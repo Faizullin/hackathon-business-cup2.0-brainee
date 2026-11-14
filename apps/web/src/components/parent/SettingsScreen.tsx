@@ -10,6 +10,7 @@ import { ru } from "@/i18n/ru";
 const t = ru.settings;
 const input = "min-h-12 w-full rounded-xl border border-border bg-background px-3 text-base";
 type Data = {
+  jury: boolean;
   child: { name: string; birthYear: number; promise: number };
   timeZone: string;
   email: string;
@@ -268,6 +269,28 @@ export function SettingsScreen() {
           </ul>
         </Panel>
         <Panel title={t.account}>
+          {data.jury && (
+            <button
+              type="button"
+              className={outlineButton}
+              disabled={busy}
+              onClick={async () => {
+                setBusy(true);
+                try {
+                  const r = await fetch("/api/demo-reset", { method: "POST" });
+                  if (!r.ok) throw Error();
+                  await refresh();
+                  setNotice(t.saved);
+                } catch {
+                  setNotice(t.error);
+                } finally {
+                  setBusy(false);
+                }
+              }}
+            >
+              {ru.jury.reset}
+            </button>
+          )}
           <p className="break-all">{data.email}</p>
           <div className="rounded-xl bg-mint/15 p-4">
             <h3 className="font-semibold">{t.plan}</h3>

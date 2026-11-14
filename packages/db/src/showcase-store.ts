@@ -151,6 +151,7 @@ export async function resetShowcase(db: Database, tokenHash: string, now: Date) 
         data: {
           ...demoShowcase,
           calendar: calendar.showcase.calendar,
+          earned: calendar.showcase.earned,
         },
       })
       .where(eq(showcases.childId, access.childId));

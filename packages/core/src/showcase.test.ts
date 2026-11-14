@@ -149,7 +149,7 @@ describe("showcase actions", () => {
       mode: "timed",
     });
     expect(timed).toMatchObject({ ok: true, wallet: { stars: 70 } });
-    if (timed.ok) expect(timed.showcase.fun[0]?.until).toBe("2026-11-14T10:10:00.000Z");
+    if (timed.ok) expect(timed.showcase.fun[0]?.remainingSeconds).toBe(600);
   });
 
   it("rejects unknown or malformed actions", () => {

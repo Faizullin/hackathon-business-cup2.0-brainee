@@ -15,7 +15,7 @@ const t = ru.analytics;
 type Scope = "district" | "city" | "country";
 type Kind = "growth" | "absolute";
 
-// T-41–T-43 for the demo: live Brainy/wallet/latest game + seeded analytics (D-21).
+// D-29: saved activity metrics; illustrative historical/character radars and ranking.
 export function AnalyticsScreen() {
   const { snapshot } = useLearning();
   const [scope, setScope] = useState<Scope>("district");
@@ -23,7 +23,34 @@ export function AnalyticsScreen() {
   const [shared, setShared] = useState(false);
   if (!snapshot) return null;
   const { child, progress, latestGame, showcase } = snapshot;
-  const a = showcase.analytics;
+  const live = snapshot.activity;
+  const seeded = showcase.analytics;
+  const a = live
+    ? {
+        ...seeded,
+        metrics: {
+          ...seeded.metrics,
+          focusMinutes: live.focusMinutes,
+          focusDelta: ru.liveAnalytics.saved,
+          streakDays: live.streakDays,
+          streakNote: ru.liveAnalytics.saved,
+          takesRecommendation: live.takesRecommendation,
+          recommendationDelta: ru.liveAnalytics.entries(live.took, live.entries),
+        },
+        week: {
+          ...seeded.week,
+          learning: live.learning,
+          science: live.science,
+          fun: [0, 0, 0, 0, 0, 0, 0],
+        },
+        hardThing: {
+          weeks: [t.now],
+          share: [live.takesRecommendation],
+          finished: live.recommendedFinished,
+          recommended: live.recommendedStarted,
+        },
+      }
+    : seeded;
   const stage = stageOf(progress.stats);
   const age = new Date().getFullYear() - child.birthYear;
   const table = a.ranking[scope][kind];
@@ -118,6 +145,9 @@ export function AnalyticsScreen() {
         </div>
       </Panel>
 
+      <p className="text-sm text-muted-foreground" data-testid="computed-analytics">
+        {ru.liveAnalytics.note}
+      </p>
       <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {[
           [t.focus, t.focusValue(a.metrics.focusMinutes), a.metrics.focusDelta],
@@ -188,7 +218,7 @@ export function AnalyticsScreen() {
             ]}
           />
         </Panel>
-        <Panel title={t.week} note={t.weekNote}>
+        <Panel title={t.week} note={ru.liveAnalytics.week}>
           <Bars
             label={t.week}
             categories={a.week.days}
@@ -207,7 +237,7 @@ export function AnalyticsScreen() {
             ]}
           />
         </Panel>
-        <Panel title={t.hard} note={t.hardNote}>
+        <Panel title={t.hard} note={ru.liveAnalytics.recommended}>
           <Bars
             label={t.hard}
             categories={a.hardThing.weeks}

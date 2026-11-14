@@ -54,3 +54,5 @@ export function moodNow(mood: number, lastActive: Date, now: Date) {
   if (idle === 0 || mood <= MOOD_FLOOR) return mood;
   return Math.max(MOOD_FLOOR, mood - MOOD_DECAY_PER_DAY * idle);
 }
+
+export const NEUTRAL_QUIZ = { hours: 1, content: 1, finish: 1, reaction: 1, reads: 1 } as const;

@@ -4,6 +4,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (jury access and live product loop)
+- Completed T-107–T-109 and ticked T-53/T-63: isolated one-tap jury families, simple signup/setup, actual learning history/analytics, app-task rewards, earned thresholds/progress/celebrations, Snake play credit and restart-from-zero cartoon placeholders. D-29 records the minimal persistence choices; demo.md starts with the one-minute jury path.
+- `pnpm check` and 169 unit tests pass. Full browser run: 226/228; corrected lab readiness and WebKit speculative game-route fetch cancellation, then all 44 affected checks passed on the final build across both engines/sizes. WebKit screenshots reviewed. No learning runtime/catalog/adapter edits; no deployment. Fresh recordings and physical-device rehearsal are next.
+
 ## 2026-11-14 (bridge and Picture Puzzle)
 - Completed T-19/T-29/T-85 and light T-89/T-90: ported GSP bridge/Phaser/puzzle, four-placement adapter, manifest-backed DB/runtime metadata, build/asset validation and conformance. D-28 records the protocol and minimal game columns.
 - Check, 159 unit tests and asset audit pass. Full e2e initially passed 209/216; after fixes, all 44 affected reruns pass. Reviewed WebKit phone/iPad puzzle and lab screenshots. Parent/Settings changes remain separately owned; Tangram Tales and deployment were not attempted.

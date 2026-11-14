@@ -100,3 +100,15 @@ export function practiceGame<T extends { id: string; kind: GameKind; skills: { m
           stats[ABILITY_BODY[b.skills.main as Ability]] || a.id.localeCompare(b.id),
     )[0];
 }
+
+/** Brainy's advice must stay in learning, even when motor/reaction is weaker. */
+export function learningPracticeGame<
+  T extends { id: string; kind: GameKind; skills: { main: Skill } },
+>(stats: BrainyStats, games: readonly T[]) {
+  return practiceGame(
+    stats,
+    games.filter((g) =>
+      ["brain", "eyes", "mouth"].includes(ABILITY_BODY[g.skills.main as Ability]),
+    ),
+  );
+}

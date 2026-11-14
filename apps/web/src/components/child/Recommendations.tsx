@@ -20,7 +20,13 @@ export function useRecommendations() {
     const scores: AbilityScores = snapshot.progress.skills;
     const age = new Date().getFullYear() - snapshot.child.birthYear;
     const open = allGames.filter((game) => game.minAge <= age);
-    const recs = recommendGames(scores, ageAverages, open, [], Date.now());
+    const recs = recommendGames(
+      scores,
+      ageAverages,
+      open,
+      snapshot.learningHistory ?? [],
+      Date.now(),
+    );
     // The MVP catalog has two games: top up with the rest by their main-skill gap.
     const extra = open
       .filter((game) => game.kind === "dev" && !recs.some((rec) => rec.game.id === game.id))
@@ -56,7 +62,8 @@ export function RecommendationCards({
         return (
           <li key={rec.game.id}>
             <Link
-              href={`/game/${rec.game.id}`}
+              prefetch={false}
+              href={`/game/${rec.game.id}?recommended=1`}
               onClick={() => onChoose?.(rec.game.id)}
               data-testid="recommended-game"
               className={cn(

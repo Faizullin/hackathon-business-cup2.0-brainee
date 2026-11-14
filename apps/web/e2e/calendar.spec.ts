@@ -10,7 +10,9 @@ test("daily rollover reaches both devices, archives tasks and resets weekly prog
 }, testInfo) => {
   const headers = { origin: baseURL as string };
   await page.request.post("/api/demo-session", { headers });
+  await page.request.post("/api/parent", { headers, data: { pin: "1234" } });
   await page.request.post("/api/demo-reset", { headers });
+  await page.request.delete("/api/parent", { headers });
   await page.goto("/gifts");
   await expect(page.getByTestId("child-task-t3")).toBeVisible();
   const before = await savedState(page.request);
@@ -68,6 +70,8 @@ test("daily rollover reaches both devices, archives tasks and resets weekly prog
   } finally {
     connection.client.close();
     await context.close();
+    await page.request.post("/api/parent", { headers, data: { pin: "1234" } });
     await page.request.post("/api/demo-reset", { headers });
+    await page.request.delete("/api/parent", { headers });
   }
 });

@@ -1,35 +1,31 @@
-# Two-device presentation (T-71)
+# Jury and two-device presentation (T-71 / T-107)
 
-Use an iPad in landscape (1180 × 820 reference) as the child and a phone as the parent. Both must use the same server; separate browsers retain independent cookies. Budget 5–7 minutes. Analytics are illustrative and labelled «Демо-данные».
+## Prepare
+Run `pnpm demo`: reset the local DB and start with demo access enabled. Use a fresh DB before the presentation. This is a local rehearsal, not deployment. An unavailable Brainy screen usually means `DEMO_MODE` is missing.
 
-## Prepare and reset
+## Jury path: under one minute
+1. Open `/` or `/login` and tap «Войти как жюри». No form or PIN is needed. Each tap creates an isolated family; other visitors keep their own state.
+2. `/jury` shows reusable login/password/PIN and two role cards. Choose the child, then finish «Найди лишний». The family starts at 9/10 completed learning games: the tenth earns the explorer badge, celebrates and completes the 15★ in-app task. The parent feed records both events.
+3. Return to `/jury` and choose the parent. Analytics show real saved minutes, streak and advice counts beside labelled illustrative radars/ranking. Confirm the waiting real-life task or deliver the waiting gift to try the parent loop.
+4. Settings → «Сбросить демо» restores showcase content while preserving balances, Brainy, history and earned rewards. For a fresh badge demonstration, open `/` and create another jury family.
 
-For a local rehearsal, `pnpm demo` resets the demo database and starts the app with demo access enabled. Parent PIN: `1234`.
+Parent access lasts 15 minutes; use the PIN shown on `/jury` to unlock it again. Credentials remain visible in the creating tab; save them before closing it. Jury families older than seven days are removed when another jury family is created. Demo history is seeded deliberately, then new actions are real and isolated.
 
-For two physical devices on the same Wi-Fi, build first (`pnpm build`), prepare the database, then run `DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web exec next start --hostname 0.0.0.0`. Open `http://<Mac-LAN-IP>:3000` on both devices. Keep this process running during the presentation. This is local rehearsal, not deployment.
+## Two-device path: 5–7 minutes
+Use an iPad in landscape (1180 × 820 reference) as the child and a phone as the parent. Both must reach the same server. For physical devices on the same Wi-Fi, build (`pnpm build`), prepare the DB, then run `DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web exec next start --hostname 0.0.0.0`. Open `http://<Mac-LAN-IP>:3000` on both devices. Keep this local process running during rehearsal.
 
-To reset an already running demo, open its browser console and run these same-origin requests:
-
-```js
-await fetch('/api/demo-session', { method: 'POST' });
-await fetch('/api/demo-reset', { method: 'POST' });
-```
-
-Reload both devices after resetting, then start below. The HTTP reset restores showcase content (tasks, gifts, videos and accessories) but preserves balances, Brainy and game history. Use `pnpm demo` or `pnpm db:reset` before a presentation that needs the complete initial state. Never reset mid-walkthrough. An unavailable Brainy screen usually means demo mode is missing; check the server environment and prepared DB.
-
-## Walkthrough
+On the parent phone create a jury family, open Settings and generate a child pairing code. On the iPad choose the child-device role and enter that code. These devices now share one family with independent revocable cookies. A new real family can instead use the quiz-first `/onboarding` or simple `/signup`; both end at `/onboarding/setup` with pairing and own-domain Screen Time instructions.
 
 | Step | Child iPad | Parent phone | Expected evidence |
 |---|---|---|---|
-| 1 | Open `/`, choose a recommended game or the other-games link | Open `/analytics`, enter PIN 1234 | Entry requires a choice; parent analytics show the demo label |
-| 2 | Play «Найди лишний» to completion | Leave analytics visible | Before/after Brainy, earned ★ and two next steps; parent's balance/latest game update within about 3 seconds without reloading |
-| 3 | Tap «Хватит на сегодня», then Gifts; mark «Прочитать книжку перед сном» done | Open Tasks | Child waits for confirmation; task appears for the parent |
-| 4 | Keep Gifts visible | Tap «Подтвердить» on that task | Child receives ☀, weekly progress and responsibility increase without reload |
-| 5 | Buy «Мороженое» using ☀ | Open Gifts & goal; mark the request «Вручено» | Balance decreases once and the request is fulfilled |
-| 6 | Open Brainy; buy the 50★ accessory, remove and wear it again; return to Learn | Return to Analytics and observe Brainy | Worn accessory follows the mascot; one item occupies each slot |
-| 7 (optional) | Start a fresh run and finish three games consecutively | Keep analytics visible | Break suggestion on the third consecutive completion; bonus is awarded only once per cookie |
+| 1 | Open `/entry`, choose the recommended odd-one-out game | Leave Analytics visible | Child choice is logged |
+| 2 | Finish the game | Observe Analytics | Brainy/★ update, badge celebration, app task done; parent feed updates through polling |
+| 3 | Stop for today, open Gifts | Open Tasks; confirm the waiting real-life task | Child gains ☀ and responsibility; backpack unlocks when responsibility reaches 70 |
+| 4 | Keep Gifts visible | Open Gifts and deliver the waiting request | Fulfilment appears on the child device |
+| 5 | Open Brainy; buy and wear an accessory | Observe Brainy | The worn item follows the mascot |
+| 6 | Buy Snake time in Leisure; play, pause and reopen | Observe saved balance | Purchased minutes count only during play; another purchase adds time |
 
-For a short science demonstration, open Leisure → «Как живут пчёлы», play briefly, pause, close, and reopen: position resumes. The animated placeholder uses one second per demo minute. Complete the quiz to earn ★; a wrong answer pays nothing. Fun games and cartoons currently demonstrate purchasing only: describe their catalog as in development.
+Science placeholders resume position and pay ★ only after the correct answer. Bought cartoons require Play and restart from zero on each visit, with no watch-next. Snake is playable; other fun titles remain catalog previews. Real media is deferred. For the shared seeded family, login is `mama@example.com` / `demo1234`, PIN `1234`; its existing backpack/badge are valid, and a game today completes the garden streak.
 
 ## Rehearsal checklist
 
@@ -43,7 +39,7 @@ For a short science demonstration, open Leisure → «Как живут пчёл
 
 | Product criterion | Evidence / presentation boundary |
 |---|---|
-| Entry and logged choice | `mvp-pages.spec.ts`; two playable games are available, so the requested three distinct recommendations remain a catalog limitation |
+| Entry and logged choice | `mvp-pages.spec.ts`; three learning games are available; recommendations use completed sessions from the last seven days |
 | Post-game choices, stop and third-game bonus | `post-game.spec.ts`, `pattern.spec.ts`; server receipt and replay checks in `sessions-api.spec.ts` |
 | Saved growth and shared state | `state-sync.spec.ts`, core stage tests; parent uses the same polled snapshot, and task confirmation is checked across separate browser contexts |
 | Accessories in every child context | `mvp-pages.spec.ts` buys/removes/wears and checks dock plus both post-game portraits; core enforces one item per slot |

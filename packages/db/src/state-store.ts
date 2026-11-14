@@ -1,5 +1,11 @@
-import { isLearningProgress, moodNow, type StateSnapshot } from "@brainee/core";
-import { and, desc, eq, gt } from "drizzle-orm";
+import {
+  activitySummary,
+  isLearningProgress,
+  moodNow,
+  type StateSnapshot,
+  unlockEarned,
+} from "@brainee/core";
+import { and, desc, eq, gt, sql } from "drizzle-orm";
 import {
   brainyStates,
   children,
@@ -64,12 +70,37 @@ export async function getStateSnapshot(
     };
     if (!isLearningProgress(progress) || !isLearningProgress({ ...progress, stats: startSnapshot }))
       throw new Error("Invalid saved child state.");
+    const sessions = await tx
+      .select()
+      .from(gameSessions)
+      .where(eq(gameSessions.childId, access.childId));
+    const history = sessions.map((s) => ({
+      gameId: s.gameId,
+      startedAt: s.startedAt.getTime(),
+      finishedAt: s.status === "completed" ? (s.finishedAt?.getTime() ?? null) : null,
+      durationMs: s.durationMs,
+      recommended: s.recommended,
+    }));
+    const activity = activitySummary(history, row.showcase, now);
+    const earned = unlockEarned(row.showcase, progress.stats, activity, now);
+    if (earned.earned.length !== row.showcase.earned.length) {
+      await tx.update(showcases).set({ data: earned }).where(eq(showcases.childId, access.childId));
+      await tx
+        .update(families)
+        .set({ version: sql`${families.version} + 1` })
+        .where(eq(families.id, access.familyId));
+      row.version++;
+    }
     return {
+      learningHistory: history
+        .filter((s) => s.finishedAt !== null && s.finishedAt >= now.getTime() - 7 * 86400000)
+        .map((s) => ({ gameId: s.gameId, finishedAt: s.finishedAt as number })),
+      activity,
       version: row.version,
       child: row.child,
       progress,
       baseline: startSnapshot,
-      showcase: row.showcase,
+      showcase: earned,
       parentUnlocked: row.parentUntil !== null && row.parentUntil > now,
       latestGame:
         row.last?.finishedAt && row.last.starsEarned !== null

@@ -41,6 +41,7 @@ export function GameGrid() {
               </div>
             ) : (
               <Link
+                prefetch={false}
                 href={`/game/${game.id}`}
                 className={`${card} transition-transform duration-(--dur-press) active:scale-[0.97]`}
               >

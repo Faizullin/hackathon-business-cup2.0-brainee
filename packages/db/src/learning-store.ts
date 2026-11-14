@@ -3,6 +3,7 @@ import { setTimeout as delay } from "node:timers/promises";
 import {
   addFeed,
   type BrainyStats,
+  completeAppTasks,
   finishLearningSession,
   moodNow,
   parseLearningGameResult,
@@ -135,7 +136,10 @@ export async function startGameSession(db: Database, tokenHash: string, input: u
       .where(and(eq(games.id, gameId), eq(games.enabled, true), eq(games.kind, "dev")))
       .get();
     if (!game) throw new LearningStoreError("invalid-input");
-    const launch = parseLearningLaunch(input, game);
+    const { recommended, ...launchFields } = input as Record<string, unknown>;
+    if (recommended !== undefined && typeof recommended !== "boolean")
+      throw new LearningStoreError("invalid-input");
+    const launch = parseLearningLaunch(launchFields, game);
     if (!launch) throw new LearningStoreError("invalid-input");
     const session = {
       id: randomUUID(),
@@ -145,6 +149,12 @@ export async function startGameSession(db: Database, tokenHash: string, input: u
       level: launch.level,
       seed: launch.seed ?? randomInt(0x100000000),
       startedAt: now,
+      recommended: !!(
+        input &&
+        typeof input === "object" &&
+        "recommended" in input &&
+        input.recommended === true
+      ),
     };
     await tx.insert(gameSessions).values(session);
     return {
@@ -226,6 +236,8 @@ export async function finishGameSession(
       result,
       game.weights,
     );
+    const appTasks = completeAppTasks(calendar.showcase, completion.after.wallet, now);
+    completion.after.wallet = appTasks.wallet;
     await tx
       .update(wallets)
       .set(completion.after.wallet)
@@ -239,7 +251,7 @@ export async function finishGameSession(
         updatedAt: now,
       })
       .where(eq(brainyStates.childId, access.childId));
-    const data = structuredClone(calendar.showcase);
+    const data = appTasks.showcase;
     if (data.calendar) data.calendar.bonusGiven = completion.after.streak.bonusGiven;
     addFeed(data, {
       at: now.toISOString(),

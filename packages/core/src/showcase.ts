@@ -59,6 +59,8 @@ export type FunGame = {
   forever: boolean;
   /** ISO time the timed unlock ends, if any. */
   until: string | null;
+  remainingSeconds?: number;
+  play?: { id: string; device: string; at: string; sequence: number };
 };
 export type Cartoon = { id: string; title: string; detail: string; price: number; owned: boolean };
 export type ScienceVideo = {
@@ -72,8 +74,11 @@ export type ScienceVideo = {
   answer: number;
   position: number;
   solved: boolean;
+  completedAt?: string;
 };
 export type FeedKind =
+  | "app-task"
+  | "earned"
   | "stage-up"
   | "game"
   | "task-done"
@@ -329,7 +334,10 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       const price = action.mode === "forever" ? game.priceForever : game.priceTimed;
       if (wallet.stars < price) return fail("not-enough-stars");
       if (action.mode === "forever") game.forever = true;
-      else game.until = new Date(now.getTime() + FUN_PRICES.timedMinutes * 60_000).toISOString();
+      else {
+        game.remainingSeconds = (game.remainingSeconds ?? 0) + FUN_PRICES.timedMinutes * 60;
+        game.until = null;
+      }
       addFeed(s, { at, kind: "fun", title: game.title, amount: price });
       return ok({ ...wallet, stars: wallet.stars - price });
     }
@@ -353,6 +361,7 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       if (action.answer !== video.answer) return fail("wrong-answer");
       if (video.solved) return ok();
       video.solved = true;
+      video.completedAt = at;
       video.position = 0;
       addFeed(s, { at, kind: "video", title: video.title, amount: VIDEO_QUIZ_STARS });
       return ok({ ...wallet, stars: wallet.stars + VIDEO_QUIZ_STARS }, { eyes: VIDEO_QUIZ_EYES });
@@ -368,6 +377,7 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
 
 /** Minutes left on a timed unlock (0 when expired or none). */
 export function funMinutesLeft(game: FunGame, now: Date) {
+  if (game.remainingSeconds !== undefined) return Math.ceil(game.remainingSeconds / 60);
   if (!game.until) return 0;
   return Math.max(0, Math.ceil((new Date(game.until).getTime() - now.getTime()) / 60_000));
 }

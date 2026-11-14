@@ -8,7 +8,9 @@ test("parent cancellation updates child badges without rewards; other statuses s
 }, testInfo) => {
   const headers = { origin: baseURL as string };
   await page.request.post("/api/demo-session", { headers });
+  await page.request.post("/api/parent", { headers, data: { pin: "1234" } });
   await page.request.post("/api/demo-reset", { headers });
+  await page.request.delete("/api/parent", { headers });
   await page.goto("/gifts");
   const childBadge = page
     .getByRole("link", { name: "Подарки", exact: true })

@@ -4,6 +4,7 @@ import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { type FormEvent, useState } from "react";
 import { primaryButton } from "@/components/demo/kit";
+import { JuryButton } from "@/components/JuryButton";
 import { ru } from "@/i18n/ru";
 
 const t = ru.login;
@@ -61,6 +62,8 @@ export function ParentLogin() {
       >
         {t.newFamily}
       </Link>
+      <JuryButton />
+      <Link href="/signup">{ru.signup.link}</Link>
       <Link href="/child-login" className="font-semibold text-coral">
         {ru.pairing.child}
       </Link>

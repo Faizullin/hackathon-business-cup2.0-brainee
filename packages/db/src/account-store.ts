@@ -119,10 +119,28 @@ function personalShowcase(childName: string, start: ReturnType<typeof quizStart>
   showcase.entryLog = { took: 0, other: 0 };
   showcase.weekGoal = { ...showcase.weekGoal, earned: 0 };
   showcase.tasks = [];
+  showcase.fun = showcase.fun.map((g) => ({
+    ...g,
+    forever: false,
+    until: null,
+    remainingSeconds: 0,
+  }));
+  showcase.cartoons = showcase.cartoons.map((c) => ({ ...c, owned: false }));
+  showcase.science = showcase.science.map((v) => ({
+    ...v,
+    solved: false,
+    position: 0,
+    completedAt: undefined,
+  }));
   return showcase;
 }
 
-export async function signupFromQuiz(db: Database, raw: unknown, now: Date) {
+export async function signupFromQuiz(
+  db: Database,
+  raw: unknown,
+  now: Date,
+  plan: "demo" | "jury" = "demo",
+) {
   const input = (raw ?? {}) as Partial<SignupInput>;
   if (!validSignup(input, now)) throw new AccountError("invalid-input");
   const email = input.email.trim().toLowerCase();
@@ -136,7 +154,7 @@ export async function signupFromQuiz(db: Database, raw: unknown, now: Date) {
     if (taken) throw new AccountError("email-taken");
     const familyId = randomUUID();
     const childId = randomUUID();
-    await tx.insert(families).values({ id: familyId, plan: "demo", version: 0, createdAt: now });
+    await tx.insert(families).values({ id: familyId, plan, version: 0, createdAt: now });
     await tx.insert(parents).values({
       id: randomUUID(),
       familyId,

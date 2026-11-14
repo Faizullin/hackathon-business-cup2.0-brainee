@@ -75,10 +75,38 @@ export function LeisureScreen() {
                     <button
                       type="button"
                       className={cn(primaryButton, "ml-auto")}
-                      onClick={() => setSoon(game.id)}
+                      onClick={() =>
+                        game.id === "snake"
+                          ? window.location.assign(`/fun/${game.id}`)
+                          : setSoon(game.id)
+                      }
                     >
                       {t.play}
                     </button>
+                    {!game.forever && (
+                      <>
+                        <button
+                          type="button"
+                          className={outlineButton}
+                          disabled={busy || stars < game.priceTimed}
+                          onClick={() =>
+                            run({ type: "unlock-fun", gameId: game.id, mode: "timed" })
+                          }
+                        >
+                          {t.timed(10, game.priceTimed)}
+                        </button>
+                        <button
+                          type="button"
+                          className={outlineButton}
+                          disabled={busy || stars < game.priceForever}
+                          onClick={() =>
+                            run({ type: "unlock-fun", gameId: game.id, mode: "forever" })
+                          }
+                        >
+                          {t.forever(game.priceForever)}
+                        </button>
+                      </>
+                    )}
                     {soon === game.id && (
                       <p role="status" className="w-full text-muted-foreground text-xs">
                         {t.soon}
@@ -127,7 +155,9 @@ export function LeisureScreen() {
               <span className="font-semibold">{cartoon.title}</span>
               <span className="text-muted-foreground text-xs">{cartoon.detail}</span>
               {cartoon.owned ? (
-                <Chip tone="mint">{t.watch}</Chip>
+                <Link href={`/cartoon/${cartoon.id}`} className={primaryButton}>
+                  {t.watch}
+                </Link>
               ) : (
                 <button
                   type="button"
