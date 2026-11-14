@@ -158,3 +158,16 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-114 Remaining external game waves; see external-games.md.
 
 - [ ] T-115 Translate imported scored-game instructions and controls into English while retaining Russian; host/catalog localization is complete in T-112.
+
+## Redesign (D-34, D-35) → [plans/redesign.md](../plans/redesign.md)
+
+- [ ] T-130 English as the source dictionary; `ru` partial with English fallback (D-34)
+- [ ] T-131 Lavender tokens (same token names), Manrope woff2, derived dark set; update ui.md
+- [ ] T-132 Parametric Brainy in the pink/violet look (stages, accessories, `talk` kept)
+- [ ] T-133 `packages/core/src/funnel.ts`: funnel logic + `funnelQuizAnswers` mapping, tested
+- [ ] T-134 `StepPage` + `AnswerGroup` components (two-column iPad landscape)
+- [ ] T-135 Parent funnel at `/start` → signup → setup; `/onboarding` redirects; pricing pending, no checkout
+- [ ] T-136 Family plan: `showcase.familyPlan`, parent card, phrase on the child's stopping point, off-screen task template
+- [ ] T-137 Demo moments: Odd One Out demo mode (no session/rewards), real-stage growth slider
+- [ ] T-138 Restyle product pages (blocked on AppLavender child/parent designs; tokens/components meanwhile)
+- [ ] T-139 Docs, full serial e2e, re-record reports after T-135–T-138

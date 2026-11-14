@@ -2,7 +2,7 @@
 
 > A snapshot: **overwrite it, don't append.** History goes in [log.md](log.md); tasks go in [todo.md](todo.md).
 
-**Updated:** 2026-11-15 · **Phase:** P7 Demo prep (all pages built)
+**Updated:** 2026-11-15 · **Phase:** P7 demo prep + redesign planning
 
 ## Phases
 
@@ -20,10 +20,11 @@
 Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 
 ## Current focus
-**Jury-ready presentation MVP:** one-tap isolated family access, quiz-first or simple signup, paired devices, saved learning/tasks/rewards and playable Snake. Activity analytics use real saved actions; historical/character radars and rankings remain labelled demo. See [demo.md](../demo.md) and the [remaining road map](todo.md#road-to-mvp-acceptance-criteria--remaining-tasks).
+**Lavender redesign and parent funnel** per [plans/redesign.md](../plans/redesign.md) (T-130–T-139, D-34/D-35), after the PR #1 films integration (issue #5). Games continue separately (issue #4). The jury-ready MVP stays working throughout: see [demo.md](../demo.md).
 
 ## Handoff
-- **Integrated:** pushed `games` commit `dc84a8b661409015d5dbae0d100cdfdd37d258e9` into master. The newer local-only cleanup commit was deliberately excluded. No other worktree was modified; no push, deployment or production database access.
+- **Latest (planning, docs only):** analysed the Brainy Funnel Export → [product/funnel.md](../product/funnel.md) (screenshots, logic, tokens, mapping onto `quizStart`); plan [plans/redesign.md](../plans/redesign.md); D-34 English-only new work, D-35 funnel at `/start`. Next: T-130 → T-137 in order; T-138 waits for the AppLavender child/parent designs. No code changed in this session.
+- **Previous games integration (still relevant) · Integrated:** pushed `games` commit `dc84a8b661409015d5dbae0d100cdfdd37d258e9` into master. The newer local-only cleanup commit was deliberately excluded. No other worktree was modified; no push, deployment or production database access.
 - **Catalog:** Tangram Tales, Mirror Grid, Rhythm Copycat and Secret Message Lab join the three existing learning games. Magnet Mission Lab and Neighborhood Route Planner are unscored Explore previews. Pinned artifacts, source hashes and LICENSE/CREDITS are unchanged. Unimported titles remain unregistered (T-114).
 - **Integration fixes:** T-112 English manifest titles, localized host loading/errors and iframe titles, locale handshake, Russian saved-feed titles. Explore direct opens now load shared state and honor age locks. The session API now enforces learning-game minimum ages. Core rewards, receipt replay protection, auth/pairing/PIN, settings, motion/offline recovery and production shared-family refresh logic remain intact.
 - **Conflicts:** preserved master’s product handoff context and both ADRs; renamed the branch’s duplicate D-31 artifact decision to D-32. No application-code merge conflicts.

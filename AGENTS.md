@@ -31,6 +31,8 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - **Game rules live in `packages/core`** as pure, tested functions. Don't scatter economy or stat logic through UI code. → [architecture.md](docs/dev/architecture.md)
 - **Games follow the contract**: React games through props, any other engine (Phaser, GDevelop, external repo) through the iframe bridge. They report a `GameResult`, never grant ★, and load nothing from outside our origin. Test them at `/lab`. Port the bridge, engine kits and tests from `../game-store-planning` rather than rewriting them. → [games.md](docs/dev/games.md)
 - **Local-first, no new infrastructure.** SQLite file, media in `public/media`. Don't assume a long-running process or writable disk (the final deploy is serverless; live sync = polling). Deployment is only the last task (T-14). Don't add backend services, cloud SDKs, auth or payment providers without a new entry in [decisions.md](docs/dev/decisions.md).
+- **English only for new work (D-34):** add new UI strings to `en.ts` only; don't add Russian translations or `content.ts` pairs. → [decisions.md](docs/dev/decisions.md)
+- **Redesign:** follow [docs/plans/redesign.md](docs/plans/redesign.md) and [docs/product/funnel.md](docs/product/funnel.md) (D-35). Keep the parametric Brainy; don't add checkout or third-party analytics.
 - **Product rules:** no feeds, autoplay or "watch next". Kids never see rankings. Brainy never dies. No medical claims. → [rules.md](docs/product/rules.md#product-rules)
 
 ## Commands

@@ -9,7 +9,8 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [progress/](progress/) | Current status, backlog, session log | **Every session start** (status.md) | Whoever finishes work |
 | [product/](product/) | What we build: condensed PRD | Building a feature or checking a rule | Product owner; anyone fixing a spec gap |
 | [dev/](dev/) | How we build: stack, setup, conventions, decisions | Scaffolding, adding packages, onboarding | Whoever changes the architecture |
-| [ideas/](ideas/) | Original sources: PRD PDF, HTML prototype | Porting prototype code (line map inside) | Rarely; sources are frozen |
+| [plans/](plans/) | Ordered implementation plans for larger efforts | Starting a planned effort (e.g. the redesign) | Whoever plans or finishes the effort |
+| [ideas/](ideas/) | Original sources: PRD PDF, HTML prototype, Brainy Funnel Export | Porting prototype code (line map inside) | Rarely; sources are frozen |
 | [reports/](reports/) | Generated UI walkthroughs, videos, screenshots and logs | Reviewing current UI or recording a demo | Whoever changes a report scenario |
 
 ## Files
@@ -37,6 +38,8 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [ideas/README.md](ideas/README.md) | What the source files are + prototype line map |
 | [reports/README.md](reports/README.md) | Recording commands, artifact map and analysis of the game-store-planning reporting pipeline |
 | [product/routes-spec.md](product/routes-spec.md) | Building or changing routes, access, parent dashboard or ROUTES.md rules |
+| [product/funnel.md](product/funnel.md) | Building the parent funnel or lavender redesign: export analysis, screenshots, logic, tokens, what to take or skip |
+| [plans/redesign.md](plans/redesign.md) | Implementing the redesign: ordered tasks T-130–T-139, ground rules, open owner questions |
 | [product/external-games.md](product/external-games.md) | Planning the 30-game pack (licences, path C, first wave) |
 | [reports/mvp.md](reports/mvp.md) | Every MVP page (child + parent): phone/iPad walkthrough videos, screenshots, JSON logs. Also [reports/learning.md](reports/learning.md) (three-game loop) |
 
@@ -48,6 +51,7 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 - **Write economy or stat logic** → `mechanics.md` → `data-model.md` §How stats change
 - **Save games or wire shared state** → `dev/sessions.md` → `product/data-model.md` → `dev/setup.md`
 - **Infra, auth or deploy** → `architecture.md` → `rules.md` §Technical requirements → `decisions.md`
+- **Redesign or parent funnel** → `plans/redesign.md` → `product/funnel.md` → `dev/ui.md`
 - **Demo prep** → `rules.md` §Acceptance criteria → `status.md`
 
 ## Upkeep

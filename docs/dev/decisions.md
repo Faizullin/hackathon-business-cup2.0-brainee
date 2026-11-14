@@ -6,6 +6,16 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-35 · Parent funnel at /start and the lavender design · 2026-11-15 · accepted (defaults; owner may revise) · extends D-24, supersedes D-13 tokens
+**Context:** the Brainy Funnel Export (a 25-screen US parent quiz plus the "AppLavender" tokens) replaces the prototype look and the child-habit quiz; see [funnel.md](../product/funnel.md).
+**Decision:** port the funnel into the Next app as the parent entry at `/start` (`/onboarding` redirects there), with logic in `packages/core/src/funnel.ts`. Five funnel answers map onto the existing `QuizAnswers`, so `quizStart` and quiz-first signup stay unchanged. Funnel answers are stored as `showcase.familyPlan`, and the plan is computed in core. Lavender tokens keep the current token names; Manrope is vendored; Brainy keeps the parametric renderer in the new pink/violet look. The offer shows "pricing pending": no checkout, no payment provider and no third-party analytics.
+**Consequences:** plan in [plans/redesign.md](../plans/redesign.md) (T-130–T-139). Product pages wait for the AppLavender child/parent designs. Billing, real prices and funnel analytics need new entries.
+
+## D-34 · New work is English only · 2026-11-15 · accepted · amends D-30
+**Context:** the product is US-first; keeping Russian strings and content pairs in step slows every change.
+**Decision:** new UI strings go into `en.ts` only. No Russian translations or `content.ts` pairs are required for new work. `en` becomes the source dictionary type and `ru` a partial override that falls back to English (T-130). Existing Russian stays as it is.
+**Consequences:** the RU switch can show English for new features. Russian e2e specs cover only existing surfaces; new specs are English. D-33 is reserved for the PR #1 films integration.
+
 ## D-32 · Pinned path-C artifacts and per-game session adapters · 2026-11-14 · accepted · extends D-16, D-28
 **Context:** the 30-game handoff pins external games with different controls, progress stores and completion semantics; a launcher smoke test alone cannot validate Brainee rewards.
 **Decision:** keep selected original static files and LICENSE under `games/<id>/artifact/`, with repository commit, original paths, Git blob SHA-1 and SHA-256 in `sources.lock.json`. Check hashes in `pnpm check`; normal builds fetch nothing. A reviewed build transform creates the local served copy and adds the game-specific protocol-2 session adapter. The first adapter is Tangram's guided DOM engine: four completed silhouettes, Check-based mistakes, one correction per previously mistaken silhouette, native select/place and automatic orientation. Remove free/debug/audio/storage paths from served code. Other engines require their own reviewed adapters; do not infer round completion from page loads or generic button clicks.

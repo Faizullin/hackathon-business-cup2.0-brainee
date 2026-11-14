@@ -14,6 +14,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-15 (funnel analysis and redesign plan)
+- Analysed the Brainy Funnel Export (25 parent screens, engine logic, lavender tokens, mascot): [product/funnel.md](../product/funnel.md) with phone/iPad screenshots. Funnel answers map onto the existing `quizStart` inputs.
+- Added [plans/redesign.md](../plans/redesign.md) (T-130–T-139), D-34 (new work English only) and D-35 (funnel at `/start`, lavender tokens, parametric Brainy, no checkout). GitHub issues #3 redesign, #4 games, #5 PR #1 films.
+
 ## 2026-11-14 (English rehearsal, motion and pitch support)
 - T-110 verified and deployed shared demo refreshed without removing other families; T-111 English WebKit report scenarios, English/Russian smoke and own-surface localization completed (D-31).
 - T-87 adds bounded reward/counter/mascot motion and localized loaders. Fixed offline feedback when polling pauses; confirmed state survives disconnection. Added the owner’s T-62/T-84 rehearsal checklist and T-73 ten-slide/three-minute pitch outline.
