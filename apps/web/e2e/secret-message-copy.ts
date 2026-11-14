@@ -1,4 +1,4 @@
-import type { FrameLocator } from "@playwright/test";
+import { expect, type FrameLocator } from "@playwright/test";
 
 function mulberry32(seed: number) {
   let a = seed >>> 0;
@@ -37,38 +37,46 @@ export async function playSecretMessageInput(
   makeMistake = false,
   roundIndex?: number,
 ) {
-  if (typeof roundIndex === "number") {
-    await frame
-      .locator(".session-progress")
-      .filter({ hasText: `Послание ${roundIndex + 1} из 4` })
-      .waitFor({ state: "visible", timeout: 8000 });
-  }
+  const text =
+    SECRET_TEXT[(await frame.locator("html").getAttribute("lang")) === "en" ? "en" : "ru"];
+  if (typeof roundIndex === "number")
+    await expect(frame.locator(".session-progress")).toHaveText(text.progress(roundIndex + 1), {
+      timeout: 8000,
+    });
 
-  // Wait until in recall phase (or click check to end preview early)
-  const cover = frame.locator("#memory-cover");
-  const checkBtn = frame.locator('[data-action="check"]');
-
-  // If preview is still running, clicking check switches to recall early
-  const isCovered = await cover.evaluate((el) => el.classList.contains("is-covered"));
-  if (!isCovered) {
-    await checkBtn.click();
-    await frame
-      .locator(".session-message")
-      .filter({ hasText: "Восстанови секретное послание" })
-      .waitFor({ state: "visible" });
-  }
+  const game = frame.locator("#game");
+  const checkBtn = frame.getByRole("button", { name: text.check, exact: true });
+  await expect(game).toHaveAttribute("data-turn", /^(preview|recall)$/);
+  // Check during the preview ends it early. If the preview timer wins the race, the same tap
+  // lands in recall with nothing filled, which only prompts and never counts as a mistake.
+  if ((await game.getAttribute("data-turn")) === "preview") await checkBtn.click({ delay: 60 });
+  await expect(game).toHaveAttribute("data-turn", "recall");
 
   await frame.locator('[data-action="clear"]').click({ delay: 60 });
+  await expect(frame.locator(".copy-slot.is-filled")).toHaveCount(0);
   const sequence = makeMistake
     ? pattern.map((id, i) => (i === pattern.length - 1 ? (id === "star" ? "moon" : "star") : id))
     : [...pattern];
 
-  for (const sym of sequence) {
-    const stampBtn = frame.locator(`.stamp-button[data-symbol="${sym}"]`);
-    await stampBtn.click({ delay: 60 });
-    await new Promise((r) => setTimeout(r, 80));
+  for (const [i, sym] of sequence.entries()) {
+    await frame.locator(`.stamp-button[data-symbol="${sym}"]`).click({ delay: 60 });
+    // Every stamp must land exactly once.
+    await expect(frame.locator(".copy-slot.is-filled")).toHaveCount(i + 1);
   }
 
-  // Click Check
-  await checkBtn.click();
+  await checkBtn.click({ delay: 60 });
+  if (makeMistake) await expect(frame.locator(".session-message")).toHaveText(text.wrong);
 }
+
+const SECRET_TEXT = {
+  ru: {
+    progress: (n: number) => `Послание ${n} из 4`,
+    check: "Проверить",
+    wrong: "В послании есть ошибки. Проверь знаки и нажми ещё раз!",
+  },
+  en: {
+    progress: (n: number) => `Message ${n} of 4`,
+    check: "Check",
+    wrong: "The message has mistakes. Check the signs and try again!",
+  },
+};
