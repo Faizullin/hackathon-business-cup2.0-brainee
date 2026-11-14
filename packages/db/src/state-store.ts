@@ -1,4 +1,4 @@
-import { isLearningProgress, type StateSnapshot } from "@brainee/core";
+import { isLearningProgress, moodNow, type StateSnapshot } from "@brainee/core";
 import { and, desc, eq, gt } from "drizzle-orm";
 import {
   brainyStates,
@@ -48,9 +48,12 @@ export async function getStateSnapshot(
     .where(and(eq(demoSessions.tokenHash, tokenHash), gt(demoSessions.expiresAt, now)))
     .get();
   if (!row) throw new LearningStoreError("unauthorized");
-  const { brain, eyes, mouth, arms, legs, resp, mood, startSnapshot } = row.state;
+  const { brain, eyes, mouth, arms, legs, resp, startSnapshot, skills } = row.state;
+  // ROUTES.md §7: mood fades on idle days; computed on read, no cron (serverless).
+  const mood = moodNow(row.state.mood, row.state.updatedAt, now);
   const progress = {
     stats: { brain, eyes, mouth, arms, legs, resp },
+    skills,
     mood,
     wallet: { stars: row.wallet.stars, suns: row.wallet.suns },
     streak: row.run,

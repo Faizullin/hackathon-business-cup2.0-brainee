@@ -81,13 +81,14 @@ test("three completed games offer a break and save exactly one bonus", async ({
   await page.screenshot({ path: testInfo.outputPath("break.png"), fullPage: true });
   await page.getByRole("button", { name: "Сделать перерыв" }).click();
   await expect(page.getByTestId("brainy-stat-eyes")).toHaveText(
-    String(Math.min(100, before.progress.stats.eyes + 9)),
+    // D-23 level budget: L1 +3, L2 +4, L1 +3.
+    String(Math.min(100, before.progress.stats.eyes + 10)),
   );
   await page.getByRole("navigation").getByRole("link", { name: "Учимся" }).click();
   await expect(page.getByTestId("wallet-stars")).toContainText(
     String(before.progress.wallet.stars + 41),
   );
-  await page.getByRole("link", { name: "Найди лишний Внимание", exact: true }).click();
+  await page.getByRole("link", { name: "с 4 лет Найди лишний Внимание", exact: true }).click();
   await finishOddOneOut(page);
   await expect(page.getByTestId("streak-bonus")).toHaveCount(0);
   await expect(

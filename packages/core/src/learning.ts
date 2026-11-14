@@ -1,21 +1,24 @@
 import { applyStatGains, BODY_STATS, moodAfterGame } from "./brainy";
 import { completeLearningGame, type LearningStreak, sessionStars, stopForToday } from "./economy";
-import { ABILITY_BODY } from "./stat-gains";
+import {
+  ABILITY_BODY,
+  abilityStatGains,
+  applySkillGains,
+  isSkillScores,
+  type SkillScores,
+  type SkillWeights,
+  weightedSkillGains,
+} from "./stat-gains";
 import type { Ability, BrainyStats, GameKind, GameResult, Skill, Wallet } from "./types";
 
 export type LearningProgress = {
   stats: BrainyStats;
+  /** The six ability scores (0–100) that roll up into Brainy's body (D-23). */
+  skills: SkillScores;
   wallet: Wallet;
   mood: number;
   streak: LearningStreak;
 };
-
-/** Prototype calibration until a specialist supplies the session-gain policy (T-24). */
-export function prototypeStatGains(gameId: string): Partial<BrainyStats> {
-  if (gameId === "odd-one-out") return { eyes: 3 };
-  if (gameId === "continue-pattern") return { brain: 2 };
-  throw new RangeError("No learning gain policy exists for this game.");
-}
 
 export function isLearningProgress(value: unknown): value is LearningProgress {
   if (!value || typeof value !== "object") return false;
@@ -25,6 +28,7 @@ export function isLearningProgress(value: unknown): value is LearningProgress {
   return (
     !!p.stats &&
     [...BODY_STATS, "resp" as const].every((key) => stat(p.stats?.[key])) &&
+    isSkillScores(p.skills) &&
     !!p.wallet &&
     count(p.wallet.stars) &&
     count(p.wallet.suns) &&
@@ -36,9 +40,16 @@ export function isLearningProgress(value: unknown): value is LearningProgress {
 }
 
 /** Pure transition. The host validates the issued session and owns persistence. */
-export function finishLearningSession(before: LearningProgress, result: GameResult) {
+export function finishLearningSession(
+  before: LearningProgress,
+  result: GameResult,
+  weights: SkillWeights,
+) {
   if (!isLearningProgress(before)) throw new RangeError("Invalid learning progress.");
-  const stats = applyStatGains(before.stats, prototypeStatGains(result.gameId));
+  // D-23: the game's weights split the session budget across abilities, which roll up to the body.
+  const skillGains = weightedSkillGains(result, weights);
+  const skills = applySkillGains(before.skills, skillGains);
+  const stats = applyStatGains(before.stats, abilityStatGains(skillGains));
   const step = completeLearningGame(before.streak);
   const gameStars = sessionStars(result);
   const earnedStars = gameStars + step.bonus;
@@ -52,6 +63,7 @@ export function finishLearningSession(before: LearningProgress, result: GameResu
   ) as Partial<BrainyStats>;
   const after: LearningProgress = {
     stats,
+    skills,
     wallet: { ...before.wallet, stars },
     mood: moodAfterGame(before.mood),
     streak: step.streak,
@@ -60,6 +72,7 @@ export function finishLearningSession(before: LearningProgress, result: GameResu
     before,
     after,
     gains,
+    skillGains,
     gameStars,
     earnedStars,
     bonus: step.bonus,

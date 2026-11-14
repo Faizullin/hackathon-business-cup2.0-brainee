@@ -1,6 +1,7 @@
 import { randomUUID, scryptSync, timingSafeEqual } from "node:crypto";
 import {
   applyShowcaseAction,
+  applySkillGains,
   applyStatGains,
   type BrainyStats,
   PARENT_ACTIONS,
@@ -12,7 +13,7 @@ import type { Database } from "./client";
 import { LearningStoreError, requireAccess, writeTransaction } from "./learning-store";
 import { demoShowcase } from "./showcase-seed";
 
-export const PARENT_UNLOCK_MS = 30 * 60 * 1000;
+export const PARENT_UNLOCK_MS = 15 * 60 * 1000;
 
 export class ShowcaseError extends Error {
   constructor(public readonly reason: string) {
@@ -111,9 +112,12 @@ export async function applyShowcase(db: Database, tokenHash: string, input: unkn
         legs: state.legs,
         resp: state.resp,
       };
+      const skills = outcome.gains.eyes
+        ? applySkillGains(state.skills, { attention: outcome.gains.eyes })
+        : state.skills;
       await tx
         .update(brainyStates)
-        .set({ ...applyStatGains(stats, outcome.gains), updatedAt: now })
+        .set({ ...applyStatGains(stats, outcome.gains), skills, updatedAt: now })
         .where(eq(brainyStates.childId, access.childId));
     }
     await tx

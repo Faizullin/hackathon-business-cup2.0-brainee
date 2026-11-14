@@ -1,5 +1,5 @@
 // The one contract every game implements. Guide: docs/dev/games.md.
-import type { GameKind, GameResult, RoundEvent, Skill } from "@brainee/core";
+import type { GameKind, GameResult, RoundEvent, Skill, SkillWeights } from "@brainee/core";
 import type { ComponentType } from "react";
 
 /** Hosts supply localized strings; isolated games never import an application. */
@@ -34,6 +34,10 @@ export type GameMeta = {
   /** Russian UI title. */
   title: string;
   skills: { main: Skill; secondary?: Skill };
+  /** D-23: this game's share of each trained ability (sums to 1); mirrors the Game row. */
+  weights: SkillWeights;
+  /** D-22: recommended minimum age; the catalog spans 4–10. */
+  minAge: number;
   levels: number;
 };
 

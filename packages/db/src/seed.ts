@@ -25,11 +25,13 @@ const historicalResult: GameResult = {
 const historicalCompletion = finishLearningSession(
   {
     stats: { ...stats, eyes: 38 },
+    skills: { speech: 62, reading: 48, logic: 78, attention: 38, memory: 55, motor: 70 },
     wallet: { stars: 328, suns: 6 },
     mood: 64,
     streak: { inRow: 0, bonusGiven: false },
   },
   historicalResult,
+  { attention: 1 },
 );
 // Public demo PIN only, salted/hashed at rest. The parent barrier is T-40.
 const pinSalt = "brainee-demo-parent-v1";
@@ -44,8 +46,10 @@ export const demo = {
   parent: {
     id: "demo-parent",
     familyId: "demo-family",
-    email: "parent@brainee.test",
+    // Demo login from the MVP prototype: mama@example.com / demo1234 (public demo credentials).
+    email: "mama@example.com",
     pinHash: `scrypt$${pinSalt}$${scryptSync("1234", pinSalt, 64).toString("hex")}`,
+    passwordHash: `scrypt$${pinSalt}$${scryptSync("demo1234", pinSalt, 64).toString("hex")}`,
   },
   child: { id: "demo-child", familyId: "demo-family", name: "Саша", birthYear: 2020 },
   wallet: { childId: "demo-child", stars: 340, suns: 6 },
@@ -53,6 +57,7 @@ export const demo = {
     childId: "demo-child",
     ...stats,
     mood: 72,
+    skills: { speech: 62, reading: 48, logic: 78, attention: 41, memory: 55, motor: 70 },
     startSnapshot: { brain: 18, eyes: 16, mouth: 14, arms: 14, legs: 18, resp: 10 },
     updatedAt: new Date("2026-11-14T00:00:00Z"),
   },
@@ -66,6 +71,8 @@ export const demo = {
       levels: 2,
       roundsPerSession: 4,
       enabled: true,
+      weights: { attention: 1 },
+      minAge: 4,
     },
     {
       id: "continue-pattern",
@@ -76,6 +83,8 @@ export const demo = {
       levels: 2,
       roundsPerSession: 4,
       enabled: true,
+      weights: { logic: 0.7, attention: 0.3 },
+      minAge: 5,
     },
   ],
   history: {

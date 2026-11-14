@@ -1,8 +1,10 @@
 import { createHash, randomBytes, randomInt, randomUUID } from "node:crypto";
 import { setTimeout as delay } from "node:timers/promises";
 import {
+  addFeed,
   type BrainyStats,
   finishLearningSession,
+  moodNow,
   parseLearningGameResult,
   parseLearningLaunch,
   stopForToday,
@@ -15,6 +17,7 @@ import {
   families,
   gameSessions,
   games,
+  showcases,
   wallets,
 } from "../schema";
 import type { Database } from "./client";
@@ -200,11 +203,13 @@ export async function finishGameSession(
     const completion = finishLearningSession(
       {
         stats,
+        skills: state.skills,
         wallet: { stars: wallet.stars, suns: wallet.suns },
-        mood: state.mood,
+        mood: moodNow(state.mood, state.updatedAt, now),
         streak: { inRow: access.inRow, bonusGiven: access.bonusGiven },
       },
       result,
+      game.weights,
     );
     await tx
       .update(wallets)
@@ -212,8 +217,28 @@ export async function finishGameSession(
       .where(eq(wallets.childId, access.childId));
     await tx
       .update(brainyStates)
-      .set({ ...completion.after.stats, mood: completion.after.mood, updatedAt: now })
+      .set({
+        ...completion.after.stats,
+        skills: completion.after.skills,
+        mood: completion.after.mood,
+        updatedAt: now,
+      })
       .where(eq(brainyStates.childId, access.childId));
+    const showcase = await tx
+      .select({ data: showcases.data })
+      .from(showcases)
+      .where(eq(showcases.childId, access.childId))
+      .get();
+    if (showcase) {
+      const data = structuredClone(showcase.data);
+      addFeed(data, {
+        at: now.toISOString(),
+        kind: "game",
+        title: `${game.title} · ${result.level}`,
+        amount: completion.earnedStars,
+      });
+      await tx.update(showcases).set({ data }).where(eq(showcases.childId, access.childId));
+    }
     await tx
       .update(demoSessions)
       .set(completion.after.streak)

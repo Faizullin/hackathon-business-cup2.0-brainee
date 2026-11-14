@@ -42,3 +42,14 @@ describe("mood and stats", () => {
     expect(NOW.eyes).toBe(41);
   });
 });
+
+describe("mood decay", () => {
+  it("fades 5 per idle day, never below 30, and not on the same day", async () => {
+    const { moodNow } = await import("./onboarding");
+    const last = new Date("2026-11-10T10:00:00Z");
+    expect(moodNow(72, last, new Date("2026-11-10T23:00:00Z"))).toBe(72);
+    expect(moodNow(72, last, new Date("2026-11-12T08:00:00Z"))).toBe(62);
+    expect(moodNow(40, last, new Date("2026-11-20T08:00:00Z"))).toBe(30);
+    expect(moodNow(20, last, new Date("2026-11-20T08:00:00Z"))).toBe(20);
+  });
+});

@@ -115,9 +115,23 @@ export function ParentShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-2">
-            <Link href="/entry" className={outlineButton}>
-              {t.childMode}
-            </Link>
+            {snapshot?.parentUnlocked ? (
+              // ROUTES.md §3.3: hand the device back — locks parent mode, child re-enters via /entry.
+              <button
+                type="button"
+                className={outlineButton}
+                onClick={async () => {
+                  await lockParent();
+                  window.location.assign("/entry");
+                }}
+              >
+                {t.returnToChild}
+              </button>
+            ) : (
+              <Link href="/entry" className={outlineButton}>
+                {t.childMode}
+              </Link>
+            )}
             {snapshot?.parentUnlocked && (
               <button
                 type="button"

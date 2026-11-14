@@ -1,7 +1,7 @@
 "use client";
 
 import { Brainy } from "@brainee/brainy";
-import { STAGES, stageOf } from "@brainee/core";
+import { ABILITIES, STAGES, stageOf } from "@brainee/core";
 import { Share2 } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
@@ -27,6 +27,15 @@ export function AnalyticsScreen() {
   const stage = stageOf(progress.stats);
   const age = new Date().getFullYear() - child.birthYear;
   const table = a.ranking[scope][kind];
+  // D-23: the "now" outline is the child's live ability scores, moved by every finished game.
+  const skillsNow = ABILITIES.map((skill) => Math.round(progress.skills[skill]));
+  const toConfirm = showcase.tasks.filter((task) => task.status === "check").length;
+  const toDeliver = showcase.requests.filter((request) => !request.delivered).length;
+  const attention = [
+    toConfirm > 0 && { href: "/tasks", text: ru.parent.attention.confirm(toConfirm) },
+    toDeliver > 0 && { href: "/rewards", text: ru.parent.attention.deliver(toDeliver) },
+    showcase.tasks.length === 0 && { href: "/tasks", text: ru.parent.attention.assign },
+  ].filter(Boolean) as { href: string; text: string }[];
   const share = async () => {
     const text = `${t.recap(a.recap.month)} · ${child.name}: ${a.recap.achievements.join(", ")}. ${t.referral(a.recap.referral)}`;
     try {
@@ -43,6 +52,24 @@ export function AnalyticsScreen() {
         <h1>{t.title}</h1>
         <Chip tone="sun">{t.demoNote}</Chip>
       </div>
+
+      {attention.length > 0 && (
+        <section
+          data-testid="needs-attention"
+          className="flex flex-col gap-2 rounded-panel border-2 border-coral/40 bg-coral/5 p-4"
+        >
+          <h2 className="font-heading font-semibold text-lg">{ru.parent.attention.title}</h2>
+          <ul className="flex flex-wrap gap-2">
+            {attention.map((item) => (
+              <li key={item.text}>
+                <Link href={item.href} className={primaryButton}>
+                  {item.text}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <Panel className="sm:flex-row sm:items-center">
         <div className="flex items-end justify-center gap-2">
@@ -133,7 +160,7 @@ export function AnalyticsScreen() {
             labels={a.skills.labels}
             series={[
               { values: a.skills.monthAgo, color: "sky" },
-              { values: a.skills.now, color: "coral" },
+              { values: skillsNow, color: "coral" },
             ]}
             average={a.skills.average}
           />
@@ -191,6 +218,29 @@ export function AnalyticsScreen() {
           <p className="text-sm">{t.hardDone(a.hardThing.finished, a.hardThing.recommended)}</p>
         </Panel>
       </div>
+
+      <Panel title={ru.parent.feed.title}>
+        {showcase.feed.length === 0 ? (
+          <p className="text-muted-foreground">{ru.parent.feed.empty}</p>
+        ) : (
+          <ol className="flex flex-col gap-1" data-testid="event-feed">
+            {showcase.feed.slice(0, 8).map((item) => (
+              <li
+                key={`${item.at}-${item.kind}-${item.title ?? ""}`}
+                className="flex items-baseline justify-between gap-3 rounded-xl bg-secondary/50 px-3 py-2 text-sm"
+              >
+                <span>{ru.parent.feed.kinds[item.kind]?.(item.title ?? "", item.amount ?? 0)}</span>
+                <time dateTime={item.at} className="shrink-0 text-muted-foreground text-xs">
+                  {new Date(item.at).toLocaleString("ru-RU", {
+                    dateStyle: "short",
+                    timeStyle: "short",
+                  })}
+                </time>
+              </li>
+            ))}
+          </ol>
+        )}
+      </Panel>
 
       <Panel title={t.ranking} note={t.rankingNote}>
         <div className="flex flex-wrap gap-2">

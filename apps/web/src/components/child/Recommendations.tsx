@@ -1,6 +1,6 @@
 "use client";
 
-import { ABILITIES, type Ability, type AbilityScores, recommendGames } from "@brainee/core";
+import { type Ability, type AbilityScores, recommendGames } from "@brainee/core";
 import { reactGames } from "@brainee/games";
 import { ChildIcon } from "@brainee/ui/components/child-icons";
 import { cn } from "@brainee/ui/lib/utils";
@@ -15,13 +15,14 @@ export function useRecommendations() {
   const { snapshot } = useLearning();
   return useMemo(() => {
     if (!snapshot) return [];
-    const { analytics, ageAverages } = snapshot.showcase;
-    const scores = Object.fromEntries(
-      ABILITIES.map((skill, index) => [skill, analytics.skills.now[index] ?? 50]),
-    ) as AbilityScores;
-    const recs = recommendGames(scores, ageAverages, reactGames, [], Date.now());
+    const { ageAverages } = snapshot.showcase;
+    // Live ability scores (D-23) and only games open for the child's age (D-22).
+    const scores: AbilityScores = snapshot.progress.skills;
+    const age = new Date().getFullYear() - snapshot.child.birthYear;
+    const open = reactGames.filter((game) => game.minAge <= age);
+    const recs = recommendGames(scores, ageAverages, open, [], Date.now());
     // The MVP catalog has two games: top up with the rest by their main-skill gap.
-    const extra = reactGames
+    const extra = open
       .filter((game) => game.kind === "dev" && !recs.some((rec) => rec.game.id === game.id))
       .map((game) => {
         const skill = game.skills.main as Ability;

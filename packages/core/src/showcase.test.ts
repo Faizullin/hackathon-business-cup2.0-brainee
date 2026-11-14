@@ -62,6 +62,7 @@ const base: Showcase = {
   ],
   ageAverages: { speech: 50, reading: 50, logic: 50, attention: 50, memory: 50, motor: 50 },
   entryLog: { took: 0, other: 0 },
+  feed: [],
   analytics: {} as Showcase["analytics"],
 };
 const input = (showcase = base, stars = 100, suns = 5) => ({

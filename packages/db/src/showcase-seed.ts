@@ -242,6 +242,12 @@ export const demoShowcase: Showcase = {
   // Illustrative values for the demo; real age norms remain T-83.
   ageAverages: { speech: 55, reading: 55, logic: 58, attention: 52, memory: 56, motor: 60 },
   entryLog: { took: 14, other: 6 },
+  feed: [
+    { at: "2026-11-14T00:00:00.000Z", kind: "game", title: "Найди лишний · 1", amount: 12 },
+    { at: "2026-11-13T17:40:00.000Z", kind: "task-done", title: "Убраться в комнате" },
+    { at: "2026-11-13T15:10:00.000Z", kind: "video", title: "Тайны океана", amount: 15 },
+    { at: "2026-11-12T16:20:00.000Z", kind: "gift-bought", title: "Набор наклеек", amount: 2 },
+  ],
   analytics: {
     weeks: 8,
     quizStats: { brain: 18, eyes: 16, mouth: 14, arms: 14, legs: 18, resp: 10 },

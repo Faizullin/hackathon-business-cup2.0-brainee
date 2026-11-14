@@ -37,6 +37,8 @@ Family → many children is out of MVP in the UI but **must be possible in the s
 - Prototype simplification: Continue the pattern → brain +2; Odd one out → eyes +3; science video → eyes +2; confirmed task → resp +2.
 - **The exact formula is TBD** (an education specialist sets it before launch). Keep it in one function in `packages/core` so it's easy to swap.
 
+**Now implemented (D-23):** per-game `weights` + level/accuracy budget → whole-point ability gains → body parts; see [decisions.md](../dev/decisions.md). The paragraph below describes the earlier T-24 helpers.
+
 **Implemented in T-24:** `sessionSkillGains(result, trained, policy)` asks the injected policy for a session's total gain budget, then splits it 70/30 (100% if there is one distinct skill). The policy receives level, rounds, mistakes, corrections and duration; there is no default level/accuracy calibration. `abilityStatGains` sums ability gains into body parts; `applyStatGains` caps the resulting stats at 100. Fractions are retained. Trait/fun-skill rollups remain TBD. The current [child flow](../dev/ui.md#saved-learning-state-t-55) uses the prototype's fixed per-game gains on the server instead.
 
 ## Analytics events (minimum)

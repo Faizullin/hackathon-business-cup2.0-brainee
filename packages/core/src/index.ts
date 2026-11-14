@@ -4,6 +4,7 @@ export * from "./brainy";
 export * from "./economy";
 export * from "./game-validation";
 export * from "./learning";
+export * from "./onboarding";
 export * from "./random";
 export * from "./recommendations";
 export * from "./showcase";

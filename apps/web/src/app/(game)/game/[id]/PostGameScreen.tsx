@@ -58,6 +58,15 @@ export function PostGameScreen({
         ))}
         <ArrowRight aria-hidden="true" className="col-start-2 row-start-1 size-6 text-mint" />
       </div>
+      {Object.keys(completion.skillGains ?? {}).length > 0 && (
+        <p className="flex flex-wrap justify-center gap-2 text-sm" data-testid="skill-gains">
+          {Object.entries(completion.skillGains).map(([skill, gain]) => (
+            <span key={skill} className="rounded-full bg-sky/15 px-3 py-1 font-medium">
+              {t.skillGain(ru.skills[skill as keyof typeof ru.skills] ?? skill, gain as number)}
+            </span>
+          ))}
+        </p>
+      )}
       <div className="flex flex-wrap justify-center gap-2 lg:col-start-1" aria-live="polite">
         {Object.entries(completion.gains).map(([stat, gain]) => (
           <p

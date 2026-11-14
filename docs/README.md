@@ -35,6 +35,8 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [dev/agent-tooling.md](dev/agent-tooling.md) | Which agent skills and MCP servers to use or skip, and why |
 | [ideas/README.md](ideas/README.md) | What the source files are + prototype line map |
 | [reports/README.md](reports/README.md) | Recording commands, artifact map and analysis of the game-store-planning reporting pipeline |
+| [product/routes-spec.md](product/routes-spec.md) | Building or changing routes, access, parent dashboard or ROUTES.md rules |
+| [product/external-games.md](product/external-games.md) | Planning the 30-game pack (licences, path C, first wave) |
 | [reports/mvp.md](reports/mvp.md) | Every MVP page (child + parent): phone/iPad walkthrough videos, screenshots, JSON logs. Also [reports/learning.md](reports/learning.md) (three-game loop) |
 
 ## Reading paths by task

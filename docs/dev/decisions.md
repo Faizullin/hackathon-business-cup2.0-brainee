@@ -6,6 +6,26 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-25 · ROUTES.md is the product spec, reduced for our stack · 2026-11-14 · accepted · extends D-15, D-16, D-21
+**Context:** new inputs in `docs/ideas/`: `ROUTES.md` + `brainy-mvp.zip` (routes, roles, rules, events, clickable prototype) and a 30-game handoff for external learning games. Summary: [routes-spec.md](../product/routes-spec.md), [external-games.md](../product/external-games.md).
+**Decision:** adopt ROUTES.md behaviour with reductions: polling stays (no SSE, no Web Push; «Требует внимания», badges and an event feed instead); our current paths stay (mapping in routes-spec); events live as a capped feed in the showcase; mood decay and resets are computed on read (no cron); the prototype's Google Fonts/cdnjs are never copied. External games: all source licences are permissive (QLOBE-kids MIT, Sugarizer Apache-2.0, H5P MIT, h5p-standalone MIT, Blockly Games Apache-2.0); they come in as path C artifacts after T-29, starting with Tangram Tales. Ranking stays fake/seeded; privacy work and the science-video media question wait.
+**Consequences:** product work follows routes-spec; the 30-game pack is a later catalog source, not an MVP blocker.
+
+## D-24 · Onboarding quiz before the account; own minimal accounts · 2026-11-14 · accepted · extends D-21
+**Context:** the PRD/prototype put a habit quiz in onboarding; the product owner wants it **before** the account exists, initialising Brainy.
+**Decision:** `/onboarding`: 5 questions (0–3 each) → `quizStart` in `core` (prototype formula, body stats capped at 40) shows the starting Brainy → signup (child name, birth year for age 4–10, email, password, PIN) → `POST /api/onboarding` creates family, parent (scrypt password + PIN), child, wallet (50 ★), Brainy (quiz stats and skills, `startSnapshot` = baseline) and a personalised showcase, then sets the device cookie with parent mode unlocked. `POST /api/auth/login` (email + password) opens the family's child on this device. Parent unlock is 15 min; «Вернуть ребёнку» locks and returns to `/entry`. Demo account: `mama@example.com` / `demo1234`, PIN 1234. No auth provider.
+**Consequences:** works only with `DEMO_MODE=1` like the other APIs; password reset, device pairing codes and multi-child families are follow-ups. A methodologist replaces the quiz formula later.
+
+## D-23 · Per-game skill weights drive real stat changes · 2026-11-14 · accepted · supersedes the fixed prototype gains
+**Context:** each game trains several abilities in different proportions; finishing a game must change the child's metrics accordingly.
+**Decision:** every learning game has `weights` (ability → share, sum 1) and a `minAge`, stored on the `games` row and mirrored in game metadata. Children have six ability scores (`brainy_states.skills`). A completed session earns a budget `(3 + (level − 1)) × (0.5 + 0.5 × first-try accuracy)`, split by weights into whole-point ability gains (`weightedSkillGains`); abilities update, and body parts grow by the summed gains of their abilities (logic/memory → brain, attention → eyes, speech/reading → mouth, motor → arms). Parent radar "now" and recommendations read the live scores. Science-video eyes gains also train attention.
+**Consequences:** Odd one out (attention 1.0) keeps +3 eyes at level 1; Continue the pattern (logic 0.7, attention 0.3) gives logic +2/attention +1. Calibration remains a methodologist's choice in one place (`stat-gains.ts`).
+
+## D-22 · Russian now, English later; catalog for ages 4–10 · 2026-11-14 · accepted
+**Context:** the 30-game handoff assumes US English for ages 6–9; the PRD is Russian with younger children.
+**Decision:** the product stays Russian for now; an English locale (`en.ts`) comes later. The catalog spans ages 4–10; each game has a recommended minimum age, games above the child's age show locked «Откроется с N лет», and recommendations only offer open games.
+**Consequences:** English-only external games wait for the locale or must be language-light.
+
 ## D-21 · Seeded showcase content for the presentation MVP · 2026-11-14 · accepted · extends D-20
 **Context:** the MVP must show every page and its basic interactions for the pitch; calculating analytics, tasks history and media catalogs properly is out of scope for the hackathon.
 **Decision:** one `showcases` row per child holds seeded JSON (analytics, tasks, recommendations, gifts/requests, leisure catalog, science videos, accessories owned/worn, entry log). It is part of the versioned `/api/state` snapshot. `POST /api/actions` validates each interaction with the pure `applyShowcaseAction` in `core` (economy/accessory rules reused) and saves showcase, wallet and stat gains in one transaction with a version bump, so child and parent devices converge by polling. Parent actions need a device PIN unlock (`demo_sessions.parent_until`, scrypt-verified, 30 min) via `POST/DELETE /api/parent`. `POST /api/demo-reset` (DEMO_MODE only) restores the seed for tests and presentations. Charts are hand-rolled SVG (no Recharts dependency). Navigation uses React `<ViewTransition>` cross-fade/slide with reduced-motion off.

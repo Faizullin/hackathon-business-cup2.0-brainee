@@ -127,6 +127,12 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
 - [x] T-94 Post-game «Подтянуть навык» card should prefer a different game than the one just played (the report shows it repeating Odd one out next to its own next-level card) → [screens.md](../product/screens.md#game-screen-and-no-exit-flow)
 - [x] T-98 iPad landscape layout (1180 × 820): left tab rail, dock as side column, two-column Brainy tab; portrait-tablet rotate hint; e2e/report iPad viewport switched to landscape
+- [x] T-100 Per-game skill weights + ability scores → body (D-23); minimum age per game, locked cards, age-aware recommendations (D-22)
+- [x] T-101 Onboarding quiz before signup (`/onboarding`), own minimal accounts, parent login, demo account, 15-min PIN, «Вернуть ребёнку» (D-24)
+- [x] T-102 ROUTES.md extras: «Требует внимания», event feed, mood decay on read, live-skill radar (D-25)
+- [ ] T-103 ROUTES.md follow-ups: tab badges, task cancel, bonus once per day + daily/weekly resets, parent Settings (child, PIN change, devices), device pairing code, adult-task gate fallback → [routes-spec.md](../product/routes-spec.md)
+- [ ] T-104 English locale `en.ts` + locale switch (D-22), before English-only external games
+- [ ] T-105 First external game via path C: Tangram Tales (after T-29/T-85) → [external-games.md](../product/external-games.md)
 - [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run
 - [x] T-96 `mvp` report module: every page + child → parent walkthrough; `scaffold` report retired → [reports/mvp.md](../reports/mvp.md)
 - [ ] T-97 Showcase follow-ups after the pitch: real Task/Gift/Request tables, computed analytics, playable fun games and cartoons, presenter «Сбросить демо» button (endpoint exists)

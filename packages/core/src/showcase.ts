@@ -72,6 +72,25 @@ export type ScienceVideo = {
   position: number;
   solved: boolean;
 };
+export type FeedKind =
+  | "game"
+  | "task-done"
+  | "task-confirmed"
+  | "gift-bought"
+  | "gift-delivered"
+  | "accessory"
+  | "video"
+  | "exchange"
+  | "fun";
+/** Parent event feed (ROUTES.md §6): structured, rendered with i18n strings. */
+export type FeedItem = { at: string; kind: FeedKind; title?: string; amount?: number };
+export const FEED_LIMIT = 30;
+
+/** Newest first, capped. */
+export function addFeed(showcase: Showcase, item: FeedItem) {
+  showcase.feed = [item, ...(showcase.feed ?? [])].slice(0, FEED_LIMIT);
+}
+
 export type RankRow = { place: number; name: string; value: string; me?: boolean };
 export type RankTable = { summary: string; rows: RankRow[] };
 export type Analytics = {
@@ -115,6 +134,7 @@ export type Showcase = {
   science: ScienceVideo[];
   ageAverages: Record<Ability, number>;
   entryLog: { took: number; other: number };
+  feed: FeedItem[];
   analytics: Analytics;
 };
 
@@ -176,6 +196,8 @@ const count = (value: unknown, max: number) =>
 export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction): ShowcaseOutcome {
   const { wallet, now, id } = input;
   const s: Showcase = structuredClone(input.showcase);
+  s.feed ??= [];
+  const at = now.toISOString();
   const ok = (next: Wallet = wallet, gains: { eyes?: number; resp?: number } = {}) =>
     ({ ok: true, showcase: s, wallet: next, gains }) as const;
   switch (action.type) {
@@ -184,6 +206,12 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       if (!result.ok) return fail(result.reason);
       s.owned = result.owned;
       s.equipped = equip(s.equipped, action.id);
+      addFeed(s, {
+        at,
+        kind: "accessory",
+        title: action.id,
+        amount: wallet.stars - result.wallet.stars,
+      });
       return ok(result.wallet);
     }
     case "equip":
@@ -195,7 +223,9 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       return ok();
     case "exchange": {
       const result = exchangeSuns(wallet, action.suns);
-      return result.ok ? ok(result.wallet) : fail(result.reason);
+      if (!result.ok) return fail(result.reason);
+      addFeed(s, { at, kind: "exchange", amount: action.suns });
+      return ok(result.wallet);
     }
     case "buy-gift": {
       const gift = s.gifts.find((g) => g.id === action.giftId);
@@ -209,18 +239,21 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
         at: now.toISOString(),
         delivered: false,
       });
+      addFeed(s, { at, kind: "gift-bought", title: gift.title, amount: gift.price });
       return ok(result.wallet);
     }
     case "task-done": {
       const task = s.tasks.find((t) => t.id === action.taskId);
       if (task?.place !== "real" || task.status !== "todo") return fail("invalid-task");
       task.status = "check";
+      addFeed(s, { at, kind: "task-done", title: task.title });
       return ok();
     }
     case "task-confirm": {
       const task = s.tasks.find((t) => t.id === action.taskId);
       if (task?.status !== "check") return fail("invalid-task");
       task.status = "done";
+      addFeed(s, { at, kind: "task-confirmed", title: task.title, amount: task.reward });
       if (task.place === "app") return ok({ ...wallet, stars: wallet.stars + task.reward });
       s.weekGoal.earned += task.reward;
       return ok({ ...wallet, suns: wallet.suns + task.reward }, { resp: TASK_RESP_GAIN });
@@ -269,6 +302,7 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       const request = s.requests.find((r) => r.id === action.requestId);
       if (!request || request.delivered) return fail("not-found");
       request.delivered = true;
+      addFeed(s, { at, kind: "gift-delivered", title: request.title });
       return ok();
     }
     case "goal-set":
@@ -283,6 +317,7 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       if (wallet.stars < price) return fail("not-enough-stars");
       if (action.mode === "forever") game.forever = true;
       else game.until = new Date(now.getTime() + FUN_PRICES.timedMinutes * 60_000).toISOString();
+      addFeed(s, { at, kind: "fun", title: game.title, amount: price });
       return ok({ ...wallet, stars: wallet.stars - price });
     }
     case "buy-cartoon": {
@@ -306,6 +341,7 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       if (video.solved) return ok();
       video.solved = true;
       video.position = 0;
+      addFeed(s, { at, kind: "video", title: video.title, amount: VIDEO_QUIZ_STARS });
       return ok({ ...wallet, stars: wallet.stars + VIDEO_QUIZ_STARS }, { eyes: VIDEO_QUIZ_EYES });
     }
     case "entry-choice":

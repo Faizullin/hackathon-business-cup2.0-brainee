@@ -10,6 +10,13 @@ export {
   showcases,
   wallets,
 } from "../schema";
+export {
+  AccountError,
+  loginParent,
+  MAX_CHILD_AGE,
+  MIN_CHILD_AGE,
+  signupFromQuiz,
+} from "./account-store";
 export { type Database, openDatabase } from "./client";
 export { type DatabaseConfig, getDatabaseConfig } from "./config";
 export {

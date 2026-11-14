@@ -51,3 +51,62 @@ export function abilityStatGains(gains: Partial<Record<Ability, number>>): Parti
   }
   return body;
 }
+
+// D-23: every learning game declares its own skill weights (summing to 1). A completed
+// session earns a budget from level and accuracy, split by those weights.
+export type SkillWeights = Partial<Record<Ability, number>>;
+export type SkillScores = Record<Ability, number>;
+export const SESSION_BASE_GAIN = 3;
+
+export function isSkillWeights(value: unknown): value is SkillWeights {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const entries = Object.entries(value as Record<string, unknown>);
+  if (entries.length === 0) return false;
+  let sum = 0;
+  for (const [key, weight] of entries) {
+    if (!(ABILITIES as readonly string[]).includes(key)) return false;
+    if (typeof weight !== "number" || !(weight > 0) || weight > 1) return false;
+    sum += weight;
+  }
+  return Math.abs(sum - 1) < 1e-6;
+}
+
+export function isSkillScores(value: unknown): value is SkillScores {
+  if (!value || typeof value !== "object") return false;
+  return ABILITIES.every((skill) => {
+    const n = (value as Record<string, unknown>)[skill];
+    return typeof n === "number" && Number.isFinite(n) && n >= 0 && n <= 100;
+  });
+}
+
+/** Budget: base + 1 per level above 1, scaled 50–100% by first-try accuracy. */
+export function sessionBudget(result: Pick<GameResult, "level" | "rounds" | "corrections">) {
+  const accuracy = result.rounds > 0 ? (result.rounds - result.corrections) / result.rounds : 0;
+  return (SESSION_BASE_GAIN + Math.max(0, result.level - 1)) * (0.5 + 0.5 * accuracy);
+}
+
+/** Whole-point ability gains for one completed session (zeros dropped). */
+export function weightedSkillGains(
+  result: Pick<GameResult, "level" | "rounds" | "corrections">,
+  weights: SkillWeights,
+): Partial<Record<Ability, number>> {
+  if (!isSkillWeights(weights)) throw new RangeError("Invalid skill weights.");
+  const budget = sessionBudget(result);
+  const gains: Partial<Record<Ability, number>> = {};
+  for (const ability of ABILITIES) {
+    const weight = weights[ability];
+    if (!weight) continue;
+    const gain = Math.round(budget * weight);
+    if (gain > 0) gains[ability] = gain;
+  }
+  return gains;
+}
+
+export function applySkillGains(scores: SkillScores, gains: Partial<Record<Ability, number>>) {
+  const next = { ...scores };
+  for (const ability of ABILITIES) {
+    const gain = gains[ability];
+    if (gain) next[ability] = Math.min(100, Math.max(0, next[ability] + gain));
+  }
+  return next;
+}

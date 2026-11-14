@@ -1,4 +1,11 @@
-import type { BrainyStats, LearningCompletion, Showcase, Skill } from "@brainee/core";
+import type {
+  BrainyStats,
+  LearningCompletion,
+  Showcase,
+  Skill,
+  SkillScores,
+  SkillWeights,
+} from "@brainee/core";
 import { sql } from "drizzle-orm";
 import { check, integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
@@ -28,6 +35,8 @@ export const parents = sqliteTable("parents", {
     .references(() => families.id, { onDelete: "cascade" }),
   email: text("email").notNull(),
   pinHash: text("pin_hash").notNull(),
+  // D-24: own minimal login (scrypt), no auth provider. Null for PIN-only demo parents.
+  passwordHash: text("password_hash"),
 });
 
 export const children = sqliteTable("children", {
@@ -69,6 +78,8 @@ export const brainyStates = sqliteTable(
     legs: real("legs").notNull(),
     resp: real("resp").notNull(),
     mood: real("mood").notNull(),
+    // D-23: six ability scores; learning games move them by their weights, then roll up to the body.
+    skills: text("skills", { mode: "json" }).$type<SkillScores>().notNull(),
     startSnapshot: text("start_snapshot", { mode: "json" }).$type<BrainyStats>().notNull(),
     updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
   },
@@ -91,6 +102,9 @@ export const games = sqliteTable(
     levels: integer("levels").notNull(),
     roundsPerSession: integer("rounds_per_session").notNull(),
     enabled: integer("enabled", { mode: "boolean" }).notNull().default(true),
+    // D-23 per-game skill weights (sum 1); D-22 recommended minimum age (catalog spans 4–10).
+    weights: text("weights", { mode: "json" }).$type<SkillWeights>().notNull(),
+    minAge: integer("min_age").notNull().default(4),
   },
   (table) => [
     check("game_kind_valid", sql`${table.kind} IN ('dev', 'fun')`),
