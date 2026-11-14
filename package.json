@@ -1,0 +1,19 @@
+{
+  "name": "brainee",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.23.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "check": "biome check . && pnpm typecheck",
+    "format": "biome format --write .",
+    "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.7",
+    "turbo": "2.11.11",
+    "typescript": "5.9.3"
+  }
+}

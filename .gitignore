@@ -1,0 +1,24 @@
+node_modules/
+.pnpm-store/
+.turbo/
+.next/
+out/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# Local data and secrets
+data/
+*.db
+*.db-shm
+*.db-wal
+.env*
+!.env.example
+
+# Built games are regenerated from their workspace packages
+apps/web/public/games/
+
+.DS_Store
+*.log

@@ -4,6 +4,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (7)
+- Completed T-10: pnpm workspace + lockfile, Turborepo, shared TypeScript/Biome/Tailwind config, and an empty JIT `@brainee/core` package.
+- Updated setup, Commands and progress (T-15); preserved the D-12 game plan. Verified dependency installation and `pnpm check`; T-11 is next.
+
 ## 2026-11-14 (6)
 - Analyzed `../game-store-planning`: a tested any-engine bridge, engine kits, build pipeline and WebKit e2e already exist. Decided to port them instead of our drafted protocol (D-12).
 - Removed from the plan: the `apps/game-lab` app (→ `/lab`), the `git` import source + `adapter.js`, the generated registry, the subdomain task T-86. Updated T-16, T-19, T-29, T-85.

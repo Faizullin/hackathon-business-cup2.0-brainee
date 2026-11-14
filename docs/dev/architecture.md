@@ -1,6 +1,6 @@
 # Architecture
 
-> **Status: planned.** Nothing is scaffolded yet. When reality differs from this file, update this file. The reasoning behind each choice is in [decisions.md](decisions.md).
+> **Status: foundation scaffolded (T-10).** pnpm workspaces, Turborepo, shared config and an empty source-exported `core` package exist. The rest of this layout is planned. When reality differs from this file, update this file. The reasoning behind each choice is in [decisions.md](decisions.md).
 
 **Guiding principle: local-first, zero infrastructure.** One SQLite file, media in the repo, one Node process. Clone → `pnpm dev` works with no accounts, Docker or cloud services.
 

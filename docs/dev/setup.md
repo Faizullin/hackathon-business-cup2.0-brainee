@@ -1,14 +1,37 @@
 # Setup
 
-> **Status: planned.** These commands become real once T-10 (scaffold) is done. Then update this file and the Commands section of `AGENTS.md`.
+> **Status: foundation scaffolded (T-10).** The install and checks below work now. The web app, DB and game commands are planned and listed separately.
 
 ## Prerequisites
-- Node.js 22 LTS, pnpm 9+
+- Node.js >= 22.13; `.nvmrc` selects Node 22.
+- pnpm 11.23.0 (pinned in `package.json`). If needed: `npm install --global pnpm@11.23.0`.
 - Nothing else: no Docker, no database server, no cloud accounts.
 
-## First run (planned)
+## First run
 ```bash
 pnpm install
+pnpm check
+```
+
+Available commands:
+
+| Command | Does |
+|---|---|
+| `pnpm check` | Biome lint + format checks, then workspace TypeScript checks |
+| `pnpm typecheck` | Run each package's `typecheck` through Turborepo |
+| `pnpm format` | Format source and config files; Markdown and frozen prototype sources are excluded |
+
+The web app does not exist yet, so there is no development server or runnable UI at this step.
+
+## Shared config and internal packages
+`packages/config` exports strict TypeScript presets (`base.json`, `react.json`, `nextjs.json`), the shared Biome config, and a Tailwind v4 CSS entry. The CSS maps utility names to the prototype's variables; token values and fonts belong in `packages/ui` (T-12). The Next.js app will add Tailwind's bundler integration in T-11/T-12.
+
+Internal packages use the `@brainee/*` scope and `workspace:*` references. `@brainee/core` is the first empty example: its package exports point directly at `src/index.ts`, with no `dist/` or build script. Its TypeScript config extends `@brainee/config/tsconfig/base.json`. Future apps must transpile these source exports with their bundler.
+
+Workspace globs already include `apps/*`, `packages/*` and `games/*`. Apps and embedded-game packages will be added in their own tasks; the updated `/lab` and bridge design is in [games.md](games.md).
+
+## Application first run (planned, T-11 – T-13)
+```bash
 cp apps/web/.env.example apps/web/.env.local   # defaults work as-is
 pnpm db:reset       # create data/dev.db, push schema, seed the demo family
 pnpm dev            # web on http://localhost:3000
@@ -26,7 +49,6 @@ pnpm dev            # web on http://localhost:3000
 | `pnpm db:reset` | Delete the DB file → push → seed (use freely; data is disposable) |
 | `pnpm db:studio` | Drizzle Studio: browse and edit local data |
 | `pnpm test` / `pnpm e2e` | Vitest / Playwright (Chromium + WebKit; run `games:build` first) |
-| `pnpm check` | Biome lint + format, plus `tsc` typecheck |
 
 > Next.js 16 `next dev` writes a "This is NOT the Next.js you know" rules block into an `AGENTS.md` (seen in game-store-planning). Commit it, and read the docs it points to (`node_modules/next/dist/docs/`) before using Next APIs.
 

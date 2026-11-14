@@ -1,0 +1,16 @@
+{
+  "name": "@brainee/config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./biome": "./biome.json",
+    "./tsconfig/base.json": "./tsconfig/base.json",
+    "./tsconfig/react.json": "./tsconfig/react.json",
+    "./tsconfig/nextjs.json": "./tsconfig/nextjs.json",
+    "./tailwind.css": "./tailwind.css"
+  },
+  "dependencies": {
+    "tailwindcss": "4.3.5"
+  }
+}

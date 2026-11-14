@@ -34,7 +34,12 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 
 ## Commands
 
-Not scaffolded yet. Planned commands are in [docs/dev/setup.md](docs/dev/setup.md). Update both files once they exist.
+- `pnpm install` — install the workspace using the pinned package manager and lockfile.
+- `pnpm check` — Biome lint/format checks, then workspace TypeScript checks.
+- `pnpm typecheck` — workspace TypeScript checks through Turborepo.
+- `pnpm format` — format source and config files with Biome.
+
+The web app, database and game commands are still planned. See [docs/dev/setup.md](docs/dev/setup.md).
 
 ## Conventions and tools
 

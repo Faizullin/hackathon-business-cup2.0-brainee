@@ -2,14 +2,14 @@
 
 > A snapshot: **overwrite it, don't append.** History goes in [log.md](log.md); tasks go in [todo.md](todo.md).
 
-**Updated:** 2026-11-14 · **Phase:** P1 Scaffold (next)
+**Updated:** 2026-11-14 · **Phase:** P1 Scaffold (in progress)
 
 ## Phases
 
 | # | Phase | Status | Tasks |
 |---|---|---|---|
 | P0 | Docs & planning | ✅ done | T-01 – T-05 |
-| P1 | Scaffold monorepo + game pipeline | ⏳ next | T-10 – T-19 |
+| P1 | Scaffold monorepo + game pipeline | 🔄 in progress | T-10 – T-19 |
 | P2 | Core logic + Brainy + game contract | ⬜ todo | T-20 – T-29 |
 | P3 | Child flow | ⬜ todo | T-30 – T-38 |
 | P4 | Parent flow | ⬜ todo | T-40 – T-46 |
@@ -20,10 +20,10 @@
 Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 
 ## Current focus
-Scaffold the local-first monorepo (SQLite, no external services) following [architecture.md](../dev/architecture.md) (T-10).
+Workspace foundation is ready (T-10). Next: scaffold `apps/web` with the planned Next.js route groups (T-11), following [architecture.md](../dev/architecture.md).
 
 ## Handoff
-- **Last session:** reviewed product goals, planned stack and implementation risks; added follow-up tasks T-80 – T-84. No application code exists yet.
-- **Next:** define a small end-to-end demo slice (T-80), then begin T-10 and validate the deployment and iPad constraints early (T-84).
-- **Blockers / open questions:** demo scope, reward incentives, score validity, production security boundaries and licensed media need decisions; product TBDs are in [overview.md](../product/overview.md#open-questions-tbd).
-- **Not committed:** `docs/`, `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and the README change are still uncommitted.
+- **Last session:** completed T-10 and T-15: pinned pnpm workspace + lockfile, Turborepo tasks, shared TypeScript/Biome/Tailwind config, and an empty `@brainee/core` package exporting TS source. Preserved the updated game plan (D-12). Install and lint/type checks pass.
+- **Next:** T-11 → T-12 → finish T-13 (the `core` source stub exists; the remaining packages, Vitest and SQLite do not). Then implement `/lab` and port the game pipeline as planned.
+- **Blockers / open questions:** none blocking the scaffold. Product TBDs remain in [overview.md](../product/overview.md#open-questions-tbd).
+- **Not committed:** scaffold files and this session's README, AGENTS and progress/setup/architecture changes. No commit or push was requested.

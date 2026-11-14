@@ -10,12 +10,12 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [x] T-05 Map prototype functions to line numbers → [ideas/README.md](../ideas/README.md)
 
 ## P1 · Scaffold monorepo
-- [ ] T-10 pnpm workspaces + Turborepo + `packages/config` (tsconfig, Biome, Tailwind), JIT internal packages
+- [x] T-10 pnpm workspaces + Turborepo + `packages/config` (tsconfig, Biome, Tailwind), JIT internal packages
 - [ ] T-11 `apps/web` Next.js 16 with `(child)`, `(parent)`, `(auth)` route groups
 - [ ] T-12 `packages/ui`: port tokens + fonts via `next/font` (prototype lines 7–285)
 - [ ] T-13 Empty `core`, `brainy`, `games`, `db` packages with Vitest; `db` on SQLite (`data/dev.db`) + `db:reset`
 - [ ] T-14 Deploy one container to Railway (volume for SQLite) on a custom domain → [setup.md](../dev/setup.md#deploy-demo)
-- [ ] T-15 Update [setup.md](../dev/setup.md) and the AGENTS.md Commands section with the real commands
+- [x] T-15 Update [setup.md](../dev/setup.md) and the AGENTS.md Commands section with the real commands (extend as app, DB and game scripts land)
 - [ ] T-16 Dev-only `/lab` route: game picker, level/seed, phone/iPad frame, event stream panel (`data-status`) → [games.md](../dev/games.md#lab)
 - [ ] T-17 `pnpm gen:game` Turborepo generator
 - [ ] T-18 Install the curated agent skills → [agent-tooling.md](../dev/agent-tooling.md)
