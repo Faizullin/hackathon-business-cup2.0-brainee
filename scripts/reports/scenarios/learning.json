@@ -11,7 +11,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Learn",
+                  "name": "Brainy recommends",
                   "exact": true
                 },
                 "timeout": 20000
@@ -175,7 +175,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Learn",
+              "name": "Brainy recommends",
               "exact": true
             },
             "timeout": 20000,
@@ -188,7 +188,7 @@
               "by": "testId",
               "value": "wallet-stars"
             },
-            "message": "The Brainy dock shows the saved wallet"
+            "message": "The compact Energy card shows the saved wallet"
           }
         },
         {
@@ -335,7 +335,7 @@
               "name": "Leisure",
               "exact": true
             },
-            "message": "Leisure placeholder (T-36)"
+            "message": "Leisure shows the saved shop and entertainment choices"
           }
         },
         {
@@ -358,7 +358,7 @@
               "name": "Gifts",
               "exact": true
             },
-            "message": "Gifts placeholder (T-38)"
+            "message": "Gifts shows the saved goal, shop and tasks"
           }
         },
         {
@@ -375,7 +375,7 @@
         {
           "expect": {
             "url": "^/brainy$",
-            "message": "The dock opens the Brainy tab"
+            "message": "The compact Energy card opens the Brainy tab"
           }
         },
         {
@@ -397,7 +397,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Learn",
+              "name": "Brainy recommends",
               "exact": true
             },
             "timeout": 20000,
@@ -410,7 +410,7 @@
               "by": "testId",
               "value": "wallet-stars"
             },
-            "message": "The Brainy dock shows the saved wallet"
+            "message": "The compact Energy card shows the saved wallet"
           }
         },
         {
@@ -557,7 +557,7 @@
               "name": "Leisure",
               "exact": true
             },
-            "message": "Leisure placeholder (T-36)"
+            "message": "Leisure shows the saved shop and entertainment choices"
           }
         },
         {
@@ -580,7 +580,7 @@
               "name": "Gifts",
               "exact": true
             },
-            "message": "Gifts placeholder (T-38)"
+            "message": "Gifts shows the saved goal, shop and tasks"
           }
         },
         {
@@ -597,7 +597,7 @@
         {
           "expect": {
             "url": "^/brainy$",
-            "message": "The dock opens the Brainy tab"
+            "message": "The compact Energy card opens the Brainy tab"
           }
         },
         {

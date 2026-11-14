@@ -121,7 +121,7 @@ Our own games: `sandbox="allow-scripts allow-same-origin"`. This isolates lifecy
 PECS board games and the sample game don't fit. Porting a candidate is T-85.
 
 ## Porting prototype games
-Odd one out and Continue the pattern → `react` runtime. Prototype lines 901–982 ([ideas/README.md](../ideas/README.md)). Catalog: [screens.md](../product/screens.md#learn-учимся).
+Odd one out and Continue the pattern → `react` runtime. Prototype lines 901–982 ([ideas/README.md](../ideas/README.md)). Catalog: [screens.md](../product/screens.md#learn).
 
 ## Implemented platform slice (T-29 / T-85 / T-89 / T-90)
 

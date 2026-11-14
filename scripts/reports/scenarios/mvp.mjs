@@ -2,6 +2,18 @@ import assert from "node:assert/strict";
 
 export { checkSurface } from "./common.mjs";
 
+/** Review the real stage range without changing a family's saved Brainy. */
+export async function previewGrowth(page, { timeline }) {
+  const preview = page.getByTestId("funnel-growth");
+  await preview.waitFor();
+  const slider = preview.getByRole("slider", { name: "Explore Brainy's stages" });
+  await slider.focus();
+  await slider.press("End");
+  assert.equal(await preview.getAttribute("data-stage"), "genius");
+  timeline?.check(true, "The funnel preview reaches the real Genius stage");
+  await page.waitForTimeout(900);
+}
+
 /** Fresh seeded tasks, gifts and videos (DEMO_MODE reset endpoint). */
 export async function resetDemo(page, { base, timeline }) {
   const headers = { origin: base };
