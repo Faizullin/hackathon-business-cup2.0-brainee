@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-14 — Games batch consolidated on local games branch
+Four scored archive imports and two Explore previews are implemented (seven learning games total). Integrated real-host reward checks, separate unscored preview registry, source/asset validation and iPad screenshot fixes. Static checks and 171 unit tests pass; focused iPad suite 22/22, preview matrix 8/8. A later serial stress run still fails intermittently in Rhythm input and Tangram placement (10/12 passed); T-113 remains open. Full-app onboarding/login tests also need owner follow-up. Consolidated locally at the owner's request; master untouched, no push/deploy. Next: resolve the two input failures, then use the preview-first import approach in external-games.md.
+
 ## 2026-11-14 — T-105 pinned Tangram Tales
 Imported the first priority path-C game in the isolated `games` worktree: original MIT QLOBE artifact and hashes, Russian four-silhouette adapter, three levels, manifest/seed registration, offline build/source/asset checks and real-input reward/conformance coverage. Simplified to native select/place with snapping; removed free/debug/audio/storage paths. D-31 records the artifact/adapter boundary; T-107/T-108 retain the remaining ordered waves. Final post-rebase verification is pending; no push/deployment.
 
