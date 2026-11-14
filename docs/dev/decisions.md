@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-38 · Games register from their own folders (generated registry) · 2026-11-15 · accepted · supersedes D-12's "no generated TS registry"
+**Context:** build, checks and the catalog each listed game ids by hand (#8). Next (Turbopack), esbuild and Vitest share no glob-import feature, so a runtime-only scan cannot feed the client catalog.
+**Decision:** `scripts/discover-games.mjs` derives the game list from each folder's `manifest.json`/`preview.json` and writes gitignored `*.generated.ts` modules (postinstall and every dev/test/typecheck/build/check entry point). Each embedded folder exports `buildGame()` (and optional `checkAssets()`). Manifests require a same-origin `thumbnail`; previews carry declarative `explore` metadata read by `ExplorePlayer`. GSP Phaser games use `engine-phaser` as their shared family adapter.
+**Consequences:** adding a game touches only its folder (plus e2e spec regexes). A stale generated file is possible until any listed command runs; a fresh checkout gets it from `pnpm install`.
+
 ## D-37 · English-only feature copy · 2026-11-15 · superseded by D-34 (English-only platform)
 **Decision:** new features and UI text remain English only in feature-local copy modules. Write English copy for the product instead of translating the design files' placeholder text. D-34 governs the whole platform; the former exception preserving Russian translations and locale controls no longer applies.
 
@@ -141,7 +146,7 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 **Decision:** shadcn/ui with a `base-*` style for every interactive component, child and parent alike, restyled with the prototype tokens in `packages/ui`. Motion in four layers: CSS → React `<ViewTransition>` for routes and shared elements → Motion (`LazyMotion`) for physics, gestures and rewards. Layouts own the persistent chrome; the root layout has no visual chrome; game screens are fullscreen. Details: [ui.md](ui.md).
 **Consequences:** one accessible primitive set; no Vaul, Radix or extra page-transition libraries. Reduced motion must be handled explicitly for view transitions. Rewards stay calm and finite (product rules).
 
-## D-12 · Port the game platform from `game-store-planning` · 2026-11-14 · accepted · refines D-11, supersedes the game-lab app (D-08)
+## D-12 · Port the game platform from `game-store-planning` · 2026-11-14 · accepted (registry clause superseded by D-38) · refines D-11, supersedes the game-lab app (D-08)
 **Context:** our earlier repo `../game-store-planning` already has a tested any-engine bridge (`bridge-core`: MessageChannel handshake, zod validation, engine adapters, IIFE drop-in), engine build kits (esbuild for Phaser, `gdexporter` for GDevelop), a manifest → build → `public/` → DB seed pipeline, asset checks, and Chromium + WebKit e2e that caught real iPad-relevant bugs.
 **Decision:** port these instead of the protocol drafted in D-11. Strip the PECS-specific parts. Embedded games become workspace packages under `games/`, with shared `engine-phaser` / `engine-gdevelop` kits. GDevelop projects are committed as editable source and exported at build time. Manifests seed the `Game` table (no generated TS registry). The lab is a dev-only `/lab` route, not a separate Vite app. Dropped: the `git` import source, `adapter.js` injection, the games subdomain.
 **Consequences:** less to build and fewer apps; proven WebKit fixes from the start. 3–5 existing games are candidates to reuse. We inherit GSP's protocol vocabulary.

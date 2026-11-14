@@ -109,6 +109,7 @@ The example defaults demo access off; explicitly set `DEMO_MODE=1` in `apps/web/
 | `pnpm gen:game` | Scaffold a new game (react or embedded) + register it |
 | `pnpm games:build` | Build `bridge.js` + every embedded game, replace `public/games/<id>/` ([games.md](games.md)) |
 | `pnpm test:assets` | Check every built game's referenced files exist |
+| `pnpm games:discover` | Regenerate the gitignored game registry from each game folder (also runs on install, dev, test, typecheck, build and checks) |
 
 Next.js ships version-matched docs at `apps/web/node_modules/next/dist/docs/`; read the relevant pages before using Next APIs. `next typegen` runs before TypeScript checks, so a clean checkout needs no previous build. `next-env.d.ts` and `.next/` are generated and ignored. If Next adds agent instructions, retain them alongside the project instructions.
 

@@ -183,3 +183,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 
 - [x] T-143 Audit the 30-game archive against implemented imports and propose faster unscored delivery → [external-games.md](../product/external-games.md#30-game-audit-and-faster-delivery-proposal-2026-11-15)
 - [ ] T-144 Extend the existing Explore container and family import helpers, then batch remaining games without analytics; scope and acceptance → [external-games.md](../product/external-games.md#proposed-next-implementation-not-yet-implemented)
+- [x] T-145 Game auto-discovery from each folder; required 4:3 SVG thumbnails rendered on every game card (#8, D-38)
+- [x] T-146 First Explore wave from GSP: Shape Pairs, Color Boxes, Sticker Scene; declarative Explore metadata in `ExplorePlayer` (#8)
+- [ ] T-147 QLOBE/Sugarizer/H5P/Blockly family adapters and the remaining 24 archive titles as Explore batches (T-144 scope; GSP wave done)
+- [ ] T-148 Decide which Explore previews (incl. the GSP wave) earn real `GameResult` hooks and promotion to scored

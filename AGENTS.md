@@ -54,7 +54,7 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - `pnpm typecheck` — workspace TypeScript checks through Turborepo.
 - `pnpm format` — format source and config files with Biome.
 
-`pnpm games:build` bundles same-origin embedded games; `pnpm test:assets` validates their builds. Database paths, browser installation and all commands are in [docs/dev/setup.md](docs/dev/setup.md).
+`pnpm games:build` bundles same-origin embedded games (games register from their own folders via `pnpm games:discover`); `pnpm test:assets` validates their builds. Database paths, browser installation and all commands are in [docs/dev/setup.md](docs/dev/setup.md).
 
 ## Conventions and tools
 

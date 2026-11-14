@@ -138,7 +138,7 @@ The sections above describing full GDevelop build tooling, per-version trust tie
 
 `games/tangram-tales/artifact/` contains 47 selected, unmodified QLOBE files from commit `60967634e6cc313c41a5aa8067bed9f0f616176c`, including MIT LICENSE. `sources.lock.json` records upstream paths, Git blob hashes and SHA-256; `pnpm check` checks every retained byte. The handoff launcher was reviewed but not executed: only the selected pinned files were fetched and verified outside the repo. Normal builds are offline.
 
-`scripts/build-tangram.mjs` copies that artifact and applies a bounded guided-mode port plus `session.js`/`session.css`/English HTML to `public/games/tangram-tales/`; the upstream English copy is kept. The served engine omits debug, free play, shelf, storage, narration and idle prompting. The original 16 silhouettes, shape-family equivalence, target geometry and snapping remain. Native buttons use select-then-place input, including keyboard activation; orientation snaps automatically. Drag/hold rotation is omitted from this simplified guided version. Controls fit the phone iframe and landscape iPad; no race between pointer-up replacement and compatibility click.
+`games/tangram-tales/build.mjs` copies that artifact and applies a bounded guided-mode port plus `session.js`/`session.css`/English HTML to `public/games/tangram-tales/`; the upstream English copy is kept. The served engine omits debug, free play, shelf, storage, narration and idle prompting. The original 16 silhouettes, shape-family equivalence, target geometry and snapping remain. Native buttons use select-then-place input, including keyboard activation; orientation snaps automatically. Drag/hold rotation is omitted from this simplified guided version. Controls fit the phone iframe and landscape iPad; no race between pointer-up replacement and compatibility click.
 
 The manifest specifies logic .7 / motor .3, age 6+, three levels. Levels leave 4/5/6 pieces to place, selected deterministically by the issued seed. A session selects four distinct silhouettes from the 16. **Round = one fully assembled silhouette confirmed with "Check".** Check while incomplete reports one mistake; completing after one or more failed checks reports exactly one correction. Selection, failed placement and rotation never count as rounds/mistakes. Four rounds produce exactly one finish; pagehide/unmount stops without finishing. All timing is elapsed monotonic time, with no family timezone dependency.
 
@@ -180,6 +180,19 @@ rows with the non-reset seed command (`pnpm db:seed`) against the intended deplo
 This integration does not run that command against production. Do not use `db:reset` or the
 shared-family refresh to install game catalog entries. Unimported titles in
 [the remaining queue](../product/external-games.md) stay unregistered and unavailable to children.
+
+## Auto-discovery, thumbnails and Explore metadata (#8, D-38)
+
+A game registers by existing: `scripts/discover-games.mjs` reads every `packages/games/src/<id>/manifest.json`, `games/<id>/manifest.json` (scored) and `games/<id>/preview.json` (Explore) and writes the gitignored registry modules the catalog imports. Shared scripts name no game.
+
+New game checklist (only its folder):
+- React: `manifest.json`, `index.ts` that **default-exports** its `GameDefinition`, `thumbnail.svg`.
+- Embedded: `manifest.json` or `preview.json`, `build.mjs` exporting `buildGame(destination)` (optional `checkAssets(base)`), `thumbnail.svg`, `CREDITS.md`/licences.
+- `thumbnail` is always `/games/<id>/thumbnail.svg`: 4:3 (`viewBox="0 0 160 120"`), ≤ 8 KB, `#F2F1FA` canvas with a 1 px `#E6E4F2` frame (`rx` 18), `GAME_PALETTE` shapes showing the actual mechanic, no text, no Brainy, nothing external.
+- Previews add `explore`: `family` (`phaser` | `qlobe` | `sugarizer` | `h5p` | `blockly`), `viewport` (`responsive`, or `contain` with `aspectRatio` like `"4 / 3"`), `orientation`, `audio`, `readiness` (`bridge`, or `load` for games without the bridge).
+- E2E: add the spec name to `HEAVY_GAME_SPECS`/`GAME_SPECS` in `apps/web/playwright.config.ts`.
+
+GSP Phaser games (Shape Pairs, Color Boxes, Sticker Scene) share `packages/engine-phaser`, which carries GSP `phaser-core`'s helpers as `@brainee/engine-phaser/<module>`. Batch details: [docs/games/batches/2026-11-15-autodiscovery-thumbnails-wave1.md](../games/batches/2026-11-15-autodiscovery-thumbnails-wave1.md).
 
 ## Lavender palette (T-141)
 
