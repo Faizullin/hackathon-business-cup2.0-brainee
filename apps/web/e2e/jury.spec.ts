@@ -33,8 +33,8 @@ test("jury joins in one tap; families stay isolated; game ten completes an app t
     });
     await page.getByRole("link", { name: "Смотреть как ребёнок" }).click();
     await expect(page).toHaveURL(/\/entry$/);
-    await page.goto("/brainy");
-    await expect(page.getByText("Откроется: 9 / 10 игр", { exact: true })).toBeVisible();
+    await page.goto("/path");
+    await expect(page.getByText("9 / 10", { exact: true })).toBeVisible();
     await page.goto("/game/odd-one-out?recommended=1&seed=42");
     await answerOddOneOut(page);
     await expect(page.getByRole("dialog", { name: "Новая награда!" })).toBeVisible();
@@ -74,29 +74,54 @@ test("jury joins in one tap; families stay isolated; game ten completes an app t
   }
 });
 
-test("simple signup uses neutral stats and setup pairs another device", async ({
+test("funnel signup keeps setup pairing on the same family", async ({
   page,
   browser,
   baseURL,
 }, info) => {
-  await page.goto("/login");
-  await page.getByRole("link", { name: "Создать аккаунт без квиза" }).click();
-  await page.getByLabel("Имя ребёнка", { exact: true }).fill("Лея");
-  await page.getByLabel("Год рождения").fill(String(new Date().getFullYear() - 6));
+  await page
+    .context()
+    .addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
+  await page.goto("/start");
+  await page.evaluate(() =>
+    localStorage.setItem(
+      "brainy.us-parent-quiz.v2",
+      JSON.stringify({
+        version: 4,
+        screen: "result",
+        answers: {
+          goal: "ending",
+          age: "6-7",
+          handoff: "bargain",
+          content: "kids",
+          finish: "switch",
+          reading: "together",
+          duration: "one",
+          attempt: "timer",
+          moment: "afternoon",
+        },
+      }),
+    ),
+  );
+  await page.goto("/signup");
+  await page.getByLabel("Child's name", { exact: true }).fill("Leah");
+  await page
+    .getByLabel("Birth year", { exact: true })
+    .fill(String(new Date().getUTCFullYear() - 6));
   await page
     .getByLabel("Email", { exact: true })
-    .fill(`simple-${Date.now()}-${info.project.name}@example.com`);
-  await page.getByLabel("Пароль (минимум 6 символов)").fill("secret123");
-  await page.getByLabel("PIN родителя (4 цифры)").fill("2468");
+    .fill(`pairing-${Date.now()}-${info.project.name}@example.com`);
+  await page.getByLabel("Password (at least 6 characters)").fill("secret123");
+  await page.getByLabel("Parent PIN (4 digits)").fill("2468");
   await page
-    .getByRole("combobox", { name: "Часовой пояс", exact: true })
+    .getByRole("combobox", { name: "Timezone", exact: true })
     .selectOption("America/Chicago");
-  await page.getByRole("button", { name: "Создать и начать" }).click();
+  await page.getByRole("button", { name: "Create & start" }).click();
   await expect(page).toHaveURL(/\/onboarding\/setup$/);
   const code = page.getByTestId("setup-code");
   await expect(code).toHaveText(/^\d{6}$/);
   const state = await savedState(page.request);
-  expect(state.progress.stats.brain).toBe(17);
+  expect(state.progress.stats.brain).toBe(20);
   expect(state.showcase.calendar?.timeZone).toBe("America/Chicago");
   await expect(page.getByText(baseURL as string, { exact: true })).toBeVisible();
   await page.screenshot({
@@ -106,16 +131,17 @@ test("simple signup uses neutral stats and setup pairs another device", async ({
   });
   const device = await browser.newContext({ baseURL });
   try {
+    await device.addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
     const child = await device.newPage();
     await child.goto("/child-login");
-    await child.getByLabel("Код из 6 цифр").fill((await code.textContent()) ?? "");
-    await child.getByRole("button", { name: "Подключить", exact: true }).click();
+    await child.getByLabel("6-digit code").fill((await code.textContent()) ?? "");
+    await child.getByRole("button", { name: "Connect", exact: true }).click();
     await expect(child).toHaveURL(/\/entry$/);
     expect((await savedState(device.request)).child.id).toBe(state.child.id);
   } finally {
     await device.close();
   }
-  await page.getByRole("button", { name: "Это и есть устройство ребёнка" }).click();
+  await page.getByRole("button", { name: "This is the child's device" }).click();
   await expect(page).toHaveURL(/\/entry$/);
   expect((await savedState(page.request)).parentUnlocked).toBe(false);
 });

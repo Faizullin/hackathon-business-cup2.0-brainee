@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · T-135 parent funnel
+Added the 25-step parent flow, early age gate, local resume/migration, browser Back, isolated tours, pending pricing and validated funnel signup into setup. Retired the child quiz. Check/test/build pass; 32 browser cases plus 20 final layout cases pass on both engines/sizes; screenshots reviewed. Corrected the stale jury discovery assertion to Path.
+
 ## 2026-11-15 · Lavender review corrections
 Separated violet active controls and pink highlights from loss brown; unified compact Energy cards, improved Learn and Path, parent targets and game framing. Check/test/build pass, 92 affected browser tests pass, and the requested 11 pages were reviewed on phone and iPad. Continuing with T-135; no push or deployment.
 

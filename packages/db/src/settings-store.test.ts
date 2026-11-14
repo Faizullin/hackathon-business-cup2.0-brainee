@@ -132,3 +132,40 @@ it("isolates families, serializes code redemption and keeps PIN elevation at fif
     code: "unauthorized",
   });
 });
+
+it("validates funnel answers and the exact age before converting the quiz start", async () => {
+  const f = await fixture();
+  const { signupFromQuiz } = await import("./account-store");
+  const { funnelQuizAnswers, quizStart } = await import("@brainee/core");
+  const funnel = {
+    goal: "ending",
+    age: "6-7",
+    duration: "one",
+    content: "kids",
+    finish: "switch",
+    handoff: "bargain",
+    reading: "together",
+    attempt: "timer",
+    moment: "afternoon",
+  };
+  const input = {
+    email: "funnel@example.com",
+    password: "secret123",
+    pin: "2468",
+    childName: "Alex",
+    birthYear: 2020,
+    funnel,
+  };
+  for (const invalid of [
+    { ...input, funnel: { ...funnel, age: "outside" } },
+    { ...input, birthYear: 2022 },
+    { ...input, funnel: { ...funnel, moment: "invalid" } },
+  ])
+    await expect(signupFromQuiz(f.db, invalid, now)).rejects.toMatchObject({
+      reason: "invalid-input",
+    });
+  const access = await signupFromQuiz(f.db, input, now);
+  const state = await getStateSnapshot(f.db, demoTokenHash(access.token) as string, now);
+  expect(state.progress.stats).toEqual(quizStart(funnelQuizAnswers(funnel)).stats);
+  expect(state.progress.wallet).toEqual({ stars: 50, suns: 0 });
+});

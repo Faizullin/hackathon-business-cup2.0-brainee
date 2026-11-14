@@ -9,6 +9,7 @@ export function StepPage({
   title,
   body,
   art,
+  artClassName = "",
   children,
   onBack,
   onContinue,
@@ -23,6 +24,7 @@ export function StepPage({
   title: string;
   body?: ReactNode;
   art?: ReactNode;
+  artClassName?: string;
   children?: ReactNode;
   onBack?: () => void;
   onContinue?: () => void;
@@ -59,11 +61,14 @@ export function StepPage({
         />
         <span className="text-right font-semibold text-muted-foreground text-xs">{chapter}</span>
       </div>
-      <div key={step} className="lv-in grid flex-1 gap-5 lg:grid-cols-2 lg:items-center lg:gap-10">
+      <div
+        key={step}
+        className="lv-in grid flex-1 content-start gap-5 lg:grid-cols-2 lg:content-center lg:items-center lg:gap-10"
+      >
         {art && (
           <div
             data-testid="step-art"
-            className="flex min-w-0 items-center justify-center rounded-stage bg-violet-wash p-4 lg:col-start-1 lg:row-span-2 lg:min-h-96"
+            className={`flex min-w-0 items-center justify-center rounded-stage bg-violet-wash p-4 lg:col-start-1 lg:row-span-2 lg:min-h-96 ${artClassName}`}
           >
             {art}
           </div>

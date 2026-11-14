@@ -2,6 +2,9 @@ import { randomBytes, randomUUID, scryptSync, timingSafeEqual } from "node:crypt
 import {
   advanceCalendar,
   calendarKeys,
+  funnelBirthYears,
+  funnelQuizAnswers,
+  isFunnelAnswers,
   isQuizAnswers,
   quizStart,
   type Showcase,
@@ -75,6 +78,7 @@ export type SignupInput = {
   childName: string;
   birthYear: number;
   answers: unknown;
+  funnel?: unknown;
   timeZone?: unknown;
 };
 
@@ -141,7 +145,19 @@ export async function signupFromQuiz(
   now: Date,
   plan: "demo" | "jury" = "demo",
 ) {
-  const input = (raw ?? {}) as Partial<SignupInput>;
+  const input = { ...(raw ?? {}) } as Partial<SignupInput>;
+  if (input.funnel !== undefined) {
+    if (!isFunnelAnswers(input.funnel)) throw new AccountError("invalid-input");
+    const years = funnelBirthYears(input.funnel.age, now.getUTCFullYear());
+    if (
+      !years ||
+      !Number.isInteger(input.birthYear) ||
+      Number(input.birthYear) < years.min ||
+      Number(input.birthYear) > years.max
+    )
+      throw new AccountError("invalid-input");
+    input.answers = funnelQuizAnswers(input.funnel);
+  }
   if (!validSignup(input, now)) throw new AccountError("invalid-input");
   const email = input.email.trim().toLowerCase();
   const start = quizStart(input.answers as never);

@@ -67,7 +67,7 @@ export function ParentLogin() {
         {tl.newFamily}
       </Link>
       <JuryButton />
-      <Link href="/signup">{t.signup.link}</Link>
+
       <Link href="/child-login" className="font-semibold text-accent">
         {t.pairing.child}
       </Link>
