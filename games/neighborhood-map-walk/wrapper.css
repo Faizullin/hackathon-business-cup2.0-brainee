@@ -109,3 +109,26 @@ main#game {
 .magic-screen > .big-action {
   z-index: 30;
 }
+
+/* Artwork is decorative; the actual action remains visible at every aspect ratio. */
+.done-hotspot {
+  background: #fff3c4;
+  border: 3px solid #573c29;
+  color: #573c29;
+  height: 64px;
+  font: 700 22px system-ui;
+}
+.done-hotspot::after {
+  content: "Done →";
+}
+@media (max-width: 600px) {
+  .brainee-host-title {
+    display: none;
+  }
+}
+
+@media (max-width: 760px), (orientation: portrait) {
+  .magic-screen > .big-action:active:not(:disabled) {
+    transform: translate(50%, 5px);
+  }
+}

@@ -1,40 +1,5 @@
-# Reflection (Mirror Grid) Integration Guide
+# reflection
 
-This document specifies the exact steps for the integrator to register `reflection` in the shared catalog, build pipeline, and database.
-
-## 1. Register Manifest in `packages/game-catalog/src/index.ts`
-
-```typescript
-import reflection from "../../../games/reflection/manifest.json" with { type: "json" };
-
-// Add `reflection` to the exported manifests array:
-export const manifests = [odd, pattern, puzzle, tangram, reflection].map((value) =>
-  manifestSchema.parse(value),
-);
-```
-
-## 2. Add Build Step in `scripts/build-games.mjs`
-
-```javascript
-import { buildGame as buildReflection } from "../games/reflection/build.mjs";
-
-// After destination setup:
-rmSync(`${destination}/reflection`, { recursive: true, force: true });
-await buildReflection(`${destination}/reflection`);
-```
-
-## 3. Apply Schema & Seed Database
-
-```bash
-pnpm games:build
-pnpm db:push
-pnpm db:seed
-```
-
-## 4. Run Conformance and E2E Tests
-
-```bash
-pnpm check
-pnpm test:assets
-pnpm --filter @brainee/web test:e2e e2e/reflection.spec.ts
-```
+Registered by the shared game catalog and built offline by `pnpm games:build`.
+See [game integration](../../docs/dev/games.md#learning-batch-and-explore-previews) for the authoritative contract, runtime routes and acceptance checks.
+Pinned source files and licenses stay in `artifact/`; build transforms never modify those originals.

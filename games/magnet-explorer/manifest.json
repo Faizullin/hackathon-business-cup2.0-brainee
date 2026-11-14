@@ -1,9 +1,0 @@
-{
-  "id": "magnet-explorer",
-  "title": "Magnet Mission Lab",
-  "entry": "/games/magnet-explorer/index.html",
-  "minAge": 6,
-  "license": "MIT",
-  "sizeBudgetBytes": 7000000,
-  "mode": "explore"
-}

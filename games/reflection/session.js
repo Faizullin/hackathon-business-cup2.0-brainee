@@ -370,6 +370,8 @@ window.addEventListener(
   "pagehide",
   () => {
     session.finished = true;
+    window.createjs.Ticker.removeAllEventListeners("tick");
+    stage.removeAllChildren();
     bridge.close();
   },
   { once: true },

@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { build } from "esbuild";
 
@@ -10,7 +10,7 @@ const result = await build({
   format: "esm",
   write: false,
 });
-const { manifests } = await import(
+const { manifests, previews } = await import(
   `data:text/javascript;base64,${Buffer.from(result.outputFiles[0].text).toString("base64")}`
 );
 const files = (dir) =>
@@ -29,8 +29,13 @@ const discovered = [
 if (new Set(manifests.map((game) => game.id)).size !== manifests.length)
   throw new Error("Duplicate game ids");
 for (const dir of discovered) {
-  const manifest = JSON.parse(readFileSync(`${dir}/manifest.json`, "utf8"));
-  if (manifest.engine === "qlobe-dom") {
+  const manifest = JSON.parse(
+    readFileSync(
+      `${dir}/${existsSync(`${dir}/preview.json`) ? "preview" : "manifest"}.json`,
+      "utf8",
+    ),
+  );
+  if (existsSync(`${dir}/sources.lock.json`)) {
     const lock = JSON.parse(readFileSync(`${dir}/sources.lock.json`, "utf8"));
     if (!/^[a-f0-9]{40}$/.test(lock.commit)) throw new Error("Unpinned source");
     for (const file of lock.files) {
@@ -44,13 +49,13 @@ for (const dir of discovered) {
         throw new Error(`Changed pinned artifact: ${file.path}`);
     }
   }
-  if (!manifests.some((game) => game.id === manifest.id))
+  if (![...manifests, ...previews].some((game) => game.id === manifest.id))
     throw new Error(`Unregistered manifest: ${dir}`);
 }
-for (const game of manifests) {
+for (const game of [...manifests, ...previews.map((p) => ({ ...p, runtime: "embedded" }))]) {
   const path =
     game.runtime === "embedded"
-      ? `games/${game.id}/manifest.json`
+      ? `games/${game.id}/${game.mode === "explore" ? "preview" : "manifest"}.json`
       : `packages/games/src/${game.id}/manifest.json`;
   if (JSON.parse(readFileSync(path)).id !== game.id) throw new Error(`Missing manifest ${game.id}`);
   const sourceFiles = game.runtime === "react" ? files(`packages/games/src/${game.id}`) : [];
@@ -76,5 +81,5 @@ for (const game of manifests) {
   }
 }
 console.log(
-  `Validated ${manifests.length} manifests${process.argv.includes("--assets") ? " and built assets" : ""}`,
+  `Validated ${manifests.length} learning manifests and ${previews.length} previews${process.argv.includes("--assets") ? " and built assets" : ""}`,
 );

@@ -1,0 +1,474 @@
+{
+  "repository": "kaigani/qlobe-kids",
+  "commit": "60967634e6cc313c41a5aa8067bed9f0f616176c",
+  "files": [
+    {
+      "upstream": "LICENSE",
+      "path": "LICENSE",
+      "gitBlob": "69b618370281183db43e6a24ccfd944a5b62a145",
+      "sha256": "f308b595b213721db303e73e6e7d00b1e57ec9bfc193842e68c9ca481fb90632"
+    },
+    {
+      "upstream": "games/rhythm-copycat/ASSETS.md",
+      "path": "ASSETS.md",
+      "gitBlob": "afa5e805e1ac05ce4598ca68d3a75799bb5920b2",
+      "sha256": "f86b6c18ac99a9dc1150f8de2aa6aa6c5625324af5f960e80b43c15795a6aeed"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/again.m4a",
+      "path": "assets/audio/again.m4a",
+      "gitBlob": "4b8f72f3480e427434d8bef8fc5a5eedfedb5073",
+      "sha256": "c4520d48424a97ca22af742edb9b8982d1cbdecc02f9d2ace195eb53a3de39fb"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/all-done.m4a",
+      "path": "assets/audio/all-done.m4a",
+      "gitBlob": "07aa1811084f90bb2a679511a533463b3e6397d5",
+      "sha256": "5afba17fec86ea538772d42accd0162c896d8438c8141e7b33929de21ea7c02d"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/choose-mode.m4a",
+      "path": "assets/audio/choose-mode.m4a",
+      "gitBlob": "89e8e00380dfb8847b8b70738d4a392d43f85f7d",
+      "sha256": "b32b00734db83ae23c98922b088b4446cc111dab72dba516b9410729bcbe8b73"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/clap.m4a",
+      "path": "assets/audio/clap.m4a",
+      "gitBlob": "e996de53b27a09efc2aad366e2e2ce148ab77bdf",
+      "sha256": "31897c5b7b7c19297a2509342824fe6ad83d5f7eedb024cf8c556c47361feb54"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/good-1.m4a",
+      "path": "assets/audio/good-1.m4a",
+      "gitBlob": "d25761bfb4904fbc4c7d06bb2dff003aa2a70c89",
+      "sha256": "151f6d30c94305f1e1ae29c25c465fe42250e06c7b523e8f5d2375504410e574"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/good-2.m4a",
+      "path": "assets/audio/good-2.m4a",
+      "gitBlob": "aa28ef2d65d99d1cc32305ded7b227916c0020ba",
+      "sha256": "73a3993647432a33948fce79af606ccdf7c736badd3a33a9aeccd5584ae8a01e"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/good-3.m4a",
+      "path": "assets/audio/good-3.m4a",
+      "gitBlob": "41811ce7874334056fea00eea630014ddebcebf9",
+      "sha256": "94677cbff4097ae546e6aa43cc444444980e6cef1ef2977b7bba026b1386d043"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/intro.m4a",
+      "path": "assets/audio/intro.m4a",
+      "gitBlob": "342136c04120f74e48033661a87c66bc90724e8f",
+      "sha256": "39972c24902434ee5a203c1a7e892f3cb231dbe111a0ba01f8f18c1f0a3c9991"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/lines.json",
+      "path": "assets/audio/lines.json",
+      "gitBlob": "48a57d2b833c668ff380b3132ff84b3dcd93d374",
+      "sha256": "468289a209542e676e82199651b21102ab8e054f6aa586954fe2be728fd0cdbc"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/listen.m4a",
+      "path": "assets/audio/listen.m4a",
+      "gitBlob": "2097e30b2f6086e570cc95b38c0916662d1ec0ca",
+      "sha256": "77ceac7fad59feb417974ca868635543abc606e816bc9ffb8404bbfe4708dc80"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/manifest.json",
+      "path": "assets/audio/manifest.json",
+      "gitBlob": "172d4724017f694bd61797692789f925cc567579",
+      "sha256": "b8ba304a1f7f640f26a2e780ef4313ec2c8d19607e1281522479c117ca0ed6af"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/mode-clap-stomp.m4a",
+      "path": "assets/audio/mode-clap-stomp.m4a",
+      "gitBlob": "e203505987b2c34ad9e31af349921fd98b63c8c4",
+      "sha256": "8b3f51520b60f7dd4528006b99719bd146e632b14fe8b1a78b1da0d1e5358d7c"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/mode-drum-beat.m4a",
+      "path": "assets/audio/mode-drum-beat.m4a",
+      "gitBlob": "d55c8158754a52ba8aca0772d32c58fe9d5a2de7",
+      "sha256": "7d636722ae2c903dee1688e6ede97d64406d60e317b55bac19fc520124513779"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/mode-drum-circle.m4a",
+      "path": "assets/audio/mode-drum-circle.m4a",
+      "gitBlob": "62757345e74f0933dc66d0b1ff3366237af110ce",
+      "sha256": "eeec66c8be6d98682239e238ed260b0d02ace1c01a53053c79bf3260c27fc6a5"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/mode-jingle-beat.m4a",
+      "path": "assets/audio/mode-jingle-beat.m4a",
+      "gitBlob": "a5eb69512eb13414a015538f8195f1c7999d2223",
+      "sha256": "914f5bc293c033cf6b17853094ec2140a34324403e9539659e682b078bb33e94"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/mode-parade-beat.m4a",
+      "path": "assets/audio/mode-parade-beat.m4a",
+      "gitBlob": "bec5a00ef547d0d18d2680cbd08b92ed4d81440f",
+      "sha256": "79f4b0d02cd763ba26b55528a2a797f36e1f263f79e9e4cf1808b00ff0d8e7aa"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/nudge-clap.m4a",
+      "path": "assets/audio/nudge-clap.m4a",
+      "gitBlob": "a333c5942946034b4020e743950eb5f3e3dfe817",
+      "sha256": "1fbb19ad0367331d83d090408ae99c2aad3ad81651f35b2724c8a74e4046ab76"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/nudge-shake.m4a",
+      "path": "assets/audio/nudge-shake.m4a",
+      "gitBlob": "a857644fb17614e0dcaad0724bbabb4498f99c16",
+      "sha256": "7425d0437f3651ae452156fb378acc1252a3dcf66cf546d118e72a999aec210e"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/nudge-stomp.m4a",
+      "path": "assets/audio/nudge-stomp.m4a",
+      "gitBlob": "d16bec4c875cc51e04219c5c8948a2ed6a10993e",
+      "sha256": "185cd6278a35c6b75e57d8695b021a594d6d2e2e3353ea0da80a9bdb3aeb558b"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/nudge-tap.m4a",
+      "path": "assets/audio/nudge-tap.m4a",
+      "gitBlob": "3deaae1ba2f520ba8ef92a158ea837435c682936",
+      "sha256": "0071807a7f5bda343c3f345f017fb9de1226df9f0830e2778775ef878ae233b8"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/oops.m4a",
+      "path": "assets/audio/oops.m4a",
+      "gitBlob": "401a5918214bd96551e90cdff29b78d947626994",
+      "sha256": "3d473724ceab234798a28a1cd3ea661d8f93840449c320e0e100e5fc0ee47114"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/pick-beat.m4a",
+      "path": "assets/audio/pick-beat.m4a",
+      "gitBlob": "3b7edb47869e0fba4511b3d29f4248430f926753",
+      "sha256": "d19cc4c22c687f5a326f8135618ae0bf058cdf14bf5661d73cc0e6c0e48f7a43"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/round-end.m4a",
+      "path": "assets/audio/round-end.m4a",
+      "gitBlob": "faef3f80c087fb11f11047a5492edb9346aeec83",
+      "sha256": "e3c6fceef9282e6afa09a9c648be242e5ccef1faae853f8ba5903ee04e8d3ff7"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/shake.m4a",
+      "path": "assets/audio/shake.m4a",
+      "gitBlob": "08ce7236d1257059f0513875176784445b669185",
+      "sha256": "7f8b9a7443841734c19865e3daaaa01ed8757f72d69713cc16e7c24dc0e9eede"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/song.m4a",
+      "path": "assets/audio/song.m4a",
+      "gitBlob": "9195a627dd2af2732e1e1fd45c3b99bac54fb5b7",
+      "sha256": "a79d575053ba7d9730c6a1eb75b789e6bbd220035bb4c7cf3cf0a94da9c9216a"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/stars-1.m4a",
+      "path": "assets/audio/stars-1.m4a",
+      "gitBlob": "e65ff1a1f783cd9f606459db40aa3950a97029cd",
+      "sha256": "20a15a50288f5b8779a2d5a3c729beb725a902b1ee987d2b9ee4182cc225e908"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/stars-2.m4a",
+      "path": "assets/audio/stars-2.m4a",
+      "gitBlob": "54019a73b4e57bfc2ba4ab6e3abaf2954ae95b9c",
+      "sha256": "f476d759d58a2c666f904afd542dc9fceb1dc534393cc64a2768ec465a44e6d8"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/stars-3.m4a",
+      "path": "assets/audio/stars-3.m4a",
+      "gitBlob": "394846b30afbdb96a343a2978c0abd71760abde1",
+      "sha256": "868f6f318fd6ea9cfe8f01992b99bfc96564ac35f92e233aec9fcececad12ffb"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/start.m4a",
+      "path": "assets/audio/start.m4a",
+      "gitBlob": "d4e6e2a3d3e6ce11c852bc75ff585b01f93825c0",
+      "sha256": "21cb8c38b152b6ac0bf7b6242519ab6391456e164fd8a7ff17fc52ea0b8d6147"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/stomp.m4a",
+      "path": "assets/audio/stomp.m4a",
+      "gitBlob": "d71bd1c4969e2e0560b76b68ac6ed5f4aaf454ff",
+      "sha256": "455a3bf9eddfc7e79516fe284f8c5550661cf205d84b9036deffc468de3d0353"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/tap.m4a",
+      "path": "assets/audio/tap.m4a",
+      "gitBlob": "f513ec53492faf31bbb6f0afa43e052d179ee21f",
+      "sha256": "1fe4ef99f7c542ad6921c6e80a2a5c7ccb4b3a8cbe6f110203884f9ca224b06d"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/together.m4a",
+      "path": "assets/audio/together.m4a",
+      "gitBlob": "444794cb29a42167bf70ecc1d4f9616521841a8e",
+      "sha256": "c4654d2087be2f35dd1432313e0ef512d31d462f4017fb1f5943ba0a020beddd"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/watch-kiki.m4a",
+      "path": "assets/audio/watch-kiki.m4a",
+      "gitBlob": "aba244caec95a6fabc7fda038025b8ef5633b627",
+      "sha256": "aad015bb09db309d4ab52789a22f77d94b9980276cf6b727ee4d2775faeacddd"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/audio/your-turn.m4a",
+      "path": "assets/audio/your-turn.m4a",
+      "gitBlob": "5423a04dc20da46bbdbf14850306a292079edaad",
+      "sha256": "975ecc6bd4e166875edf9b9e4bc295b11046b0b715f82a49694fcc3ea5414c54"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/bg/end.webp",
+      "path": "assets/bg/end.webp",
+      "gitBlob": "77c5a749d3044497cda093da1906f1aa112aacbf",
+      "sha256": "ee6af2322a982284c347e0757a6c40e24a3172255970183eb6ef520bcc78d627"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/bg/play-portrait.webp",
+      "path": "assets/bg/play-portrait.webp",
+      "gitBlob": "995db423b341d68e4ebaf9f963d1aa7ec70a63ea",
+      "sha256": "d129229319167a62b1f5b78980596725eaacee73ab939cd04511ea604e12ff8d"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/bg/play.webp",
+      "path": "assets/bg/play.webp",
+      "gitBlob": "5b780bae31e4bfdf5d60e87badc4e743f67dd33d",
+      "sha256": "4b5ad85e115b89d687af247f48ab35705615d1f7285b232ce7a13c8a38fa6a53"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/bg/splash.webp",
+      "path": "assets/bg/splash.webp",
+      "gitBlob": "c70a0788330f34a3c858e5d167159750d784bff3",
+      "sha256": "120e4d1bb865379550cfc56bf82910e316a81c509ce007e785c9345d3f9692a3"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/cards/orange.webp",
+      "path": "assets/cards/orange.webp",
+      "gitBlob": "1924ca3cbc49c0241354b2c2e9ba7ddcf4c9fb7e",
+      "sha256": "e989db7765755bbb8075ef67d07d1354a9d417c16c1ea2ba867515795c37ba03"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/cards/teal.webp",
+      "path": "assets/cards/teal.webp",
+      "gitBlob": "458c8eeec60be610c5eada42c1b39ecd500d2769",
+      "sha256": "dcdd05563183238fcaad592ce2b47f2f062b212f617130270d1ee09fd75ad604"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/cards/yellow.webp",
+      "path": "assets/cards/yellow.webp",
+      "gitBlob": "104d9f6c15145573cca77b6ba6c506f64710e5c4",
+      "sha256": "a82a93389cfee7ed9934f8ae097e624e0c297de3cd52337569e9f018a5e81425"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/kiki/poses/celebrate.webp",
+      "path": "assets/kiki/poses/celebrate.webp",
+      "gitBlob": "f0cfd88f6ab809ef7d9eb2586a6fde755e14c911",
+      "sha256": "c19885067f7a1a10c3b7871b1dc1d7f64ccbf3717a7e8c51b7c2b7b8fa36e18e"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/kiki/poses/clap.webp",
+      "path": "assets/kiki/poses/clap.webp",
+      "gitBlob": "2a2c9c68bb2eddf1357d725606e722ee0c56c115",
+      "sha256": "c843d72e315d88dde8160781f59006d25afd156ccc39b6576847b15a94c1e327"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/kiki/poses/neutral.webp",
+      "path": "assets/kiki/poses/neutral.webp",
+      "gitBlob": "69817d9442d77252793902ec940c77820f98174c",
+      "sha256": "11a1feb2dc9ce8d04553bc0bd99d32b0bd1d664351faeb73d89ee1ad23bee251"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/kiki/poses/notice.webp",
+      "path": "assets/kiki/poses/notice.webp",
+      "gitBlob": "e91bd8d43d5b77345e7f3612c0ffb1e7817b47a9",
+      "sha256": "aad078ab4cc357d713ca472f12af32b1c2a2193d209fd03409664c57c28bf7d1"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/kiki/poses/shake.webp",
+      "path": "assets/kiki/poses/shake.webp",
+      "gitBlob": "b5d24256607539e3693ab10a87bdb0ceae93f6c0",
+      "sha256": "84df36575f82f359f19323ea10930c5ff6248fb6a2b5f3e2a3fa0e6acfd381cb"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/kiki/poses/stomp.webp",
+      "path": "assets/kiki/poses/stomp.webp",
+      "gitBlob": "5d14fba0389ed09475afe8f00703d4ec7674171a",
+      "sha256": "a83ab6be54336a9c85c32b89a94b842552215d373c28881840d26e33482a3112"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/kiki/poses/tap.webp",
+      "path": "assets/kiki/poses/tap.webp",
+      "gitBlob": "5f417087b687e2219c19cfaf2fa2c1867bca5f2b",
+      "sha256": "83e9c6b6b953da17e19bab9e0aca3dcd8a4538257a6c63d4ef99015c0210aa3b"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/kiki/poses.json",
+      "path": "assets/kiki/poses.json",
+      "gitBlob": "502726eda9273d8444a35a52b93773c7b67fbf1e",
+      "sha256": "68f296d6523576528ba021cf803d1c0246db5d8c3569534555f2fdc24c1bb636"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/og-image.jpg",
+      "path": "assets/og-image.jpg",
+      "gitBlob": "2c483e9481fb50c9b1703477b0c8712269d18817",
+      "sha256": "8eb0ce555e5d018306fd13cd1fc3db39e88e28fc01003f463a604dc0bb667b01"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/pads/clap.webp",
+      "path": "assets/pads/clap.webp",
+      "gitBlob": "136b8c5fde41967ee39aec0475887615119c2fd2",
+      "sha256": "68ab3c217d26ed402d2d3535eea80b01f5be7bbfef01727d6ad9edf647a0394d"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/pads/shake.webp",
+      "path": "assets/pads/shake.webp",
+      "gitBlob": "a306524012df80155b6d766096f42064d0e28615",
+      "sha256": "b95ede22cd354e645e5e6a12fbade3a876a31f359934798d6e5cd23124951921"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/pads/stomp.webp",
+      "path": "assets/pads/stomp.webp",
+      "gitBlob": "13595f1b606b7524e65110cecce8df758ae3218a",
+      "sha256": "2f31bed2db17f2e93a20579610c007ce192fe9c116c4a3737b67b08d210a3d43"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/pads/tap.webp",
+      "path": "assets/pads/tap.webp",
+      "gitBlob": "490e43fafa7366c271b3163aa12402fb8f51cdab",
+      "sha256": "e7b5a4966a1fdc96aec51d69bc57bbc7c3a721e2b53cc2fdf4308ce38b1bc650"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/ui/button.webp",
+      "path": "assets/ui/button.webp",
+      "gitBlob": "fe84b7db7d4cbfab1accb9b1f00d9cfdef74f0ae",
+      "sha256": "dd4c8cd76c0aa307bf88f571d77c3ff76fde171ad8e3fe5de9ffebed87681646"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/ui/djembe.webp",
+      "path": "assets/ui/djembe.webp",
+      "gitBlob": "fda5231d8305c849828dfcf3d5cd1339a75f76e5",
+      "sha256": "4c4c31ae409969075fdaeaacb07640346a2e8a1fa41912605bcf7c6b7b949e7e"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/ui/maraca.webp",
+      "path": "assets/ui/maraca.webp",
+      "gitBlob": "3d66f6e9550d205b69e18cc74a14b719307a1bf0",
+      "sha256": "200375edecc2b3d851df4f054b14ec0c9dab7f0342a1e57342c512418606176c"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/ui/plaque.webp",
+      "path": "assets/ui/plaque.webp",
+      "gitBlob": "516892fbe4c1cf1d7ed3c23c9399de15a371e49f",
+      "sha256": "1eea3d5f9c58236ddcb525857c71d9834970535f0c44f593d7731beccfb68470"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/ui/star.webp",
+      "path": "assets/ui/star.webp",
+      "gitBlob": "6919e9a3d398ce69d5424dd9a766531f03f2297c",
+      "sha256": "00ca1c238141f305f7e99dbce5128941edb5fc5ba99ed2595d1f0498a0e9f6a3"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/ui/tambourine.webp",
+      "path": "assets/ui/tambourine.webp",
+      "gitBlob": "7cfa4aae1facce559ce71a989b4e58acd0a09adf",
+      "sha256": "d611fc7ba88ee0c4ce5a233081ec3ad94963ee05c580ef19489e6f40b7017de1"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/ui/title.webp",
+      "path": "assets/ui/title.webp",
+      "gitBlob": "b03d31460d4991cb86076a265b2052b13914f572",
+      "sha256": "365540483e9759b70a035110879dd51a2ce6bb48fa8cf381b121039f8b4b3d66"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/ui/tray.webp",
+      "path": "assets/ui/tray.webp",
+      "gitBlob": "c15bcf7a5f22a932e466cec16818118fdd8fcc35",
+      "sha256": "4480735bb4f411c04a416066007bd4c56db90cc86c28972ce9ba0a4287f47746"
+    },
+    {
+      "upstream": "games/rhythm-copycat/assets/ui/woodblock.webp",
+      "path": "assets/ui/woodblock.webp",
+      "gitBlob": "4d809873235b9b751ca4ad38306d17cade8db081",
+      "sha256": "650b70727f04f9195a53f9ab1853a89b1fe928c67db426f36006b96d80c52e81"
+    },
+    {
+      "upstream": "games/rhythm-copycat/config.js",
+      "path": "config.js",
+      "gitBlob": "ca453da63150e5d03d73fb1d9b314658c7a73bfe",
+      "sha256": "c6f194c2f123ca5f913108f97505ea8bd90b800dc6d31b526c44e4242044b0a8"
+    },
+    {
+      "upstream": "games/rhythm-copycat/config.json",
+      "path": "config.json",
+      "gitBlob": "561442e6974d2267d07d37ff7364340f20b32936",
+      "sha256": "85ce3d9bb457c134066462065b7bd9d2cabbd643050783d3219896dc4b58279c"
+    },
+    {
+      "upstream": "games/rhythm-copycat/css/style.css",
+      "path": "css/style.css",
+      "gitBlob": "ba49a8dac0d8146b8cc6a28ba23b00c843fa2450",
+      "sha256": "99712dce48d140db6097e13fcc31fa1079870b40d24e098acbd31cacfee7555f"
+    },
+    {
+      "upstream": "games/rhythm-copycat/game-design.md",
+      "path": "game-design.md",
+      "gitBlob": "dd5c6388248ac847658125003023aa964b1671d5",
+      "sha256": "f36f4a53f8580924fc33aab5b9f34e3c785693a00d8850c5e2e64f7cb72080af"
+    },
+    {
+      "upstream": "games/rhythm-copycat/game.json",
+      "path": "game.json",
+      "gitBlob": "8800a3bb1a95efe8d5ea0f2c761c4a60da3b74e6",
+      "sha256": "fd6115124226b96f6d32d94467454238027fb5333ca847cf5bced71a4f018ec1"
+    },
+    {
+      "upstream": "games/rhythm-copycat/index.html",
+      "path": "index.html",
+      "gitBlob": "2eb7471c69b27f3503fdfd223ee852b7fe6abfb2",
+      "sha256": "bbff87bcf64416a993fa549bcd609b3a00672d21798839df6f33e188201e4bee"
+    },
+    {
+      "upstream": "games/rhythm-copycat/js/main.js",
+      "path": "js/main.js",
+      "gitBlob": "c352f8d96ec2af93c074da76cb5197b7a8300b62",
+      "sha256": "3e2c54460aa1cdb46fb743ab20dad7f4d81c18623e1a5d864324a2f323153827"
+    },
+    {
+      "upstream": "games/rhythm-copycat/js/percussion.js",
+      "path": "js/percussion.js",
+      "gitBlob": "aa23fd8ffee7bbb600cecbe59fa5d13e66971d2c",
+      "sha256": "5696ad293f0ebcbb0b1f08345a29ec3068b1567b37fbe5e1a37a28fe1544f435"
+    },
+    {
+      "upstream": "shared/js/tap.js",
+      "path": "shared/js/tap.js",
+      "gitBlob": "18567c4c8945d38ecf92a1a8c9121aec8027da39",
+      "sha256": "679c005b02a6f0ab30f1c815adb09a8babe143ffb10f7644a08b3f6056e545e7"
+    },
+    {
+      "upstream": "shared/js/timers.js",
+      "path": "shared/js/timers.js",
+      "gitBlob": "83fd5012ac729efd550e90ccc0961aa502ba30b5",
+      "sha256": "8fcafc8d483be1191f2c767ef33ac0df0cf6c579bae8c32b1e11662e690a12a1"
+    },
+    {
+      "upstream": "shared/js/rng.js",
+      "path": "shared/js/rng.js",
+      "gitBlob": "2da3970400aba6b5904953675efe6dce0b9e067b",
+      "sha256": "e93a51b73e256a7a61163c1d375bd78e04198258a00fe3e314e9831225063dc6"
+    },
+    {
+      "upstream": "shared/js/celebrate.js",
+      "path": "shared/js/celebrate.js",
+      "gitBlob": "b8c6f8a1ef29eff7acb67cdfef840e77522304aa",
+      "sha256": "c0b444ab34fbaf5f66ed1bf8a19b1aeea9a1e8c9c26a82a8147b336e2914e703"
+    },
+    {
+      "upstream": "shared/js/stage/pose-sprite-dom.js",
+      "path": "shared/js/stage/pose-sprite-dom.js",
+      "gitBlob": "fe85cbcc3110e288026eecfef6673146d44f2693",
+      "sha256": "783e7f5c5e3f6f885a097c34f22ac0f8deea1ee8197fbf37db1a558925dc5792"
+    }
+  ]
+}

@@ -1,0 +1,360 @@
+{
+  "repository": "kaigani/qlobe-kids",
+  "commit": "60967634e6cc313c41a5aa8067bed9f0f616176c",
+  "files": [
+    {
+      "upstream": "LICENSE",
+      "path": "LICENSE",
+      "gitBlob": "69b618370281183db43e6a24ccfd944a5b62a145",
+      "sha256": "f308b595b213721db303e73e6e7d00b1e57ec9bfc193842e68c9ca481fb90632"
+    },
+    {
+      "upstream": "games/secret-message-copy/ASSETS.md",
+      "path": "ASSETS.md",
+      "gitBlob": "c5d8724532c9d9164dea77d2dd4cd74095cfd7da",
+      "sha256": "bf4d3fe4b39a989c325a10ae403ecc251965c567b062f94c3bb379f49901b3b0"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/backdrop-delivery.webp",
+      "path": "assets/art/backdrop-delivery.webp",
+      "gitBlob": "c4b7aaef6d10980221eefdd6b09e96eaa3936091",
+      "sha256": "b0882817434525966b074a50685a962009a9c42570ab2da8357d7fb6c13e1435"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/backdrop-desk.webp",
+      "path": "assets/art/backdrop-desk.webp",
+      "gitBlob": "102aa736213b97f810fb19449f412bb83f795481",
+      "sha256": "0624039b4c315ca95efba35799cab505b23df7904f8ce8d241484ad1dc423f48"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/button-next.webp",
+      "path": "assets/art/button-next.webp",
+      "gitBlob": "b19f8609954019aa96e82c0ab210a26c81dbea19",
+      "sha256": "a328385fc97fa344c4622a9ee6d8ff075bc072619bccd779705e00111466f853"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/button-replay.webp",
+      "path": "assets/art/button-replay.webp",
+      "gitBlob": "b084a14412ac33fca147e95c6507a90f5ca76e00",
+      "sha256": "fe8a0f380b6709c8ed807a66da0fa57cc024f78e4d5662af109fb9786ba9389a"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/envelope-heart.webp",
+      "path": "assets/art/envelope-heart.webp",
+      "gitBlob": "07760344851dc32e5ac54debd809031d82d82eba",
+      "sha256": "bf2e36697b50caf4f37b8dea53d1bcc7a4df987dbf2132fc79a2bc491cb75ae3"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/envelope-moon.webp",
+      "path": "assets/art/envelope-moon.webp",
+      "gitBlob": "1e89a997edbc690b0ba8c5a61276dd2bd031bc2a",
+      "sha256": "a0b3c2a6160a23e3eff1bbd6c5440837f72641e4920b73bda6383f1fdee0c4f1"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/envelope-star.webp",
+      "path": "assets/art/envelope-star.webp",
+      "gitBlob": "2d285552219f6b0514516e96afbb297d1073ee94",
+      "sha256": "f6472c4dd12ce3ed5d7f700d00ff94af045c0e3cebd8852e5e61fc3f2262b764"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/nav-back.webp",
+      "path": "assets/art/nav-back.webp",
+      "gitBlob": "e814ff501213e37e464b073453c4812d926eb04b",
+      "sha256": "774bde3493ad9eaec56d54699d67dd68c5bdb78386338d8a5c90e907a7a816e1"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/nav-home.webp",
+      "path": "assets/art/nav-home.webp",
+      "gitBlob": "f32b67788f0f99aaca24305294d4cc63e1a857f4",
+      "sha256": "59d55f03b14dcd763e8f9d2e2b8d4cbf6512d3646ef8be45ad5d957a1d4404eb"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/nav-muted.webp",
+      "path": "assets/art/nav-muted.webp",
+      "gitBlob": "98170bc2e0bd266d4a8334cfc7788ec1f85c35b7",
+      "sha256": "60838306ca738e2c570ee20300d144663eb83920f5c1a5bd74d70174cb1773bf"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/nav-sound.webp",
+      "path": "assets/art/nav-sound.webp",
+      "gitBlob": "f44c01d9717fefc75c1d6abf497290b0becb674f",
+      "sha256": "d94f947552e702702c7652b8acca7cfa14ff49dbc7adbfa4db98e351125da974"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/owl-carry.webp",
+      "path": "assets/art/owl-carry.webp",
+      "gitBlob": "8cbc04f7ffa8d306ea63c07031d66af16dd44ce1",
+      "sha256": "4e6104c8ce5586a99eedee325c7fdc701a06171f967146eb797d13132c8ea5f2"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/owl-cheer.webp",
+      "path": "assets/art/owl-cheer.webp",
+      "gitBlob": "66a6f5a7d5b8b4a11b6a620a9b408956c4c39d28",
+      "sha256": "7669cfc33ed3f81c696bf6465b86db430372e3171a8092a2528aaa599a91dd75"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/owl-guide.webp",
+      "path": "assets/art/owl-guide.webp",
+      "gitBlob": "52c89b498435fbb2cda0da23d266d5e44c62807c",
+      "sha256": "f3c09c60c234e407ec66c7f06c0c7edd043067e806833b08c492406b3dc9296b"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/owl-neutral.webp",
+      "path": "assets/art/owl-neutral.webp",
+      "gitBlob": "8e103110701cff66f264250d02403c49bf94ceeb",
+      "sha256": "fa18087cd132db804743bc634181094e9554d86f35d129b41f5a066c33b618a0"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/paper-sheet.webp",
+      "path": "assets/art/paper-sheet.webp",
+      "gitBlob": "99224cec29b38b07ee92c80a8a781b5b33d28ee4",
+      "sha256": "21483fb13c51ac0fa38efb57b32006f8ec2226a9e5a66e6e19468a72b4feae2d"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/seal-burst.webp",
+      "path": "assets/art/seal-burst.webp",
+      "gitBlob": "2602c6fea9e8a2b4d4d4e1ddd265e2a2984eca5f",
+      "sha256": "5b8b5970f77982b92a423b73a4d49169910aceb3d55b7b28083682e4e514f414"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/stamp-heart.webp",
+      "path": "assets/art/stamp-heart.webp",
+      "gitBlob": "0082fdf4daead040c176490e5dab7410dbb0160b",
+      "sha256": "2656789d6a01bb2a437febca721dc844eb394a1e1500322038fc9f707290fadf"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/stamp-moon.webp",
+      "path": "assets/art/stamp-moon.webp",
+      "gitBlob": "80718cec7ad2fa6e2c283f280d15409c36be644d",
+      "sha256": "21f3674b726fdc37ef3a7eb9a649e9bd8bca995deaff711028ba0322b1ab89fc"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/stamp-star.webp",
+      "path": "assets/art/stamp-star.webp",
+      "gitBlob": "99d3a7ef59af986236b6b91fb9e24bc9a135bf82",
+      "sha256": "643ad25dd7b13e20999ae7111a6325d51505c1bc0fe1ea376e3ef6a133810b16"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/art/title-lockup.webp",
+      "path": "assets/art/title-lockup.webp",
+      "gitBlob": "8e71fee9055c1362d50b0050ada8e4ea633a13a0",
+      "sha256": "48f6eb51d6ad40d8e9f477e09cd5e0de3b471f9a10fc75ae84ac16551db2b8d4"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/cheer.m4a",
+      "path": "assets/audio/cheer.m4a",
+      "gitBlob": "4e07cc5918170b628c1543223ce451911e0d9ea4",
+      "sha256": "8c20e47a5849e2117e512dab7ca9cf2cae91b5baf986159aa53e501ac7316e65"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/correct.m4a",
+      "path": "assets/audio/correct.m4a",
+      "gitBlob": "08ced789192cf96e78e1a78700b6b5a5ceabb842",
+      "sha256": "cc38bedc88f33a8372f05a53617a74b9412d757b761fed95600e0d97f77bb7d1"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/delivered.m4a",
+      "path": "assets/audio/delivered.m4a",
+      "gitBlob": "da34b4fdc520241ae5d93cbcab0c455b0e9eb663",
+      "sha256": "9c134bc43fdc052d067a123b346c8c279b921413a3f90fee6792e976a7566a96"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/lines.json",
+      "path": "assets/audio/lines.json",
+      "gitBlob": "0304def83838c0da5cdee69dcd2ae802fc18f18c",
+      "sha256": "524da227eb0eb60a9a7d09d58147921d2dbb7856276ae5d6df0be5f828336cfd"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/manifest.json",
+      "path": "assets/audio/manifest.json",
+      "gitBlob": "baea9efa929857314417bd0e35f6525a0d0fba4b",
+      "sha256": "c543c8c919dfcfb9ea6ec60435504e306351af5f0749fc27711073ef1f203dea"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/memory-intro.m4a",
+      "path": "assets/audio/memory-intro.m4a",
+      "gitBlob": "7ca2e784e87e25a2971eb742038c4b63c24eea12",
+      "sha256": "71ce74ef2b14eb5230d67fc4c47ff8e88f938e6c8592cd0aacfa9a4ffd90486b"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/nudge.m4a",
+      "path": "assets/audio/nudge.m4a",
+      "gitBlob": "df12c9cc8608573e7b098a14a02d4c9d4925c9bf",
+      "sha256": "896fb4f6b8347c35664b972d0792aa047f2a3ff4aed1124db4ac01bfc1c4bed2"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/picture-intro.m4a",
+      "path": "assets/audio/picture-intro.m4a",
+      "gitBlob": "45f135ad51cf83110b46b01ee21bf2aa1bbb5531",
+      "sha256": "9dca3fde6ed4e70e20c45d686f778eae49683d2e929cb888dc80b607fc8400d8"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/qa-report.json",
+      "path": "assets/audio/qa-report.json",
+      "gitBlob": "5ae2eb9cc85b383127c0f39bc7a4024013a880a8",
+      "sha256": "1f995c7ae42b86a651596bc6317637997677390ba779b526a4876df29a16917f"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/qa.json",
+      "path": "assets/audio/qa.json",
+      "gitBlob": "f39699ae0694714650315cc24d704a73f7e394be",
+      "sha256": "a79c05bee8c8422bace0af249524614a9f3798c442d1f1a632e7c7ac35d37c97"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/trace-nudge.m4a",
+      "path": "assets/audio/trace-nudge.m4a",
+      "gitBlob": "1f688c23c9a16bc193e7ff4b19c30012bf300171",
+      "sha256": "d9fd671620c4c48fc881912e45829557b817bfc9021eecbb88afffd49650f025"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/welcome.m4a",
+      "path": "assets/audio/welcome.m4a",
+      "gitBlob": "6458f09f833a2a47555f2d33bd73b60e47de4ed4",
+      "sha256": "e3a591a23bc2047593e0c941a23dd9b276d6b2d1db6c2fcd05a13de226afa524"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/word-cat.m4a",
+      "path": "assets/audio/word-cat.m4a",
+      "gitBlob": "196f82f84c76fd7d15b93f54427005f43ed3744f",
+      "sha256": "88cc2fb59b8724e8c3dfa4fadda653b934b658d57bb91a7b9d39bc96684d3e91"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/word-intro.m4a",
+      "path": "assets/audio/word-intro.m4a",
+      "gitBlob": "e29aad5dd4616bd334d4fe8ee401b3e7fb6c63f8",
+      "sha256": "8c2a824807f966aeae07ff03730b3281ce5359171f8e2ab3f588c9a831137bf0"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/word-map.m4a",
+      "path": "assets/audio/word-map.m4a",
+      "gitBlob": "3fc06fe033483e721dd461f7978fa4111025a623",
+      "sha256": "5ddff5d205235421861a508288692105765c89fc7995b1b40fb45e9907a52549"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/word-owl.m4a",
+      "path": "assets/audio/word-owl.m4a",
+      "gitBlob": "8d4e43a9c3f2b15e411d0c5804de0fe9f4fd56f9",
+      "sha256": "e8cb0ec3186e3831e0e518e4dadff019bab4fc9a0dd322a6d9f6c0c1622ab9af"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/audio/word-sun.m4a",
+      "path": "assets/audio/word-sun.m4a",
+      "gitBlob": "efa40d59a6376cae711131c1b58343554232365e",
+      "sha256": "116f132c9ffa6cea28f19d543e31e079a0666e2dc6f2a2139cefb9efb014f7b4"
+    },
+    {
+      "upstream": "games/secret-message-copy/assets/og-image.jpg",
+      "path": "assets/og-image.jpg",
+      "gitBlob": "f6597001c238e10020a4c74ab3acdbf28152fc9c",
+      "sha256": "0cc89db4ff3a3df36ac1cb01d48a417b9e779058036ce77e44012546b65283af"
+    },
+    {
+      "upstream": "games/secret-message-copy/config.js",
+      "path": "config.js",
+      "gitBlob": "142919c481a01e2b777b338ab05b6b57b8e2d210",
+      "sha256": "5120bad838bcb828bbcd875d5bfd11bb2e82b0ab0f724774a12e99cc7e674380"
+    },
+    {
+      "upstream": "games/secret-message-copy/config.json",
+      "path": "config.json",
+      "gitBlob": "ecff64eed6783cb9c76ca3bd53efb990bfed304e",
+      "sha256": "332d81b5e5e9eb876f90b51b763eba57afc2309dc9fa33cc576a27418dc45d20"
+    },
+    {
+      "upstream": "games/secret-message-copy/css/style.css",
+      "path": "css/style.css",
+      "gitBlob": "cf934af56750fffa224d84e1b0f285bd3c7e1a2b",
+      "sha256": "fc35f8a2ce76de6a5141a043b188dd76243742312707d5ca5bdcfb190cd637fe"
+    },
+    {
+      "upstream": "games/secret-message-copy/game-design.md",
+      "path": "game-design.md",
+      "gitBlob": "9bdae63cdb8050333699782a18607e3905cf746c",
+      "sha256": "f509bc80b4bbc95a03205960d1e1f52a73c0fd10fa3c5f4fe928e78ed3c627b3"
+    },
+    {
+      "upstream": "games/secret-message-copy/game.json",
+      "path": "game.json",
+      "gitBlob": "6bc90f4ab91bd639ab934b17412518d1cc88cca0",
+      "sha256": "9766dd2bb694ce62abe074e21ee39bdb463b6efac4d0ce5e2a6c2496331fbe98"
+    },
+    {
+      "upstream": "games/secret-message-copy/index.html",
+      "path": "index.html",
+      "gitBlob": "79008089cf92e7ecb1cb50d3f4090771220231c7",
+      "sha256": "edcc6eeed3dc68c297be2e9f895337f5df0d8e871347e8801e01c41d3b851778"
+    },
+    {
+      "upstream": "games/secret-message-copy/js/main.js",
+      "path": "js/main.js",
+      "gitBlob": "3e0aaeb8d7b1849b714be5c18f1d47acc165ad4f",
+      "sha256": "b01f6b5bec9ab34f3b4cdc1eda0d6550e44a96df38dc0e0af7079afb2d469cdf"
+    },
+    {
+      "upstream": "games/secret-message-copy/js/trace-letter.js",
+      "path": "js/trace-letter.js",
+      "gitBlob": "a5273cfea3e54d0d9e14bfde8c7d78eabd022167",
+      "sha256": "6f04de095f833e39ca7c530f08b1b386d70429d31eb3b2017168d8f88e750926"
+    },
+    {
+      "upstream": "shared/js/tap.js",
+      "path": "shared/js/tap.js",
+      "gitBlob": "18567c4c8945d38ecf92a1a8c9121aec8027da39",
+      "sha256": "679c005b02a6f0ab30f1c815adb09a8babe143ffb10f7644a08b3f6056e545e7"
+    },
+    {
+      "upstream": "shared/js/timers.js",
+      "path": "shared/js/timers.js",
+      "gitBlob": "83fd5012ac729efd550e90ccc0961aa502ba30b5",
+      "sha256": "8fcafc8d483be1191f2c767ef33ac0df0cf6c579bae8c32b1e11662e690a12a1"
+    },
+    {
+      "upstream": "shared/js/rng.js",
+      "path": "shared/js/rng.js",
+      "gitBlob": "2da3970400aba6b5904953675efe6dce0b9e067b",
+      "sha256": "e93a51b73e256a7a61163c1d375bd78e04198258a00fe3e314e9831225063dc6"
+    },
+    {
+      "upstream": "shared/js/celebrate.js",
+      "path": "shared/js/celebrate.js",
+      "gitBlob": "b8c6f8a1ef29eff7acb67cdfef840e77522304aa",
+      "sha256": "c0b444ab34fbaf5f66ed1bf8a19b1aeea9a1e8c9c26a82a8147b336e2914e703"
+    },
+    {
+      "upstream": "shared/js/preload.js",
+      "path": "shared/js/preload.js",
+      "gitBlob": "39a6d1088533f4269f76f9f2340ff7cddb27935e",
+      "sha256": "84508ea987c2fa357fbeaacf602880a261c1a67b21fb29614311fd7fb6018f63"
+    },
+    {
+      "upstream": "shared/js/hud.js",
+      "path": "shared/js/hud.js",
+      "gitBlob": "982c6a7b4455e9dbbe5d3e8f8d40fa4f7490f7a7",
+      "sha256": "86584bfd294487f16189fb54443a1828d67c1b92f2d2f5dc911c714a62cdd4cb"
+    },
+    {
+      "upstream": "shared/js/screens.js",
+      "path": "shared/js/screens.js",
+      "gitBlob": "7c29dba8d799a9c6e2f3e2528ed78c5f4a3ec7b6",
+      "sha256": "036715fe8f4a2584049d4e3b2152f9e11d9b0734f76c7f4a16287c789f4524af"
+    },
+    {
+      "upstream": "shared/js/idle-nudge.js",
+      "path": "shared/js/idle-nudge.js",
+      "gitBlob": "492d6bf2dab1db83ef0848ecb6f295c16184a1d7",
+      "sha256": "ba08e3c8bc4b0a215e0109ac779e6f5dcb0246cc6e4757b3cc3f247a78c3a18c"
+    },
+    {
+      "upstream": "shared/assets/objects/leaf.webp",
+      "path": "shared/assets/objects/leaf.webp",
+      "gitBlob": "61550a38c4ca4b3d5604aac5a87480d438a14d19",
+      "sha256": "bb772d0706bca12a1c947a6dc666d7c3189485e7e262e02cabf3fe208a037a00"
+    },
+    {
+      "upstream": "shared/assets/objects/sun.webp",
+      "path": "shared/assets/objects/sun.webp",
+      "gitBlob": "09de24257ef958c39ea4c05f9ec344cea5714c69",
+      "sha256": "ae0ec2d5693ae9cb00edad1fa2420df4111213a9b5033b906d56a6f7e8b65d03"
+    }
+  ]
+}

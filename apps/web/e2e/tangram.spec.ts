@@ -58,6 +58,9 @@ for (const level of [1, 2]) {
     page,
   }) => {
     await page.goto("/lab");
+    await page
+      .getByRole("combobox", { name: "Экран", exact: true })
+      .selectOption((page.viewportSize()?.width ?? 390) >= 768 ? "ipad" : "phone");
     await page.getByRole("combobox", { name: "Игра", exact: true }).selectOption("tangram-tales");
     await page.getByRole("combobox", { name: "Уровень", exact: true }).selectOption(String(level));
     await page.getByTestId("embedded-game").scrollIntoViewIfNeeded();

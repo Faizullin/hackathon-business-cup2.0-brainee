@@ -1,12 +1,13 @@
 "use client";
 
 import { Card, CardDescription, CardHeader } from "@brainee/ui/components/card";
+import Link from "next/link";
 import { GameGrid } from "@/components/child/GameGrid";
 import { RecommendationCards } from "@/components/child/Recommendations";
 import { useI18n } from "@/i18n";
 
 export function LearnContent() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   return (
     <>
       <Card>
@@ -29,6 +30,12 @@ export function LearnContent() {
         </h2>
         <GameGrid />
       </section>
+      <Link
+        href="/explore"
+        className="rounded-xl border border-border p-4 text-sm text-muted-foreground"
+      >
+        {locale === "ru" ? "Свободная игра · без звёзд →" : "Explore · free play, no stars →"}
+      </Link>
     </>
   );
 }

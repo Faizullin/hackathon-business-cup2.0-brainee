@@ -154,5 +154,5 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-108 History-based recommendations, automatic app tasks, live activity analytics and earned rewards with progress/celebrations/feed (D-29).
 - [x] T-109 Playable Snake with saved active-time credit/top-ups/forever and restart-from-zero cartoon placeholder (D-29).
 
-- [ ] T-110 Complete learning imports and unscored Explore batch: Tangram acceptance, Rhythm Copycat, Secret Message Lab, Mirror Grid; Neighborhood and Magnet previews.
-- [ ] T-111 Remaining external game waves; see external-games.md.
+- [ ] T-113 Complete learning imports and unscored Explore batch: Tangram acceptance, Rhythm Copycat, Secret Message Lab, Mirror Grid; Neighborhood and Magnet previews.
+- [ ] T-114 Remaining external game waves; see external-games.md.

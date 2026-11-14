@@ -28,3 +28,7 @@ apps/web/public/games/
 .vercel
 
 .next-games/
+
+# Pinned game content is not local SQLite data.
+!games/*/artifact/data/
+!games/*/artifact/data/**

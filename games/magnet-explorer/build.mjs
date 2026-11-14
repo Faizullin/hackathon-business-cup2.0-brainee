@@ -14,7 +14,6 @@ export async function buildGame(destination) {
 
   // 2. Copy preview metadata, credits, adapter and wrapper
   cpSync(resolve(__dirname, "preview.json"), resolve(dest, "preview.json"));
-  cpSync(resolve(__dirname, "manifest.json"), resolve(dest, "manifest.json"));
   cpSync(resolve(__dirname, "CREDITS.md"), resolve(dest, "CREDITS.md"));
   cpSync(resolve(__dirname, "wrapper.css"), resolve(dest, "wrapper.css"));
   cpSync(resolve(__dirname, "adapter.js"), resolve(dest, "adapter.js"));
@@ -28,6 +27,14 @@ export async function buildGame(destination) {
   );
   // Audio only on intentional interaction, no autoplay
   mainJs = mainJs.replace("muted: false,", "muted: true,");
+  mainJs = mainJs.replace(
+    "addHud();",
+    "narrator.setMuted(true); voiceClips.setMuted(true); sfx.setMuted(true); bgm.setMuted(true);\naddHud();",
+  );
+  mainJs = mainJs.replace(
+    "function repeatPrompt() {",
+    "function repeatPrompt() { state.muted = false; narrator.setMuted(false); voiceClips.setMuted(false); sfx.setMuted(false); bgm.setMuted(false);",
+  );
   // Route in-game splash home button to host exit instead of external ../../
   mainJs = mainJs.replace(
     "location.href = '../../';",

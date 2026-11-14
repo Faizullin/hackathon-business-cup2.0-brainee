@@ -1,0 +1,60 @@
+{
+ "id": "rhythm-copycat",
+ "title": "Rhythm Copycat",
+ "category": "art-music",
+ "path": "games/rhythm-copycat/",
+ "icon": "assets/hub/tiles/rhythm-copycat.jpg",
+ "entry": "index.html",
+ "age": {
+  "min": 2,
+  "max": 4
+ },
+ "status": "beta",
+ "accent": "#f25f5c",
+ "shareTitle": "Rhythm Copycat 🥁 — copy Kiki's claps, stomps, taps and shakes",
+ "description": "Kiki the kawaii kitten plays a tiny beat. Listen, then copy it back on four big friendly pads — clap, stomp, tap and shake!",
+ "learningGoals": [
+  "Hear and copy short body-percussion rhythm patterns",
+  "Match sounds to actions in a steady sequence",
+  "Grow pattern memory from two beats to four"
+ ],
+ "interactionModel": "pick a beat card, watch Kiki play the pattern on the pads, then copy it by tapping the same big pads in order",
+ "feedbackModel": "every beat can be finished: a wrong pad wiggles with a spoken nudge and the right pad glows after two tries; every finished beat ends in stars, confetti and a song",
+ "uses": [
+  "shared/js/voice-clips.js",
+  "shared/js/sfx.js",
+  "shared/js/tap.js",
+  "shared/js/celebrate.js",
+  "shared/js/audio-unlock.js",
+  "shared/js/debug-harness.js",
+  "shared/js/timers.js",
+  "shared/js/rng.js",
+  "shared/js/stage/pose-sprite-dom.js"
+ ],
+ "modes": [
+  {
+   "id": "drum-beat",
+   "title": "Drum Beat",
+   "skill": "copy 2-4 beat clap and stomp patterns"
+  },
+  {
+   "id": "jingle-beat",
+   "title": "Jingle Beat",
+   "skill": "copy 2-4 beat tap and shake patterns"
+  },
+  {
+   "id": "parade-beat",
+   "title": "Parade Beat",
+   "skill": "copy patterns mixing all four actions"
+  }
+ ],
+ "license": {
+  "code": "MIT",
+  "assets": "CC-BY-4.0"
+ },
+ "credits": "All art generated locally with the QLOBE LAN pipeline (Krea 2, Ideogram 4, Qwen Image Edit, Qwen Image Layered, Qwen3 TTS voice clone, Whisper QA). Kawaii sticker style per the ui-mockups. See ASSETS.md. Built for QLOBE Kids.",
+ "characters": [
+  "kiki"
+ ],
+ "conceptVideo": null
+}

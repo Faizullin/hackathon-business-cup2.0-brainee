@@ -2,15 +2,11 @@
   "$schema": "https://turborepo.com/schema.json",
   "tasks": {
     "typecheck": {
-      "dependsOn": [
-        "^typecheck"
-      ],
+      "dependsOn": ["^typecheck"],
       "outputs": []
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "outputs": [
         ".next/**",
         "!.next/cache/**",
@@ -26,9 +22,7 @@
       "persistent": true
     },
     "test": {
-      "dependsOn": [
-        "^typecheck"
-      ],
+      "dependsOn": ["^typecheck"],
       "outputs": []
     }
   },
@@ -39,7 +33,5 @@
     "DATABASE_AUTH_TOKEN",
     "BRAINEE_DEFAULT_LOCALE"
   ],
-  "globalEnv": [
-    "BRAINEE_NEXT_DIR"
-  ]
+  "globalEnv": ["BRAINEE_NEXT_DIR"]
 }

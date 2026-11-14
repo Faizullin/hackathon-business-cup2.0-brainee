@@ -63,5 +63,5 @@ export async function solveReflectionPattern(_page: Page, frame: FrameLocator) {
   }
 
   // Click Check
-  await checkBtn.click();
+  await checkBtn.click({ delay: 60 });
 }

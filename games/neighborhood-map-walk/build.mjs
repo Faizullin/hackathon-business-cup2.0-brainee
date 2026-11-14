@@ -14,7 +14,6 @@ export async function buildGame(destination) {
 
   // 2. Copy preview metadata, credits, adapter and wrapper
   cpSync(resolve(__dirname, "preview.json"), resolve(dest, "preview.json"));
-  cpSync(resolve(__dirname, "manifest.json"), resolve(dest, "manifest.json"));
   cpSync(resolve(__dirname, "CREDITS.md"), resolve(dest, "CREDITS.md"));
   cpSync(resolve(__dirname, "wrapper.css"), resolve(dest, "wrapper.css"));
   cpSync(resolve(__dirname, "adapter.js"), resolve(dest, "adapter.js"));
@@ -24,6 +23,10 @@ export async function buildGame(destination) {
   mainJs = mainJs.replaceAll("../../../shared/", "../shared/");
   // Audio only on intentional interaction, no autoplay
   mainJs = mainJs.replace("let muted = false;", "let muted = true;");
+  mainJs = mainJs.replace(
+    "showSplash();\n\nwindow.addEventListener",
+    "setMuted(true);\nshowSplash();\n\nwindow.addEventListener",
+  );
   // Route in-game splash home button to host exit instead of external ../../
   mainJs = mainJs.replace(
     "if (splash) window.location.href = '../../';",
@@ -36,6 +39,16 @@ export async function buildGame(destination) {
     "const installDebug = () => () => {};",
   );
   writeFileSync(resolve(dest, "js/main.js"), mainJs, "utf8");
+
+  // Native button activation avoids upstream pointerup/click double activation on WebKit.
+  writeFileSync(
+    resolve(dest, "shared/js/tap.js"),
+    `export function onTap(node, action, options = {}) {
+    const click = (event) => { try { options.feedback?.(event); } catch { /* Audio feedback must not block navigation. */ } action(event); };
+    node.addEventListener('click', click);
+    return () => node.removeEventListener('click', click);
+  }`,
+  );
 
   // 4. Clean shared/css/base.css from missing font-face references
   const baseCssPath = resolve(dest, "shared/css/base.css");
