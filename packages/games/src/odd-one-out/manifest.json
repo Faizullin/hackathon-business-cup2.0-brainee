@@ -1,0 +1,24 @@
+{
+  "id": "odd-one-out",
+  "version": "0.1.0",
+  "kind": "dev",
+  "title": "Найди лишний",
+  "engine": "react",
+  "runtime": "react",
+  "entry": "OddOneOut.tsx",
+  "skills": {
+    "main": "attention"
+  },
+  "weights": {
+    "attention": 1
+  },
+  "minAge": 4,
+  "levels": 2,
+  "roundsPerSession": 4,
+  "bridge": {
+    "protocol": 2,
+    "contract": "odd-one-out@1"
+  },
+  "sizeBudgetBytes": 100000,
+  "license": "LicenseRef-Project"
+}

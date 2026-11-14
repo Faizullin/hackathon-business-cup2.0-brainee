@@ -30,6 +30,7 @@ export type GameProps = {
 
 export type GameMeta = {
   id: string;
+  version: string;
   kind: GameKind;
   /** Russian UI title. */
   title: string;
@@ -39,6 +40,7 @@ export type GameMeta = {
   /** D-22: recommended minimum age; the catalog spans 4–10. */
   minAge: number;
   levels: number;
+  roundsPerSession: number;
 };
 
 export type ReactGameModule = { default: ComponentType<GameProps> };

@@ -1,11 +1,14 @@
 "use client";
 
 import { Component, type ComponentType, lazy, type ReactNode, Suspense } from "react";
+import { IframeGame } from "./IframeGame";
 import type { GameDefinition, GameProps } from "./kit";
 
 type HostProps = Omit<GameProps, "level"> & {
   game: GameDefinition;
   level: number;
+  onReady?(): void;
+  sessionId?: string;
   onError?(error: Error): void;
 };
 
@@ -53,11 +56,10 @@ class GameErrorBoundary extends Component<
  */
 export function GameHost({ game, onError, ...props }: HostProps) {
   if (game.runtime === "embedded") {
-    // IframeGame + bridge: T-29.
     return (
-      <p role="status" className="p-6 text-center">
-        Эта игра пока недоступна.
-      </p>
+      <GameErrorBoundary onError={onError}>
+        <IframeGame game={game} onError={onError} {...props} />
+      </GameErrorBoundary>
     );
   }
   const Game = lazyGame(game);

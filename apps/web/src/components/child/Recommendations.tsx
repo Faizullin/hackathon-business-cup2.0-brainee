@@ -1,7 +1,7 @@
 "use client";
 
 import { type Ability, type AbilityScores, recommendGames } from "@brainee/core";
-import { reactGames } from "@brainee/games";
+import { allGames } from "@brainee/games";
 import { ChildIcon } from "@brainee/ui/components/child-icons";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
@@ -19,7 +19,7 @@ export function useRecommendations() {
     // Live ability scores (D-23) and only games open for the child's age (D-22).
     const scores: AbilityScores = snapshot.progress.skills;
     const age = new Date().getFullYear() - snapshot.child.birthYear;
-    const open = reactGames.filter((game) => game.minAge <= age);
+    const open = allGames.filter((game) => game.minAge <= age);
     const recs = recommendGames(scores, ageAverages, open, [], Date.now());
     // The MVP catalog has two games: top up with the rest by their main-skill gap.
     const extra = open

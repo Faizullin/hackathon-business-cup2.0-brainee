@@ -21,7 +21,8 @@
   "dependencies": {
     "@brainee/core": "workspace:*",
     "@libsql/client": "0.18.0",
-    "drizzle-orm": "0.45.4"
+    "drizzle-orm": "0.45.4",
+    "@brainee/game-catalog": "workspace:*"
   },
   "devDependencies": {
     "@brainee/config": "workspace:*",

@@ -6,4 +6,4 @@ export {
   type GameProps,
   type GameText,
 } from "./kit";
-export { getGame, reactGames } from "./registry";
+export { allGames, getGame, reactGames } from "./registry";

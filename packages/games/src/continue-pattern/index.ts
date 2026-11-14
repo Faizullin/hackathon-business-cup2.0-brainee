@@ -1,13 +1,9 @@
 import type { GameDefinition } from "../kit";
-
+import manifest from "./manifest.json" with { type: "json" };
 export const continuePattern: GameDefinition = {
-  id: "continue-pattern",
+  ...manifest,
   kind: "dev",
-  title: "Продолжи узор",
-  skills: { main: "logic", secondary: "attention" },
-  weights: { logic: 0.7, attention: 0.3 },
-  minAge: 5,
-  levels: 2,
   runtime: "react",
+  skills: manifest.skills as GameDefinition["skills"],
   load: () => import("./ContinuePattern"),
 };

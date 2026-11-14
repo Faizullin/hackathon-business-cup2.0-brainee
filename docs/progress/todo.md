@@ -32,7 +32,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 | 9 | Ranking hidden from child, no last names | ✅ parent-only, initials (T-43) |
 | 10 | Own-domain only; works with Screen Time allowlist | Automated route audit + PWA done; physical Screen Time verification remains T-62 |
 
-**Left before deployment (in order):** remaining T-103 Settings/pairing/fallback → T-29/T-85 Picture Puzzle bridge integration → T-104/T-105 locale and Tangram Tales → T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Quiz-first onboarding is implemented by T-101. Deployment is currently deferred.
+**Left before deployment (in order):** remaining T-103 Settings/pairing/fallback → T-104/T-105 locale and Tangram Tales → T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Quiz-first onboarding is implemented by T-101. Deployment is currently deferred.
 
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
@@ -50,7 +50,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-16 Dev-only `/lab` route: game picker, level/seed, phone/iPad frame, event stream panel (`data-status`) → [games.md](../dev/games.md#lab)
 - [ ] T-17 `pnpm gen:game` Turborepo generator
 - [ ] T-18 Install the curated agent skills → [agent-tooling.md](../dev/agent-tooling.md)
-- [ ] T-19 `pnpm games:build` + `pnpm test:assets` (port GSP `build-packages.mjs`, `verify-game-assets.mjs`); `db:seed` reads `games/*/manifest.json` into `Game`
+- [x] T-19 `pnpm games:build` + `pnpm test:assets` (port GSP `build-packages.mjs`, `verify-game-assets.mjs`); `db:seed` reads `games/*/manifest.json` into `Game`
 
 ## P2 · Core logic + Brainy · [mechanics.md](../product/mechanics.md)
 - [x] T-20 `packages/brainy`: port `brainy(s, id, acc)` to typed SVG/React (lines 671–733); pure `brainyModel` + `<Brainy>`, presets, `/lab/brainy`
@@ -62,7 +62,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-26 Weekly goal counted by confirmed ☀; 5-tasks-a-day limit (`applyShowcaseAction`, D-21)
 - [x] T-27 Accessory slots (one per slot; earned vs. bought): catalog, `equip`/`unequip`, `buyAccessory` in `core`
 - [x] T-28 Game contract: `GameResult`/`Skill` types in `core`, `GameDefinition` + lazy registry + error boundary in `games`; `pnpm check:games` (no cross-game imports) → [games.md](../dev/games.md)
-- [ ] T-29 Port GSP `bridge-core` → `packages/game-bridge` (drop PECS parts, global `Brainee`) + `engine-phaser` / `engine-gdevelop` kits + `IframeGame` and host hook in `GameHost` → [games.md](../dev/games.md#bridge-embedded-games-port-gsp-packagesbridge-core)
+- [x] T-29 Port GSP `bridge-core` → `packages/game-bridge` (protocol 2/1, no PECS, global `Brainee`) + `engine-phaser`, generic GDevelop adapter, `IframeGame` and embedded `GameHost` (GDevelop export kit deferred) → [games.md](../dev/games.md#bridge-embedded-games-port-gsp-packagesbridge-core)
 
 ## P3 · Child flow · [screens.md#child](../product/screens.md#child)
 - [x] T-30 Child app shell: Brainy dock + 4-tab bottom bar in `(child)/layout`, fullscreen game layout, app-feel checklist → [ui.md](../dev/ui.md#app-shell-route-group-layouts-own-the-chrome)
@@ -118,11 +118,11 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-82 Define demo versus production boundaries for sessions, parent PIN, child data and backups.
 - [ ] T-83 Resolve reward incentives and clarify the evidence and labels for skill scores, age averages and seeded rankings.
 - [ ] T-84 Validate the PWA and two-device sync on a real iPad early over LAN (no deployment needed); define offline behavior and source licensed demo media.
-- [ ] T-85 Port one GSP game end to end (suggest `phaser-shape-match-game`): engine kit, Russian UI, manifest, bridge events → `GameResult`, Chromium + WebKit e2e. Other candidates in [games.md](../dev/games.md#reusable-gsp-games-candidates)
+- [x] T-85 Port GSP Picture Puzzle end to end: Phaser kit, local CC0 art/licences, Russian host, manifest, four-placement `GameResult`, issued-session rewards and Chromium/WebKit e2e. Other candidates in [games.md](../dev/games.md#reusable-gsp-games-candidates)
 - [ ] T-87 Motion polish: `<ViewTransition>` tab/push/pop + shared elements, ★ fly-to-wallet, animated counters, Brainy idle/stage-up, `loading.tsx` Brainy loader, reduced-motion spec → [ui.md](../dev/ui.md). After the functional flow works.
 - [x] T-88 Port the local UI recording/report tooling from game-store-planning; generate phone/iPad walkthroughs with linked videos, screenshots and logs → [reports/README.md](../reports/README.md)
-- [ ] T-89 Manifest schema (zod) for all games + CI validation: id, version, engine, runtime, entry, skills, levels, bridge protocol/contract, size budget, license → [games.md](../dev/games.md#scaling-three-paths-in-one-contract-d-16)
-- [ ] T-90 Game conformance suite (Playwright, Chromium + WebKit): load, ready ≤ 10 s, one finish, zero foreign requests, size budget, no console errors; required before a game is listed
+- [x] T-89 Light manifest schema (zod) for all listed games + `pnpm check` validation: id, version, engine, runtime, entry, skills, levels, bridge protocol/contract, size budget, license → [games.md](../dev/games.md#scaling-three-paths-in-one-contract-d-16)
+- [x] T-90 Game conformance suite (Playwright, Chromium + WebKit): load, ready ≤ 10 s, one finish, zero foreign requests, size budget, no console errors; required before a game is listed
 - [ ] T-91 (Later) External game artifacts (path C): `games:import <id>@<version>` with checksum, `GameVersion` table, enable/disable/rollback
 - [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
 - [x] T-94 Post-game «Подтянуть навык» card should prefer a different game than the one just played (the report shows it repeating Odd one out next to its own next-level card) → [screens.md](../product/screens.md#game-screen-and-no-exit-flow)
@@ -135,7 +135,8 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
   - [x] Daily bonus shared across devices; family-local daily/weekly rollover, fresh task quota and read-only task history (D-26).
   - [ ] Settings (including timezone selection), pairing and adult-task fallback remain.
 - [ ] T-104 English locale `en.ts` + locale switch (D-22), before English-only external games
-- [ ] T-105 First external game via path C: Tangram Tales (after T-29/T-85) → [external-games.md](../product/external-games.md)
+- [ ] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
+- [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).
 - [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run
 - [x] T-96 `mvp` report module: every page + child → parent walkthrough; `scaffold` report retired → [reports/mvp.md](../reports/mvp.md)
 - [ ] T-97 Showcase follow-ups after the pitch: real Task/Gift/Request tables, computed analytics, playable fun games and cartoons, presenter «Сбросить демо» button (endpoint exists)

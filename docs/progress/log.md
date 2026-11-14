@@ -4,6 +4,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (bridge and Picture Puzzle)
+- Completed T-19/T-29/T-85 and light T-89/T-90: ported GSP bridge/Phaser/puzzle, four-placement adapter, manifest-backed DB/runtime metadata, build/asset validation and conformance. D-28 records the protocol and minimal game columns.
+- Check, 159 unit tests and asset audit pass. Full e2e initially passed 209/216; after fixes, all 44 affected reruns pass. Reviewed WebKit phone/iPad puzzle and lab screenshots. Parent/Settings changes remain separately owned; Tangram Tales and deployment were not attempted.
+
 ## 2026-11-14 (daily and weekly resets)
 - T-103 calendar slice: one daily bonus per child across devices, local-midnight task/streak rollover, Monday goal-progress reset and read-only parent history; transactional lazy persistence (D-26), no cron or schema change.
 - Added boundary, concurrency, stale-action, retry and cross-device browser checks. Demo reset clears task history but preserves daily eligibility. Fixed an existing lab-test readiness race and updated report checks for a previously claimed bonus.

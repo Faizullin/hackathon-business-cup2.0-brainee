@@ -8,8 +8,8 @@
   },
   "scripts": {
     "dev": "turbo run dev",
-    "demo": "pnpm db:reset && DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web dev",
-    "build": "turbo run build",
+    "demo": "pnpm games:build && pnpm db:reset && DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web dev",
+    "build": "pnpm games:build && turbo run build",
     "start": "pnpm --filter @brainee/web start",
     "e2e": "pnpm build && pnpm --filter @brainee/web e2e",
     "report": "node scripts/report.mjs",
@@ -19,14 +19,18 @@
     "db:seed": "pnpm --filter @brainee/db db:seed",
     "db:reset": "pnpm --filter @brainee/db db:reset",
     "db:studio": "pnpm --filter @brainee/db db:studio",
-    "check": "biome check . && pnpm check:games && pnpm typecheck",
+    "check": "biome check . && pnpm check:games && pnpm check:manifests && pnpm typecheck",
     "format": "biome format --write .",
     "typecheck": "turbo run typecheck",
-    "check:games": "node packages/games/scripts/check-games.mjs"
+    "check:games": "node packages/games/scripts/check-games.mjs",
+    "games:build": "node scripts/build-games.mjs",
+    "test:assets": "node scripts/check-manifests.mjs --assets",
+    "check:manifests": "node scripts/check-manifests.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.7",
     "turbo": "2.11.11",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "esbuild": "0.28.2"
   }
 }

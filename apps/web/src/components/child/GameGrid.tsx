@@ -1,6 +1,6 @@
 "use client";
 
-import { reactGames } from "@brainee/games";
+import { allGames } from "@brainee/games";
 import { ChildIcon } from "@brainee/ui/components/child-icons";
 import { Lock } from "@brainee/ui/components/icons";
 import Link from "next/link";
@@ -13,7 +13,7 @@ export function GameGrid() {
   const age = snapshot ? new Date().getFullYear() - snapshot.child.birthYear : 10;
   return (
     <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-      {reactGames.map((game) => {
+      {allGames.map((game) => {
         const skill = ru.skills[game.skills.main as keyof typeof ru.skills] ?? game.skills.main;
         const locked = age < game.minAge;
         const body = (

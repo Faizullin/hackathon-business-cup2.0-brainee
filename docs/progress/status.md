@@ -9,8 +9,8 @@
 | # | Phase | Status | Tasks |
 |---|---|---|---|
 | P0 | Docs & planning | ✅ done | T-01 – T-05 |
-| P1 | Scaffold monorepo + game pipeline | 🔄 in progress (T-17 – T-19 left) | T-10 – T-19 (no T-14) |
-| P2 | Core logic + Brainy + game contract | 🔄 in progress (T-29 left) | T-20 – T-29 |
+| P1 | Scaffold monorepo + game pipeline | 🔄 in progress (T-17 – T-18 left) | T-10 – T-19 (no T-14) |
+| P2 | Core logic + Brainy + game contract | ✅ done | T-20 – T-29 |
 | P3 | Child flow | ✅ presentation scope done | T-30 – T-38 |
 | P4 | Parent flow | ✅ presentation scope done | T-40 – T-46 |
 | P5 | Data, auth, live sync | ✅ presentation scope done; broader data tasks remain | T-50 – T-55 |
@@ -20,14 +20,17 @@
 Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 
 ## Current focus
-**Presentation MVP: every page exists** (D-21). Child: entry, Learn with advice, two games and the post-game loop, Leisure, video quiz, Gifts, Brainy shop. Parent: PIN, Analytics (seeded), Tasks, Gifts & goal. Child ↔ parent sync works by polling. What's left before deployment: the [road map in todo.md](todo.md#road-to-mvp-acceptance-criteria--remaining-tasks).
+**Presentation MVP: every page exists** (D-21). Child: entry, Learn with advice, three games and the post-game loop, Leisure, video quiz, Gifts, Brainy shop. Parent: PIN, Analytics (seeded), Tasks, Gifts & goal. Child ↔ parent sync works by polling. What's left before deployment: the [road map in todo.md](todo.md#road-to-mvp-acceptance-criteria--remaining-tasks).
 
 ## Handoff
+- **Game platform (T-19/T-29/T-85/T-89/T-90):** protocol 2/1 bridge, Phaser kit, Picture Puzzle, manifest-driven catalog/seed, own-origin build/asset checks and all-game conformance are complete. The puzzle reports four placements per issued session; existing server receipts grant rewards. Details and limits: [games.md](../dev/games.md#implemented-platform-slice-t-29--t-85--t-89--t-90), D-28.
+- **Game verification:** `pnpm check`, all 159 workspace unit tests and `pnpm test:assets` pass. Full `pnpm e2e`: 209/216 initially passed; the seven failures were fixed (new-catalog expectation, WebKit lab press timing, parallel child-login heading), then all 44 affected cases passed after rebuilding. Chromium/WebKit phone + landscape iPad; puzzle and lab WebKit screenshots reviewed.
+- **Games next:** optional T-105 Tangram Tales via pinned path C; T-104 for English content; T-106 for a GDevelop export kit. Refresh recordings and rehearse on a physical iPad before freeze. No deployment.
 - **Latest (T-103 calendar slice):** shared daily bonus across devices; core calendar rollover at local midnight and Monday; archived completed/expired tasks in a read-only parent history; a fresh daily task quota. Reads and actions persist resets transactionally and notify both devices through versioned polling. D-26 records persistence and the default timezone; see [calendar resets](../product/mechanics.md#calendar-resets).
 - **Current baseline:** T-100–T-102 plus the first T-103 slice (badges and task cancellation) remain complete. Calendar metadata uses the existing showcase JSON; no schema migration or service was added. The game streak remains device-scoped; opening another device cannot reclaim today's bonus. Saved receipts remain replayable without new rewards.
 - **Verification:** `pnpm check`, 107 unit tests, 29 report-tool tests and all 176 e2e checks pass (Chromium/WebKit, phone and landscape iPad). WebKit history/reset screenshots reviewed. The lab seed test now waits for the initial board before comparing it after restart.
-- **Next (in order):** T-103 parent Settings (child details, PIN, timezone, devices) → pairing code → adult-task fallback. Then T-29/T-85 same-origin iframe bridge + GSP Picture Puzzle (cap counted rounds), T-104 locale support and T-105 Tangram Tales. Games report results; the server grants rewards.
+- **Next (in order):** T-103 parent Settings (child details, PIN, timezone, devices) → pairing code → adult-task fallback. T-104 locale support and T-105 Tangram Tales. Games report results; the server grants rewards.
 - **Demo prep:** refresh [MVP](../reports/mvp.md) and [learning](../reports/learning.md) recordings before freezing; existing captures predate T-100–T-103. Learning report checks now allow a bonus already claimed by another recording/device. T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md), T-73 pitch and T-74 freeze follow. T-87 motion is optional; T-14 deployment stays deferred.
 - **Run:** `pnpm demo` resets the DB and enables demo mode; child `/entry`, parent PIN 1234, login `mama@example.com` / `demo1234`, new family `/onboarding`. HTTP `/api/demo-reset` restores showcase content and clears task history, preserving wallet, Brainy, game history and daily bonus eligibility. Use a full DB reset for a fresh bonus rehearsal. Stale route types: delete `apps/web/.next/dev`.
-- **Limits:** timezone defaults to `Asia/Almaty` until Settings supports selection; history retains 100 tasks. Analytics are labelled demo data; two playable learning games limit recommendations. Science media is on hold; the video is an animated placeholder. Fun games/cartoons demonstrate purchases only. Physical checks need an iPad; T-82 demo/production boundaries remain open.
+- **Limits:** timezone defaults to `Asia/Almaty` until Settings supports selection; history retains 100 tasks. Analytics are labelled demo data; three learning games are playable. Science media is on hold; the video is an animated placeholder. Fun games/cartoons demonstrate purchases only. Physical checks need an iPad; T-82 demo/production boundaries remain open.
 - **Rules / blockers:** single `master`; local-first; business rules in core; own-origin resources; Russian UI in `ru.ts`; no deployment. No implementation blockers.

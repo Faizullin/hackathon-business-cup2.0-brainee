@@ -1,5 +1,6 @@
 import { scryptSync } from "node:crypto";
 import { type BrainyStats, finishLearningSession, type GameResult } from "@brainee/core";
+import { manifests } from "@brainee/game-catalog";
 import {
   brainyStates,
   children,
@@ -61,32 +62,20 @@ export const demo = {
     startSnapshot: { brain: 18, eyes: 16, mouth: 14, arms: 14, legs: 18, resp: 10 },
     updatedAt: new Date("2026-11-14T00:00:00Z"),
   },
-  games: [
-    {
-      id: "odd-one-out",
-      title: "Найди лишний",
-      kind: "dev",
-      mainSkill: "attention",
-      secondarySkill: null,
-      levels: 2,
-      roundsPerSession: 4,
-      enabled: true,
-      weights: { attention: 1 },
-      minAge: 4,
-    },
-    {
-      id: "continue-pattern",
-      title: "Продолжи узор",
-      kind: "dev",
-      mainSkill: "logic",
-      secondarySkill: "attention",
-      levels: 2,
-      roundsPerSession: 4,
-      enabled: true,
-      weights: { logic: 0.7, attention: 0.3 },
-      minAge: 5,
-    },
-  ],
+  games: manifests.map((game) => ({
+    id: game.id,
+    title: game.title,
+    kind: game.kind,
+    mainSkill: game.skills.main,
+    secondarySkill: game.skills.secondary ?? null,
+    weights: game.weights,
+    minAge: game.minAge,
+    levels: game.levels,
+    roundsPerSession: game.roundsPerSession,
+    enabled: true,
+    runtime: game.runtime,
+    runtimeUrl: game.runtime === "embedded" ? game.entry : null,
+  })),
   history: {
     id: "demo-completed-game",
     childId: "demo-child",

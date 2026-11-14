@@ -100,6 +100,10 @@ export const games = sqliteTable(
     mainSkill: text("main_skill").$type<Skill>().notNull(),
     secondarySkill: text("secondary_skill").$type<Skill>(),
     levels: integer("levels").notNull(),
+    runtime: text("runtime", { enum: ["react", "embedded"] })
+      .notNull()
+      .default("react"),
+    runtimeUrl: text("runtime_url"),
     roundsPerSession: integer("rounds_per_session").notNull(),
     enabled: integer("enabled", { mode: "boolean" }).notNull().default(true),
     // D-23 per-game skill weights (sum 1); D-22 recommended minimum age (catalog spans 4–10).

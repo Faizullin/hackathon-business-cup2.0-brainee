@@ -2,7 +2,7 @@
 
 import { Brainy } from "@brainee/brainy";
 import { type LearningCompletion, practiceGame } from "@brainee/core";
-import { type GameDefinition, reactGames } from "@brainee/games";
+import { allGames, type GameDefinition } from "@brainee/games";
 import { StarIcon } from "@brainee/ui/components/child-icons";
 import { ArrowRight } from "@brainee/ui/components/icons";
 import Link from "next/link";
@@ -27,8 +27,8 @@ export function PostGameScreen({
   const practice =
     practiceGame(
       completion.after.stats,
-      reactGames.filter((other) => other.id !== game.id),
-    ) ?? practiceGame(completion.after.stats, reactGames);
+      allGames.filter((other) => other.id !== game.id),
+    ) ?? practiceGame(completion.after.stats, allGames);
   const nextLevel = level < game.levels ? level + 1 : 1;
   const card =
     "flex min-h-28 flex-col justify-center gap-2 rounded-panel border border-border bg-card p-4 text-left transition-transform duration-(--dur-press) active:scale-[0.97]";

@@ -71,7 +71,7 @@ export function readPendingFinish(): PendingFinish | null {
     const result = parseLearningGameResult(value.result, {
       id: game.id,
       levels: game.levels,
-      roundsPerSession: value.result.rounds,
+      roundsPerSession: game.roundsPerSession,
     });
     if (!result || result.level !== issued.level) return null;
     return {

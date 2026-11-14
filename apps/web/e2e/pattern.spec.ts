@@ -32,7 +32,7 @@ for (const level of [1, 2]) {
     await expect(page.getByTestId("earned-stars")).toContainText("+13");
     await expect(page.getByTestId("practice-game")).toHaveAttribute(
       "href",
-      /\/game\/(odd-one-out|continue-pattern)\?/,
+      /\/game\/(odd-one-out|continue-pattern|picture-puzzle)\?/,
     );
     await expect(page.getByTestId("next-level")).toHaveText(
       level === 1 ? /Следующий уровень/ : /Сыграть ещё раз/,

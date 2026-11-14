@@ -1,13 +1,9 @@
 import type { GameDefinition } from "../kit";
-
+import manifest from "./manifest.json" with { type: "json" };
 export const oddOneOut: GameDefinition = {
-  id: "odd-one-out",
+  ...manifest,
   kind: "dev",
-  title: "Найди лишний",
-  skills: { main: "attention" },
-  weights: { attention: 1 },
-  minAge: 4,
-  levels: 2,
   runtime: "react",
+  skills: manifest.skills as GameDefinition["skills"],
   load: () => import("./OddOneOut"),
 };

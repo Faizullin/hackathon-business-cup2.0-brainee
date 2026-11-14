@@ -1,0 +1,26 @@
+{
+  "id": "continue-pattern",
+  "version": "0.1.0",
+  "kind": "dev",
+  "title": "Продолжи узор",
+  "engine": "react",
+  "runtime": "react",
+  "entry": "ContinuePattern.tsx",
+  "skills": {
+    "main": "logic",
+    "secondary": "attention"
+  },
+  "weights": {
+    "logic": 0.7,
+    "attention": 0.3
+  },
+  "minAge": 5,
+  "levels": 2,
+  "roundsPerSession": 4,
+  "bridge": {
+    "protocol": 2,
+    "contract": "continue-pattern@1"
+  },
+  "sizeBudgetBytes": 100000,
+  "license": "LicenseRef-Project"
+}

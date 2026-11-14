@@ -1,0 +1,26 @@
+{
+  "id": "picture-puzzle",
+  "version": "0.1.0",
+  "kind": "dev",
+  "title": "Собери картинку",
+  "engine": "phaser",
+  "runtime": "embedded",
+  "entry": "/games/picture-puzzle/index.html",
+  "skills": {
+    "main": "motor",
+    "secondary": "logic"
+  },
+  "weights": {
+    "motor": 0.7,
+    "logic": 0.3
+  },
+  "minAge": 4,
+  "levels": 5,
+  "roundsPerSession": 4,
+  "bridge": {
+    "protocol": 2,
+    "contract": "picture-puzzle@1"
+  },
+  "sizeBudgetBytes": 8000000,
+  "license": "LicenseRef-Project AND MIT AND CC0-1.0"
+}

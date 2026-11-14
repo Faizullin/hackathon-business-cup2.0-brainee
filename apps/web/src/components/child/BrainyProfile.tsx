@@ -8,7 +8,7 @@ import {
   STAGES,
   stageOf,
 } from "@brainee/core";
-import { reactGames } from "@brainee/games";
+import { allGames } from "@brainee/games";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { ViewTransition } from "react";
@@ -26,7 +26,7 @@ export function BrainyProfile() {
   const stage = stageOf(stats);
   const t = ru.child.brainyPage;
   const weakest = BODY_STATS.reduce((a, b) => (stats[a] <= stats[b] ? a : b));
-  const suggestion = practiceGame(stats, reactGames);
+  const suggestion = practiceGame(stats, allGames);
   return (
     <div className="flex flex-col gap-5 lg:grid lg:grid-cols-[minmax(0,400px)_minmax(0,1fr)] lg:items-start">
       <section className="flex flex-col items-center gap-4 rounded-panel border border-border bg-card p-5 text-center sm:p-8 lg:sticky lg:top-[max(16px,env(safe-area-inset-top))]">

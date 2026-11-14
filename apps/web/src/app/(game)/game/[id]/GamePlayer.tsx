@@ -180,6 +180,7 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
         </p>
       </header>
       <GameHost
+        sessionId={issued.sessionId}
         text={ru.games}
         game={game}
         level={issued.level}

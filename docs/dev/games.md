@@ -11,11 +11,11 @@ The app works with **built games, not source**. Wherever a game is made, it ends
 | Path | For | Source lives | Runtime | Status |
 |---|---|---|---|---|
 | **A · React** | small, tightly integrated learning games | `packages/games/src/<id>/` | `react` | ✅ odd-one-out, continue-pattern |
-| **B · In-repo engine** | Phaser/GDevelop games we write | `games/<engine>-<name>/` workspace package | `embedded` | planned (T-29, T-19) |
+| **B · In-repo engine** | Phaser/GDevelop games we write | `games/<engine>-<name>/` workspace package | `embedded` | ✅ Picture Puzzle |
 | **C · External** | other repos, teams or engines | **outside this repo**; we import a pinned, checksummed build artifact | `embedded` | later (T-91) |
 
 Rules that keep it scalable:
-- **Manifest = single source**, schema-validated in CI: id, version, engine, runtime, entry, skills, levels, bridge protocol + contract (`<id>@<n>`), size budget, license (T-89).
+- **Manifest = single source**, schema-validated by `pnpm check`: id, version, engine, runtime, entry, skills, levels, bridge protocol + contract (`<id>@<n>`), size budget, license (T-89).
 - **Catalog in the DB** (`Game` + `GameVersion`), filled from manifests: adding a B/C game needs no app code; versions can be pinned, rolled back or disabled.
 - **Versioned bridge:** the host supports protocol N and N−1; games learn host capabilities in `init`.
 - **One conformance suite for every game** (T-90): loads, `ready` ≤ 10 s, exactly one `finish`, zero foreign requests, size budget, no console errors, Chromium + WebKit. A game is listed only after it passes. A new engine = a ~30-line adapter + passing the suite.
@@ -103,7 +103,7 @@ Lessons GSP's browser tests surfaced, which apply to us because the iPad runs We
 - **Run `pnpm games:build` before e2e** after any bridge change. Games bundle the bridge, and a stale build fails confusingly.
 
 ## Lab
-A dev-only `/lab` route in `apps/web` (no separate app; implemented for React games, `BRAINEE_LAB=1` enables it in production builds): game picker (React registry now; `Game` table once embedded games exist), level/seed, phone/iPad frame, and the **event stream panel** (bridge status + live events), which e2e reads too. Embedded-game developers can also use standalone mode inside their engine.
+A dev-only `/lab` route in `apps/web` (no separate app; React and embedded games, `BRAINEE_LAB=1` enables it in production builds): game picker (validated manifest registry), level/seed, phone/iPad frame, and the **event stream panel** (bridge status + live events), which e2e reads too. Embedded-game developers can also use standalone mode inside their engine.
 
 ## Isolation
 Our own games: `sandbox="allow-scripts allow-same-origin"`. This isolates lifecycle; it is not a security boundary, so only audited code goes in. The bridge doesn't need same-origin. If we ever accept untrusted builds, serve them with GSP's `Content-Security-Policy: sandbox allow-scripts …` + `Access-Control-Allow-Origin: *` headers (GSP `src/app/game-builds/[...path]/route.ts`): an opaque origin that can still load its own files.
@@ -122,3 +122,14 @@ PECS board games and the sample game don't fit. Porting a candidate is T-85.
 
 ## Porting prototype games
 Odd one out and Continue the pattern → `react` runtime. Prototype lines 901–982 ([ideas/README.md](../ideas/README.md)). Catalog: [screens.md](../product/screens.md#learn-учимся).
+
+## Implemented platform slice (T-29 / T-85 / T-89 / T-90)
+
+- `packages/game-bridge` ports GSP's `bridge-core` transport, endpoints, repeat-hello handshake, DOM/GDevelop adapters and tests. The drop-in script exposes `window.Brainee`; PECS, speech, card/progress host methods and analytics outbox are removed. Protocol 2 supports protocol 1 (legacy `id` normalizes to `eventId`). Every incoming message is capped at 64 KiB and 50 messages/s; the last 1,000 event IDs are deduplicated. Contract event payloads use zod. Nonce + the private transferred MessageChannel bind the connection to the iframe; these audited same-origin builds are not a security boundary.
+- `packages/engine-phaser` ports the GSP Phaser adapter, `BridgedScene`, responsive factory and esbuild helper. Scenes send `ready` only after assets and launch config are loaded. `IframeGame` waits at most 10 seconds for ready, renders an error and removes the frame on failure; unmount closes the bridge and removes the iframe's timers/audio/renderer. A finish must agree with the observed rounds and issued game/level before the existing LearningProvider submits it. Lab launches use an ephemeral ID and never save rewards.
+- Every React folder and engine game has `manifest.json`. `packages/game-catalog` validates and exports the three manifests; DB seed and embedded registry consume them. `pnpm check` validates manifests, entry paths, weights and React source budgets; `pnpm test:assets` additionally checks embedded output budgets, HTML/CSS references, pictures and bridge build. React budgets are source bytes in this light slice; embedded budgets are uncompressed artifact bytes. Version-history/rollback (`GameVersion`) and automatic path-C imports remain future work.
+- `games/picture-puzzle` is path B. Phaser 4 and the Rex jigsaw cutter are bundled locally, with Kenney CC0 pictures and preserved licences. **One session = four successful piece placements**, not four pictures. Each rejected placement increments mistakes; a successfully placed piece with one or more prior rejections increments corrections once. Picture changes reset per-piece attempts, retain the issued level and continue the four-placement counter. At four, input stops and exactly one `GameResult` is emitted. Partial play never finishes. Seed selects the starting picture; no family calendar/timezone dependency. Five levels retain GSP's short-side `<700px` cap at 3×4 pieces. The host's Russian chrome surrounds language-light canvas controls; no remote speech/font is used.
+- `pnpm games:build` replaces the public puzzle directory and emits `public/games/bridge.js`; `pnpm build` runs it first. Generated artifacts stay ignored. Use `pnpm games:build` before `pnpm dev` on a fresh checkout. `pnpm db:push && pnpm db:seed` adds runtime columns/catalog to existing local data; `pnpm demo` starts from a full reset.
+- `game-conformance.spec.ts` loops all manifests in Chromium/WebKit, phone/landscape iPad: ready within 10 seconds, real pointer input, exactly one finish, no console errors/foreign requests. Puzzle coverage includes rejection→correction, server receipt replay without another reward, stopping, timeout cleanup and screenshots. `pnpm test` retains the ported bridge/geometry/layout tests.
+
+The sections above describing full GDevelop build tooling, per-version trust tiers and external artifact imports are the longer-term design; this slice supplies its generic GDevelop bridge adapter, but not a GDevelop export kit.

@@ -1,13 +1,14 @@
 "use client";
 
 import { type GameResult, type RoundEvent, roundStars, sessionStars } from "@brainee/core";
-import { clampLevel, GameHost, reactGames } from "@brainee/games";
+import { allGames, clampLevel, GameHost } from "@brainee/games";
 import { Button } from "@brainee/ui/components/button";
 import { useId, useState } from "react";
 import { ru } from "@/i18n/ru";
 
 type Status = "running" | "finished" | "error";
 type LabEvent =
+  | { type: "ready" }
   | { type: "round"; event: RoundEvent }
   | { type: "finish"; result: GameResult }
   | { type: "error"; message: string };
@@ -20,20 +21,22 @@ const fieldClass =
 
 export function LabClient() {
   const ids = { game: useId(), level: useId(), seed: useId(), frame: useId() };
-  const [gameId, setGameId] = useState(reactGames[0]?.id ?? "");
+  const [gameId, setGameId] = useState(allGames[0]?.id ?? "");
   const [level, setLevel] = useState(1);
   const [seed, setSeed] = useState(42);
   const [frame, setFrame] = useState<Frame>("phone");
   const [run, setRun] = useState(0);
   const [status, setStatus] = useState<Status>("running");
+  const [connected, setConnected] = useState(false);
   const [events, setEvents] = useState<LabEvent[]>([]);
 
-  const game = reactGames.find((g) => g.id === gameId) ?? reactGames[0];
+  const game = allGames.find((g) => g.id === gameId) ?? allGames[0];
   if (!game) return null;
   const safeLevel = clampLevel(level, game.levels);
 
   function restart(changes?: () => void) {
     changes?.();
+    setConnected(false);
     setEvents([]);
     setStatus("running");
     setRun((n) => n + 1);
@@ -57,7 +60,7 @@ export function LabClient() {
               value={game.id}
               onChange={(e) => restart(() => setGameId(e.target.value))}
             >
-              {reactGames.map((g) => (
+              {allGames.map((g) => (
                 <option key={g.id} value={g.id}>
                   {g.title}
                 </option>
@@ -120,6 +123,10 @@ export function LabClient() {
           className={`mx-auto w-full ${FRAMES[frame]} rounded-panel border border-border bg-background`}
         >
           <GameHost
+            onReady={() => {
+              setConnected(true);
+              setEvents((list) => [...list, { type: "ready" }]);
+            }}
             text={ru.games}
             key={`${game.id}-${safeLevel}-${seed}-${run}`}
             game={game}
@@ -140,7 +147,9 @@ export function LabClient() {
 
       <aside
         data-testid="event-stream"
-        data-status={status}
+        data-status={
+          game.runtime === "embedded" && connected && status === "running" ? "connected" : status
+        }
         className="flex flex-col gap-3 rounded-panel border border-border bg-card p-4"
       >
         <h2 className="font-heading font-semibold">{ru.lab.events}</h2>
@@ -157,6 +166,7 @@ export function LabClient() {
           {events.map((e, i) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: append-only log
             <li key={i} data-event={e.type}>
+              {e.type === "ready" && "ready"}
               {e.type === "round" &&
                 `round correct=${e.event.correct} afterMistake=${e.event.afterMistake}`}
               {e.type === "finish" && `finish ${JSON.stringify(e.result)}`}

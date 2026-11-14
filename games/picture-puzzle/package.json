@@ -1,0 +1,25 @@
+{
+  "name": "@brainee/picture-puzzle",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@brainee/engine-phaser": "workspace:*",
+    "@brainee/game-bridge": "workspace:*",
+    "phaser": "4.2.1",
+    "phaser4-rex-plugins": "4.2.0"
+  },
+  "devDependencies": {
+    "@brainee/config": "workspace:*",
+    "typescript": "5.9.3",
+    "vitest": "5.1.0",
+    "@types/node": "22.19.15"
+  }
+}

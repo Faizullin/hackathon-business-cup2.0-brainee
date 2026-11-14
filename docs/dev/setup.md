@@ -1,6 +1,6 @@
 # Setup
 
-> **Status: saved child learning flow and polling ready.** Install, server/build, Vitest, database tools and browser tests work. Embedded-game build commands remain planned.
+> **Status: saved child learning flow and polling ready.** Install, server/build, Vitest, database tools and browser tests work. The bridge and Picture Puzzle build locally.
 
 ## Prerequisites
 - Node.js >= 22.13; `.nvmrc` selects Node 22.
@@ -12,6 +12,7 @@ Fastest manual run: `pnpm demo` (resets `data/dev.db`, then starts the dev serve
 ```bash
 pnpm install
 pnpm db:reset
+pnpm games:build
 pnpm dev
 ```
 
@@ -30,7 +31,7 @@ Available commands:
 | `pnpm db:seed` | Add missing demo fixtures without overwriting balances |
 | `pnpm db:reset` | Delete the database + WAL/SHM files, push schema and seed the demo |
 | `pnpm db:studio` | Open Drizzle's local data inspector |
-| `pnpm check` | Biome lint + format checks, `check:games`, then workspace TypeScript checks |
+| `pnpm check` | Biome lint + format checks, game boundaries and manifests, then workspace TypeScript checks |
 | `pnpm check:games` | Fail if a game folder imports another game or a non-core `@brainee/*` package |
 | `pnpm typecheck` | Run each package's `typecheck` through Turborepo |
 | `pnpm format` | Format source and config files; Markdown and frozen prototype sources are excluded |
@@ -82,7 +83,7 @@ The CLI is used during development; it is not a runtime dependency. Existing set
 
 Internal packages use the `@brainee/*` scope and `workspace:*` references. Their exports point directly at TS source, with no `dist/` or build script. TypeScript configs extend `@brainee/config`; the web app configures workspace packages in `transpilePackages`. The database package is Node/server-only.
 
-Workspace globs include `apps/*`, `packages/*` and `games/*`. React games live in `packages/games/src/<id>/` (first: `odd-one-out`). Embedded-game packages and the bridge come with T-29/T-19; design in [games.md](games.md).
+Workspace globs include `apps/*`, `packages/*` and `games/*`. React games live in `packages/games/src/<id>/` (first: `odd-one-out`). Embedded games use `games/*`, `packages/game-bridge` and `packages/engine-phaser`; design in [games.md](games.md).
 
 ## Local database and tests
 `packages/db` uses the Node libSQL client and Drizzle. `openDatabase()` creates an explicit connection; importing the package performs no DB I/O. Callers close the returned `client` when finished. Foreign keys, a busy timeout and WAL mode are enabled on its single configured native handle. Request handlers own their connection lifetime. The pinned driver compatibility patch and deferred secondary indexes are documented in [D-19](decisions.md).
@@ -125,3 +126,10 @@ Not now. Deploying is the final roadmap step (T-14): Vercel Hobby + Turso free p
 1. Before deploying: run `pnpm build && pnpm --filter @brainee/web exec next start --hostname 0.0.0.0` and open `http://<mac-ip>:3000` on an iPad on the same Wi-Fi (layout, touch, WebKit).
 2. After T-14: on the iPad, Settings → Screen Time → Content & Privacy → Web Content → Allowed Websites Only, then add only `<project>.vercel.app`.
 3. Add the site to the Home Screen and go through the demo flow. Any blank image or font means something loads from a foreign domain.
+
+## Embedded games (T-29 / T-85)
+
+- `pnpm games:build` bundles the local bridge and Phaser Picture Puzzle, replacing `apps/web/public/games/picture-puzzle/`. Run before `pnpm dev` on a new checkout or after changing an embedded game; `pnpm build` does this automatically.
+- `pnpm test:assets` verifies built entries, referenced assets, pictures, bridge script and manifest size budgets. `pnpm check:manifests` validates every listed game's manifest; included in `pnpm check`.
+- For an existing DB, run `pnpm db:push && pnpm db:seed` to add game runtime columns and catalog entries. `pnpm demo` resets the local demo as usual.
+- `/lab` now includes «Собери картинку». Its events use the same `round`/`finish` contract as React games; embedded ready changes the event stream to `data-status="connected"`. Standalone: `/games/picture-puzzle/index.html?level=3&seed=42`.

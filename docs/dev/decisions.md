@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-28 · Port the bounded bridge and manifest-backed game runtimes · 2026-11-14 · accepted · implements D-16
+**Context:** Picture Puzzle needs a same-origin Phaser runtime that preserves issued sessions, server-only rewards and per-game skill weights.
+**Decision:** port GSP `bridge-core` and `phaser-core` at reference commit `13f8eff`, removing PECS/speech/remote host methods. Protocol 2 accepts 1, with MessageChannel + nonce, zod event validation, bounded event deduplication, message size/rate limits and a 10-second host ready timeout. Add only `games.runtime` (default `react`) and nullable `games.runtime_url`; manifests seed these alongside weights/minAge/rounds. Keep the existing session API and LearningProvider finish path. Picture Puzzle counts four placements, with one correction per placed piece that had rejections, holding the issued level through picture changes. Build artifacts and all assets stay on our origin.
+**Consequences:** no service, reward logic or family-timezone dependency is added. Manifest validation and all-game browser conformance cover the three listed games. `GameVersion`, automatic artifact imports and the GDevelop export kit remain deferred. Detailed runtime rules: [games.md](games.md#implemented-platform-slice-t-29--t-85--t-89--t-90).
+
 ## D-26 · Persist calendar rollover in the showcase · 2026-11-14 · accepted · extends D-25
 **Context:** ROUTES.md requires family-local daily/weekly resets and a daily bonus that cannot be reclaimed by opening another device.
 **Decision:** keep calendar keys, IANA timezone and the child's shared bonus flag in the existing showcase JSON. Use `Asia/Almaty` as the MVP default until Settings exposes timezone selection. Core computes rollover; state reads and relevant mutations persist it transactionally and bump the family version. Cookie streak counters reset together at midnight; completion receipts remain immutable. Retain the latest 100 archived tasks in the showcase and show them read-only to parents.
