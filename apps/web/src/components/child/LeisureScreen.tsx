@@ -54,7 +54,7 @@ export function LeisureScreen() {
       </Panel>
       <Notice notice={notice} />
       <Panel title={t.shop} note={`★ ${stars}`}>
-        <ul className="grid gap-3 sm:grid-cols-2">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {fun.map((game) => {
             const Icon = FUN_ICONS[game.icon as keyof typeof FUN_ICONS] ?? Play;
             const left = funMinutesLeft(game, now);
@@ -143,7 +143,7 @@ export function LeisureScreen() {
         </ul>
       </Panel>
       <Panel title={t.science} note={t.scienceNote}>
-        <ul className="grid gap-3 sm:grid-cols-2">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {science.map((video) => {
             const Icon = SCIENCE_ICONS[video.icon as keyof typeof SCIENCE_ICONS] ?? Play;
             return (

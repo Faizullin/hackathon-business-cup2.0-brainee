@@ -4,6 +4,12 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (presentation acceptance)
+- T-70 acceptance evidence and T-71 reset-first two-device script; T-61 all-route own-origin audit. Added accessory, video resume, child-ranking and task goal/responsibility checks.
+- Re-recorded MVP and learning from separate fresh DBs: 32 screenshots and four successful walkthroughs; frames reviewed. Interrupted captures were discarded.
+- Landscape post-game columns and wider Gifts/Leisure grids; existing parent columns reviewed. Optional T-87 reward animation deferred.
+- Verified check, 94 unit tests, 156 e2e plus 32 focused rechecks; Chromium/WebKit phone and landscape iPad screenshots reviewed. Next: physical iPad rehearsal, pitch and freeze; deployment stays last.
+
 ## 2026-11-14 (landscape)
 - Manual-run error explained/fixed: Turborepo strict env mode stripped `DEMO_MODE` (and no `.env.local`) → API 404 → load error. Added `globalPassThroughEnv` and `pnpm demo`.
 - T-98 iPad landscape layout (rail, dock column, two-column Brainy) + portrait rotate hint; iPad e2e/report viewport → 1180 × 820. T-60 manifest + generated icons + theme color.

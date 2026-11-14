@@ -19,7 +19,7 @@ child's task in Tasks and opens Gifts & goal.
 
 ### Phone · 390 × 844
 
-**Phone: entry, leisure, video quiz, gifts, Brainy shop, parent** (flow `phone-mvp`): PASSED, 16 of 16 checks passed, 52.8 s, phone. Recorded Nov 14, 2026, 6:22 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/login`.
+**Phone: entry, leisure, video quiz, gifts, Brainy shop, parent** (flow `phone-mvp`): PASSED, 16 of 16 checks passed, 52.7 s, phone. Recorded Nov 14, 2026, 7:08 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/login`.
 
 [![Phone: entry, leisure, video quiz, gifts, Brainy shop, parent: click to play the recording](videos/mvp/phone-mvp.jpg)](videos/mvp/phone-mvp.mp4)
 
@@ -27,76 +27,76 @@ child's task in Tasks and opens Gifts & goal.
 
 | Time | Source | Entry |
 | --- | --- | --- |
-| 00:00.053 | step | open /login |
-| 00:01.619 | check | Demo content reset to the seed |
-| 00:01.620 | step | call resetDemo |
-| 00:03.153 | step | goto / |
-| 00:03.183 | check | Opening the app shows the entry screen |
-| 00:04.985 | step | wait 1800 |
-| 00:04.985 | mark | Child: other games → Learn |
-| 00:05.012 | step | click {"by":"role","role":"link","name":"Нет, хочу посмотреть другие игры","exact":true} |
-| 00:05.057 | check | Learn shows Brainy's advice and the grid |
-| 00:06.258 | step | wait 1200 |
-| 00:06.258 | mark | Leisure: shop, cartoons, science |
-| 00:06.287 | step | click {"by":"role","role":"link","name":"Отдых","exact":true} |
-| 00:06.363 | check | Leisure shows the ★ shop |
-| 00:06.365 | step | scroll window by 0,700 |
-| 00:07.167 | step | wait 800 |
-| 00:07.174 | step | scroll window by 0,900 |
-| 00:07.977 | step | wait 800 |
-| 00:07.977 | mark | Science video: pause-only player and quiz |
-| 00:08.006 | step | click {"by":"role","role":"link","name":"Как живут пчёлы"} |
-| 00:08.032 | check | The player has only play/pause |
-| 00:08.067 | step | click {"by":"role","role":"button","name":"Смотреть","exact":true} |
-| 00:28.404 | check | The quiz appears after the last minute |
-| 00:28.435 | step | click {"by":"role","role":"button","name":"Воск","exact":true} |
-| 00:28.448 | network (warn) | 409 POST http://127.0.0.1:3123/api/actions |
-| 00:28.449 | console (warn) | Failed to load resource: the server responded with a status of 409 (Conflict) |
-| 00:29.336 | step | wait 900 |
-| 00:29.370 | step | click {"by":"role","role":"button","name":"Мёд","exact":true} |
-| 00:29.394 | check | Correct answer pays +15★ once |
-| 00:30.595 | step | wait 1200 |
-| 00:30.623 | step | click {"by":"role","role":"link","name":"Вернуться в «Отдых»","exact":true} |
-| 00:30.623 | mark | Gifts: goal, shop, tasks, exchange |
-| 00:30.683 | step | click {"by":"role","role":"link","name":"Подарки","exact":true} |
-| 00:30.756 | check | Gifts shows the weekly goal and tasks |
-| 00:30.757 | step | scroll window by 0,600 |
-| 00:31.434 | check | Child marks a real-life task done → waits for the parent |
-| 00:31.434 | step | call childTaskDone |
-| 00:31.467 | step | click {"by":"role","role":"button","name":"1 ☀ на 10 ★","exact":true} |
-| 00:32.468 | step | wait 1000 |
-| 00:32.468 | mark | Brainy: accessory shop |
-| 00:32.485 | step | click {"by":"role","role":"link","name":"Брейни","exact":true} |
-| 00:32.560 | check | Brainy tab shows stats and the shop |
-| 00:33.308 | check | Bought accessory is worn (one per slot) |
-| 00:34.865 | step | call buyCheapestAccessory |
-| 00:36.067 | step | wait 1200 |
-| 00:36.067 | mark | Parent: PIN, analytics, confirm the child's task |
-| 00:37.618 | step | goto /analytics |
-| 00:37.642 | check | Parent mode is behind a PIN |
-| 00:37.660 | step | click {"by":"role","role":"button","name":"Цифра 1","exact":true} |
-| 00:37.692 | step | click {"by":"role","role":"button","name":"Цифра 2","exact":true} |
-| 00:37.725 | step | click {"by":"role","role":"button","name":"Цифра 3","exact":true} |
-| 00:37.759 | step | click {"by":"role","role":"button","name":"Цифра 4","exact":true} |
-| 00:37.835 | check | Analytics: radars, bars, ranking |
-| 00:38.837 | step | wait 1000 |
-| 00:41.867 | step | call scrollPage |
-| 00:41.903 | step | click {"by":"role","role":"button","name":"Город","exact":true} |
-| 00:42.706 | step | wait 800 |
-| 00:42.730 | step | call openParentTab |
-| 00:42.808 | check | Tasks: Today list with confirmations |
-| 00:43.746 | check | Parent confirms → ☀ and weekly goal grow |
-| 00:44.648 | step | call confirmTask |
-| 00:47.679 | step | call scrollPage |
-| 00:47.692 | step | call openParentTab |
-| 00:47.770 | check | Gifts & goal: requests and shop |
-| 00:50.793 | step | call scrollPage |
+| 00:00.059 | step | open /login |
+| 00:01.613 | check | Demo content reset to the seed |
+| 00:01.613 | step | call resetDemo |
+| 00:03.146 | step | goto / |
+| 00:03.170 | check | Opening the app shows the entry screen |
+| 00:04.971 | step | wait 1800 |
+| 00:04.971 | mark | Child: other games → Learn |
+| 00:04.999 | step | click {"by":"role","role":"link","name":"Нет, хочу посмотреть другие игры","exact":true} |
+| 00:05.048 | check | Learn shows Brainy's advice and the grid |
+| 00:06.251 | step | wait 1200 |
+| 00:06.251 | mark | Leisure: shop, cartoons, science |
+| 00:06.259 | step | click {"by":"role","role":"link","name":"Отдых","exact":true} |
+| 00:06.333 | check | Leisure shows the ★ shop |
+| 00:06.333 | step | scroll window by 0,700 |
+| 00:07.135 | step | wait 800 |
+| 00:07.145 | step | scroll window by 0,900 |
+| 00:07.949 | step | wait 800 |
+| 00:07.949 | mark | Science video: pause-only player and quiz |
+| 00:07.982 | step | click {"by":"role","role":"link","name":"Как живут пчёлы"} |
+| 00:08.007 | check | The player has only play/pause |
+| 00:08.043 | step | click {"by":"role","role":"button","name":"Смотреть","exact":true} |
+| 00:28.383 | check | The quiz appears after the last minute |
+| 00:28.410 | step | click {"by":"role","role":"button","name":"Воск","exact":true} |
+| 00:28.423 | network (warn) | 409 POST http://127.0.0.1:3123/api/actions |
+| 00:28.424 | console (warn) | Failed to load resource: the server responded with a status of 409 (Conflict) |
+| 00:29.311 | step | wait 900 |
+| 00:29.325 | step | click {"by":"role","role":"button","name":"Мёд","exact":true} |
+| 00:29.349 | check | Correct answer pays +15★ once |
+| 00:30.551 | step | wait 1200 |
+| 00:30.576 | step | click {"by":"role","role":"link","name":"Вернуться в «Отдых»","exact":true} |
+| 00:30.576 | mark | Gifts: goal, shop, tasks, exchange |
+| 00:30.624 | step | click {"by":"role","role":"link","name":"Подарки","exact":true} |
+| 00:30.699 | check | Gifts shows the weekly goal and tasks |
+| 00:30.700 | step | scroll window by 0,600 |
+| 00:31.364 | check | Child marks a real-life task done → waits for the parent |
+| 00:31.364 | step | call childTaskDone |
+| 00:31.392 | step | click {"by":"role","role":"button","name":"1 ☀ на 10 ★","exact":true} |
+| 00:32.393 | step | wait 1000 |
+| 00:32.393 | mark | Brainy: accessory shop |
+| 00:32.409 | step | click {"by":"role","role":"link","name":"Брейни","exact":true} |
+| 00:32.484 | check | Brainy tab shows stats and the shop |
+| 00:33.239 | check | Bought accessory is worn (one per slot) |
+| 00:34.807 | step | call buyCheapestAccessory |
+| 00:36.007 | step | wait 1200 |
+| 00:36.007 | mark | Parent: PIN, analytics, confirm the child's task |
+| 00:37.549 | step | goto /analytics |
+| 00:37.572 | check | Parent mode is behind a PIN |
+| 00:37.595 | step | click {"by":"role","role":"button","name":"Цифра 1","exact":true} |
+| 00:37.626 | step | click {"by":"role","role":"button","name":"Цифра 2","exact":true} |
+| 00:37.660 | step | click {"by":"role","role":"button","name":"Цифра 3","exact":true} |
+| 00:37.694 | step | click {"by":"role","role":"button","name":"Цифра 4","exact":true} |
+| 00:37.768 | check | Analytics: radars, bars, ranking |
+| 00:38.769 | step | wait 1000 |
+| 00:41.784 | step | call scrollPage |
+| 00:41.812 | step | click {"by":"role","role":"button","name":"Город","exact":true} |
+| 00:42.614 | step | wait 800 |
+| 00:42.626 | step | call openParentTab |
+| 00:42.702 | check | Tasks: Today list with confirmations |
+| 00:43.616 | check | Parent confirms → ☀ and weekly goal grow |
+| 00:44.518 | step | call confirmTask |
+| 00:47.545 | step | call scrollPage |
+| 00:47.559 | step | call openParentTab |
+| 00:47.634 | check | Gifts & goal: requests and shop |
+| 00:50.666 | step | call scrollPage |
 
 </details>
 
 ### iPad viewport · 1180 × 820 landscape
 
-**iPad viewport: entry, leisure, video quiz, gifts, Brainy shop, parent** (flow `ipad-mvp`): PASSED, 16 of 16 checks passed, 52.2 s, ipad. Recorded Nov 14, 2026, 6:22 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/login`.
+**iPad viewport: entry, leisure, video quiz, gifts, Brainy shop, parent** (flow `ipad-mvp`): PASSED, 16 of 16 checks passed, 52.5 s, ipad. Recorded Nov 14, 2026, 7:09 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/login`.
 
 [![iPad viewport: entry, leisure, video quiz, gifts, Brainy shop, parent: click to play the recording](videos/mvp/ipad-mvp.jpg)](videos/mvp/ipad-mvp.mp4)
 
@@ -104,70 +104,70 @@ child's task in Tasks and opens Gifts & goal.
 
 | Time | Source | Entry |
 | --- | --- | --- |
-| 00:00.047 | step | open /login |
-| 00:01.615 | check | Demo content reset to the seed |
-| 00:01.615 | step | call resetDemo |
-| 00:03.151 | step | goto / |
-| 00:03.175 | check | Opening the app shows the entry screen |
-| 00:04.977 | step | wait 1800 |
-| 00:04.977 | mark | Child: other games → Learn |
-| 00:05.000 | step | click {"by":"role","role":"link","name":"Нет, хочу посмотреть другие игры","exact":true} |
-| 00:05.023 | check | Learn shows Brainy's advice and the grid |
-| 00:06.224 | step | wait 1200 |
-| 00:06.224 | mark | Leisure: shop, cartoons, science |
-| 00:06.251 | step | click {"by":"role","role":"link","name":"Отдых","exact":true} |
-| 00:06.330 | check | Leisure shows the ★ shop |
-| 00:06.331 | step | scroll window by 0,700 |
-| 00:07.132 | step | wait 800 |
-| 00:07.133 | step | scroll window by 0,900 |
-| 00:07.936 | step | wait 800 |
-| 00:07.936 | mark | Science video: pause-only player and quiz |
-| 00:07.966 | step | click {"by":"role","role":"link","name":"Как живут пчёлы"} |
-| 00:07.991 | check | The player has only play/pause |
-| 00:08.029 | step | click {"by":"role","role":"button","name":"Смотреть","exact":true} |
-| 00:28.358 | check | The quiz appears after the last minute |
-| 00:28.396 | step | click {"by":"role","role":"button","name":"Воск","exact":true} |
+| 00:00.060 | step | open /login |
+| 00:01.632 | check | Demo content reset to the seed |
+| 00:01.632 | step | call resetDemo |
+| 00:03.168 | step | goto / |
+| 00:03.182 | check | Opening the app shows the entry screen |
+| 00:04.983 | step | wait 1800 |
+| 00:04.983 | mark | Child: other games → Learn |
+| 00:05.026 | step | click {"by":"role","role":"link","name":"Нет, хочу посмотреть другие игры","exact":true} |
+| 00:05.040 | check | Learn shows Brainy's advice and the grid |
+| 00:06.242 | step | wait 1200 |
+| 00:06.242 | mark | Leisure: shop, cartoons, science |
+| 00:06.263 | step | click {"by":"role","role":"link","name":"Отдых","exact":true} |
+| 00:06.341 | check | Leisure shows the ★ shop |
+| 00:06.342 | step | scroll window by 0,700 |
+| 00:07.144 | step | wait 800 |
+| 00:07.147 | step | scroll window by 0,900 |
+| 00:07.948 | step | wait 800 |
+| 00:07.948 | mark | Science video: pause-only player and quiz |
+| 00:07.968 | step | click {"by":"role","role":"link","name":"Как живут пчёлы"} |
+| 00:07.994 | check | The player has only play/pause |
+| 00:08.030 | step | click {"by":"role","role":"button","name":"Смотреть","exact":true} |
+| 00:28.364 | check | The quiz appears after the last minute |
+| 00:28.395 | step | click {"by":"role","role":"button","name":"Воск","exact":true} |
 | 00:28.410 | network (warn) | 409 POST http://127.0.0.1:3123/api/actions |
 | 00:28.410 | console (warn) | Failed to load resource: the server responded with a status of 409 (Conflict) |
 | 00:29.297 | step | wait 900 |
-| 00:29.330 | step | click {"by":"role","role":"button","name":"Мёд","exact":true} |
-| 00:29.354 | check | Correct answer pays +15★ once |
-| 00:30.556 | step | wait 1200 |
-| 00:30.586 | step | click {"by":"role","role":"link","name":"Вернуться в «Отдых»","exact":true} |
-| 00:30.586 | mark | Gifts: goal, shop, tasks, exchange |
-| 00:30.645 | step | click {"by":"role","role":"link","name":"Подарки","exact":true} |
-| 00:30.720 | check | Gifts shows the weekly goal and tasks |
-| 00:30.721 | step | scroll window by 0,600 |
-| 00:31.395 | check | Child marks a real-life task done → waits for the parent |
-| 00:31.395 | step | call childTaskDone |
-| 00:31.429 | step | click {"by":"role","role":"button","name":"1 ☀ на 10 ★","exact":true} |
-| 00:32.430 | step | wait 1000 |
-| 00:32.430 | mark | Brainy: accessory shop |
-| 00:32.446 | step | click {"by":"role","role":"link","name":"Брейни","exact":true} |
-| 00:32.522 | check | Brainy tab shows stats and the shop |
-| 00:33.264 | check | Bought accessory is worn (one per slot) |
-| 00:34.179 | step | call buyCheapestAccessory |
-| 00:35.382 | step | wait 1200 |
-| 00:35.382 | mark | Parent: PIN, analytics, confirm the child's task |
-| 00:36.933 | step | goto /analytics |
-| 00:36.957 | check | Parent mode is behind a PIN |
-| 00:36.973 | step | click {"by":"role","role":"button","name":"Цифра 1","exact":true} |
-| 00:37.006 | step | click {"by":"role","role":"button","name":"Цифра 2","exact":true} |
-| 00:37.038 | step | click {"by":"role","role":"button","name":"Цифра 3","exact":true} |
-| 00:37.073 | step | click {"by":"role","role":"button","name":"Цифра 4","exact":true} |
-| 00:37.148 | check | Analytics: radars, bars, ranking |
-| 00:38.149 | step | wait 1000 |
-| 00:41.175 | step | call scrollPage |
-| 00:41.214 | step | click {"by":"role","role":"button","name":"Город","exact":true} |
-| 00:42.015 | step | wait 800 |
-| 00:42.045 | step | call openParentTab |
-| 00:42.122 | check | Tasks: Today list with confirmations |
-| 00:42.396 | check | Parent confirms → ☀ and weekly goal grow |
-| 00:43.298 | step | call confirmTask |
-| 00:46.323 | step | call scrollPage |
-| 00:46.340 | step | call openParentTab |
-| 00:46.422 | check | Gifts & goal: requests and shop |
-| 00:49.460 | step | call scrollPage |
+| 00:29.319 | step | click {"by":"role","role":"button","name":"Мёд","exact":true} |
+| 00:29.344 | check | Correct answer pays +15★ once |
+| 00:30.546 | step | wait 1200 |
+| 00:30.566 | step | click {"by":"role","role":"link","name":"Вернуться в «Отдых»","exact":true} |
+| 00:30.566 | mark | Gifts: goal, shop, tasks, exchange |
+| 00:30.611 | step | click {"by":"role","role":"link","name":"Подарки","exact":true} |
+| 00:30.686 | check | Gifts shows the weekly goal and tasks |
+| 00:30.687 | step | scroll window by 0,600 |
+| 00:31.363 | check | Child marks a real-life task done → waits for the parent |
+| 00:31.363 | step | call childTaskDone |
+| 00:31.395 | step | click {"by":"role","role":"button","name":"1 ☀ на 10 ★","exact":true} |
+| 00:32.397 | step | wait 1000 |
+| 00:32.397 | mark | Brainy: accessory shop |
+| 00:32.413 | step | click {"by":"role","role":"link","name":"Брейни","exact":true} |
+| 00:32.490 | check | Brainy tab shows stats and the shop |
+| 00:33.231 | check | Bought accessory is worn (one per slot) |
+| 00:34.145 | step | call buyCheapestAccessory |
+| 00:35.347 | step | wait 1200 |
+| 00:35.347 | mark | Parent: PIN, analytics, confirm the child's task |
+| 00:36.903 | step | goto /analytics |
+| 00:36.929 | check | Parent mode is behind a PIN |
+| 00:36.944 | step | click {"by":"role","role":"button","name":"Цифра 1","exact":true} |
+| 00:36.976 | step | click {"by":"role","role":"button","name":"Цифра 2","exact":true} |
+| 00:37.009 | step | click {"by":"role","role":"button","name":"Цифра 3","exact":true} |
+| 00:37.043 | step | click {"by":"role","role":"button","name":"Цифра 4","exact":true} |
+| 00:37.118 | check | Analytics: radars, bars, ranking |
+| 00:38.119 | step | wait 1000 |
+| 00:41.139 | step | call scrollPage |
+| 00:41.164 | step | click {"by":"role","role":"button","name":"Город","exact":true} |
+| 00:41.965 | step | wait 800 |
+| 00:41.994 | step | call openParentTab |
+| 00:42.072 | check | Tasks: Today list with confirmations |
+| 00:42.351 | check | Parent confirms → ☀ and weekly goal grow |
+| 00:43.253 | step | call confirmTask |
+| 00:46.266 | step | call scrollPage |
+| 00:46.292 | step | call openParentTab |
+| 00:46.370 | check | Gifts & goal: requests and shop |
+| 00:49.393 | step | call scrollPage |
 
 </details>
 
@@ -249,7 +249,7 @@ child's task in Tasks and opens Gifts & goal.
 
 [Download the flow timelines (JSON)](logs/mvp.json).
 
-Captured Nov 14, 2026, 6:22 p.m. (Asia/Almaty): 20 scenarios, ipad and phone; Russian, light theme. No failed steps, redirects, JavaScript errors, HTTP errors or unexpected failed requests. 0 known lifecycle request cancellations remain in the manifest. Source: `2f20f13` with working-tree changes. Imported static references are not live captures. Flows: `phone-mvp` PASSED (16 checks), `ipad-mvp` PASSED (16 checks). Timelines: [JSON log](logs/mvp.json).
+Captured Nov 14, 2026, 7:08 p.m. (Asia/Almaty): 20 scenarios, ipad and phone; Russian, light theme. No failed steps, redirects, JavaScript errors, HTTP errors or unexpected failed requests. 0 known lifecycle request cancellations remain in the manifest. Source: `3a39c69` with working-tree changes. Imported static references are not live captures. Flows: `phone-mvp` PASSED (16 checks), `ipad-mvp` PASSED (16 checks). Timelines: [JSON log](logs/mvp.json).
 
 The editable [template](src/mvp.md), [scenario](../../scripts/reports/scenarios/mvp.json)
 and [walkthrough actions](../../scripts/reports/scenarios/mvp.mjs) define what

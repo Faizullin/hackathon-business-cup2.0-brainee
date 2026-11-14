@@ -12,7 +12,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - Parent proof: T-40 (PIN barrier) and T-41 (Brainy, balance and latest completed game).
 - Verification/demo: T-70 (this slice's Playwright checks) and T-71 (two-device walkthrough).
 
-**Done when:** one finish updates balance/stats once, retrying it pays nothing twice, both devices converge through polling, and the third game offers a break with exactly one bonus. Refresh restores server state. The saved child flow, retry recovery and polling between child devices now exist; the PIN barrier and parent proof remain. Slice-only work does not complete broader tasks such as all T-41 analytics or all T-50 entities.
+**Done when:** one finish updates balance/stats once, retrying it pays nothing twice, both devices converge through polling, and the third game offers a break with exactly one bonus. Refresh restores server state. Saved child progression, retry recovery, PIN access and parent polling exist; presentation rehearsal is documented in [demo.md](../demo.md). Slice-only work does not complete broader tasks such as all T-41 analytics or all T-50 entities.
 
 Other task IDs stay outside this slice. T-24/T-25 are available as pure core improvements; entry flow, tasks/gifts, leisure, advanced analytics, embedded games and motion polish wait. Deployment remains the final task (T-14).
 
@@ -30,9 +30,9 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 | 7 | Gifts ☀ only; exchange ☀ → ★ 1:10 | ✅ (T-38, T-46) |
 | 8 | 5-tasks-a-day limit | ✅ (T-26/T-44) |
 | 9 | Ranking hidden from child, no last names | ✅ parent-only, initials (T-43) |
-| 10 | Own-domain only; works with Screen Time allowlist | e2e checks foreign requests; T-60–T-62 remain |
+| 10 | Own-domain only; works with Screen Time allowlist | Automated route audit + PWA done; physical Screen Time verification remains T-62 |
 
-**Left before deployment (in order):** T-70 acceptance walkthrough → T-71 two-device demo script → T-61 network audit → T-62/T-84 iPad over LAN → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Nice-to-have: T-85 one playable fun game, T-53 onboarding quiz.
+**Left before deployment (in order):** T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Nice-to-have: T-85 one playable fun game, T-53 onboarding quiz.
 
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
@@ -90,7 +90,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-51 Seeds: demo family, scenarios "после квиза / сейчас / только развлечения"
   - [x] One deterministic **now** scenario with quiz baseline, two games, hashed parent PIN and consistent history; reruns preserve progress
 - [ ] T-52 Demo session (`DEMO_MODE`, seeded family) + parent PIN barrier; Better Auth = stretch goal
-  - [x] Explicit opt-in, opaque HttpOnly cookie, hashed token, expiry, same-origin mutations; parent barrier remains T-40 → [sessions.md](../dev/sessions.md)
+  - [x] Explicit opt-in, opaque HttpOnly cookie, hashed token, expiry, same-origin mutations; parent barrier implemented in T-40 → [sessions.md](../dev/sessions.md)
 - [ ] T-53 Onboarding quiz → starting stats
 - [x] T-54 API: issued game start/finish/stop → core → atomic saved state and receipt; child UI wired through T-55 → [sessions.md](../dev/sessions.md)
 - [x] T-55 Live updates by short polling: `/api/state` version + TanStack Query (~3 s) in child and parent UIs → [D-15](../dev/decisions.md)
@@ -99,13 +99,13 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 
 ## P6 · PWA + allowlist · [rules.md](../product/rules.md#device-lockdown)
 - [x] T-60 PWA manifest + generated icons (`/manifest.webmanifest`, `/icon`, `/apple-icon`), standalone, theme colors; offline shell not needed for the demo
-- [ ] T-61 Audit: zero foreign-domain requests (DevTools network)
+- [x] T-61 Automated own-origin audit across all pages, both games, four videos, lab and PWA assets (`own-origin.spec.ts`); physical allowlist remains T-62
 - [ ] T-62 Test on an iPad: over LAN during development; with Screen Time "Allowed Websites Only" after T-14
 - [ ] T-63 Onboarding wizard for setting up the allowlist (stretch goal)
 
 ## P7 · Demo & pitch
-- [ ] T-70 Walk through the [acceptance criteria](../product/rules.md#mvp-acceptance-criteria) (Playwright) + web-design-guidelines audit
-- [ ] T-71 Two-device demo script (child iPad + parent phone)
+- [x] T-70 Presentation acceptance walk and visual review → [evidence and remaining boundaries](../demo.md#acceptance-walk-t-70); expanded accessory, child-ranking and video-resume checks
+- [x] T-71 Reset-first two-device demo script (child landscape iPad + parent phone) → [demo.md](../demo.md)
 - [ ] T-72 Landing page (`apps/landing`), stretch goal
 - [ ] T-73 Pitch deck
 - [ ] T-74 Freeze `master`, tag the demo build
@@ -114,7 +114,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 ## Backlog / ideas
 - [x] T-80 Define a smallest end-to-end demo slice and prioritize it ahead of optional features → [scope above](#smallest-end-to-end-demo-slice-t-80).
 - [ ] T-81 Specify server-side result validation, idempotency and atomic wallet/task updates.
-  - [x] Session/result validation, concurrent replay protection, atomic wallet/Brainy/run/history/version and rollback tests → [sessions.md](../dev/sessions.md); task updates await T-44
+  - [x] Session/result validation, concurrent replay protection, atomic wallet/Brainy/run/history/version and rollback tests → [sessions.md](../dev/sessions.md); showcase task actions implemented in T-44 (D-21)
 - [ ] T-82 Define demo versus production boundaries for sessions, parent PIN, child data and backups.
 - [ ] T-83 Resolve reward incentives and clarify the evidence and labels for skill scores, age averages and seeded rankings.
 - [ ] T-84 Validate the PWA and two-device sync on a real iPad early over LAN (no deployment needed); define offline behavior and source licensed demo media.

@@ -40,7 +40,7 @@ export function GiftsScreen() {
       </Panel>
       <Notice notice={notice} />
       <Panel title={t.shop} note={`☀ ${wallet.suns}`}>
-        <ul className="flex flex-col gap-2">
+        <ul className="grid gap-3 lg:grid-cols-2">
           {gifts.map((gift) => (
             <li
               key={gift.id}
@@ -63,7 +63,7 @@ export function GiftsScreen() {
         </ul>
       </Panel>
       <Panel title={t.tasks}>
-        <ul className="flex flex-col gap-2">
+        <ul className="grid gap-3 lg:grid-cols-2">
           {tasks.map((task) => (
             <li
               key={task.id}

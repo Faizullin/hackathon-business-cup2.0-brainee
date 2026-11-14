@@ -33,8 +33,11 @@ export function PostGameScreen({
   const card =
     "flex min-h-28 flex-col justify-center gap-2 rounded-panel border border-border bg-card p-4 text-left transition-transform duration-(--dur-press) active:scale-[0.97]";
   return (
-    <section data-testid="post-game" className="flex flex-col gap-5 p-4 pb-8 sm:p-6">
-      <div className="text-center">
+    <section
+      data-testid="post-game"
+      className="mx-auto grid w-full max-w-6xl gap-5 p-4 pb-8 sm:p-6 lg:grid-cols-2 lg:items-start"
+    >
+      <div className="text-center lg:col-span-2">
         <p className="text-muted-foreground">{game.title}</p>
         <h1 className="mt-1">{t.done}</h1>
       </div>
@@ -55,7 +58,7 @@ export function PostGameScreen({
         ))}
         <ArrowRight aria-hidden="true" className="col-start-2 row-start-1 size-6 text-mint" />
       </div>
-      <div className="flex flex-wrap justify-center gap-2" aria-live="polite">
+      <div className="flex flex-wrap justify-center gap-2 lg:col-start-1" aria-live="polite">
         {Object.entries(completion.gains).map(([stat, gain]) => (
           <p
             key={stat}
@@ -71,7 +74,7 @@ export function PostGameScreen({
         ))}
         {Object.keys(completion.gains).length === 0 && <p>{t.statsUnchanged}</p>}
       </div>
-      <div className="text-center">
+      <div className="text-center lg:col-start-1">
         <p
           className="flex items-center justify-center gap-2 font-heading text-2xl font-semibold"
           data-testid="earned-stars"
@@ -86,7 +89,7 @@ export function PostGameScreen({
       {completion.suggestBreak && (
         <aside
           data-testid="break-suggestion"
-          className="flex flex-col items-center gap-3 rounded-panel border border-mint bg-mint/10 p-4 text-center"
+          className="flex flex-col items-center gap-3 lg:col-start-2 rounded-panel border border-mint bg-mint/10 p-4 text-center"
         >
           <h2 className="font-heading font-semibold">{t.breakTitle}</h2>
           {completion.bonus > 0 && <p data-testid="streak-bonus">{t.bonus(completion.bonus)}</p>}
@@ -95,7 +98,10 @@ export function PostGameScreen({
           </StopLearningButton>
         </aside>
       )}
-      <section aria-labelledby="next-steps" className="flex flex-col gap-3">
+      <section
+        aria-labelledby="next-steps"
+        className="flex flex-col gap-3 lg:col-start-2 lg:row-start-2 lg:row-span-2"
+      >
         <h2 id="next-steps" className="font-heading text-lg font-semibold">
           {t.next}
         </h2>
