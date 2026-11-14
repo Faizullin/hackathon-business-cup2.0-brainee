@@ -175,3 +175,6 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-141 Game palette tokens `--game-*` / `GAME_PALETTE` + host chrome (game folders out of scope)
 - [x] T-142 Parent patterns: Today/Week cards, needs-attention actions, earned breakdown
 - [ ] T-139 Docs, full serial e2e, re-record reports after T-135–T-138
+
+- [x] T-143 Audit the 30-game archive against implemented imports and propose faster unscored delivery → [external-games.md](../product/external-games.md#30-game-audit-and-faster-delivery-proposal-2026-11-15)
+- [ ] T-144 Extend the existing Explore container and family import helpers, then batch remaining games without analytics; scope and acceptance → [external-games.md](../product/external-games.md#proposed-next-implementation-not-yet-implemented)
