@@ -37,7 +37,9 @@
     "BRAINEE_LAB",
     "DATABASE_URL",
     "DATABASE_AUTH_TOKEN",
-    "BRAINEE_DEFAULT_LOCALE",
+    "BRAINEE_DEFAULT_LOCALE"
+  ],
+  "globalEnv": [
     "BRAINEE_NEXT_DIR"
   ]
 }
