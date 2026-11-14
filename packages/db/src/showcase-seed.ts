@@ -191,6 +191,19 @@ export const demoShowcase: Showcase = {
   ],
   science: [
     {
+      // Interactive film: apps/web/public/media/films/sky-blue.{mp3,json} (docs/dev/films.md).
+      id: "sky-blue",
+      title: "Why Is the Sky Blue?",
+      minutes: 13,
+      icon: "sun",
+      colors: ["#1F3FA8", "#3C68EE"],
+      question: "Why is the sky blue?",
+      options: ["It mirrors the sea", "Air bounces blue light", "Someone painted it"],
+      answer: 1,
+      position: 0,
+      solved: false,
+    },
+    {
       id: "ocean",
       title: "Тайны океана",
       minutes: 24,

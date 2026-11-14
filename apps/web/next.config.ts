@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     "@brainee/brainy",
     "@brainee/core",
     "@brainee/db",
+    "@brainee/films",
     "@brainee/games",
     "@brainee/ui",
   ],

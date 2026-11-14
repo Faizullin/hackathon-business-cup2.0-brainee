@@ -13,6 +13,7 @@ import {
   Play,
   Rocket,
   Route,
+  Sun,
   Worm,
 } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
@@ -31,7 +32,7 @@ import { ru } from "@/i18n/ru";
 import { useLearning } from "./LearningProvider";
 
 const FUN_ICONS = { snake: Worm, rocket: Rocket, drum: Drum, target: Crosshair, maze: Route };
-export const SCIENCE_ICONS = { wave: Fish, bee: Flower2, planet: Orbit, dino: Bone };
+export const SCIENCE_ICONS = { wave: Fish, bee: Flower2, planet: Orbit, dino: Bone, sun: Sun };
 
 // Leisure tab (T-36): fun-game shop for ★, cartoons for ★, free science videos.
 export function LeisureScreen() {

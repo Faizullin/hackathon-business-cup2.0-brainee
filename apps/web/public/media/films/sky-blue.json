@@ -1,0 +1,1959 @@
+{
+  "id": "sky-blue",
+  "title": "Why Is the Sky Blue?",
+  "lang": "en",
+  "skill": "attention",
+  "duration": 753.52,
+  "audio": "/media/films/sky-blue.mp3",
+  "scenes": [
+    {
+      "t": 0,
+      "bg": "yard",
+      "props": ["sun", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 6.96,
+      "bg": "sky",
+      "props": ["question", "sun", "cloud"],
+      "brainy": "center"
+    },
+    {
+      "t": 11.44,
+      "bg": "sky",
+      "props": ["colors", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 20.16,
+      "bg": "yard",
+      "props": ["cloud", "tree"],
+      "brainy": "left"
+    },
+    {
+      "t": 29.44,
+      "bg": "sky",
+      "props": ["cloud", "sun"],
+      "brainy": "center"
+    },
+    {
+      "t": 36.76,
+      "bg": "yard",
+      "props": ["sun", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 51.64,
+      "bg": "sky",
+      "props": ["stars", "star"],
+      "brainy": "left"
+    },
+    {
+      "t": 58.84,
+      "bg": "sea",
+      "props": ["waves", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 63.4,
+      "bg": "sea",
+      "props": ["mirror", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 70.44,
+      "bg": "desert",
+      "props": ["sun", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 79.36,
+      "bg": "mountains",
+      "props": ["cloud", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 85.36,
+      "bg": "sky",
+      "props": ["brush", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 95.76,
+      "bg": "yard",
+      "props": ["star", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 106.8,
+      "bg": "room",
+      "props": ["sunbeam", "star"],
+      "brainy": "right"
+    },
+    {
+      "t": 120.8,
+      "bg": "room",
+      "props": ["sunbeam", "sun"],
+      "brainy": "center"
+    },
+    {
+      "t": 132.84,
+      "bg": "sunbeam",
+      "props": ["sun", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 143.4,
+      "bg": "sunbeam",
+      "props": ["sun", "sunbeam"],
+      "brainy": "left"
+    },
+    {
+      "t": 152.48,
+      "bg": "sunbeam",
+      "props": ["colors", "star"],
+      "brainy": "center"
+    },
+    {
+      "t": 165.64,
+      "bg": "sky",
+      "props": ["rainbow", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 175.04,
+      "bg": "sky",
+      "props": ["rainbow", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 186.96,
+      "bg": "room",
+      "props": ["crayons", "sunbeam"],
+      "brainy": "left"
+    },
+    {
+      "t": 195.92,
+      "bg": "sunbeam",
+      "props": ["colors", "crayons"],
+      "brainy": "left"
+    },
+    {
+      "t": 208.88,
+      "bg": "sunbeam",
+      "props": ["colors", "star"],
+      "brainy": "center"
+    },
+    {
+      "t": 219.04,
+      "bg": "sunbeam",
+      "props": ["star", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 228.12,
+      "bg": "space",
+      "props": ["sun", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 235.12,
+      "bg": "space",
+      "props": ["earth", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 243.4,
+      "bg": "space",
+      "props": ["earth", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 252.04,
+      "bg": "sky",
+      "props": ["air", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 260.4,
+      "bg": "yard",
+      "props": ["wind", "tree"],
+      "brainy": "left"
+    },
+    {
+      "t": 270.76,
+      "bg": "yard",
+      "props": ["hand", "wind"],
+      "brainy": "left"
+    },
+    {
+      "t": 275.2,
+      "bg": "yard",
+      "props": ["question", "hand"],
+      "brainy": "center"
+    },
+    {
+      "t": 281.19,
+      "bg": "yard",
+      "props": ["wind", "hand"],
+      "brainy": "left"
+    },
+    {
+      "t": 286.11,
+      "bg": "yard",
+      "props": ["tree", "wind"],
+      "brainy": "left"
+    },
+    {
+      "t": 298.39,
+      "bg": "sky",
+      "props": ["wind", "sun"],
+      "brainy": "right"
+    },
+    {
+      "t": 304.31,
+      "bg": "sky",
+      "props": ["air", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 313.67,
+      "bg": "sea",
+      "props": ["air", "waves"],
+      "brainy": "left"
+    },
+    {
+      "t": 321.59,
+      "bg": "room",
+      "props": ["bubbles", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 332.19,
+      "bg": "sunbeam",
+      "props": ["air", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 340.23,
+      "bg": "sky",
+      "props": ["question", "bubbles"],
+      "brainy": "center"
+    },
+    {
+      "t": 344.19,
+      "bg": "sky",
+      "props": ["bounce", "sun"],
+      "brainy": "right"
+    },
+    {
+      "t": 354.47,
+      "bg": "sky",
+      "props": ["bounce", "star"],
+      "brainy": "left"
+    },
+    {
+      "t": 362.71,
+      "bg": "sky",
+      "props": ["air", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 372.63,
+      "bg": "sky",
+      "props": ["bounce", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 381.35,
+      "bg": "room",
+      "props": ["bounce", "star"],
+      "brainy": "left"
+    },
+    {
+      "t": 393.31,
+      "bg": "room",
+      "props": ["marbles", "bounce"],
+      "brainy": "left"
+    },
+    {
+      "t": 404.95,
+      "bg": "sky",
+      "props": ["bounce", "star"],
+      "brainy": "right"
+    },
+    {
+      "t": 413.79,
+      "bg": "sky",
+      "props": ["eye", "bounce"],
+      "brainy": "left"
+    },
+    {
+      "t": 422.43,
+      "bg": "sky",
+      "props": ["question", "eye"],
+      "brainy": "center"
+    },
+    {
+      "t": 428.91,
+      "bg": "sky",
+      "props": ["sun", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 435.99,
+      "bg": "space",
+      "props": ["sun", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 447.63,
+      "bg": "space",
+      "props": ["earth", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 453.59,
+      "bg": "sky",
+      "props": ["bounce", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 461.35,
+      "bg": "sunset",
+      "props": ["cloud", "tree"],
+      "brainy": "left"
+    },
+    {
+      "t": 471.43,
+      "bg": "sunset",
+      "props": ["colors", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 482.83,
+      "bg": "sunset",
+      "props": ["sunbeam", "tree"],
+      "brainy": "left"
+    },
+    {
+      "t": 493.55,
+      "bg": "sunset",
+      "props": ["bounce", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 505.15,
+      "bg": "sunset",
+      "props": ["eye", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 519.19,
+      "bg": "yard",
+      "props": ["basket", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 529.67,
+      "bg": "yard",
+      "props": ["marbles", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 539.51,
+      "bg": "sunset",
+      "props": ["bench", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 549.95,
+      "bg": "sunset",
+      "props": ["bench", "bounce"],
+      "brainy": "left"
+    },
+    {
+      "t": 562.83,
+      "bg": "sky",
+      "props": ["sun", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 567.99,
+      "bg": "sunset",
+      "props": ["star", "cloud"],
+      "brainy": "center"
+    },
+    {
+      "t": 575.91,
+      "bg": "sunset",
+      "props": ["sunbeam", "star"],
+      "brainy": "left"
+    },
+    {
+      "t": 583.99,
+      "bg": "kitchen",
+      "props": ["glass", "milk", "flashlight"],
+      "brainy": "left"
+    },
+    {
+      "t": 597.75,
+      "bg": "kitchen",
+      "props": ["glass", "milk"],
+      "brainy": "left"
+    },
+    {
+      "t": 612.19,
+      "bg": "kitchen",
+      "props": ["flashlight", "glass"],
+      "brainy": "left"
+    },
+    {
+      "t": 621.31,
+      "bg": "kitchen",
+      "props": ["question", "glass", "milk"],
+      "brainy": "center"
+    },
+    {
+      "t": 625.59,
+      "bg": "kitchen",
+      "props": ["glass", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 635.43,
+      "bg": "kitchen",
+      "props": ["flashlight", "glass"],
+      "brainy": "right"
+    },
+    {
+      "t": 647.23,
+      "bg": "sunset",
+      "props": ["glass", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 653.59,
+      "bg": "kitchen",
+      "props": ["milk", "glass"],
+      "brainy": "left"
+    },
+    {
+      "t": 662.03,
+      "bg": "yard",
+      "props": ["sun", "sunbeam"],
+      "brainy": "left"
+    },
+    {
+      "t": 674.03,
+      "bg": "yard",
+      "props": ["question", "crayons"],
+      "brainy": "center"
+    },
+    {
+      "t": 679.39,
+      "bg": "yard",
+      "props": ["crayons", "colors"],
+      "brainy": "left"
+    },
+    {
+      "t": 686.83,
+      "bg": "sky",
+      "props": ["question", "earth"],
+      "brainy": "center"
+    },
+    {
+      "t": 692.01,
+      "bg": "sky",
+      "props": ["bounce", "star"],
+      "brainy": "left"
+    },
+    {
+      "t": 700.41,
+      "bg": "sunset",
+      "props": ["question", "tree"],
+      "brainy": "center"
+    },
+    {
+      "t": 705.85,
+      "bg": "sunset",
+      "props": ["sunbeam", "bench"],
+      "brainy": "left"
+    },
+    {
+      "t": 715.97,
+      "bg": "yard",
+      "props": ["star", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 725.37,
+      "bg": "sky",
+      "props": ["bounce", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 738.45,
+      "bg": "sky",
+      "props": ["colors", "sun"],
+      "brainy": "right"
+    },
+    {
+      "t": 746.73,
+      "bg": "yard",
+      "props": ["star", "sun"],
+      "brainy": "center"
+    }
+  ],
+  "questions": [
+    {
+      "t": 10.7,
+      "q": "What color is the sky on a sunny day?",
+      "options": ["Pink", "Green", "Blue"],
+      "answer": 2,
+      "hint": "Almost! Look up on a sunny day.",
+      "praise": "Yes! On a sunny day the sky is blue.",
+      "replayFrom": 6.96
+    },
+    {
+      "t": 280.67,
+      "q": "What did you feel on your hand?",
+      "options": ["Air", "Water", "Sand"],
+      "answer": 0,
+      "hint": "Almost! It came out when you blew.",
+      "praise": "Yes! You felt the air you blew out.",
+      "replayFrom": 270.76
+    },
+    {
+      "t": 343.83,
+      "q": "What is air made of?",
+      "options": ["Big rocks", "Tiny bits", "Soft feathers"],
+      "answer": 1,
+      "hint": "Almost! The bits are too small to see.",
+      "praise": "Right! Air is made of tiny, tiny bits.",
+      "replayFrom": 301.79
+    },
+    {
+      "t": 427.42,
+      "q": "So what color does the sky look?",
+      "options": ["Black", "Blue", "Orange"],
+      "answer": 1,
+      "hint": "Almost! Which light bounces into your eyes?",
+      "praise": "Yes! Bouncing blue light fills the sky.",
+      "replayFrom": 413.79
+    },
+    {
+      "t": 624.69,
+      "q": "What color does the milky water look?",
+      "options": ["A little green", "A little red", "A little blue"],
+      "answer": 2,
+      "hint": "Almost! The milk bits act like air.",
+      "praise": "Yes! The milk bounces blue light, like air.",
+      "replayFrom": 583.99
+    },
+    {
+      "t": 678.37,
+      "q": "Is sunlight one color or many colors?",
+      "options": ["Lots of colors", "Just one color", "No color at all"],
+      "answer": 0,
+      "hint": "Almost! Think of the box of crayons.",
+      "praise": "Yes! Sunlight has all the colors inside.",
+      "replayFrom": 152.48
+    },
+    {
+      "t": 691.07,
+      "q": "Which color does air bounce the most?",
+      "options": ["Red", "Yellow", "Blue"],
+      "answer": 2,
+      "hint": "Almost! Remember: boing, boing, boing!",
+      "praise": "Right! Blue light bounces all over the sky.",
+      "replayFrom": 372.63
+    },
+    {
+      "t": 705.07,
+      "q": "Why is the sunset sky orange and red?",
+      "options": ["Light takes a long trip", "Someone paints it red", "The sea turns orange"],
+      "answer": 0,
+      "hint": "Almost! Think of the long, bumpy walk.",
+      "praise": "Yes! On a long trip the blue bounces away.",
+      "replayFrom": 482.83
+    }
+  ],
+  "captions": [
+    {
+      "t": 0.14,
+      "end": 1.6,
+      "text": "Hi there, hi there!"
+    },
+    {
+      "t": 1.6,
+      "end": 3.86,
+      "text": "I'm Brainy, your brain buddy."
+    },
+    {
+      "t": 3.86,
+      "end": 6.96,
+      "text": "Today I have a big riddle for you."
+    },
+    {
+      "t": 6.96,
+      "end": 9.52,
+      "text": "Look up at the sky on a sunny day."
+    },
+    {
+      "t": 9.52,
+      "end": 10.4,
+      "text": "What color is it?"
+    },
+    {
+      "t": 11.44,
+      "end": 13.52,
+      "text": "Yes, blue!"
+    },
+    {
+      "t": 13.52,
+      "end": 15.96,
+      "text": "But why is the sky blue?"
+    },
+    {
+      "t": 15.96,
+      "end": 17.2,
+      "text": "Why not pink?"
+    },
+    {
+      "t": 17.2,
+      "end": 18.48,
+      "text": "Why not green?"
+    },
+    {
+      "t": 18.48,
+      "end": 20.16,
+      "text": "Why not polka dots?"
+    },
+    {
+      "t": 20.16,
+      "end": 22.08,
+      "text": "Let's find out together."
+    },
+    {
+      "t": 22.08,
+      "end": 25.84,
+      "text": "Picture this: you are in the yard with your mom."
+    },
+    {
+      "t": 25.84,
+      "end": 29.44,
+      "text": "You lie down on the soft green grass."
+    },
+    {
+      "t": 29.44,
+      "end": 32.12,
+      "text": "You look up, up, up."
+    },
+    {
+      "t": 32.12,
+      "end": 36.76,
+      "text": "The sky is so big, and it's so blue."
+    },
+    {
+      "t": 36.76,
+      "end": 41.32,
+      "text": "So you ask, “Mom, why is the sky blue?”"
+    },
+    {
+      "t": 41.32,
+      "end": 45.24,
+      "text": "And Mom says, “Hmm, that's a good question.”"
+    },
+    {
+      "t": 45.24,
+      "end": 47.52,
+      "text": "Maybe you asked a grown-up too."
+    },
+    {
+      "t": 47.52,
+      "end": 51.64,
+      "text": "Maybe they scratch their head. Hmm, hmm."
+    },
+    {
+      "t": 51.64,
+      "end": 55.4,
+      "text": "I asked that same question a long time ago."
+    },
+    {
+      "t": 55.4,
+      "end": 56.48,
+      "text": "And guess what?"
+    },
+    {
+      "t": 56.48,
+      "end": 58.84,
+      "text": "I had some funny ideas."
+    },
+    {
+      "t": 58.84,
+      "end": 61.5,
+      "text": "My first idea was about the sea."
+    },
+    {
+      "t": 61.5,
+      "end": 63.4,
+      "text": "The sea is blue, right?"
+    },
+    {
+      "t": 63.4,
+      "end": 66.8,
+      "text": "So I thought the sky was like a giant mirror."
+    },
+    {
+      "t": 66.8,
+      "end": 70.44,
+      "text": "I thought the sky showed us the blue sea."
+    },
+    {
+      "t": 70.44,
+      "end": 73.04,
+      "text": "Ah, but that's not right."
+    },
+    {
+      "t": 73.04,
+      "end": 76.4,
+      "text": "The sky is blue even far away from the sea."
+    },
+    {
+      "t": 76.4,
+      "end": 79.36,
+      "text": "It's blue over the hot, sandy desert."
+    },
+    {
+      "t": 79.36,
+      "end": 82.52,
+      "text": "It's blue over the tall, snowy mountains."
+    },
+    {
+      "t": 82.52,
+      "end": 85.36,
+      "text": "So the sea is not the answer."
+    },
+    {
+      "t": 85.36,
+      "end": 88.24,
+      "text": "My second idea was even sillier."
+    },
+    {
+      "t": 88.24,
+      "end": 91.8,
+      "text": "I thought someone painted the sky with a giant brush."
+    },
+    {
+      "t": 91.8,
+      "end": 95.76,
+      "text": "No, nobody paints the sky."
+    },
+    {
+      "t": 95.76,
+      "end": 99.36,
+      "text": "I really used to think these things, and that's okay."
+    },
+    {
+      "t": 99.36,
+      "end": 101.92,
+      "text": "Being wrong is how we start learning."
+    },
+    {
+      "t": 101.92,
+      "end": 104.24,
+      "text": "So let's find the real answer,"
+    },
+    {
+      "t": 104.24,
+      "end": 106.8,
+      "text": "and we'll find it on an adventure."
+    },
+    {
+      "t": 106.8,
+      "end": 108.92,
+      "text": "Here is my secret plan."
+    },
+    {
+      "t": 108.92,
+      "end": 111.84,
+      "text": "We are going to ride a sunbeam."
+    },
+    {
+      "t": 111.84,
+      "end": 115.24,
+      "text": "A sunbeam is a long, thin line of sunlight."
+    },
+    {
+      "t": 115.24,
+      "end": 117.6,
+      "text": "You've seen one coming through a window, right?"
+    },
+    {
+      "t": 117.6,
+      "end": 120.8,
+      "text": "It looks like a bright golden stripe on the floor."
+    },
+    {
+      "t": 120.8,
+      "end": 124.64,
+      "text": "Today, we're going to ride one, like a slide."
+    },
+    {
+      "t": 124.64,
+      "end": 127.28,
+      "text": "Close your eyes, hold on tight."
+    },
+    {
+      "t": 127.28,
+      "end": 128.84,
+      "text": "Let's count together."
+    },
+    {
+      "t": 128.84,
+      "end": 132.84,
+      "text": "Three, two, one, go."
+    },
+    {
+      "t": 132.84,
+      "end": 136.92,
+      "text": "Wee, we're flying inside the sunbeam."
+    },
+    {
+      "t": 136.92,
+      "end": 140.04,
+      "text": "We start way up high at the sun."
+    },
+    {
+      "t": 140.04,
+      "end": 143.4,
+      "text": "It is so bright and so warm here."
+    },
+    {
+      "t": 143.4,
+      "end": 145.8,
+      "text": "Look at all the light around us."
+    },
+    {
+      "t": 145.8,
+      "end": 148.12,
+      "text": "What color is sunlight?"
+    },
+    {
+      "t": 148.12,
+      "end": 149.84,
+      "text": "It looks white, doesn't it?"
+    },
+    {
+      "t": 149.84,
+      "end": 152.48,
+      "text": "Or a little bit yellow."
+    },
+    {
+      "t": 152.48,
+      "end": 155.04,
+      "text": "But here is a big surprise."
+    },
+    {
+      "t": 155.04,
+      "end": 157.68,
+      "text": "Sunlight is not just one color."
+    },
+    {
+      "t": 157.68,
+      "end": 160.76,
+      "text": "It is lots of colors all mixed together."
+    },
+    {
+      "t": 160.76,
+      "end": 165.64,
+      "text": "Red, orange, yellow, green, blue, and purple."
+    },
+    {
+      "t": 165.64,
+      "end": 167.84,
+      "text": "Have you ever seen a rainbow?"
+    },
+    {
+      "t": 167.84,
+      "end": 170.92,
+      "text": "First it rains, then the sun comes out."
+    },
+    {
+      "t": 170.92,
+      "end": 175.04,
+      "text": "And there it is, colorful stripes across the sky."
+    },
+    {
+      "t": 175.04,
+      "end": 177.68,
+      "text": "A rainbow is sunlight split apart."
+    },
+    {
+      "t": 177.68,
+      "end": 180.84,
+      "text": "It shows us all the colors hiding inside."
+    },
+    {
+      "t": 180.84,
+      "end": 183.56,
+      "text": "You can see a little rainbow at home, too."
+    },
+    {
+      "t": 183.56,
+      "end": 186.96,
+      "text": "Look at the spray from a garden hose on a sunny day."
+    },
+    {
+      "t": 186.96,
+      "end": 188.92,
+      "text": "Think of a box of crayons."
+    },
+    {
+      "t": 188.92,
+      "end": 191.96,
+      "text": "When the box is closed, you can't see the colors."
+    },
+    {
+      "t": 191.96,
+      "end": 195.92,
+      "text": "But open it, and there they are, every color."
+    },
+    {
+      "t": 195.92,
+      "end": 199.64,
+      "text": "Right now, all those colors are flying with us."
+    },
+    {
+      "t": 199.64,
+      "end": 201.6,
+      "text": "We just can't see them apart."
+    },
+    {
+      "t": 201.6,
+      "end": 203.0,
+      "text": "Not yet."
+    },
+    {
+      "t": 203.04,
+      "end": 205.52,
+      "text": "Sunlight is like that crayon box."
+    },
+    {
+      "t": 205.52,
+      "end": 208.88,
+      "text": "All the colors are packed inside, together."
+    },
+    {
+      "t": 208.88,
+      "end": 210.64,
+      "text": "Let's say it together."
+    },
+    {
+      "t": 210.64,
+      "end": 213.76,
+      "text": "Sunlight has all the colors."
+    },
+    {
+      "t": 213.76,
+      "end": 216.32,
+      "text": "One more time, a little louder."
+    },
+    {
+      "t": 216.32,
+      "end": 219.04,
+      "text": "Sunlight has all the colors."
+    },
+    {
+      "t": 219.04,
+      "end": 220.6,
+      "text": "Great job."
+    },
+    {
+      "t": 220.6,
+      "end": 223.52,
+      "text": "So here is our first big idea."
+    },
+    {
+      "t": 223.52,
+      "end": 228.12,
+      "text": "Sunlight looks white, but it has all the colors inside."
+    },
+    {
+      "t": 228.12,
+      "end": 230.36,
+      "text": "Our sunbeam keeps flying."
+    },
+    {
+      "t": 230.36,
+      "end": 231.8,
+      "text": "Zoom!"
+    },
+    {
+      "t": 231.8,
+      "end": 235.12,
+      "text": "We leave the sun far, far behind."
+    },
+    {
+      "t": 235.12,
+      "end": 237.36,
+      "text": "Now we're flying toward the Earth."
+    },
+    {
+      "t": 237.36,
+      "end": 238.8,
+      "text": "That's our home."
+    },
+    {
+      "t": 238.8,
+      "end": 240.12,
+      "text": "Do you see it?"
+    },
+    {
+      "t": 240.12,
+      "end": 243.4,
+      "text": "It looks like a big blue and white ball."
+    },
+    {
+      "t": 243.4,
+      "end": 246.84,
+      "text": "Wait, what's that all around the Earth?"
+    },
+    {
+      "t": 246.84,
+      "end": 248.36,
+      "text": "It's air!"
+    },
+    {
+      "t": 248.36,
+      "end": 252.04,
+      "text": "Air wraps around our Earth like a soft blanket."
+    },
+    {
+      "t": 252.04,
+      "end": 255.88,
+      "text": "You can't see air, but it's always there."
+    },
+    {
+      "t": 255.88,
+      "end": 258.84,
+      "text": "So how do we know air is there?"
+    },
+    {
+      "t": 258.84,
+      "end": 260.4,
+      "text": "Let's try something."
+    },
+    {
+      "t": 260.4,
+      "end": 264.52,
+      "text": "First, take a big breath in through your nose."
+    },
+    {
+      "t": 264.52,
+      "end": 266.56,
+      "text": "And let it out."
+    },
+    {
+      "t": 266.56,
+      "end": 268.48,
+      "text": "Ah."
+    },
+    {
+      "t": 268.48,
+      "end": 270.76,
+      "text": "You just breathed in air."
+    },
+    {
+      "t": 270.76,
+      "end": 272.92,
+      "text": "Now let's try one more thing."
+    },
+    {
+      "t": 272.92,
+      "end": 275.2,
+      "text": "Put your hand in front of your mouth."
+    },
+    {
+      "t": 275.2,
+      "end": 278.59,
+      "text": "Now blow."
+    },
+    {
+      "t": 278.59,
+      "end": 280.37,
+      "text": "Did you feel something on your hand?"
+    },
+    {
+      "t": 281.19,
+      "end": 282.27,
+      "text": "You're right."
+    },
+    {
+      "t": 282.27,
+      "end": 283.79,
+      "text": "That's air."
+    },
+    {
+      "t": 283.79,
+      "end": 286.11,
+      "text": "Air can even make sounds."
+    },
+    {
+      "t": 286.11,
+      "end": 290.03,
+      "text": "When the wind blows, it goes whoosh through the trees."
+    },
+    {
+      "t": 290.03,
+      "end": 296.67,
+      "text": "Can you make a wind sound with me?"
+    },
+    {
+      "t": 296.67,
+      "end": 298.39,
+      "text": "What a great wind!"
+    },
+    {
+      "t": 298.39,
+      "end": 301.79,
+      "text": "That's air moving all around us."
+    },
+    {
+      "t": 301.79,
+      "end": 304.31,
+      "text": "Now here's a secret about air."
+    },
+    {
+      "t": 304.31,
+      "end": 307.75,
+      "text": "Air is made of tiny, tiny bits."
+    },
+    {
+      "t": 307.75,
+      "end": 311.19,
+      "text": "They are so small that nobody can see them."
+    },
+    {
+      "t": 311.19,
+      "end": 313.67,
+      "text": "Smaller than a speck of dust."
+    },
+    {
+      "t": 313.67,
+      "end": 316.27,
+      "text": "Smaller than the tip of one hair."
+    },
+    {
+      "t": 316.27,
+      "end": 318.63,
+      "text": "And there are so many of them."
+    },
+    {
+      "t": 318.63,
+      "end": 321.59,
+      "text": "More than all the sand on a beach."
+    },
+    {
+      "t": 321.59,
+      "end": 323.31,
+      "text": "Think about a bubble bath."
+    },
+    {
+      "t": 323.31,
+      "end": 326.35,
+      "text": "The bathtub is full of little bubbles."
+    },
+    {
+      "t": 326.35,
+      "end": 328.11,
+      "text": "Air is a bit like that."
+    },
+    {
+      "t": 328.11,
+      "end": 330.43,
+      "text": "It's full of teeny bits."
+    },
+    {
+      "t": 330.43,
+      "end": 332.19,
+      "text": "We just can't see them."
+    },
+    {
+      "t": 332.19,
+      "end": 334.99,
+      "text": "Our sunbeam is getting close to the air now."
+    },
+    {
+      "t": 334.99,
+      "end": 336.03,
+      "text": "Here we go."
+    },
+    {
+      "t": 336.03,
+      "end": 337.43,
+      "text": "Hold on."
+    },
+    {
+      "t": 337.43,
+      "end": 340.23,
+      "text": "So here is our second big idea."
+    },
+    {
+      "t": 340.23,
+      "end": 342.31,
+      "text": "Air is made of tiny bits."
+    },
+    {
+      "t": 342.31,
+      "end": 343.53,
+      "text": "Too small to see."
+    },
+    {
+      "t": 344.19,
+      "end": 345.63,
+      "text": "Whoa."
+    },
+    {
+      "t": 345.63,
+      "end": 347.03,
+      "text": "Did you feel that?"
+    },
+    {
+      "t": 347.03,
+      "end": 350.67,
+      "text": "Our sunbeam just bumped into a tiny bit of air."
+    },
+    {
+      "t": 350.67,
+      "end": 352.19,
+      "text": "And look what happened."
+    },
+    {
+      "t": 352.19,
+      "end": 354.47,
+      "text": "The blue light bounced away."
+    },
+    {
+      "t": 354.47,
+      "end": 355.63,
+      "text": "Boing."
+    },
+    {
+      "t": 355.63,
+      "end": 358.07,
+      "text": "Then it bumped another tiny bit."
+    },
+    {
+      "t": 358.07,
+      "end": 359.07,
+      "text": "Boing."
+    },
+    {
+      "t": 359.07,
+      "end": 360.43,
+      "text": "And another one."
+    },
+    {
+      "t": 360.43,
+      "end": 362.71,
+      "text": "Boing, boing, boing."
+    },
+    {
+      "t": 362.71,
+      "end": 366.27,
+      "text": "But what about the red light and the yellow light?"
+    },
+    {
+      "t": 366.27,
+      "end": 368.59,
+      "text": "They bump into the air bits a little."
+    },
+    {
+      "t": 368.59,
+      "end": 371.07,
+      "text": "But mostly they keep going straight."
+    },
+    {
+      "t": 371.07,
+      "end": 372.63,
+      "text": "Zoom."
+    },
+    {
+      "t": 372.63,
+      "end": 374.43,
+      "text": "Blue light is different."
+    },
+    {
+      "t": 374.43,
+      "end": 378.15,
+      "text": "Blue bounces much, much more than red or yellow."
+    },
+    {
+      "t": 378.15,
+      "end": 381.35,
+      "text": "It bounces all over the whole sky."
+    },
+    {
+      "t": 381.35,
+      "end": 383.75,
+      "text": "Here is our science word for today."
+    },
+    {
+      "t": 383.75,
+      "end": 385.91,
+      "text": "It's called scattering."
+    },
+    {
+      "t": 385.91,
+      "end": 389.27,
+      "text": "Scat-ter-ing."
+    },
+    {
+      "t": 389.27,
+      "end": 393.31,
+      "text": "Scattering means light bounces around in every direction."
+    },
+    {
+      "t": 393.31,
+      "end": 396.59,
+      "text": "Imagine you drop a bag of marbles on the floor."
+    },
+    {
+      "t": 396.59,
+      "end": 398.99,
+      "text": "The marbles roll everywhere."
+    },
+    {
+      "t": 398.99,
+      "end": 402.15,
+      "text": "This way, that way, all around."
+    },
+    {
+      "t": 402.15,
+      "end": 404.95,
+      "text": "That's what blue light does in the sky."
+    },
+    {
+      "t": 404.95,
+      "end": 407.39,
+      "text": "Can you make the bouncing sound with me?"
+    },
+    {
+      "t": 407.39,
+      "end": 410.07,
+      "text": "Boing, boing, boing."
+    },
+    {
+      "t": 410.79,
+      "end": 413.79,
+      "text": "You sound just like bouncing blue light."
+    },
+    {
+      "t": 413.79,
+      "end": 415.71,
+      "text": "Now think about this."
+    },
+    {
+      "t": 415.71,
+      "end": 419.03,
+      "text": "Blue light is bouncing all over the sky."
+    },
+    {
+      "t": 419.03,
+      "end": 422.43,
+      "text": "So wherever you look up, blue light is there."
+    },
+    {
+      "t": 422.43,
+      "end": 424.95,
+      "text": "It bounces right into your eyes."
+    },
+    {
+      "t": 424.95,
+      "end": 427.12,
+      "text": "So what color does the sky look?"
+    },
+    {
+      "t": 428.91,
+      "end": 429.99,
+      "text": "You're right."
+    },
+    {
+      "t": 429.99,
+      "end": 431.03,
+      "text": "Blue."
+    },
+    {
+      "t": 431.03,
+      "end": 433.19,
+      "text": "Here's one more secret."
+    },
+    {
+      "t": 433.19,
+      "end": 435.99,
+      "text": "What if there were no air at all?"
+    },
+    {
+      "t": 435.99,
+      "end": 439.63,
+      "text": "Way up in space, there is almost no air."
+    },
+    {
+      "t": 439.67,
+      "end": 442.39,
+      "text": "So nothing bounces the blue light around."
+    },
+    {
+      "t": 442.39,
+      "end": 445.55,
+      "text": "That's why the sky in space looks black,"
+    },
+    {
+      "t": 445.55,
+      "end": 447.63,
+      "text": "even when the sun is shining."
+    },
+    {
+      "t": 447.63,
+      "end": 449.27,
+      "text": "Let's say it together."
+    },
+    {
+      "t": 449.27,
+      "end": 452.31,
+      "text": "Air bounces the blue light."
+    },
+    {
+      "t": 452.31,
+      "end": 453.59,
+      "text": "Wonderful."
+    },
+    {
+      "t": 453.59,
+      "end": 456.35,
+      "text": "So here is our third big idea."
+    },
+    {
+      "t": 456.35,
+      "end": 461.35,
+      "text": "The sky is blue because air bounces blue light all around."
+    },
+    {
+      "t": 461.35,
+      "end": 464.39,
+      "text": "Now our sunbeam slows down a little."
+    },
+    {
+      "t": 464.39,
+      "end": 467.03,
+      "text": "Look, it's evening at home."
+    },
+    {
+      "t": 467.03,
+      "end": 469.03,
+      "text": "The sun is going down."
+    },
+    {
+      "t": 469.03,
+      "end": 471.43,
+      "text": "And the sky is changing color."
+    },
+    {
+      "t": 471.43,
+      "end": 474.83,
+      "text": "What colors do you see at sunset?"
+    },
+    {
+      "t": 474.83,
+      "end": 479.71,
+      "text": "Orange, red, pink, maybe a little yellow."
+    },
+    {
+      "t": 479.71,
+      "end": 482.83,
+      "text": "But wait, where did the blue go?"
+    },
+    {
+      "t": 482.83,
+      "end": 484.43,
+      "text": "Here's what happens."
+    },
+    {
+      "t": 484.43,
+      "end": 487.31,
+      "text": "In the evening, the sun is low."
+    },
+    {
+      "t": 487.31,
+      "end": 490.23,
+      "text": "It's way down near the edge of the sky."
+    },
+    {
+      "t": 490.23,
+      "end": 493.55,
+      "text": "So its light takes a long trip through the air,"
+    },
+    {
+      "t": 493.55,
+      "end": 496.39,
+      "text": "a much longer trip than at lunchtime."
+    },
+    {
+      "t": 496.43,
+      "end": 500.55,
+      "text": "On that long trip, the blue light keeps bouncing away."
+    },
+    {
+      "t": 500.55,
+      "end": 503.07,
+      "text": "Boing, boing, boing."
+    },
+    {
+      "t": 503.07,
+      "end": 505.15,
+      "text": "Off to the side it goes."
+    },
+    {
+      "t": 505.15,
+      "end": 508.75,
+      "text": "When the light reaches you, most of the blue is gone."
+    },
+    {
+      "t": 508.75,
+      "end": 510.83,
+      "text": "Can you guess which colors are left?"
+    },
+    {
+      "t": 511.91,
+      "end": 515.15,
+      "text": "You're right, the reds and the oranges."
+    },
+    {
+      "t": 515.15,
+      "end": 519.19,
+      "text": "That's why sunsets look so warm and orange."
+    },
+    {
+      "t": 519.19,
+      "end": 522.43,
+      "text": "Imagine you carry a basket of colored balls."
+    },
+    {
+      "t": 522.43,
+      "end": 525.79,
+      "text": "On a short walk, all your balls stay in the basket."
+    },
+    {
+      "t": 525.79,
+      "end": 529.67,
+      "text": "But on a long bumpy walk, things bounce out."
+    },
+    {
+      "t": 529.67,
+      "end": 532.95,
+      "text": "The blue balls bounce out first, boing."
+    },
+    {
+      "t": 532.95,
+      "end": 536.43,
+      "text": "At the end, only red and orange balls are left."
+    },
+    {
+      "t": 536.43,
+      "end": 539.51,
+      "text": "That's what happens to sunlight in the evening."
+    },
+    {
+      "t": 539.51,
+      "end": 542.67,
+      "text": "Once I watched a sunset with my friend."
+    },
+    {
+      "t": 542.67,
+      "end": 545.03,
+      "text": "We sat on a bench in the park."
+    },
+    {
+      "t": 545.03,
+      "end": 549.95,
+      "text": "The sky turned orange, then pink, then a deep red."
+    },
+    {
+      "t": 549.95,
+      "end": 553.47,
+      "text": "My friend asked, “Did someone turn off the blue?”"
+    },
+    {
+      "t": 554.39,
+      "end": 556.95,
+      "text": "No, nobody turned it off."
+    },
+    {
+      "t": 556.95,
+      "end": 559.83,
+      "text": "The blue light was still bouncing around."
+    },
+    {
+      "t": 559.83,
+      "end": 562.83,
+      "text": "It just bounced away before it got to us."
+    },
+    {
+      "t": 562.83,
+      "end": 565.59,
+      "text": "Far away, where it was still daytime,"
+    },
+    {
+      "t": 565.59,
+      "end": 567.99,
+      "text": "kids saw a blue sky."
+    },
+    {
+      "t": 567.99,
+      "end": 569.59,
+      "text": "Let's say it together."
+    },
+    {
+      "t": 569.59,
+      "end": 572.47,
+      "text": "Long trip, red sky."
+    },
+    {
+      "t": 572.47,
+      "end": 575.91,
+      "text": "Yes, long trip, red sky."
+    },
+    {
+      "t": 575.91,
+      "end": 578.75,
+      "text": "So here is our fourth big idea."
+    },
+    {
+      "t": 578.75,
+      "end": 581.43,
+      "text": "At sunset, blue bounces away"
+    },
+    {
+      "t": 581.43,
+      "end": 583.99,
+      "text": "and red and orange reach you."
+    },
+    {
+      "t": 583.99,
+      "end": 586.55,
+      "text": "Now it's time for a home experiment."
+    },
+    {
+      "t": 586.55,
+      "end": 589.55,
+      "text": "Remember, always do this with a grown-up."
+    },
+    {
+      "t": 589.55,
+      "end": 591.07,
+      "text": "Here is what you need."
+    },
+    {
+      "t": 591.07,
+      "end": 594.75,
+      "text": "A clear glass of water, a little bit of milk,"
+    },
+    {
+      "t": 594.75,
+      "end": 597.75,
+      "text": "a spoon and a flashlight."
+    },
+    {
+      "t": 597.75,
+      "end": 601.07,
+      "text": "Step one, fill the glass with water."
+    },
+    {
+      "t": 601.07,
+      "end": 605.15,
+      "text": "Step two, ask your grown-up to add a few drops of milk,"
+    },
+    {
+      "t": 605.15,
+      "end": 606.83,
+      "text": "just a few drops."
+    },
+    {
+      "t": 606.83,
+      "end": 609.03,
+      "text": "Then stir it with the spoon."
+    },
+    {
+      "t": 609.03,
+      "end": 612.19,
+      "text": "The water will look a tiny bit cloudy."
+    },
+    {
+      "t": 612.19,
+      "end": 615.15,
+      "text": "Step three, make the room dark."
+    },
+    {
+      "t": 615.15,
+      "end": 616.87,
+      "text": "Turn off the lights."
+    },
+    {
+      "t": 616.87,
+      "end": 619.35,
+      "text": "Step four, shine the flashlight"
+    },
+    {
+      "t": 619.35,
+      "end": 621.31,
+      "text": "into the side of the glass."
+    },
+    {
+      "t": 621.31,
+      "end": 623.67,
+      "text": "Now look at the glass from the side."
+    },
+    {
+      "t": 623.67,
+      "end": 624.39,
+      "text": "What do you see?"
+    },
+    {
+      "t": 625.59,
+      "end": 628.15,
+      "text": "The water looks a little bit blue."
+    },
+    {
+      "t": 628.15,
+      "end": 631.39,
+      "text": "The milk has tiny bits just like the air."
+    },
+    {
+      "t": 631.39,
+      "end": 633.51,
+      "text": "They bounce the blue light around,"
+    },
+    {
+      "t": 633.51,
+      "end": 635.43,
+      "text": "just like in the sky."
+    },
+    {
+      "t": 635.43,
+      "end": 638.39,
+      "text": "Now walk around to the other side of the glass."
+    },
+    {
+      "t": 638.39,
+      "end": 640.67,
+      "text": "Look at the spot where the light comes out."
+    },
+    {
+      "t": 640.67,
+      "end": 644.39,
+      "text": "Don't stare at the bright light, just peek at the glass."
+    },
+    {
+      "t": 644.39,
+      "end": 647.23,
+      "text": "The light there looks yellow or orange."
+    },
+    {
+      "t": 647.23,
+      "end": 650.63,
+      "text": "The blue bounced away inside the milky water."
+    },
+    {
+      "t": 650.63,
+      "end": 653.59,
+      "text": "That's like a little sunset in a glass."
+    },
+    {
+      "t": 653.59,
+      "end": 656.39,
+      "text": "If it doesn't work the first time, that's okay."
+    },
+    {
+      "t": 656.39,
+      "end": 659.19,
+      "text": "Add one more drop of milk and try again."
+    },
+    {
+      "t": 659.19,
+      "end": 662.03,
+      "text": "You just made the sky in your kitchen."
+    },
+    {
+      "t": 662.03,
+      "end": 664.67,
+      "text": "Our sunbeam has landed back home."
+    },
+    {
+      "t": 665.67,
+      "end": 667.83,
+      "text": "Now let's play a mini quiz."
+    },
+    {
+      "t": 667.83,
+      "end": 669.83,
+      "text": "Three questions, ready?"
+    },
+    {
+      "t": 669.83,
+      "end": 672.07,
+      "text": "Don't worry, just try your best."
+    },
+    {
+      "t": 672.07,
+      "end": 674.03,
+      "text": "Here comes question one."
+    },
+    {
+      "t": 674.03,
+      "end": 676.19,
+      "text": "Is sunlight just one color?"
+    },
+    {
+      "t": 676.19,
+      "end": 678.07,
+      "text": "Or lots of colors mixed together?"
+    },
+    {
+      "t": 679.39,
+      "end": 682.75,
+      "text": "Lots of colors, just like a box of crayons."
+    },
+    {
+      "t": 682.75,
+      "end": 686.83,
+      "text": "Good thinking, every try makes your brain stronger."
+    },
+    {
+      "t": 686.83,
+      "end": 689.87,
+      "text": "Question two: which color does the air bounce"
+    },
+    {
+      "t": 689.87,
+      "end": 690.77,
+      "text": "around the most?"
+    },
+    {
+      "t": 692.01,
+      "end": 695.77,
+      "text": "Blue, blue light bounces all over the sky."
+    },
+    {
+      "t": 695.77,
+      "end": 697.17,
+      "text": "Did you say blue?"
+    },
+    {
+      "t": 697.17,
+      "end": 700.41,
+      "text": "Great job, and if not, now you know."
+    },
+    {
+      "t": 700.41,
+      "end": 703.53,
+      "text": "Question three: why does the sky look orange"
+    },
+    {
+      "t": 703.53,
+      "end": 704.77,
+      "text": "and red at sunset?"
+    },
+    {
+      "t": 705.85,
+      "end": 708.71,
+      "text": "The light takes a long trip through the air."
+    },
+    {
+      "t": 708.71,
+      "end": 710.49,
+      "text": "The blue bounces away."
+    },
+    {
+      "t": 710.49,
+      "end": 712.81,
+      "text": "Red and orange reach your eyes."
+    },
+    {
+      "t": 712.81,
+      "end": 715.97,
+      "text": "That was a tricky one, thank you for trying."
+    },
+    {
+      "t": 715.97,
+      "end": 720.17,
+      "text": "You did all three questions, I'm so proud of you."
+    },
+    {
+      "t": 720.17,
+      "end": 722.97,
+      "text": "Now here is the big idea from today."
+    },
+    {
+      "t": 722.97,
+      "end": 725.37,
+      "text": "Say it to your mom or dad tonight."
+    },
+    {
+      "t": 725.37,
+      "end": 729.57,
+      "text": "The sky is blue because air bounces blue sunlight"
+    },
+    {
+      "t": 729.57,
+      "end": 731.05,
+      "text": "all around."
+    },
+    {
+      "t": 731.05,
+      "end": 732.97,
+      "text": "One more time, with me."
+    },
+    {
+      "t": 732.97,
+      "end": 737.01,
+      "text": "The sky is blue because air bounces blue sunlight"
+    },
+    {
+      "t": 737.01,
+      "end": 738.45,
+      "text": "all around."
+    },
+    {
+      "t": 738.45,
+      "end": 741.89,
+      "text": "Perfect, sunlight has all the colors."
+    },
+    {
+      "t": 741.89,
+      "end": 744.01,
+      "text": "Air bounces the blue the most."
+    },
+    {
+      "t": 744.01,
+      "end": 746.73,
+      "text": "So blue fills up the whole sky."
+    },
+    {
+      "t": 746.73,
+      "end": 750.49,
+      "text": "You got a little bit smarter today, and so did I."
+    },
+    {
+      "t": 750.49,
+      "end": 752.69,
+      "text": "See you next time, little why-asker."
+    },
+    {
+      "t": 752.69,
+      "end": 753.53,
+      "text": "Bye-bye."
+    }
+  ]
+}

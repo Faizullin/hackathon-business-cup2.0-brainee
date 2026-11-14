@@ -55,7 +55,7 @@ Playable in the prototype: Odd one out and Continue the pattern, 2 levels each, 
 A separate tab, so entertainment isn't in view right after 1–2 learning games.
 - **Game shop (★):** Змейка (Snake, spatial thinking), Ракета-раннер (Rocket runner, reaction), Ритм-барабаны (Rhythm drums, rhythm), Катапульта (Catapult, accuracy), Лабиринт-гонки (Maze race, dexterity). Two buttons each: «10 мин · 30★» and «Навсегда · 500★». A timed unlock shows minutes left. All are our own takes on popular genres; famous titles only under license (out of MVP).
 - **Cartoons and fairy tales (★):** no "watch next" row after an episode.
-- **Science videos (free):** long educational films, 20–26 min. Player below.
+- **Science videos (free):** long educational films, 20–26 min. Player below. A science video can be an **interactive film** (real podcast audio, drawn scenes, questions that pause it): [films.md](../dev/films.md).
 
 ### Science video player
 - The only control is pause/play. No seeking, scrubber or switching videos. The progress bar shows position only and isn't tappable.

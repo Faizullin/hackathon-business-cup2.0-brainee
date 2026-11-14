@@ -25,7 +25,8 @@
     "check:games": "node packages/games/scripts/check-games.mjs",
     "games:build": "node scripts/build-games.mjs",
     "test:assets": "node scripts/check-manifests.mjs --assets",
-    "check:manifests": "node scripts/check-manifests.mjs"
+    "check:manifests": "node scripts/check-manifests.mjs",
+    "check:films": "pnpm --filter @brainee/films test"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.7",

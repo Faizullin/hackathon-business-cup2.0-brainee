@@ -3,6 +3,7 @@ export * from "./accessories";
 export * from "./brainy";
 export * from "./calendar";
 export * from "./economy";
+export * from "./film";
 export * from "./game-validation";
 export * from "./learning";
 export * from "./onboarding";

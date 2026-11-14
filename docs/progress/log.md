@@ -4,6 +4,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (interactive films, T-107)
+- The task targeted a nonexistent vanilla prototype (`assets/film.js`, `tools/*.py`), so it was adapted to the monorepo (D-29, [films.md](../dev/films.md)): `core/film.ts` checks, `packages/films` art/stage, `/video/[id]` film player, `/lab/film`, `make_film.py` (local faster-whisper via uv, ffmpeg decode), `pnpm check:films`.
+- First film `sky-blue` came from the ElevenLabs mp3, which turned out to be **English**. Captions were proofread; 8 question pauses were placed from `silencedetect` silences; 83 scenes. Checks: 208 unit tests, full e2e 224/224.
+
 ## 2026-11-14 (bridge and Picture Puzzle)
 - Completed T-19/T-29/T-85 and light T-89/T-90: ported GSP bridge/Phaser/puzzle, four-placement adapter, manifest-backed DB/runtime metadata, build/asset validation and conformance. D-28 records the protocol and minimal game columns.
 - Check, 159 unit tests and asset audit pass. Full e2e initially passed 209/216; after fixes, all 44 affected reruns pass. Reviewed WebKit phone/iPad puzzle and lab screenshots. Parent/Settings changes remain separately owned; Tangram Tales and deployment were not attempted.
