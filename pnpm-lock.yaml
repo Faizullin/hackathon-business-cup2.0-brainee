@@ -91,6 +91,31 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
+  games/color-boxes:
+    dependencies:
+      '@brainee/engine-phaser':
+        specifier: workspace:*
+        version: link:../../packages/engine-phaser
+      '@brainee/game-bridge':
+        specifier: workspace:*
+        version: link:../../packages/game-bridge
+      phaser:
+        specifier: 4.2.1
+        version: 4.2.1
+    devDependencies:
+      '@brainee/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@types/node':
+        specifier: 22.19.15
+        version: 22.19.15
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: 5.1.0
+        version: 5.1.0(@types/node@22.19.15)(vite@8.3.8(@types/node@22.19.15)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
+
   games/picture-puzzle:
     dependencies:
       '@brainee/engine-phaser':
@@ -105,6 +130,56 @@ importers:
       phaser4-rex-plugins:
         specifier: 4.2.0
         version: 4.2.0(graphology-types@0.24.8)
+    devDependencies:
+      '@brainee/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@types/node':
+        specifier: 22.19.15
+        version: 22.19.15
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: 5.1.0
+        version: 5.1.0(@types/node@22.19.15)(vite@8.3.8(@types/node@22.19.15)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
+
+  games/shape-pairs:
+    dependencies:
+      '@brainee/engine-phaser':
+        specifier: workspace:*
+        version: link:../../packages/engine-phaser
+      '@brainee/game-bridge':
+        specifier: workspace:*
+        version: link:../../packages/game-bridge
+      phaser:
+        specifier: 4.2.1
+        version: 4.2.1
+    devDependencies:
+      '@brainee/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@types/node':
+        specifier: 22.19.15
+        version: 22.19.15
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: 5.1.0
+        version: 5.1.0(@types/node@22.19.15)(vite@8.3.8(@types/node@22.19.15)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
+
+  games/sticker-scene:
+    dependencies:
+      '@brainee/engine-phaser':
+        specifier: workspace:*
+        version: link:../../packages/engine-phaser
+      '@brainee/game-bridge':
+        specifier: workspace:*
+        version: link:../../packages/game-bridge
+      phaser:
+        specifier: 4.2.1
+        version: 4.2.1
     devDependencies:
       '@brainee/config':
         specifier: workspace:*
@@ -208,6 +283,9 @@ importers:
       '@brainee/game-bridge':
         specifier: workspace:*
         version: link:../game-bridge
+      canvas-confetti:
+        specifier: 1.9.4
+        version: 1.9.4
       phaser:
         specifier: 4.2.1
         version: 4.2.1
@@ -215,6 +293,9 @@ importers:
       '@brainee/config':
         specifier: workspace:*
         version: link:../config
+      '@types/canvas-confetti':
+        specifier: 1.9.0
+        version: 1.9.0
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1568,6 +1649,9 @@ packages:
   '@tybys/wasm-util@0.10.4':
     resolution: {integrity: sha512-W3c4gRigFS0T/Ma4qIYF3GDAc5AQdHb1yL5znJT1Zv1YaD9Kitx656wBjvr19qbiosmZT8lWDM5BEMynUqX65A==}
 
+  '@types/canvas-confetti@1.9.0':
+    resolution: {integrity: sha512-aBGj/dULrimR1XDZLtG9JwxX1b4HPRF6CX9Yfwh3NvstZEm1ZL7RBnel4keCPSqs1ANRu1u2Aoz9R+VmtjYuTg==}
+
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
 
@@ -1630,6 +1714,9 @@ packages:
 
   caniuse-lite@1.0.30001826:
     resolution: {integrity: sha512-wTB+9tIbLro/BCXwLuNV1meHE4L9dS6dArMDwgYfNBPMYScqClHyGunhkCSDtHhe/69Xl0sHlKgBVZ+fNsYtWA==}
+
+  canvas-confetti@1.9.4:
+    resolution: {integrity: sha512-yxQbJkAVrFXWNbTUjPqjF7G+g6pDotOUHGbkZq2NELZUMDpiJ85rIEazVb8GTaAptNW2miJAXbs1BtioA251Pw==}
 
   chai@6.3.0:
     resolution: {integrity: sha512-XWAtwJ6OHO+tj0EKCs0Y2UamnyOxseZWltU4x2U2wh8g4AigdjwvtUjvLP2tqkA/avxHEtzxNaqGq/YGNwckKg==}
@@ -3194,6 +3281,8 @@ snapshots:
       tslib: 2.9.1
     optional: true
 
+  '@types/canvas-confetti@1.9.0': {}
+
   '@types/chai@5.2.3':
     dependencies:
       '@types/deep-eql': 4.0.2
@@ -3261,6 +3350,8 @@ snapshots:
   buffer-from@1.1.2: {}
 
   caniuse-lite@1.0.30001826: {}
+
+  canvas-confetti@1.9.4: {}
 
   chai@6.3.0: {}
 

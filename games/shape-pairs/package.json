@@ -1,0 +1,21 @@
+{
+  "name": "@brainee/shape-pairs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@brainee/engine-phaser": "workspace:*",
+    "@brainee/game-bridge": "workspace:*",
+    "phaser": "4.2.1"
+  },
+  "devDependencies": {
+    "@brainee/config": "workspace:*",
+    "@types/node": "22.19.15",
+    "typescript": "5.9.3",
+    "vitest": "5.1.0"
+  }
+}

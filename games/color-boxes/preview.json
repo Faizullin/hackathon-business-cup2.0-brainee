@@ -1,0 +1,17 @@
+{
+  "id": "color-boxes",
+  "title": "Color Boxes",
+  "entry": "/games/color-boxes/index.html",
+  "minAge": 4,
+  "license": "MIT",
+  "sizeBudgetBytes": 6000000,
+  "mode": "explore",
+  "thumbnail": "/games/color-boxes/thumbnail.svg",
+  "explore": {
+    "family": "phaser",
+    "viewport": "responsive",
+    "orientation": "any",
+    "audio": true,
+    "readiness": "bridge"
+  }
+}

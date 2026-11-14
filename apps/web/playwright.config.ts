@@ -11,12 +11,12 @@ const databasePath = join(tmpdir(), `brainee-e2e-${randomUUID()}.db`);
 const FULL = process.env.E2E_FULL === "1";
 // Heavy, already-stable game checks (acceptance, stress, integration): full mode only.
 const HEAVY_GAME_SPECS =
-  /(games-integration|picture-puzzle|reflection|rhythm-copycat|secret-message-copy|magnet-explorer|neighborhood-map-walk)[\w-]*\.spec\.ts$/;
+  /(games-integration|picture-puzzle|reflection|rhythm-copycat|secret-message-copy|magnet-explorer|neighborhood-map-walk|phaser-previews)[\w-]*\.spec\.ts$/;
 // Every game-related spec, for the projects that skip games entirely.
 const GAME_SPECS =
-  /(games-integration|picture-puzzle|tangram|reflection|rhythm-copycat|secret-message-copy|magnet-explorer|neighborhood-map-walk|pattern|film)[\w-]*\.spec\.ts$/;
+  /(games-integration|picture-puzzle|tangram|reflection|rhythm-copycat|secret-message-copy|magnet-explorer|neighborhood-map-walk|phaser-previews|pattern|film)[\w-]*\.spec\.ts$/;
 const LAYOUT_SPECS =
-  /(child-shell|pwa-layout|mvp-pages|scaffold|onboarding|parent-patterns|funnel-moments|post-game)\.spec\.ts$/;
+  /(child-shell|pwa-layout|mvp-pages|scaffold|onboarding|parent-patterns|funnel-moments|post-game|game-cards)\.spec\.ts$/;
 
 const webkitIpad = { browserName: "webkit" as const, viewport: { width: 1180, height: 820 } };
 const chromiumPhone = { browserName: "chromium" as const, viewport: { width: 390, height: 844 } };

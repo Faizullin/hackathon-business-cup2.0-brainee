@@ -1,5 +1,6 @@
 "use client";
 import { createId, HostBridge } from "@brainee/game-bridge";
+import type { Preview } from "@brainee/game-catalog";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -7,7 +8,6 @@ import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { useI18n } from "@/i18n";
 
-type Preview = { id: string; title: string; entry: string; minAge: number };
 // Separate from LearningProvider: no issued session and no round/finish callbacks.
 export function ExplorePlayer({ game }: { game: Preview }) {
   const { snapshot } = useLearning();
@@ -32,10 +32,13 @@ function AvailablePreview({ game }: { game: Preview }) {
   const [status, setStatus] = useState("loading");
   const router = useRouter();
   const { locale } = useI18n();
+  const meta = game.explore;
+  const ready = useRef(false);
   useEffect(() => {
     let stopped = false;
+    ready.current = false;
     const timer = setTimeout(() => {
-      if (!stopped) {
+      if (!stopped && !ready.current) {
         bridge.close();
         setStatus("error");
       }
@@ -50,6 +53,7 @@ function AvailablePreview({ game }: { game: Preview }) {
         if (stopped) return;
         if (phase === "ready") {
           clearTimeout(timer);
+          ready.current = true;
           setStatus("ready");
         }
         if (phase === "error") {
@@ -77,6 +81,13 @@ function AvailablePreview({ game }: { game: Preview }) {
       window.removeEventListener("message", exit);
     };
   }, [game.id, locale, router]);
+  // Games without a bridge handshake are ready once their document has loaded.
+  const loaded = () => {
+    if (meta.readiness !== "load") return;
+    ready.current = true;
+    setStatus((current) => (current === "error" ? current : "ready"));
+  };
+  const contain = meta.viewport === "contain" && meta.aspectRatio;
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-2">
       <header className="flex items-center justify-between gap-3 px-4">
@@ -84,23 +95,49 @@ function AvailablePreview({ game }: { game: Preview }) {
           ← Exit
         </Link>
         <h1 className="text-lg">{game.title}</h1>
-        <span className="text-sm">No stars</span>
+        <span className="text-sm">{meta.audio ? "No stars · sound" : "No stars"}</span>
       </header>
+      {meta.orientation !== "any" && (
+        <p
+          data-testid="orientation-hint"
+          className={`px-4 text-muted-foreground text-sm ${meta.orientation === "landscape" ? "hidden portrait:block" : "hidden landscape:block"}`}
+        >
+          {meta.orientation === "landscape"
+            ? "Turn your device sideways for more room."
+            : "Hold your device upright for more room."}
+        </p>
+      )}
       {status === "loading" && <p role="status">Loading…</p>}
       {status === "error" ? (
         <p role="alert">Could not load. Return to the list and try again.</p>
       ) : (
-        <iframe
-          ref={frame}
-          src={game.entry}
-          title={game.title}
-          data-testid="explore-frame"
-          data-ready={status === "ready"}
-          sandbox="allow-scripts allow-same-origin"
-          allow="camera 'none'; microphone 'none'"
-          className="w-full flex-1 border-0"
+        <div
+          data-testid="explore-stage"
+          data-viewport={meta.viewport}
+          className="flex min-h-0 flex-1 items-center justify-center"
           style={{ minHeight: "calc(100dvh - 80px)" }}
-        />
+        >
+          <iframe
+            ref={frame}
+            src={game.entry}
+            title={game.title}
+            data-testid="explore-frame"
+            data-ready={status === "ready"}
+            onLoad={loaded}
+            sandbox="allow-scripts allow-same-origin"
+            allow="camera 'none'; microphone 'none'; autoplay 'none'"
+            className={contain ? "border-0" : "w-full self-stretch border-0"}
+            style={
+              contain
+                ? {
+                    aspectRatio: meta.aspectRatio,
+                    // Largest box of this aspect ratio that fits the stage (letterboxed).
+                    width: `min(100%, calc((100dvh - 80px) * (${meta.aspectRatio})))`,
+                  }
+                : undefined
+            }
+          />
+        </div>
       )}
     </div>
   );
