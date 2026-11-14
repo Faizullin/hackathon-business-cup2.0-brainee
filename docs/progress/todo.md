@@ -12,7 +12,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - Parent proof: T-40 (PIN barrier) and T-41 (Brainy, balance and latest completed game).
 - Verification/demo: T-70 (this slice's Playwright checks) and T-71 (two-device walkthrough).
 
-**Done when:** one finish updates balance/stats once, retrying it pays nothing twice, both devices converge through polling, and the third game offers a break with exactly one bonus. Refresh restores server state. The client preview and saved-session APIs exist; UI polling and parent proof remain. Slice-only work does not complete broader tasks such as all T-41 analytics or all T-50 entities.
+**Done when:** one finish updates balance/stats once, retrying it pays nothing twice, both devices converge through polling, and the third game offers a break with exactly one bonus. Refresh restores server state. The saved child flow, retry recovery and polling between child devices now exist; the PIN barrier and parent proof remain. Slice-only work does not complete broader tasks such as all T-41 analytics or all T-50 entities.
 
 Other task IDs stay outside this slice. T-24/T-25 are available as pure core improvements; entry flow, tasks/gifts, leisure, advanced analytics, embedded games and motion polish wait. Deployment remains the final task (T-14).
 
@@ -52,7 +52,7 @@ Other task IDs stay outside this slice. T-24/T-25 are available as pure core imp
 - [ ] T-32 Learn tab (recommendations + grid); the game grid exists, «Брейни советует» recommendations remain
 - [x] T-33 Game: Odd one out (2 levels × 4 rounds, seeded), tested at `/lab` and in the child flow
 - [x] T-34 Game: Continue the pattern (2 levels × 4 seeded rounds); both games share `kit/Shape`
-- [x] T-35 Post-game screen: before → after, stat chip, "Что дальше?", stop, third-game break +5★; [per-tab preview](../dev/ui.md#temporary-learning-preview-t-35), no DB writes
+- [x] T-35 Post-game screen: before → after, stat chip, "Что дальше?", stop, third-game break +5★; now uses [saved learning state](../dev/ui.md#saved-learning-state-t-55)
 - [ ] T-36 Leisure tab: shop (10 min / forever), cartoons, science videos
 - [ ] T-37 Science video player (pause only, resume, quiz)
 - [ ] T-38 Gifts tab + Brainy tab (accessory shop, stats, earned rewards)
@@ -74,8 +74,10 @@ Other task IDs stay outside this slice. T-24/T-25 are available as pure core imp
 - [ ] T-52 Demo session (`DEMO_MODE`, seeded family) + parent PIN barrier; Better Auth = stretch goal
   - [x] Explicit opt-in, opaque HttpOnly cookie, hashed token, expiry, same-origin mutations; parent barrier remains T-40 → [sessions.md](../dev/sessions.md)
 - [ ] T-53 Onboarding quiz → starting stats
-- [x] T-54 API: issued game start/finish/stop → core → atomic saved state and receipt; UI integration is T-55 → [sessions.md](../dev/sessions.md)
+- [x] T-54 API: issued game start/finish/stop → core → atomic saved state and receipt; child UI wired through T-55 → [sessions.md](../dev/sessions.md)
 - [ ] T-55 Live updates by short polling: `/api/state` version + TanStack Query (~3 s) in child and parent UIs → [D-15](../dev/decisions.md)
+  - [x] Cookie-authorized snapshot, child polling, issued-game UI, confirmed rewards, finish retry/reload and other-device sync → [sessions.md](../dev/sessions.md#shared-state-and-client-recovery-t-55), D-20
+  - [ ] Parent consumer after T-40/T-41; verify child → parent without reloading before closing T-55
 
 ## P6 · PWA + allowlist · [rules.md](../product/rules.md#device-lockdown)
 - [ ] T-60 Serwist PWA manifest + icons + offline shell
@@ -105,7 +107,7 @@ Other task IDs stay outside this slice. T-24/T-25 are available as pure core imp
 - [ ] T-90 Game conformance suite (Playwright, Chromium + WebKit): load, ready ≤ 10 s, one finish, zero foreign requests, size budget, no console errors; required before a game is listed
 - [ ] T-91 (Later) External game artifacts (path C): `games:import <id>@<version>` with checksum, `GameVersion` table, enable/disable/rollback
 - [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
-- [ ] T-93 Resolve WebKit's native mouse-coordinate failure on this Mac, then rerun the complete UI suite; a bare-button repro is in [setup.md](../dev/setup.md#webkit-pointer-diagnostics-t-93)
+- [x] T-93 Restore complete WebKit UI verification with normal clicks: the full suite passes at phone/iPad widths; the earlier coordinate failure no longer reproduces, with its cause unconfirmed. Keep the [diagnostic repro](../dev/setup.md#webkit-pointer-diagnostics-t-93) if it recurs.
 - Additional learning games (Sounds & letters, Repeat after Brainy, Magic garden, Expedition, Error detective)
 - Fun games beyond the first one
 - Push notification on `stage_up`

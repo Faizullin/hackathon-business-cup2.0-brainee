@@ -6,7 +6,7 @@ A web platform (PWA) for kids aged 4–10. The parent sets it up as the **only t
 - **Market:** CIS, Russian UI. Parents pay, kids use it.
 - **Context:** Business Cup 2.0 hackathon project.
 
-> **Status:** workspace, UI and local data foundation ready (T-10 – T-13). Run `pnpm install && pnpm db:reset && pnpm dev`. Game contracts and the lab are next. See [progress/status.md](docs/progress/status.md).
+> **Status:** two learning games, saved rewards/Brainy, retry recovery and child-state polling work. Parent access/view is next. Run `pnpm install`, enable `DEMO_MODE=1` in `apps/web/.env.local`, then `pnpm db:reset && pnpm dev`. See [setup](docs/dev/setup.md) and [current progress](docs/progress/status.md).
 
 ## Documentation
 

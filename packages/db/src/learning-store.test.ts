@@ -268,5 +268,5 @@ it("pays a third-game bonus once per browser session and stopping cancels pendin
     ).toBe(0);
   }
   expect((await f.db.select().from(wallets).get())?.stars).toBe(340 + 6 * 12 + 5);
-  expect((await f.db.select().from(families).get())?.version).toBe(6);
+  expect((await f.db.select().from(families).get())?.version).toBe(7);
 });

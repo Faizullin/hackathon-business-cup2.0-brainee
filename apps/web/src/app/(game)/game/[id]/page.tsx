@@ -1,4 +1,4 @@
-import { getGame } from "@brainee/games";
+import { clampLevel, getGame } from "@brainee/games";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GamePlayer } from "./GamePlayer";
@@ -18,13 +18,16 @@ export default async function GamePage({ params, searchParams }: Props) {
   const game = getGame(id);
   if (!game) notFound();
   const query = await searchParams;
-  const level = Number(query.level) || 1;
-  // A fresh seed per visit unless one is given (?seed= replays a board).
+  const level = clampLevel(Number(query.level) || 1, game.levels);
+  // The launch API chooses the seed unless the URL asks for a replay.
   const requestedSeed = Number(query.seed);
   const seed =
-    query.seed !== undefined && Number.isFinite(requestedSeed)
+    query.seed !== undefined &&
+    Number.isSafeInteger(requestedSeed) &&
+    requestedSeed >= 0 &&
+    requestedSeed <= 0xffffffff
       ? requestedSeed
-      : Math.floor(Math.random() * 1_000_000);
+      : undefined;
   return (
     <GamePlayer key={`${game.id}:${level}:${seed}`} gameId={game.id} level={level} seed={seed} />
   );

@@ -7,52 +7,168 @@ import {
   roundStars,
 } from "@brainee/core";
 import { clampLevel, GameHost, getGame } from "@brainee/games";
+import { Button } from "@brainee/ui/components/button";
 import { StarIcon } from "@brainee/ui/components/child-icons";
 import { ArrowLeft } from "@brainee/ui/components/icons";
-import Link from "next/link";
-import { useRef, useState } from "react";
-import { useDemoProgress } from "@/components/child/DemoProgressProvider";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { LearningBoundary } from "@/components/child/LearningBoundary";
+import { useLearning } from "@/components/child/LearningProvider";
+import { StopLearningButton } from "@/components/child/StopLearningButton";
 import { ru } from "@/i18n/ru";
+import {
+  canRetryFinish,
+  type IssuedGame,
+  LearningApiError,
+  pendingGameHref,
+} from "@/lib/learning-api";
 import { PostGameScreen } from "./PostGameScreen";
 
-type Props = { gameId: string; level: number; seed: number };
+type Props = { gameId: string; level: number; seed?: number };
+type Phase = "starting" | "start-error" | "playing" | "saving" | "save-error";
 
-export function GamePlayer({ gameId, level, seed }: Props) {
+export function GamePlayer(props: Props) {
+  const [attempt, setAttempt] = useState(0);
+  return (
+    <LearningBoundary game>
+      <ActiveGamePlayer key={attempt} {...props} onStartRetry={() => setAttempt((n) => n + 1)} />
+    </LearningBoundary>
+  );
+}
+
+function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onStartRetry(): void }) {
   const game = getGame(gameId);
-  const preview = useDemoProgress();
+  const { pending, start, finish, discardPending } = useLearning();
+  const [initialPending] = useState(pending);
+  const [phase, setPhase] = useState<Phase>(initialPending ? "saving" : "starting");
+  const [issued, setIssued] = useState<IssuedGame | null>(initialPending?.issued ?? null);
   const [completion, setCompletion] = useState<LearningCompletion | null>(null);
   const [events, setEvents] = useState<RoundEvent[]>([]);
-  const settled = useRef(false);
-  if (!game) return null;
-  const safeLevel = clampLevel(level, game.levels);
+  const [error, setError] = useState<unknown>(null);
+  const settled = useRef(!!initialPending);
+  const result = useRef<GameResult | null>(initialPending?.result ?? null);
+  const boot = useRef<Promise<IssuedGame> | null>(null);
+  const router = useRouter();
+  const safeLevel = clampLevel(level, game?.levels ?? 1);
   const t = ru.child.game;
-  function finish(result: GameResult) {
-    if (settled.current) return;
-    settled.current = true;
-    setCompletion(preview.finish(result));
-  }
-  if (completion)
-    return <PostGameScreen game={game} level={safeLevel} seed={seed} completion={completion} />;
-  if (!preview.ready)
+  const sync = ru.child.sync;
+  const matches =
+    !initialPending ||
+    (initialPending.issued.gameId === gameId &&
+      initialPending.issued.level === safeLevel &&
+      (seed === undefined || initialPending.issued.seed === seed));
+
+  const save = useCallback(
+    async (launch: IssuedGame, value: GameResult) => {
+      setPhase("saving");
+      setError(null);
+      try {
+        setCompletion(await finish(launch, value));
+      } catch (error) {
+        setError(error);
+        setPhase("save-error");
+      }
+    },
+    [finish],
+  );
+
+  useEffect(() => {
+    if (!matches && initialPending) {
+      router.replace(pendingGameHref(initialPending.issued));
+      return;
+    }
+    let mounted = true;
+    boot.current ??= initialPending
+      ? Promise.resolve(initialPending.issued)
+      : start(gameId, safeLevel, seed);
+    void boot.current
+      .then((launch) => {
+        if (!mounted) return;
+        setIssued(launch);
+        if (initialPending) void save(launch, initialPending.result);
+        else setPhase("playing");
+      })
+      .catch((error) => {
+        if (mounted) {
+          setError(error);
+          setPhase("start-error");
+        }
+      });
+    return () => {
+      mounted = false;
+    };
+  }, [gameId, safeLevel, seed, initialPending, matches, router, start, save]);
+
+  if (!game) return null;
+  if (completion && issued)
     return (
-      <p role="status" className="p-6 text-center">
-        {t.preparing}
-      </p>
+      <PostGameScreen game={game} level={issued.level} seed={issued.seed} completion={completion} />
     );
+  if (phase !== "playing" || !issued) {
+    const failed = phase === "save-error" || phase === "start-error";
+    const retryable = canRetryFinish(error);
+    const accessExpired = error instanceof LearningApiError && error.status === 401;
+    return (
+      <section className="mx-auto flex w-full max-w-xl flex-col items-center gap-4 p-6 text-center">
+        <h1>{game.title}</h1>
+        <p role={failed ? "alert" : "status"}>
+          {phase === "start-error"
+            ? accessExpired
+              ? sync.accessError
+              : sync.startError
+            : phase === "save-error"
+              ? retryable
+                ? sync.saveError
+                : sync.expired
+              : phase === "saving"
+                ? sync.saving
+                : t.preparing}
+        </p>
+        {phase === "start-error" && (
+          <Button
+            size="child"
+            onClick={() => {
+              if (accessExpired) window.location.reload();
+              else onStartRetry();
+            }}
+          >
+            {accessExpired ? sync.reload : sync.retry}
+          </Button>
+        )}
+        {phase === "save-error" && retryable && (
+          <Button
+            size="child"
+            onClick={() => {
+              if (issued && result.current) void save(issued, result.current);
+            }}
+          >
+            {sync.saveRetry}
+          </Button>
+        )}
+        {phase === "save-error" && !retryable && (
+          <Button
+            size="child"
+            onClick={() => {
+              discardPending();
+              window.location.reload();
+            }}
+          >
+            {sync.restart}
+          </Button>
+        )}
+      </section>
+    );
+  }
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col">
       <header className="flex items-center gap-3 px-3 py-2">
-        <Link
-          href="/learn"
-          onClick={preview.stop}
-          className="flex min-h-12 items-center gap-1 rounded-full px-3 font-semibold transition-transform duration-(--dur-press) active:scale-95"
-        >
+        <StopLearningButton href="/learn" variant="ghost">
           <ArrowLeft className="size-5" aria-hidden="true" />
           {t.exit}
-        </Link>
+        </StopLearningButton>
         <div className="min-w-0 flex-1">
           <h1 className="!text-lg leading-tight">{game.title}</h1>
-          <p className="text-muted-foreground text-sm">{t.level(safeLevel)}</p>
+          <p className="text-muted-foreground text-sm">{t.level(issued.level)}</p>
         </div>
         <p
           role="status"
@@ -66,10 +182,15 @@ export function GamePlayer({ gameId, level, seed }: Props) {
       <GameHost
         text={ru.games}
         game={game}
-        level={safeLevel}
-        seed={seed}
+        level={issued.level}
+        seed={issued.seed}
         onRound={(event) => setEvents((list) => [...list, event])}
-        onFinish={finish}
+        onFinish={(value) => {
+          if (settled.current) return;
+          settled.current = true;
+          result.current = value;
+          void save(issued, value);
+        }}
       />
     </div>
   );

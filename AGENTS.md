@@ -38,7 +38,7 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - `pnpm install` — install the workspace using the pinned package manager and lockfile.
 - `pnpm dev` — start the Next.js web app at `http://localhost:3000`.
 - `pnpm build` / `pnpm start` — build and serve the production web app.
-- `pnpm e2e` — build, then run the smoke and `/lab` game tests in Chromium and WebKit (phone + iPad widths).
+- `pnpm e2e` — build, then run shell, `/lab`, saved learning, polling and recovery tests in Chromium and WebKit (phone + iPad widths).
 - `pnpm report --video` — generate Markdown with phone/iPad recordings, screenshots and logs against a local server; see [docs/reports/README.md](docs/reports/README.md).
 - `pnpm test:reports` — validate the report generator, browser capture, video conversion and artifact links.
 - `pnpm test` — run workspace Vitest tests (`core` rules, game rounds, database).

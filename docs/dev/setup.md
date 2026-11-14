@@ -1,6 +1,6 @@
 # Setup
 
-> **Status: child learning preview + saved-session API ready.** Install, server/build, Vitest, database tools and browser tests work. Embedded-game build commands remain planned.
+> **Status: saved child learning flow and polling ready.** Install, server/build, Vitest, database tools and browser tests work. Embedded-game build commands remain planned.
 
 ## Prerequisites
 - Node.js >= 22.13; `.nvmrc` selects Node 22.
@@ -8,6 +8,7 @@
 - Nothing else: no Docker, no database server, no cloud accounts.
 
 ## First run
+Enable demo access using the [database setup](#local-database-and-tests) before starting the child flow (`DEMO_MODE=1` in `apps/web/.env.local`). Then:
 ```bash
 pnpm install
 pnpm db:reset
@@ -34,7 +35,7 @@ Available commands:
 | `pnpm typecheck` | Run each package's `typecheck` through Turborepo |
 | `pnpm format` | Format source and config files; Markdown and frozen prototype sources are excluded |
 
-No environment variables or database are needed for the client preview screens. `/` redirects to `/learn`; `/analytics` and `/login` exercise the parent and auth route groups. **`/lab`** is the game harness ([games.md](games.md#lab)): on in `pnpm dev`, 404 in production unless `BRAINEE_LAB=1` (the e2e server sets it). The [demo cookie and saved-session API](sessions.md) require explicit opt-in; the parent PIN and UI polling remain follow-ups.
+Before opening child screens, set `DEMO_MODE=1` in `apps/web/.env.local` ([database setup below](#local-database-and-tests)). `/` redirects to `/learn`; the child now requires saved state and shows a retry screen if unavailable. `/analytics` and `/login` remain placeholders. **`/lab`** is an independent game harness ([games.md](games.md#lab)): on in `pnpm dev`, 404 in production unless `BRAINEE_LAB=1` (the e2e server sets it). Parent access/view remains a follow-up.
 
 pnpm permits the esbuild install script required by tsx/Drizzle Kit and Vitest's toolchain. Other dependency build scripts remain subject to pnpm's approval settings.
 
@@ -44,10 +45,12 @@ Install browser binaries once, then run the spec:
 pnpm --filter @brainee/web exec playwright install chromium webkit
 pnpm e2e
 ```
-The suite checks shells, both games, post-game progression, session APIs, cookies, routing, fonts, Russian text, themes, reduced motion, touch targets, overflow and own-domain requests at 390px and 820px in both engines. Screenshots/traces are in `apps/web/test-results/` (gitignored). Playwright seeds a unique temporary SQLite file before starting its server, enables demo mode there, and cleans up afterward; it does not touch `data/dev.db`. On macOS, WebKit keyboard traversal uses Option-Tab to include links. Emulation does not replace the real-device Screen Time check (T-62).
+The suite checks shells, both games, saved post-game progression, polling, retry/reload recovery, session APIs, cookies, routing, fonts, Russian text, themes, reduced motion, touch targets, overflow and own-domain requests at 390px and 820px in both engines. Screenshots/traces are in `apps/web/test-results/` (gitignored). Playwright seeds a unique temporary SQLite file before starting its server, enables demo mode there, and cleans up afterward; it does not touch `data/dev.db`. One worker avoids competing tests mutating the shared seeded child; assertions use saved balances/capped gains rather than a fixed 340★. On macOS, WebKit keyboard traversal uses Option-Tab to include links. Emulation does not replace the real-device Screen Time check (T-62).
 
 ### WebKit pointer diagnostics (T-93)
 Observed on this Mac on 2026-11-14 with pinned WebKit 2388: DOM hit testing identifies the correct link, but a mouse click requested at `(100, 430)` produces a pointer event near `(-1095, 1570)`. Playwright reports `<html> intercepts pointer events`. The same failure occurs on a plain HTML button; one worker, headed mode and a forced reinstall did not resolve it. API/browser-fetch tests pass in WebKit. This is an input-coordinate problem outside the application, not evidence that its UI click flows passed. Keep the normal click assertions; do not bypass them with forced clicks or synthetic DOM events.
+
+Follow-up in the T-55 session: all 112 browser tests passed, including WebKit phone/iPad UI flows with normal pointer input. No forced clicks, synthetic click replacements or browser-flag workaround were added. The earlier failure did not recur; its cause remains unconfirmed. T-93 is no longer a verification blocker; retain this repro for a recurrence.
 
 Reproduce independently of the app and database:
 ```bash
@@ -86,7 +89,7 @@ Workspace globs include `apps/*`, `packages/*` and `games/*`. React games live i
 
 The implemented schema and fixture scope are described in [data-model.md](../product/data-model.md). There are no migrations during the hackathon: edit `packages/db/schema.ts`, then use `db:reset`. Stop any process holding an open DB connection before reset. Reset refuses to overwrite a non-SQLite file.
 
-No environment file is required. To override defaults, optionally copy and edit:
+To enable the connected child flow, copy the example if needed, edit `DEMO_MODE` to `1`, then prepare the database:
 ```bash
 cp apps/web/.env.example apps/web/.env.local
 pnpm db:reset
@@ -94,7 +97,7 @@ pnpm test
 ```
 DB scripts load `apps/web/.env.local` if present; shell variables take precedence. The default `DATABASE_URL=file:./data/dev.db` resolves from the **workspace root**, regardless of whether the caller runs in the root, `apps/web` or `packages/db`. Absolute paths/file URLs also work. Only local files are supported; no remote database URL or token is needed. Database files and sidecars stay gitignored.
 
-To enable the API locally, set `DEMO_MODE=1` in `apps/web/.env.local`, run `pnpm db:reset` (or push/seed if preserving data), then restart the app. This exposes only the seeded demo child; [sessions.md](sessions.md) defines the cookie, launch and finish contract. Browser UI integration remains T-55.
+The example defaults demo access off; explicitly set `DEMO_MODE=1` in `apps/web/.env.local` before restarting the app. Use push/seed instead of reset to preserve existing data. This exposes only the seeded demo child; [sessions.md](sessions.md) defines the cookie, snapshot, launch and recovery contract. The lab and public placeholders still work without a database; no local rewards are granted as a fallback when the API is off.
 
 `packages/config` shares a Node Vitest configuration. Core rules, Brainy rendering, game rounds and database persistence have tests. DB tests use isolated temporary files, including concurrent finishes and rollback. `pnpm test` runs these workspace suites; `test:reports` and `e2e` remain separate commands.
 

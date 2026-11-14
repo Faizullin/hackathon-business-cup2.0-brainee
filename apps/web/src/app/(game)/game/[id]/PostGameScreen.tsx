@@ -5,9 +5,9 @@ import { type LearningCompletion, practiceGame } from "@brainee/core";
 import { type GameDefinition, reactGames } from "@brainee/games";
 import { StarIcon } from "@brainee/ui/components/child-icons";
 import { ArrowRight } from "@brainee/ui/components/icons";
-import { buttonVariants } from "@brainee/ui/lib/button-variants";
 import Link from "next/link";
-import { useDemoProgress } from "@/components/child/DemoProgressProvider";
+import { useLearning } from "@/components/child/LearningProvider";
+import { StopLearningButton } from "@/components/child/StopLearningButton";
 import { ru } from "@/i18n/ru";
 import { demoChild } from "@/lib/demo-child";
 
@@ -22,7 +22,7 @@ export function PostGameScreen({
   seed: number;
   completion: LearningCompletion;
 }) {
-  const { stop } = useDemoProgress();
+  const { snapshot } = useLearning();
   const t = ru.child.game;
   const practice = practiceGame(completion.after.stats, reactGames);
   const nextLevel = level < game.levels ? level + 1 : 1;
@@ -75,7 +75,9 @@ export function PostGameScreen({
           <StarIcon className="size-7" />+{completion.earnedStars}
         </p>
         <p className="mt-1 text-sm">{t.starsEarned(completion.gameStars)}</p>
-        <p className="text-muted-foreground text-sm">{t.balance(completion.after.wallet.stars)}</p>
+        <p className="text-muted-foreground text-sm">
+          {t.balance(snapshot?.progress.wallet.stars ?? completion.after.wallet.stars)}
+        </p>
       </div>
       {completion.suggestBreak && (
         <aside
@@ -84,9 +86,9 @@ export function PostGameScreen({
         >
           <h2 className="font-heading font-semibold">{t.breakTitle}</h2>
           {completion.bonus > 0 && <p data-testid="streak-bonus">{t.bonus(completion.bonus)}</p>}
-          <Link href="/brainy" onClick={stop} className={buttonVariants({ size: "child" })}>
+          <StopLearningButton href="/brainy" variant="default">
             {t.breakAction}
-          </Link>
+          </StopLearningButton>
         </aside>
       )}
       <section aria-labelledby="next-steps" className="flex flex-col gap-3">
@@ -96,7 +98,7 @@ export function PostGameScreen({
         <div className="grid gap-3 sm:grid-cols-2">
           {practice && (
             <Link
-              href={`/game/${practice.id}?level=1&seed=${seed + 1}`}
+              href={`/game/${practice.id}?level=1&seed=${(seed + 1) >>> 0}`}
               className={card}
               data-testid="practice-game"
             >
@@ -108,7 +110,7 @@ export function PostGameScreen({
             </Link>
           )}
           <Link
-            href={`/game/${game.id}?level=${nextLevel}&seed=${seed + 1}`}
+            href={`/game/${game.id}?level=${nextLevel}&seed=${(seed + 1) >>> 0}`}
             className={card}
             data-testid="next-level"
           >
@@ -118,13 +120,7 @@ export function PostGameScreen({
           </Link>
         </div>
       </section>
-      <Link
-        href="/brainy"
-        onClick={stop}
-        className={buttonVariants({ variant: "secondary", size: "child" })}
-      >
-        {t.enough}
-      </Link>
+      <StopLearningButton href="/brainy">{t.enough}</StopLearningButton>
     </section>
   );
 }

@@ -6,11 +6,13 @@ import { StarIcon, SunIcon } from "@brainee/ui/components/child-icons";
 import Link from "next/link";
 import { ru } from "@/i18n/ru";
 import { demoChild } from "@/lib/demo-child";
-import { useDemoProgress } from "./DemoProgressProvider";
+import { useLearning } from "./LearningProvider";
 
 // Top dock on Learn / Leisure / Gifts (docs/product/screens.md#brainy-dock-every-child-screen).
 export function BrainyDock() {
-  const { stats, wallet, mood } = useDemoProgress().progress;
+  const { snapshot } = useLearning();
+  if (!snapshot) return null;
+  const { stats, wallet, mood } = snapshot.progress;
   const { equipped, weekGoal } = demoChild;
   const stage = stageOf(stats);
   const t = ru.child.dock;

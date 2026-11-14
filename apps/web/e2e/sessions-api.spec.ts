@@ -10,7 +10,8 @@ const result = {
 };
 
 test("browser fetch uses its HttpOnly demo cookie for a saved game", async ({ page }) => {
-  await page.goto("/learn");
+  // Public pages do not bootstrap the child cookie; this test creates it explicitly.
+  await page.goto("/login");
   const saved = await page.evaluate(async (result) => {
     const access = await fetch("/api/demo-session", { method: "POST" });
     const hidden = !document.cookie.includes("brainee_demo");
@@ -219,10 +220,13 @@ test("the saved run pays one third-game bonus and stopping abandons unfinished g
     },
   });
   expect(saved.status()).toBe(200);
-  expect((await saved.json()).completion).toMatchObject({
+  const { completion } = await saved.json();
+  const brain = Math.min(100, completion.before.stats.brain + 2);
+  const gain = brain - completion.before.stats.brain;
+  expect(completion).toMatchObject({
     earnedStars: 13,
     bonus: 0,
-    gains: { brain: 2 },
-    after: { streak: { inRow: 1, bonusGiven: true } },
+    gains: gain > 0 ? { brain: gain } : {},
+    after: { stats: { brain }, streak: { inRow: 1, bonusGiven: true } },
   });
 });

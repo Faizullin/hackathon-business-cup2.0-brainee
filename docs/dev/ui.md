@@ -28,13 +28,15 @@ app/(auth)/layout.tsx       # centered single column
 - The entry screen («Во что играем сейчас?») is a full-screen sheet that can't be dismissed (product rule): Base UI Dialog, not a swipeable Drawer.
 - Bottom sheets (accessory preview, gift confirm, parent "new task") use Base UI Drawer with snap points.
 
-## Temporary learning preview (T-35)
+## Saved learning state (T-55)
 
-`DemoProgressProvider` at the root preserves Brainy, wallet, mood and the learning streak across the sibling child/game route groups. It starts from `demoChild`, saves a versioned snapshot in per-tab `sessionStorage`, and falls back to memory when storage is unavailable or corrupt. Reload restores the tab snapshot; it is not shared with a parent's device. Finishing calls the pure `finishLearningSession` transition; stopping resets the run, preserves the one-time bonus flag and shows Brainy's thank-you.
+<a id="temporary-learning-preview-t-35"></a>
 
-The post-game screen shows actual capped stat gains and earned stars. It offers an available game for the weakest trained body part (`practiceGame`), plus the next level (or a new level-one run after the last level). This fallback needs no age norms. The separate entry algorithm is [T-25](../product/screens.md#entry-screen-во-что-играем-сейчас).
+`LearningProvider` at the root shares TanStack Query state across child/game routes. Child screens wait for a cookie-authorized snapshot; failed initial reads show a retry screen. Background failures keep the last confirmed state and show a notice. Polling pauses outside child/game routes and when the page is hidden; return/focus/reconnect refetches. The read, mutation and recovery contract lives in [sessions.md](sessions.md#shared-state-and-client-recovery-t-55).
 
-T-54/T-81 will validate/deduplicate results and write rewards atomically on the server; T-55 replaces this preview with server state. This does not yet meet the [two-device demo proof](../progress/todo.md#smallest-end-to-end-demo-slice-t-80).
+`GamePlayer` waits for a server-issued launch before mounting `GameHost`. The post-game screen shows the immutable before/after receipt and actual capped gains, while its balance comes from current shared state. It offers an available game for the weakest trained body part (`practiceGame`), plus the next level (or a new level-one run after the last level). This fallback needs no age norms. The separate entry algorithm is [T-25](../product/screens.md#entry-screen-во-что-играем-сейчас).
+
+The former T-35 local balance/stat preview is removed. Only unacknowledged results use per-tab storage; no local awards are migrated into the server. `demoChild` retains only accessory/weekly-goal presentation for T-38/T-46. Stopping waits for the server before navigating and showing Brainy's thank-you. Parent access/view wiring remains T-40/T-41; child-mode polling alone does not complete the [parent demo proof](../progress/todo.md#smallest-end-to-end-demo-slice-t-80).
 
 ## Motion tokens (put in `packages/ui`)
 

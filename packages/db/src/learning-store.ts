@@ -251,5 +251,10 @@ export async function stopGameRun(db: Database, tokenHash: string, now: Date) {
       .update(gameSessions)
       .set({ status: "abandoned", finishedAt: now })
       .where(and(eq(gameSessions.demoSessionHash, tokenHash), eq(gameSessions.status, "pending")));
+    // Run state is part of /api/state too; other tabs must observe a stop.
+    await tx
+      .update(families)
+      .set({ version: sql`${families.version} + 1` })
+      .where(eq(families.id, access.familyId));
   });
 }

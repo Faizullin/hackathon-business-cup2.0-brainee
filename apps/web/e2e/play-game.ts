@@ -2,7 +2,7 @@ import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
 /** Solve by the visible SVG differences, without adding answer markers to the game. */
-export async function finishOddOneOut(page: Page) {
+export async function answerOddOneOut(page: Page) {
   for (let round = 0; round < 4; round++) {
     const cells = page.getByRole("button", { name: /^Фигура \d+$/ });
     await expect(cells.first()).toBeVisible();
@@ -14,5 +14,9 @@ export async function finishOddOneOut(page: Page) {
     await cells.nth(odd).click();
     await page.getByRole("button", { name: /^(Дальше|Готово)$/ }).click();
   }
+}
+
+export async function finishOddOneOut(page: Page) {
+  await answerOddOneOut(page);
   await expect(page.getByTestId("post-game")).toBeVisible();
 }

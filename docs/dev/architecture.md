@@ -1,6 +1,6 @@
 # Architecture
 
-> **Status: child learning preview + saved-session API ready.** The workspace, core/Brainy, two React games, child shell and SQLite/Drizzle connected-demo subset exist. The [session contract](sessions.md) is implemented; UI polling and the parent view are next. The reasoning behind each choice is in [decisions.md](decisions.md).
+> **Status: saved child learning flow + cross-device polling ready.** The workspace, core/Brainy, two React games, child shell and SQLite/Drizzle demo subset exist. The [session/state contract](sessions.md) is wired into the child UI; parent access/view is next. The reasoning behind each choice is in [decisions.md](decisions.md).
 
 **Guiding principle: local-first, zero infrastructure.** One SQLite file, media in the repo. Clone → `pnpm dev` works with no accounts, Docker or cloud services. Don't assume one long-running process or a writable disk: the final deploy is serverless (D-15).
 
@@ -44,12 +44,12 @@ apps/web/
 │  ├─ (auth)/login/           # Welcome page; sessions, quiz and onboarding planned
 │  ├─ (game)/game/[id]/       # Fullscreen play (no dock/tab bar); `?level=&seed=`
 │  ├─ lab/, lab/brainy/       # Dev-only game lab + event stream; Brainy presets (T-16, T-20)
-│  └─ api/                   # Demo access + issued game start/finish/stop; /api/state is T-55
+│  └─ api/                   # Demo access, issued game start/finish/stop, versioned /api/state
 ├─ public/media/             # Planned: own-domain media
 └─ e2e/                      # Scaffold smoke tests (Chromium + WebKit)
 ```
 
-Child routes use their own shell (tab bar; dock via the nested `(docked)` group); parent and auth routes still use the starter `AppFrame`. Fullscreen games use the sibling `(game)` group. Child data comes from `demoChild` plus the [temporary progress provider](ui.md#temporary-learning-preview-t-35) until T-55 replaces it with saved state. The demo cookie/session API exists but is not called by that provider yet. Parent routes remain placeholders; the parent barrier (T-40) must land before parent data/actions are added.
+Child routes use their own shell (tab bar; dock via the nested `(docked)` group); parent and auth routes still use the starter `AppFrame`. Fullscreen games use the sibling `(game)` group. `LearningProvider` loads [saved child state](ui.md#saved-learning-state-t-55) across child/game navigation. `demoChild` contains only accessory/goal presentation awaiting T-38/T-46. Parent routes remain placeholders; the parent barrier (T-40) must land before parent data/actions are added.
 
 ## Package responsibilities
 
@@ -64,7 +64,7 @@ Child routes use their own shell (tab bar; dock via the nested `(docked)` group)
 | `db` | Schema per [data-model.md](../product/data-model.md), seeds, scenario fixtures | contain business rules |
 | `ui` | Buttons, cards, dock, tab bars; tokens from the prototype (`--coral`, `--sun`, `--mint`, `--sky`; Unbounded + Onest) | |
 
-**Data flow:** the host obtains a server-issued game ID, then reports `GameResult` → `POST /api/sessions` → `core` computes ★ and stat deltas → `db` writes in one transaction (bumps the family's `version`). The [implemented contract](sessions.md) covers access, launch, retries and stopping. Child/parent `/api/state` polling (~3 s) and UI wiring remain T-55.
+**Data flow:** the host obtains a server-issued game ID, then reports `GameResult` → `POST /api/sessions` → `core` computes ★ and stat deltas → `db` writes in one transaction (bumps the family's `version`). The child polls `/api/state` and refreshes after mutations; only confirmed state updates its wallet/Brainy. The [contract](sessions.md) covers access, launch, snapshots, recovery and stopping. Parent reuse of polling follows T-40/T-41.
 
 ## Stack
 

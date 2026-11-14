@@ -11,7 +11,8 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 1 : 2,
+  // UI writes now share the seeded child; run in order and assert relative saved state.
+  workers: 1,
   reporter: "list",
   metadata: { databasePath },
   globalTeardown: "./e2e/cleanup-database.ts",

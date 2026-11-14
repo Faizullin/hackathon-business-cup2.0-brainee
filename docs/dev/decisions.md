@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-20 · Server snapshots and retained finish IDs replace local awards · 2026-11-14 · accepted · supersedes D-17, extends D-15/D-18
+**Context:** the child preview could not restore saved rewards or observe another device, and a replayed receipt may contain an older balance.
+**Decision:** one consistent versioned snapshot, TanStack Query polling and explicit loading/recovery UI. Host-issued games submit stable IDs; only pending result envelopes use tab storage. A finish requires server acknowledgement and a fresh state read before the completion UI. The full contract is in [sessions.md](sessions.md#shared-state-and-client-recovery-t-55). Poll/cancellation behavior follows [TanStack's polling guide](https://tanstack.com/query/latest/docs/framework/react/guides/polling).
+**Consequences:** no browser-side rewards or preview migration; connected child screens require the prepared opt-in demo database. Accessory/goal presentation is still a fixture. Parent wiring remains behind its barrier. Tests use one worker for the shared seeded child; no test reset endpoint or infrastructure is added.
+
 ## D-19 · Keep pinned SQLite tooling compatible with concurrent demo writes · 2026-11-14 · accepted
 **Context:** regression tests reproduced a failed-BEGIN/COMMIT statement remaining active in the native libSQL binding and duplicate index creation during repeated Drizzle Kit pushes with CHECK constraints. Upstream reports: [libSQL #361](https://github.com/tursodatabase/libsql-client-ts/issues/361), [Drizzle #4574](https://github.com/drizzle-team/drizzle-orm/issues/4574).
 **Decision:** apply a pnpm patch to `@libsql/client@0.18.0` (ESM and CJS) so transaction controls use native `exec`, preserving error mapping. Use one configured native handle per request-owned client, WAL, and bounded whole-transaction SQLITE_BUSY retries. Keep optional secondary indexes/email uniqueness out of the demo schema while the pinned Kit rebuild bug persists.
@@ -16,7 +21,7 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 **Decision:** explicit demo opt-in, an opaque cookie stored as a hash, a server-issued pending game ID, strict core result validation, and a transaction saving rewards/state/history/version together. Retries return an immutable receipt. Contract and trust boundaries: [sessions.md](sessions.md).
 **Consequences:** API data survives requests/process restarts; no auth provider or shared server memory. The parent PIN and current-state polling are separate follow-ups; the existing UI preview is unchanged.
 
-## D-17 · Per-tab learning preview before server rewards · 2026-11-14 · accepted
+## D-17 · Per-tab learning preview before server rewards · 2026-11-14 · superseded by D-20
 **Context:** T-35 must demonstrate changed Brainy/wallet state across child and fullscreen game routes before T-54 persistence exists.
 **Decision:** a root client provider calls pure core transitions and keeps a transient per-tab snapshot; no API writes or shared server memory. The storage, stopping and replacement boundary is documented in [ui.md](ui.md#temporary-learning-preview-t-35).
 **Consequences:** the child flow is reviewable now. Cross-device proof, trusted rewards and replay protection still require the [demo data slice](../progress/todo.md#smallest-end-to-end-demo-slice-t-80); the preview must be replaced, not treated as persistence.

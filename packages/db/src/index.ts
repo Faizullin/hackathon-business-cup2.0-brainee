@@ -21,3 +21,4 @@ export {
   startGameSession,
   stopGameRun,
 } from "./learning-store";
+export { getStateSnapshot } from "./state-store";

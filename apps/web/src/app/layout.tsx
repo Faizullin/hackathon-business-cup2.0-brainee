@@ -1,7 +1,7 @@
 import { MotionProvider } from "@brainee/ui/motion-provider";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { DemoProgressProvider } from "@/components/child/DemoProgressProvider";
+import { LearningProvider } from "@/components/child/LearningProvider";
 import { ru } from "@/i18n/ru";
 import { onest, unbounded } from "./fonts";
 import "./globals.css";
@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ru" className={`${onest.variable} ${unbounded.variable}`}>
       <body>
         <MotionProvider>
-          <DemoProgressProvider>{children}</DemoProgressProvider>
+          <LearningProvider>{children}</LearningProvider>
         </MotionProvider>
       </body>
     </html>

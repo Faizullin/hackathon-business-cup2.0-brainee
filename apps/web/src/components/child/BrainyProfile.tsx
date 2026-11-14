@@ -3,14 +3,13 @@ import { Brainy } from "@brainee/brainy";
 import { BODY_STATS, STAGES, stageOf } from "@brainee/core";
 import { ru } from "@/i18n/ru";
 import { demoChild } from "@/lib/demo-child";
-import { useDemoProgress } from "./DemoProgressProvider";
+import { useLearning } from "./LearningProvider";
 
 // Big Brainy + stage path. Accessory shop and stats come with T-38.
 export function BrainyProfile() {
-  const {
-    progress: { stats },
-    resting,
-  } = useDemoProgress();
+  const { snapshot, resting } = useLearning();
+  if (!snapshot) return null;
+  const { stats } = snapshot.progress;
   const { equipped } = demoChild;
   const stage = stageOf(stats);
   return (

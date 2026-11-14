@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { generateRounds } from "../../../packages/games/src/continue-pattern/rounds";
+import { readyState } from "./saved-state";
 
 for (const level of [1, 2]) {
   test(`pattern level ${level} reports corrections once and grows Brainy`, async ({
@@ -8,6 +9,7 @@ for (const level of [1, 2]) {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(`/game/continue-pattern?level=${level}&seed=42`);
+    const before = await readyState(page);
     const rounds = generateRounds(level, 42);
     for (const [index, round] of rounds.entries()) {
       const answers = page.getByRole("button", { name: /^Ответ \d+$/ });
@@ -23,14 +25,20 @@ for (const level of [1, 2]) {
       if (index === 0) await expect(page.getByText("Звезда за исправление! +4 ★")).toBeVisible();
       await page.getByRole("button", { name: /^(Дальше|Готово)$/ }).click();
     }
-    await expect(page.getByTestId("stat-gain-brain")).toContainText("Мозг +2");
+    const brain = Math.min(100, before.progress.stats.brain + 2);
+    const gain = brain - before.progress.stats.brain;
+    if (gain > 0) await expect(page.getByTestId("stat-gain-brain")).toContainText(`Мозг +${gain}`);
+    else await expect(page.getByText("Брейни уже освоил этот навык!")).toBeVisible();
     await expect(page.getByTestId("earned-stars")).toContainText("+13");
-    await expect(page.getByTestId("practice-game")).toHaveAttribute("href", /odd-one-out/);
+    await expect(page.getByTestId("practice-game")).toHaveAttribute(
+      "href",
+      /\/game\/(odd-one-out|continue-pattern)\?/,
+    );
     await expect(page.getByTestId("next-level")).toHaveText(
       level === 1 ? /Следующий уровень/ : /Сыграть ещё раз/,
     );
-    await page.getByRole("link", { name: "Хватит на сегодня" }).click();
-    await expect(page.getByTestId("brainy-stat-brain")).toHaveText("68");
+    await page.getByRole("button", { name: "Хватит на сегодня" }).click();
+    await expect(page.getByTestId("brainy-stat-brain")).toHaveText(String(brain));
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );

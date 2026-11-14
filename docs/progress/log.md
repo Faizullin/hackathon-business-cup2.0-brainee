@@ -4,6 +4,12 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (saved child flow)
+- T-55 child subset: cookie-authorized versioned state, TanStack Query polling, issued launches, confirmed rewards and stop. D-20 replaces the local preview; only pending finish envelopes use tab storage.
+- Verified: check/build; 86 unit tests; 112 e2e in Chromium/WebKit phone/iPad, including independent-device polling, lost-response reload/replay, newer balances, blocked storage and failed refresh. Six demo-off requests return 404 without opening a DB; WebKit screenshots reviewed. Normal pointer flows pass again (T-93); original cause unconfirmed.
+- Final follow-up: launch-time expiry offers an explicit reload; the expanded expiry check passed in all four browser configurations after that change.
+- Next: T-40 PIN barrier, T-41 minimal parent view and remaining T-55 parent polling, then T-70/T-71 connected proof. Broad tasks stay open; no deployment changes.
+
 ## 2026-11-14 (saved sessions)
 - T-50/T-51 demo subset + T-52 cookie access; T-54 issued games and atomic saved results, T-81 session validation/replay/rollback tests. D-18 contract; D-19 native driver patch and deferred optional indexes (T-92).
 - Verified: check/build; 82 unit tests; 40 Chromium UI/API + 8 WebKit API/browser-fetch tests; demo-off 404/no-DB smoke. Full WebKit UI is blocked by an independently reproduced native coordinate failure (T-93); Learn screenshot reviewed.
