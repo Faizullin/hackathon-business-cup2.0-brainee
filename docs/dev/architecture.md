@@ -2,7 +2,7 @@
 
 > **Status: local data foundation ready (T-10 – T-13).** The workspace, web/UI foundation, empty `core`/`brainy`/`games` packages, Vitest and SQLite/Drizzle tools exist. The minimal schema covers Family/Child/Wallet; other entities and product features are planned. The reasoning behind each choice is in [decisions.md](decisions.md).
 
-**Guiding principle: local-first, zero infrastructure.** One SQLite file, media in the repo, one Node process. Clone → `pnpm dev` works with no accounts, Docker or cloud services.
+**Guiding principle: local-first, zero infrastructure.** One SQLite file, media in the repo. Clone → `pnpm dev` works with no accounts, Docker or cloud services. Don't assume one long-running process or a writable disk: the final deploy is serverless (D-15).
 
 ## Monorepo layout
 
@@ -11,7 +11,7 @@ pnpm workspaces + Turborepo, TypeScript everywhere. Internal packages export TS 
 ```
 brainee/
 ├─ apps/
-│  ├─ web/          # Main PWA: child + parent UI + API (Next.js, single Node process)
+│  ├─ web/          # Main PWA: child + parent UI + API (Next.js)
 │  └─ landing/      # Optional: marketing / pitch page
 ├─ packages/
 │  ├─ core/         # Pure logic + shared types (GameResult, Skill, Stats…)
@@ -41,8 +41,8 @@ apps/web/
 │  ├─ (parent)/analytics/     # Starter page; barrier, data and other parent routes planned
 │  ├─ (auth)/login/           # Welcome page; sessions, quiz and onboarding planned
 │  ├─ (game)/game/[id]/       # Planned: fullscreen sibling group (T-30)
-│  ├─ lab/                   # Planned: dev-only game lab + event stream
-│  └─ api/                   # Planned: route handlers + /api/stream (SSE)
+│  ├─ lab/                   # Dev-only game lab + event stream (T-16)
+│  └─ api/                   # Planned: route handlers + /api/state (polled version + snapshot)
 ├─ public/media/             # Planned: own-domain media
 └─ e2e/                      # Scaffold smoke tests (Chromium + WebKit)
 ```
@@ -62,7 +62,7 @@ Each route group has its own nested layout and opts into the shared `AppFrame` f
 | `db` | Schema per [data-model.md](../product/data-model.md), seeds, scenario fixtures | contain business rules |
 | `ui` | Buttons, cards, dock, tab bars; tokens from the prototype (`--coral`, `--sun`, `--mint`, `--sky`; Unbounded + Onest) | |
 
-**Data flow:** game emits `GameResult` → `POST /api/sessions` → `core` computes ★ and stat deltas → `db` write in one transaction → in-process event bus → SSE → child and parent UIs update.
+**Data flow:** game emits `GameResult` → `POST /api/sessions` → `core` computes ★ and stat deltas → `db` write in one transaction (bumps the family's `version`) → child and parent UIs poll `/api/state` (~3 s) and refetch when the version changes.
 
 ## Stack
 
@@ -74,7 +74,7 @@ Each route group has its own nested layout and opts into the shared `AppFrame` f
 | Charts | Recharts |
 | DB | **SQLite** via libSQL client + Drizzle ORM (`file:./data/dev.db`); `drizzle-kit push` / `studio` |
 | Auth | Demo session first (seeded family, cookie) + parent PIN; Better Auth as a stretch goal |
-| Live sync | SSE + in-process EventEmitter (valid because we run one instance) |
+| Live sync | Short polling via TanStack Query (~3 s, version check). Works locally and on serverless |
 | Media | Files in `apps/web/public/media`, no object storage |
 | Browser storage | UI preferences only; the server is the source of truth (parent needs live data) |
 | PWA | Serwist |
@@ -83,6 +83,6 @@ Each route group has its own nested layout and opts into the shared `AppFrame` f
 | Tests | Vitest (`core`, `brainy`, bridge, game rounds); asset-integrity script; Playwright in **Chromium + WebKit** (games, demo flow, acceptance criteria) |
 | Games | React (default); embedded via iframe + bridge for Phaser (esbuild), GDevelop (`gdexporter`), Three.js, static builds |
 | Game lab | dev-only `/lab` route in `apps/web` |
-| Deploy | One container (`next start`) on Railway with a volume for the SQLite file + custom domain |
+| Deploy | **Final step only (T-14):** Vercel Hobby (free) + Turso free libSQL via the same Drizzle driver. Nothing deploy-specific before then |
 
 Own-domain constraint: [rules.md](../product/rules.md#technical-requirements). Agent tooling (skills, MCP): [agent-tooling.md](agent-tooling.md).

@@ -23,6 +23,9 @@ importers:
       '@brainee/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@brainee/games':
+        specifier: workspace:*
+        version: link:../../packages/games
       '@brainee/ui':
         specifier: workspace:*
         version: link:../../packages/ui

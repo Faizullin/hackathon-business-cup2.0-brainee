@@ -29,7 +29,7 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - **Everything loads from our own domain or its subdomains.** That includes the API, auth, fonts, images, video and games. No third-party CDNs, no YouTube embeds, no client calls to `*.supabase.co` or Firebase. The iOS Screen Time allowlist blocks them. → [rules.md](docs/product/rules.md#technical-requirements)
 - **Game rules live in `packages/core`** as pure, tested functions. Don't scatter economy or stat logic through UI code. → [architecture.md](docs/dev/architecture.md)
 - **Games follow the contract**: React games through props, any other engine (Phaser, GDevelop, external repo) through the iframe bridge. They report a `GameResult`, never grant ★, and load nothing from outside our origin. Test them at `/lab`. Port the bridge, engine kits and tests from `../game-store-planning` rather than rewriting them. → [games.md](docs/dev/games.md)
-- **Local-first, no new infrastructure.** SQLite file, media in `public/media`, one Node process. Don't add backend services, cloud SDKs, auth or payment providers without a new entry in [decisions.md](docs/dev/decisions.md).
+- **Local-first, no new infrastructure.** SQLite file, media in `public/media`. Don't assume a long-running process or writable disk (the final deploy is serverless; live sync = polling). Deployment is only the last task (T-14). Don't add backend services, cloud SDKs, auth or payment providers without a new entry in [decisions.md](docs/dev/decisions.md).
 - **Product rules:** no feeds, autoplay or "watch next". Kids never see rankings. Brainy never dies. No medical claims. → [rules.md](docs/product/rules.md#product-rules)
 
 ## Commands
@@ -37,17 +37,18 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - `pnpm install` — install the workspace using the pinned package manager and lockfile.
 - `pnpm dev` — start the Next.js web app at `http://localhost:3000`.
 - `pnpm build` / `pnpm start` — build and serve the production web app.
-- `pnpm e2e` — build, then run the scaffold smoke tests in Chromium and WebKit (phone + iPad widths).
+- `pnpm e2e` — build, then run the smoke and `/lab` game tests in Chromium and WebKit (phone + iPad widths).
 - `pnpm report --video` — generate Markdown with phone/iPad recordings, screenshots and logs against a local server; see [docs/reports/README.md](docs/reports/README.md).
 - `pnpm test:reports` — validate the report generator, browser capture, video conversion and artifact links.
-- `pnpm test` — run workspace Vitest tests (currently the local database foundation).
+- `pnpm test` — run workspace Vitest tests (`core` rules, game rounds, database).
 - `pnpm db:reset` — recreate the local SQLite database, push the schema and seed the demo.
 - `pnpm db:push` / `pnpm db:seed` / `pnpm db:studio` — apply the schema, add demo fixtures or inspect local data.
-- `pnpm check` — Biome lint/format checks, then workspace TypeScript checks.
+- `pnpm check` — Biome lint/format checks, `check:games` (self-contained game folders), then TypeScript checks.
+- `/lab` (in `pnpm dev`) — play any registered game with level/seed and watch its events.
 - `pnpm typecheck` — workspace TypeScript checks through Turborepo.
 - `pnpm format` — format source and config files with Biome.
 
-Game commands are still planned. Database paths, browser installation and all commands are in [docs/dev/setup.md](docs/dev/setup.md).
+Embedded-game commands (`games:build`, `test:assets`) are still planned (T-19). Database paths, browser installation and all commands are in [docs/dev/setup.md](docs/dev/setup.md).
 
 ## Conventions and tools
 

@@ -26,7 +26,7 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [product/rules.md](product/rules.md) | Device lockdown, own-domain requirement, privacy, product rules, **acceptance criteria** |
 | [dev/architecture.md](dev/architecture.md) | Stack, monorepo layout, package responsibilities |
 | [dev/decisions.md](dev/decisions.md) | Why we chose what we chose (ADR log) |
-| [dev/setup.md](dev/setup.md) | Install, run, env vars, deploy |
+| [dev/setup.md](dev/setup.md) | Install, run, env vars, iPad testing (deploy = final step) |
 | [dev/conventions.md](dev/conventions.md) | Code style, naming, testing, git |
 | [dev/games.md](dev/games.md) | Game runtimes, bridge + engine kits to port from game-store-planning, testing, reusable games |
 | [dev/ui.md](dev/ui.md) | UI and motion system: Base UI components, page transitions, Motion, app shell, mobile app-feel checklist |

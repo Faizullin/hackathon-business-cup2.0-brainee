@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-15 · Deploy last, on free tiers: Vercel Hobby + Turso via Drizzle; sync by polling · 2026-11-14 · accepted · supersedes D-06 and the SSE part of D-04
+**Context:** deployment isn't needed until the demo, and only free options are allowed. Vercel Hobby is free but serverless, with no persistent disk and no shared memory, so a SQLite file and an in-process SSE bus won't survive there. Drizzle already talks to libSQL, and Turso hosts libSQL on a free plan.
+**Decision:** develop **local-only** until the end. The final roadmap step (T-14) deploys `apps/web` to **Vercel Hobby** (free `<project>.vercel.app` domain, which is allowlistable in Screen Time; no paid custom domain) with the database on **Turso's free plan** through the same `drizzle-orm/libsql` driver (`DATABASE_URL=libsql://…` + `DATABASE_AUTH_TOKEN`). **Live sync uses short polling** (TanStack Query, ~3 s, version check), the same locally and on serverless. No long-lived SSE functions. Media stays in `public/` (served from our domain).
+**Consequences:** no deployment work or infrastructure until the last step. Code must not assume one long-running process or a writable disk. `getDatabaseConfig` accepts only `file:` today and will be extended in T-14. Hobby is for non-commercial use: fine for the hackathon, revisit for a commercial launch.
+
 ## D-14 · Port local UI recordings and Markdown reports · 2026-11-14 · accepted
 **Context:** `../game-store-planning` already records checked Playwright flows and renders Markdown with screenshots, MP4 posters and JSON timelines. We need the same review artifacts for the current scaffold.
 **Decision:** port its local report CLI, browser driver, generator, timeline/media helpers and tests into `scripts/`. Resolve the existing pinned Playwright from `apps/web`; use local ffmpeg for video conversion. Register a Russian scaffold scenario at phone/iPad viewport sizes and commit generated artifacts under `docs/reports`.
@@ -46,7 +51,7 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 **Decision:** seeded demo family + cookie session (`DEMO_MODE`) + parent PIN barrier. Better Auth (works with SQLite + Drizzle) is a stretch goal.
 **Consequences:** no sign-up flow at first; the quiz still runs against the demo child.
 
-## D-06 · Single Node instance on Railway; media in the repo · 2026-11-14 · accepted · supersedes deploy and media parts of D-01/D-04
+## D-06 · Single Node instance on Railway; media in the repo · 2026-11-14 · superseded by D-15 (media-in-repo still holds)
 **Context:** a SQLite file and in-process SSE need one long-running server. Vercel serverless has neither a persistent disk nor shared memory. Object storage is extra infrastructure.
 **Decision:** deploy one container (`next start`) on Railway with a volume and our custom domain. Media is served from `apps/web/public/media`.
 **Consequences:** the own-domain rule is met for free; no horizontal scaling (fine for a demo). Moving to Turso or Postgres later only changes the Drizzle driver.
@@ -56,7 +61,7 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 **Decision:** SQLite file via `@libsql/client` + Drizzle. `drizzle-kit push` instead of migrations; `db:reset` reseeds freely; Drizzle Studio for inspection.
 **Consequences:** clone-and-run in seconds; disposable data. The same driver can point at Turso later.
 
-## D-04 · Live sync via SSE on our own domain · 2026-11-14 · accepted
+## D-04 · Live sync via SSE on our own domain · 2026-11-14 · SSE superseded by D-15 (polling)
 **Context:** the parent must see the child's progress without reloading. Supabase Realtime and Firebase run on third-party domains that the Screen Time allowlist blocks.
 **Decision:** use a Server-Sent Events endpoint in `apps/web`, with polling as a fallback.
 **Consequences:** no extra vendor; reconnects have to be handled on our side. (D-06 makes an in-process event bus enough.)

@@ -14,30 +14,29 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [x] T-11 `apps/web` Next.js 16 with `(child)`, `(parent)`, `(auth)` route groups
 - [x] T-12 `packages/ui`: fonts via `next/font`; `shadcn init` with a Base UI (`base-*`) style restyled to the tokens; motion tokens; install Motion + Lucide; root layout without visual chrome → [ui.md](../dev/ui.md)
 - [x] T-13 Empty `core`, `brainy`, `games`, `db` packages with Vitest; `db` on SQLite (`data/dev.db`) + `db:reset`
-- [ ] T-14 Deploy one container to Railway (volume for SQLite) on a custom domain → [setup.md](../dev/setup.md#deploy-demo)
 - [x] T-15 Update [setup.md](../dev/setup.md) and the AGENTS.md Commands section with the real commands (extend as app, DB and game scripts land)
-- [ ] T-16 Dev-only `/lab` route: game picker, level/seed, phone/iPad frame, event stream panel (`data-status`) → [games.md](../dev/games.md#lab)
+- [x] T-16 Dev-only `/lab` route: game picker, level/seed, phone/iPad frame, event stream panel (`data-status`) → [games.md](../dev/games.md#lab)
 - [ ] T-17 `pnpm gen:game` Turborepo generator
 - [ ] T-18 Install the curated agent skills → [agent-tooling.md](../dev/agent-tooling.md)
 - [ ] T-19 `pnpm games:build` + `pnpm test:assets` (port GSP `build-packages.mjs`, `verify-game-assets.mjs`); `db:seed` reads `games/*/manifest.json` into `Game`
 
 ## P2 · Core logic + Brainy · [mechanics.md](../product/mechanics.md)
 - [ ] T-20 `packages/brainy`: port `brainy(s, id, acc)` to typed SVG/React (lines 671–733)
-- [ ] T-21 Star rules (+3 / +4 / +15 / 3-in-a-row +5) with tests
-- [ ] T-22 Exchange ☀→★ 1:10, one-way; gifts ☀ only
-- [ ] T-23 Stage + mood math (stage thresholds, +8 mood per game)
+- [x] T-21 Star rules (+3 / +4 / +15 / 3-in-a-row +5) with tests
+- [x] T-22 Exchange ☀→★ 1:10, one-way; gifts ☀ only
+- [x] T-23 Stage + mood math (stage thresholds, +8 mood per game); mood decay rate is still a product TBD
 - [ ] T-24 Stat gain from a session (70/30 weights; keep the formula swappable)
 - [ ] T-25 Entry recommendation algorithm (3 largest gaps, least-played in 7 days)
 - [ ] T-26 Weekly goal counted by week_suns; 5-tasks-a-day limit
 - [ ] T-27 Accessory slots (one per slot; earned vs. bought)
-- [ ] T-28 Game contract: `GameResult`/`Skill` types in `core`, `GameDefinition` + lazy registry + error boundary in `games`; `pnpm check:games` (no cross-game imports) → [games.md](../dev/games.md)
+- [x] T-28 Game contract: `GameResult`/`Skill` types in `core`, `GameDefinition` + lazy registry + error boundary in `games`; `pnpm check:games` (no cross-game imports) → [games.md](../dev/games.md)
 - [ ] T-29 Port GSP `bridge-core` → `packages/game-bridge` (drop PECS parts, global `Brainee`) + `engine-phaser` / `engine-gdevelop` kits + `IframeGame` and host hook in `GameHost` → [games.md](../dev/games.md#bridge-embedded-games-port-gsp-packagesbridge-core)
 
 ## P3 · Child flow · [screens.md#child](../product/screens.md#child)
 - [ ] T-30 Child app shell: Brainy dock + 4-tab bottom bar in `(child)/layout`, fullscreen game layout, app-feel checklist → [ui.md](../dev/ui.md#app-shell-route-group-layouts-own-the-chrome)
 - [ ] T-31 Entry screen (no close, logs the choice)
 - [ ] T-32 Learn tab (recommendations + grid)
-- [ ] T-33 Game: Odd one out (2 levels × 4 rounds), tested at `/lab`
+- [x] T-33 Game: Odd one out (2 levels × 4 rounds, seeded), tested at `/lab`; wiring into the child flow is T-32/T-35
 - [ ] T-34 Game: Continue the pattern
 - [ ] T-35 Post-game screen: before → after, "Что дальше?", break after 3
 - [ ] T-36 Leisure tab: shop (10 min / forever), cartoons, science videos
@@ -59,12 +58,12 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [ ] T-52 Demo session (`DEMO_MODE`, seeded family) + parent PIN barrier; Better Auth = stretch goal
 - [ ] T-53 Onboarding quiz → starting stats
 - [ ] T-54 API: session finish → core → db
-- [ ] T-55 SSE live updates to both UIs (in-process event bus)
+- [ ] T-55 Live updates by short polling: `/api/state` version + TanStack Query (~3 s) in child and parent UIs → [D-15](../dev/decisions.md)
 
 ## P6 · PWA + allowlist · [rules.md](../product/rules.md#device-lockdown)
 - [ ] T-60 Serwist PWA manifest + icons + offline shell
 - [ ] T-61 Audit: zero foreign-domain requests (DevTools network)
-- [ ] T-62 Test on an iPad with Screen Time "Allowed Websites Only"
+- [ ] T-62 Test on an iPad: over LAN during development; with Screen Time "Allowed Websites Only" after T-14
 - [ ] T-63 Onboarding wizard for setting up the allowlist (stretch goal)
 
 ## P7 · Demo & pitch
@@ -73,13 +72,14 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [ ] T-72 Landing page (`apps/landing`), stretch goal
 - [ ] T-73 Pitch deck
 - [ ] T-74 Freeze `master`, tag the demo build
+- [ ] T-14 **Final step: deploy (free tiers only)**: Vercel Hobby project for `apps/web` (monorepo root dir, `<project>.vercel.app`); Turso free database; extend `getDatabaseConfig`/`openDatabase` for `libsql://` + `DATABASE_AUTH_TOKEN`; `db:push` + seed against Turso; run the e2e suite against the deployed URL → [D-15](../dev/decisions.md)
 
 ## Backlog / ideas
 - [ ] T-80 Define a smallest end-to-end demo slice and prioritize it ahead of optional features.
 - [ ] T-81 Specify server-side result validation, idempotency and atomic wallet/task updates.
 - [ ] T-82 Define demo versus production boundaries for sessions, parent PIN, child data and backups.
 - [ ] T-83 Resolve reward incentives and clarify the evidence and labels for skill scores, age averages and seeded rankings.
-- [ ] T-84 Validate the own-domain PWA and two-device sync on a real iPad early; define offline behavior and source licensed demo media.
+- [ ] T-84 Validate the PWA and two-device sync on a real iPad early over LAN (no deployment needed); define offline behavior and source licensed demo media.
 - [ ] T-85 Port one GSP game end to end (suggest `phaser-shape-match-game`): engine kit, Russian UI, manifest, bridge events → `GameResult`, Chromium + WebKit e2e. Other candidates in [games.md](../dev/games.md#reusable-gsp-games-candidates)
 - [ ] T-87 Motion polish: `<ViewTransition>` tab/push/pop + shared elements, ★ fly-to-wallet, animated counters, Brainy idle/stage-up, `loading.tsx` Brainy loader, reduced-motion spec → [ui.md](../dev/ui.md). After the functional flow works.
 - [x] T-88 Port the local UI recording/report tooling from game-store-planning; generate phone/iPad walkthroughs with linked videos, screenshots and logs → [reports/README.md](../reports/README.md)

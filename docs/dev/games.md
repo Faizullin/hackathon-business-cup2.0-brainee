@@ -84,7 +84,7 @@ Lessons GSP's browser tests surfaced, which apply to us because the iPad runs We
 - **Run `pnpm games:build` before e2e** after any bridge change. Games bundle the bridge, and a stale build fails confusingly.
 
 ## Lab
-A dev-only `/lab` route in `apps/web` (no separate app): game picker from the `Game` table plus React registry, level/seed, phone/iPad frame, and the **event stream panel** (bridge status + live events), which e2e reads too. Embedded-game developers can also use standalone mode inside their engine.
+A dev-only `/lab` route in `apps/web` (no separate app; implemented for React games, `BRAINEE_LAB=1` enables it in production builds): game picker (React registry now; `Game` table once embedded games exist), level/seed, phone/iPad frame, and the **event stream panel** (bridge status + live events), which e2e reads too. Embedded-game developers can also use standalone mode inside their engine.
 
 ## Isolation
 Our own games: `sandbox="allow-scripts allow-same-origin"`. This isolates lifecycle; it is not a security boundary, so only audited code goes in. The bridge doesn't need same-origin. If we ever accept untrusted builds, serve them with GSP's `Content-Security-Policy: sandbox allow-scripts …` + `Access-Control-Allow-Origin: *` headers (GSP `src/app/game-builds/[...path]/route.ts`): an opaque origin that can still load its own files.

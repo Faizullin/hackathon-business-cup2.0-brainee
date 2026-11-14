@@ -18,9 +18,10 @@
     "db:seed": "pnpm --filter @brainee/db db:seed",
     "db:reset": "pnpm --filter @brainee/db db:reset",
     "db:studio": "pnpm --filter @brainee/db db:studio",
-    "check": "biome check . && pnpm typecheck",
+    "check": "biome check . && pnpm check:games && pnpm typecheck",
     "format": "biome format --write .",
-    "typecheck": "turbo run typecheck"
+    "typecheck": "turbo run typecheck",
+    "check:games": "node packages/games/scripts/check-games.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.7",

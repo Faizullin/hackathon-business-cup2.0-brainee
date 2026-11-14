@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@brainee/core": "workspace:*",
+    "@brainee/games": "workspace:*",
     "@brainee/ui": "workspace:*",
     "next": "16.4.6",
     "react": "19.3.1",

@@ -2,6 +2,7 @@
 @import "@brainee/ui/styles.css";
 
 @source "../";
+@source "../../../../packages/games/src";
 
 @layer base {
   body {

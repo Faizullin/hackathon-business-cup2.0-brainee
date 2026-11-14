@@ -24,16 +24,17 @@ Available commands:
 | `pnpm e2e` | Build, then run Playwright against a production server on :3100 |
 | `pnpm report --video` | Generate a Markdown UI report with recordings, screenshots and logs against a local server on :3123; [instructions](../reports/README.md) |
 | `pnpm test:reports` | Test report validation, browser capture, video conversion and report links |
-| `pnpm test` | Run the workspace Vitest suites through Turborepo |
+| `pnpm test` | Run the workspace Vitest suites through Turborepo (`core` rules, game rounds, DB) |
 | `pnpm db:push` | Apply `packages/db/schema.ts` to the local SQLite file using Drizzle Kit |
 | `pnpm db:seed` | Add missing demo fixtures without overwriting balances |
 | `pnpm db:reset` | Delete the database + WAL/SHM files, push schema and seed the demo |
 | `pnpm db:studio` | Open Drizzle's local data inspector |
-| `pnpm check` | Biome lint + format checks, then workspace TypeScript checks |
+| `pnpm check` | Biome lint + format checks, `check:games`, then workspace TypeScript checks |
+| `pnpm check:games` | Fail if a game folder imports another game or a non-core `@brainee/*` package |
 | `pnpm typecheck` | Run each package's `typecheck` through Turborepo |
 | `pnpm format` | Format source and config files; Markdown and frozen prototype sources are excluded |
 
-No environment variables or database are needed for the starter screens. `/` redirects to `/learn`; `/analytics` and `/login` exercise the parent and auth route groups. These are placeholders; sessions and the parent PIN are not implemented yet, and no family data is exposed.
+No environment variables or database are needed for the starter screens. `/` redirects to `/learn`; `/analytics` and `/login` exercise the parent and auth route groups. **`/lab`** is the game harness ([games.md](games.md#lab)): on in `pnpm dev`, 404 in production unless `BRAINEE_LAB=1` (the e2e server sets it). These are placeholders; sessions and the parent PIN are not implemented yet, and no family data is exposed.
 
 pnpm permits the esbuild install script required by tsx/Drizzle Kit and Vitest's toolchain. Other dependency build scripts remain subject to pnpm's approval settings.
 
@@ -60,7 +61,7 @@ The CLI is used during development; it is not a runtime dependency. Existing set
 
 Internal packages use the `@brainee/*` scope and `workspace:*` references. `@brainee/core` is the first empty example: its package exports point directly at `src/index.ts`, with no `dist/` or build script. Its TypeScript config extends `@brainee/config/tsconfig/base.json`. The web app configures workspace packages in `transpilePackages`.
 
-Workspace globs include `apps/*`, `packages/*` and `games/*`. Embedded-game packages will be added in their own tasks; the `/lab` and bridge design is in [games.md](games.md).
+Workspace globs include `apps/*`, `packages/*` and `games/*`. React games live in `packages/games/src/<id>/` (first: `odd-one-out`). Embedded-game packages and the bridge come with T-29/T-19; design in [games.md](games.md).
 
 ## Local database and tests
 `packages/db` uses the Node libSQL client and Drizzle. `openDatabase()` creates an explicit connection; importing the package performs no DB I/O. Callers close the returned `client` when finished. Foreign keys, a busy timeout and WAL mode are enabled on open. This is server-only code and is not wired into the starter UI.
@@ -92,11 +93,12 @@ Next.js ships version-matched docs at `apps/web/node_modules/next/dist/docs/`; r
 | `DATABASE_URL` | `file:./data/dev.db` | Implemented: workspace-relative SQLite path, or absolute file URL |
 | `DEMO_MODE` | `true` | Planned (T-52): auto-login as the seeded demo family |
 | `PARENT_PIN` | `1234` | Planned (T-40/T-52): parent barrier for the demo |
+| `BRAINEE_LAB` | unset | `1` enables `/lab` in a production build (always on in `next dev`) |
 
-## Deploy (demo)
-One container running `next start` on Railway, with a volume mounted at `/data` (`DATABASE_URL=file:/data/brainee.db`) and our custom domain. It's a single instance, so SQLite and in-process SSE just work. Don't scale beyond one replica.
+## Deploy
+Not now. Deploying is the final roadmap step (T-14): Vercel Hobby + Turso free plan via Drizzle ([D-15](decisions.md)). Until then, everything runs locally.
 
 ## Testing on a real device
-1. Open the deployed custom domain.
-2. On an iPad: Settings → Screen Time → Content & Privacy → Web Content → Allowed Websites Only, then add only our domain.
+1. Before deploying: run `pnpm build && pnpm --filter @brainee/web exec next start --hostname 0.0.0.0` and open `http://<mac-ip>:3000` on an iPad on the same Wi-Fi (layout, touch, WebKit).
+2. After T-14: on the iPad, Settings → Screen Time → Content & Privacy → Web Content → Allowed Websites Only, then add only `<project>.vercel.app`.
 3. Add the site to the Home Screen and go through the demo flow. Any blank image or font means something loads from a foreign domain.

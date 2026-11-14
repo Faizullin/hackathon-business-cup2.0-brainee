@@ -29,6 +29,6 @@ export default defineConfig({
     command: "pnpm exec next start --hostname 127.0.0.1 --port 3100",
     url: "http://127.0.0.1:3100/learn",
     reuseExistingServer: false,
-    env: { NEXT_TELEMETRY_DISABLED: "1" },
+    env: { NEXT_TELEMETRY_DISABLED: "1", BRAINEE_LAB: "1" },
   },
 });

@@ -4,6 +4,15 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (game contract)
+- T-28: core types + seeded RNG; games kit, lazy registry, `GameHost` + error boundary; `pnpm check:games` in `pnpm check`.
+- T-33 Odd one out (seeded), T-16 `/lab` (event stream, prod 404 unless `BRAINEE_LAB=1`), T-21 – T-23 core economy/stage/mood rules.
+- Verified: check clean; 39 unit tests; 28 e2e in Chromium + WebKit (phone + iPad); lab gating; WebKit screenshot.
+
+## 2026-11-14 (review)
+- Reviewed T-12/T-88/T-13: no code fixes needed. Checks pass (lint, types, 18 DB, 29 report, 20 e2e in Chromium + WebKit; `db:reset` on a fresh file).
+- Deployment moved to the final step: T-14 = Vercel Hobby + Turso free via Drizzle; live sync = polling (D-15, T-55); removed Railway/SSE notes; iPad testing over LAN before deploying (T-62, T-84).
+
 ## 2026-11-14 (13)
 - Completed T-13: empty renderer/game packages, shared Vitest config, and SQLite/libSQL + Drizzle with a minimal family/child/wallet seed and local management commands.
 - Verified 18 path/persistence tests, lint/type checks, production build and repeated real `db:reset`; checked additive seed, FK/integer constraints and rollback. No UI changes.
