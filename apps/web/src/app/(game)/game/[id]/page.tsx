@@ -20,6 +20,12 @@ export default async function GamePage({ params, searchParams }: Props) {
   const query = await searchParams;
   const level = Number(query.level) || 1;
   // A fresh seed per visit unless one is given (?seed= replays a board).
-  const seed = Number(query.seed) || Math.floor(Math.random() * 1_000_000);
-  return <GamePlayer gameId={game.id} level={level} seed={seed} />;
+  const requestedSeed = Number(query.seed);
+  const seed =
+    query.seed !== undefined && Number.isFinite(requestedSeed)
+      ? requestedSeed
+      : Math.floor(Math.random() * 1_000_000);
+  return (
+    <GamePlayer key={`${game.id}:${level}:${seed}`} gameId={game.id} level={level} seed={seed} />
+  );
 }

@@ -10,7 +10,7 @@ The app works with **built games, not source**. Wherever a game is made, it ends
 
 | Path | For | Source lives | Runtime | Status |
 |---|---|---|---|---|
-| **A · React** | small, tightly integrated learning games | `packages/games/src/<id>/` | `react` | ✅ odd-one-out |
+| **A · React** | small, tightly integrated learning games | `packages/games/src/<id>/` | `react` | ✅ odd-one-out, continue-pattern |
 | **B · In-repo engine** | Phaser/GDevelop games we write | `games/<engine>-<name>/` workspace package | `embedded` | planned (T-29, T-19) |
 | **C · External** | other repos, teams or engines | **outside this repo**; we import a pinned, checksummed build artifact | `embedded` | later (T-91) |
 
@@ -43,12 +43,12 @@ type GameResult = { gameId: string; level: number; rounds: number; mistakes: num
 
 // packages/games/src/kit.ts
 type GameProps = {
-  level: number; seed: number;
+  level: number; seed: number; text: GameText;
   onRound(e: { correct: boolean; afterMistake: boolean }): void;
   onFinish(result: GameResult): void;
 };
 ```
-`<GameHost game level seed onRound onFinish />` renders `ReactGame` (via `load()` from the code registry) or `IframeGame` (via `runtimeUrl` from the `Game` DB row). Both run inside an error boundary. **The server validates every `GameResult` before `core` rewards it** (T-81).
+`<GameHost game level seed text onRound onFinish />` renders `ReactGame` (via `load()` from the code registry) or `IframeGame` (via `runtimeUrl` from the `Game` DB row). Both run inside an error boundary. `GameText` is defined in `kit.ts`; the web host supplies Russian strings from `i18n/ru.ts`. Shared shape types and the SVG renderer live in `src/kit/`; game folders may import that kit, core, npm and their own files, never another game. `pnpm check:games` checks this boundary. **The server validates every `GameResult` before `core` rewards it** (T-81).
 
 Rules for every game:
 1. **Games report; `core` rewards.** A game never decides ★ or stat changes.

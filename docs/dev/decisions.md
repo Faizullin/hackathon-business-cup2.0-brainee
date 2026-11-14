@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-17 · Per-tab learning preview before server rewards · 2026-11-14 · accepted
+**Context:** T-35 must demonstrate changed Brainy/wallet state across child and fullscreen game routes before T-54 persistence exists.
+**Decision:** a root client provider calls pure core transitions and keeps a transient per-tab snapshot; no API writes or shared server memory. The storage, stopping and replacement boundary is documented in [ui.md](ui.md#temporary-learning-preview-t-35).
+**Consequences:** the child flow is reviewable now. Cross-device proof, trusted rewards and replay protection still require the [demo data slice](../progress/todo.md#smallest-end-to-end-demo-slice-t-80); the preview must be replaced, not treated as persistence.
+
 ## D-16 · Game catalog scales by artifacts: three paths, one contract · 2026-11-14 · accepted · extends D-10/D-11/D-12
 **Context:** games may come in large numbers, from other repos, teams and engines; the D-12 plan assumed all game source lives in this monorepo.
 **Decision:** the app consumes **built artifacts + manifests**, not source. Path A = React folders (`packages/games`), path B = in-repo engine packages (`games/*`), path C = external pinned, checksummed build artifacts imported by version. Manifests are schema-validated and fill `Game`/`GameVersion` in the DB; the bridge is versioned (host supports N and N−1); every game must pass one conformance suite before it is listed; isolation follows trust tiers. Details: [games.md](games.md#scaling-three-paths-in-one-contract-d-16).

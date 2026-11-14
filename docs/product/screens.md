@@ -21,6 +21,8 @@ The platform's recommendation outweighs the child's wish. Otherwise kids play on
 - The choice is logged (took the recommendation vs. other games). This is the *do the hard thing* metric.
 - **Algorithm (MVP):** for each of the 6 skills, compute gap = value − age average. Sort ascending and take the first 3. For each, pick that skill's game the child played least in the last 7 days.
 
+**Core implementation (T-25):** `recommendGames` takes complete ability scores, supplied age averages, a playable catalog, completed-session history and an explicit timestamp. Both main and secondary abilities qualify. The seven-day window includes its start and excludes future sessions. Equal play counts prefer the main ability, then game ID; equal gaps keep ability order. Cards have distinct game IDs; missing games in the top three skills produce fewer cards. Age averages remain product TBD (T-83); the algorithm supplies none. Entry/Learn UI wiring and choice logging remain T-31/T-32.
+
 ### Learn «Учимся»
 - «Брейни советует» block: the same 3 recommendations with reasons.
 - «Все развивающие игры» block: a grid of cards showing the skill and maximum reward.

@@ -3,12 +3,18 @@
 import { roundStars } from "@brainee/core";
 import { useMemo, useRef, useState } from "react";
 import { clampLevel, type GameProps } from "../kit";
+import { Shape } from "../kit/Shape";
 import { generateRounds } from "./rounds";
-import { Shape } from "./Shape";
 
 type Feedback = { kind: "correct"; stars: number; corrected: boolean } | { kind: "miss" } | null;
 
-export default function OddOneOut({ level: requestedLevel, seed, onRound, onFinish }: GameProps) {
+export default function OddOneOut({
+  level: requestedLevel,
+  seed,
+  onRound,
+  onFinish,
+  text,
+}: GameProps) {
   const level = clampLevel(requestedLevel, 2);
   const rounds = useMemo(() => generateRounds(level, seed), [level, seed]);
   const startedAt = useRef(Date.now());
@@ -67,9 +73,7 @@ export default function OddOneOut({ level: requestedLevel, seed, onRound, onFini
       data-game="odd-one-out"
     >
       <div className="flex items-center justify-between gap-3">
-        <p className="text-muted-foreground text-sm">
-          Раунд {index + 1} из {rounds.length}
-        </p>
+        <p className="text-muted-foreground text-sm">{text.round(index + 1, rounds.length)}</p>
         <ol className="flex gap-1.5" aria-hidden="true">
           {rounds.map((r, i) => (
             <li
@@ -80,7 +84,7 @@ export default function OddOneOut({ level: requestedLevel, seed, onRound, onFini
         </ol>
       </div>
 
-      <h2 className="font-heading text-lg font-semibold">Найди фигуру, которая отличается</h2>
+      <h2 className="font-heading text-lg font-semibold">{text.oddInstruction}</h2>
 
       <div
         className="grid gap-2.5"
@@ -94,7 +98,7 @@ export default function OddOneOut({ level: requestedLevel, seed, onRound, onFini
               // Re-mount on each miss so the shake animation replays.
               key={shaking ? `${cell}-shake-${shakeCell.n}` : `${index}-${cell}`}
               type="button"
-              aria-label={`Фигура ${cell + 1}`}
+              aria-label={text.shape(cell + 1)}
               disabled={solved || done}
               onClick={() => answer(cell)}
               className={`aspect-square min-h-14 touch-manipulation rounded-2xl border-2 bg-card p-3 transition-transform duration-(--dur-press) active:scale-95 disabled:cursor-default ${
@@ -109,10 +113,9 @@ export default function OddOneOut({ level: requestedLevel, seed, onRound, onFini
 
       <div className="flex min-h-12 items-center justify-between gap-3" aria-live="polite">
         <p className="font-medium">
-          {feedback?.kind === "miss" && "Почти! Присмотрись и попробуй ещё раз"}
-          {feedback?.kind === "correct" &&
-            `${feedback.corrected ? "Звезда за исправление!" : "Верно!"} +${feedback.stars} ★`}
-          {done && " Игра пройдена!"}
+          {feedback?.kind === "miss" && text.almost}
+          {feedback?.kind === "correct" && text.correct(feedback.stars, feedback.corrected)}
+          {done && text.completed}
         </p>
         {solved && !done && (
           <button
@@ -120,7 +123,7 @@ export default function OddOneOut({ level: requestedLevel, seed, onRound, onFini
             onClick={next}
             className="min-h-12 rounded-full bg-primary px-5 font-semibold text-primary-foreground transition-transform duration-(--dur-press) active:scale-95"
           >
-            {isLast ? "Готово" : "Дальше"}
+            {isLast ? text.done : text.next}
           </button>
         )}
       </div>

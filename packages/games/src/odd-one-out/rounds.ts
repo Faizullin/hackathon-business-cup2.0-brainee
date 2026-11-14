@@ -1,14 +1,6 @@
 import { createRng } from "@brainee/core";
 
-export const SHAPES = ["circle", "square", "triangle"] as const;
-export const COLORS = ["coral", "sky", "sun", "mint"] as const;
-
-export type ShapeSpec = {
-  shape: (typeof SHAPES)[number];
-  color: (typeof COLORS)[number];
-  /** 1 = full size; level 2 uses subtle size differences. */
-  scale: number;
-};
+import { COLORS, SHAPES, type ShapeSpec } from "../kit/shapes";
 
 export type Difference = "color" | "shape" | "size";
 

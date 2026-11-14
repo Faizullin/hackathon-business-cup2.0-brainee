@@ -120,6 +120,7 @@ export function LabClient() {
           className={`mx-auto w-full ${FRAMES[frame]} rounded-panel border border-border bg-background`}
         >
           <GameHost
+            text={ru.games}
             key={`${game.id}-${safeLevel}-${seed}-${run}`}
             game={game}
             level={safeLevel}

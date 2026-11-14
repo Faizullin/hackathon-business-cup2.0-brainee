@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { ShapeSpec } from "./rounds";
+import type { ShapeSpec } from "./shapes";
 
 const FILL: Record<ShapeSpec["color"], string> = {
   coral: "var(--coral)",

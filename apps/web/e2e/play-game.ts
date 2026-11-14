@@ -1,0 +1,18 @@
+import type { Page } from "@playwright/test";
+import { expect } from "@playwright/test";
+
+/** Solve by the visible SVG differences, without adding answer markers to the game. */
+export async function finishOddOneOut(page: Page) {
+  for (let round = 0; round < 4; round++) {
+    const cells = page.getByRole("button", { name: /^Фигура \d+$/ });
+    await expect(cells.first()).toBeVisible();
+    const shapes = await cells
+      .locator("svg")
+      .evaluateAll((elements) => elements.map((element) => element.innerHTML));
+    const odd = shapes.findIndex((shape) => shapes.filter((other) => other === shape).length === 1);
+    expect(odd).toBeGreaterThanOrEqual(0);
+    await cells.nth(odd).click();
+    await page.getByRole("button", { name: /^(Дальше|Готово)$/ }).click();
+  }
+  await expect(page.getByTestId("post-game")).toBeVisible();
+}

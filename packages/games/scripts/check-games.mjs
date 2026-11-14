@@ -1,7 +1,7 @@
 // Each game folder may import only its own files, ../kit, @brainee/core and npm packages.
 // Keeps games self-contained so one can be promoted to its own package (D-10).
 import { readdirSync, readFileSync, statSync } from "node:fs";
-import { join, relative } from "node:path";
+import { dirname, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const src = fileURLToPath(new URL("../src", import.meta.url));
@@ -15,11 +15,18 @@ function files(dir) {
   });
 }
 
-for (const game of readdirSync(src).filter((n) => statSync(join(src, n)).isDirectory())) {
+for (const game of readdirSync(src).filter(
+  (n) => n !== "kit" && statSync(join(src, n)).isDirectory(),
+)) {
   for (const file of files(join(src, game))) {
     for (const [, spec] of readFileSync(file, "utf8").matchAll(IMPORT)) {
       const internal = spec.startsWith("@brainee/") && spec !== "@brainee/core";
-      const sibling = spec.startsWith("../") && !/^\.\.\/kit(\.ts)?$/.test(spec);
+      const target = resolve(dirname(file), spec);
+      const sharedKit =
+        target === join(src, "kit") ||
+        target === join(src, "kit.ts") ||
+        target.startsWith(`${join(src, "kit")}${sep}`);
+      const sibling = spec.startsWith("../") && !sharedKit;
       if (internal || sibling) problems.push(`${relative(src, file)}: imports "${spec}"`);
     }
   }

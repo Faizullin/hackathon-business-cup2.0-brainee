@@ -4,6 +4,11 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (learning loop)
+- T-80 defines the connected demo slice; T-35 implements the per-tab post-game loop, Brainy/wallet updates, stop and one-time third-game break bonus (D-17). No DB writes yet.
+- T-34 adds Continue the pattern (2 × 4 seeded rounds), shared shape kit and localized host text; T-24/T-25 add tested gain-policy and recommendation functions without inventing calibration/age norms.
+- Verified: check clean; 70 unit tests; 64 e2e (Chromium + WebKit, phone + iPad); WebKit screenshots reviewed. Next: the T-50/T-51 demo data subset, then trusted finishes and parent polling.
+
 ## 2026-11-14 (shell)
 - Single `master` branch (local + GitHub); personal notes → gitignored `.local/`.
 - T-20 Brainy renderer + `/lab/brainy`, T-27 accessory rules, T-30 child shell (tab bar, dock, Brainy tab, fullscreen game). D-16 game scaling + T-89 – T-91.

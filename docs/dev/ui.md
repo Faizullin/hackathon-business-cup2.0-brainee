@@ -28,6 +28,14 @@ app/(auth)/layout.tsx       # centered single column
 - The entry screen («Во что играем сейчас?») is a full-screen sheet that can't be dismissed (product rule): Base UI Dialog, not a swipeable Drawer.
 - Bottom sheets (accessory preview, gift confirm, parent "new task") use Base UI Drawer with snap points.
 
+## Temporary learning preview (T-35)
+
+`DemoProgressProvider` at the root preserves Brainy, wallet, mood and the learning streak across the sibling child/game route groups. It starts from `demoChild`, saves a versioned snapshot in per-tab `sessionStorage`, and falls back to memory when storage is unavailable or corrupt. Reload restores the tab snapshot; it is not shared with a parent's device. Finishing calls the pure `finishLearningSession` transition; stopping resets the run, preserves the one-time bonus flag and shows Brainy's thank-you.
+
+The post-game screen shows actual capped stat gains and earned stars. It offers an available game for the weakest trained body part (`practiceGame`), plus the next level (or a new level-one run after the last level). This fallback needs no age norms. The separate entry algorithm is [T-25](../product/screens.md#entry-screen-во-что-играем-сейчас).
+
+T-54/T-81 will validate/deduplicate results and write rewards atomically on the server; T-55 replaces this preview with server state. This does not yet meet the [two-device demo proof](../progress/todo.md#smallest-end-to-end-demo-slice-t-80).
+
 ## Motion tokens (put in `packages/ui`)
 
 | Token | Value | Used for |

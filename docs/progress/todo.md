@@ -14,7 +14,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 
 **Done when:** one finish updates balance/stats once, retrying it pays nothing twice, both devices converge through polling, and the third game offers a break with exactly one bonus. Refresh restores server state. This session builds the client preview; it does not satisfy the saved/two-device part yet. Slice-only work does not complete broader tasks such as all T-41 analytics or all T-50 entities.
 
-Other task IDs stay outside this slice. T-24/T-25 can follow as pure core improvements; entry flow, tasks/gifts, leisure, advanced analytics, embedded games and motion polish wait. Deployment remains the final task (T-14).
+Other task IDs stay outside this slice. T-24/T-25 are available as pure core improvements; entry flow, tasks/gifts, leisure, advanced analytics, embedded games and motion polish wait. Deployment remains the final task (T-14).
 
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
@@ -39,8 +39,8 @@ Other task IDs stay outside this slice. T-24/T-25 can follow as pure core improv
 - [x] T-21 Star rules (+3 / +4 / +15 / 3-in-a-row +5) with tests
 - [x] T-22 Exchange ☀→★ 1:10, one-way; gifts ☀ only
 - [x] T-23 Stage + mood math (stage thresholds, +8 mood per game); mood decay rate is still a product TBD
-- [ ] T-24 Stat gain from a session (70/30 weights; keep the formula swappable)
-- [ ] T-25 Entry recommendation algorithm (3 largest gaps, least-played in 7 days)
+- [x] T-24 Session skill gains (70/30), ability → body rollup; injected level/accuracy policy, calibration still TBD → [data-model.md](../product/data-model.md#how-stats-change)
+- [x] T-25 Entry recommendation algorithm (3 largest gaps, least-played in 7 days); explicit age-average/history/time inputs → [screens.md](../product/screens.md#entry-screen-во-что-играем-сейчас)
 - [ ] T-26 Weekly goal counted by week_suns; 5-tasks-a-day limit
 - [x] T-27 Accessory slots (one per slot; earned vs. bought): catalog, `equip`/`unequip`, `buyAccessory` in `core`
 - [x] T-28 Game contract: `GameResult`/`Skill` types in `core`, `GameDefinition` + lazy registry + error boundary in `games`; `pnpm check:games` (no cross-game imports) → [games.md](../dev/games.md)
@@ -50,9 +50,9 @@ Other task IDs stay outside this slice. T-24/T-25 can follow as pure core improv
 - [x] T-30 Child app shell: Brainy dock + 4-tab bottom bar in `(child)/layout`, fullscreen game layout, app-feel checklist → [ui.md](../dev/ui.md#app-shell-route-group-layouts-own-the-chrome)
 - [ ] T-31 Entry screen (no close, logs the choice)
 - [ ] T-32 Learn tab (recommendations + grid); the game grid exists, «Брейни советует» recommendations remain
-- [x] T-33 Game: Odd one out (2 levels × 4 rounds, seeded), tested at `/lab`; wiring into the child flow is T-32/T-35
-- [ ] T-34 Game: Continue the pattern
-- [ ] T-35 Post-game screen: before → after, "Что дальше?", break after 3
+- [x] T-33 Game: Odd one out (2 levels × 4 rounds, seeded), tested at `/lab` and in the child flow
+- [x] T-34 Game: Continue the pattern (2 levels × 4 seeded rounds); both games share `kit/Shape`
+- [x] T-35 Post-game screen: before → after, stat chip, "Что дальше?", stop, third-game break +5★; [per-tab preview](../dev/ui.md#temporary-learning-preview-t-35), no DB writes
 - [ ] T-36 Leisure tab: shop (10 min / forever), cartoons, science videos
 - [ ] T-37 Science video player (pause only, resume, quiz)
 - [ ] T-38 Gifts tab + Brainy tab (accessory shop, stats, earned rewards)

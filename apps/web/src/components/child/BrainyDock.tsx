@@ -1,13 +1,17 @@
+"use client";
+
 import { Brainy } from "@brainee/brainy";
 import { stageOf } from "@brainee/core";
 import { StarIcon, SunIcon } from "@brainee/ui/components/child-icons";
 import Link from "next/link";
 import { ru } from "@/i18n/ru";
 import { demoChild } from "@/lib/demo-child";
+import { useDemoProgress } from "./DemoProgressProvider";
 
 // Top dock on Learn / Leisure / Gifts (docs/product/screens.md#brainy-dock-every-child-screen).
 export function BrainyDock() {
-  const { stats, equipped, wallet, mood, weekGoal } = demoChild;
+  const { stats, wallet, mood } = useDemoProgress().progress;
+  const { equipped, weekGoal } = demoChild;
   const stage = stageOf(stats);
   const t = ru.child.dock;
   return (
