@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { type ReactNode, ViewTransition } from "react";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { TabBar } from "@/components/child/TabBar";
 import { ru } from "@/i18n/ru";
@@ -20,7 +20,7 @@ export default function ChildLayout({ children }: { children: ReactNode }) {
           tabIndex={-1}
           className="mx-auto flex w-full max-w-[1180px] flex-col gap-5 pt-[max(16px,env(safe-area-inset-top))] pr-[max(16px,env(safe-area-inset-right))] pb-[calc(96px+env(safe-area-inset-bottom))] pl-[max(16px,env(safe-area-inset-left))]"
         >
-          {children}
+          <ViewTransition default="page-fade">{children}</ViewTransition>
         </main>
         <TabBar />
       </div>

@@ -7,6 +7,7 @@ import {
   families,
   gameSessions,
   games,
+  showcases,
   wallets,
 } from "../schema";
 import type { Database } from "./client";
@@ -31,6 +32,8 @@ export async function getStateSnapshot(
       state: brainyStates,
       wallet: wallets,
       run: { inRow: demoSessions.inRow, bonusGiven: demoSessions.bonusGiven },
+      parentUntil: demoSessions.parentUntil,
+      showcase: showcases.data,
       last: gameSessions,
       gameTitle: games.title,
     })
@@ -39,6 +42,7 @@ export async function getStateSnapshot(
     .innerJoin(families, eq(families.id, children.familyId))
     .innerJoin(brainyStates, eq(brainyStates.childId, children.id))
     .innerJoin(wallets, eq(wallets.childId, children.id))
+    .innerJoin(showcases, eq(showcases.childId, children.id))
     .leftJoin(gameSessions, eq(gameSessions.id, latest))
     .leftJoin(games, eq(games.id, gameSessions.gameId))
     .where(and(eq(demoSessions.tokenHash, tokenHash), gt(demoSessions.expiresAt, now)))
@@ -58,6 +62,8 @@ export async function getStateSnapshot(
     child: row.child,
     progress,
     baseline: startSnapshot,
+    showcase: row.showcase,
+    parentUnlocked: row.parentUntil !== null && row.parentUntil > now,
     latestGame:
       row.last?.finishedAt && row.last.starsEarned !== null
         ? {

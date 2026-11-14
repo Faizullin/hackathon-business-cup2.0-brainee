@@ -8,8 +8,8 @@
       "title": "Phone: three saved games, break and child tabs",
       "surface": "web",
       "target": "http://127.0.0.1:3123/learn",
-      "startedAt": "2026-11-14T12:27:36.553Z",
-      "durationMs": 39905,
+      "startedAt": "2026-11-14T13:00:43.813Z",
+      "durationMs": 43611,
       "status": "PASSED",
       "checks": {
         "passed": 27,
@@ -21,369 +21,369 @@
       "media": {
         "video": "phone-learning.mp4",
         "poster": "phone-learning.jpg",
-        "bytes": 272618
+        "bytes": 452771
       },
       "screenshots": [],
       "entries": [
         {
-          "t": 51,
+          "t": 58,
           "source": "step",
           "level": "info",
           "message": "open /learn"
         },
         {
-          "t": 1620,
+          "t": 1629,
           "source": "check",
           "level": "info",
           "message": "Learn opens with saved state",
           "data": null
         },
         {
-          "t": 1622,
+          "t": 1632,
           "source": "check",
           "level": "info",
           "message": "The Brainy dock shows the saved wallet",
           "data": null
         },
         {
-          "t": 1623,
+          "t": 1635,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 1623,
+          "t": 1635,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 1623,
+          "t": 1635,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 1623,
+          "t": 1635,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 2825,
+          "t": 2837,
           "source": "step",
           "level": "info",
           "message": "wait 1200"
         },
         {
-          "t": 2825,
+          "t": 2837,
           "source": "mark",
           "level": "info",
           "message": "Game 1: open Continue the pattern from the Learn grid"
         },
         {
-          "t": 2891,
+          "t": 2945,
           "source": "step",
           "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Продолжи узор\"}"
+          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Продолжи узор Логика\",\"exact\":true}"
         },
         {
-          "t": 2993,
+          "t": 3046,
           "source": "check",
           "level": "info",
           "message": "The game opens fullscreen",
           "data": null
         },
         {
-          "t": 3275,
+          "t": 3327,
           "source": "mark",
           "level": "info",
           "message": "Play Continue the pattern"
         },
         {
-          "t": 13654,
+          "t": 17206,
           "source": "check",
           "level": "info",
-          "message": "Four rounds played (3 corrected)"
+          "message": "Four rounds played (5 corrected)"
         },
         {
-          "t": 13654,
+          "t": 17206,
           "source": "step",
           "level": "info",
           "message": "call playGame"
         },
         {
-          "t": 13684,
+          "t": 17235,
           "source": "check",
           "level": "info",
           "message": "Game 1: «Игра пройдена!» shows stars and Brainy before → after"
         },
         {
-          "t": 13685,
+          "t": 17236,
           "source": "check",
           "level": "info",
           "message": "No break suggestion before the third game"
         },
         {
-          "t": 16393,
+          "t": 19942,
           "source": "step",
           "level": "info",
           "message": "call showPostGame"
         },
         {
-          "t": 16393,
+          "t": 19942,
           "source": "mark",
           "level": "info",
           "message": "Game 2: «Что дальше?» practice card"
         },
         {
-          "t": 16417,
+          "t": 19955,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"testId\",\"value\":\"practice-game\"}"
         },
         {
-          "t": 17208,
+          "t": 20740,
           "source": "mark",
           "level": "info",
           "message": "Play Odd one out"
         },
         {
-          "t": 22023,
+          "t": 25555,
           "source": "check",
           "level": "info",
           "message": "Four rounds played"
         },
         {
-          "t": 22023,
+          "t": 25555,
           "source": "step",
           "level": "info",
           "message": "call playGame"
         },
         {
-          "t": 22051,
+          "t": 25580,
           "source": "check",
           "level": "info",
           "message": "Game 2: «Игра пройдена!» shows stars and Brainy before → after"
         },
         {
-          "t": 22052,
+          "t": 25580,
           "source": "check",
           "level": "info",
           "message": "No break suggestion before the third game"
         },
         {
-          "t": 24756,
+          "t": 28287,
           "source": "step",
           "level": "info",
           "message": "call showPostGame"
         },
         {
-          "t": 24756,
+          "t": 28287,
           "source": "mark",
           "level": "info",
           "message": "Game 3: next level card"
         },
         {
-          "t": 24780,
+          "t": 28305,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"testId\",\"value\":\"next-level\"}"
         },
         {
-          "t": 24856,
+          "t": 28382,
           "source": "mark",
           "level": "info",
           "message": "Play Odd one out"
         },
         {
-          "t": 29665,
+          "t": 33136,
           "source": "check",
           "level": "info",
           "message": "Four rounds played"
         },
         {
-          "t": 29665,
+          "t": 33136,
           "source": "step",
           "level": "info",
           "message": "call playGame"
         },
         {
-          "t": 29694,
+          "t": 33162,
           "source": "check",
           "level": "info",
           "message": "Game 3: «Игра пройдена!» shows stars and Brainy before → after"
         },
         {
-          "t": 29697,
+          "t": 33164,
           "source": "check",
           "level": "info",
           "message": "The third game adds the one-time +5 ★ break bonus"
         },
         {
-          "t": 32401,
+          "t": 35869,
           "source": "step",
           "level": "info",
           "message": "call showPostGame"
         },
         {
-          "t": 32401,
+          "t": 35869,
           "source": "mark",
           "level": "info",
           "message": "Take the suggested break"
         },
         {
-          "t": 32438,
+          "t": 35888,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Сделать перерыв\",\"exact\":true}"
         },
         {
-          "t": 32462,
+          "t": 35921,
           "source": "check",
           "level": "info",
           "message": "The break ends on the Brainy tab",
           "data": null
         },
         {
-          "t": 32465,
+          "t": 35926,
           "source": "check",
           "level": "info",
           "message": "Brainy thanks the child",
           "data": null
         },
         {
-          "t": 32465,
+          "t": 35927,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 32465,
+          "t": 35927,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 32465,
+          "t": 35927,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 32465,
+          "t": 35927,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 33967,
+          "t": 37428,
           "source": "step",
           "level": "info",
           "message": "wait 1500"
         },
         {
-          "t": 33967,
+          "t": 37428,
           "source": "mark",
           "level": "info",
           "message": "Visit the other tabs"
         },
         {
-          "t": 34003,
+          "t": 37454,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Учимся\",\"exact\":true}"
         },
         {
-          "t": 34028,
+          "t": 37528,
           "source": "check",
           "level": "info",
           "message": "Learn shows the updated wallet",
           "data": null
         },
         {
-          "t": 35029,
+          "t": 38529,
           "source": "step",
           "level": "info",
           "message": "wait 1000"
         },
         {
-          "t": 35051,
+          "t": 38552,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Отдых\",\"exact\":true}"
         },
         {
-          "t": 35074,
+          "t": 38628,
           "source": "check",
           "level": "info",
           "message": "Leisure placeholder (T-36)",
           "data": null
         },
         {
-          "t": 35876,
+          "t": 39429,
           "source": "step",
           "level": "info",
           "message": "wait 800"
         },
         {
-          "t": 35897,
+          "t": 39453,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Подарки\",\"exact\":true}"
         },
         {
-          "t": 35921,
+          "t": 39529,
           "source": "check",
           "level": "info",
           "message": "Gifts placeholder (T-38)",
           "data": null
         },
         {
-          "t": 36722,
+          "t": 40331,
           "source": "step",
           "level": "info",
           "message": "wait 800"
         },
         {
-          "t": 36752,
+          "t": 40353,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Открыть Брейни\",\"exact\":true}"
         },
         {
-          "t": 36853,
+          "t": 40455,
           "source": "check",
           "level": "info",
           "message": "The dock opens the Brainy tab",
           "data": null
         },
         {
-          "t": 36854,
+          "t": 40457,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 36854,
+          "t": 40457,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 36854,
+          "t": 40457,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 36854,
+          "t": 40457,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 38056,
+          "t": 41659,
           "source": "step",
           "level": "info",
           "message": "wait 1200"
@@ -397,8 +397,8 @@
       "title": "iPad viewport: three saved games, break and child tabs",
       "surface": "web",
       "target": "http://127.0.0.1:3123/learn",
-      "startedAt": "2026-11-14T12:28:16.459Z",
-      "durationMs": 38428,
+      "startedAt": "2026-11-14T13:01:27.425Z",
+      "durationMs": 40274,
       "status": "PASSED",
       "checks": {
         "passed": 27,
@@ -410,369 +410,369 @@
       "media": {
         "video": "ipad-learning.mp4",
         "poster": "ipad-learning.jpg",
-        "bytes": 270741
+        "bytes": 577090
       },
       "screenshots": [],
       "entries": [
         {
-          "t": 59,
+          "t": 75,
           "source": "step",
           "level": "info",
           "message": "open /learn"
         },
         {
-          "t": 1617,
+          "t": 1634,
           "source": "check",
           "level": "info",
           "message": "Learn opens with saved state",
           "data": null
         },
         {
-          "t": 1618,
+          "t": 1636,
           "source": "check",
           "level": "info",
           "message": "The Brainy dock shows the saved wallet",
           "data": null
         },
         {
-          "t": 1619,
+          "t": 1636,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 1619,
+          "t": 1636,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 1619,
+          "t": 1636,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 1619,
+          "t": 1636,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 2821,
+          "t": 2838,
           "source": "step",
           "level": "info",
           "message": "wait 1200"
         },
         {
-          "t": 2821,
+          "t": 2838,
           "source": "mark",
           "level": "info",
           "message": "Game 1: open Continue the pattern from the Learn grid"
         },
         {
-          "t": 2850,
+          "t": 2858,
           "source": "step",
           "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Продолжи узор\"}"
+          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Продолжи узор Логика\",\"exact\":true}"
         },
         {
-          "t": 2952,
+          "t": 2959,
           "source": "check",
           "level": "info",
           "message": "The game opens fullscreen",
           "data": null
         },
         {
-          "t": 3231,
+          "t": 3239,
           "source": "mark",
           "level": "info",
           "message": "Play Continue the pattern"
         },
         {
-          "t": 11784,
+          "t": 13457,
           "source": "check",
           "level": "info",
-          "message": "Four rounds played (2 corrected)"
+          "message": "Four rounds played (3 corrected)"
         },
         {
-          "t": 11784,
+          "t": 13457,
           "source": "step",
           "level": "info",
           "message": "call playGame"
         },
         {
-          "t": 11811,
+          "t": 13487,
           "source": "check",
           "level": "info",
           "message": "Game 1: «Игра пройдена!» shows stars and Brainy before → after"
         },
         {
-          "t": 11812,
+          "t": 13488,
           "source": "check",
           "level": "info",
           "message": "No break suggestion before the third game"
         },
         {
-          "t": 14518,
+          "t": 16194,
           "source": "step",
           "level": "info",
           "message": "call showPostGame"
         },
         {
-          "t": 14518,
+          "t": 16194,
           "source": "mark",
           "level": "info",
           "message": "Game 2: «Что дальше?» practice card"
         },
         {
-          "t": 14544,
+          "t": 16219,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"testId\",\"value\":\"practice-game\"}"
         },
         {
-          "t": 15325,
+          "t": 17001,
           "source": "mark",
           "level": "info",
           "message": "Play Odd one out"
         },
         {
-          "t": 20162,
+          "t": 21736,
           "source": "check",
           "level": "info",
           "message": "Four rounds played"
         },
         {
-          "t": 20162,
+          "t": 21736,
           "source": "step",
           "level": "info",
           "message": "call playGame"
         },
         {
-          "t": 20190,
+          "t": 21761,
           "source": "check",
           "level": "info",
           "message": "Game 2: «Игра пройдена!» shows stars and Brainy before → after"
         },
         {
-          "t": 20190,
+          "t": 21762,
           "source": "check",
           "level": "info",
           "message": "No break suggestion before the third game"
         },
         {
-          "t": 22896,
+          "t": 24467,
           "source": "step",
           "level": "info",
           "message": "call showPostGame"
         },
         {
-          "t": 22896,
+          "t": 24467,
           "source": "mark",
           "level": "info",
           "message": "Game 3: next level card"
         },
         {
-          "t": 22907,
+          "t": 24488,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"testId\",\"value\":\"next-level\"}"
         },
         {
-          "t": 22931,
+          "t": 24565,
           "source": "mark",
           "level": "info",
           "message": "Play Odd one out"
         },
         {
-          "t": 27727,
+          "t": 29300,
           "source": "check",
           "level": "info",
           "message": "Four rounds played"
         },
         {
-          "t": 27727,
+          "t": 29300,
           "source": "step",
           "level": "info",
           "message": "call playGame"
         },
         {
-          "t": 27755,
+          "t": 29326,
           "source": "check",
           "level": "info",
           "message": "Game 3: «Игра пройдена!» shows stars and Brainy before → after"
         },
         {
-          "t": 27757,
+          "t": 29328,
           "source": "check",
           "level": "info",
           "message": "The third game adds the one-time +5 ★ break bonus"
         },
         {
-          "t": 30461,
+          "t": 32032,
           "source": "step",
           "level": "info",
           "message": "call showPostGame"
         },
         {
-          "t": 30461,
+          "t": 32032,
           "source": "mark",
           "level": "info",
           "message": "Take the suggested break"
         },
         {
-          "t": 30474,
+          "t": 32056,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Сделать перерыв\",\"exact\":true}"
         },
         {
-          "t": 30501,
+          "t": 32086,
           "source": "check",
           "level": "info",
           "message": "The break ends on the Brainy tab",
           "data": null
         },
         {
-          "t": 30504,
+          "t": 32089,
           "source": "check",
           "level": "info",
           "message": "Brainy thanks the child",
           "data": null
         },
         {
-          "t": 30505,
+          "t": 32089,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 30505,
+          "t": 32089,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 30505,
+          "t": 32089,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 30505,
+          "t": 32089,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 32006,
+          "t": 33591,
           "source": "step",
           "level": "info",
           "message": "wait 1500"
         },
         {
-          "t": 32006,
+          "t": 33591,
           "source": "mark",
           "level": "info",
           "message": "Visit the other tabs"
         },
         {
-          "t": 32024,
+          "t": 33600,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Учимся\",\"exact\":true}"
         },
         {
-          "t": 32049,
+          "t": 33674,
           "source": "check",
           "level": "info",
           "message": "Learn shows the updated wallet",
           "data": null
         },
         {
-          "t": 33050,
+          "t": 34677,
           "source": "step",
           "level": "info",
           "message": "wait 1000"
         },
         {
-          "t": 33072,
+          "t": 34703,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Отдых\",\"exact\":true}"
         },
         {
-          "t": 33096,
+          "t": 34781,
           "source": "check",
           "level": "info",
           "message": "Leisure placeholder (T-36)",
           "data": null
         },
         {
-          "t": 33898,
+          "t": 35584,
           "source": "step",
           "level": "info",
           "message": "wait 800"
         },
         {
-          "t": 33922,
+          "t": 35609,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Подарки\",\"exact\":true}"
         },
         {
-          "t": 33944,
+          "t": 35661,
           "source": "check",
           "level": "info",
           "message": "Gifts placeholder (T-38)",
           "data": null
         },
         {
-          "t": 34746,
+          "t": 36463,
           "source": "step",
           "level": "info",
           "message": "wait 800"
         },
         {
-          "t": 34756,
+          "t": 36483,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Открыть Брейни\",\"exact\":true}"
         },
         {
-          "t": 34857,
+          "t": 36585,
           "source": "check",
           "level": "info",
           "message": "The dock opens the Brainy tab",
           "data": null
         },
         {
-          "t": 34858,
+          "t": 36586,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 34858,
+          "t": 36586,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 34858,
+          "t": 36586,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 34858,
+          "t": 36586,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 36059,
+          "t": 37788,
           "source": "step",
           "level": "info",
           "message": "wait 1200"

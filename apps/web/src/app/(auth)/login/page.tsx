@@ -19,6 +19,9 @@ export default function LoginPage() {
           {ru.app.toLearn}
           <ArrowRight aria-hidden="true" />
         </Link>
+        <Link href="/analytics" className={buttonVariants({ size: "child", variant: "outline" })}>
+          {ru.child.mode.parent}
+        </Link>
       </CardFooter>
     </Card>
   );

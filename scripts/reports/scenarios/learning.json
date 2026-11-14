@@ -204,7 +204,8 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Продолжи узор"
+            "name": "Продолжи узор Логика",
+            "exact": true
           }
         },
         {
@@ -428,7 +429,8 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Продолжи узор"
+            "name": "Продолжи узор Логика",
+            "exact": true
           }
         },
         {

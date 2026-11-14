@@ -4,8 +4,8 @@ import { Brainy } from "@brainee/brainy";
 import { stageOf } from "@brainee/core";
 import { StarIcon, SunIcon } from "@brainee/ui/components/child-icons";
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { ru } from "@/i18n/ru";
-import { demoChild } from "@/lib/demo-child";
 import { useLearning } from "./LearningProvider";
 
 // Top dock on Learn / Leisure / Gifts (docs/product/screens.md#brainy-dock-every-child-screen).
@@ -13,7 +13,7 @@ export function BrainyDock() {
   const { snapshot } = useLearning();
   if (!snapshot) return null;
   const { stats, wallet, mood } = snapshot.progress;
-  const { equipped, weekGoal } = demoChild;
+  const { equipped, weekGoal } = snapshot.showcase;
   const stage = stageOf(stats);
   const t = ru.child.dock;
   return (
@@ -27,7 +27,9 @@ export function BrainyDock() {
         aria-label={t.openBrainy}
         className="shrink-0 rounded-2xl transition-transform duration-(--dur-press) active:scale-95"
       >
-        <Brainy stats={stats} equipped={equipped} label="" className="h-24 w-auto sm:h-[136px]" />
+        <ViewTransition name="brainy-hero">
+          <Brainy stats={stats} equipped={equipped} label="" className="h-24 w-auto sm:h-[136px]" />
+        </ViewTransition>
       </Link>
 
       <div className="flex min-w-0 flex-1 flex-col gap-2">

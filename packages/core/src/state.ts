@@ -1,4 +1,5 @@
 import type { LearningProgress } from "./learning";
+import type { Showcase } from "./showcase";
 import type { BrainyStats } from "./types";
 
 /** Public child data only; dates cross the API as ISO strings. */
@@ -15,6 +16,10 @@ export type StateSnapshot = {
     starsEarned: number;
     finishedAt: string;
   } | null;
+  /** Seeded demo content and its interactive state (D-21). */
+  showcase: Showcase;
+  /** The parent PIN was entered on this device and has not expired. */
+  parentUnlocked: boolean;
 };
 
 export type StateReply =

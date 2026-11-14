@@ -1,7 +1,17 @@
 import { scryptSync } from "node:crypto";
 import { type BrainyStats, finishLearningSession, type GameResult } from "@brainee/core";
-import { brainyStates, children, families, gameSessions, games, parents, wallets } from "../schema";
+import {
+  brainyStates,
+  children,
+  families,
+  gameSessions,
+  games,
+  parents,
+  showcases,
+  wallets,
+} from "../schema";
 import type { Database } from "./client";
+import { demoShowcase } from "./showcase-seed";
 
 const stats: BrainyStats = { brain: 66, eyes: 41, mouth: 55, arms: 70, legs: 64, resp: 80 };
 const historicalResult: GameResult = {
@@ -96,5 +106,9 @@ export async function seedDemo(db: Database) {
       .values([...demo.games])
       .onConflictDoNothing();
     await transaction.insert(gameSessions).values(demo.history).onConflictDoNothing();
+    await transaction
+      .insert(showcases)
+      .values({ childId: demo.child.id, data: demoShowcase })
+      .onConflictDoNothing();
   });
 }

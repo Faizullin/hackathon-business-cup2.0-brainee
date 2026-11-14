@@ -1,6 +1,12 @@
 "use client";
 
-import type { GameResult, LearningCompletion, StateReply, StateSnapshot } from "@brainee/core";
+import type {
+  GameResult,
+  LearningCompletion,
+  ShowcaseAction,
+  StateReply,
+  StateSnapshot,
+} from "@brainee/core";
 import { QueryClient, QueryClientProvider, useQuery, useQueryClient } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 import {
@@ -33,7 +39,24 @@ type Context = {
   finish(issued: IssuedGame, result: GameResult): Promise<LearningCompletion>;
   stop(): Promise<void>;
   discardPending(): void;
+  /** Runs one demo action on the server, then refreshes; returns a failure reason or null. */
+  act(action: ShowcaseAction): Promise<string | null>;
+  unlockParent(pin: string): Promise<boolean>;
+  lockParent(): Promise<void>;
 };
+
+export type ActionReply = { ok: true } | { error: string };
+async function postJson(path: string, body: unknown, method = "POST") {
+  const response = await fetch(path, {
+    method,
+    credentials: "same-origin",
+    cache: "no-store",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  const reply = (await response.json().catch(() => ({}))) as { error?: string };
+  return { status: response.status, error: response.ok ? null : (reply.error ?? "unavailable") };
+}
 const LearningContext = createContext<Context | null>(null);
 
 export function LearningProvider({ children }: { children: ReactNode }) {
@@ -48,7 +71,8 @@ export function LearningProvider({ children }: { children: ReactNode }) {
 function SharedLearning({ children }: { children: ReactNode }) {
   const client = useQueryClient();
   const pathname = usePathname();
-  const active = /^\/(learn|leisure|gifts|brainy|game)(\/|$)/.test(pathname);
+  const active =
+    /^\/(learn|leisure|gifts|brainy|game|entry|video|analytics|tasks|rewards)(\/|$)/.test(pathname);
   const accessReady = useRef(false);
   const [hydrated, setHydrated] = useState(false);
   const [resting, setResting] = useState(false);
@@ -152,6 +176,26 @@ function SharedLearning({ children }: { children: ReactNode }) {
     await refresh();
     setResting(true);
   }, [refresh]);
+  const act = useCallback(
+    async (action: ShowcaseAction) => {
+      const { error } = await postJson("/api/actions", action);
+      await refresh().catch(() => {});
+      return error;
+    },
+    [refresh],
+  );
+  const unlockParent = useCallback(
+    async (pin: string) => {
+      const { error } = await postJson("/api/parent", { pin });
+      await refresh().catch(() => {});
+      return error === null;
+    },
+    [refresh],
+  );
+  const lockParent = useCallback(async () => {
+    await postJson("/api/parent", {}, "DELETE");
+    await refresh().catch(() => {});
+  }, [refresh]);
   const discardPending = useCallback(() => {
     pendingRef.current = null;
     storePendingFinish(null);
@@ -170,6 +214,9 @@ function SharedLearning({ children }: { children: ReactNode }) {
         finish,
         stop,
         discardPending,
+        act,
+        unlockParent,
+        lockParent,
       }}
     >
       {children}

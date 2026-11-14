@@ -17,22 +17,22 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 Other task IDs stay outside this slice. T-24/T-25 are available as pure core improvements; entry flow, tasks/gifts, leisure, advanced analytics, embedded games and motion polish wait. Deployment remains the final task (T-14).
 
 ## Road to MVP (acceptance criteria → remaining tasks)
-Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). Status on 2026-11-14:
+Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MVP is a **presentation build**: every page exists with basic saved interactions; analytics are seeded (D-21). Status on 2026-11-14:
 
-| # | Criterion | State | Remaining |
-|---|---|---|---|
-| 1 | Entry screen, no close, 3 games by gap, choice logged | core ready (T-25) | T-31, T-32, T-83 age averages |
-| 2 | Post-game before → after, two next steps, stop; 3-game break + bonus | ✅ done (T-35) | T-94 |
-| 3 | Stats/stage update for child **and parent** without reload | child ✅ | T-40, T-41, rest of T-55, T-71 |
-| 4 | Accessories buy/wear/remove, shown everywhere | rules ✅ (T-27) | T-38 shop UI + saved `equipped` |
-| 5 | Science video: pause only, resume, ★ only after correct answer | — | T-37 (+ licensed media, T-84) |
-| 6 | Task «Готово» → parent confirms → ☀ + weekly goal + `resp` | — | T-26, T-44, T-50 Task entity |
-| 7 | Gifts ☀ only; exchange ☀ → ★ 1:10 | rules ✅ (T-22) | T-38 Gifts tab, T-46 |
-| 8 | 5-tasks-a-day limit | — | T-26, T-44 |
-| 9 | Ranking hidden from child, no last names | trivially true | T-43 (parent only) |
-| 10 | Own-domain only; works with Screen Time allowlist | e2e checks foreign requests | T-60, T-61, T-62 |
+| # | Criterion | State |
+|---|---|---|
+| 1 | Entry screen, no close, 3 games by gap, choice logged | ✅ demo (T-31/T-32; age averages illustrative, T-83) |
+| 2 | Post-game before → after, two next steps, stop; 3-game break + bonus | ✅ (T-35, T-94) |
+| 3 | Stats/stage update for child **and parent** without reload | ✅ polling on both (T-55; e2e two-device check) |
+| 4 | Accessories buy/wear/remove, shown everywhere | ✅ (T-38) |
+| 5 | Science video: pause only, resume, ★ only after correct answer | ✅ demo player, no real media (T-37, T-84) |
+| 6 | Task «Готово» → parent confirms → ☀ + weekly goal + `resp` | ✅ (T-44) |
+| 7 | Gifts ☀ only; exchange ☀ → ★ 1:10 | ✅ (T-38, T-46) |
+| 8 | 5-tasks-a-day limit | ✅ (T-26/T-44) |
+| 9 | Ranking hidden from child, no last names | ✅ parent-only, initials (T-43) |
+| 10 | Own-domain only; works with Screen Time allowlist | e2e checks foreign requests; T-60–T-62 remain |
 
-Suggested order: parent proof (T-40/T-41/T-55) → entry + Learn recommendations (T-31/T-32) → Brainy shop + Gifts (T-38/T-46) → tasks (T-26/T-44) → Leisure + video (T-36/T-37) → PWA/allowlist (T-60–T-62) → demo (T-70/T-71/T-73) → T-14 deploy.
+**Left before deployment (in order):** T-70 acceptance walkthrough → T-71 two-device demo script → T-60 PWA manifest/icons → T-61 network audit → T-62/T-84 iPad over LAN → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Nice-to-have: T-85 one playable fun game, T-53 onboarding quiz.
 
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
@@ -59,30 +59,30 @@ Suggested order: parent proof (T-40/T-41/T-55) → entry + Learn recommendations
 - [x] T-23 Stage + mood math (stage thresholds, +8 mood per game); mood decay rate is still a product TBD
 - [x] T-24 Session skill gains (70/30), ability → body rollup; injected level/accuracy policy, calibration still TBD → [data-model.md](../product/data-model.md#how-stats-change)
 - [x] T-25 Entry recommendation algorithm (3 largest gaps, least-played in 7 days); explicit age-average/history/time inputs → [screens.md](../product/screens.md#entry-screen-во-что-играем-сейчас)
-- [ ] T-26 Weekly goal counted by week_suns; 5-tasks-a-day limit
+- [x] T-26 Weekly goal counted by confirmed ☀; 5-tasks-a-day limit (`applyShowcaseAction`, D-21)
 - [x] T-27 Accessory slots (one per slot; earned vs. bought): catalog, `equip`/`unequip`, `buyAccessory` in `core`
 - [x] T-28 Game contract: `GameResult`/`Skill` types in `core`, `GameDefinition` + lazy registry + error boundary in `games`; `pnpm check:games` (no cross-game imports) → [games.md](../dev/games.md)
 - [ ] T-29 Port GSP `bridge-core` → `packages/game-bridge` (drop PECS parts, global `Brainee`) + `engine-phaser` / `engine-gdevelop` kits + `IframeGame` and host hook in `GameHost` → [games.md](../dev/games.md#bridge-embedded-games-port-gsp-packagesbridge-core)
 
 ## P3 · Child flow · [screens.md#child](../product/screens.md#child)
 - [x] T-30 Child app shell: Brainy dock + 4-tab bottom bar in `(child)/layout`, fullscreen game layout, app-feel checklist → [ui.md](../dev/ui.md#app-shell-route-group-layouts-own-the-chrome)
-- [ ] T-31 Entry screen (no close, logs the choice)
-- [ ] T-32 Learn tab (recommendations + grid); the game grid exists, «Брейни советует» recommendations remain
+- [x] T-31 Entry screen `/entry` (no close, logs the choice; `/` redirects here)
+- [x] T-32 Learn tab: «Брейни советует» (T-25 + top-up for the 2-game catalog) + grid
 - [x] T-33 Game: Odd one out (2 levels × 4 rounds, seeded), tested at `/lab` and in the child flow
 - [x] T-34 Game: Continue the pattern (2 levels × 4 seeded rounds); both games share `kit/Shape`
 - [x] T-35 Post-game screen: before → after, stat chip, "Что дальше?", stop, third-game break +5★; now uses [saved learning state](../dev/ui.md#saved-learning-state-t-55)
-- [ ] T-36 Leisure tab: shop (10 min / forever), cartoons, science videos
-- [ ] T-37 Science video player (pause only, resume, quiz)
-- [ ] T-38 Gifts tab + Brainy tab (accessory shop, stats, earned rewards)
+- [x] T-36 Leisure tab: shop (10 min / forever), cartoons, science videos (fun games/cartoons have no content yet)
+- [x] T-37 Science video player `/video/[id]` (pause only, resume, quiz; animated placeholder, no media)
+- [x] T-38 Gifts tab + Brainy tab (accessory shop, stats, earned rewards)
 
 ## P4 · Parent flow · [screens.md#parent](../product/screens.md#parent)
-- [ ] T-40 Parent barrier (PIN) + parent tab bar
-- [ ] T-41 Analytics: Brainy hero + 4 metrics + insight
-- [ ] T-42 Analytics: skill + character radars, weekly time bars (Recharts)
-- [ ] T-43 Analytics: "Do the hard thing" chart, ranking (seeded), share card
-- [ ] T-44 Tasks: form, templates, Today list, confirm, limit 5
-- [ ] T-45 Tasks: recommendations from stats → "Назначить"
-- [ ] T-46 Gifts & goal: weekly goal, gift CRUD, child requests → "Вручено"
+- [x] T-40 Parent barrier (PIN 1234, server-checked per device) + parent tab bar
+- [x] T-41 Analytics: Brainy hero (live) + 4 metrics + insight (seeded, D-21)
+- [x] T-42 Analytics: skill + character radars, weekly time bars (hand-rolled SVG, seeded)
+- [x] T-43 Analytics: "Do the hard thing" chart, ranking (seeded), share card
+- [x] T-44 Tasks: form, templates, Today list, confirm, limit 5
+- [x] T-45 Tasks: recommendations (seeded) → "Назначить"
+- [x] T-46 Gifts & goal: weekly goal, gift add/remove, child requests → "Вручено"
 
 ## P5 · Data, auth, live sync · [data-model.md](../product/data-model.md)
 - [ ] T-50 Drizzle SQLite schema for every entity
@@ -93,9 +93,9 @@ Suggested order: parent proof (T-40/T-41/T-55) → entry + Learn recommendations
   - [x] Explicit opt-in, opaque HttpOnly cookie, hashed token, expiry, same-origin mutations; parent barrier remains T-40 → [sessions.md](../dev/sessions.md)
 - [ ] T-53 Onboarding quiz → starting stats
 - [x] T-54 API: issued game start/finish/stop → core → atomic saved state and receipt; child UI wired through T-55 → [sessions.md](../dev/sessions.md)
-- [ ] T-55 Live updates by short polling: `/api/state` version + TanStack Query (~3 s) in child and parent UIs → [D-15](../dev/decisions.md)
+- [x] T-55 Live updates by short polling: `/api/state` version + TanStack Query (~3 s) in child and parent UIs → [D-15](../dev/decisions.md)
   - [x] Cookie-authorized snapshot, child polling, issued-game UI, confirmed rewards, finish retry/reload and other-device sync → [sessions.md](../dev/sessions.md#shared-state-and-client-recovery-t-55), D-20
-  - [ ] Parent consumer after T-40/T-41; verify child → parent without reloading before closing T-55
+  - [x] Parent consumer; child ↔ parent sync verified in `mvp-pages.spec.ts`
 
 ## P6 · PWA + allowlist · [rules.md](../product/rules.md#device-lockdown)
 - [ ] T-60 Serwist PWA manifest + icons + offline shell
@@ -125,7 +125,9 @@ Suggested order: parent proof (T-40/T-41/T-55) → entry + Learn recommendations
 - [ ] T-90 Game conformance suite (Playwright, Chromium + WebKit): load, ready ≤ 10 s, one finish, zero foreign requests, size budget, no console errors; required before a game is listed
 - [ ] T-91 (Later) External game artifacts (path C): `games:import <id>@<version>` with checksum, `GameVersion` table, enable/disable/rollback
 - [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
-- [ ] T-94 Post-game «Подтянуть навык» card should prefer a different game than the one just played (the report shows it repeating Odd one out next to its own next-level card) → [screens.md](../product/screens.md#game-screen-and-no-exit-flow)
+- [x] T-94 Post-game «Подтянуть навык» card should prefer a different game than the one just played (the report shows it repeating Odd one out next to its own next-level card) → [screens.md](../product/screens.md#game-screen-and-no-exit-flow)
+- [x] T-96 `mvp` report module: every page + child → parent walkthrough; `scaffold` report retired → [reports/mvp.md](../reports/mvp.md)
+- [ ] T-97 Showcase follow-ups after the pitch: real Task/Gift/Request tables, computed analytics, playable fun games and cartoons, presenter «Сбросить демо» button (endpoint exists)
 - [x] T-95 `learning` report module: phone/iPad recordings of the saved three-game loop, break, tabs and `/lab` → [reports/learning.md](../reports/learning.md)
 - [x] T-93 Restore complete WebKit UI verification with normal clicks: the full suite passes at phone/iPad widths; the earlier coordinate failure no longer reproduces, with its cause unconfirmed. Keep the [diagnostic repro](../dev/setup.md#webkit-pointer-diagnostics-t-93) if it recurs.
 - Additional learning games (Sounds & letters, Repeat after Brainy, Magic garden, Expedition, Error detective)

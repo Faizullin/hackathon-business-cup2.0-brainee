@@ -33,7 +33,7 @@ export const GAME_SESSION_MS = 60 * 60 * 1000;
 type Store = Pick<Database, "select" | "insert" | "update">;
 type Transaction = Parameters<Parameters<Database["transaction"]>[0]>[0];
 
-async function writeTransaction<T>(
+export async function writeTransaction<T>(
   db: Database,
   work: (tx: Transaction) => Promise<T>,
 ): Promise<T> {
@@ -84,7 +84,7 @@ export async function findDemoAccess(db: Store, tokenHash: string, now: Date) {
     .get();
 }
 
-async function requireAccess(db: Store, tokenHash: string, now: Date) {
+export async function requireAccess(db: Store, tokenHash: string, now: Date) {
   const access = await findDemoAccess(db, tokenHash, now);
   if (!access) throw new LearningStoreError("unauthorized");
   return access;

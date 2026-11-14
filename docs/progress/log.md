@@ -4,6 +4,11 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (all pages)
+- D-21 seeded showcase + `/api/actions`, PIN barrier (`/api/parent`), `/api/demo-reset`. Built entry, Learn advice, Leisure, video player, Gifts, Brainy shop, parent Analytics/Tasks/Gifts & goal, SVG charts, ViewTransition route fades; T-94 fixed.
+- Verified: check; 94 unit; 132 e2e (Chromium/WebKit, phone/iPad) incl. parent → child task sync. New `mvp` report (20 shots, 2 walkthroughs); `learning` re-recorded; `scaffold` report retired.
+- Next: T-70/T-71 demo proof, T-60–T-62 PWA/allowlist, pitch, freeze, then T-14.
+
 ## 2026-11-14 (reports)
 - Reviewed changes since T-30 (T-34/35/54/55/80/81, D-17–D-20) and mapped the MVP acceptance criteria to remaining tasks in todo.md.
 - T-95: new `learning` report module (scenario + child-only game solvers). Re-recorded `learning` (27/27 checks per flow, 12 shots) and `scaffold` (19/19). Found T-94: the practice card can repeat the game just played.

@@ -1,0 +1,1066 @@
+{
+  "shots": [
+    {
+      "route": "/entry",
+      "shots": [
+        {
+          "name": "entry",
+          "fullPage": true,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Во что играем сейчас?",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/learn",
+      "shots": [
+        {
+          "name": "learn",
+          "fullPage": true,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Брейни советует",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/leisure",
+      "shots": [
+        {
+          "name": "leisure",
+          "fullPage": true,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Игры за звёзды",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/video/ocean",
+      "shots": [
+        {
+          "name": "video",
+          "fullPage": false,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "button",
+                  "name": "Смотреть",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/gifts",
+      "shots": [
+        {
+          "name": "gifts",
+          "fullPage": true,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Задания от мамы",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/brainy",
+      "shots": [
+        {
+          "name": "brainy",
+          "fullPage": true,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Аксессуары",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/analytics",
+      "shots": [
+        {
+          "name": "parent-pin",
+          "fullPage": false,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Вход для родителей",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/analytics",
+      "shots": [
+        {
+          "name": "analytics",
+          "fullPage": true,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Вход для родителей",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "click": {
+                "by": "role",
+                "role": "button",
+                "name": "Цифра 1",
+                "exact": true
+              }
+            },
+            {
+              "click": {
+                "by": "role",
+                "role": "button",
+                "name": "Цифра 2",
+                "exact": true
+              }
+            },
+            {
+              "click": {
+                "by": "role",
+                "role": "button",
+                "name": "Цифра 3",
+                "exact": true
+              }
+            },
+            {
+              "click": {
+                "by": "role",
+                "role": "button",
+                "name": "Цифра 4",
+                "exact": true
+              }
+            },
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "img",
+                  "name": "Умения",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "wait": 600
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/tasks",
+      "shots": [
+        {
+          "name": "tasks",
+          "fullPage": true,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Сегодня",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/rewards",
+      "shots": [
+        {
+          "name": "rewards",
+          "fullPage": true,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Магазин подарков",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "name": "phone-mvp",
+      "title": "Phone: entry, leisure, video quiz, gifts, Brainy shop, parent",
+      "viewport": "phone",
+      "start": "/login",
+      "steps": [
+        {
+          "call": "resetDemo"
+        },
+        {
+          "goto": "/"
+        },
+        {
+          "expect": {
+            "url": "^/entry$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Во что играем сейчас?",
+              "exact": true
+            },
+            "timeout": 20000,
+            "message": "Opening the app shows the entry screen"
+          }
+        },
+        {
+          "wait": 1800
+        },
+        {
+          "mark": "Child: other games → Learn"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Нет, хочу посмотреть другие игры",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/learn$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Брейни советует",
+              "exact": true
+            },
+            "message": "Learn shows Brainy's advice and the grid"
+          }
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "mark": "Leisure: shop, cartoons, science"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Отдых",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/leisure$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Игры за звёзды",
+              "exact": true
+            },
+            "message": "Leisure shows the ★ shop"
+          }
+        },
+        {
+          "scroll": {
+            "y": 700
+          }
+        },
+        {
+          "wait": 800
+        },
+        {
+          "scroll": {
+            "y": 900
+          }
+        },
+        {
+          "wait": 800
+        },
+        {
+          "mark": "Science video: pause-only player and quiz"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Как живут пчёлы"
+          }
+        },
+        {
+          "expect": {
+            "url": "^/video/bees$",
+            "target": {
+              "by": "role",
+              "role": "button",
+              "name": "Смотреть",
+              "exact": true
+            },
+            "message": "The player has only play/pause"
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Смотреть",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "testId",
+              "value": "video-quiz"
+            },
+            "timeout": 30000,
+            "message": "The quiz appears after the last minute"
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Воск",
+            "exact": true
+          }
+        },
+        {
+          "wait": 900
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Мёд",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "text",
+              "value": "Верно! +15★ и Глаза +2"
+            },
+            "message": "Correct answer pays +15★ once"
+          }
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Вернуться в «Отдых»",
+            "exact": true
+          }
+        },
+        {
+          "mark": "Gifts: goal, shop, tasks, exchange"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Подарки",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/gifts$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Задания от мамы",
+              "exact": true
+            },
+            "message": "Gifts shows the weekly goal and tasks"
+          }
+        },
+        {
+          "scroll": {
+            "y": 600
+          }
+        },
+        {
+          "call": "childTaskDone"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "1 ☀ на 10 ★",
+            "exact": true
+          }
+        },
+        {
+          "wait": 1000
+        },
+        {
+          "mark": "Brainy: accessory shop"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Брейни",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/brainy$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Аксессуары",
+              "exact": true
+            },
+            "message": "Brainy tab shows stats and the shop"
+          }
+        },
+        {
+          "call": "buyCheapestAccessory"
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "mark": "Parent: PIN, analytics, confirm the child's task"
+        },
+        {
+          "goto": "/analytics"
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Вход для родителей",
+              "exact": true
+            },
+            "message": "Parent mode is behind a PIN"
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Цифра 1",
+            "exact": true
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Цифра 2",
+            "exact": true
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Цифра 3",
+            "exact": true
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Цифра 4",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "role",
+              "role": "img",
+              "name": "Умения",
+              "exact": true
+            },
+            "message": "Analytics: radars, bars, ranking"
+          }
+        },
+        {
+          "wait": 1000
+        },
+        {
+          "call": "scrollPage"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Город",
+            "exact": true
+          }
+        },
+        {
+          "wait": 800
+        },
+        {
+          "call": "openParentTab",
+          "args": {
+            "name": "Задания"
+          }
+        },
+        {
+          "expect": {
+            "url": "^/tasks$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Сегодня",
+              "exact": true
+            },
+            "message": "Tasks: Today list with confirmations"
+          }
+        },
+        {
+          "call": "confirmTask"
+        },
+        {
+          "call": "scrollPage"
+        },
+        {
+          "call": "openParentTab",
+          "args": {
+            "name": "Подарки и цель"
+          }
+        },
+        {
+          "expect": {
+            "url": "^/rewards$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Магазин подарков",
+              "exact": true
+            },
+            "message": "Gifts & goal: requests and shop"
+          }
+        },
+        {
+          "call": "scrollPage"
+        }
+      ]
+    },
+    {
+      "name": "ipad-mvp",
+      "title": "iPad viewport: entry, leisure, video quiz, gifts, Brainy shop, parent",
+      "viewport": "ipad",
+      "start": "/login",
+      "steps": [
+        {
+          "call": "resetDemo"
+        },
+        {
+          "goto": "/"
+        },
+        {
+          "expect": {
+            "url": "^/entry$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Во что играем сейчас?",
+              "exact": true
+            },
+            "timeout": 20000,
+            "message": "Opening the app shows the entry screen"
+          }
+        },
+        {
+          "wait": 1800
+        },
+        {
+          "mark": "Child: other games → Learn"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Нет, хочу посмотреть другие игры",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/learn$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Брейни советует",
+              "exact": true
+            },
+            "message": "Learn shows Brainy's advice and the grid"
+          }
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "mark": "Leisure: shop, cartoons, science"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Отдых",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/leisure$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Игры за звёзды",
+              "exact": true
+            },
+            "message": "Leisure shows the ★ shop"
+          }
+        },
+        {
+          "scroll": {
+            "y": 700
+          }
+        },
+        {
+          "wait": 800
+        },
+        {
+          "scroll": {
+            "y": 900
+          }
+        },
+        {
+          "wait": 800
+        },
+        {
+          "mark": "Science video: pause-only player and quiz"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Как живут пчёлы"
+          }
+        },
+        {
+          "expect": {
+            "url": "^/video/bees$",
+            "target": {
+              "by": "role",
+              "role": "button",
+              "name": "Смотреть",
+              "exact": true
+            },
+            "message": "The player has only play/pause"
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Смотреть",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "testId",
+              "value": "video-quiz"
+            },
+            "timeout": 30000,
+            "message": "The quiz appears after the last minute"
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Воск",
+            "exact": true
+          }
+        },
+        {
+          "wait": 900
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Мёд",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "text",
+              "value": "Верно! +15★ и Глаза +2"
+            },
+            "message": "Correct answer pays +15★ once"
+          }
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Вернуться в «Отдых»",
+            "exact": true
+          }
+        },
+        {
+          "mark": "Gifts: goal, shop, tasks, exchange"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Подарки",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/gifts$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Задания от мамы",
+              "exact": true
+            },
+            "message": "Gifts shows the weekly goal and tasks"
+          }
+        },
+        {
+          "scroll": {
+            "y": 600
+          }
+        },
+        {
+          "call": "childTaskDone"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "1 ☀ на 10 ★",
+            "exact": true
+          }
+        },
+        {
+          "wait": 1000
+        },
+        {
+          "mark": "Brainy: accessory shop"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Брейни",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/brainy$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Аксессуары",
+              "exact": true
+            },
+            "message": "Brainy tab shows stats and the shop"
+          }
+        },
+        {
+          "call": "buyCheapestAccessory"
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "mark": "Parent: PIN, analytics, confirm the child's task"
+        },
+        {
+          "goto": "/analytics"
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Вход для родителей",
+              "exact": true
+            },
+            "message": "Parent mode is behind a PIN"
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Цифра 1",
+            "exact": true
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Цифра 2",
+            "exact": true
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Цифра 3",
+            "exact": true
+          }
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Цифра 4",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "role",
+              "role": "img",
+              "name": "Умения",
+              "exact": true
+            },
+            "message": "Analytics: radars, bars, ranking"
+          }
+        },
+        {
+          "wait": 1000
+        },
+        {
+          "call": "scrollPage"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Город",
+            "exact": true
+          }
+        },
+        {
+          "wait": 800
+        },
+        {
+          "call": "openParentTab",
+          "args": {
+            "name": "Задания"
+          }
+        },
+        {
+          "expect": {
+            "url": "^/tasks$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Сегодня",
+              "exact": true
+            },
+            "message": "Tasks: Today list with confirmations"
+          }
+        },
+        {
+          "call": "confirmTask"
+        },
+        {
+          "call": "scrollPage"
+        },
+        {
+          "call": "openParentTab",
+          "args": {
+            "name": "Подарки и цель"
+          }
+        },
+        {
+          "expect": {
+            "url": "^/rewards$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Магазин подарков",
+              "exact": true
+            },
+            "message": "Gifts & goal: requests and shop"
+          }
+        },
+        {
+          "call": "scrollPage"
+        }
+      ]
+    }
+  ]
+}

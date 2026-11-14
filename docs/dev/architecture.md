@@ -38,18 +38,19 @@ apps/web/
 ├─ src/app/
 │  ├─ layout.tsx, page.tsx    # Fonts/providers only; / redirects to /learn
 │  ├─ (child)/layout.tsx      # Child shell: content + persistent 4-tab bottom bar (T-30)
-│  ├─ (child)/(docked)/       # Brainy dock layout: learn (game grid), leisure, gifts (stubs)
-│  ├─ (child)/brainy/         # Brainy tab (no dock): big Brainy + stage path
-│  ├─ (parent)/analytics/     # Starter page; barrier, data and other parent routes planned
+│  ├─ (child)/(docked)/       # Brainy dock layout: learn (advice + grid), leisure (shop/cartoons/science), gifts (goal/shop/tasks/exchange)
+│  ├─ (child)/brainy/         # Brainy tab (no dock): big Brainy, stage path, stats, accessory shop, rewards
+│  ├─ (parent)/               # PIN barrier + tabs: analytics (seeded charts), tasks, rewards (D-21)
 │  ├─ (auth)/login/           # Welcome page; sessions, quiz and onboarding planned
 │  ├─ (game)/game/[id]/       # Fullscreen play (no dock/tab bar); `?level=&seed=`
+│  ├─ (game)/entry, video/[id] # Entry screen «Во что играем сейчас?» (`/` redirects here); science video player
 │  ├─ lab/, lab/brainy/       # Dev-only game lab + event stream; Brainy presets (T-16, T-20)
-│  └─ api/                   # Demo access, issued game start/finish/stop, versioned /api/state
+│  └─ api/                   # Demo access, game start/finish/stop, /api/state, /api/actions, /api/parent, /api/demo-reset
 ├─ public/media/             # Planned: own-domain media
 └─ e2e/                      # Scaffold smoke tests (Chromium + WebKit)
 ```
 
-Child routes use their own shell (tab bar; dock via the nested `(docked)` group); parent and auth routes still use the starter `AppFrame`. Fullscreen games use the sibling `(game)` group. `LearningProvider` loads [saved child state](ui.md#saved-learning-state-t-55) across child/game navigation. `demoChild` contains only accessory/goal presentation awaiting T-38/T-46. Parent routes remain placeholders; the parent barrier (T-40) must land before parent data/actions are added.
+Child routes use their own shell (tab bar; dock via the nested `(docked)` group); parent routes use `ParentShell` (PIN gate, top/bottom tabs); auth uses the starter `AppFrame`. Fullscreen games, the entry screen and the video player use the `(game)` group. `LearningProvider` loads the versioned snapshot (child state + seeded showcase, D-21) for child, game and parent routes and exposes `act()` for demo interactions.
 
 ## Package responsibilities
 
@@ -64,7 +65,7 @@ Child routes use their own shell (tab bar; dock via the nested `(docked)` group)
 | `db` | Schema per [data-model.md](../product/data-model.md), seeds, scenario fixtures | contain business rules |
 | `ui` | Buttons, cards, dock, tab bars; tokens from the prototype (`--coral`, `--sun`, `--mint`, `--sky`; Unbounded + Onest) | |
 
-**Data flow:** the host obtains a server-issued game ID, then reports `GameResult` → `POST /api/sessions` → `core` computes ★ and stat deltas → `db` writes in one transaction (bumps the family's `version`). The child polls `/api/state` and refreshes after mutations; only confirmed state updates its wallet/Brainy. The [contract](sessions.md) covers access, launch, snapshots, recovery and stopping. Parent reuse of polling follows T-40/T-41.
+**Data flow:** the host obtains a server-issued game ID, then reports `GameResult` → `POST /api/sessions` → `core` computes ★ and stat deltas → `db` writes in one transaction (bumps the family's `version`). The child polls `/api/state` and refreshes after mutations; only confirmed state updates its wallet/Brainy. The [contract](sessions.md) covers access, launch, snapshots, recovery and stopping. Demo interactions go through `POST /api/actions` → `applyShowcaseAction` (core) → one transaction; parent actions need the device PIN unlock (D-21).
 
 ## Stack
 

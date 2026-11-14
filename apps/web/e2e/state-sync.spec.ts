@@ -205,7 +205,7 @@ test("expired access asks for a reload without silently replacing an issued sess
       body: '{"error":"unauthorized"}',
     }),
   );
-  await page.getByRole("link", { name: /Найди лишний/ }).click();
+  await page.getByRole("link", { name: "Найди лишний Внимание", exact: true }).click();
   await expect(page.getByText("Открой занятие заново, чтобы обновить Брейни.")).toBeVisible();
   await expect(page.locator("[data-game]")).toHaveCount(0);
   expect(accessRequests).toBe(2);

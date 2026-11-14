@@ -44,7 +44,7 @@ test("child tabs navigate, keep the bar, and show the dock except on the Brainy 
 
 test("a game opens fullscreen from Learn and exits back", async ({ page }) => {
   await page.goto("/learn");
-  await page.getByRole("link", { name: /Найди лишний/ }).click();
+  await page.getByRole("link", { name: "Найди лишний Внимание", exact: true }).click();
   await expect(page).toHaveURL(/\/game\/odd-one-out$/);
   await expect(page.getByRole("navigation", { name: "Разделы" })).toHaveCount(0);
   await expect(page.getByTestId("brainy-dock")).toHaveCount(0);

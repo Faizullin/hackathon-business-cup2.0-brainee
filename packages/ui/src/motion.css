@@ -49,3 +49,45 @@
     animation: none !important;
   }
 }
+
+/* Route transitions via React <ViewTransition> (D-21 demo motion; full polish is T-87). */
+::view-transition-old(.page-fade) {
+  animation: var(--dur-nav) var(--ease-out) both brainee-fade-out;
+}
+::view-transition-new(.page-fade) {
+  animation: var(--dur-sheet) var(--ease-out) both brainee-fade-in;
+}
+::view-transition-old(.page-slide) {
+  animation: var(--dur-nav) var(--ease-out) both brainee-fade-out;
+}
+::view-transition-new(.page-slide) {
+  animation: var(--dur-sheet) var(--ease-out) both brainee-slide-in;
+}
+::view-transition-group(brainy-hero) {
+  animation-duration: var(--dur-sheet);
+  animation-timing-function: var(--ease-out);
+}
+@keyframes brainee-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes brainee-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@keyframes brainee-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

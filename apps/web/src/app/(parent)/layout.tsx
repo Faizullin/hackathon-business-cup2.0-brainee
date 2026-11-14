@@ -1,14 +1,7 @@
 import type { ReactNode } from "react";
-import { AppFrame } from "@/components/AppFrame";
+import { ParentShell } from "@/components/parent/ParentShell";
 
-// Only a placeholder is exposed until the parent barrier (T-40) and session (T-52) exist.
-// Add authorization before rendering family data or accepting parent actions here.
+// Parent mode: PIN barrier (T-40 demo) + three tabs. Parent actions are re-checked on the server.
 export default function ParentLayout({ children }: { children: ReactNode }) {
-  return (
-    <AppFrame>
-      <main id="main-content" data-mode="parent" tabIndex={-1}>
-        {children}
-      </main>
-    </AppFrame>
-  );
+  return <ParentShell>{children}</ParentShell>;
 }

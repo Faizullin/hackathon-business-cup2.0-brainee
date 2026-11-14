@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { expect, it, onTestFinished } from "vitest";
-import { brainyStates, children, demoSessions, wallets } from "../schema";
+import { brainyStates, children, demoSessions, showcases, wallets } from "../schema";
 import { resetDatabase } from "../scripts/database-tools";
 import { openDatabase } from "./client";
 import { getDatabaseConfig } from "./config";
@@ -15,6 +15,8 @@ import {
   stopGameRun,
 } from "./learning-store";
 import { demo } from "./seed";
+import { demoShowcase } from "./showcase-seed";
+import { applyShowcase, setParentUnlock } from "./showcase-store";
 import { getStateSnapshot } from "./state-store";
 
 const now = new Date("2026-11-14T12:00:00Z");
@@ -57,7 +59,9 @@ it("returns only the authenticated child's public snapshot and seeded history", 
     "baseline",
     "child",
     "latestGame",
+    "parentUnlocked",
     "progress",
+    "showcase",
     "version",
   ]);
   expect(JSON.stringify(snapshot)).not.toMatch(/pinHash|email|tokenHash|scrypt/);
@@ -109,6 +113,7 @@ it("does not mix a sibling's stats, wallet or game history into a snapshot", asy
   await f.db.insert(children).values({ ...demo.child, id: "sibling", name: "Миша" });
   await f.db.insert(wallets).values({ childId: "sibling", stars: 1, suns: 2 });
   await f.db.insert(brainyStates).values({ ...demo.brainy, childId: "sibling", eyes: 99 });
+  await f.db.insert(showcases).values({ childId: "sibling", data: demoShowcase });
   await f.db.insert(demoSessions).values({
     tokenHash: "sibling-access",
     childId: "sibling",
@@ -127,4 +132,28 @@ it("rejects corrupt stored state instead of presenting a made-up baseline", asyn
   const f = await fixture();
   await f.client.execute("UPDATE brainy_states SET start_snapshot = '{}'");
   await expect(getStateSnapshot(f.db, f.hash, now)).rejects.toThrow("Invalid saved child state");
+});
+
+it("parent actions need the PIN; a confirmed task pays suns and bumps the version", async () => {
+  const f = await fixture();
+  const access = await createDemoAccess(f.db, now);
+  const hash = demoTokenHash(access.token) as string;
+  const before = await getStateSnapshot(f.db, hash, now);
+  expect(before.parentUnlocked).toBe(false);
+  await expect(
+    applyShowcase(f.db, hash, { type: "task-confirm", taskId: "t2" }, now),
+  ).rejects.toMatchObject({
+    code: "unauthorized",
+  });
+  expect(await setParentUnlock(f.db, hash, "0000", now)).toBe(false);
+  expect(await setParentUnlock(f.db, hash, "1234", now)).toBe(true);
+  await applyShowcase(f.db, hash, { type: "task-confirm", taskId: "t2" }, now);
+  const after = await getStateSnapshot(f.db, hash, now);
+  expect(after.parentUnlocked).toBe(true);
+  expect(after.progress.wallet.suns).toBe(before.progress.wallet.suns + 2);
+  expect(after.progress.stats.resp).toBe(Math.min(100, before.progress.stats.resp + 2));
+  expect(after.version).toBeGreaterThan(before.version);
+  await expect(applyShowcase(f.db, hash, { type: "nope" }, now)).rejects.toMatchObject({
+    code: "invalid-input",
+  });
 });

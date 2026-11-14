@@ -9,7 +9,6 @@ import Link from "next/link";
 import { useLearning } from "@/components/child/LearningProvider";
 import { StopLearningButton } from "@/components/child/StopLearningButton";
 import { ru } from "@/i18n/ru";
-import { demoChild } from "@/lib/demo-child";
 
 export function PostGameScreen({
   game,
@@ -24,7 +23,12 @@ export function PostGameScreen({
 }) {
   const { snapshot } = useLearning();
   const t = ru.child.game;
-  const practice = practiceGame(completion.after.stats, reactGames);
+  // T-94: prefer a different game for the weak skill; fall back to this one if it's the only fit.
+  const practice =
+    practiceGame(
+      completion.after.stats,
+      reactGames.filter((other) => other.id !== game.id),
+    ) ?? practiceGame(completion.after.stats, reactGames);
   const nextLevel = level < game.levels ? level + 1 : 1;
   const card =
     "flex min-h-28 flex-col justify-center gap-2 rounded-panel border border-border bg-card p-4 text-left transition-transform duration-(--dur-press) active:scale-[0.97]";
@@ -42,7 +46,7 @@ export function PostGameScreen({
           >
             <Brainy
               stats={completion[when].stats}
-              equipped={demoChild.equipped}
+              equipped={snapshot?.showcase.equipped ?? {}}
               label={t[when]}
               className="mx-auto h-auto w-full max-w-48"
             />

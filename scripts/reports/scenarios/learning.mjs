@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 
-export { checkSurface } from "./scaffold.mjs";
+export { checkSurface } from "./common.mjs";
 
 const NEXT = /^(Дальше|Готово)$/;
 const pause = (page, ms = 450) => page.waitForTimeout(ms);

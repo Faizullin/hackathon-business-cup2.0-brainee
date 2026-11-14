@@ -3,6 +3,7 @@ import { Card, CardDescription, CardHeader } from "@brainee/ui/components/card";
 import { ChildIcon } from "@brainee/ui/components/child-icons";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { RecommendationCards } from "@/components/child/Recommendations";
 import { ru } from "@/i18n/ru";
 
 export const metadata: Metadata = { title: ru.learn.title };
@@ -18,6 +19,12 @@ export default function LearnPage() {
           </CardDescription>
         </CardHeader>
       </Card>
+      <section aria-labelledby="advice" className="flex flex-col gap-3">
+        <h2 id="advice" className="font-heading text-lg font-semibold">
+          {ru.child.advice}
+        </h2>
+        <RecommendationCards />
+      </section>
       <section aria-labelledby="all-games" className="flex flex-col gap-3">
         <h2 id="all-games" className="font-heading text-lg font-semibold">
           {ru.learn.allGames}

@@ -1,4 +1,4 @@
-import type { BrainyStats, LearningCompletion, Skill } from "@brainee/core";
+import type { BrainyStats, LearningCompletion, Showcase, Skill } from "@brainee/core";
 import { sql } from "drizzle-orm";
 import { check, integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
@@ -115,6 +115,8 @@ export const demoSessions = sqliteTable(
     expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
     inRow: integer("in_row").notNull().default(0),
     bonusGiven: integer("bonus_given", { mode: "boolean" }).notNull().default(false),
+    // Parent PIN unlock for this device (T-40 demo barrier).
+    parentUntil: integer("parent_until", { mode: "timestamp_ms" }),
   },
   (table) => [
     check("demo_session_expiry_valid", sql`${table.expiresAt} > ${table.createdAt}`),
@@ -177,4 +179,17 @@ export const gameSessions = sqliteTable(
   )`,
     ),
   ],
+);
+
+// D-21: seeded presentation data (analytics, tasks, gifts, leisure) and its demo interactions.
+export const showcases = sqliteTable(
+  "showcases",
+  {
+    childId: text("child_id")
+      .notNull()
+      .primaryKey()
+      .references(() => children.id, { onDelete: "cascade" }),
+    data: text("data", { mode: "json" }).$type<Showcase>().notNull(),
+  },
+  (table) => [check("showcase_data_valid", sql`json_valid(${table.data})`)],
 );

@@ -1,6 +1,6 @@
 /** Local configuration for the report tooling ported from game-store-planning. */
 export const settings = {
-  defaultModule: "scaffold",
+  defaultModule: "mvp",
   baseUrl: "http://127.0.0.1:3123",
   locale: "ru",
   localeId: "ru-RU",
@@ -8,18 +8,18 @@ export const settings = {
 };
 
 export const modules = {
-  scaffold: {
-    title: "Brainee: starter screens and navigation",
-    scenario: "scripts/reports/scenarios/scaffold.json",
+  learning: {
+    title: "Brainee: saved child learning loop",
+    scenario: "scripts/reports/scenarios/learning.json",
     routePrefix: "/",
     viewports: ["ipad", "phone"],
     localeLabel: "Russian",
     fixtures: {},
     staticAssets: {},
   },
-  learning: {
-    title: "Brainee: saved child learning loop",
-    scenario: "scripts/reports/scenarios/learning.json",
+  mvp: {
+    title: "Brainee: every MVP page, child and parent",
+    scenario: "scripts/reports/scenarios/mvp.json",
     routePrefix: "/",
     viewports: ["ipad", "phone"],
     localeLabel: "Russian",

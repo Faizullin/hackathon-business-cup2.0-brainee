@@ -6,6 +6,7 @@ export * from "./game-validation";
 export * from "./learning";
 export * from "./random";
 export * from "./recommendations";
+export * from "./showcase";
 export * from "./stat-gains";
 export * from "./state";
 export * from "./types";

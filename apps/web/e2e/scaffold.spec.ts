@@ -1,8 +1,9 @@
 import { expect, test } from "@playwright/test";
 
 for (const route of [
-  { path: "/", destination: "/learn", heading: "Учимся" },
-  { path: "/analytics", destination: "/analytics", heading: "Аналитика" },
+  { path: "/", destination: "/entry", heading: "Во что играем сейчас?" },
+  { path: "/learn", destination: "/learn", heading: "Учимся" },
+  { path: "/analytics", destination: "/analytics", heading: "Вход для родителей" },
   { path: "/login", destination: "/login", heading: "Добро пожаловать в Брейни" },
 ]) {
   test(`${route.path} renders its shell using only same-origin resources`, async ({
@@ -41,7 +42,7 @@ for (const route of [
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
     ).toBe(true);
 
-    if (route.path === "/") {
+    if (route.path === "/learn") {
       await page.screenshot({ path: testInfo.outputPath("learn.png"), fullPage: true });
       await page.emulateMedia({ colorScheme: "dark" });
       await expect(page.locator("body")).toHaveCSS("background-color", "rgb(16, 18, 28)");

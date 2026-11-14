@@ -7,6 +7,7 @@ export {
   gameSessions,
   games,
   parents,
+  showcases,
   wallets,
 } from "../schema";
 export { type Database, openDatabase } from "./client";
@@ -21,4 +22,12 @@ export {
   startGameSession,
   stopGameRun,
 } from "./learning-store";
+export { demoShowcase } from "./showcase-seed";
+export {
+  applyShowcase,
+  PARENT_UNLOCK_MS,
+  resetShowcase,
+  ShowcaseError,
+  setParentUnlock,
+} from "./showcase-store";
 export { getStateSnapshot } from "./state-store";

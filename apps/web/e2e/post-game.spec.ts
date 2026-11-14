@@ -87,7 +87,7 @@ test("three completed games offer a break and save exactly one bonus", async ({
   await expect(page.getByTestId("wallet-stars")).toContainText(
     String(before.progress.wallet.stars + 41),
   );
-  await page.getByRole("link", { name: /Найди лишний/ }).click();
+  await page.getByRole("link", { name: "Найди лишний Внимание", exact: true }).click();
   await finishOddOneOut(page);
   await expect(page.getByTestId("streak-bonus")).toHaveCount(0);
   await expect(

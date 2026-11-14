@@ -2,8 +2,10 @@
 
 | Report | Shows |
 | --- | --- |
+| [Every MVP page](mvp.md) (default) | Entry, Learn, Leisure, video quiz, Gifts, Brainy shop, parent PIN, Analytics, Tasks, Gifts & goal. Two walkthroughs, 20 screenshots |
 | [Saved child learning loop](learning.md) | Three saved games without returning to the menu, post-game screens, the three-game break bonus, the Brainy tab, child tabs and `/lab`. Two walkthroughs, 12 screenshots |
-| [Starter screens and navigation](scaffold.md) | `/login`, `/learn`, the `/analytics` placeholder and 404 recovery. Two walkthroughs, six screenshots |
+
+The earlier `scaffold` report (placeholder screens) was retired once every page existed.
 
 ## Run
 
@@ -18,7 +20,7 @@ pnpm build
 pnpm --filter @brainee/web exec next start --hostname 127.0.0.1 --port 3123
 ```
 
-For the `learning` module, the server needs the demo session, the lab and a
+Both modules need the demo session, the lab and a
 freshly reset database (any local `file:` path works):
 
 ```bash
@@ -30,11 +32,11 @@ DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web exec next start --hostname 
 In a second terminal, generate screenshots, walkthrough recordings and Markdown:
 
 ```bash
-pnpm report --video                   # scaffold (default module)
+pnpm report --video                   # mvp (default module): every page
 pnpm report --module learning --video # saved child learning loop
 ```
 
-The command defaults to the `scaffold` module and `http://127.0.0.1:3123`.
+The command defaults to the `mvp` module and `http://127.0.0.1:3123`.
 It records Chromium at phone (390 × 844) and iPad (820 × 1180) viewport sizes,
 in Russian, light theme, with timestamps shown in Asia/Almaty. Both recordings
 show the same continuous flow. `--video` requires successful MP4 conversion;
@@ -51,7 +53,7 @@ pnpm report --flow phone-walkthrough --video
 pnpm report --flows --video --headed
 
 # Render saved captures without opening a browser:
-pnpm report --from docs/reports/.captures/scaffold/latest
+pnpm report --from docs/reports/.captures/mvp/latest
 
 # Use another local server, such as the development server:
 pnpm report --base http://localhost:3000 --video
@@ -68,6 +70,12 @@ and replace their previous videos. `--viewport phone|ipad|desktop|mobile` can
 override flow viewports; the generated result names the viewport actually used.
 Rebuild before recording source changes when using a production server.
 
+### MVP module
+
+The flow first calls `POST /api/demo-reset` (DEMO_MODE only) to restore seeded tasks,
+gifts and videos, then plays the child flow and enters parent mode with PIN `1234`.
+Analytics are seeded demo data (D-21).
+
 ### Learning module
 
 Reset the database before each `learning` run: the flows play three games in
@@ -79,16 +87,16 @@ or trying pattern answers in order) and add no test hooks to the games.
 
 | File | Purpose |
 | --- | --- |
-| [scaffold.md](scaffold.md) | Generated Markdown with clickable video posters, screenshots, checks and timelines |
-| [src/scaffold.md](src/scaffold.md) | Editable narrative and `shot`, `compare`, `flow`, `verification` placeholders |
-| [scenarios/scaffold.json](../../scripts/reports/scenarios/scaffold.json) | Screenshot routes, flow steps and viewport selection |
-| [scenarios/scaffold.mjs](../../scripts/reports/scenarios/scaffold.mjs) | Surface checks and expected-404 recovery |
-| `screens/scaffold/*.png` | Published screenshots referenced by the Markdown |
-| [Phone MP4](videos/scaffold/phone-walkthrough.mp4), [iPad MP4](videos/scaffold/ipad-walkthrough.mp4) | H.264 recordings, each with a JPEG poster |
-| [logs/scaffold.json](logs/scaffold.json) | Published timed steps, checks, console/network issues and bridge messages |
-| `.captures/scaffold/latest/` | Ignored raw screenshots, manifest, source commit/dirty marker, HTML contact sheet and PDF |
-| `.captures/scaffold/flows/<flow>/` | Ignored per-flow timeline and recordings; inspect these when a flow fails |
-| `.captures/scaffold/run-state.json`, `run.log` | Progress and diagnostics for the last run |
+| [mvp.md](mvp.md), [learning.md](learning.md) | Generated Markdown with clickable video posters, screenshots, checks and timelines |
+| [src/mvp.md](src/mvp.md), [src/learning.md](src/learning.md) | Editable narrative and `shot`, `compare`, `flow`, `verification` placeholders |
+| [scenarios/mvp.json](../../scripts/reports/scenarios/mvp.json), [learning.json](../../scripts/reports/scenarios/learning.json) | Screenshot routes, flow steps and viewport selection |
+| [mvp.mjs](../../scripts/reports/scenarios/mvp.mjs), [learning.mjs](../../scripts/reports/scenarios/learning.mjs), [common.mjs](../../scripts/reports/scenarios/common.mjs) | Walkthrough actions (`call` steps) and shared surface checks |
+| `screens/<module>/*.png` | Published screenshots referenced by the Markdown |
+| [Phone MP4](videos/mvp/phone-mvp.mp4), [iPad MP4](videos/mvp/ipad-mvp.mp4) | H.264 recordings, each with a JPEG poster |
+| [logs/mvp.json](logs/mvp.json) | Published timed steps, checks, console/network issues and bridge messages |
+| `.captures/<module>/latest/` | Ignored raw screenshots, manifest, source commit/dirty marker, HTML contact sheet and PDF |
+| `.captures/<module>/flows/<flow>/` | Ignored per-flow timeline and recordings; inspect these when a flow fails |
+| `.captures/<module>/run-state.json`, `run.log` | Progress and diagnostics for the last run |
 
 Edit the template and scenario, then regenerate. Do not hand-edit the generated
 report. Commit the Markdown, PNGs, MP4s, JPEG posters and JSON log together so
@@ -132,7 +140,7 @@ unexpected request failures, missing/duplicate viewports, missing assets and
 escaping asset paths. Flows retain console errors and 4xx responses as warnings;
 uncaught exceptions, unexpected request failures, 5xx responses, failed checks,
 foreign-origin requests and recording conversion failures make them FAILED.
-The scaffold's expected 404 is checked explicitly and retained in the log.
+The shared `recoverMissing` check expects a 404 and keeps it in the log.
 Do not interpret PASSED as a general accessibility or security audit.
 
 This is a local tooling port under [D-14](../dev/decisions.md#d-14--port-local-ui-recordings-and-markdown-reports--2026-11-14--accepted).
