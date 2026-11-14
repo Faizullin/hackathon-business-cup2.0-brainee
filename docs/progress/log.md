@@ -4,6 +4,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (merge master: English locale)
+- Merged master's T-104/T-14 commits. The merge had no textual conflicts, but typecheck broke: `en.ts` must mirror `ru.ts`, so the film player, lab and mascot strings were added in English.
+- Full e2e: 188/244. All 56 failures are master's Russian-text specs under the new English default, reproduced on clean master; every film and own-origin spec passes.
+
 ## 2026-11-14 (merge master; replaceable film mascot, T-115)
 - Merged `master` into `feature/audio_to_movie`. Conflicts were docs only; master already used D-29/T-107–T-109, so the film work became D-30 and T-111–T-114.
 - `FilmStage` now has a narrator slot (`FilmNarrator`). The player passes the child's own Brainy (stats + bought accessories); `/lab/film` swaps mascots; `packages/films` no longer imports Brainy. An e2e test buys and equips a bow tie, then sees it on the film's narrator.
