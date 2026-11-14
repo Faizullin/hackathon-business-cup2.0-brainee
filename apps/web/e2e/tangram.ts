@@ -15,5 +15,8 @@ export async function completeTangram(page: Page) {
     await frame.locator(".slot.selected-family").last().click({ delay: 60 });
     await expect(frame.locator(".tray-piece")).toHaveCount(before - 1);
   }
-  await frame.getByRole("button", { name: "Проверить", exact: true }).click();
+  const progress = await frame.locator(".session-progress").textContent();
+  await frame.getByRole("button", { name: "Проверить", exact: true }).click({ delay: 60 });
+  if (!progress?.includes("4 из 4"))
+    await expect(frame.locator(".session-progress")).not.toHaveText(progress ?? "");
 }
