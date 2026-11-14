@@ -20,13 +20,14 @@
     "db:reset": "pnpm --filter @brainee/db db:reset",
     "db:refresh-demo": "pnpm --filter @brainee/db db:refresh-demo",
     "db:studio": "pnpm --filter @brainee/db db:studio",
-    "check": "biome check . && pnpm check:games && pnpm check:manifests && pnpm typecheck",
+    "check": "biome check . && pnpm check:games && pnpm check:manifests && pnpm check:palette && pnpm typecheck",
     "format": "biome format --write .",
     "typecheck": "turbo run typecheck",
     "check:games": "node packages/games/scripts/check-games.mjs",
     "games:build": "node scripts/build-games.mjs",
     "test:assets": "node scripts/check-manifests.mjs --assets",
-    "check:manifests": "node scripts/check-manifests.mjs"
+    "check:manifests": "node scripts/check-manifests.mjs",
+    "check:palette": "node scripts/check-game-palette.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.7",

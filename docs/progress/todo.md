@@ -171,6 +171,6 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-137 Demo moments: funnel-local shape-match step (no game code, no session/rewards), real-stage growth slider
 - [ ] T-138 Restyle product pages from [design.md](../product/design.md) patterns
 - [x] T-140 Child shell: dark hero brain card + tab bar Learn · Leisure · [Brainy hub] · Path · Gifts; new Path tab
-- [ ] T-141 Game palette tokens `--game-*` / `GAME_PALETTE` + host chrome (game folders out of scope)
+- [x] T-141 Game palette tokens `--game-*` / `GAME_PALETTE` + host chrome (game folders out of scope)
 - [ ] T-142 Parent patterns: Today/Week cards, needs-attention actions, earned breakdown
 - [ ] T-139 Docs, full serial e2e, re-record reports after T-135–T-138

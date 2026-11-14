@@ -181,3 +181,7 @@ rows with the non-reset seed command (`pnpm db:seed`) against the intended deplo
 This integration does not run that command against production. Do not use `db:reset` or the
 shared-family refresh to install game catalog entries. Unimported titles in
 [the remaining queue](../product/external-games.md) stay unregistered and unavailable to children.
+
+## Lavender palette (T-141)
+
+Host chrome uses `--game-*` aliases from `@brainee/ui/styles.css`. Canvas consumers can import `GAME_PALETTE` from `@brainee/ui/lib/game-palette`; `pnpm check:palette` prevents drift from the light UI reference. CSS aliases follow the derived dark theme. Pair colors with shapes or words for correct/retry feedback. Pinned game artwork stays unchanged; this redesign does not modify game internals.

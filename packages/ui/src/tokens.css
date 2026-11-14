@@ -26,6 +26,17 @@
   --pink: #ff9ec2;
   --night: #2e2b55;
   --ring: #8c76ff;
+  --game-surface: var(--bg);
+  --game-tile: var(--surface);
+  --game-tile-ring: var(--line);
+  --game-selected: var(--mint);
+  --game-selected-wash: var(--violet-wash);
+  --game-correct: var(--sky);
+  --game-correct-wash: var(--gain-wash);
+  --game-retry: var(--coral);
+  --game-retry-wash: var(--loss-wash);
+  --game-star: var(--sun);
+  --game-highlight: var(--pink);
 }
 
 @media (prefers-color-scheme: dark) {
