@@ -1,9 +1,12 @@
 "use client";
 
+import { navigationCounts } from "@brainee/core";
 import { ChildIcon, type ChildIconName } from "@brainee/ui/components/child-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { NavigationBadge } from "@/components/demo/NavigationBadge";
 import { ru } from "@/i18n/ru";
+import { useLearning } from "./LearningProvider";
 
 const TABS: { href: string; icon: ChildIconName; label: string }[] = [
   { href: "/learn", icon: "learn", label: ru.child.tabs.learn },
@@ -15,6 +18,8 @@ const TABS: { href: string; icon: ChildIconName; label: string }[] = [
 // Persistent bar in the (child) layout: bottom on phones/portrait, a left rail at lg (iPad landscape).
 export function TabBar() {
   const pathname = usePathname();
+  const { snapshot } = useLearning();
+  const count = snapshot ? navigationCounts(snapshot.showcase).childGifts : 0;
   return (
     <nav
       aria-label={ru.child.tabsLabel}
@@ -27,13 +32,19 @@ export function TabBar() {
             <li key={tab.href}>
               <Link
                 href={tab.href}
+                aria-description={
+                  tab.href === "/gifts" && count ? ru.notifications(count) : undefined
+                }
                 aria-current={current ? "page" : undefined}
                 className={`flex min-h-16 flex-col items-center justify-center gap-0.5 text-xs font-semibold lg:min-h-20 lg:rounded-2xl lg:mx-2 transition-[color,transform] duration-(--dur-press) active:scale-95 ${
                   current ? "text-coral" : "text-muted-foreground"
                 }`}
               >
                 <ChildIcon name={tab.icon} className="size-7" />
-                {tab.label}
+                <span className="flex items-center gap-1">
+                  {tab.label}
+                  {tab.href === "/gifts" && <NavigationBadge count={count} />}
+                </span>
               </Link>
             </li>
           );

@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { applyShowcaseAction, parseShowcaseAction, type Showcase, TASKS_PER_DAY } from "./showcase";
+import {
+  applyShowcaseAction,
+  navigationCounts,
+  PARENT_ACTIONS,
+  parseShowcaseAction,
+  type Showcase,
+  TASKS_PER_DAY,
+} from "./showcase";
 
 const base: Showcase = {
   equipped: {},
@@ -152,5 +159,51 @@ describe("showcase actions", () => {
       type: "exchange",
       suns: 1,
     });
+  });
+});
+
+it("cancels only assigned tasks, without paying or mutating the original", () => {
+  expect(PARENT_ACTIONS.has("task-cancel")).toBe(true);
+  expect(parseShowcaseAction({ type: "task-cancel", taskId: "a" })).not.toBeNull();
+  const result = applyShowcaseAction(input(), { type: "task-cancel", taskId: "a" });
+  expect(result).toMatchObject({
+    ok: true,
+    wallet: { stars: 100, suns: 5 },
+    showcase: { tasks: [], weekGoal: base.weekGoal },
+  });
+  expect(base.tasks).toHaveLength(1);
+  if (!result.ok) throw new Error();
+  expect(applyShowcaseAction(input(result.showcase), { type: "task-cancel", taskId: "a" }).ok).toBe(
+    false,
+  );
+  for (const status of ["check", "done"] as const) {
+    const showcase = { ...base, tasks: base.tasks.map((task) => ({ ...task, status })) };
+    expect(applyShowcaseAction(input(showcase), { type: "task-cancel", taskId: "a" })).toEqual({
+      ok: false,
+      reason: "invalid-task",
+    });
+  }
+});
+
+it("counts only assigned real tasks, pending confirmations and undelivered gifts", () => {
+  const tasks = [
+    ...base.tasks,
+    { ...base.tasks[0], id: "app", place: "app" as const },
+    { ...base.tasks[0], id: "check", status: "check" as const },
+    { ...base.tasks[0], id: "done", status: "done" as const },
+  ] as Showcase["tasks"];
+  const requests = [
+    { id: "r1", giftId: "gift", title: "Gift", at: "2026-11-14", delivered: false },
+    { id: "r2", giftId: "gift", title: "Gift", at: "2026-11-14", delivered: true },
+  ];
+  expect(navigationCounts({ tasks, requests })).toEqual({
+    childGifts: 1,
+    parentTasks: 1,
+    parentRewards: 1,
+  });
+  expect(navigationCounts({ tasks: [], requests: [] })).toEqual({
+    childGifts: 0,
+    parentTasks: 0,
+    parentRewards: 0,
   });
 });

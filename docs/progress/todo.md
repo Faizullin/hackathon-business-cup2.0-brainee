@@ -32,7 +32,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 | 9 | Ranking hidden from child, no last names | ✅ parent-only, initials (T-43) |
 | 10 | Own-domain only; works with Screen Time allowlist | Automated route audit + PWA done; physical Screen Time verification remains T-62 |
 
-**Left before deployment (in order):** T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Nice-to-have: T-85 one playable fun game, T-53 onboarding quiz.
+**Left before deployment (in order):** remaining T-103 mechanics/settings → T-29/T-85 Picture Puzzle bridge integration → T-104/T-105 locale and Tangram Tales → T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Quiz-first onboarding is implemented by T-101. Deployment is currently deferred.
 
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
@@ -131,6 +131,8 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-101 Onboarding quiz before signup (`/onboarding`), own minimal accounts, parent login, demo account, 15-min PIN, «Вернуть ребёнку» (D-24)
 - [x] T-102 ROUTES.md extras: «Требует внимания», event feed, mood decay on read, live-skill radar (D-25)
 - [ ] T-103 ROUTES.md follow-ups: tab badges, task cancel, bonus once per day + daily/weekly resets, parent Settings (child, PIN change, devices), device pairing code, adult-task gate fallback → [routes-spec.md](../product/routes-spec.md)
+  - [x] Tab badges from shared state (assigned real tasks / confirmations / undelivered gifts), hidden parent counts while locked; cancel assigned tasks with parent authorization and no rewards.
+  - [ ] Daily/weekly resets and daily bonus; Settings, pairing and adult-task fallback remain.
 - [ ] T-104 English locale `en.ts` + locale switch (D-22), before English-only external games
 - [ ] T-105 First external game via path C: Tangram Tales (after T-29/T-85) → [external-games.md](../product/external-games.md)
 - [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run

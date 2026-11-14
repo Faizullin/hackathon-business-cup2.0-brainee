@@ -72,6 +72,16 @@ export function TasksScreen() {
                   >
                     {ru.child.taskStatus[task.status]}
                   </Chip>
+                  {task.status === "todo" && (
+                    <button
+                      type="button"
+                      disabled={busy}
+                      className={cn(outlineButton, "ml-auto")}
+                      onClick={() => run({ type: "task-cancel", taskId: task.id })}
+                    >
+                      {t.cancel}
+                    </button>
+                  )}
                   {task.status === "check" && (
                     <button
                       type="button"

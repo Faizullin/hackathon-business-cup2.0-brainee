@@ -1,5 +1,6 @@
 "use client";
 
+import { navigationCounts } from "@brainee/core";
 import { ChartLine, ClipboardCheck, Gift, LogOut } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
@@ -8,6 +9,7 @@ import { type ReactNode, useState, ViewTransition } from "react";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton } from "@/components/demo/kit";
+import { NavigationBadge } from "@/components/demo/NavigationBadge";
 import { ru } from "@/i18n/ru";
 
 const t = ru.parent;
@@ -88,6 +90,13 @@ function Gate({ children }: { children: ReactNode }) {
 export function ParentShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { snapshot, lockParent } = useLearning();
+  const counts = snapshot?.parentUnlocked ? navigationCounts(snapshot.showcase) : null;
+  const badge = (href: string) =>
+    href === "/tasks"
+      ? (counts?.parentTasks ?? 0)
+      : href === "/rewards"
+        ? (counts?.parentRewards ?? 0)
+        : 0;
   return (
     <div className="min-h-dvh overscroll-none">
       <a
@@ -104,13 +113,17 @@ export function ParentShell({ children }: { children: ReactNode }) {
               <Link
                 key={href}
                 href={href}
+                aria-description={badge(href) ? ru.notifications(badge(href)) : undefined}
                 aria-current={pathname === href ? "page" : undefined}
                 className={cn(
                   "rounded-xl px-3 py-2 font-semibold text-sm",
                   pathname === href ? "bg-secondary text-foreground" : "text-muted-foreground",
                 )}
               >
-                {label}
+                <span className="inline-flex items-center gap-1">
+                  {label}
+                  <NavigationBadge count={badge(href)} />
+                </span>
               </Link>
             ))}
           </nav>
@@ -166,6 +179,7 @@ export function ParentShell({ children }: { children: ReactNode }) {
             <li key={href}>
               <Link
                 href={href}
+                aria-description={badge(href) ? ru.notifications(badge(href)) : undefined}
                 aria-current={pathname === href ? "page" : undefined}
                 className={cn(
                   "flex min-h-16 flex-col items-center justify-center gap-0.5 font-semibold text-xs transition-transform duration-(--dur-press) active:scale-95",
@@ -173,7 +187,10 @@ export function ParentShell({ children }: { children: ReactNode }) {
                 )}
               >
                 <Icon aria-hidden="true" className="size-6" />
-                {label}
+                <span className="inline-flex items-center gap-1">
+                  {label}
+                  <NavigationBadge count={badge(href)} />
+                </span>
               </Link>
             </li>
           ))}

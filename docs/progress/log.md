@@ -4,6 +4,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (task cancellation and badges)
+- T-103 first slice: shared-state child/parent navigation counts and parent-only cancellation of assigned tasks. Core protects pending/completed tasks and preserves wallet, stats and weekly goal; counts sync by polling and parent badges hide while locked.
+- Verified `pnpm check`, 99 unit tests and 172 e2e checks across Chromium/WebKit phone and landscape iPad; reviewed WebKit screenshots. T-103 remains open for daily/weekly resets, daily bonus, Settings, pairing and adult-task fallback.
+
 ## 2026-11-14 (skills, onboarding)
 - Analysed new inputs (ROUTES.md + brainy-mvp.zip, 30-game handoff); licences checked (all permissive). D-22 locale/age, D-23 per-game weights → skills → body, D-24 quiz-before-signup + own login, D-25 reduced ROUTES.md adoption. Condensed in product/routes-spec.md and external-games.md.
 - Built T-100–T-102: weights/minAge, live skills, `/onboarding` + `/api/onboarding`, `/login` + `/api/auth/login`, «Вернуть ребёнку», «Требует внимания», event feed, mood decay.

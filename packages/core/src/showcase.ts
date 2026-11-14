@@ -152,6 +152,7 @@ export type ShowcaseAction =
   | { type: "entry-choice"; took: boolean }
   // Parent-only actions:
   | { type: "task-confirm"; taskId: string }
+  | { type: "task-cancel"; taskId: string }
   | {
       type: "task-add";
       title: string;
@@ -167,6 +168,7 @@ export type ShowcaseAction =
 
 export const PARENT_ACTIONS = new Set<ShowcaseAction["type"]>([
   "task-confirm",
+  "task-cancel",
   "task-add",
   "recommendation-assign",
   "gift-add",
@@ -247,6 +249,12 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       if (task?.place !== "real" || task.status !== "todo") return fail("invalid-task");
       task.status = "check";
       addFeed(s, { at, kind: "task-done", title: task.title });
+      return ok();
+    }
+    case "task-cancel": {
+      const task = s.tasks.find((t) => t.id === action.taskId);
+      if (task?.status !== "todo") return fail("invalid-task");
+      s.tasks = s.tasks.filter((t) => t.id !== task.id);
       return ok();
     }
     case "task-confirm": {
@@ -388,4 +396,14 @@ export function parseShowcaseAction(value: unknown): ShowcaseAction | null {
   if (action.type === "unlock-fun" && action.mode !== "timed" && action.mode !== "forever")
     return null;
   return action as ShowcaseAction;
+}
+
+/** Pending work shown in navigation, derived from the current shared snapshot. */
+export function navigationCounts(showcase: Pick<Showcase, "tasks" | "requests">) {
+  return {
+    childGifts: showcase.tasks.filter((task) => task.place === "real" && task.status === "todo")
+      .length,
+    parentTasks: showcase.tasks.filter((task) => task.status === "check").length,
+    parentRewards: showcase.requests.filter((request) => !request.delivered).length,
+  };
 }

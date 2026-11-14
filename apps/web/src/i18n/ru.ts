@@ -215,6 +215,7 @@ export const ru = {
     share: "Поделиться",
     copied: "Текст скопирован",
   },
+  notifications: (count: number) => `Требуют внимания: ${count}`,
   parent: {
     tabsLabel: "Разделы родителя",
     tabs: { analytics: "Аналитика", tasks: "Задания", rewards: "Подарки и цель" },
@@ -264,6 +265,7 @@ export const ru = {
       today: "Сегодня",
       promise: "Обещание ребёнка: 3 задания",
       confirm: "Подтвердить",
+      cancel: "Отменить",
       recs: "Рекомендации по статам Брейни",
       recAverage: (avg: number) => `среднее ${avg}`,
       assign: "Назначить",
