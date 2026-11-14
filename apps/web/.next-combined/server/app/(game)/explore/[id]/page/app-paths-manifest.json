@@ -1,0 +1,3 @@
+{
+  "/(game)/explore/[id]/page": "app/(game)/explore/[id]/page.js"
+}

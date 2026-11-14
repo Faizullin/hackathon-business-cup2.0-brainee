@@ -1,0 +1,44 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(child)/layout,_N_T_/(child)/(docked)/layout,_N_T_/(child)/(docked)/learn/layout,_N_T_/(child)/(docked)/learn/page,_N_T_/learn"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KGNoaWxkKQ/!KGRvY2tlZCk/learn/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 96,
+        "slots": {
+          "children": {
+            "hints": 96,
+            "slots": {
+              "children": {
+                "hints": 96,
+                "slots": {
+                  "children": {
+                    "hints": 160,
+                    "slots": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/c2aaf9a3959395e2ba0c477b145a8dd4760ba7b9c02534a73bf590879a000388/$/learn",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/(child)/(docked)/learn/page"
+    },
+    "isFallback": false
+  }
+}

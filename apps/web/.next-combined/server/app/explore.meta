@@ -1,0 +1,44 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(child)/layout,_N_T_/(child)/(docked)/layout,_N_T_/(child)/(docked)/explore/layout,_N_T_/(child)/(docked)/explore/page,_N_T_/explore"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KGNoaWxkKQ/!KGRvY2tlZCk/explore/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 96,
+        "slots": {
+          "children": {
+            "hints": 96,
+            "slots": {
+              "children": {
+                "hints": 96,
+                "slots": {
+                  "children": {
+                    "hints": 160,
+                    "slots": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/d25a464e91c7708fa1d7cb975d776d470e99b0169e19c7901648e079237a75f3/$/explore",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/(child)/(docked)/explore/page"
+    },
+    "isFallback": false
+  }
+}

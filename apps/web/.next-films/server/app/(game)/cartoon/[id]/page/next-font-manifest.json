@@ -1,0 +1,11 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/apps/web/src/app/(game)/cartoon/[id]/page": [
+      "static/media/Onest-s.p.3-5syjlletznn.woff2",
+      "static/media/Unbounded-s.p.3_sefggm56dud.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}

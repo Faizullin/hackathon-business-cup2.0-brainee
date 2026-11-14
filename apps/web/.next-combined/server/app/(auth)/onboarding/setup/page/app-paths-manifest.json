@@ -1,0 +1,3 @@
+{
+  "/(auth)/onboarding/setup/page": "app/(auth)/onboarding/setup/page.js"
+}

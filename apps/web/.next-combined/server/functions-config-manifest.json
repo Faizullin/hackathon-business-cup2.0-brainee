@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "functions": {
+    "/api/actions": {},
+    "/api/auth/login": {},
+    "/api/auth/signup": {},
+    "/api/demo-reset": {},
+    "/api/demo-session": {},
+    "/api/fun": {},
+    "/api/jury": {},
+    "/api/onboarding": {},
+    "/api/pairing": {},
+    "/api/parent": {},
+    "/api/sessions": {},
+    "/api/sessions/start": {},
+    "/api/sessions/stop": {},
+    "/api/settings": {},
+    "/api/state": {}
+  }
+}

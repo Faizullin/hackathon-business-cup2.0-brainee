@@ -1,0 +1,3 @@
+module.exports=[12006,a=>{"use strict";let b=a=>Number.isInteger(a)&&a>=0;a.s(["M",0,function({correct:a,afterMistake:b}){return a?b?4:3:0},"P",0,function({rounds:a,corrections:c}){if(!b(a)||!b(c)||c>a)throw RangeError("rounds and corrections must be counts with corrections <= rounds.");return(a-c)*3+4*c},"p",0,a=>({...a,inRow:0})])},68474,a=>{"use strict";a.s(["f",0,(a,b)=>Math.min(Math.max(1,Math.trunc(a)||1),b)])}];
+
+//# sourceMappingURL=packages_16y47rdhddjne._.js.map

@@ -1,0 +1,54 @@
+1:"/_next/static/chunks/2db3_qq4ectry.js"
+2:"LoadingBoundaryProvider"
+3:I[61962,["$1"],"$2"]
+4:"/_next/static/chunks/458a09f-gqaeo.js"
+5:"/_next/static/chunks/0e4gcbl0rbfdm.js"
+6:"/_next/static/chunks/0v14f35t50k-c.js"
+7:"/_next/static/chunks/1qht_f6rwwto_.js"
+8:"/_next/static/chunks/2_e7rykw53ceu.js"
+9:"/_next/static/chunks/41uezh9nkfb4g.js"
+a:"/_next/static/chunks/1fww_f3n3sns9.js"
+b:I[49199,["$4","$5","$6","$7","$8","$9","$a"],"BrainyLoader"]
+c:"$Sreact.fragment"
+d:I[41238,["$4","$5","$6","$7","$8","$9"],"I18nProvider"]
+e:I[23325,["$4","$5","$6","$7","$8","$9"],"MotionProvider"]
+f:"LearningProvider"
+10:I[72287,["$4","$5","$6","$7","$8","$9"],"$f"]
+11:I[61962,["$1"],"default"]
+12:"/_next/static/chunks/07bgm--xmie3s.js"
+13:I[71653,["$4","$5","$6","$7","$8","$9","$12"],"default"]
+14:I[19399,["$1"],"default"]
+15:"/_next/static/chunks/3tl3d_fqrsobp.js"
+16:I[27943,["$4","$5","$6","$7","$8","$9","$15"],"default"]
+18:"ClientSegmentRoot"
+19:I[76905,["$1"],"$18"]
+1a:"/_next/static/chunks/207_1ukmp1jz8.js"
+1b:I[39411,["$4","$5","$6","$7","$8","$9","$1a"],"default"]
+1e:"/_next/static/chunks/0y-tpmas95sy-.js"
+1f:"/_next/static/chunks/09ftqlwdem3-h.js"
+20:"/_next/static/chunks/2kxzd2n6fe4jo.js"
+21:I[50422,["$4","$5","$6","$7","$8","$9","$1a","$1e","$1f","$20"],"BrainyDock"]
+25:"/_next/static/chunks/3ll4zqtgsybam.js"
+26:I[79422,["$4","$5","$6","$7","$8","$9","$1a","$1e","$1f","$20","$25"],"GiftsScreen"]
+27:I[31190,["$1"],"OutletBoundary"]
+28:"$Sreact.suspense"
+2a:"ViewportBoundary"
+2b:I[31190,["$1"],"$2a"]
+2d:"MetadataBoundary"
+2e:I[31190,["$1"],"$2d"]
+30:I[93962,["$4","$5","$6","$7","$8","$9"],"default",1]
+:HL["/_next/static/chunks/3z_16_9-l1lic.css","style"]
+:HL["/_next/static/media/Onest-s.p.3-5syjlletznn.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/Unbounded-s.p.3_sefggm56dud.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+23:X
+24:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$c","c",{"children":[["$","$L26",null,{}],[["$","script","script-0",{"src":"/_next/static/chunks/3ll4zqtgsybam.js","async":true,"nonce":"$undefined"}]],["$","$L27",null,{"children":["$","$28",null,{"name":"Next.MetadataOutlet","children":"$@29"}]}]]}],"p":false,"v":null}}]]
+22:[["children",{"s":"gifts","h":512,"d":{"r":["$","$c","c",{"children":[null,["$","$L11",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L14",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$23"},"c":"$Q24"}]]
+1d:[["children",{"s":"(docked)","h":512,"d":{"r":["$","$c","c",{"children":[[["$","script","script-0",{"src":"/_next/static/chunks/0y-tpmas95sy-.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/09ftqlwdem3-h.js","async":true,"nonce":"$undefined"}],["$","script","script-2",{"src":"/_next/static/chunks/2kxzd2n6fe4jo.js","async":true,"nonce":"$undefined"}]],["$","div",null,{"className":"flex flex-col gap-5 lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start xl:grid-cols-[320px_minmax(0,1fr)]","children":[["$","div",null,{"className":"lg:sticky lg:top-[max(16px,env(safe-area-inset-top))]","children":["$","$L21",null,{}]}],["$","div",null,{"className":"flex min-w-0 flex-col gap-5","children":["$","$L11",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L14",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]]}],"p":false,"v":null},"c":"$Q22"}]]
+17:[["children",{"s":"(child)","h":512,"d":{"r":["$","$c","c",{"children":[[["$","script","script-0",{"src":"/_next/static/chunks/207_1ukmp1jz8.js","async":true,"nonce":"$undefined"}]],["$","$L19",null,{"Component":"$1b","slots":{"children":["$","$L11",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L14",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","$L16",null,{}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]},"serverProvidedParams":{"params":{},"promises":["$@1c"]}}]]}],"p":false,"v":null},"c":"$Q1d"}]]
+0:{"P":null,"c":["","gifts"],"q":"","i":false,"t":{"t":{"s":"","h":532,"d":{"r":["$","$L3",null,{"loading":[["$","$Lb","l",{}],[],[["$","script","script-0",{"src":"/_next/static/chunks/1fww_f3n3sns9.js","async":true,"nonce":"$undefined"}]]],"children":["$","$c","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/3z_16_9-l1lic.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/458a09f-gqaeo.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/0e4gcbl0rbfdm.js","async":true,"nonce":"$undefined"}],["$","script","script-2",{"src":"/_next/static/chunks/0v14f35t50k-c.js","async":true,"nonce":"$undefined"}],["$","script","script-3",{"src":"/_next/static/chunks/1qht_f6rwwto_.js","async":true,"nonce":"$undefined"}],["$","script","script-4",{"src":"/_next/static/chunks/2_e7rykw53ceu.js","async":true,"nonce":"$undefined"}],["$","script","script-5",{"src":"/_next/static/chunks/41uezh9nkfb4g.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","className":"_3t-EMW_variable iqQm3q_variable","children":["$","body",null,{"children":["$","$Ld",null,{"children":["$","$Le",null,{"children":["$","$L10",null,{"children":["$","$L11",null,{"parallelRouterKey":"children","error":"$13","errorStyles":[],"errorScripts":[["$","script","script-0",{"src":"/_next/static/chunks/07bgm--xmie3s.js","async":true,"nonce":"$undefined"}]],"template":["$","$L14",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","$L16",null,{}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]}]}]}]]}]}],"p":false,"v":null},"c":"$Q17"},"h":{"r":["$","$c","h",{"children":[null,["$","$L2b",null,{"children":"$L2c"}],["$","$L2e",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$28",null,{"name":"Next.Metadata","children":"$L2f"}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":false,"v":null}},"m":"$undefined","G":["$30",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/3z_16_9-l1lic.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"3buUufjY5t31VHzR33lQ8"}
+23:C
+1c:"$17:0:1:d:r:props:children:1:props:serverProvidedParams:params"
+2c:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1, viewport-fit=cover"}],["$","meta","2",{"name":"theme-color","content":"#f1f4fa","media":"(prefers-color-scheme: light)"}],["$","meta","3",{"name":"theme-color","content":"#10121c","media":"(prefers-color-scheme: dark)"}]]
+31:I[39641,["$1"],"IconMark"]
+29:null
+2f:[["$","title","0",{"children":"Gifts · Brainy"}],["$","meta","1",{"name":"description","content":"Learn, play, and grow together with Brainy."}],["$","link","2",{"rel":"manifest","href":"/manifest.webmanifest","crossOrigin":"$undefined"}],["$","meta","3",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","4",{"name":"apple-mobile-web-app-title","content":"Brainy"}],["$","meta","5",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","link","6",{"rel":"icon","href":"/icon?c9343d4aff5b5279","alt":"$undefined","type":"image/png","sizes":"512x512"}],["$","link","7",{"rel":"apple-touch-icon","href":"/apple-icon?5fc39a1c5e16ecb7","alt":"$undefined","type":"image/png","sizes":"180x180"}],["$","$L31","8",{}]]

@@ -1,0 +1,3 @@
+module.exports=[23611,a=>{"use strict";var b=a.i(71715);let c={name:"play",size:24,node:[["path",{d:"M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z",key:"10ikf1"}]]};c.node;let d=(0,b.f)(c);a.s(["f",0,d],23611)},32696,a=>{"use strict";a.s(["f",0,{afterQuiz:{brain:18,eyes:16,mouth:14,arms:14,legs:18,resp:10},now:{brain:66,eyes:41,mouth:55,arms:70,legs:64,resp:80},onlyFun:{brain:12,eyes:32,mouth:34,arms:96,legs:88,resp:20}}])}];
+
+//# sourceMappingURL=_1iy3qm8el0e-7._.js.map

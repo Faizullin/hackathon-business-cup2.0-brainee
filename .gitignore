@@ -32,3 +32,5 @@ apps/web/public/games/
 # Pinned game content is not local SQLite data.
 !games/*/artifact/data/
 !games/*/artifact/data/**
+pecs-game-store-master.zip
+Brainy-Funnel-Export.zip
