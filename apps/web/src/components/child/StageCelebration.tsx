@@ -4,7 +4,8 @@ import { type StateSnapshot, stageOf } from "@brainee/core";
 import { Dialog } from "@brainee/ui/components/dialog";
 import { useEffect, useRef, useState } from "react";
 import { primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
+
 export function StageCelebration({
   snapshot,
   enabled,
@@ -12,9 +13,14 @@ export function StageCelebration({
   snapshot?: StateSnapshot;
   enabled: boolean;
 }) {
-  const previous = useRef<{ child: string; stage: number; earned: string[] } | null>(null);
+  const previous = useRef<{
+    child: string;
+    stage: number;
+    earned: string[];
+  } | null>(null);
   const [reward, setReward] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+  const { t } = useI18n();
   const stage = snapshot ? stageOf(snapshot.progress.stats) : null;
   useEffect(() => {
     if (!snapshot) return;
@@ -46,8 +52,8 @@ export function StageCelebration({
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-0 z-40 bg-foreground/30" />
         <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 flex max-h-[90dvh] w-[min(90vw,420px)] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3 overflow-auto rounded-panel border border-border bg-card p-6 text-center">
-          <Dialog.Title className="font-heading text-2xl font-bold">
-            {reward ? ru.liveAnalytics.earned : ru.stageUp.title}
+          <Dialog.Title className="font-heading font-bold text-2xl">
+            {reward ? t.liveAnalytics.earned : t.stageUp.title}
           </Dialog.Title>
           <Brainy
             stats={snapshot.progress.stats}
@@ -55,10 +61,10 @@ export function StageCelebration({
             className="h-48 w-48"
           />
           <p className="font-semibold">
-            {reward ? ru.child.brainyPage.earnedNames[reward] : ru.stages[stage.id]}
+            {reward ? t.child.brainyPage.earnedNames[reward] : t.stages[stage.id]}
           </p>
-          <Dialog.Description>{ru.stageUp.note}</Dialog.Description>
-          <Dialog.Close className={primaryButton}>{ru.stageUp.close}</Dialog.Close>
+          <Dialog.Description>{t.stageUp.note}</Dialog.Description>
+          <Dialog.Close className={primaryButton}>{t.stageUp.close}</Dialog.Close>
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>

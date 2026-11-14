@@ -1,11 +1,14 @@
+"use client";
+
 import { type ReactNode, ViewTransition } from "react";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { TabBar } from "@/components/child/TabBar";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 
 // Child app shell: content + persistent tab bar (bottom on phones, left rail in iPad landscape).
 // Fullscreen games use the sibling (game) group.
 export default function ChildLayout({ children }: { children: ReactNode }) {
+  const { t } = useI18n();
   return (
     <LearningBoundary>
       <div className="min-h-dvh overscroll-none">
@@ -13,7 +16,7 @@ export default function ChildLayout({ children }: { children: ReactNode }) {
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-30 focus:rounded-xl focus:bg-surface focus:px-4 focus:py-3"
         >
-          {ru.app.skipToContent}
+          {t.app.skipToContent}
         </a>
         <main
           id="main-content"
@@ -25,7 +28,7 @@ export default function ChildLayout({ children }: { children: ReactNode }) {
             data-testid="rotate-hint"
             className="hidden rounded-xl bg-sky/10 p-3 text-center font-medium text-sm [@media(min-width:700px)_and_(orientation:portrait)]:block"
           >
-            {ru.child.rotateHint}
+            {t.child.rotateHint}
           </p>
           <ViewTransition default="page-fade">{children}</ViewTransition>
         </main>

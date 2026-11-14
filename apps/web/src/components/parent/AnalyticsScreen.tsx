@@ -8,16 +8,17 @@ import Link from "next/link";
 import { useState } from "react";
 import { useLearning } from "@/components/child/LearningProvider";
 import { Chip, Meter, outlineButton, Panel, primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 import { Bars, Legend, Radar } from "./charts";
 
-const t = ru.analytics;
 type Scope = "district" | "city" | "country";
 type Kind = "growth" | "absolute";
 
 // D-29: saved activity metrics; illustrative historical/character radars and ranking.
 export function AnalyticsScreen() {
   const { snapshot } = useLearning();
+  const { t: i18n, locale } = useI18n();
+  const t = i18n.analytics;
   const [scope, setScope] = useState<Scope>("district");
   const [kind, setKind] = useState<Kind>("growth");
   const [shared, setShared] = useState(false);
@@ -31,11 +32,11 @@ export function AnalyticsScreen() {
         metrics: {
           ...seeded.metrics,
           focusMinutes: live.focusMinutes,
-          focusDelta: ru.liveAnalytics.saved,
+          focusDelta: i18n.liveAnalytics.saved,
           streakDays: live.streakDays,
-          streakNote: ru.liveAnalytics.saved,
+          streakNote: i18n.liveAnalytics.saved,
           takesRecommendation: live.takesRecommendation,
-          recommendationDelta: ru.liveAnalytics.entries(live.took, live.entries),
+          recommendationDelta: i18n.liveAnalytics.entries(live.took, live.entries),
         },
         week: {
           ...seeded.week,
@@ -59,9 +60,9 @@ export function AnalyticsScreen() {
   const toConfirm = showcase.tasks.filter((task) => task.status === "check").length;
   const toDeliver = showcase.requests.filter((request) => !request.delivered).length;
   const attention = [
-    toConfirm > 0 && { href: "/tasks", text: ru.parent.attention.confirm(toConfirm) },
-    toDeliver > 0 && { href: "/rewards", text: ru.parent.attention.deliver(toDeliver) },
-    showcase.tasks.length === 0 && { href: "/tasks", text: ru.parent.attention.assign },
+    toConfirm > 0 && { href: "/tasks", text: i18n.parent.attention.confirm(toConfirm) },
+    toDeliver > 0 && { href: "/rewards", text: i18n.parent.attention.deliver(toDeliver) },
+    showcase.tasks.length === 0 && { href: "/tasks", text: i18n.parent.attention.assign },
   ].filter(Boolean) as { href: string; text: string }[];
   const share = async () => {
     const text = `${t.recap(a.recap.month)} · ${child.name}: ${a.recap.achievements.join(", ")}. ${t.referral(a.recap.referral)}`;
@@ -85,7 +86,7 @@ export function AnalyticsScreen() {
           data-testid="needs-attention"
           className="flex flex-col gap-2 rounded-panel border-2 border-coral/40 bg-coral/5 p-4"
         >
-          <h2 className="font-heading font-semibold text-lg">{ru.parent.attention.title}</h2>
+          <h2 className="font-heading font-semibold text-lg">{i18n.parent.attention.title}</h2>
           <ul className="flex flex-wrap gap-2">
             {attention.map((item) => (
               <li key={item.text}>
@@ -109,7 +110,7 @@ export function AnalyticsScreen() {
         <div className="flex min-w-0 flex-1 flex-col gap-2">
           <h2 className="font-heading font-semibold text-xl">{t.age(child.name, age)}</h2>
           <p className="text-muted-foreground text-sm">
-            {t.weeks(a.weeks, ru.stages.sleepy, ru.stages[stage.id])}
+            {t.weeks(a.weeks, i18n.stages.sleepy, i18n.stages[stage.id])}
           </p>
           <ol className="grid grid-cols-5 gap-1 text-[10px] leading-tight sm:text-xs">
             {STAGES.map((s, i) => (
@@ -120,14 +121,14 @@ export function AnalyticsScreen() {
                 <span
                   className={cn("[overflow-wrap:anywhere]", i === stage.index && "font-semibold")}
                 >
-                  {ru.stages[s.id]}
+                  {i18n.stages[s.id]}
                 </span>
               </li>
             ))}
           </ol>
           <div className="flex flex-wrap gap-2 text-sm">
             <Chip tone="mint">
-              {ru.child.dock.mood}: {progress.mood}%
+              {i18n.child.dock.mood}: {progress.mood}%
             </Chip>
             <span data-testid="parent-stars">
               <Chip>★ {progress.wallet.stars}</Chip>
@@ -136,7 +137,7 @@ export function AnalyticsScreen() {
             {latestGame && (
               <span data-testid="parent-latest-game">
                 <Chip tone="sky">
-                  {latestGame.title} · {ru.child.game.level(latestGame.level)} · +
+                  {latestGame.title} · {i18n.child.game.level(latestGame.level)} · +
                   {latestGame.starsEarned}★
                 </Chip>
               </span>
@@ -146,7 +147,7 @@ export function AnalyticsScreen() {
       </Panel>
 
       <p className="text-sm text-muted-foreground" data-testid="computed-analytics">
-        {ru.liveAnalytics.note}
+        {i18n.liveAnalytics.note}
       </p>
       <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {[
@@ -218,7 +219,7 @@ export function AnalyticsScreen() {
             ]}
           />
         </Panel>
-        <Panel title={t.week} note={ru.liveAnalytics.week}>
+        <Panel title={t.week} note={i18n.liveAnalytics.week}>
           <Bars
             label={t.week}
             categories={a.week.days}
@@ -237,7 +238,7 @@ export function AnalyticsScreen() {
             ]}
           />
         </Panel>
-        <Panel title={t.hard} note={ru.liveAnalytics.recommended}>
+        <Panel title={t.hard} note={i18n.liveAnalytics.recommended}>
           <Bars
             label={t.hard}
             categories={a.hardThing.weeks}
@@ -249,9 +250,9 @@ export function AnalyticsScreen() {
         </Panel>
       </div>
 
-      <Panel title={ru.parent.feed.title}>
+      <Panel title={i18n.parent.feed.title}>
         {showcase.feed.length === 0 ? (
-          <p className="text-muted-foreground">{ru.parent.feed.empty}</p>
+          <p className="text-muted-foreground">{i18n.parent.feed.empty}</p>
         ) : (
           <ol className="flex flex-col gap-1" data-testid="event-feed">
             {showcase.feed.slice(0, 8).map((item) => (
@@ -259,9 +260,11 @@ export function AnalyticsScreen() {
                 key={`${item.at}-${item.kind}-${item.title ?? ""}`}
                 className="flex items-baseline justify-between gap-3 rounded-xl bg-secondary/50 px-3 py-2 text-sm"
               >
-                <span>{ru.parent.feed.kinds[item.kind]?.(item.title ?? "", item.amount ?? 0)}</span>
+                <span>
+                  {i18n.parent.feed.kinds[item.kind]?.(item.title ?? "", item.amount ?? 0)}
+                </span>
                 <time dateTime={item.at} className="shrink-0 text-muted-foreground text-xs">
-                  {new Date(item.at).toLocaleString("ru-RU", {
+                  {new Date(item.at).toLocaleString(locale === "ru" ? "ru-RU" : "en-US", {
                     dateStyle: "short",
                     timeStyle: "short",
                   })}
@@ -336,7 +339,7 @@ export function AnalyticsScreen() {
           <div className="flex flex-1 flex-col gap-2">
             <h2 className="font-heading font-semibold text-lg">{t.recap(a.recap.month)}</h2>
             <p className="font-semibold">
-              {child.name} · {ru.stages[stage.id]}
+              {child.name} · {i18n.stages[stage.id]}
             </p>
             <ul className="text-sm">
               {a.recap.achievements.map((item) => (

@@ -55,7 +55,7 @@ test("demo access is cookie-bound and a finish returns the same saved receipt on
   expect(access.headers()["set-cookie"]).toContain("HttpOnly");
   expect(access.headers()["set-cookie"]).toContain("SameSite=lax");
   expect(access.headers()["cache-control"]).toBe("no-store");
-  expect(await access.json()).toMatchObject({ child: { id: "demo-child", name: "Саша" } });
+  expect(await access.json()).toMatchObject({ child: { id: "demo-child", name: "Mia" } });
   expect(await access.text()).not.toMatch(/pin|hash|token|email/i);
   const cookie = (await request.storageState()).cookies.find(
     (cookie) => cookie.name === "brainee_demo",

@@ -109,7 +109,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-72 Landing page (`apps/landing`), stretch goal
 - [ ] T-73 Pitch deck
 - [ ] T-74 Freeze `master`, tag the demo build
-- [ ] T-14 **Deploy (free tiers only)**: Turso cloud database provisioned and seeded (`libsql://brainee-demo-...`); `getDatabaseConfig`, `openDatabase`, `drizzle.config.ts` and `scripts/manage.ts` updated and tested with `DATABASE_AUTH_TOKEN`; Vercel Hobby project deployment next → [D-15](../dev/decisions.md)
+- [x] T-14 **Deploy (free tiers only)**: Turso cloud database provisioned and seeded (`libsql://brainee-demo-...`); `packages/db` updated with `DATABASE_AUTH_TOKEN` support; Vercel Next.js project deployed and live at `https://brainee.vercel.app` → [D-15](../dev/decisions.md)
 
 ## Backlog / ideas
 - [x] T-80 Define a smallest end-to-end demo slice and prioritize it ahead of optional features → [scope above](#smallest-end-to-end-demo-slice-t-80).
@@ -135,14 +135,17 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
   - [x] Daily bonus shared across devices; family-local daily/weekly rollover, fresh task quota and read-only task history (D-26).
   - [x] Settings (child, PIN, timezone, devices/account), one-time pairing/revocation, adult-task fallback; stage celebration/feed and task empty states.
   - [x] Onboarding polish: progress, answer reactions, story, hold/reduced-motion reveal and optional referral field.
-- [ ] T-104 English locale `en.ts` + locale switch (D-22), before English-only external games
+- [x] T-104 English locale `en.ts` + locale switch (D-22), before English-only external games
+- [x] T-110 US-English seeds and demo family (Mia, `mom@example.com`, US names/numbers, New York time), RU display map for seeded content and game titles, `db:refresh-demo`, report locale cookie/timezone fix (D-30)
+- [ ] T-111 English recordings and e2e locale: port report scenarios/selectors to English (or run both locales) and re-record MVP + learning
+- [ ] T-112 Games worktree: English manifest titles plus i18n for `GameHost`/`IframeGame` error and loading strings (currently Russian)
 - [ ] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
 - [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).
-- [x] T-111 Interactive films from ElevenLabs podcasts (D-30) → [films.md](../dev/films.md): `core/film.ts` format + checks, `packages/films` art/stage, `/video/[id]` film player, `/lab/film` studio, `make_film.py`, `pnpm check:films`, first film `sky-blue` (English, 8 questions, 83 scenes)
-- [x] T-112 Films `rain` («Rain», 8 questions, 79 scenes) and `sun-goes` («Where the sun goes», 7 questions, 84 scenes); 5 backgrounds + 23 props added; `make_film.py` uses word timestamps; `sky-blue` retitled «Why the sky is blue?»
-- [x] T-113 Film props stand on the ground: background `ground` lines, prop `base`/`floats`, standing props never bob; check forbids standing props on ground-less scenes; marbles, clothesline, flashlight/orange redrawn or grounded; scenes fixed in all three films
-- [x] T-115 Replaceable film mascot: `FilmNarrator` slot in `FilmStage`; the child's own Brainy (stats + bought accessories) leads every film; `/lab/film` mascot selector; e2e proves bought accessories appear on the narrator
-- [ ] T-114 Film follow-ups: second on-stage character for `guest` voices; English player chrome with T-104; physical iPad check of the Web Audio mouth (with T-84); confirm the Russian/English choice for future podcasts
+- [x] T-120 Interactive films from ElevenLabs podcasts (D-31) → [films.md](../dev/films.md): `core/film.ts` format + checks, `packages/films` art/stage, `/video/[id]` film player, `/lab/film` studio, `make_film.py`, `pnpm check:films`, first film `sky-blue` (English, 8 questions, 83 scenes)
+- [x] T-121 Films `rain` («Rain», 8 questions, 79 scenes) and `sun-goes` («Where the sun goes», 7 questions, 84 scenes); 5 backgrounds + 23 props added; `make_film.py` uses word timestamps; `sky-blue` retitled «Why the sky is blue?»
+- [x] T-122 Film props stand on the ground: background `ground` lines, prop `base`/`floats`, standing props never bob; check forbids standing props on ground-less scenes; marbles, clothesline, flashlight/orange redrawn or grounded; scenes fixed in all three films
+- [x] T-123 Replaceable film mascot: `FilmNarrator` slot in `FilmStage`; the child's own Brainy (stats + bought accessories) leads every film; `/lab/film` mascot selector; e2e proves bought accessories appear on the narrator
+- [ ] T-124 Film follow-ups: second on-stage character for `guest` voices; physical iPad check of the Web Audio mouth (with T-84); confirm the Russian/English choice for future podcasts
 - [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run
 - [x] T-96 `mvp` report module: every page + child → parent walkthrough; `scaffold` report retired → [reports/mvp.md](../reports/mvp.md)
 - [ ] T-97 Showcase follow-ups after the pitch: real Task/Gift/Request tables, computed analytics, playable fun games and cartoons, presenter «Сбросить демо» button (endpoint exists)

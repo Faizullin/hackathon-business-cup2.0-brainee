@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { AnalyticsScreen } from "@/components/parent/AnalyticsScreen";
-import { ru } from "@/i18n/ru";
 
-export const metadata: Metadata = { title: ru.analytics.title };
+export const metadata: Metadata = { title: "Analytics" };
 
-export default function AnalyticsPage() {
+export default function Page() {
   return <AnalyticsScreen />;
 }

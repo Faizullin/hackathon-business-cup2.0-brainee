@@ -56,10 +56,26 @@ it("creates the schema and seed that another connection can read", async () => {
   }
 });
 
+it("refreshes only the shared demo family", async () => {
+  const fixture = await temporaryDatabase();
+  const { db } = await fixture.seeded();
+  await db.insert(families).values({ ...demo.family, id: "other-family" });
+  await db.insert(children).values({ ...demo.child, id: "other-child", familyId: "other-family" });
+  await db.update(children).set({ name: "Renamed" }).where(eq(children.id, demo.child.id));
+  await db.update(wallets).set({ stars: 1 }).where(eq(wallets.childId, demo.child.id));
+  await seedDatabase(fixture.config, true);
+  expect(await db.select().from(children).where(eq(children.id, demo.child.id))).toEqual([
+    demo.child,
+  ]);
+  expect(await db.select().from(wallets)).toEqual([demo.wallet]);
+  expect(await db.select().from(children)).toHaveLength(2);
+  expect(await db.select().from(gameSessions)).toHaveLength(10);
+});
+
 it("allows more than one child in a family", async () => {
   const fixture = await temporaryDatabase();
   const { db } = await fixture.seeded();
-  await db.insert(children).values({ ...demo.child, id: "second-child", name: "Миша" });
+  await db.insert(children).values({ ...demo.child, id: "second-child", name: "Noah" });
   expect(await db.select().from(children)).toHaveLength(2);
 });
 

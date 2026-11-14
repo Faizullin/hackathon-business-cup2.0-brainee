@@ -18,6 +18,7 @@
     "db:push": "pnpm --filter @brainee/db db:push",
     "db:seed": "pnpm --filter @brainee/db db:seed",
     "db:reset": "pnpm --filter @brainee/db db:reset",
+    "db:refresh-demo": "pnpm --filter @brainee/db db:refresh-demo",
     "db:studio": "pnpm --filter @brainee/db db:studio",
     "check": "biome check . && pnpm check:games && pnpm check:manifests && pnpm typecheck",
     "format": "biome format --write .",

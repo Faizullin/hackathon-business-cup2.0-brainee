@@ -14,7 +14,7 @@ import { coralButton, outlineButton, primaryButton } from "@/components/demo/kit
 import { FilmView } from "@/components/film/FilmView";
 import { brainyNarrator } from "@/components/film/narrators";
 import { useFilmScript } from "@/components/film/useFilmScript";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 
 const SAVE_EVERY_SECONDS = 10; // ROUTES.md §5: save position every 10 s and on close
 
@@ -23,7 +23,8 @@ function FinalQuiz({ video }: { video: ScienceVideo }) {
   const { act } = useLearning();
   const [wrong, setWrong] = useState<number[]>([]);
   const [solved, setSolved] = useState(false);
-  const t = ru.child.video;
+  const { t: i18n } = useI18n();
+  const t = i18n.child.video;
   const answer = async (index: number) => {
     const error = await act({ type: "video-answer", id: video.id, answer: index });
     if (error === "wrong-answer") setWrong((w) => [...w, index]);
@@ -70,11 +71,12 @@ function FinalQuiz({ video }: { video: ScienceVideo }) {
 }
 
 function CloseButton({ onClose }: { onClose: () => void }) {
+  const { t } = useI18n();
   return (
     <div className="flex items-center gap-3">
       <button type="button" onClick={onClose} className={outlineButton}>
         <ArrowLeft aria-hidden="true" className="size-4" />
-        {ru.child.video.close}
+        {t.child.video.close}
       </button>
     </div>
   );
@@ -87,7 +89,8 @@ function DemoPlayer({ video }: { video: ScienceVideo }) {
   const [position, setPosition] = useState(() => (video.solved ? 0 : video.position));
   const [playing, setPlaying] = useState(false);
   const saved = useRef(false);
-  const t = ru.child.video;
+  const { t: i18n } = useI18n();
+  const t = i18n.child.video;
   useEffect(() => {
     if (!playing) return;
     const timer = setInterval(() => {
@@ -153,7 +156,7 @@ function DemoPlayer({ video }: { video: ScienceVideo }) {
             />
           </div>
           <p className="mt-1 text-muted-foreground text-sm">
-            {position} / {video.minutes} мин
+            {position} / {i18n.child.leisure.minutes(video.minutes)}
           </p>
         </div>
       </div>
@@ -172,7 +175,8 @@ function FilmPlayer({ video }: { video: ScienceVideo }) {
   const seconds = useRef(startAt);
   const savedMinute = useRef(video.solved ? 0 : video.position);
   const lastSave = useRef(0);
-  const t = ru.child.video.film;
+  const { t: i18n } = useI18n();
+  const t = i18n.child.video.film;
 
   const save = useCallback(
     (minute: number) => {

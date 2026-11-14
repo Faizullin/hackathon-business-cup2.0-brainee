@@ -6,7 +6,7 @@ import { Pause, Play, RotateCcw } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { coralButton, outlineButton, primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 
 type Meter = { ctx: AudioContext; analyser: AnalyserNode; data: Uint8Array<ArrayBuffer> };
 
@@ -40,7 +40,8 @@ export function FilmView({
   onTime,
   onEnded,
 }: FilmViewProps) {
-  const t = ru.child.video.film;
+  const { t: i18n } = useI18n();
+  const t = i18n.child.video.film;
   const audio = useRef<HTMLAudioElement>(null);
   const last = useRef(startAt);
   const meter = useRef<Meter | null | false>(null); // false: Web Audio unavailable
@@ -257,7 +258,9 @@ export function FilmView({
             type="button"
             onClick={() => (playing ? audio.current?.pause() : play())}
             className={cn(primaryButton, "min-h-14 min-w-14")}
-            aria-label={playing ? ru.child.video.pause : blocked ? t.resume : ru.child.video.play}
+            aria-label={
+              playing ? i18n.child.video.pause : blocked ? t.resume : i18n.child.video.play
+            }
             data-testid="film-toggle"
           >
             {playing ? <Pause className="size-6" /> : <Play className="size-6" />}
@@ -265,7 +268,7 @@ export function FilmView({
           <div className="flex-1">
             <div
               role="progressbar"
-              aria-label={ru.child.video.progress}
+              aria-label={i18n.child.video.progress}
               aria-valuemin={0}
               aria-valuemax={Math.round(script.duration)}
               aria-valuenow={Math.round(time)}
@@ -285,7 +288,7 @@ export function FilmView({
       {studio && (
         <div className="flex flex-col gap-3 rounded-panel border border-border border-dashed p-3">
           <label className="flex flex-col gap-1 text-sm">
-            {ru.lab.film.seek}: {clock(time)}
+            {i18n.lab.film.seek}: {clock(time)}
             <input
               type="range"
               min={0}
@@ -297,7 +300,7 @@ export function FilmView({
           </label>
           <label className="flex items-center gap-2 text-sm">
             <input type="checkbox" checked={skip} onChange={(e) => setSkip(e.target.checked)} />
-            {ru.lab.film.skip}
+            {i18n.lab.film.skip}
           </label>
           <div className="flex flex-wrap gap-2">
             {script.questions.map((q, i) => (
@@ -310,7 +313,7 @@ export function FilmView({
                   seek(Math.max(0, q.t - 4));
                 }}
               >
-                {ru.lab.film.jump(i + 1, clock(q.t))}
+                {i18n.lab.film.jump(i + 1, clock(q.t))}
               </button>
             ))}
           </div>

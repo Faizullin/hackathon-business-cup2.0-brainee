@@ -662,8 +662,8 @@ async function openSession(options) {
   const authProbe = options.authProbe ? String(options.authProbe) : null;
   const locale = String(options.locale || "en");
   const browserLocale = String(options.localeId || "en-US");
-  const localeCookie = String(options.localeCookie || "Next-Locale");
-  const timezone = String(options.timezone || "Asia/Almaty");
+  const localeCookie = String(options.localeCookie || "brainee_locale");
+  const timezone = String(options.timezone || "America/New_York");
   const timeoutMs = Number(options.timeout ?? 30000);
   const email = options.email || process.env.REPORT_EMAIL || process.env.UISHOT_EMAIL;
   const password = options.password || process.env.REPORT_PASSWORD || process.env.UISHOT_PASSWORD;
@@ -1212,8 +1212,8 @@ Web report runner (npm run report)
   --auth-probe <route>  Protected route to verify cached session
   --locale <code>       Locale (default: en)
   --locale-id <id>      Locale ID (default: en-US)
-  --locale-cookie <c>   Locale cookie (default: Next-Locale)
-  --timezone <zone>     Timezone (default: Asia/Almaty)
+  --locale-cookie <c>   Locale cookie (default: brainee_locale)
+  --timezone <zone>     Timezone (default: America/New_York)
   --settle <ms>         Page settle time in ms (default: 1500)
   --viewport <v>        ipad | phone | desktop | mobile | both (or comma-separated names)
   --storage-state <f>   Existing Playwright storage state file

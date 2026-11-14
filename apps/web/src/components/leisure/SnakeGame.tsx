@@ -9,7 +9,7 @@ import {
 } from "@brainee/core";
 import { useEffect, useRef, useState } from "react";
 import { outlineButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 /** Native React game: emits a result through props; the leisure host never grants learning rewards. */
 export function SnakeGame({
   active,
@@ -22,7 +22,8 @@ export function SnakeGame({
     direction = useRef<Direction>("right"),
     duration = useRef(0),
     reported = useRef(false);
-  const t = ru.playTime;
+  const { t: i18n } = useI18n();
+  const t = i18n.playTime;
   useEffect(() => {
     if (!active) return;
     const timer = setInterval(() => {

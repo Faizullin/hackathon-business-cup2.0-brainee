@@ -15,7 +15,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { StopLearningButton } from "@/components/child/StopLearningButton";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 import {
   canRetryFinish,
   type IssuedGame,
@@ -50,8 +50,9 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
   const boot = useRef<Promise<IssuedGame> | null>(null);
   const router = useRouter();
   const safeLevel = clampLevel(level, game?.levels ?? 1);
-  const t = ru.child.game;
-  const sync = ru.child.sync;
+  const { t: i18n, tc } = useI18n();
+  const t = i18n.child.game;
+  const sync = i18n.child.sync;
   const matches =
     !initialPending ||
     (initialPending.issued.gameId === gameId &&
@@ -110,7 +111,7 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
     const accessExpired = error instanceof LearningApiError && error.status === 401;
     return (
       <section className="mx-auto flex w-full max-w-xl flex-col items-center gap-4 p-6 text-center">
-        <h1>{game.title}</h1>
+        <h1>{tc(game.title)}</h1>
         <p role={failed ? "alert" : "status"}>
           {phase === "start-error"
             ? accessExpired
@@ -167,7 +168,7 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
           {t.exit}
         </StopLearningButton>
         <div className="min-w-0 flex-1">
-          <h1 className="!text-lg leading-tight">{game.title}</h1>
+          <h1 className="!text-lg leading-tight">{tc(game.title)}</h1>
           <p className="text-muted-foreground text-sm">{t.level(issued.level)}</p>
         </div>
         <p
@@ -181,7 +182,7 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
       </header>
       <GameHost
         sessionId={issued.sessionId}
-        text={ru.games}
+        text={i18n.games}
         game={game}
         level={issued.level}
         seed={issued.seed}

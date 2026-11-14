@@ -15,18 +15,19 @@ import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { ViewTransition } from "react";
 import { Meter, Notice, outlineButton, Panel, primaryButton, useAct } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";
 
 // Brainy tab: big Brainy, stage path, stats, accessory shop and earned rewards (T-38).
 export function BrainyProfile() {
   const { snapshot, resting } = useLearning();
   const { run, busy, notice } = useAct();
+  const { t: i18n } = useI18n();
   if (!snapshot) return null;
   const { stats } = snapshot.progress;
   const { equipped, owned, earned } = snapshot.showcase;
   const stage = stageOf(stats);
-  const t = ru.child.brainyPage;
+  const t = i18n.child.brainyPage;
   const suggestion = learningPracticeGame(
     stats,
     allGames.filter((g) => g.minAge <= new Date().getFullYear() - snapshot.child.birthYear),
@@ -47,15 +48,15 @@ export function BrainyProfile() {
         <ViewTransition name="brainy-hero">
           <Brainy stats={stats} equipped={equipped} className="h-auto w-full max-w-[320px]" />
         </ViewTransition>
-        <p className="font-heading text-lg font-semibold">{ru.stages[stage.id]}</p>
+        <p className="font-heading text-lg font-semibold">{i18n.stages[stage.id]}</p>
         {stage.next && (
           <p className="text-muted-foreground">
-            {ru.child.dock.toNext(ru.stages[stage.next], stage.pointsToNext)}
+            {i18n.child.dock.toNext(i18n.stages[stage.next], stage.pointsToNext)}
           </p>
         )}
         {suggestion && (
           <Link href={`/game/${suggestion.id}`} className={cn(primaryButton, "min-h-12 px-5")}>
-            {t.suggest(ru.lab.brainy.statNames[weakest])}
+            {t.suggest(i18n.lab.brainy.statNames[weakest])}
           </Link>
         )}
         <ol className="grid w-full max-w-md grid-cols-5 gap-1.5 text-[10px] leading-tight sm:text-xs">
@@ -73,7 +74,7 @@ export function BrainyProfile() {
                 className="[overflow-wrap:anywhere]"
                 aria-current={i === stage.index ? "step" : undefined}
               >
-                {ru.stages[s.id]}
+                {i18n.stages[s.id]}
               </span>
             </li>
           ))}
@@ -86,7 +87,7 @@ export function BrainyProfile() {
               <div key={stat} className="flex flex-col gap-1.5 rounded-xl bg-secondary p-3">
                 <div className="flex items-baseline justify-between gap-2">
                   <dt className="font-semibold">
-                    {ru.lab.brainy.statNames[stat]}{" "}
+                    {i18n.lab.brainy.statNames[stat]}{" "}
                     <span className="font-normal text-muted-foreground text-xs">
                       {t.trains[stat]}
                     </span>
@@ -121,7 +122,7 @@ export function BrainyProfile() {
                     label=""
                     className="h-24 w-auto"
                   />
-                  <span className="font-semibold text-sm">{ru.accessories[item.id]}</span>
+                  <span className="font-semibold text-sm">{i18n.accessories[item.id]}</span>
                   {!has ? (
                     <button
                       type="button"
@@ -174,7 +175,7 @@ export function BrainyProfile() {
                   {!has && (
                     <span className="block font-normal text-xs">
                       {rewards
-                        ? ru.rewardProgress(
+                        ? i18n.rewardProgress(
                             reward,
                             rewards[reward].value,
                             rewards[reward].target,

@@ -13,18 +13,19 @@ import {
   primaryButton,
   useAct,
 } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 
-const t = ru.parent.tasks;
 const input = "min-h-11 w-full rounded-xl border border-border bg-background px-3 text-base";
 
 // T-44/T-45 for the demo: form, templates, Today list with confirm, limit 5, recommendations.
 export function TasksScreen() {
   const { snapshot } = useLearning();
   const { run, busy, notice } = useAct();
+  const { t: i18n } = useI18n();
+  const t = i18n.parent.tasks;
   const [title, setTitle] = useState("");
   const [place, setPlace] = useState<TaskPlace>("real");
-  const [skill, setSkill] = useState("Ответственность");
+  const [skill, setSkill] = useState(t.defaultSkill);
   const [reward, setReward] = useState(2);
   if (!snapshot) return null;
   const { tasks, templates, recommendations, taskHistory = [] } = snapshot.showcase;
@@ -84,7 +85,7 @@ export function TasksScreen() {
                       task.status === "done" ? "mint" : task.status === "check" ? "sun" : undefined
                     }
                   >
-                    {ru.child.taskStatus[task.status]}
+                    {i18n.child.taskStatus[task.status]}
                   </Chip>
                   {task.status === "todo" && (
                     <button
@@ -206,9 +207,9 @@ export function TasksScreen() {
                 >
                   <span className="flex-1">{task.title}</span>
                   <time dateTime={task.day} className="text-muted-foreground">
-                    {ru.date(task.day)}
+                    {i18n.date(task.day)}
                   </time>
-                  <Chip>{task.status === "done" ? ru.child.taskStatus.done : t.expired}</Chip>
+                  <Chip>{task.status === "done" ? i18n.child.taskStatus.done : t.expired}</Chip>
                 </li>
               ))}
             </ul>

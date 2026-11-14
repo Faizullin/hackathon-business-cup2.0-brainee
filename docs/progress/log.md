@@ -4,24 +4,42 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (merge master: useI18n everywhere)
+- Merged master's T-104 view wiring (`39ff574`) and `db:refresh-demo` (`acb2423`). `VideoPlayer.tsx` conflicted: kept the film player and moved it and `FilmView` to `useI18n`; the dev studio stays Russian like other lab pages. Master took D-30 and T-110–T-112, so the film work is now D-31 and T-120–T-124.
+- Checks: `pnpm check`, 283 unit tests, e2e 235/248 with all 16 film checks passing. The 13 failures (onboarding ×8, `/login` ×4, jury ×1) also fail on clean `origin/master` `acb2423` (14 there).
+
 ## 2026-11-14 (merge master: English locale)
 - Merged master's T-104/T-14 commits. The merge had no textual conflicts, but typecheck broke: `en.ts` must mirror `ru.ts`, so the film player, lab and mascot strings were added in English.
 - Full e2e: 188/244. All 56 failures are master's Russian-text specs under the new English default, reproduced on clean master; every film and own-origin spec passes.
 
-## 2026-11-14 (merge master; replaceable film mascot, T-115)
-- Merged `master` into `feature/audio_to_movie`. Conflicts were docs only; master already used D-29/T-107–T-109, so the film work became D-30 and T-111–T-114.
+## 2026-11-14 (merge master; replaceable film mascot, T-123)
+- Merged `master` into `feature/audio_to_movie`. Conflicts were docs only; master already used D-29/T-107–T-109, so the film work became D-31 and T-120–T-124.
 - `FilmStage` now has a narrator slot (`FilmNarrator`). The player passes the child's own Brainy (stats + bought accessories); `/lab/film` swaps mascots; `packages/films` no longer imports Brainy. An e2e test buys and equips a bow tie, then sees it on the film's narrator.
 
-## 2026-11-14 (films: props stand on the ground, T-113)
+## 2026-11-14 (films: props stand on the ground, T-122)
 - Feedback: props looked like they were flying. Cause: every prop had one fixed spot in the upper frame plus bobbing motions. Backgrounds now declare a `ground` line and standing props a `base`; the stage places them on the ground and keeps them still. 85 scenes were affected. The check now fails on standing props in sky/space/cloud/sea scenes; 6 scenes and 7 Brainy spots were fixed. Verified by measuring standing props during playback (no vertical movement) and screenshots.
 
-## 2026-11-14 (films: rain and sun-goes, T-112)
+## 2026-11-14 (films: rain and sun-goes, T-121)
 - Two more ElevenLabs podcasts (English) became films: `rain` (8 questions, 79 scenes) and `sun-goes` (7 questions, 84 scenes). Added 5 backgrounds, 23 props and two card icons. `sky-blue` retitled «Why the sky is blue?»; its source file was renamed to match.
 - `make_film.py` now takes caption times from word timestamps: segment times were ~1.2 s early on Rain. Checks: 244 unit tests, full e2e 224/224, first-question play-through for both new films in Chromium and WebKit.
 
-## 2026-11-14 (interactive films, T-111)
-- The task targeted a nonexistent vanilla prototype (`assets/film.js`, `tools/*.py`), so it was adapted to the monorepo (D-30, [films.md](../dev/films.md)): `core/film.ts` checks, `packages/films` art/stage, `/video/[id]` film player, `/lab/film`, `make_film.py` (local faster-whisper via uv, ffmpeg decode), `pnpm check:films`.
+## 2026-11-14 (interactive films, T-120)
+- The task targeted a nonexistent vanilla prototype (`assets/film.js`, `tools/*.py`), so it was adapted to the monorepo (D-31, [films.md](../dev/films.md)): `core/film.ts` checks, `packages/films` art/stage, `/video/[id]` film player, `/lab/film`, `make_film.py` (local faster-whisper via uv, ffmpeg decode), `pnpm check:films`.
 - First film `sky-blue` came from the ElevenLabs mp3, which turned out to be **English**. Captions were proofread; 8 question pauses were placed from `silencedetect` silences; 83 scenes. Checks: 208 unit tests, full e2e 224/224.
+## 2026-11-14 (US-English demo content, locale test fix)
+- T-110 / D-30: shared demo and jury seeds rewritten for the US audience (Mia, Ava, `mom@example.com`, US names, en-US numbers, New York time); Russian switch maps seeded strings and game titles via `i18n/content.ts`. Small i18n fixes: backpack progress wording, video minutes, default task skill, cartoon icon check, "Neighborhood" ranking scope.
+- `pnpm db:refresh-demo` replaces only the shared demo family (local or cloud). Fixed e2e locale: the global Playwright `cookie` header overrode the session jar (401s, English UI); now `BRAINEE_DEFAULT_LOCALE=ru` on the test server. Report captures use `brainee_locale` + New York time.
+
+## 2026-11-14 (Bilingual EN/RU localization and English default)
+- Completed T-104: implemented full bilingual support (EN/RU with English as default) across all child, parent, entry, and auth views per ADR D-22 and AGENTS.md.
+- Added comprehensive English dictionary `apps/web/src/i18n/en.ts` mirroring `ru.ts`, typed `I18nProvider` / `useI18n()` with SSR cookie `brainee_locale` (1 year, SameSite=Lax) and `localStorage` sync.
+- Added floating locale pill on entry/auth/onboarding, compact header toggle in Parent Shell, and radio cards in Parent Settings. Added Playwright e2e spec `e2e/locale-switch.spec.ts`. All checks, unit tests, and typechecks pass.
+
+## 2026-11-14 (Vercel production deployment & live domain brainee.vercel.app)
+- Completed T-14: linked and deployed production Next.js app to Vercel connected to remote Turso libSQL database.
+- Added root Turborepo output mapping (`apps/web/.next`) and configured Vercel environment variables (`DATABASE_URL`, `DATABASE_AUTH_TOKEN`, `DEMO_MODE=1`, `BRAINEE_LAB=1`).
+- Configured production domain alias `https://brainee.vercel.app` (and `hackathon-business-cup20-brainee.vercel.app`). Verified live HTTP/2 200 responses for root, `/jury`, and `/games/` same-origin assets.
+
 ## 2026-11-14 (Turso remote database deployment configuration)
 - First deployment phase for T-14: configured `packages/db` (`getDatabaseConfig`, `openDatabase`, `drizzle.config.ts`, `database-tools.ts`, `manage.ts`) to support remote libSQL/Turso URLs (`libsql://`) and `DATABASE_AUTH_TOKEN`, skipping local SQLite PRAGMAs/directories on cloud connections.
 - Provisioned cloud database `brainee-demo` on Turso in Frankfurt (`aws-eu-central-1`), pushed schema and seeded demo showcase data. Created `.env.deployed` (gitignored) with cloud credentials.

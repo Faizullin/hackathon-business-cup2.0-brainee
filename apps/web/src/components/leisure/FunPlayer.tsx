@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton, Panel, primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 import { SnakeGame } from "./SnakeGame";
 export function FunPlayer({ id }: { id: string }) {
   const { snapshot, refresh } = useLearning();
@@ -18,7 +18,8 @@ export function FunPlayer({ id }: { id: string }) {
   const session = useRef<{ id: string; sequence: number } | null>(null),
     seconds = useRef(0),
     queue = useRef(Promise.resolve());
-  const t = ru.playTime;
+  const { t: i18n } = useI18n();
+  const t = i18n.playTime;
   const flush = useCallback(() => {
     const credit = seconds.current;
     seconds.current = 0;

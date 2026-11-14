@@ -11,15 +11,16 @@ import {
   primaryButton,
   useAct,
 } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 
-const t = ru.parent.rewards;
 const input = "min-h-11 w-full rounded-xl border border-border bg-background px-3 text-base";
 
 // T-46 for the demo: rules, weekly goal, gift shop CRUD, child requests → «Вручено».
 export function RewardsScreen() {
   const { snapshot } = useLearning();
   const { run, busy, notice } = useAct();
+  const { t: i18n } = useI18n();
+  const t = i18n.parent.rewards;
   const [target, setTarget] = useState(10);
   const [giftId, setGiftId] = useState("");
   const [title, setTitle] = useState("");
@@ -48,7 +49,7 @@ export function RewardsScreen() {
             <span>
               {goal.earned} / {goal.target} ☀
             </span>
-            <span className="text-muted-foreground">{ru.child.gifts.goalDue(goal.due)}</span>
+            <span className="text-muted-foreground">{i18n.child.gifts.goalDue(goal.due)}</span>
           </div>
           <Meter value={(goal.earned / goal.target) * 100} tone="bg-sun" />
           <div className="grid grid-cols-2 gap-3">
@@ -131,7 +132,7 @@ export function RewardsScreen() {
                 {gift.title}{" "}
                 <span className="font-normal text-muted-foreground">· {gift.price} ☀</span>
               </span>
-              {gift.id === goal.giftId && <Chip tone="sun">{ru.child.gifts.goalMark}</Chip>}
+              {gift.id === goal.giftId && <Chip tone="sun">{i18n.child.gifts.goalMark}</Chip>}
               <button
                 type="button"
                 disabled={busy || gift.id === goal.giftId}

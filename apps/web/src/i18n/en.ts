@@ -5,7 +5,7 @@ export const en: Dictionary = {
   rewardProgress: (id: string, value: number, target: number, starts: number) =>
     id === "heroCape"
       ? `Unlocks: ${value} / ${target} completed · ${starts} / ${EARNED_THRESHOLDS.heroWindow} started via advice`
-      : `Unlocks: ${Math.min(value, target)} / ${target} ${id === "explorerBadge" ? "games" : id === "ownGarden" ? "days" : "responsibility tasks"}`,
+      : `Unlocks: ${Math.min(value, target)} / ${target} ${id === "explorerBadge" ? "games" : id === "ownGarden" ? "days" : "responsibility"}`,
   jury: {
     join: "Join as Jury",
     title: "Brainy in one minute",
@@ -382,7 +382,7 @@ export const en: Dictionary = {
       `Finished: ${done} of ${total} recommended games of all time.`,
     ranking: "Leaderboard",
     rankingNote: "Age league, monthly season. Hidden from the child.",
-    scopes: { district: "District", city: "City", country: "Country" },
+    scopes: { district: "Neighborhood", city: "City", country: "Country" },
     kinds: { growth: "By growth", absolute: "Absolute" },
     recap: (month: string) => `Monthly recap: ${month}`,
     referral: (code: string) => `Invite code: ${code}`,
@@ -451,6 +451,7 @@ export const en: Dictionary = {
       real: "Real life · ☀",
       app: "In app · ★",
       skill: "Target skill",
+      defaultSkill: "Responsibility",
       reward: (place: "real" | "app") => (place === "real" ? "Reward, ☀" : "Reward, ★"),
       add: "Add",
       templates: "Templates by age",
@@ -501,7 +502,7 @@ export const en: Dictionary = {
     email: "Email",
     password: "Password",
     submit: "Log in",
-    demoHint: "Demo: mama@example.com / demo1234",
+    demoHint: "Demo: mom@example.com / demo1234",
     wrong: "Invalid email or password",
     newFamily: "New family? Take the quiz and create an account",
   },

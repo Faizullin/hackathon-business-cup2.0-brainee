@@ -1,6 +1,6 @@
 # Interactive films (podcast → «мультик»)
 
-A film is **an mp3 plus a JSON script**. The browser draws it, so no video is rendered. Brainy talks with the voice, scenes change with the story, and questions pause the audio until the child answers. Films are science videos: free, and the only ★ reward is the existing end-of-video quiz (+15★, eyes +2, first time only). In-film questions never grant ★. Decision: [D-30](decisions.md).
+A film is **an mp3 plus a JSON script**. The browser draws it, so no video is rendered. Brainy talks with the voice, scenes change with the story, and questions pause the audio until the child answers. Films are science videos: free, and the only ★ reward is the existing end-of-video quiz (+15★, eyes +2, first time only). In-film questions never grant ★. Decision: [D-31](decisions.md).
 
 ## Where things live
 
@@ -113,7 +113,7 @@ The script fields `brainy` (spot) and `who: "brainy"` keep their names for compa
 - A question pauses the audio, and Brainy stands centre-stage. A wrong answer dims that option and shows `hint` + «Послушать ещё раз». The right answer shows `praise`, then the film continues after 1.8 s or on «Дальше».
 - Position is saved in whole minutes: every 10 s while the minute changes, and on «Закрыть и досмотреть позже». The film resumes from that minute; questions before it count as answered.
 - The end of the audio opens the existing final quiz.
-- Player chrome is Russian (`ru.child.video.film`). Film content uses the script's `lang` and is marked with `lang=` for screen readers.
+- Player chrome follows the app locale (`useI18n`, `child.video.film` in `ru.ts`/`en.ts`). Film content uses the script's `lang` and is marked with `lang=` for screen readers.
 
 ## Known limits
 - One character on stage. A `guest` voice only stops Brainy's mouth.

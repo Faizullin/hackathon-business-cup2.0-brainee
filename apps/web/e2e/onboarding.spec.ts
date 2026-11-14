@@ -93,7 +93,7 @@ test("a finished game moves the child's skills by the game's weights and lands i
 
 test("login rejects unknown accounts and the demo account opens parent mode", async ({ page }) => {
   await page.goto("/login");
-  await page.getByLabel("Email").fill("mama@example.com");
+  await page.getByLabel("Email").fill("mom@example.com");
   await page.getByLabel("Пароль").fill("demo1234");
   await page.getByRole("button", { name: "Войти", exact: true }).click();
   await expect(page.getByRole("heading", { level: 1, name: "Аналитика" })).toBeVisible();

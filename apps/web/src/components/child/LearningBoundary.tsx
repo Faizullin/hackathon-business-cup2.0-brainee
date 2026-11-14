@@ -4,7 +4,7 @@ import { Button } from "@brainee/ui/components/button";
 import { buttonVariants } from "@brainee/ui/lib/button-variants";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 import { LearningApiError, pendingGameHref } from "@/lib/learning-api";
 import { useLearning } from "./LearningProvider";
 
@@ -16,6 +16,7 @@ export function LearningBoundary({
   game?: boolean;
 }) {
   const { ready, error } = useLearning();
+  const { t } = useI18n();
   const Container = game ? "section" : "main";
   if (!ready)
     return (
@@ -23,13 +24,13 @@ export function LearningBoundary({
         id={game ? undefined : "main-content"}
         className="mx-auto flex max-w-xl flex-col items-center gap-4 p-6 text-center"
       >
-        <h1>{ru.child.sync.title}</h1>
+        <h1>{t.child.sync.title}</h1>
         <p role={error ? "alert" : "status"}>
           {error
             ? isExpired(error)
-              ? ru.child.sync.accessError
-              : ru.child.sync.loadError
-            : ru.child.sync.loading}
+              ? t.child.sync.accessError
+              : t.child.sync.loadError
+            : t.child.sync.loading}
         </p>
         {error && <RetryStateButton />}
       </Container>
@@ -44,25 +45,26 @@ export function LearningBoundary({
 
 export function LearningNotice() {
   const { error, pending } = useLearning();
+  const { t } = useI18n();
   if (!error && !pending) return null;
   return (
     <aside className="mx-auto flex max-w-xl flex-col items-center gap-3 p-4 text-center">
       {error && (
         <>
           <p role="alert">
-            {isExpired(error) ? ru.child.sync.accessError : ru.child.sync.updateError}
+            {isExpired(error) ? t.child.sync.accessError : t.child.sync.updateError}
           </p>
           <RetryStateButton />
         </>
       )}
       {pending && (
         <>
-          <p>{ru.child.sync.pending}</p>
+          <p>{t.child.sync.pending}</p>
           <Link
             href={pendingGameHref(pending.issued)}
             className={buttonVariants({ size: "child" })}
           >
-            {ru.child.sync.recover}
+            {t.child.sync.recover}
           </Link>
         </>
       )}
@@ -74,6 +76,7 @@ const isExpired = (error: unknown) => error instanceof LearningApiError && error
 
 function RetryStateButton() {
   const { error, refresh } = useLearning();
+  const { t } = useI18n();
   const expired = isExpired(error);
   return (
     <Button
@@ -83,7 +86,7 @@ function RetryStateButton() {
         else void refresh().catch(() => {});
       }}
     >
-      {expired ? ru.child.sync.reload : ru.child.sync.retry}
+      {expired ? t.child.sync.reload : t.child.sync.retry}
     </Button>
   );
 }
