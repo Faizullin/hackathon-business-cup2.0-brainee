@@ -10,18 +10,13 @@ import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton } from "@/components/demo/kit";
 import { NavigationBadge } from "@/components/demo/NavigationBadge";
-import { ru } from "@/i18n/ru";
-
-const t = ru.parent;
-const TABS = [
-  { href: "/analytics", label: t.tabs.analytics, Icon: ChartLine },
-  { href: "/tasks", label: t.tabs.tasks, Icon: ClipboardCheck },
-  { href: "/rewards", label: t.tabs.rewards, Icon: Gift },
-  { href: "/settings", label: t.tabs.settings, Icon: Settings },
-];
+import { HeaderLocaleToggle } from "@/components/LocaleSwitcher";
+import { useI18n } from "@/i18n";
 
 function PinGate() {
   const { unlockParent } = useLearning();
+  const { t } = useI18n();
+  const tp = t.parent;
   const [adult, setAdult] = useState(false);
   const [answer, setAnswer] = useState("");
   const [pin, setPin] = useState("");
@@ -44,8 +39,8 @@ function PinGate() {
   };
   return (
     <section className="mx-auto flex max-w-sm flex-col items-center gap-5 rounded-panel border border-border bg-card p-6 text-center">
-      <h1>{t.pinTitle}</h1>
-      <p className="text-muted-foreground text-sm">{adult ? t.adultNote : t.pinNote}</p>
+      <h1>{tp.pinTitle}</h1>
+      <p className="text-muted-foreground text-sm">{adult ? tp.adultNote : tp.pinNote}</p>
       <button
         type="button"
         className={outlineButton}
@@ -54,7 +49,7 @@ function PinGate() {
           setWrong(false);
         }}
       >
-        {adult ? t.usePin : t.adultTask}
+        {adult ? tp.usePin : tp.adultTask}
       </button>
       {adult && (
         <form
@@ -68,18 +63,18 @@ function PinGate() {
           }}
         >
           <label className="flex flex-col gap-2">
-            {t.adultQuestion}
+            {tp.adultQuestion}
             <input
-              aria-label={t.adultAnswer}
+              aria-label={tp.adultAnswer}
               inputMode="numeric"
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
               className="min-h-12 rounded-xl border border-border px-3"
             />
           </label>
-          <p className="text-muted-foreground text-sm">{t.adultHint}</p>
+          <p className="text-muted-foreground text-sm">{tp.adultHint}</p>
           <button type="submit" disabled={busy} className={outlineButton}>
-            {t.adultSubmit}
+            {tp.adultSubmit}
           </button>
         </form>
       )}
@@ -97,7 +92,7 @@ function PinGate() {
       </div>
       {wrong && (
         <p role="alert" className="text-coral text-sm">
-          {adult ? t.adultWrong : t.pinWrong}
+          {adult ? tp.adultWrong : tp.pinWrong}
         </p>
       )}
       <div className={adult ? "hidden" : "grid grid-cols-3 gap-3"}>
@@ -108,7 +103,7 @@ function PinGate() {
             <button
               key={key}
               type="button"
-              aria-label={key === "⌫" ? t.pinErase : t.pinDigit(key)}
+              aria-label={key === "⌫" ? tp.pinErase : tp.pinDigit(key)}
               onClick={() => (key === "⌫" ? setPin((p) => p.slice(0, -1)) : press(key))}
               className="size-16 rounded-2xl bg-secondary font-heading font-semibold text-xl transition-transform duration-(--dur-press) active:scale-90"
             >
@@ -130,6 +125,15 @@ function Gate({ children }: { children: ReactNode }) {
 export function ParentShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { snapshot, lockParent } = useLearning();
+  const { t } = useI18n();
+  const tp = t.parent;
+  const tabs = [
+    { href: "/analytics", label: tp.tabs.analytics, Icon: ChartLine },
+    { href: "/tasks", label: tp.tabs.tasks, Icon: ClipboardCheck },
+    { href: "/rewards", label: tp.tabs.rewards, Icon: Gift },
+    { href: "/settings", label: tp.tabs.settings, Icon: Settings },
+  ];
+
   const counts = snapshot?.parentUnlocked ? navigationCounts(snapshot.showcase) : null;
   const badge = (href: string) =>
     href === "/tasks"
@@ -143,17 +147,17 @@ export function ParentShell({ children }: { children: ReactNode }) {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-30 focus:rounded-xl focus:bg-surface focus:px-4 focus:py-3"
       >
-        {ru.app.skipToContent}
+        {t.app.skipToContent}
       </a>
       <header className="sticky top-0 z-20 border-border border-b bg-card/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-[1180px] items-center gap-3 px-4 pt-[max(8px,env(safe-area-inset-top))] pb-2">
-          <p className="font-display font-bold text-coral text-xl">{ru.app.name}</p>
-          <nav aria-label={t.tabsLabel} className="ml-4 hidden gap-1 min-[1000px]:flex">
-            {TABS.map(({ href, label }) => (
+          <p className="font-display font-bold text-coral text-xl">{t.app.name}</p>
+          <nav aria-label={tp.tabsLabel} className="ml-4 hidden gap-1 min-[1000px]:flex">
+            {tabs.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                aria-description={badge(href) ? ru.notifications(badge(href)) : undefined}
+                aria-description={badge(href) ? t.notifications(badge(href)) : undefined}
                 aria-current={pathname === href ? "page" : undefined}
                 className={cn(
                   "rounded-xl px-3 py-2 font-semibold text-sm",
@@ -168,6 +172,7 @@ export function ParentShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-2">
+            <HeaderLocaleToggle />
             {snapshot?.parentUnlocked ? (
               // ROUTES.md §3.3: hand the device back — locks parent mode, child re-enters via /entry.
               <button
@@ -178,11 +183,11 @@ export function ParentShell({ children }: { children: ReactNode }) {
                   window.location.assign("/entry");
                 }}
               >
-                {t.returnToChild}
+                {tp.returnToChild}
               </button>
             ) : (
               <Link href="/entry" className={outlineButton}>
-                {t.childMode}
+                {tp.childMode}
               </Link>
             )}
             {snapshot?.parentUnlocked && (
@@ -190,7 +195,7 @@ export function ParentShell({ children }: { children: ReactNode }) {
                 type="button"
                 onClick={() => lockParent()}
                 className={outlineButton}
-                aria-label={t.lock}
+                aria-label={tp.lock}
               >
                 <LogOut aria-hidden="true" className="size-4" />
               </button>
@@ -211,15 +216,15 @@ export function ParentShell({ children }: { children: ReactNode }) {
         </main>
       </LearningBoundary>
       <nav
-        aria-label={t.tabsLabel}
+        aria-label={tp.tabsLabel}
         className="fixed inset-x-0 bottom-0 z-20 border-border border-t bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-sm min-[1000px]:hidden"
       >
         <ul className="grid grid-cols-4">
-          {TABS.map(({ href, label, Icon }) => (
+          {tabs.map(({ href, label, Icon }) => (
             <li key={href}>
               <Link
                 href={href}
-                aria-description={badge(href) ? ru.notifications(badge(href)) : undefined}
+                aria-description={badge(href) ? t.notifications(badge(href)) : undefined}
                 aria-current={pathname === href ? "page" : undefined}
                 className={cn(
                   "flex min-h-16 flex-col items-center justify-center gap-0.5 font-semibold text-xs transition-transform duration-(--dur-press) active:scale-95",

@@ -5,18 +5,21 @@ import Link from "next/link";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { RecommendationCards, useRecommendations } from "@/components/child/Recommendations";
-import { ru } from "@/i18n/ru";
+import { FloatingLocalePill } from "@/components/LocaleSwitcher";
+import { useI18n } from "@/i18n";
 
 // T-31: shown on every entry into child mode. No close button or swipe; the choice is logged.
 function Entry() {
   const { snapshot, act } = useLearning();
   const recs = useRecommendations();
+  const { t } = useI18n();
   if (!snapshot) return null;
-  const t = ru.child.entry;
+  const te = t.child.entry;
   const first = recs[0];
   return (
     <section className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-5 p-4 sm:p-8 lg:max-w-5xl">
-      <h1 className="text-center">{t.title}</h1>
+      <FloatingLocalePill />
+      <h1 className="text-center">{te.title}</h1>
       <div className="flex items-center gap-4 rounded-panel border border-border bg-card p-4">
         <Brainy
           stats={snapshot.progress.stats}
@@ -26,7 +29,7 @@ function Entry() {
         />
         {first && (
           <p className="relative rounded-2xl bg-sky/10 p-4 font-heading font-semibold text-lg">
-            {t.ask(ru.skills[first.skill].toLowerCase())}
+            {te.ask(t.skills[first.skill].toLowerCase())}
           </p>
         )}
       </div>
@@ -36,7 +39,7 @@ function Entry() {
         onClick={() => void act({ type: "entry-choice", took: false })}
         className="mt-auto self-center p-3 text-muted-foreground text-sm underline-offset-4 hover:underline"
       >
-        {t.other}
+        {te.other}
       </Link>
     </section>
   );

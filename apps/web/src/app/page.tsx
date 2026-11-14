@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { AppFrame } from "@/components/AppFrame";
 import { outlineButton, Panel } from "@/components/demo/kit";
 import { JuryButton } from "@/components/JuryButton";
-import { ru } from "@/i18n/ru";
+import { FloatingLocalePill } from "@/components/LocaleSwitcher";
+import { useI18n } from "@/i18n";
+
 export default function HomePage() {
+  const { t } = useI18n();
   const [paired, setPaired] = useState(false);
   useEffect(() => {
     void fetch("/api/device")
@@ -14,14 +17,15 @@ export default function HomePage() {
   }, []);
   return (
     <AppFrame>
+      <FloatingLocalePill />
       <main id="main-content" className="mx-auto max-w-2xl">
-        <Panel as="h1" title={ru.roles.title} note={ru.roles.note}>
+        <Panel as="h1" title={t.roles.title} note={t.roles.note}>
           <div className="grid gap-4 sm:grid-cols-2">
             <Link className={`${outlineButton} min-h-24`} href="/login">
-              {ru.roles.parent}
+              {t.roles.parent}
             </Link>
             <Link className={`${outlineButton} min-h-24`} href={paired ? "/entry" : "/child-login"}>
-              {ru.roles.child}
+              {t.roles.child}
             </Link>
           </div>
           <JuryButton />

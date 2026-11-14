@@ -1,13 +1,13 @@
 "use client";
 import { Brainy } from "@brainee/brainy";
 import { TIME_ZONES } from "@brainee/core";
-import { ClipboardCheck, Lock, Settings, Tablet } from "@brainee/ui/components/icons";
+import { ClipboardCheck, Globe, Lock, Settings, Tablet } from "@brainee/ui/components/icons";
 import { type FormEvent, useCallback, useEffect, useState } from "react";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton, Panel, primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { LanguageRadioCards } from "@/components/LocaleSwitcher";
+import { useI18n } from "@/i18n";
 
-const t = ru.settings;
 const input = "min-h-12 w-full rounded-xl border border-border bg-background px-3 text-base";
 type Data = {
   jury: boolean;
@@ -18,6 +18,8 @@ type Data = {
 };
 export function SettingsScreen() {
   const { snapshot, refresh } = useLearning();
+  const { t } = useI18n();
+  const ts = t.settings;
   const [data, setData] = useState<Data | null>(null);
   const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
@@ -28,9 +30,9 @@ export function SettingsScreen() {
       if (!r.ok) throw new Error();
       setData(await r.json());
     } catch {
-      setNotice(t.error);
+      setNotice(ts.error);
     }
-  }, []);
+  }, [ts.error]);
   useEffect(() => {
     void load();
   }, [load]);
@@ -45,16 +47,16 @@ export function SettingsScreen() {
       });
       const result = await r.json();
       if (!r.ok) {
-        setNotice(result.error === "wrong-pin" ? t.wrongPin : t.error);
+        setNotice(result.error === "wrong-pin" ? ts.wrongPin : ts.error);
         return false;
       }
       if (path === "/api/pairing") setCode(result);
       await refresh();
       await load();
-      setNotice(t.saved);
+      setNotice(ts.saved);
       return true;
     } catch {
-      setNotice(t.error);
+      setNotice(ts.error);
       return false;
     } finally {
       setBusy(false);
@@ -63,9 +65,9 @@ export function SettingsScreen() {
   if (!data || !snapshot)
     return (
       <Panel>
-        <p role="status">{notice || t.loading}</p>
+        <p role="status">{notice || ts.loading}</p>
         <button type="button" className={outlineButton} onClick={load}>
-          {t.retry}
+          {ts.retry}
         </button>
       </Panel>
     );
@@ -83,12 +85,12 @@ export function SettingsScreen() {
   };
   return (
     <>
-      <h1>{t.title}</h1>
+      <h1>{ts.title}</h1>
       <div className="flex items-center gap-4 rounded-panel bg-lavender/30 p-4">
         <Brainy stats={snapshot.progress.stats} className="h-24 w-24" />
         <div>
-          <h2 className="font-heading text-xl font-semibold">{snapshot.child.name}</h2>
-          <p className="text-muted-foreground">{t.intro}</p>
+          <h2 className="font-heading font-semibold text-xl">{snapshot.child.name}</h2>
+          <p className="text-muted-foreground">{ts.intro}</p>
         </div>
       </div>
       {notice && (
@@ -97,7 +99,11 @@ export function SettingsScreen() {
         </p>
       )}
       <div className="grid gap-5 min-[1000px]:grid-cols-2">
-        <Panel title={t.child}>
+        <Panel title={ts.language}>
+          <Globe aria-hidden="true" className="size-6 text-coral" />
+          <LanguageRadioCards />
+        </Panel>
+        <Panel title={ts.child}>
           <ClipboardCheck aria-hidden="true" className="size-6 text-coral" />
           <form
             key={`${data.child.name}-${data.child.birthYear}-${data.child.promise}`}
@@ -105,7 +111,7 @@ export function SettingsScreen() {
             className="flex flex-col gap-3"
           >
             <label>
-              {t.name}
+              {ts.name}
               <input
                 className={input}
                 name="name"
@@ -115,7 +121,7 @@ export function SettingsScreen() {
               />
             </label>
             <label>
-              {t.year}
+              {ts.year}
               <input
                 className={input}
                 name="year"
@@ -127,7 +133,7 @@ export function SettingsScreen() {
               />
             </label>
             <label>
-              {t.promise}
+              {ts.promise}
               <input
                 className={input}
                 name="promise"
@@ -139,24 +145,30 @@ export function SettingsScreen() {
               />
             </label>
             <button type="submit" disabled={busy} className={primaryButton}>
-              {t.save}
+              {ts.save}
             </button>
           </form>
         </Panel>
-        <Panel title={t.security}>
+        <Panel title={ts.security}>
           <Lock aria-hidden="true" className="size-6 text-coral" />
           <form
             onSubmit={async (e) => {
               e.preventDefault();
               const form = e.currentTarget;
               const f = new FormData(form);
-              if (await run({ type: "pin", oldPin: f.get("oldPin"), newPin: f.get("newPin") }))
+              if (
+                await run({
+                  type: "pin",
+                  oldPin: f.get("oldPin"),
+                  newPin: f.get("newPin"),
+                })
+              )
                 form.reset();
             }}
             className="flex flex-col gap-3"
           >
             <label>
-              {t.oldPin}
+              {ts.oldPin}
               <input
                 className={input}
                 name="oldPin"
@@ -168,7 +180,7 @@ export function SettingsScreen() {
               />
             </label>
             <label>
-              {t.newPin}
+              {ts.newPin}
               <input
                 className={input}
                 name="newPin"
@@ -180,21 +192,24 @@ export function SettingsScreen() {
               />
             </label>
             <button type="submit" disabled={busy} className={primaryButton}>
-              {t.changePin}
+              {ts.changePin}
             </button>
           </form>
         </Panel>
-        <Panel title={t.timezone}>
+        <Panel title={ts.timezone}>
           <Settings aria-hidden="true" className="size-6 text-coral" />
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              void run({ type: "timezone", timeZone: new FormData(e.currentTarget).get("zone") });
+              void run({
+                type: "timezone",
+                timeZone: new FormData(e.currentTarget).get("zone"),
+              });
             }}
             className="flex flex-col gap-3"
           >
             <label>
-              {t.timezone}
+              {ts.timezone}
               <select
                 key={data.timeZone}
                 name="zone"
@@ -211,32 +226,32 @@ export function SettingsScreen() {
                     ?.value.replace("GMT", "UTC");
                   return (
                     <option key={zone} value={zone}>
-                      {t.zones[zone]} · {offset}
+                      {ts.zones[zone]} · {offset}
                     </option>
                   );
                 })}
               </select>
             </label>
-            <p className="text-sm text-muted-foreground">{t.zoneNote}</p>
+            <p className="text-muted-foreground text-sm">{ts.zoneNote}</p>
             <button type="submit" disabled={busy} className={primaryButton}>
-              {t.save}
+              {ts.save}
             </button>
           </form>
         </Panel>
-        <Panel title={t.devices}>
+        <Panel title={ts.devices}>
           <Tablet aria-hidden="true" className="size-6 text-coral" />
-          <p className="text-muted-foreground text-sm">{t.pairingNote}</p>
+          <p className="text-muted-foreground text-sm">{ts.pairingNote}</p>
           <button
             type="button"
             disabled={busy}
             className={outlineButton}
             onClick={() => run({ type: "create" }, "/api/pairing")}
           >
-            {t.newCode}
+            {ts.newCode}
           </button>
           {code && (
             <output
-              aria-label={t.code}
+              aria-label={ts.code}
               data-testid="pairing-code"
               className="rounded-xl bg-sky/20 p-4 text-center font-heading text-3xl tracking-widest"
             >
@@ -250,8 +265,8 @@ export function SettingsScreen() {
                 className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-border p-3"
               >
                 <span>
-                  {d.current ? t.thisDevice : t.device}
-                  <small className="block text-muted-foreground">{ru.date(d.createdAt)}</small>
+                  {d.current ? ts.thisDevice : ts.device}
+                  <small className="block text-muted-foreground">{t.date(d.createdAt)}</small>
                 </span>
                 <button
                   type="button"
@@ -262,13 +277,13 @@ export function SettingsScreen() {
                       window.location.assign("/login");
                   }}
                 >
-                  {t.revoke}
+                  {ts.revoke}
                 </button>
               </li>
             ))}
           </ul>
         </Panel>
-        <Panel title={t.account}>
+        <Panel title={ts.account}>
           {data.jury && (
             <button
               type="button"
@@ -280,21 +295,21 @@ export function SettingsScreen() {
                   const r = await fetch("/api/demo-reset", { method: "POST" });
                   if (!r.ok) throw Error();
                   await refresh();
-                  setNotice(t.saved);
+                  setNotice(ts.saved);
                 } catch {
-                  setNotice(t.error);
+                  setNotice(ts.error);
                 } finally {
                   setBusy(false);
                 }
               }}
             >
-              {ru.jury.reset}
+              {t.jury.reset}
             </button>
           )}
           <p className="break-all">{data.email}</p>
           <div className="rounded-xl bg-mint/15 p-4">
-            <h3 className="font-semibold">{t.plan}</h3>
-            <p className="text-sm">{t.planNote}</p>
+            <h3 className="font-semibold">{ts.plan}</h3>
+            <p className="text-sm">{ts.planNote}</p>
           </div>
           <button
             type="button"
@@ -307,12 +322,12 @@ export function SettingsScreen() {
                 if (!r.ok) throw new Error();
                 window.location.assign("/login");
               } catch {
-                setNotice(t.error);
+                setNotice(ts.error);
                 setBusy(false);
               }
             }}
           >
-            {t.logout}
+            {ts.logout}
           </button>
         </Panel>
       </div>

@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import { primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
+
 export function JuryButton() {
-  const [busy, setBusy] = useState(false),
-    [error, setError] = useState(false);
+  const { t } = useI18n();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(false);
   return (
     <div>
       <button
@@ -19,7 +21,10 @@ export function JuryButton() {
             if (!r.ok) throw Error();
             const data = await r.json();
             try {
-              sessionStorage.setItem("brainee-jury", JSON.stringify(data.credentials));
+              sessionStorage.setItem(
+                "brainee-jury",
+                JSON.stringify(data.credentials),
+              );
             } catch {}
             window.location.assign("/jury");
           } catch {
@@ -28,9 +33,9 @@ export function JuryButton() {
           }
         }}
       >
-        {ru.jury.join}
+        {t.jury.join}
       </button>
-      {error && <p role="alert">{ru.jury.error}</p>}
+      {error && <p role="alert">{t.jury.error}</p>}
     </div>
   );
 }
