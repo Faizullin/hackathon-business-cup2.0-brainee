@@ -16,7 +16,7 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 
 | File | One-line purpose |
 |---|---|
-| [demo.md](demo.md) | Reset-first two-device presentation script and rehearsal checks |
+| [demo.md](demo.md) | One-minute jury path, reset-first two-device presentation and rehearsal checks |
 | [progress/status.md](progress/status.md) | Phase dashboard, current focus, **handoff note** |
 | [progress/todo.md](progress/todo.md) | Backlog checklist with task IDs (T-xx) |
 | [progress/log.md](progress/log.md) | Append-only session history, newest first |

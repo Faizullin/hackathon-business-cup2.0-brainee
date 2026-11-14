@@ -61,7 +61,7 @@ A separate 0–100% scale for **recent activity, not skill**. +8 points per comp
 
 ### Accessories
 - **Bought with ★ (cosmetic):** cowboy hat 120, cap 60, headphones 90, glasses 80, bow tie 50, scarf 70. Slots: head, face, neck. One item per slot; can be worn and removed.
-- **Earned (can't be bought):** captain's backpack (Responsibility), explorer badge (Learning machine), own garden (Long game), hero cape (Do the hard thing; unlocks at 50). Ones not yet earned are shown dashed.
+- **Earned (can't be bought):** backpack at responsibility ≥70; explorer badge at 10 completed learning games; garden at a 7-day learning streak; hero cape after at least 5 of the last 10 recommended starts finish (requires 10 starts). `EARNED_THRESHOLDS` in `packages/core/src/activity.ts` is the single configurable source. Locked dashed cards show current progress; unlocks persist, celebrate for the child and add a parent event.
 - Worn accessories appear **everywhere** Brainy is shown: child dock, entry screen, parent dashboard, story card.
 
 ### Onboarding quiz → starting Brainy
@@ -79,3 +79,9 @@ Worse habits make a sleepier starting Brainy. Prototype start: brain 18, eyes 16
 - **5 character traits** (character radar): long game, learning machine, do the hard thing, learning from mistakes, responsibility.
 
 How games move these numbers: [data-model.md](data-model.md#how-stats-change).
+
+## Leisure play credit
+Ten-minute purchases add 600 seconds of saved credit. Only active foreground Snake play consumes credit; pause, background and closed screens do not. Forever ownership removes the time limit. Server checks and persistence are described in D-29. Cartoon placeholders start from the beginning on every visit and require an explicit play action.
+
+## Live activity
+Completed sessions provide learning minutes by family-local day, current learning streak and recommendation completion counts. Science completions contribute their catalog duration once. Entry choices provide the advice rate; current weekly goals provide suns versus target. Radar history, character radar and ranking remain labelled demo data. A learning finish completes all assigned in-app tasks and grants their stars once; real-life tasks still need parent confirmation.

@@ -37,7 +37,13 @@ test("the same seed replays the same board; level 2 uses 12 cells", async ({ pag
     page
       .locator('[data-game="odd-one-out"] svg')
       .evaluateAll((els) => els.map((e) => e.innerHTML).join("|"));
-  const first = await board();
+  let first = "";
+  await expect
+    .poll(async () => {
+      first = await board();
+      return first;
+    })
+    .not.toBe("");
   await page.getByRole("button", { name: "Перезапустить" }).click();
   await expect.poll(board).toBe(first);
 

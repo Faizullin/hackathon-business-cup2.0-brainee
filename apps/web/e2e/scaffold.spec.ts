@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 for (const route of [
-  { path: "/", destination: "/entry", heading: "Во что играем сейчас?" },
+  { path: "/", destination: "/", heading: "Добро пожаловать в Брейни" },
   { path: "/learn", destination: "/learn", heading: "Учимся" },
   { path: "/analytics", destination: "/analytics", heading: "Вход для родителей" },
   { path: "/login", destination: "/login", heading: "Добро пожаловать в Брейни" },

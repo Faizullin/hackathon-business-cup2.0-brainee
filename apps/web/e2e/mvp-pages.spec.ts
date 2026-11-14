@@ -6,13 +6,15 @@ import { savedState } from "./saved-state";
 test.beforeEach(async ({ page, baseURL }) => {
   const headers = { origin: baseURL as string };
   expect((await page.request.post("/api/demo-session", { headers })).ok()).toBe(true);
+  await page.request.post("/api/parent", { headers, data: { pin: "1234" } });
   expect((await page.request.post("/api/demo-reset", { headers })).ok()).toBe(true);
+  await page.request.delete("/api/parent", { headers });
 });
 
 test("entry screen recommends games, has no close button, and logs the choice", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/entry");
   await expect(page).toHaveURL(/\/entry$/);
   await expect(
     page.getByRole("heading", { level: 1, name: "Во что играем сейчас?" }),

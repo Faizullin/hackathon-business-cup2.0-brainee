@@ -74,7 +74,7 @@ function SharedLearning({ children }: { children: ReactNode }) {
   const client = useQueryClient();
   const pathname = usePathname();
   const active =
-    /^\/(learn|leisure|gifts|brainy|game|entry|video|analytics|tasks|rewards|settings)(\/|$)/.test(
+    /^\/(learn|leisure|gifts|brainy|game|entry|video|analytics|tasks|rewards|settings|fun|cartoon)(\/|$)/.test(
       pathname,
     );
   const accessReady = useRef(false);
@@ -143,7 +143,12 @@ function SharedLearning({ children }: { children: ReactNode }) {
       throw new Error("Resolve the pending result before starting another game.");
     const issued = await learningRequest<IssuedGame>("/api/sessions/start", {
       post: true,
-      body: { gameId, level, ...(seed === undefined ? {} : { seed }) },
+      body: {
+        gameId,
+        level,
+        recommended: new URLSearchParams(window.location.search).get("recommended") === "1",
+        ...(seed === undefined ? {} : { seed }),
+      },
     });
     setResting(false);
     return issued;
@@ -230,7 +235,9 @@ function SharedLearning({ children }: { children: ReactNode }) {
       {children}
       <StageCelebration
         snapshot={state.data}
-        enabled={/^\/(learn|leisure|gifts|brainy|game|entry|video)(\/|$)/.test(pathname)}
+        enabled={/^\/(learn|leisure|gifts|brainy|game|entry|video|fun|cartoon)(\/|$)/.test(
+          pathname,
+        )}
       />
     </LearningContext>
   );

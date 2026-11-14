@@ -1,5 +1,10 @@
 import { scryptSync } from "node:crypto";
-import { type BrainyStats, finishLearningSession, type GameResult } from "@brainee/core";
+import {
+  type BrainyStats,
+  EARNED_THRESHOLDS,
+  finishLearningSession,
+  type GameResult,
+} from "@brainee/core";
 import { manifests } from "@brainee/game-catalog";
 import {
   brainyStates,
@@ -82,12 +87,13 @@ export const demo = {
     demoSessionHash: null,
     ...historicalResult,
     seed: 42,
+    recommended: false,
     status: "completed",
     starsEarned: historicalCompletion.earnedStars,
     resultKey: JSON.stringify(historicalResult),
     completion: historicalCompletion,
-    startedAt: new Date("2026-11-13T23:59:00Z"),
-    finishedAt: new Date("2026-11-14T00:00:00Z"),
+    startedAt: new Date(Date.now() - 86400000 - 60000),
+    finishedAt: new Date(Date.now() - 86400000),
   },
 } as const;
 
@@ -104,6 +110,21 @@ export async function seedDemo(db: Database) {
       .values([...demo.games])
       .onConflictDoNothing();
     await transaction.insert(gameSessions).values(demo.history).onConflictDoNothing();
+    // Ten completed games over the previous six days: badge is earned; one game today earns the garden.
+    for (let i = 1; i < EARNED_THRESHOLDS.explorerGames; i++) {
+      const finishedAt = new Date(
+        demo.history.finishedAt.getTime() - Math.floor((i * 6) / 10) * 86400000 - i * 60000,
+      );
+      await transaction
+        .insert(gameSessions)
+        .values({
+          ...demo.history,
+          id: `demo-history-${i}`,
+          startedAt: new Date(finishedAt.getTime() - 60000),
+          finishedAt,
+        })
+        .onConflictDoNothing();
+    }
     await transaction
       .insert(showcases)
       .values({ childId: demo.child.id, data: demoShowcase })

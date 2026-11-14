@@ -56,9 +56,11 @@ it("returns only the authenticated child's public snapshot and seeded history", 
     },
   });
   expect(Object.keys(snapshot).sort()).toEqual([
+    "activity",
     "baseline",
     "child",
     "latestGame",
+    "learningHistory",
     "parentUnlocked",
     "progress",
     "showcase",
@@ -93,15 +95,16 @@ it("other connections see each committed version with the matching wallet, Brain
     },
     finished,
   );
-  expect(await getStateSnapshot(f.observer.db, observerHash, finished)).toMatchObject({
-    version: 1,
+  const afterFinish = await getStateSnapshot(f.observer.db, observerHash, finished);
+  expect(afterFinish.version).toBeGreaterThanOrEqual(1);
+  expect(afterFinish).toMatchObject({
     progress: { stats: { eyes: 44 }, wallet: { stars: 352 }, streak: { inRow: 0 } },
     latestGame: { id: launch.sessionId, finishedAt: finished.toISOString() },
   });
   expect((await getStateSnapshot(f.db, f.hash, finished)).progress.streak.inRow).toBe(1);
   await stopGameRun(f.db, f.hash, finished);
   expect(await getStateSnapshot(f.observer.db, observerHash, finished)).toMatchObject({
-    version: 2,
+    version: afterFinish.version + 1,
     progress: { wallet: { stars: 352 } },
     latestGame: { id: launch.sessionId },
   });

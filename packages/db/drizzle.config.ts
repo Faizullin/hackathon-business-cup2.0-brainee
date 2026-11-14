@@ -1,8 +1,13 @@
 import { defineConfig } from "drizzle-kit";
 import { getDatabaseConfig } from "./src/config";
 
+const config = getDatabaseConfig();
+
 export default defineConfig({
-  dialect: "sqlite",
+  dialect: config.isRemote ? "turso" : "sqlite",
   schema: "./schema.ts",
-  dbCredentials: { url: getDatabaseConfig().url },
+  dbCredentials: {
+    url: config.url,
+    authToken: config.authToken,
+  },
 });

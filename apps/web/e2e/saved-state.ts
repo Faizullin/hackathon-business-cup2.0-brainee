@@ -11,7 +11,7 @@ export async function savedState(request: APIRequestContext): Promise<StateSnaps
 
 export async function handleStageCelebration(page: Page) {
   // Shared demo progress can cross a stage in any learning test.
-  const celebration = page.getByRole("dialog", { name: "Брейни вырос!" });
+  const celebration = page.getByRole("dialog", { name: /Брейни вырос!|Новая награда!/ });
   await page.addLocatorHandler(celebration, async () => {
     await celebration.getByRole("button", { name: "Здорово!", exact: true }).click();
   });

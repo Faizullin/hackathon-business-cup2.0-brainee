@@ -19,6 +19,7 @@ export {
 } from "./account-store";
 export { type Database, openDatabase } from "./client";
 export { type DatabaseConfig, getDatabaseConfig } from "./config";
+export { createJuryFamily } from "./jury-store";
 export {
   createDemoAccess,
   demoTokenHash,
@@ -29,6 +30,7 @@ export {
   startGameSession,
   stopGameRun,
 } from "./learning-store";
+export { updateFunPlay } from "./leisure-store";
 export {
   createPairingCode,
   getSettings,

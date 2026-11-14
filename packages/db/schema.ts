@@ -161,6 +161,7 @@ export const gameSessions = sqliteTable(
       .references(() => games.id),
     level: integer("level").notNull(),
     seed: integer("seed").notNull(),
+    recommended: integer("recommended", { mode: "boolean" }).notNull().default(false),
     status: text("status", { enum: ["pending", "completed", "abandoned"] })
       .notNull()
       .default("pending"),

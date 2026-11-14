@@ -46,7 +46,8 @@ it("creates the schema and seed that another connection can read", async () => {
   expect(demo.parent.pinHash).toMatch(/^scrypt\$/);
   expect(await db.select().from(brainyStates)).toEqual([demo.brainy]);
   expect(await db.select().from(games)).toEqual([...demo.games]);
-  expect(await db.select().from(gameSessions)).toEqual([demo.history]);
+  expect(await db.select().from(gameSessions)).toEqual(expect.arrayContaining([demo.history]));
+  expect(await db.select().from(gameSessions)).toHaveLength(10);
   const reopened = await openDatabase(fixture.config);
   try {
     expect(await reopened.db.select().from(wallets)).toEqual([demo.wallet]);
@@ -113,7 +114,7 @@ it("repeated seed preserves existing balances and creates no duplicates", async 
   expect((await db.select().from(games).where(eq(games.id, "odd-one-out")).get())?.enabled).toBe(
     false,
   );
-  expect(await db.select().from(gameSessions)).toHaveLength(1);
+  expect(await db.select().from(gameSessions)).toHaveLength(10);
 });
 
 it("constrains Brainy values, family versions, catalog values and history references", async () => {

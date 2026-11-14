@@ -25,7 +25,8 @@ test("quiz → signup creates a family with a quiz-based Brainy; the parent can 
   await page.getByLabel("Пароль (минимум 6 символов)").fill("secret123");
   await page.getByLabel("PIN родителя (4 цифры)").fill("2468");
   await page.getByRole("button", { name: "Создать и начать" }).click();
-  await expect(page).toHaveURL(/\/entry$/);
+  await expect(page).toHaveURL(/\/onboarding\/setup$/);
+  await expect(page.getByTestId("setup-code")).toHaveText(/^[0-9]{6}$/);
   const state = await savedState(page.request);
   expect(state.child.name).toBe("Мира");
   expect(state.showcase.calendar?.timeZone).toBeTruthy();
@@ -41,10 +42,10 @@ test("quiz → signup creates a family with a quiz-based Brainy; the parent can 
   await parent.goto("/login");
   await parent.getByLabel("Email").fill(email);
   await parent.getByLabel("Пароль").fill("wrong-password");
-  await parent.getByRole("button", { name: "Войти" }).click();
+  await parent.getByRole("button", { name: "Войти", exact: true }).click();
   await expect(parent.getByText("Неверный email или пароль")).toBeVisible();
   await parent.getByLabel("Пароль").fill("secret123");
-  await parent.getByRole("button", { name: "Войти" }).click();
+  await parent.getByRole("button", { name: "Войти", exact: true }).click();
   await expect(parent.getByRole("heading", { level: 1, name: "Аналитика" })).toBeVisible();
   await expect(parent.getByText("Мира, ")).toBeVisible();
   await expect(parent.getByTestId("needs-attention")).toContainText("Назначить задания на сегодня");
@@ -83,7 +84,10 @@ test("a finished game moves the child's skills by the game's weights and lands i
   const after = await savedState(page.request);
   expect(after.progress.skills.logic).toBe(Math.min(100, before.progress.skills.logic + 2));
   expect(after.progress.skills.attention).toBe(Math.min(100, before.progress.skills.attention + 1));
-  expect(after.showcase.feed[0]).toMatchObject({ kind: "game", title: "Продолжи узор · 1" });
+  expect(after.showcase.feed.find((item) => item.kind === "game")).toMatchObject({
+    kind: "game",
+    title: "Продолжи узор · 1",
+  });
   await page.request.post("/api/sessions/stop", { headers });
 });
 
@@ -91,7 +95,7 @@ test("login rejects unknown accounts and the demo account opens parent mode", as
   await page.goto("/login");
   await page.getByLabel("Email").fill("mama@example.com");
   await page.getByLabel("Пароль").fill("demo1234");
-  await page.getByRole("button", { name: "Войти" }).click();
+  await page.getByRole("button", { name: "Войти", exact: true }).click();
   await expect(page.getByRole("heading", { level: 1, name: "Аналитика" })).toBeVisible();
   await expect(page.getByTestId("event-feed")).toBeVisible();
   await page.getByRole("button", { name: "Вернуть ребёнку" }).click();

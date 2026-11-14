@@ -94,9 +94,17 @@ describe("showcase actions", () => {
   });
 
   it("enforces five tasks a day", () => {
+    const firstTask = base.tasks[0] ?? {
+      id: "t0",
+      title: "Дело",
+      place: "real" as const,
+      skill: "X",
+      reward: 1,
+      status: "todo" as const,
+    };
     const full = {
       ...base,
-      tasks: Array.from({ length: TASKS_PER_DAY }, (_, i) => ({ ...base.tasks[0]!, id: `t${i}` })),
+      tasks: Array.from({ length: TASKS_PER_DAY }, (_, i) => ({ ...firstTask, id: `t${i}` })),
     };
     const add = { type: "task-add", title: "Ещё", place: "real", skill: "X", reward: 1 } as const;
     expect(applyShowcaseAction(input(full), add)).toEqual({ ok: false, reason: "daily-limit" });
@@ -149,7 +157,7 @@ describe("showcase actions", () => {
       mode: "timed",
     });
     expect(timed).toMatchObject({ ok: true, wallet: { stars: 70 } });
-    if (timed.ok) expect(timed.showcase.fun[0]?.until).toBe("2026-11-14T10:10:00.000Z");
+    if (timed.ok) expect(timed.showcase.fun[0]?.remainingSeconds).toBe(600);
   });
 
   it("rejects unknown or malformed actions", () => {

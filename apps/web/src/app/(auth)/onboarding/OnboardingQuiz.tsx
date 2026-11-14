@@ -50,7 +50,7 @@ export function OnboardingQuiz() {
       setBusy(false);
       if (response.ok) {
         // Fresh page load: the new device cookie belongs to the new child.
-        window.location.assign("/entry");
+        window.location.assign("/onboarding/setup");
         return;
       }
       const reply = (await response.json().catch(() => ({}))) as { error?: string };

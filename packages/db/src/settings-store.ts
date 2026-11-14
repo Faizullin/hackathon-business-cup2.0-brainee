@@ -70,6 +70,9 @@ export async function getSettings(db: Database, token: string, now: Date) {
         ),
       );
     return {
+      jury:
+        (await tx.select().from(families).where(eq(families.id, access.familyId)).get())?.plan ===
+        "jury",
       child: {
         name: child?.name ?? "",
         birthYear: child?.birthYear ?? 0,

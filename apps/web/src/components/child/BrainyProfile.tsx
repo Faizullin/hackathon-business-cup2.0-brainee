@@ -1,10 +1,12 @@
 "use client";
 import { Brainy } from "@brainee/brainy";
 import {
+  ABILITY_BODY,
   ACCESSORIES,
   BODY_STATS,
   EARNED_REWARDS,
-  practiceGame,
+  learningPracticeGame,
+  rewardProgress,
   STAGES,
   stageOf,
 } from "@brainee/core";
@@ -25,8 +27,14 @@ export function BrainyProfile() {
   const { equipped, owned, earned } = snapshot.showcase;
   const stage = stageOf(stats);
   const t = ru.child.brainyPage;
-  const weakest = BODY_STATS.reduce((a, b) => (stats[a] <= stats[b] ? a : b));
-  const suggestion = practiceGame(stats, allGames);
+  const suggestion = learningPracticeGame(
+    stats,
+    allGames.filter((g) => g.minAge <= new Date().getFullYear() - snapshot.child.birthYear),
+  );
+  const weakest = suggestion
+    ? ABILITY_BODY[suggestion.skills.main as keyof typeof ABILITY_BODY]
+    : "brain";
+  const rewards = snapshot.activity ? rewardProgress(stats, snapshot.activity) : null;
   return (
     <div className="flex flex-col gap-5 lg:grid lg:grid-cols-[minmax(0,400px)_minmax(0,1fr)] lg:items-start">
       <section className="flex flex-col items-center gap-4 rounded-panel border border-border bg-card p-5 text-center sm:p-8 lg:sticky lg:top-[max(16px,env(safe-area-inset-top))]">
@@ -163,7 +171,18 @@ export function BrainyProfile() {
                   )}
                 >
                   {t.earnedNames[reward]}
-                  {!has && <span className="block font-normal text-xs">{t.locked}</span>}
+                  {!has && (
+                    <span className="block font-normal text-xs">
+                      {rewards
+                        ? ru.rewardProgress(
+                            reward,
+                            rewards[reward].value,
+                            rewards[reward].target,
+                            snapshot.activity?.heroStarted ?? 0,
+                          )
+                        : t.locked}
+                    </span>
+                  )}
                 </li>
               );
             })}

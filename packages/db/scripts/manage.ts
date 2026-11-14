@@ -11,7 +11,7 @@ try {
   if (command === "push") console.log(runDrizzle(config).trim());
   if (command === "seed") await seedDatabase(config);
   if (command === "studio") runDrizzle(config, "studio");
-  console.log(`Database ${command} complete: ${config.path}`);
+  console.log(`Database ${command} complete: ${config.path ?? config.url}`);
 } catch (error) {
   console.error(error instanceof Error ? error.message : String(error));
   process.exitCode = 1;

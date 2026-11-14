@@ -1,6 +1,6 @@
 # Interactive films (podcast → «мультик»)
 
-A film is **an mp3 plus a JSON script**. The browser draws it, so no video is rendered. Brainy talks with the voice, scenes change with the story, and questions pause the audio until the child answers. Films are science videos: free, and the only ★ reward is the existing end-of-video quiz (+15★, eyes +2, first time only). In-film questions never grant ★. Decision: [D-29](decisions.md).
+A film is **an mp3 plus a JSON script**. The browser draws it, so no video is rendered. Brainy talks with the voice, scenes change with the story, and questions pause the audio until the child answers. Films are science videos: free, and the only ★ reward is the existing end-of-video quiz (+15★, eyes +2, first time only). In-film questions never grant ★. Decision: [D-30](decisions.md).
 
 ## Where things live
 

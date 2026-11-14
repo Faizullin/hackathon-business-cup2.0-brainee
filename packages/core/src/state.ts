@@ -5,6 +5,8 @@ import type { BrainyStats } from "./types";
 /** Public child data only; dates cross the API as ISO strings. */
 export type StateSnapshot = {
   version: number;
+  learningHistory?: import("./recommendations").PlayedGame[];
+  activity?: import("./activity").ActivitySummary;
   child: { id: string; name: string; birthYear: number };
   progress: LearningProgress;
   baseline: BrainyStats;

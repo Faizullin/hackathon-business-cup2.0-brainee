@@ -17,7 +17,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 Other task IDs stay outside this slice. T-24/T-25 are available as pure core improvements; entry flow, tasks/gifts, leisure, advanced analytics, embedded games and motion polish wait. Deployment remains the final task (T-14).
 
 ## Road to MVP (acceptance criteria → remaining tasks)
-Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MVP is a **presentation build**: every page exists with basic saved interactions; analytics are seeded (D-21). Status on 2026-11-14:
+Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MVP is a **presentation build**: every page exists with basic saved interactions; activity analytics are live; historical/character radars and ranking remain seeded (D-29). Status on 2026-11-14:
 
 | # | Criterion | State |
 |---|---|---|
@@ -32,7 +32,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 | 9 | Ranking hidden from child, no last names | ✅ parent-only, initials (T-43) |
 | 10 | Own-domain only; works with Screen Time allowlist | Automated route audit + PWA done; physical Screen Time verification remains T-62 |
 
-**Left before deployment (in order):** T-104/T-105 locale and Tangram Tales → T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Quiz-first onboarding is implemented by T-101. Deployment is currently deferred.
+**Left before deployment (in order):** refresh MVP/learning recordings → T-104/T-105 locale and Tangram Tales → T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Quiz-first onboarding is implemented by T-101. Deployment is currently deferred.
 
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
@@ -91,7 +91,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
   - [x] One deterministic **now** scenario with quiz baseline, two games, hashed parent PIN and consistent history; reruns preserve progress
 - [ ] T-52 Demo session (`DEMO_MODE`, seeded family) + parent PIN barrier; Better Auth = stretch goal
   - [x] Explicit opt-in, opaque HttpOnly cookie, hashed token, expiry, same-origin mutations; parent barrier implemented in T-40 → [sessions.md](../dev/sessions.md)
-- [ ] T-53 Onboarding quiz → starting stats
+- [x] T-53 Onboarding quiz → starting stats
 - [x] T-54 API: issued game start/finish/stop → core → atomic saved state and receipt; child UI wired through T-55 → [sessions.md](../dev/sessions.md)
 - [x] T-55 Live updates by short polling: `/api/state` version + TanStack Query (~3 s) in child and parent UIs → [D-15](../dev/decisions.md)
   - [x] Cookie-authorized snapshot, child polling, issued-game UI, confirmed rewards, finish retry/reload and other-device sync → [sessions.md](../dev/sessions.md#shared-state-and-client-recovery-t-55), D-20
@@ -101,7 +101,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-60 PWA manifest + generated icons (`/manifest.webmanifest`, `/icon`, `/apple-icon`), standalone, theme colors; offline shell not needed for the demo
 - [x] T-61 Automated own-origin audit across all pages, both games, four videos, lab and PWA assets (`own-origin.spec.ts`); physical allowlist remains T-62
 - [ ] T-62 Test on an iPad: over LAN during development; with Screen Time "Allowed Websites Only" after T-14
-- [ ] T-63 Onboarding wizard for setting up the allowlist (stretch goal)
+- [x] T-63 Onboarding setup: pairing code and current-domain Screen Time instructions (physical verification remains T-62)
 
 ## P7 · Demo & pitch
 - [x] T-70 Presentation acceptance walk and visual review → [evidence and remaining boundaries](../demo.md#acceptance-walk-t-70); expanded accessory, child-ranking and video-resume checks
@@ -109,7 +109,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-72 Landing page (`apps/landing`), stretch goal
 - [ ] T-73 Pitch deck
 - [ ] T-74 Freeze `master`, tag the demo build
-- [ ] T-14 **Final step: deploy (free tiers only)**: Vercel Hobby project for `apps/web` (monorepo root dir, `<project>.vercel.app`); Turso free database; extend `getDatabaseConfig`/`openDatabase` for `libsql://` + `DATABASE_AUTH_TOKEN`; `db:push` + seed against Turso; run the e2e suite against the deployed URL → [D-15](../dev/decisions.md)
+- [ ] T-14 **Deploy (free tiers only)**: Turso cloud database provisioned and seeded (`libsql://brainee-demo-...`); `getDatabaseConfig`, `openDatabase`, `drizzle.config.ts` and `scripts/manage.ts` updated and tested with `DATABASE_AUTH_TOKEN`; Vercel Hobby project deployment next → [D-15](../dev/decisions.md)
 
 ## Backlog / ideas
 - [x] T-80 Define a smallest end-to-end demo slice and prioritize it ahead of optional features → [scope above](#smallest-end-to-end-demo-slice-t-80).
@@ -138,10 +138,10 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-104 English locale `en.ts` + locale switch (D-22), before English-only external games
 - [ ] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
 - [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).
-- [x] T-107 Interactive films from ElevenLabs podcasts (D-29) → [films.md](../dev/films.md): `core/film.ts` format + checks, `packages/films` art/stage, `/video/[id]` film player, `/lab/film` studio, `make_film.py`, `pnpm check:films`, first film `sky-blue` (English, 8 questions, 83 scenes)
-- [x] T-109 Films `rain` («Rain», 8 questions, 79 scenes) and `sun-goes` («Where the sun goes», 7 questions, 84 scenes); 5 backgrounds + 23 props added; `make_film.py` uses word timestamps; `sky-blue` retitled «Why the sky is blue?»
-- [x] T-110 Film props stand on the ground: background `ground` lines, prop `base`/`floats`, standing props never bob; check forbids standing props on ground-less scenes; marbles, clothesline, flashlight/orange redrawn or grounded; scenes fixed in all three films
-- [ ] T-108 Film follow-ups: second on-stage character for `guest` voices; English player chrome with T-104; physical iPad check of the Web Audio mouth (with T-84); confirm the Russian/English choice for future podcasts
+- [x] T-111 Interactive films from ElevenLabs podcasts (D-30) → [films.md](../dev/films.md): `core/film.ts` format + checks, `packages/films` art/stage, `/video/[id]` film player, `/lab/film` studio, `make_film.py`, `pnpm check:films`, first film `sky-blue` (English, 8 questions, 83 scenes)
+- [x] T-112 Films `rain` («Rain», 8 questions, 79 scenes) and `sun-goes` («Where the sun goes», 7 questions, 84 scenes); 5 backgrounds + 23 props added; `make_film.py` uses word timestamps; `sky-blue` retitled «Why the sky is blue?»
+- [x] T-113 Film props stand on the ground: background `ground` lines, prop `base`/`floats`, standing props never bob; check forbids standing props on ground-less scenes; marbles, clothesline, flashlight/orange redrawn or grounded; scenes fixed in all three films
+- [ ] T-114 Film follow-ups: second on-stage character for `guest` voices; English player chrome with T-104; physical iPad check of the Web Audio mouth (with T-84); confirm the Russian/English choice for future podcasts
 - [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run
 - [x] T-96 `mvp` report module: every page + child → parent walkthrough; `scaffold` report retired → [reports/mvp.md](../reports/mvp.md)
 - [ ] T-97 Showcase follow-ups after the pitch: real Task/Gift/Request tables, computed analytics, playable fun games and cartoons, presenter «Сбросить демо» button (endpoint exists)
@@ -150,3 +150,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - Additional learning games (Sounds & letters, Repeat after Brainy, Magic garden, Expedition, Error detective)
 - Fun games beyond the first one
 - Push notification on `stage_up`
+
+- [x] T-107 One-tap isolated jury families, root role chooser, neutral simple signup and post-signup device setup (D-29).
+- [x] T-108 History-based recommendations, automatic app tasks, live activity analytics and earned rewards with progress/celebrations/feed (D-29).
+- [x] T-109 Playable Snake with saved active-time credit/top-ups/forever and restart-from-zero cartoon placeholder (D-29).
