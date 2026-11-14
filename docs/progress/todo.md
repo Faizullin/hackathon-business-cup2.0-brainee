@@ -32,7 +32,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 | 9 | Ranking hidden from child, no last names | ✅ parent-only, initials (T-43) |
 | 10 | Own-domain only; works with Screen Time allowlist | Automated route audit + PWA done; physical Screen Time verification remains T-62 |
 
-**Left before deployment (in order):** refresh MVP/learning recordings → T-104/T-105 locale and Tangram Tales → T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Quiz-first onboarding is implemented by T-101. Deployment is currently deferred.
+**Left before freeze:** games-session T-112 English manifest/host strings and planned catalog work → owner T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → owner builds the deck from [pitch.md](../pitch.md) → T-74 freeze/tag after the games merge. The owner redeploys; this session does not deploy.
 
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
@@ -107,7 +107,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-70 Presentation acceptance walk and visual review → [evidence and remaining boundaries](../demo.md#acceptance-walk-t-70); expanded accessory, child-ranking and video-resume checks
 - [x] T-71 Reset-first two-device demo script (child landscape iPad + parent phone) → [demo.md](../demo.md)
 - [ ] T-72 Landing page (`apps/landing`), stretch goal
-- [ ] T-73 Pitch deck
+- [x] T-73 Pitch support: ten-slide outline and three-minute US-first script → [pitch.md](../pitch.md); owner assembles the deck
 - [ ] T-74 Freeze `master`, tag the demo build
 - [x] T-14 **Deploy (free tiers only)**: Turso cloud database provisioned and seeded (`libsql://brainee-demo-...`); `packages/db` updated with `DATABASE_AUTH_TOKEN` support; Vercel Next.js project deployed and live at `https://brainee.vercel.app` → [D-15](../dev/decisions.md)
 
@@ -119,7 +119,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-83 Resolve reward incentives and clarify the evidence and labels for skill scores, age averages and seeded rankings.
 - [ ] T-84 Validate the PWA and two-device sync on a real iPad early over LAN (no deployment needed); define offline behavior and source licensed demo media.
 - [x] T-85 Port GSP Picture Puzzle end to end: Phaser kit, local CC0 art/licences, Russian host, manifest, four-placement `GameResult`, issued-session rewards and Chromium/WebKit e2e. Other candidates in [games.md](../dev/games.md#reusable-gsp-games-candidates)
-- [ ] T-87 Motion polish: `<ViewTransition>` tab/push/pop + shared elements, ★ fly-to-wallet, animated counters, Brainy idle/stage-up, `loading.tsx` Brainy loader, reduced-motion spec → [ui.md](../dev/ui.md). After the functional flow works.
+- [x] T-87 Motion polish: `<ViewTransition>` tab/push/pop + shared elements, ★ fly-to-wallet, animated counters, Brainy idle/stage-up, `loading.tsx` Brainy loader, reduced-motion spec → [ui.md](../dev/ui.md). After the functional flow works.
 - [x] T-88 Port the local UI recording/report tooling from game-store-planning; generate phone/iPad walkthroughs with linked videos, screenshots and logs → [reports/README.md](../reports/README.md)
 - [x] T-89 Light manifest schema (zod) for all listed games + `pnpm check` validation: id, version, engine, runtime, entry, skills, levels, bridge protocol/contract, size budget, license → [games.md](../dev/games.md#scaling-three-paths-in-one-contract-d-16)
 - [x] T-90 Game conformance suite (Playwright, Chromium + WebKit): load, ready ≤ 10 s, one finish, zero foreign requests, size budget, no console errors; required before a game is listed
@@ -137,7 +137,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
   - [x] Onboarding polish: progress, answer reactions, story, hold/reduced-motion reveal and optional referral field.
 - [x] T-104 English locale `en.ts` + locale switch (D-22), before English-only external games
 - [x] T-110 US-English seeds and demo family (Mia, `mom@example.com`, US names/numbers, New York time), RU display map for seeded content and game titles, `db:refresh-demo`, report locale cookie/timezone fix (D-30)
-- [ ] T-111 English recordings and e2e locale: port report scenarios/selectors to English (or run both locales) and re-record MVP + learning
+- [x] T-111 English WebKit MVP/learning recordings, English child/parent e2e and Russian smoke; localized Brainy/lab/manifest, report cookie/timezone checks (D-30/D-31)
 - [ ] T-112 Games worktree: English manifest titles plus i18n for `GameHost`/`IframeGame` error and loading strings (currently Russian)
 - [ ] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
 - [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).

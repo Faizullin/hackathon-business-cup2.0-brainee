@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-31 · Localized presentation and bounded feedback · 2026-11-14 · accepted · extends D-13/D-30
+**Context:** the US-first demo needs reproducible English evidence and calm feedback without changing saved rewards or coupling the SVG package to a web locale.
+**Decision:** web callers use a localized Brainy wrapper; the pure SVG defaults to decorative. The install manifest defaults to English. Published walkthroughs use WebKit, `brainee_locale=en` and New York time; Russian remains covered by browser smoke/regression flows. Keep the existing Motion provider: render-only counters, three finite reward stars, two idle breaths and a single stage entrance; reduced motion makes values immediate and removes movement.
+**Consequences:** no new dependency, economy rule or service. Loading/error views use the active dictionary. An already loaded app keeps confirmed data and offers recovery when requests fail; there is no offline cache/service worker and no promise of cold-start offline play. Physical Screen Time/Add to Home Screen checks remain the owner's T-62/T-84 rehearsal. Game manifest/host localization stays with the games session (T-112).
+
 ## D-30 · US English is the primary locale and demo content · 2026-11-14 · accepted · supersedes D-22 language order
 **Context:** the US is the main future audience; T-104 made English the default UI, but seeds, names and report captures still assumed Russian/Kazakhstan.
 **Decision:** English is the default locale (`brainee_locale` cookie, Russian by switch). The shared demo and jury seeds are US English (child "Mia", jury child "Ava", login `mom@example.com`, US names, en-US numbers, America/New_York). The Russian UI translates seeded strings and current game titles at display time through `[en, ru]` pairs in `apps/web/src/i18n/content.ts`; parent-typed text is shown as written. `pnpm db:refresh-demo` replaces only the shared demo family, so the cloud DB can be updated without wiping jury families. Report captures use `brainee_locale` and New York time.

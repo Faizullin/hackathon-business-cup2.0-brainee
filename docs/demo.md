@@ -4,10 +4,10 @@
 Run `pnpm demo`: reset the local DB and start with demo access enabled. Use a fresh DB before the presentation. This is a local rehearsal, not deployment. An unavailable Brainy screen usually means `DEMO_MODE` is missing.
 
 ## Jury path: under one minute
-1. Open `/` or `/login` and tap «Войти как жюри». No form or PIN is needed. Each tap creates an isolated family; other visitors keep their own state.
-2. `/jury` shows reusable login/password/PIN and two role cards. Choose the child, then finish «Найди лишний». The family starts at 9/10 completed learning games: the tenth earns the explorer badge, celebrates and completes the 15★ in-app task. The parent feed records both events.
+1. Open `/` or `/login` and tap “Join as Jury”. No form or PIN is needed. Each tap creates an isolated family; other visitors keep their own state.
+2. `/jury` shows reusable login/password/PIN and two role cards. Choose the child, then finish “Odd One Out”. The family starts at 9/10 completed learning games: the tenth earns the explorer badge, celebrates and completes the 15★ in-app task. The parent feed records both events.
 3. Return to `/jury` and choose the parent. Analytics show real saved minutes, streak and advice counts beside labelled illustrative radars/ranking. Confirm the waiting real-life task or deliver the waiting gift to try the parent loop.
-4. Settings → «Сбросить демо» restores showcase content while preserving balances, Brainy, history and earned rewards. For a fresh badge demonstration, open `/` and create another jury family.
+4. Settings → “Reset demo” restores showcase content while preserving balances, Brainy, history and earned rewards. For a fresh badge demonstration, open `/` and create another jury family.
 
 Parent access lasts 15 minutes; use the PIN shown on `/jury` to unlock it again. Credentials remain visible in the creating tab; save them before closing it. Jury families older than seven days are removed when another jury family is created. Demo history is seeded deliberately, then new actions are real and isolated.
 
@@ -51,3 +51,18 @@ Science placeholders resume position and pay ★ only after the correct answer. 
 | Own-domain resources | `own-origin.spec.ts` covers all page routes, both games, all four videos, lab and install assets; physical Screen Time verification remains T-62 |
 
 Visual review covers phone and landscape iPad layouts, readable labels, overflow, native controls and the existing reduced-motion checks. This is presentation acceptance, with the catalog, placeholder-media and physical-device boundaries above; it is not a production accessibility or privacy certification.
+
+## Physical iPad rehearsal (T-62 / T-84 — owner checklist)
+Use **https://brainee.vercel.app** on an iPad in landscape as the child and a phone as the parent. Use the same canonical domain on both devices; cookies on the alternate deployment hostname are separate.
+
+- [ ] Before the pitch, create a fresh jury family on the phone. Save its generated login/PIN. A new jury family is the cleanest live badge rehearsal; Settings → Reset demo restores content but preserves progress and earned rewards.
+- [ ] Try the one-tap jury path, then pair the iPad using the phone's Settings code. Confirm that both devices show the same child and balance.
+- [ ] In iPad Screen Time, set Web Content to **Allowed Websites Only** and allow only `brainee.vercel.app`. Test entry, a full learning game, purchases, pairing and parent access. Verify no fonts, images or games need another domain. Record the iPadOS version and any blocked request; automated own-origin checks do not establish physical allowlist compatibility.
+- [ ] Safari → Share → Add to Home Screen. Open the installed app, check icons, safe areas, keyboard, rotation and landscape navigation. Confirm language and device access survive reopening.
+- [ ] Keep both devices foregrounded. Finish a game on the iPad, then confirm a real-life task on the phone. Time each update: polling is approximately 3 seconds; allow up to 10 seconds in rehearsal and investigate longer delays. Background tabs refresh on return.
+- [ ] With Learn already loaded, enable airplane mode. Expect the last confirmed wallet plus a friendly connection/retry notice, not invented rewards or an empty page. Reconnect and retry; check balances converge without duplicate payouts. If a game finish was interrupted, retry its retained result.
+- [ ] Try a cold open while offline and document Safari's behavior. This MVP has no offline cache/service worker: a new document, uncached route or game requires a connection. Browser-native offline UI on a cold open is expected; do not promise offline play during the pitch.
+- [ ] Reopen in English and Russian; check long chart labels and touch targets. Use Reduce Motion and confirm counters settle immediately and reward flights stop.
+- [ ] Before presenting, restore connectivity, charge both devices, disable interruptions, create the presentation's fresh jury family and keep the local report videos ready as backup.
+
+Record **device/iPadOS, pass/fail, sync seconds and screenshots** for each failure. T-62 remains open until the owner performs this physical test. Freeze (T-74) follows the games merge and this rehearsal; the agent does not redeploy.

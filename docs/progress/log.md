@@ -4,6 +4,12 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (English rehearsal, motion and pitch support)
+- T-110 verified and deployed shared demo refreshed without removing other families; T-111 English WebKit report scenarios, English/Russian smoke and own-surface localization completed (D-31).
+- T-87 adds bounded reward/counter/mascot motion and localized loaders. Fixed offline feedback when polling pauses; confirmed state survives disconnection. Added the owner’s T-62/T-84 rehearsal checklist and T-73 ten-slide/three-minute pitch outline.
+- Checks: `pnpm check`, 170 unit tests, 29 report-tool tests; final focused browser run 36/36 on Chromium/WebKit phone/iPad. Earlier full-suite failures and repaired targeted checks are documented in [status](status.md#handoff). Fresh English MVP/learning recordings and WebKit frames reviewed.
+- Main-product commits only; no push/deploy or games worktree changes. Owner redeploy, physical rehearsal and post-games-merge T-74 freeze remain.
+
 ## 2026-11-14 (US-English demo content, locale test fix)
 - T-110 / D-30: shared demo and jury seeds rewritten for the US audience (Mia, Ava, `mom@example.com`, US names, en-US numbers, New York time); Russian switch maps seeded strings and game titles via `i18n/content.ts`. Small i18n fixes: backpack progress wording, video minutes, default task skill, cartoon icon check, "Neighborhood" ranking scope.
 - `pnpm db:refresh-demo` replaces only the shared demo family (local or cloud). Fixed e2e locale: the global Playwright `cookie` header overrode the session jar (401s, English UI); now `BRAINEE_DEFAULT_LOCALE=ru` on the test server. Report captures use `brainee_locale` + New York time.
