@@ -10,16 +10,21 @@ const session = {
   hadMistake: false,
   finished: false,
   started: performance.now(),
-  message: "Нажми на деталь, затем на её место. Собери весь силуэт и проверь.",
+  message: "Tap a piece, then its spot. Finish the whole picture and press Check.",
 };
 rng = mulberry32(Number(bridge.config?.seed) || 42);
 const sequence = shuffle(config.tales, rng).slice(0, 4);
+// A solved picture stays on screen briefly; Check is ignored meanwhile, so a double tap cannot
+// grade the next, still empty picture. `data-turn` (play | feedback | done) exposes this state.
+const FEEDBACK_MS = 700;
+let feedbackTimer = 0;
+mount.dataset.turn = "play";
 function checkRound() {
-  if (session.finished) return;
+  if (session.finished || mount.dataset.turn !== "play") return;
   if (Object.keys(state.placements).length !== 7) {
     session.mistakes++;
     session.hadMistake = true;
-    session.message = "Ещё остались детали. Попробуй закончить силуэт.";
+    session.message = "Some pieces are still missing. Try to finish the picture.";
     bridge.track("round", { correct: false, afterMistake: false });
     renderGuided();
     return;
@@ -30,9 +35,10 @@ function checkRound() {
   session.hadMistake = false;
   if (session.rounds === 4) {
     session.finished = true;
+    mount.dataset.turn = "done";
     cleanup();
     mount.innerHTML =
-      '<section class="session-complete"><h1>Все четыре силуэта готовы!</h1></section>';
+      '<section class="session-complete"><h1>All four puzzles are done!</h1></section>';
     bridge.track("finish", {
       gameId: "tangram-tales",
       level: session.level,
@@ -42,14 +48,22 @@ function checkRound() {
       durationMs: Math.round(performance.now() - session.started),
     });
   } else {
-    session.message = "Получилось! Собери следующий силуэт.";
-    startTale(sequence[session.rounds].id);
+    session.message = "You did it! Build the next picture.";
+    mount.dataset.turn = "feedback";
+    const status = mount.querySelector('[role="status"]');
+    if (status) status.textContent = session.message;
+    feedbackTimer = setTimeout(async () => {
+      if (session.finished) return;
+      await startTale(sequence[session.rounds].id);
+      mount.dataset.turn = "play";
+    }, FEEDBACK_MS);
   }
 }
 window.addEventListener(
   "pagehide",
   () => {
     session.finished = true;
+    clearTimeout(feedbackTimer);
     cleanup();
     bridge.close();
   },

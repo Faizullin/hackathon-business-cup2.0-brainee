@@ -31,7 +31,7 @@ test("web: hyphenated flags reach the options runCapture reads", () => {
   assert.deepEqual(
     parseArgs([
       "--locale-id",
-      "kk-KZ",
+      "en-GB",
       "--storage-state",
       "state.json",
       "--login-script",
@@ -42,7 +42,7 @@ test("web: hyphenated flags reach the options runCapture reads", () => {
     ]),
     {
       _: [],
-      localeId: "kk-KZ",
+      localeId: "en-GB",
       storageState: "state.json",
       loginScript: "login.json",
       authProbe: "/games",
@@ -53,7 +53,7 @@ test("web: hyphenated flags reach the options runCapture reads", () => {
 
 test("web: safeFilePart handles non-ASCII, slashes and special characters", () => {
   assert.equal(safeFilePart("games/upload"), "games-upload");
-  assert.equal(safeFilePart("Файлы 3"), "3");
+  assert.equal(safeFilePart("文件 3"), "3");
   assert.equal(safeFilePart("---test---"), "test");
   assert.equal(safeFilePart(""), "shot");
 });

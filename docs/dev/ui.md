@@ -25,7 +25,7 @@ app/(auth)/layout.tsx       # centered single column
 - Persistent parts (tab bar, dock, wallet) live in layouts, so they never re-animate when you navigate. Only the page content transitions.
 - A nested game layout cannot remove its parent layout's chrome; T-30 uses the sibling `(game)` group for fullscreen play.
 - Tab switch → cross-fade (150–200 ms). Drill-in (card → game) → slide in and back. Typed with `addTransitionType('push' | 'pop' | 'tab')`.
-- The entry screen («Во что играем сейчас?») is a full-screen sheet that can't be dismissed (product rule): Base UI Dialog, not a swipeable Drawer.
+- The entry screen ("What are we playing now?") is a full-screen sheet that can't be dismissed (product rule): Base UI Dialog, not a swipeable Drawer.
 - Bottom sheets (accessory preview, gift confirm, parent "new task") use Base UI Drawer with snap points.
 
 ## Saved learning state (T-55)
@@ -34,7 +34,7 @@ app/(auth)/layout.tsx       # centered single column
 
 `LearningProvider` at the root shares TanStack Query state across child/game routes. Child screens wait for a cookie-authorized snapshot; failed initial reads show a retry screen. Background failures keep the last confirmed state and show a notice. Polling pauses outside child/game routes and when the page is hidden; return/focus/reconnect refetches. The read, mutation and recovery contract lives in [sessions.md](sessions.md#shared-state-and-client-recovery-t-55).
 
-`GamePlayer` waits for a server-issued launch before mounting `GameHost`. The post-game screen shows the immutable before/after receipt and actual capped gains, while its balance comes from current shared state. It offers an available game for the weakest trained body part (`practiceGame`), plus the next level (or a new level-one run after the last level). This fallback needs no age norms. The separate entry algorithm is [T-25](../product/screens.md#entry-screen-во-что-играем-сейчас).
+`GamePlayer` waits for a server-issued launch before mounting `GameHost`. The post-game screen shows the immutable before/after receipt and actual capped gains, while its balance comes from current shared state. It offers an available game for the weakest trained body part (`practiceGame`), plus the next level (or a new level-one run after the last level). This fallback needs no age norms. The separate entry algorithm is [T-25](../product/screens.md#entry-screen-what-are-we-playing-now).
 
 The former T-35 local balance/stat preview is removed. Only unacknowledged results use per-tab storage; no local awards are migrated into the server. `demoChild` retains only accessory/weekly-goal presentation for T-38/T-46. Stopping waits for the server before navigating and showing Brainy's thank-you. Parent access/view wiring remains T-40/T-41; child-mode polling alone does not complete the [parent demo proof](../progress/todo.md#smallest-end-to-end-demo-slice-t-80).
 
@@ -55,7 +55,7 @@ T-12 provides these tokens, a shared spring, CSS reduced-motion overrides and a 
 
 ## Patterns per screen
 - **Dock Brainy:** subtle idle breathing (scale 1 → 1.02, 3 s). Reacts when stats change (bounce + color shift). Uses a shared `view-transition-name` with the Brainy tab.
-- **Post-game "before → after":** two Brainys, a stat chip counting up (Motion animated number), then the two «Что дальше?» cards stagger in.
+- **Post-game "before → after":** two Brainys, a stat chip counting up (Motion animated number), then the two "What's next?" cards stagger in.
 - **★ earned:** 3–5 star sprites fly from the game card to the wallet, then the wallet number ticks up. Stars are the custom SVG.
 - **Wrong answer:** the card shakes (CSS keyframe, 300 ms). Correct after a mistake: the "+4" chip pops.
 - **Parent dashboard:** restrained. Charts animate in once; Base UI Tabs, Drawers and Toasts; Lucide icons.

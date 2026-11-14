@@ -1,7 +1,6 @@
 import { EARNED_THRESHOLDS } from "@brainee/core";
-import type { Dictionary } from "./types";
 
-export const en: Dictionary = {
+export const en = {
   rewardProgress: (id: string, value: number, target: number, starts: number) =>
     id === "heroCape"
       ? `Unlocks: ${value} / ${target} completed · ${starts} / ${EARNED_THRESHOLDS.heroWindow} started via advice`
@@ -107,11 +106,6 @@ export const en: Dictionary = {
     timezone: "Timezone",
     devices: "Devices",
     account: "Account",
-    language: "Language",
-    languageOptions: {
-      en: "🇬🇧 English (Default)",
-      ru: "🇷🇺 Русский",
-    },
     name: "Child's name",
     year: "Birth year",
     promise: "Child's promise: tasks per day",
@@ -241,6 +235,16 @@ export const en: Dictionary = {
       correct: "Correct! +15★ and Eyes +2",
       wrong: "Not quite. Try another answer",
       back: "Back to Leisure",
+      film: {
+        loading: "Loading the cartoon…",
+        failed: "Couldn't load the cartoon. Please try again later.",
+        stage: "Cartoon",
+        brainyAsks: "Brainy asks",
+        listenAgain: "Listen again",
+        next: "Next",
+        resume: "Continue",
+        time: (now: string, total: string) => `${now} of ${total}`,
+      },
     },
     gifts: {
       title: "Gifts",
@@ -574,7 +578,28 @@ export const en: Dictionary = {
     status: { running: "Game in progress", finished: "Game finished", error: "Error" },
     noEvents: "No events yet",
     rewardPreview: "Reward preview (core)",
-    nav: { games: "Games", brainy: "Brainy" },
+    nav: { games: "Games", brainy: "Brainy", film: "Cartoons" },
+    film: {
+      title: "Cartoons: script check",
+      pick: "Cartoon",
+      files: "Your own files (mp3 + JSON)",
+      audio: "Audio",
+      script: "Script",
+      seek: "Seek",
+      skip: "Don't stop at questions",
+      jump: (n: number, at: string) => `Question ${n} · ${at}`,
+      issues: "Script check",
+      clean: "No errors or warnings",
+      badJson: "This is not a JSON script",
+      narrator: "Mascot (host)",
+      narrators: {
+        afterQuiz: "Brainy after the quiz",
+        now: "Brainy now",
+        onlyFun: "Brainy: only fun",
+        dressed: "Brainy with accessories",
+        none: "No mascot",
+      },
+    },
     brainy: {
       title: "Brainy: scenarios and stats",
       preview: "Brainy preview",

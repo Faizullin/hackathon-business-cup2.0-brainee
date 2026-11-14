@@ -1,9 +1,7 @@
-import type { Locale } from "@brainee/game-bridge";
-
 export interface PuzzlePicture {
   id: string;
   /** The word spoken when the picture is complete. */
-  word: Record<Locale, string>;
+  word: string;
 }
 
 /**
@@ -11,11 +9,11 @@ export interface PuzzlePicture {
  * CC0 Kenney art by assets-src/compose_pictures.py.
  */
 export const PICTURES: readonly PuzzlePicture[] = [
-  { id: "dog", word: { en: "dog", ru: "собака", kk: "ит" } },
-  { id: "rabbit", word: { en: "rabbit", ru: "заяц", kk: "қоян" } },
-  { id: "elephant", word: { en: "elephant", ru: "слон", kk: "піл" } },
-  { id: "bear", word: { en: "bear", ru: "медведь", kk: "аю" } },
-  { id: "pig", word: { en: "pig", ru: "свинья", kk: "шошқа" } },
+  { id: "dog", word: "dog" },
+  { id: "rabbit", word: "rabbit" },
+  { id: "elephant", word: "elephant" },
+  { id: "bear", word: "bear" },
+  { id: "pig", word: "pig" },
 ];
 
 export const PICTURE_WIDTH = 1024;

@@ -63,3 +63,16 @@ describe("<Brainy />", () => {
     expect(new Set(ids).size).toBe(4);
   });
 });
+
+describe("talking mouth (films)", () => {
+  it("opens with the voice level and keeps the stat smile when silent", () => {
+    const silent = renderToStaticMarkup(<Brainy stats={base} />);
+    const talking = renderToStaticMarkup(<Brainy stats={base} talk={0.8} />);
+    expect(silent).not.toContain("data-talk");
+    expect(talking).toContain("data-talk");
+    const ry = (html: string) => Number(html.match(/data-talk="" [^>]*ry="([\d.]+)"/)?.[1]);
+    expect(ry(renderToStaticMarkup(<Brainy stats={base} talk={1} />))).toBeGreaterThan(
+      ry(renderToStaticMarkup(<Brainy stats={base} talk={0.2} />)),
+    );
+  });
+});

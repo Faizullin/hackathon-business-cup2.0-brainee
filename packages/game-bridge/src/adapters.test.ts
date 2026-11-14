@@ -15,7 +15,7 @@ const context = {
   sessionId: "session-1",
   gameId: "gdevelop-test-game",
   version: "1.0.0",
-  locale: "kk" as const,
+  locale: "en" as const,
 };
 
 const open: Array<{ close(): void }> = [];

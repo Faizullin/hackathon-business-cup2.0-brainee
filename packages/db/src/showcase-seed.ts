@@ -1,6 +1,6 @@
 import type { Showcase } from "@brainee/core";
 
-// D-21: hand-picked demo content (US English, the main audience; the RU locale maps it in apps/web/src/i18n/content.ts). Analytics are illustrative, not computed.
+// D-21: hand-picked demo content in US English (the product is English-only). Analytics are illustrative, not computed.
 export const demoShowcase: Showcase = {
   equipped: { face: "glasses" },
   owned: ["glasses"],
@@ -190,6 +190,43 @@ export const demoShowcase: Showcase = {
     },
   ],
   science: [
+    {
+      // Interactive films: apps/web/public/media/films/<id>.{mp3,json} (docs/dev/films.md).
+      id: "sky-blue",
+      title: "Why the sky is blue?",
+      minutes: 13,
+      icon: "sun",
+      colors: ["#1F3FA8", "#3C68EE"],
+      question: "Why is the sky blue?",
+      options: ["It mirrors the sea", "Air bounces blue light", "Someone painted it"],
+      answer: 1,
+      position: 0,
+      solved: false,
+    },
+    {
+      id: "rain",
+      title: "Rain",
+      minutes: 13,
+      icon: "rain",
+      colors: ["#4A5694", "#7C86A8"],
+      question: "On a sunny day, where did the puddle go?",
+      options: ["It turned to sand", "Up into the air", "A bird drank it"],
+      answer: 1,
+      position: 0,
+      solved: false,
+    },
+    {
+      id: "sun-goes",
+      title: "Where the sun goes",
+      minutes: 13,
+      icon: "moon",
+      colors: ["#2A2546", "#E5731A"],
+      question: "When it's night here, what is the sun doing?",
+      options: ["Shining on other kids", "Sleeping in a bed", "Hiding under the sea"],
+      answer: 0,
+      position: 0,
+      solved: false,
+    },
     {
       id: "ocean",
       title: "Ocean Mysteries",

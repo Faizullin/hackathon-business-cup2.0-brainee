@@ -45,7 +45,7 @@ test("leaving an unfinished puzzle stops without a reward", async ({ page, baseU
   });
   await page.goto("/game/picture-puzzle?level=3&seed=42");
   await placePuzzlePiece(page);
-  await page.getByRole("button", { name: /Выйти/ }).click();
+  await page.getByRole("button", { name: /Exit/ }).click();
   await expect(page).toHaveURL(/\/learn$/);
   await expect(page.getByTestId("embedded-game")).toHaveCount(0);
   expect(finishes).toBe(0);
@@ -57,18 +57,20 @@ test("missing embedded ready becomes an error and removes the iframe", async ({ 
     route.fulfill({ contentType: "text/html", body: "<!doctype html><title>Silent game</title>" }),
   );
   await page.goto("/lab");
-  await page.getByRole("combobox", { name: "Игра", exact: true }).selectOption("picture-puzzle");
+  await page.getByRole("combobox", { name: "Game", exact: true }).selectOption("picture-puzzle");
   await expect(page.getByTestId("event-stream")).toHaveAttribute("data-status", "error", {
     timeout: 12000,
   });
-  await expect(page.getByRole("alert").filter({ hasText: "Игра не загрузилась" })).toBeVisible();
+  await expect(
+    page.getByRole("alert").filter({ hasText: "The game could not load" }),
+  ).toBeVisible();
   await expect(page.getByTestId("embedded-game")).toHaveCount(0);
 });
 
 test("level one keeps its issued level across four pictures", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/lab");
-  await page.getByRole("combobox", { name: "Игра", exact: true }).selectOption("picture-puzzle");
+  await page.getByRole("combobox", { name: "Game", exact: true }).selectOption("picture-puzzle");
   for (let round = 0; round < 4; round++) await placePuzzlePiece(page);
   const stream = page.getByTestId("event-stream");
   await expect(stream).toHaveAttribute("data-status", "finished");

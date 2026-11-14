@@ -42,27 +42,18 @@ export function buildTangram(destination) {
   replaceFunction("hud", "function hud() { return ''; }");
   // Original guided puzzles pre-place three pieces. Increase the unplaced set with difficulty.
   source = source.replace(".slice(0, 4)", ".slice(0, session.level + 3)");
-  source = source.replaceAll("${esc(tale.prompt)}", "Собери силуэт");
-  source = source.replace(
-    "${placedCount} of 7 pieces placed",
-    "Размещено ${placedCount} из 7 деталей",
-  );
-  source = source.replace("<span>of 7</span>", "<span>из 7</span>");
-  source = source.replace("${esc(tale.title)} tangram outline", "Силуэт для деталей");
-  source = source.replace("Paper pieces to place", "Детали для силуэта");
-  source = source.replace("Matching spot for a ${esc(source.shape)}", "Место для детали");
-  source = source.replace("${esc(piece.label)}, placed", "Размещённая деталь");
+  // Upstream copy is English; only the guided instruction changes, because drag/hold is omitted.
   source = source.replace(
     "${esc(piece.label)}. Drag it, hold to turn it, or tap then tap its spot.",
-    "${esc(piece.label)}. Нажми на деталь, затем на её место.",
+    "${esc(piece.label)}. Tap it, then tap its spot.",
   );
   source = source.replace(
     '      <header class="play-heading">',
-    '      <header class="play-heading"><p class="session-progress">Силуэт ${session.rounds + 1} из 4</p>',
+    '      <header class="play-heading"><p class="session-progress">Puzzle ${session.rounds + 1} of 4</p>',
   );
   source = source.replace(
     "      </div>\n    </section>`;\n  wireActions();\n  wireGuidedPieces();",
-    '      </div><footer class="session-footer"><p role="status">${session.message}</p><button data-action="check">Проверить</button></footer>\n    </section>`;\n  wireActions();\n  wireGuidedPieces();',
+    '      </div><footer class="session-footer"><p role="status">${session.message}</p><button data-action="check">Check</button></footer>\n    </section>`;\n  wireActions();\n  wireGuidedPieces();',
   );
   source = source.replace(
     'class="board-object slot ',
@@ -117,19 +108,4 @@ export function buildTangram(destination) {
   source = source.replace(/^import .*drag-to-slot-dom.*;\n/gm, "");
   source += readFileSync(`${root}/session.js`, "utf8");
   writeFileSync(resolve(destination, "js/main.js"), source);
-  // Translate only labels actually used by the guided UI; no English voice is loaded or played.
-  const config = JSON.parse(readFileSync(`${destination}/config.json`, "utf8"));
-  const labels = [
-    "Большой коралловый треугольник",
-    "Большой синий треугольник",
-    "Средний оранжевый треугольник",
-    "Маленький фиолетовый треугольник",
-    "Маленький бирюзовый треугольник",
-    "Жёлтый квадрат",
-    "Зелёный параллелограмм",
-  ];
-  config.pieces.forEach((piece, index) => {
-    piece.label = labels[index];
-  });
-  writeFileSync(`${destination}/config.json`, JSON.stringify(config));
 }

@@ -15,4 +15,4 @@ The game is imported as an unscored exploration preview (`mode: 'explore'`).
 - Imported as an unscored exploration preview: no GameResult, no round/finish scoring submissions, no stars, no ability changes, no learning sessions.
 - The creative editor and alive-town modes are preserved: Draw Home, Wind Road, Place Landmarks, and Alive Neighborhood animation.
 - English game content, prompts, and audio clips are preserved.
-- Added unscored host wrapper with label 'Свободная игра · без звёзд', easy host-controlled exit button, same-origin asset delivery, no microphone access, no external navigation, and offline execution.
+- Added unscored host wrapper with label 'Free play · no stars', easy host-controlled exit button, same-origin asset delivery, no microphone access, no external navigation, and offline execution.

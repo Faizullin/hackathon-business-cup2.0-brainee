@@ -1,8 +1,10 @@
 import { expect, type FrameLocator, type Page } from "@playwright/test";
 
 export async function solveReflectionPattern(_page: Page, frame: FrameLocator) {
-  const checkBtn = frame.getByRole("button", { name: "Проверить", exact: true });
+  const checkBtn = frame.getByRole("button", { name: "Check", exact: true });
   await expect(checkBtn).toBeVisible();
+  // A solved pattern is shown briefly before the next one loads.
+  await expect(frame.locator("#game-app")).toHaveAttribute("data-turn", "play");
 
   // Find all sample dots and calculate required player dot colors via body evaluate
   const info = await frame.locator("body").evaluate(() => {

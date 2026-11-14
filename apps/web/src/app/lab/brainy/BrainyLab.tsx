@@ -23,12 +23,12 @@ const fieldClass =
   "min-h-12 rounded-xl border border-border bg-card px-3 text-foreground focus-visible:outline-3 focus-visible:outline-ring";
 
 export function BrainyLab() {
-  const { t: ru } = useI18n();
+  const { t: i18n } = useI18n();
   const baseId = useId();
   const [stats, setStats] = useState<BrainyStats>({ ...BRAINY_PRESETS.now });
   const [equipped, setEquipped] = useState<Equipped>({ face: "glasses" });
   const stage = stageOf(stats);
-  const t = ru.lab.brainy;
+  const t = i18n.lab.brainy;
 
   function setSlot(slot: Slot, value: string) {
     setEquipped((current) =>
@@ -56,10 +56,10 @@ export function BrainyLab() {
           <Brainy stats={stats} equipped={equipped} label="" className="h-[136px] w-auto" />
         </div>
         <div data-testid="brainy-stage" className="w-full max-w-md text-center">
-          <p className="font-heading text-lg font-semibold">{ru.stages[stage.id]}</p>
+          <p className="font-heading text-lg font-semibold">{i18n.stages[stage.id]}</p>
           <p className="text-muted-foreground text-sm">
             {t.average}: {stage.average.toFixed(1)}
-            {stage.next ? ` · ${t.toNext(ru.stages[stage.next], stage.pointsToNext)}` : ""}
+            {stage.next ? ` · ${t.toNext(i18n.stages[stage.next], stage.pointsToNext)}` : ""}
           </p>
           <ol className="mt-3 grid grid-cols-5 gap-1.5" aria-hidden="true">
             {STAGES.map((s, i) => (
@@ -115,7 +115,7 @@ export function BrainyLab() {
               <option value="">{t.none}</option>
               {ACCESSORIES.filter((a) => a.slot === slot).map((a) => (
                 <option key={a.id} value={a.id}>
-                  {ru.accessories[a.id]} · {a.priceStars} ★
+                  {i18n.accessories[a.id]} · {a.priceStars} ★
                 </option>
               ))}
             </select>

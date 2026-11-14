@@ -24,7 +24,7 @@ export function exploreAcceptance(id: string) {
     const iframe = page.getByTestId("explore-frame");
     await expect(iframe).toHaveAttribute("data-ready", "true", { timeout: 10000 });
     const frame = iframe.contentFrame();
-    await expect(frame.getByTestId("host-badge")).toContainText("без звёзд");
+    await expect(frame.getByTestId("host-badge")).toContainText("no stars");
     await expect(iframe).toHaveAttribute("allow", /microphone 'none'/);
     await page.screenshot({ path: info.outputPath(`${id}-start.png`), fullPage: true });
     if (id === "magnet-explorer") {

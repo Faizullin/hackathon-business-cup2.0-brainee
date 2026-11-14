@@ -12,7 +12,7 @@ A ten-slide outline and a three-minute script. The owner builds the deck. Produc
 | 4. Try it now | Jury QR/link: `https://brainee.vercel.app` | One tap creates a separate demo family; next completed game unlocks the badge |
 | 5. Two kinds of effort | ★ and ☀ beside a task | Stars support in-app choices; parent-confirmed real-life tasks earn suns |
 | 6. Parents stay involved | Phone dashboard and paired iPad | Shared progress, tasks, gifts, PIN and revocable child devices |
-| 7. Designed for family use | English/Russian switch; own-domain diagram | English-first, bilingual, one origin, calm motion and explicit stopping points |
+| 7. Designed for family use | English UI; own-domain diagram | English-only, one origin, calm motion and explicit stopping points |
 | 8. What is real today | Product screenshots with “live / demo” labels | Saved actions and activity analytics work; historical/character radars and ranking are illustrative |
 | 9. What we must validate | Small pilot checklist | Comprehension, voluntary return, parent setup effort and real-device reliability—not clinical outcomes |
 | 10. Our ask | Jury link and three questions | Try both roles; tell us what was clear, what felt rewarding and where you got stuck |
@@ -40,7 +40,7 @@ Aim for about 18 seconds per slide. Rehearse at roughly 125 words per minute; pa
 “A parent can assign a task on a phone while the child uses an iPad. Both see saved updates through polling, normally about every three seconds. Pairing codes connect child devices, and parents can revoke access from Settings.”
 
 **7 · 1:48–2:06**
-“English is the default, with a Russian switch. Resources load from our own domain so the product can be tested with a restricted website allowlist. Motion is brief and respects reduced-motion settings. Physical iPad verification is still a required rehearsal.”
+“The product is in English. Resources load from our own domain so the product can be tested with a restricted website allowlist. Motion is brief and respects reduced-motion settings. Physical iPad verification is still a required rehearsal.”
 
 **8 · 2:06–2:24**
 “This is a working presentation MVP, not a claim of validated learning improvement. Saved games, tasks, purchases and activity totals are real. Historical radars and ranking are labelled demo data. Video media is placeholder content, and payments are not implemented.”

@@ -26,13 +26,13 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 | 3 | Stats/stage update for child **and parent** without reload | ✅ polling on both (T-55; e2e two-device check) |
 | 4 | Accessories buy/wear/remove, shown everywhere | ✅ (T-38) |
 | 5 | Science video: pause only, resume, ★ only after correct answer | ✅ demo player, no real media (T-37, T-84) |
-| 6 | Task «Готово» → parent confirms → ☀ + weekly goal + `resp` | ✅ (T-44) |
+| 6 | Task "Done" → parent confirms → ☀ + weekly goal + `resp` | ✅ (T-44) |
 | 7 | Gifts ☀ only; exchange ☀ → ★ 1:10 | ✅ (T-38, T-46) |
 | 8 | 5-tasks-a-day limit | ✅ (T-26/T-44) |
 | 9 | Ranking hidden from child, no last names | ✅ parent-only, initials (T-43) |
 | 10 | Own-domain only; works with Screen Time allowlist | Automated route audit + PWA done; physical Screen Time verification remains T-62 |
 
-**Left before freeze:** T-113 imported-game input stabilization and full browser rerun → T-115 English in-game instructions → owner T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → owner builds the deck from [pitch.md](../pitch.md) → T-74 freeze/tag. Games are merged; this session does not deploy.
+**Left before freeze:** owner T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) (including the films' Web Audio mouth, T-124) → owner builds the deck from [pitch.md](../pitch.md) → deploy and `pnpm db:refresh-demo` for the films → T-74 freeze/tag (`pre-redesign`). Next game wave: T-114.
 
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
@@ -58,7 +58,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-22 Exchange ☀→★ 1:10, one-way; gifts ☀ only
 - [x] T-23 Stage + mood math (stage thresholds, +8 mood per game); mood decay rate is still a product TBD
 - [x] T-24 Session skill gains (70/30), ability → body rollup; injected level/accuracy policy, calibration still TBD → [data-model.md](../product/data-model.md#how-stats-change)
-- [x] T-25 Entry recommendation algorithm (3 largest gaps, least-played in 7 days); explicit age-average/history/time inputs → [screens.md](../product/screens.md#entry-screen-во-что-играем-сейчас)
+- [x] T-25 Entry recommendation algorithm (3 largest gaps, least-played in 7 days); explicit age-average/history/time inputs → [screens.md](../product/screens.md#entry-screen-what-are-we-playing-now)
 - [x] T-26 Weekly goal counted by confirmed ☀; 5-tasks-a-day limit (`applyShowcaseAction`, D-21)
 - [x] T-27 Accessory slots (one per slot; earned vs. bought): catalog, `equip`/`unequip`, `buyAccessory` in `core`
 - [x] T-28 Game contract: `GameResult`/`Skill` types in `core`, `GameDefinition` + lazy registry + error boundary in `games`; `pnpm check:games` (no cross-game imports) → [games.md](../dev/games.md)
@@ -67,10 +67,10 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 ## P3 · Child flow · [screens.md#child](../product/screens.md#child)
 - [x] T-30 Child app shell: Brainy dock + 4-tab bottom bar in `(child)/layout`, fullscreen game layout, app-feel checklist → [ui.md](../dev/ui.md#app-shell-route-group-layouts-own-the-chrome)
 - [x] T-31 Entry screen `/entry` (no close, logs the choice; `/` redirects here)
-- [x] T-32 Learn tab: «Брейни советует» (T-25 + top-up for the 2-game catalog) + grid
+- [x] T-32 Learn tab: "Brainy recommends" (T-25 + top-up for the 2-game catalog) + grid
 - [x] T-33 Game: Odd one out (2 levels × 4 rounds, seeded), tested at `/lab` and in the child flow
 - [x] T-34 Game: Continue the pattern (2 levels × 4 seeded rounds); both games share `kit/Shape`
-- [x] T-35 Post-game screen: before → after, stat chip, "Что дальше?", stop, third-game break +5★; now uses [saved learning state](../dev/ui.md#saved-learning-state-t-55)
+- [x] T-35 Post-game screen: before → after, stat chip, "What's next?", stop, third-game break +5★; now uses [saved learning state](../dev/ui.md#saved-learning-state-t-55)
 - [x] T-36 Leisure tab: shop (10 min / forever), cartoons, science videos (fun games/cartoons have no content yet)
 - [x] T-37 Science video player `/video/[id]` (pause only, resume, quiz; animated placeholder, no media)
 - [x] T-38 Gifts tab + Brainy tab (accessory shop, stats, earned rewards)
@@ -81,13 +81,13 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-42 Analytics: skill + character radars, weekly time bars (hand-rolled SVG, seeded)
 - [x] T-43 Analytics: "Do the hard thing" chart, ranking (seeded), share card
 - [x] T-44 Tasks: form, templates, Today list, confirm, limit 5
-- [x] T-45 Tasks: recommendations (seeded) → "Назначить"
-- [x] T-46 Gifts & goal: weekly goal, gift add/remove, child requests → "Вручено"
+- [x] T-45 Tasks: recommendations (seeded) → "Assign"
+- [x] T-46 Gifts & goal: weekly goal, gift add/remove, child requests → "Hand over"
 
 ## P5 · Data, auth, live sync · [data-model.md](../product/data-model.md)
 - [ ] T-50 Drizzle SQLite schema for every entity
   - [x] Connected-demo subset: Parent, BrainyState, Game, GameSession, cookie access/run and family version; constraints + FK tests → [data-model.md](../product/data-model.md)
-- [ ] T-51 Seeds: demo family, scenarios "после квиза / сейчас / только развлечения"
+- [ ] T-51 Seeds: demo family, scenarios "after the quiz / now / entertainment only"
   - [x] One deterministic **now** scenario with quiz baseline, two games, hashed parent PIN and consistent history; reruns preserve progress
 - [ ] T-52 Demo session (`DEMO_MODE`, seeded family) + parent PIN barrier; Better Auth = stretch goal
   - [x] Explicit opt-in, opaque HttpOnly cookie, hashed token, expiry, same-origin mutations; parent barrier implemented in T-40 → [sessions.md](../dev/sessions.md)
@@ -125,11 +125,11 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-90 Game conformance suite (Playwright, Chromium + WebKit): load, ready ≤ 10 s, one finish, zero foreign requests, size budget, no console errors; required before a game is listed
 - [ ] T-91 (Later) External game artifacts (path C): `games:import <id>@<version>` with checksum, `GameVersion` table, enable/disable/rollback
 - [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
-- [x] T-94 Post-game «Подтянуть навык» card should prefer a different game than the one just played (the report shows it repeating Odd one out next to its own next-level card) → [screens.md](../product/screens.md#game-screen-and-no-exit-flow)
+- [x] T-94 Post-game "Improve skill" card should prefer a different game than the one just played (the report shows it repeating Odd one out next to its own next-level card) → [screens.md](../product/screens.md#game-screen-and-no-exit-flow)
 - [x] T-98 iPad landscape layout (1180 × 820): left tab rail, dock as side column, two-column Brainy tab; portrait-tablet rotate hint; e2e/report iPad viewport switched to landscape
 - [x] T-100 Per-game skill weights + ability scores → body (D-23); minimum age per game, locked cards, age-aware recommendations (D-22)
-- [x] T-101 Onboarding quiz before signup (`/onboarding`), own minimal accounts, parent login, demo account, 15-min PIN, «Вернуть ребёнку» (D-24)
-- [x] T-102 ROUTES.md extras: «Требует внимания», event feed, mood decay on read, live-skill radar (D-25)
+- [x] T-101 Onboarding quiz before signup (`/onboarding`), own minimal accounts, parent login, demo account, 15-min PIN, "Back to Child" (D-24)
+- [x] T-102 ROUTES.md extras: "Needs attention", event feed, mood decay on read, live-skill radar (D-25)
 - [x] T-103 ROUTES.md follow-ups: tab badges, task cancel, bonus once per day + daily/weekly resets, parent Settings (child, PIN change, devices), device pairing code, adult-task gate fallback → [routes-spec.md](../product/routes-spec.md)
   - [x] Tab badges from shared state (assigned real tasks / confirmations / undelivered gifts), hidden parent counts while locked; cancel assigned tasks with parent authorization and no rewards.
   - [x] Daily bonus shared across devices; family-local daily/weekly rollover, fresh task quota and read-only task history (D-26).
@@ -141,9 +141,14 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-112 English manifest titles and localized `GameHost`/`IframeGame` loading/errors, Russian catalog/feed translations and locale handshake.
 - [x] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
 - [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).
+- [x] T-120 Interactive films from ElevenLabs podcasts (D-33) → [films.md](../dev/films.md): `core/film.ts` format + checks, `packages/films` art/stage, `/video/[id]` film player, `/lab/film` studio, `make_film.py`, `pnpm check:films`, first film `sky-blue` (English, 8 questions, 83 scenes)
+- [x] T-121 Films `rain` («Rain», 8 questions, 79 scenes) and `sun-goes` («Where the sun goes», 7 questions, 84 scenes); 5 backgrounds + 23 props added; `make_film.py` uses word timestamps; `sky-blue` retitled «Why the sky is blue?»
+- [x] T-122 Film props stand on the ground: background `ground` lines, prop `base`/`floats`, standing props never bob; check forbids standing props on ground-less scenes; marbles, clothesline, flashlight/orange redrawn or grounded; scenes fixed in all three films
+- [x] T-123 Replaceable film mascot: `FilmNarrator` slot in `FilmStage`; the child's own Brainy (stats + bought accessories) leads every film; `/lab/film` mascot selector; e2e proves bought accessories appear on the narrator
+- [ ] T-124 Film follow-ups: second on-stage character for `guest` voices; physical iPad check of the Web Audio mouth (with T-84); owner records the ElevenLabs voice and commercial-use terms in films.md
 - [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run
 - [x] T-96 `mvp` report module: every page + child → parent walkthrough; `scaffold` report retired → [reports/mvp.md](../reports/mvp.md)
-- [ ] T-97 Showcase follow-ups after the pitch: real Task/Gift/Request tables, computed analytics, playable fun games and cartoons, presenter «Сбросить демо» button (endpoint exists)
+- [ ] T-97 Showcase follow-ups after the pitch: real Task/Gift/Request tables, computed analytics, playable fun games and cartoons, presenter "Reset demo" button (endpoint exists)
 - [x] T-95 `learning` report module: phone/iPad recordings of the saved three-game loop, break, tabs and `/lab` → [reports/learning.md](../reports/learning.md)
 - [x] T-93 Restore complete WebKit UI verification with normal clicks: the full suite passes at phone/iPad widths; the earlier coordinate failure no longer reproduces, with its cause unconfirmed. Keep the [diagnostic repro](../dev/setup.md#webkit-pointer-diagnostics-t-93) if it recurs.
 - Additional learning games (Sounds & letters, Repeat after Brainy, Magic garden, Expedition, Error detective)
@@ -154,7 +159,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-108 History-based recommendations, automatic app tasks, live activity analytics and earned rewards with progress/celebrations/feed (D-29).
 - [x] T-109 Playable Snake with saved active-time credit/top-ups/forever and restart-from-zero cartoon placeholder (D-29).
 
-- [ ] T-113 Finish serial WebKit input stabilization and complete browser verification after master integration: Tangram acceptance, Rhythm Copycat, Secret Message Lab, Mirror Grid; Neighborhood and Magnet previews.
+- [x] T-113 Serial input stabilization and full browser verification: Rhythm (tracked timers, touch spec), Secret Message (no preview race, touch spec), Mirror Grid (persistent buttons, stationary hit areas, double-tap guard), Tangram (double-tap guard); full serial suite on all four projects → [batch handoff](../games/batches/2026-11-15-english-input.md)
 - [ ] T-114 Remaining external game waves; see external-games.md.
 
-- [ ] T-115 Translate imported scored-game instructions and controls into English while retaining Russian; host/catalog localization is complete in T-112.
+- [x] T-115 English-only in-game copy for every imported game and preview; Russian removed from host, games, films, tests and docs (D-34)

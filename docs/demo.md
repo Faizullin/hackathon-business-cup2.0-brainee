@@ -62,7 +62,7 @@ Use **https://brainee.vercel.app** on an iPad in landscape as the child and a ph
 - [ ] Keep both devices foregrounded. Finish a game on the iPad, then confirm a real-life task on the phone. Time each update: polling is approximately 3 seconds; allow up to 10 seconds in rehearsal and investigate longer delays. Background tabs refresh on return.
 - [ ] With Learn already loaded, enable airplane mode. Expect the last confirmed wallet plus a friendly connection/retry notice, not invented rewards or an empty page. Reconnect and retry; check balances converge without duplicate payouts. If a game finish was interrupted, retry its retained result.
 - [ ] Try a cold open while offline and document Safari's behavior. This MVP has no offline cache/service worker: a new document, uncached route or game requires a connection. Browser-native offline UI on a cold open is expected; do not promise offline play during the pitch.
-- [ ] Reopen in English and Russian; check long chart labels and touch targets. Use Reduce Motion and confirm counters settle immediately and reward flights stop.
+- [ ] Check long chart labels and touch targets. Use Reduce Motion and confirm counters settle immediately and reward flights stop.
 - [ ] Before presenting, restore connectivity, charge both devices, disable interruptions, create the presentation's fresh jury family and keep the local report videos ready as backup.
 
 Record **device/iPadOS, pass/fail, sync seconds and screenshots** for each failure. T-62 remains open until the owner performs this physical test. Freeze (T-74) follows the games merge and this rehearsal; the agent does not redeploy.

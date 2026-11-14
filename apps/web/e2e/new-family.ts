@@ -9,7 +9,7 @@ export async function newFamily(request: APIRequestContext, baseURL: string, age
     data: {
       ...credentials,
       pin: "1234",
-      childName: "Мира",
+      childName: "Mira",
       birthYear: new Date().getUTCFullYear() - age,
       answers: { hours: 2, content: 2, finish: 2, reaction: 2, reads: 2 },
     },

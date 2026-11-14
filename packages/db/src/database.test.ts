@@ -86,7 +86,7 @@ it("enforces parent references and cascading child/wallet deletion", async () =>
     ["orphan-a", "orphan-b"].map((id) =>
       client.execute({
         sql: "INSERT INTO children (id, family_id, name, birth_year) VALUES (?, ?, ?, ?)",
-        args: [id, "missing-family", "Саша", 2020],
+        args: [id, "missing-family", "Sasha", 2020],
       }),
     ),
   );

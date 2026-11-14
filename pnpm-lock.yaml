@@ -38,6 +38,9 @@ importers:
       '@brainee/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@brainee/films':
+        specifier: workspace:*
+        version: link:../../packages/films
       '@brainee/game-bridge':
         specifier: workspace:*
         version: link:../../packages/game-bridge
@@ -212,6 +215,40 @@ importers:
       '@brainee/config':
         specifier: workspace:*
         version: link:../config
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: 5.1.0
+        version: 5.1.0(@types/node@22.20.5)(vite@8.3.8(@types/node@22.20.5)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
+
+  packages/films:
+    dependencies:
+      '@brainee/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      '@brainee/config':
+        specifier: workspace:*
+        version: link:../config
+      '@brainee/db':
+        specifier: workspace:*
+        version: link:../db
+      '@types/node':
+        specifier: 22.20.5
+        version: 22.20.5
+      '@types/react':
+        specifier: 19.3.0
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: 19.3.0
+        version: 19.3.0(@types/react@19.3.0)
+      react:
+        specifier: 19.3.1
+        version: 19.3.1
+      react-dom:
+        specifier: 19.3.1
+        version: 19.3.1(react@19.3.1)
       typescript:
         specifier: 5.9.3
         version: 5.9.3

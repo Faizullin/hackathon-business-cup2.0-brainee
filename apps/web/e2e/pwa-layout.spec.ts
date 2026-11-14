@@ -18,7 +18,7 @@ test("installable: manifest and generated icons come from our origin", async ({ 
 test("iPad landscape uses a side rail; portrait tablets get a rotate hint", async ({ page }) => {
   await page.setViewportSize({ width: 1180, height: 820 });
   await page.goto("/learn");
-  const rail = page.getByRole("navigation", { name: "Разделы" });
+  const rail = page.getByRole("navigation", { name: "Sections" });
   await expect(rail).toBeVisible();
   const box = await rail.boundingBox();
   expect(box?.x).toBe(0);

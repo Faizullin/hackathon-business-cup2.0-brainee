@@ -24,13 +24,13 @@ for (const game of manifests) {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/lab");
     await page
-      .getByRole("combobox", { name: "Экран", exact: true })
+      .getByRole("combobox", { name: "Screen", exact: true })
       .selectOption((page.viewportSize()?.width ?? 390) >= 768 ? "ipad" : "phone");
-    await page.getByRole("combobox", { name: "Игра", exact: true }).selectOption(game.id);
+    await page.getByRole("combobox", { name: "Game", exact: true }).selectOption(game.id);
     const stream = page.getByTestId("event-stream");
     if (game.runtime === "embedded") {
       await expect(stream).toHaveAttribute("data-status", "connected", { timeout: 10000 });
-      await page.getByRole("combobox", { name: "Уровень", exact: true }).selectOption("3");
+      await page.getByRole("combobox", { name: "Level", exact: true }).selectOption("3");
       await expect(page.getByTestId("embedded-game")).toHaveAttribute("data-ready", "true", {
         timeout: 10000,
       });
@@ -46,9 +46,9 @@ for (const game of manifests) {
       else
         for (const round of generateRounds(1, 42)) {
           await page
-            .getByRole("button", { name: `Ответ ${round.answerIndex + 1}`, exact: true })
+            .getByRole("button", { name: `Option ${round.answerIndex + 1}`, exact: true })
             .click();
-          await page.getByRole("button", { name: /^(Дальше|Готово)$/ }).click();
+          await page.getByRole("button", { name: /^(Next|Done)$/ }).click();
         }
     }
     await expect(stream).toHaveAttribute("data-status", "finished");

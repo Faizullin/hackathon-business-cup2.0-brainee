@@ -100,14 +100,15 @@ canvas#actualcanvas {
   align-items: center;
   justify-content: center;
   padding: 0;
-  min-width: 48px;
-  min-height: 48px;
+  /* Size comes from session.js: >= 48px where the grid allows, never overlapping a neighbour. */
   outline-offset: 2px;
-  transition: transform 0.1s ease;
+  transition: box-shadow 0.1s ease;
+  touch-action: manipulation;
 }
 
+/* Press feedback must not move or shrink the hit area (WebKit drops taps released outside). */
 .dot-btn:active:not(:disabled) {
-  transform: scale(0.92);
+  box-shadow: inset 0 0 0 4px rgba(37, 99, 235, 0.35);
 }
 
 .dot-btn:disabled {
@@ -147,17 +148,13 @@ canvas#actualcanvas {
   min-height: 48px;
   min-width: 150px;
   box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.25);
-  transition:
-    background-color 0.15s ease,
-    transform 0.1s ease;
+  transition: background-color 0.15s ease;
+  touch-action: manipulation;
 }
 
-.check-button:hover:not(:disabled) {
-  background-color: #1d4ed8;
-}
-
+.check-button:hover:not(:disabled),
 .check-button:active:not(:disabled) {
-  transform: scale(0.98);
+  background-color: #1d4ed8;
 }
 
 .check-button:disabled {

@@ -1,9 +1,9 @@
-# Брейни (Brainee)
+# Brainy (Brainee)
 
 A web platform (PWA) for kids aged 4–10. The parent sets it up as the **only thing the child's device can open**. Kids earn ★ stars in learning games and spend them on entertainment, and earn ☀ suns for real-life tasks and spend them on gifts from the parent. The mascot **Brainy** visibly grows as the child's skills improve. Parents get skill analytics, tasks, gifts and a weekly goal.
 
 - **Problem:** endless feeds and short videos train kids for constant stimulation. Parental controls limit screen *time*, not content *quality*.
-- **Market:** CIS, Russian UI. Parents pay, kids use it.
+- **Market:** US-first, English-only UI. Parents pay, kids use it.
 - **Context:** Business Cup 2.0 hackathon project.
 
 > **Status:** two learning games, saved rewards/Brainy, retry recovery and child-state polling work. Parent access/view is next. Run `pnpm install`, enable `DEMO_MODE=1` in `apps/web/.env.local`, then `pnpm db:reset && pnpm dev`. See [setup](docs/dev/setup.md) and [current progress](docs/progress/status.md).
