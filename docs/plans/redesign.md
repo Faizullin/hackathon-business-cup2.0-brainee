@@ -1,12 +1,12 @@
 # Plan: lavender redesign and parent funnel
 
-What to build, in order. **The visual source of truth is [product/design.md](../product/design.md)**: the Claude Design lavender system and the Brain component (D-36). The parent funnel comes from the [funnel analysis](../product/funnel.md). Decisions D-34 (English-only new work), D-35 (funnel at `/start`) and D-36 (design system, Brain mapping, kid-safe states, game palette) are in [decisions.md](../dev/decisions.md). Tasks are T-130–T-142 in [todo.md](../progress/todo.md). GitHub: issue #3 (redesign), #5 (PR #1 films first), #4 (games, separate).
+What to build, in order. **The visual source of truth is [product/design.md](../product/design.md)**: the Claude Design lavender system and the Brain component (D-36). The parent funnel comes from the [funnel analysis](../product/funnel.md). Decisions D-37 (English-only copy, existing translations untouched), D-35 (funnel at `/start`) and D-36 (design system, Brain mapping, kid-safe states, game palette) are in [decisions.md](../dev/decisions.md). Tasks are T-131–T-142 in [todo.md](../progress/todo.md).
 
 ## Ground rules
 
 - **Hard rules:** everything loads from our own domain; game and economy rules stay in `packages/core` (pure, tested); games never grant ★; no feeds, autoplay or kid rankings; Brainy never dies; no medical claims.
-- **English only for new work (D-34).** Add new strings to `apps/web/src/i18n/en.ts` only. Don't add Russian strings or `content.ts` pairs. Russian falls back to English where a key is missing (T-130).
-- **Order:** PR #1 films are integrated first (issue #5) because they touch `VideoPlayer`, `LeisureScreen` and `Brainy.tsx`. Game work stays in its own branch (issue #4). Don't edit `games/**` or `packages/games/src/<id>/**`.
+- **English only (D-37).** New UI text goes into feature-local English copy modules. **Never edit** `apps/web/src/i18n/en.ts`, `ru.ts`, `types.ts`, `context.tsx`, `content.ts` or existing strings; restyled pages keep their current `useI18n()` strings. No Russian in new code, docs, tests or seed data. The design files contain Russian placeholder copy: write English, don't translate.
+- **Scope:** only this redesign. Don't touch unrelated games or game code: `games/**`, `packages/games/src/**`, `packages/game-catalog`, `packages/game-bridge`, `packages/engine-phaser`, `apps/web/public/games/**`, and the game specs. The host chrome around games is in scope (T-141).
 - **Keep the existing product loop working:**
   - quiz-first signup, then setup/pairing (D-24 / D-29);
   - the jury path stays one tap;
@@ -21,14 +21,13 @@ What to build, in order. **The visual source of truth is [product/design.md](../
 
 ## Tasks
 
-### T-130 · English as the source dictionary (D-34)
+### T-130 · Dropped (D-37)
 
-- `apps/web/src/i18n/types.ts`: derive `Dictionary` from `en` instead of `ru`.
-- `ru` becomes a deep-partial override, deep-merged over `en` at runtime, so a missing Russian key shows English.
-- `content.ts` pairs stay for existing seed strings; new seed strings need no pair.
-- **Tests:** a unit test for the fallback; the existing Russian e2e still passes.
+No dictionary refactor. Follow the English-only rule above.
 
 ### T-131 · Lavender tokens, fonts and icons (fast re-skin)
+
+**Design refs:** [design.md § Tokens](../product/design.md#tokens) and [§ Motion](../product/design.md#motion-all-off-under-prefers-reduced-motion); `AppLavender.dc.html` lines 15–33 (motion CSS), 36 (canvas, font), 56 (hero card colours and shadow), 89–95 (ring-instead-of-border cards, bar track `#ECEAF6`), 107–115 (quest rows, reward pills), 266 (tab bar shadow and radius).
 
 Remap the **existing token names** in `packages/ui/src/tokens.css` / `styles.css` so every current Tailwind class re-skins at once:
 
@@ -62,6 +61,8 @@ Remap the **existing token names** in `packages/ui/src/tokens.css` / `styles.css
 
 ### T-132 · Brainy = the design's Brain component (primary)
 
+**Design refs:** `Brain.dc.html` lines 16–151 (SVG layers in paint order: shadow, glow, haze, limbs, shoes, hands, body shade/fill, folds, rot spots, cheeks, eyes, lids, mouth, sparkles, bolts, sweat, wisps, puffs, flies), 161–168 (health clamp, run amount), 170–190 (rAF loop at ~30 fps with reduced-motion guard), 203–211 (palette stops), 220–411 (posture: bob, droop, arms, legs, mouth, blink, sweat, effects); `BrainStates.dc.html` (4 reference states and their captions); `AppLavender.dc.html` lines 57–58 (hero use, 188 px circle, size 200), 230–231 (78 px mini in lists), 284–285 (hub, 68 px circle on `#FFF4F8`). With `effects="kid"`, skip lines 22–29 (haze), 60–63 (rot spots) and 102–149 (stink wisps, puffs, flies); keep the sweat drop (line 100).
+
 Port `docs/ideas/claude-design/Brain.dc.html` into `packages/brainy`, following [design.md § The Brain component](../product/design.md#the-brain-component-braindchtml).
 - **Model:** pure geometry, palette mixing, posture and effect amounts in `model.ts`, unit-tested. The SVG lives in `Brainy.tsx`.
 - **Animation:** a small rAF hook at about 30 fps. It's off under reduced motion, pauses when `document.hidden` or off-screen, and only hero instances animate (`animate` prop).
@@ -72,7 +73,7 @@ Port `docs/ideas/claude-design/Brain.dc.html` into `packages/brainy`, following 
   - earned rewards and `resp` → backpack, cape and the rest.
 - **Accessories:** re-anchor all six to the new head, face and neck coordinates. Keep the shop previews correct.
 - **Kid-safe by default** (`effects="kid"`): no stink, haze, flies or rot. Low energy is sleepy, droopy, sweaty and peach.
-- **API:** keep `stats`, `equipped`, `label`, `className`, `data-brainy`; add optional `mood`, `animate`, `effects` and `talk` (PR #1).
+- **API:** keep `stats`, `equipped`, `label`, `className`, `data-brainy`; add optional `mood`, `animate` and `effects`.
 - **Checks:** `/lab/brainy` gets sliders for mood/energy and stage plus the four reference states (92 / 62 / 38 / 10 → shown kid-safe). Update the tests and screenshots.
 
 ### T-133 · Funnel logic in core
@@ -86,6 +87,8 @@ Add `packages/core/src/funnel.ts`, pure and tested. Port it from `engine.mjs` (s
 
 ### T-134 · Step page and answer rows
 
+**Design refs:** funnel export `website/funnel.mjs` (`panel`, `strip`, `quizView`) and `funnel.css` (`.answer`, `.story-*`); [funnel.md § Elements to take](../product/funnel.md#elements-to-take) items 3–4; the press/enter motion from `AppLavender.dc.html` lines 15–19.
+
 Two shared components, reusable in the funnel, onboarding, setup and settings:
 - `StepPage`: Back, a progress bar, the chapter label, title/body/art and a pinned CTA. Focus moves to the `h1` on each step; reduced motion is respected.
 - `AnswerRow` / `AnswerGroup`: a radio fieldset; the selected row gets the violet wash; Continue stays disabled until a choice is made.
@@ -93,6 +96,8 @@ Two shared components, reusable in the funnel, onboarding, setup and settings:
 Build them on Base UI/shadcn plus the existing Motion layer. iPad landscape uses two columns (art | content).
 
 ### T-135 · Parent funnel at `/start` (D-35)
+
+**Design refs:** [funnel.md](../product/funnel.md) (screens, logic, mapping) with screenshots in `docs/product/funnel/`; replace the funnel's static mascot with the T-132 Brainy.
 
 1. **Screens.** Port the 25 screens to React under the `(auth)` group. Changes from the export:
    - ask age right after the goal;
@@ -111,6 +116,8 @@ Build them on Base UI/shadcn plus the existing Motion layer. iPad landscape uses
 
 ### T-136 · Family plan in the product
 
+**Design refs:** funnel result screen ([phone](../product/funnel/phone-24-result.png), [iPad](../product/funnel/ipad-24-result.png)); `KidTimeUp.dc.html` (stopping card layout: title, reason, what opens when, what still works).
+
 1. **Store the plan.** Save the funnel answers on signup as `showcase.familyPlan` (validated, JSON only; no schema change unless needed). Compute the plan in core at render time.
 2. **Parent view.** A "Family plan" card on Analytics or Settings showing the phrase, 4 steps and "afterward, notice", with Edit (reuse the answer summary) and download/copy as text.
 3. **Child view.** Show the agreed phrase on the post-game "real stopping point" and the break screen.
@@ -118,10 +125,12 @@ Build them on Base UI/shadcn plus the existing Motion layer. iPad landscape uses
 
 ### T-137 · Demo moments
 
-- **Funnel match demo:** run the real Odd One Out round in a demo mode. It creates no `game_sessions` row and no rewards.
-- **Growth slider:** use the real `@brainee/brainy` with stage presets from core.
+- **Funnel match demo:** build it in the funnel's own folder as a small React shape-match step with the game palette (T-141), like the export's `match` screen. Don't edit or import game internals; game code is out of scope. It creates no `game_sessions` row and no rewards.
+- **Growth slider:** use the T-132 Brainy with stage presets from core.
 
 ### T-138 · Restyle product pages from the design
+
+**Design refs:** `AppLavender.dc.html` lines 60–61 and 290–291 (+N bubble), 26–31 (gain pop, loss shake), 245–261 (badge grid); `KidTimeUp.dc.html` ("That's all for today" card for the break / fun-time end); `KidEvening.dc.html` lines 22–76 (earned-minutes breakdown → Leisure time explainer); [design.md § Screen patterns](../product/design.md#screen-patterns-to-adopt).
 
 The designs now exist ([design.md § Screen patterns](../product/design.md#screen-patterns-to-adopt)). Restyle:
 - entry, game player chrome, post-game (+N bubble, gain pop);
@@ -133,6 +142,8 @@ Keep the iPad landscape rail/dock layouts and all existing test IDs.
 
 ### T-140 · Child shell: hero card and live-brain tab bar
 
+**Design refs:** `AppLavender.dc.html` lines 44–53 (greeting + streak chip with flame icon), 55–79 (dark hero card: glow ring, Unbounded score, stage name, 10 segments, legend, chips), 81–99 (zone cards with one 22 px corner), 101–118 (quest rows), 208–243 (Path: dark weekly bars card, stage rows with mini brains and "you are here"), 245–261 (badges), 265–305 (tab bar with raised hub, progress ring `pathLength=100`, score badge, active dot), 345–350 and 404–408 (stage thresholds and segment fill logic).
+
 - **Dark hero brain card** on Learn and the Brainy tab: energy number, stage name, 10-segment progress to the next stage, chips for "+N★ today" and "N to <next stage>".
 - **Tab bar:** Learn · Leisure · **[Brainy hub]** · Path · Gifts. The hub is 84 px with a progress ring and a badge. Active tabs get the violet dot. On iPad landscape the rail keeps the same items.
 - **New Path tab:** weekly learning bars, the stage list with mini brains and "you are here", and earned rewards as a badge grid with progress. They move from the Brainy tab; the shop stays on Brainy.
@@ -140,11 +151,15 @@ Keep the iPad landscape rail/dock layouts and all existing test IDs.
 
 ### T-141 · Game palette tokens
 
+**Design refs:** [design.md § Game palette](../product/design.md#game-palette-fast-path-for-the-current-game-architecture); gain/loss tones in `AppLavender.dc.html` lines 383–386 and 411–412.
+
 - Add the `--game-*` CSS variables and the `GAME_PALETTE` TypeScript export in `packages/ui` ([design.md § Game palette](../product/design.md#game-palette-fast-path-for-the-current-game-architecture)), plus a usage note in [dev/games.md](../dev/games.md).
 - Restyle the host chrome (`GamePlayer`, `GameHost` frame, round progress, feedback toasts) with it.
-- Applying the palette inside `packages/games/src/<id>` and to Phaser games is a change request for the games session (issue #4). Pinned artifacts keep their art.
+- Don't apply it inside game folders; game code is out of scope. Pinned artifacts keep their art.
 
 ### T-142 · Parent patterns
+
+**Design refs:** `AppLavenderParent.dc.html` lines 29–114 (Today: brain card with status scale, needs-attention card with primary + later actions, per-session list, tasks summary), 115–177 (Week: report header, bars, day detail, stats, "Went well / To work on"), 178–210 (Feed: filters, events grouped by day with source), 211–256 (Rules → our Settings styling only), 257–279 (parent tab bar). Skip school content (lessons, grades, homework, TikTok, PDF).
 
 Restyle `AnalyticsScreen` as Today + Week sections using the design's parent cards:
 - status scale, "needs attention" with actions, per-session list;
@@ -160,10 +175,10 @@ Restyle `RewardsScreen` with the earned-breakdown card (★/☀ base + earned �
 
 ## Order
 
-T-130 → T-133 → T-131 → **T-132** → T-134 → T-140 → T-141 → T-135 → T-136 → T-137 → T-138 → T-142 → T-139.
+T-133 → T-131 → **T-132** → T-134 → T-140 → T-141 → T-135 → T-136 → T-137 → T-138 → T-142 → T-139.
 
 ## Open (owner)
 
 - Dark mode: keep it or go light-only? The default is to keep a derived dark set.
 - Billing provider and US prices: deferred (needs a decision entry).
-- Should Explore previews remain in the redesigned child UI? (issue #4)
+- Should Explore previews remain in the redesigned child UI? Until decided, restyle the existing Explore tab without changing its behavior.

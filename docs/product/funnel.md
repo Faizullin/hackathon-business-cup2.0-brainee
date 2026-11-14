@@ -1,6 +1,6 @@
 # Brainy Funnel Export: analysis
 
-The source for the redesign: a 25-screen, US-English onboarding quiz for parents plus the lavender visual system ("AppLavender"). The implementation plan lives in [plans/redesign.md](../plans/redesign.md). **For visuals, [design.md](design.md) (the full Claude Design app) takes precedence**; the funnel's static mascot is replaced by the Brain component. The decisions are D-33 (reserved for the PR #1 films), D-34 and D-35 in [decisions.md](../dev/decisions.md).
+The source for the redesign: a 25-screen, US-English onboarding quiz for parents plus the lavender visual system ("AppLavender"). The implementation plan lives in [plans/redesign.md](../plans/redesign.md). **For visuals, [design.md](design.md) (the full Claude Design app) takes precedence**; the funnel's static mascot is replaced by the Brain component. The decisions are D-35, D-36 and D-37 in [decisions.md](../dev/decisions.md).
 
 - **Source:** [ideas/Brainy-Funnel-Export.zip](../ideas/Brainy-Funnel-Export.zip). Unzip it **outside the repo** (temp dir) and serve `website/` with `python3 -m http.server`. No build is needed.
   - `website/engine.mjs`: questions, routing, profile and plan logic.
@@ -105,5 +105,5 @@ The age band gives a birth-year range for game `minAge`; signup asks for the exa
 - **Billing:** keep "pricing pending". Real checkout needs a decision entry and never appears in the child app.
 - **Fonts:** convert Unbounded from the 778 KB TTF to woff2 (we already ship Unbounded woff2); vendor Manrope woff2 like Onest.
 - **Style:** the cover and result use a dark card with a pink CTA while everything else is violet, and headings switch between Unbounded and Manrope. Pick one rule.
-- **Dark mode and languages:** the export is light-only and English-only. See D-34 for translations; dark mode is TBD.
+- **Dark mode and languages:** the export is light-only and English-only. Our copy rule is D-37 (English only, existing translations untouched); dark mode is TBD.
 - **Designs:** the full AppLavender child and parent screens are now available; see [design.md](design.md).

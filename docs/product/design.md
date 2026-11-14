@@ -5,6 +5,7 @@
 - **Origin:** Claude Design artifact `KJGLCmeh3ZVPLGeiJfzHey` (page `dcb81aee8d83`). It is a sister concept ("Izvilina", a school brain tracker) with the same mascot and lavender system.
 - **Frozen copies** of the files we use are in [ideas/claude-design/](../ideas/claude-design/). They are `.dc.html` design-canvas files: static markup with `{{bindings}}` plus a `DCLogic` class. They need the canvas runtime (not included), so read them as source; they don't run in a browser.
   - Their Google Fonts `<link>` is reference only. We vendor fonts (hard rule).
+  - **Their visible text is Russian placeholder copy for a school product.** Write English copy for our product; don't translate it or copy it (D-37).
 
 | File | What to take |
 |---|---|
@@ -80,7 +81,7 @@
 
 ### How it maps onto Brainy (decided in D-36)
 
-Keep the public API (`<Brainy stats equipped label className />`) so existing pages keep working. Add the optional `mood`, `animate`, `effects` and `talk` (PR #1) props.
+Keep the public API (`<Brainy stats equipped label className />`) so existing pages keep working. Add the optional `mood`, `animate` and `effects` props.
 
 | Brain input | Brainy source |
 |---|---|
@@ -113,7 +114,7 @@ Keep the public API (`<Brainy stats equipped label className />`) so existing pa
 | **+N bubble + gain pop / loss shake** | Post-game ★, task approval, accessory purchase |
 | **"That's all for today" card** (when it opens again, what still works) | Break / stopping point after 3 games, fun-time ended |
 | **Earned breakdown** (base + earned − lost, savings) | Parent ★/☀ summary; Leisure time explanation |
-| **Parent Today**: brain card with status scale, **"needs attention"** card with two actions, per-session list | Parent Analytics top ("Требует внимания" already exists) |
+| **Parent Today**: brain card with status scale, **"needs attention"** card with two actions, per-session list | Parent Analytics top (the existing "needs attention" block) |
 | **Parent Week report**: bars + "Went well / To work on" | Parent weekly section (no PDF for now) |
 | **Parent Feed** (events grouped by day, with source) | Existing event feed |
 
@@ -143,4 +144,43 @@ The redesign defines `--game-*` CSS variables and a `GAME_PALETTE` TypeScript ex
 | `highlight` | `#FF9EC2` | celebration, Brainy |
 | `shapes` | `#5A3FE0`, `#FF6F9F`, `#FFAE1A`, `#2847C7`, `#F0A27E`, `#1C1B33` | shape and category colours; always paired with distinct shapes for colour-blind safety |
 
-Applying the palette inside `packages/games/src/<id>` belongs to the games session (issue #4); the redesign only provides it.
+The redesign only provides the palette; game folders are out of scope for it.
+
+## Line map (frozen files)
+
+| File | Lines | What |
+|---|---|---|
+| `Brain.dc.html` | 16–151 | SVG layers in paint order |
+| | 154 | props: `health` 0–100, `size` 80–480, `animate` |
+| | 161–190 | health clamp, run amount, rAF loop (~30 fps, reduced-motion guard) |
+| | 192–211 | colour mix and palette stops |
+| | 220–411 | per-frame values: bob, droop, arms, legs, mouth, blink, sweat, stink, haze, puffs, flies, lightning |
+| `BrainStates.dc.html` | 15–45 | four reference cards (92 / 62 / 38 / 10) |
+| `AppLavender.dc.html` | 15–33 | motion CSS (press, enter, spin, glow, bubble, gain/loss) |
+| | 44–53 | greeting + streak chip |
+| | 55–79 | dark hero brain card |
+| | 81–99 | zone cards |
+| | 101–118 | quest rows |
+| | 208–243 | Path screen |
+| | 245–261 | badges grid |
+| | 265–305 | tab bar with live brain hub |
+| | 345–350, 383–386, 404–425 | stage thresholds, gain/loss tones, segments and zone colour logic |
+| `AppLavenderParent.dc.html` | 29–114 / 115–177 / 178–210 / 211–256 / 257–279 | Today / Week / Feed / Rules / tab bar |
+| `KidTimeUp.dc.html` | 19–45 | stopping card |
+| `KidEvening.dc.html` | 22–76 | earned breakdown + savings jar |
+| `WidgetsKid.dc.html` | 26 / 91 / 157 | small / medium / large widgets (later) |
+
+## Implementation notes
+
+- **Porting `.dc.html`:**
+  - `{{x}}` bindings become props or computed values;
+  - `<sc-if>` / `<sc-for>` become JSX conditionals and maps;
+  - inline styles become Tailwind classes on the T-131 tokens;
+  - `dc-import name="Brain"` becomes `<Brainy>`;
+  - `DCLogic.renderVals()` math moves into pure functions (Brainy model in `packages/brainy`, game and economy rules in `packages/core`).
+- **SVG:** keep the 280 × 268 viewBox and the paint order. Render the six lobes twice (shade layer offset +7 px, then fill) and draw the folds on top.
+- **Animation:** one shared rAF ticker for all animated Brainy instances (not one per instance). Throttle to ~30 fps, stop when `document.hidden`, when off-screen (IntersectionObserver) or under reduced motion. Static instances compute one frame with `t = 0`.
+- **Colour roles:** primary actions violet; progress bars violet / `#8C76FF`; positive feedback blue on blue wash; negative feedback peach on peach wash; the top stage and Brainy highlights pink. Avoid green and red.
+- **Typography:** Manrope 800 titles (26–28 px, −0.02em), 18/800 section headers with a muted count on the right, 15/700 row titles, 12–13/600 meta. Unbounded only for numbers (score, stars, badge marks).
+- **Layout:** phone content padding 20 px; card gaps 8–16 px. Cards are white with a 1 px `#E6E4F2` ring (box-shadow), not borders. The dark hero card uses `#1C1B33` with `#CFCDE6` / `#A3A1C6` text. iPad landscape: hero card in the left column, lists on the right, with the rail replacing the bottom bar.
+- **Accessibility:** tab bar buttons use `aria-current="page"`; the hub's `aria-label` describes Brainy's state; meters and rings are `aria-hidden` with the value given as text; touch targets are ≥ 56 px on child surfaces.

@@ -6,6 +6,15 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-37 · English-only copy without touching existing translations · 2026-11-15 · accepted · supersedes D-34
+**Context:** D-34 planned a dictionary refactor (English source type, Russian partial), which would edit existing translation files. The owner wants English only for new work and the existing Russian left alone.
+**Decision:**
+- New features and new UI text are **English only**, kept in feature-local copy modules (e.g. `apps/web/src/components/<feature>/copy.ts` or `apps/web/src/i18n/features/<feature>.ts`, plain English constants).
+- **Don't edit** `apps/web/src/i18n/en.ts`, `ru.ts`, `types.ts`, `context.tsx`, `content.ts` or existing strings. Restyled existing pages keep using their current `useI18n()` strings.
+- No Russian in new code, docs, prompts, tests or seed data. Text in the design source files is Russian placeholder copy: write English copy instead of translating it.
+
+**Consequences:** T-130 (the dictionary refactor) is dropped. The RU switch shows English on new screens, which is accepted. New e2e specs are English.
+
 ## D-36 · Claude Design lavender system and the Brain component · 2026-11-15 · accepted · extends D-35, supersedes D-13 visual identity
 **Context:** the owner's Claude Design artifact (frozen copies in `docs/ideas/claude-design/`) shows the full lavender child and parent apps and a live Brain mascot. It shares tokens with the funnel export.
 **Decision:**
@@ -24,7 +33,7 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 **Decision:** port the funnel into the Next app as the parent entry at `/start` (`/onboarding` redirects there), with logic in `packages/core/src/funnel.ts`. Five funnel answers map onto the existing `QuizAnswers`, so `quizStart` and quiz-first signup stay unchanged. Funnel answers are stored as `showcase.familyPlan`, and the plan is computed in core. Lavender tokens keep the current token names; Manrope is vendored; Brainy keeps the parametric renderer in the new pink/violet look. The offer shows "pricing pending": no checkout, no payment provider and no third-party analytics.
 **Consequences:** plan in [plans/redesign.md](../plans/redesign.md) (T-130–T-139). Product pages wait for the AppLavender child/parent designs. Billing, real prices and funnel analytics need new entries.
 
-## D-34 · New work is English only · 2026-11-15 · accepted · amends D-30
+## D-34 · New work is English only · 2026-11-15 · superseded by D-37 · amends D-30
 **Context:** the product is US-first; keeping Russian strings and content pairs in step slows every change.
 **Decision:** new UI strings go into `en.ts` only. No Russian translations or `content.ts` pairs are required for new work. `en` becomes the source dictionary type and `ru` a partial override that falls back to English (T-130). Existing Russian stays as it is.
 **Consequences:** the RU switch can show English for new features. Russian e2e specs cover only existing surfaces; new specs are English. D-33 is reserved for the PR #1 films integration.

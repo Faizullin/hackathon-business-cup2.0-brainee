@@ -159,18 +159,18 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 
 - [ ] T-115 Translate imported scored-game instructions and controls into English while retaining Russian; host/catalog localization is complete in T-112.
 
-## Redesign (D-34, D-35, D-36) → [plans/redesign.md](../plans/redesign.md)
+## Redesign (D-35, D-36, D-37) → [plans/redesign.md](../plans/redesign.md)
 
-- [ ] T-130 English as the source dictionary; `ru` partial with English fallback (D-34)
+- [x] T-130 Dropped: no dictionary refactor; new copy English-only in feature modules, existing translations untouched (D-37)
 - [ ] T-131 Lavender tokens remapped onto existing names, Manrope titles + Unbounded numerals, Lucide 2 px, motion classes, derived dark set; update ui.md (D-36)
 - [ ] T-132 **Brainy = port of the design's Brain component** (energy=mood, stage size, stat-driven parts, kid-safe effects, re-anchored accessories, rAF only on heroes) (D-36)
 - [ ] T-133 `packages/core/src/funnel.ts`: funnel logic + `funnelQuizAnswers` mapping, tested
 - [ ] T-134 `StepPage` + `AnswerGroup` components (two-column iPad landscape)
 - [ ] T-135 Parent funnel at `/start` → signup → setup; `/onboarding` redirects; pricing pending, no checkout
 - [ ] T-136 Family plan: `showcase.familyPlan`, parent card, phrase on the child's stopping point, off-screen task template
-- [ ] T-137 Demo moments: Odd One Out demo mode (no session/rewards), real-stage growth slider
+- [ ] T-137 Demo moments: funnel-local shape-match step (no game code, no session/rewards), real-stage growth slider
 - [ ] T-138 Restyle product pages from [design.md](../product/design.md) patterns
 - [ ] T-140 Child shell: dark hero brain card + tab bar Learn · Leisure · [Brainy hub] · Path · Gifts; new Path tab
-- [ ] T-141 Game palette tokens `--game-*` / `GAME_PALETTE` + host chrome; in-game adoption via games issue #4
+- [ ] T-141 Game palette tokens `--game-*` / `GAME_PALETTE` + host chrome (game folders out of scope)
 - [ ] T-142 Parent patterns: Today/Week cards, needs-attention actions, earned breakdown
 - [ ] T-139 Docs, full serial e2e, re-record reports after T-135–T-138

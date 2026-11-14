@@ -14,6 +14,9 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-15 (English-only rule, design refs)
+- D-37 supersedes D-34: English-only copy in feature modules, existing translation files untouched, no Russian in new work; T-130 dropped. Added a design line map and implementation notes to [product/design.md](../product/design.md) and per-task design references in [plans/redesign.md](../plans/redesign.md); plan scope excludes unrelated games.
+
 ## 2026-11-15 (Claude Design reference)
 - Analysed the owner's Claude Design artifact (lavender child/parent apps, live Brain component); froze key files in `docs/ideas/claude-design/`; wrote [product/design.md](../product/design.md) and D-36 (tokens remap, Manrope/Unbounded rule, Brain → Brainy mapping with kid-safe states, Learn · Leisure · Brainy hub · Path · Gifts, game palette). Plan gains T-140–T-142.
 
