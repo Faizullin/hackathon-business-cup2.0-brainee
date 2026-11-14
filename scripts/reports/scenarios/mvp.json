@@ -12,7 +12,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Во что играем сейчас?",
+                  "name": "What are we playing now?",
                   "exact": true
                 },
                 "timeout": 20000
@@ -20,8 +20,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -40,7 +40,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Брейни советует",
+                  "name": "Brainy recommends",
                   "exact": true
                 },
                 "timeout": 20000
@@ -48,8 +48,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -68,7 +68,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Игры за звёзды",
+                  "name": "Games for stars",
                   "exact": true
                 },
                 "timeout": 20000
@@ -76,8 +76,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -96,7 +96,7 @@
                 "target": {
                   "by": "role",
                   "role": "button",
-                  "name": "Смотреть",
+                  "name": "Watch",
                   "exact": true
                 },
                 "timeout": 20000
@@ -104,8 +104,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -124,7 +124,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Задания от мамы",
+                  "name": "Tasks from Mom",
                   "exact": true
                 },
                 "timeout": 20000
@@ -132,8 +132,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -152,7 +152,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Аксессуары",
+                  "name": "Accessories",
                   "exact": true
                 },
                 "timeout": 20000
@@ -160,8 +160,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -180,7 +180,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Вход для родителей",
+                  "name": "Parent login",
                   "exact": true
                 },
                 "timeout": 20000
@@ -188,8 +188,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -208,7 +208,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Вход для родителей",
+                  "name": "Parent login",
                   "exact": true
                 },
                 "timeout": 20000
@@ -218,7 +218,7 @@
               "click": {
                 "by": "role",
                 "role": "button",
-                "name": "Цифра 1",
+                "name": "Digit 1",
                 "exact": true
               }
             },
@@ -226,7 +226,7 @@
               "click": {
                 "by": "role",
                 "role": "button",
-                "name": "Цифра 2",
+                "name": "Digit 2",
                 "exact": true
               }
             },
@@ -234,7 +234,7 @@
               "click": {
                 "by": "role",
                 "role": "button",
-                "name": "Цифра 3",
+                "name": "Digit 3",
                 "exact": true
               }
             },
@@ -242,7 +242,7 @@
               "click": {
                 "by": "role",
                 "role": "button",
-                "name": "Цифра 4",
+                "name": "Digit 4",
                 "exact": true
               }
             },
@@ -251,7 +251,7 @@
                 "target": {
                   "by": "role",
                   "role": "img",
-                  "name": "Умения",
+                  "name": "Skills",
                   "exact": true
                 },
                 "timeout": 20000
@@ -262,8 +262,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -282,7 +282,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Сегодня",
+                  "name": "Today",
                   "exact": true
                 },
                 "timeout": 20000
@@ -290,8 +290,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -310,7 +310,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Магазин подарков",
+                  "name": "Gift shop",
                   "exact": true
                 },
                 "timeout": 20000
@@ -318,8 +318,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -338,7 +338,7 @@
           "call": "resetDemo"
         },
         {
-          "goto": "/"
+          "goto": "/entry"
         },
         {
           "expect": {
@@ -346,7 +346,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Во что играем сейчас?",
+              "name": "What are we playing now?",
               "exact": true
             },
             "timeout": 20000,
@@ -363,7 +363,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Нет, хочу посмотреть другие игры",
+            "name": "No, I want to see other games",
             "exact": true
           }
         },
@@ -373,7 +373,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Брейни советует",
+              "name": "Brainy recommends",
               "exact": true
             },
             "message": "Learn shows Brainy's advice and the grid"
@@ -389,7 +389,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Отдых",
+            "name": "Leisure",
             "exact": true
           }
         },
@@ -399,7 +399,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Игры за звёзды",
+              "name": "Games for stars",
               "exact": true
             },
             "message": "Leisure shows the ★ shop"
@@ -428,7 +428,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Как живут пчёлы"
+            "name": "How Bees Live"
           }
         },
         {
@@ -437,7 +437,7 @@
             "target": {
               "by": "role",
               "role": "button",
-              "name": "Смотреть",
+              "name": "Watch",
               "exact": true
             },
             "message": "The player has only play/pause"
@@ -447,7 +447,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Смотреть",
+            "name": "Watch",
             "exact": true
           }
         },
@@ -465,7 +465,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Воск",
+            "name": "Wax",
             "exact": true
           }
         },
@@ -476,7 +476,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Мёд",
+            "name": "Honey",
             "exact": true
           }
         },
@@ -484,7 +484,7 @@
           "expect": {
             "target": {
               "by": "text",
-              "value": "Верно! +15★ и Глаза +2"
+              "value": "Correct! +15★ and Eyes +2"
             },
             "message": "Correct answer pays +15★ once"
           }
@@ -496,7 +496,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Вернуться в «Отдых»",
+            "name": "Back to Leisure",
             "exact": true
           }
         },
@@ -507,7 +507,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Подарки",
+            "name": "Gifts",
             "exact": true
           }
         },
@@ -517,7 +517,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Задания от мамы",
+              "name": "Tasks from Mom",
               "exact": true
             },
             "message": "Gifts shows the weekly goal and tasks"
@@ -535,7 +535,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "1 ☀ на 10 ★",
+            "name": "1 ☀ for 10 ★",
             "exact": true
           }
         },
@@ -549,7 +549,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Брейни",
+            "name": "Brainy",
             "exact": true
           }
         },
@@ -559,7 +559,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Аксессуары",
+              "name": "Accessories",
               "exact": true
             },
             "message": "Brainy tab shows stats and the shop"
@@ -582,7 +582,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Вход для родителей",
+              "name": "Parent login",
               "exact": true
             },
             "message": "Parent mode is behind a PIN"
@@ -592,7 +592,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Цифра 1",
+            "name": "Digit 1",
             "exact": true
           }
         },
@@ -600,7 +600,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Цифра 2",
+            "name": "Digit 2",
             "exact": true
           }
         },
@@ -608,7 +608,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Цифра 3",
+            "name": "Digit 3",
             "exact": true
           }
         },
@@ -616,7 +616,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Цифра 4",
+            "name": "Digit 4",
             "exact": true
           }
         },
@@ -625,7 +625,7 @@
             "target": {
               "by": "role",
               "role": "img",
-              "name": "Умения",
+              "name": "Skills",
               "exact": true
             },
             "message": "Analytics: radars, bars, ranking"
@@ -641,7 +641,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Город",
+            "name": "City",
             "exact": true
           }
         },
@@ -651,7 +651,7 @@
         {
           "call": "openParentTab",
           "args": {
-            "name": "Задания"
+            "name": "Tasks"
           }
         },
         {
@@ -660,7 +660,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Сегодня",
+              "name": "Today",
               "exact": true
             },
             "message": "Tasks: Today list with confirmations"
@@ -675,7 +675,7 @@
         {
           "call": "openParentTab",
           "args": {
-            "name": "Подарки и цель"
+            "name": "Gifts & goal"
           }
         },
         {
@@ -684,7 +684,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Магазин подарков",
+              "name": "Gift shop",
               "exact": true
             },
             "message": "Gifts & goal: requests and shop"
@@ -705,7 +705,7 @@
           "call": "resetDemo"
         },
         {
-          "goto": "/"
+          "goto": "/entry"
         },
         {
           "expect": {
@@ -713,7 +713,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Во что играем сейчас?",
+              "name": "What are we playing now?",
               "exact": true
             },
             "timeout": 20000,
@@ -730,7 +730,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Нет, хочу посмотреть другие игры",
+            "name": "No, I want to see other games",
             "exact": true
           }
         },
@@ -740,7 +740,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Брейни советует",
+              "name": "Brainy recommends",
               "exact": true
             },
             "message": "Learn shows Brainy's advice and the grid"
@@ -756,7 +756,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Отдых",
+            "name": "Leisure",
             "exact": true
           }
         },
@@ -766,7 +766,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Игры за звёзды",
+              "name": "Games for stars",
               "exact": true
             },
             "message": "Leisure shows the ★ shop"
@@ -795,7 +795,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Как живут пчёлы"
+            "name": "How Bees Live"
           }
         },
         {
@@ -804,7 +804,7 @@
             "target": {
               "by": "role",
               "role": "button",
-              "name": "Смотреть",
+              "name": "Watch",
               "exact": true
             },
             "message": "The player has only play/pause"
@@ -814,7 +814,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Смотреть",
+            "name": "Watch",
             "exact": true
           }
         },
@@ -832,7 +832,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Воск",
+            "name": "Wax",
             "exact": true
           }
         },
@@ -843,7 +843,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Мёд",
+            "name": "Honey",
             "exact": true
           }
         },
@@ -851,7 +851,7 @@
           "expect": {
             "target": {
               "by": "text",
-              "value": "Верно! +15★ и Глаза +2"
+              "value": "Correct! +15★ and Eyes +2"
             },
             "message": "Correct answer pays +15★ once"
           }
@@ -863,7 +863,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Вернуться в «Отдых»",
+            "name": "Back to Leisure",
             "exact": true
           }
         },
@@ -874,7 +874,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Подарки",
+            "name": "Gifts",
             "exact": true
           }
         },
@@ -884,7 +884,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Задания от мамы",
+              "name": "Tasks from Mom",
               "exact": true
             },
             "message": "Gifts shows the weekly goal and tasks"
@@ -902,7 +902,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "1 ☀ на 10 ★",
+            "name": "1 ☀ for 10 ★",
             "exact": true
           }
         },
@@ -916,7 +916,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Брейни",
+            "name": "Brainy",
             "exact": true
           }
         },
@@ -926,7 +926,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Аксессуары",
+              "name": "Accessories",
               "exact": true
             },
             "message": "Brainy tab shows stats and the shop"
@@ -949,7 +949,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Вход для родителей",
+              "name": "Parent login",
               "exact": true
             },
             "message": "Parent mode is behind a PIN"
@@ -959,7 +959,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Цифра 1",
+            "name": "Digit 1",
             "exact": true
           }
         },
@@ -967,7 +967,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Цифра 2",
+            "name": "Digit 2",
             "exact": true
           }
         },
@@ -975,7 +975,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Цифра 3",
+            "name": "Digit 3",
             "exact": true
           }
         },
@@ -983,7 +983,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Цифра 4",
+            "name": "Digit 4",
             "exact": true
           }
         },
@@ -992,7 +992,7 @@
             "target": {
               "by": "role",
               "role": "img",
-              "name": "Умения",
+              "name": "Skills",
               "exact": true
             },
             "message": "Analytics: radars, bars, ranking"
@@ -1008,7 +1008,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Город",
+            "name": "City",
             "exact": true
           }
         },
@@ -1018,7 +1018,7 @@
         {
           "call": "openParentTab",
           "args": {
-            "name": "Задания"
+            "name": "Tasks"
           }
         },
         {
@@ -1027,7 +1027,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Сегодня",
+              "name": "Today",
               "exact": true
             },
             "message": "Tasks: Today list with confirmations"
@@ -1042,7 +1042,7 @@
         {
           "call": "openParentTab",
           "args": {
-            "name": "Подарки и цель"
+            "name": "Gifts & goal"
           }
         },
         {
@@ -1051,7 +1051,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Магазин подарков",
+              "name": "Gift shop",
               "exact": true
             },
             "message": "Gifts & goal: requests and shop"

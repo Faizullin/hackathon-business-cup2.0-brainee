@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import type { ReactNode } from "react";
-import { ru } from "@/i18n/ru";
+import { en } from "@/i18n/en";
 import { isLabEnabled } from "./enabled";
+import { LabHeading } from "./LabHeading";
 import { LabNav } from "./LabNav";
 
-export const metadata: Metadata = { title: ru.lab.title, robots: { index: false } };
+export const metadata: Metadata = { title: en.lab.title, robots: { index: false } };
 
 export default async function LabLayout({ children }: { children: ReactNode }) {
   await connection(); // read the env at request time, not at build time
@@ -16,8 +17,7 @@ export default async function LabLayout({ children }: { children: ReactNode }) {
       id="main-content"
       className="mx-auto min-h-dvh w-full max-w-[1180px] px-[max(16px,env(safe-area-inset-left))] py-5"
     >
-      <h1>{ru.lab.title}</h1>
-      <p className="mt-1 text-muted-foreground">{ru.lab.description}</p>
+      <LabHeading />
       <LabNav />
       {children}
     </main>

@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
-import { ru } from "@/i18n/ru";
+import { en } from "@/i18n/en";
 
 // T-60: installable app (Add to Home Screen). Every asset is served from our own origin.
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: ru.app.name,
-    short_name: ru.app.name,
-    description: ru.app.description,
-    lang: "ru",
+    name: en.app.name,
+    short_name: en.app.name,
+    description: en.app.description,
+    lang: "en",
     start_url: "/",
     scope: "/",
     display: "standalone",

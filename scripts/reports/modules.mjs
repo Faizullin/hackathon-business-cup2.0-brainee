@@ -2,8 +2,8 @@
 export const settings = {
   defaultModule: "mvp",
   baseUrl: "http://127.0.0.1:3123",
-  locale: "ru",
-  localeId: "ru-RU",
+  locale: "en",
+  localeId: "en-US",
   auth: null,
 };
 
@@ -13,7 +13,7 @@ export const modules = {
     scenario: "scripts/reports/scenarios/learning.json",
     routePrefix: "/",
     viewports: ["ipad", "phone"],
-    localeLabel: "Russian",
+    localeLabel: "English",
     fixtures: {},
     staticAssets: {},
   },
@@ -22,7 +22,7 @@ export const modules = {
     scenario: "scripts/reports/scenarios/mvp.json",
     routePrefix: "/",
     viewports: ["ipad", "phone"],
-    localeLabel: "Russian",
+    localeLabel: "English",
     fixtures: {},
     staticAssets: {},
   },

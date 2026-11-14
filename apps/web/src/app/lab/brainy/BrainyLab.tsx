@@ -1,6 +1,6 @@
 "use client";
 
-import { BRAINY_PRESETS, Brainy, type BrainyPreset } from "@brainee/brainy";
+import { BRAINY_PRESETS, type BrainyPreset } from "@brainee/brainy";
 import {
   ACCESSORIES,
   type AccessoryId,
@@ -15,13 +15,15 @@ import {
 } from "@brainee/core";
 import { Button } from "@brainee/ui/components/button";
 import { useId, useState } from "react";
-import { ru } from "@/i18n/ru";
+import { Brainy } from "@/components/Brainy";
+import { useI18n } from "@/i18n";
 
 const STAT_KEYS = ["brain", "eyes", "mouth", "arms", "legs", "resp"] as const;
 const fieldClass =
   "min-h-12 rounded-xl border border-border bg-card px-3 text-foreground focus-visible:outline-3 focus-visible:outline-ring";
 
 export function BrainyLab() {
+  const { t: ru } = useI18n();
   const baseId = useId();
   const [stats, setStats] = useState<BrainyStats>({ ...BRAINY_PRESETS.now });
   const [equipped, setEquipped] = useState<Equipped>({ face: "glasses" });

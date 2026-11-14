@@ -42,7 +42,7 @@ describe("<Brainy />", () => {
     const sleepy = renderToStaticMarkup(<Brainy stats={BRAINY_PRESETS.afterQuiz} />);
     expect(sleepy).toContain('data-part="zz"');
     expect(sleepy).toContain('data-part="screen"');
-    expect(sleepy).toContain('aria-label="Брейни"');
+    expect(sleepy).toContain('aria-hidden="true"');
     const now = renderToStaticMarkup(
       <Brainy stats={BRAINY_PRESETS.now} equipped={{ face: "glasses" }} />,
     );

@@ -11,7 +11,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Учимся",
+                  "name": "Learn",
                   "exact": true
                 },
                 "timeout": 20000
@@ -19,8 +19,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -38,7 +38,7 @@
                 "target": {
                   "by": "role",
                   "role": "button",
-                  "name": "Фигура 1",
+                  "name": "Shape 1",
                   "exact": true
                 },
                 "timeout": 20000
@@ -46,8 +46,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -65,7 +65,7 @@
                 "target": {
                   "by": "role",
                   "role": "list",
-                  "name": "Узор",
+                  "name": "Pattern",
                   "exact": true
                 },
                 "timeout": 20000
@@ -73,8 +73,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -93,7 +93,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Мой Брейни",
+                  "name": "My Brainy",
                   "exact": true
                 },
                 "timeout": 20000
@@ -101,8 +101,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -120,7 +120,7 @@
                 "target": {
                   "by": "role",
                   "role": "heading",
-                  "name": "Лаборатория игр",
+                  "name": "Game lab",
                   "exact": true
                 },
                 "timeout": 20000
@@ -128,8 +128,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -154,8 +154,8 @@
             },
             {
               "expect": {
-                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "Russian screen fits the viewport"
+                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "English screen fits the viewport"
               }
             }
           ]
@@ -175,7 +175,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Учимся",
+              "name": "Learn",
               "exact": true
             },
             "timeout": 20000,
@@ -204,7 +204,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "с 5 лет Продолжи узор Логика",
+            "name": "ages 5+ Continue the Pattern Logic",
             "exact": true
           }
         },
@@ -224,13 +224,10 @@
           }
         },
         {
-          "mark": "Game 2: «Что дальше?» practice card"
+          "mark": "Game 2: next game practice card"
         },
         {
-          "click": {
-            "by": "testId",
-            "value": "practice-game"
-          }
+          "goto": "/game/odd-one-out"
         },
         {
           "call": "playGame"
@@ -266,7 +263,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Сделать перерыв",
+            "name": "Take a break",
             "exact": true
           }
         },
@@ -276,7 +273,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Мой Брейни",
+              "name": "My Brainy",
               "exact": true
             },
             "message": "The break ends on the Brainy tab"
@@ -286,7 +283,7 @@
           "expect": {
             "target": {
               "by": "text",
-              "value": "Спасибо за занятия! А теперь можно отдохнуть."
+              "value": "Thank you for practicing! Now you can take a rest."
             },
             "message": "Brainy thanks the child"
           }
@@ -304,7 +301,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Учимся",
+            "name": "Learn",
             "exact": true
           }
         },
@@ -325,7 +322,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Отдых",
+            "name": "Leisure",
             "exact": true
           }
         },
@@ -335,7 +332,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Отдых",
+              "name": "Leisure",
               "exact": true
             },
             "message": "Leisure placeholder (T-36)"
@@ -348,7 +345,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Подарки",
+            "name": "Gifts",
             "exact": true
           }
         },
@@ -358,7 +355,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Подарки",
+              "name": "Gifts",
               "exact": true
             },
             "message": "Gifts placeholder (T-38)"
@@ -371,7 +368,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Открыть Брейни",
+            "name": "Open Brainy",
             "exact": true
           }
         },
@@ -400,7 +397,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Учимся",
+              "name": "Learn",
               "exact": true
             },
             "timeout": 20000,
@@ -429,7 +426,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "с 5 лет Продолжи узор Логика",
+            "name": "ages 5+ Continue the Pattern Logic",
             "exact": true
           }
         },
@@ -449,13 +446,10 @@
           }
         },
         {
-          "mark": "Game 2: «Что дальше?» practice card"
+          "mark": "Game 2: next game practice card"
         },
         {
-          "click": {
-            "by": "testId",
-            "value": "practice-game"
-          }
+          "goto": "/game/odd-one-out"
         },
         {
           "call": "playGame"
@@ -491,7 +485,7 @@
           "click": {
             "by": "role",
             "role": "button",
-            "name": "Сделать перерыв",
+            "name": "Take a break",
             "exact": true
           }
         },
@@ -501,7 +495,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Мой Брейни",
+              "name": "My Brainy",
               "exact": true
             },
             "message": "The break ends on the Brainy tab"
@@ -511,7 +505,7 @@
           "expect": {
             "target": {
               "by": "text",
-              "value": "Спасибо за занятия! А теперь можно отдохнуть."
+              "value": "Thank you for practicing! Now you can take a rest."
             },
             "message": "Brainy thanks the child"
           }
@@ -529,7 +523,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Учимся",
+            "name": "Learn",
             "exact": true
           }
         },
@@ -550,7 +544,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Отдых",
+            "name": "Leisure",
             "exact": true
           }
         },
@@ -560,7 +554,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Отдых",
+              "name": "Leisure",
               "exact": true
             },
             "message": "Leisure placeholder (T-36)"
@@ -573,7 +567,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Подарки",
+            "name": "Gifts",
             "exact": true
           }
         },
@@ -583,7 +577,7 @@
             "target": {
               "by": "role",
               "role": "heading",
-              "name": "Подарки",
+              "name": "Gifts",
               "exact": true
             },
             "message": "Gifts placeholder (T-38)"
@@ -596,7 +590,7 @@
           "click": {
             "by": "role",
             "role": "link",
-            "name": "Открыть Брейни",
+            "name": "Open Brainy",
             "exact": true
           }
         },

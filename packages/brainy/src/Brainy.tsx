@@ -5,7 +5,7 @@ import { brainyModel, INK } from "./model";
 type BrainyProps = {
   stats: BrainyStats;
   equipped?: Equipped;
-  /** Accessible name; pass "" when a visible label already describes Brainy. */
+  /** Localized accessible name (decorative by default); pass "" when a visible label already describes Brainy. */
   label?: string;
   className?: string;
 };
@@ -27,7 +27,7 @@ const SCREENS = [
 ] as const;
 const SIDES = [-1, 1] as const;
 
-export function Brainy({ stats, equipped = {}, label = "Брейни", className }: BrainyProps) {
+export function Brainy({ stats, equipped = {}, label = "", className }: BrainyProps) {
   const uid = useId().replace(/:/g, "");
   const m = brainyModel(stats, equipped);
   const { cx, cy, rx, ry, fill: F, dark: D } = m;

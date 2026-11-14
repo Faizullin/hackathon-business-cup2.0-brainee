@@ -11,7 +11,7 @@ export async function checkSurface(page, { timeline }) {
     };
   });
   for (const [ok, message] of [
-    [surface.language === "ru", "The document language is Russian"],
+    [surface.language === "en", "The document language is English"],
     [surface.fits, "The screen fits without horizontal scrolling"],
     [surface.loadedFonts >= 2, "The two self-hosted font families load"],
   ]) {
@@ -27,11 +27,11 @@ export async function recoverMissing(page, { base, timeline }) {
   const is404 = response?.status() === 404;
   timeline.check(is404, "The missing route returns HTTP 404");
   assert.ok(is404, "The missing route must return HTTP 404");
-  await page.getByRole("heading", { name: "Страница не найдена", exact: true }).waitFor();
-  timeline.check(true, "The Russian missing-page screen appears");
+  await page.getByRole("heading", { name: "Page not found", exact: true }).waitFor();
+  timeline.check(true, "The English missing-page screen appears");
   await checkSurface(page, { timeline });
   await page.waitForTimeout(800);
-  await page.getByRole("link", { name: "К занятиям", exact: true }).click();
-  await page.getByRole("heading", { name: "Учимся", exact: true }).waitFor();
+  await page.getByRole("link", { name: "To Learning", exact: true }).click();
+  await page.getByRole("heading", { name: "Learn", exact: true }).waitFor();
   timeline.check(new URL(page.url()).pathname === "/learn", "The 404 return link opens learning");
 }

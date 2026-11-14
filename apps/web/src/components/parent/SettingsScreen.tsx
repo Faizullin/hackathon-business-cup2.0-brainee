@@ -1,8 +1,8 @@
 "use client";
-import { Brainy } from "@brainee/brainy";
 import { TIME_ZONES } from "@brainee/core";
 import { ClipboardCheck, Globe, Lock, Settings, Tablet } from "@brainee/ui/components/icons";
 import { type FormEvent, useCallback, useEffect, useState } from "react";
+import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton, Panel, primaryButton } from "@/components/demo/kit";
 import { LanguageRadioCards } from "@/components/LocaleSwitcher";

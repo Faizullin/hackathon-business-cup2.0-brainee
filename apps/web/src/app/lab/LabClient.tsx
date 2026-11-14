@@ -4,7 +4,7 @@ import { type GameResult, type RoundEvent, roundStars, sessionStars } from "@bra
 import { allGames, clampLevel, GameHost } from "@brainee/games";
 import { Button } from "@brainee/ui/components/button";
 import { useId, useState } from "react";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 
 type Status = "running" | "finished" | "error";
 type LabEvent =
@@ -20,6 +20,7 @@ const fieldClass =
   "min-h-12 rounded-xl border border-border bg-card px-3 text-foreground focus-visible:outline-3 focus-visible:outline-ring";
 
 export function LabClient() {
+  const { t: ru, tc } = useI18n();
   const ids = { game: useId(), level: useId(), seed: useId(), frame: useId() };
   const [gameId, setGameId] = useState(allGames[0]?.id ?? "");
   const [level, setLevel] = useState(1);
@@ -50,7 +51,7 @@ export function LabClient() {
 
   return (
     <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_320px]">
-      <section aria-label={game.title} className="flex flex-col gap-4">
+      <section aria-label={tc(game.title)} className="flex flex-col gap-4">
         <div className="flex flex-wrap items-end gap-3">
           <label htmlFor={ids.game} className="flex flex-col gap-1 text-sm font-medium">
             {ru.lab.game}
@@ -62,7 +63,7 @@ export function LabClient() {
             >
               {allGames.map((g) => (
                 <option key={g.id} value={g.id}>
-                  {g.title}
+                  {tc(g.title)}
                 </option>
               ))}
             </select>
@@ -158,7 +159,8 @@ export function LabClient() {
         </p>
         {finish?.type === "finish" && (
           <p className="rounded-xl bg-secondary p-3 text-sm">
-            {ru.lab.rewardPreview}: <b>+{sessionStars(finish.result)} ★</b> (rounds {roundTotal} ★)
+            {ru.lab.rewardPreview}: <b>+{sessionStars(finish.result)} ★</b> (
+            {ru.child.game.starsEarned(roundTotal)})
           </p>
         )}
         <ol className="flex max-h-[60dvh] flex-col gap-1 overflow-auto font-mono text-xs">

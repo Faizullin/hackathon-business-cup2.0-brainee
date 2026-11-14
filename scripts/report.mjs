@@ -227,6 +227,8 @@ try {
       "Reports use local disposable fixtures. Set --base or REPORT_BASE_URL to a local server.",
     );
   const common = [
+    "--browser",
+    "webkit",
     "--base",
     base,
     "--repo",

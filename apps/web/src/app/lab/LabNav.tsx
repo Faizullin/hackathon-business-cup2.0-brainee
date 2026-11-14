@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ru } from "@/i18n/ru";
-
-const LINKS = [
-  { href: "/lab", label: ru.lab.nav.games },
-  { href: "/lab/brainy", label: ru.lab.nav.brainy },
-] as const;
+import { useI18n } from "@/i18n";
 
 export function LabNav() {
+  const { t: ru } = useI18n();
+  const LINKS = [
+    { href: "/lab", label: ru.lab.nav.games },
+    { href: "/lab/brainy", label: ru.lab.nav.brainy },
+  ] as const;
+
   const pathname = usePathname();
   return (
     <nav aria-label={ru.lab.title} className="mt-4 flex gap-2">

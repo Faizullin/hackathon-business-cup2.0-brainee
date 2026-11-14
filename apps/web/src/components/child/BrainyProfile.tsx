@@ -1,5 +1,4 @@
 "use client";
-import { Brainy } from "@brainee/brainy";
 import {
   ABILITY_BODY,
   ACCESSORIES,
@@ -14,6 +13,7 @@ import { allGames } from "@brainee/games";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { ViewTransition } from "react";
+import { Brainy } from "@/components/Brainy";
 import { Meter, Notice, outlineButton, Panel, primaryButton, useAct } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";

@@ -2,7 +2,12 @@ import { expect, test } from "@playwright/test";
 
 test("installable: manifest and generated icons come from our origin", async ({ request }) => {
   const manifest = await (await request.get("/manifest.webmanifest")).json();
-  expect(manifest).toMatchObject({ name: "Брейни", display: "standalone", start_url: "/" });
+  expect(manifest).toMatchObject({
+    name: "Brainy",
+    lang: "en",
+    display: "standalone",
+    start_url: "/",
+  });
   for (const icon of manifest.icons as { src: string }[]) {
     expect(icon.src.startsWith("/")).toBe(true);
     const response = await request.get(icon.src);

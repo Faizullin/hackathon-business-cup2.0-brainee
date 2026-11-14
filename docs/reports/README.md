@@ -37,8 +37,8 @@ pnpm report --module learning --video # saved child learning loop
 ```
 
 The command defaults to the `mvp` module and `http://127.0.0.1:3123`.
-It records Chromium at phone (390 × 844) and iPad (1180 × 820) viewport sizes,
-in Russian, light theme, with timestamps shown in America/New_York. Both recordings
+It records WebKit at phone (390 × 844) and iPad (1180 × 820) viewport sizes,
+in English (`brainee_locale=en`), light theme, with timestamps shown in America/New_York. Both recordings
 show the same continuous flow. `--video` requires successful MP4 conversion;
 conversion errors fail the run instead of silently publishing a video-less report.
 
@@ -73,8 +73,8 @@ Rebuild before recording source changes when using a production server.
 ### MVP module
 
 The flow first calls `POST /api/demo-reset` (DEMO_MODE only) to restore seeded tasks,
-gifts and videos, then plays the child flow and enters parent mode with PIN `1234`.
-Analytics are seeded demo data (D-21).
+gifts and videos, with parent authorization, then locks parent access, plays the child flow and enters parent mode with PIN `1234`.
+Saved activity analytics are live; historical/character radars and ranking remain labelled demo (D-29).
 
 ### Learning module
 
@@ -129,7 +129,7 @@ checked app sessions, assembled into a committed Markdown report.
 | `core.test.mjs`, `web.test.mjs` | Generator failure/containment tests and real-browser fixture captures, checked flows and video conversion |
 
 The local port resolves `apps/web`'s pinned `@playwright/test` instead of using
-global npm installations. It adds phone/iPad presets, Russian capture labels,
+global npm installations. It adds phone/iPad presets, English capture labels,
 foreign-origin request failures, strict video conversion and working Markdown
 links to logs. It uses Biome formatting and has no runtime dependency on the
 sibling checkout. Upstream's PECS-specific modules, fixtures, login configuration
@@ -144,5 +144,7 @@ The shared `recoverMissing` check expects a 404 and keeps it in the log.
 Do not interpret PASSED as a general accessibility or security audit.
 
 This is a local tooling port under [D-14](../dev/decisions.md#d-14--port-local-ui-recordings-and-markdown-reports--2026-11-14--accepted).
+WebKit captures do not generate a PDF (Playwright only supports PDF in Chromium); the HTML contact sheet and published images/videos remain available. The Russian smoke is retained in `english.spec.ts` and `locale-switch.spec.ts`.
+
 Browser-engine regression tests remain `pnpm e2e`; real-device verification
 remains [T-62](../progress/todo.md).

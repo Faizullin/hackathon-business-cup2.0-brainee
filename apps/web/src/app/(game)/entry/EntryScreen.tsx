@@ -1,7 +1,7 @@
 "use client";
 
-import { Brainy } from "@brainee/brainy";
 import Link from "next/link";
+import { Brainy } from "@/components/Brainy";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { RecommendationCards, useRecommendations } from "@/components/child/Recommendations";

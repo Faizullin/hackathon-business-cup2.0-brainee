@@ -1,9 +1,9 @@
 "use client";
 
-import { Brainy } from "@brainee/brainy";
 import { QUIZ_QUESTIONS, type QuizAnswers, quizStart, stageOf } from "@brainee/core";
 import { cn } from "@brainee/ui/lib/utils";
 import { type FormEvent, useState } from "react";
+import { Brainy } from "@/components/Brainy";
 import { outlineButton, primaryButton } from "@/components/demo/kit";
 import { HoldToStart } from "@/components/HoldToStart";
 import { useI18n } from "@/i18n";

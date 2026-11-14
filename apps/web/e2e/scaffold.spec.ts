@@ -57,7 +57,13 @@ for (const route of [
         browserName === "webkit" && process.platform === "darwin" ? "Alt+Tab" : "Tab";
       await page.keyboard.press(nextLinkKey);
       await expect(page.getByRole("link", { name: "Перейти к содержимому" })).toBeFocused();
-      await page.keyboard.press(nextLinkKey);
+      // The locale switch adds focusable controls before the learning link.
+      for (
+        let i = 0;
+        i < 8 && !(await link.evaluate((node) => node === document.activeElement));
+        i++
+      )
+        await page.keyboard.press(nextLinkKey);
       await expect(link).toBeFocused();
       await page.keyboard.press("Enter");
       await expect(page).toHaveURL(`${baseURL}/learn`);

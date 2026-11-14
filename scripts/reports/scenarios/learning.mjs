@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 
 export { checkSurface } from "./common.mjs";
 
-const NEXT = /^(Дальше|Готово)$/;
+const NEXT = /^(Next|Done)$/;
 const pause = (page, ms = 450) => page.waitForTimeout(ms);
 
 async function nextAppears(page, timeout = 1200) {
@@ -20,8 +20,8 @@ async function nextAppears(page, timeout = 1200) {
  * so a wrong first try shows the hint and the correction star.
  */
 export async function playGame(page, { timeline }) {
-  const odd = page.getByRole("button", { name: /^Фигура \d+$/ });
-  const pattern = page.getByRole("button", { name: /^Ответ \d+$/ });
+  const odd = page.getByRole("button", { name: /^Shape \d+$/ });
+  const pattern = page.getByRole("button", { name: /^Option \d+$/ });
   await odd.or(pattern).first().waitFor({ timeout: 20000 });
   const isOdd = (await odd.count()) > 0;
   timeline.mark(isOdd ? "Play Odd one out" : "Play Continue the pattern");
@@ -60,8 +60,15 @@ export async function showPostGame(page, { timeline, args }) {
   const screen = page.getByTestId("post-game");
   await screen.waitFor({ timeout: 20000 });
   await page.getByTestId("earned-stars").waitFor();
-  await page.getByRole("img", { name: "После игры" }).waitFor();
-  timeline.check(true, `Game ${args.game}: «Игра пройдена!» shows stars and Brainy before → after`);
+  await pause(page, 700);
+  const celebration = page.getByRole("dialog");
+  if (await celebration.isVisible())
+    await celebration.getByRole("button", { name: "Awesome!" }).click();
+  await page.getByRole("img", { name: "After game" }).waitFor();
+  timeline.check(
+    true,
+    `Game ${args.game}: «Game completed!» shows stars and Brainy before → after`,
+  );
   const breakCard = page.getByTestId("break-suggestion");
   if (args.game === 3) {
     await breakCard.waitFor();
@@ -85,6 +92,6 @@ export async function showPostGame(page, { timeline, args }) {
     timeline.check((await breakCard.count()) === 0, "No break suggestion before the third game");
   }
   await pause(page, 1500);
-  await page.mouse.wheel(0, 600);
+  await page.evaluate(() => window.scrollBy(0, 600));
   await pause(page, 1200);
 }

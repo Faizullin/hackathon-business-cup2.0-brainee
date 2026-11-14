@@ -11,7 +11,12 @@ test("quiz → signup creates a family with a quiz-based Brainy; the parent can 
   await page.goto("/onboarding");
   for (let question = 0; question < 5; question++) {
     await expect(page.getByTestId("quiz-progress")).toHaveText(`Вопрос ${question + 1} из 5`);
-    await page.getByRole("button").filter({ hasNotText: "Назад" }).nth(2).click();
+    await page
+      .locator("section")
+      .getByRole("button")
+      .filter({ hasNotText: "Назад" })
+      .nth(2)
+      .click();
   }
   await expect(page.getByRole("heading", { name: "Скролл-монстр" })).toBeVisible();
   await page.getByRole("button", { name: "Продолжить", exact: true }).click();
@@ -108,7 +113,7 @@ test("onboarding goes back, reacts to answers and requires a sustained hold with
 }, info) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/onboarding");
-  await page.getByRole("button").filter({ hasNotText: "Назад" }).nth(1).click();
+  await page.locator("section").getByRole("button").filter({ hasNotText: "Назад" }).nth(1).click();
   await expect(page.getByTestId("quiz-progress")).toHaveText("Вопрос 2 из 5");
   await page.getByRole("button", { name: "Назад", exact: true }).click();
   await expect(page.getByTestId("quiz-progress")).toHaveText("Вопрос 1 из 5");
@@ -117,7 +122,12 @@ test("onboarding goes back, reacts to answers and requires a sustained hold with
     animations: "disabled",
   });
   for (let i = 0; i < 5; i++)
-    await page.getByRole("button").filter({ hasNotText: "Назад" }).nth(2).click();
+    await page
+      .locator("section")
+      .getByRole("button")
+      .filter({ hasNotText: "Назад" })
+      .nth(2)
+      .click();
   await page.getByRole("button", { name: "Продолжить", exact: true }).click();
   const hold = page.getByRole("button", { name: "Удерживай, чтобы начать" });
   await hold.click();

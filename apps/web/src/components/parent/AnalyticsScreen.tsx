@@ -1,11 +1,11 @@
 "use client";
 
-import { Brainy } from "@brainee/brainy";
 import { ABILITIES, STAGES, stageOf } from "@brainee/core";
 import { Share2 } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
+import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
 import { Chip, Meter, outlineButton, Panel, primaryButton } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";

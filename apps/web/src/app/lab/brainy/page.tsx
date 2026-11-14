@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { ru } from "@/i18n/ru";
+import { en } from "@/i18n/en";
 import { BrainyLab } from "./BrainyLab";
 
-export const metadata: Metadata = { title: ru.lab.brainy.title };
+export const metadata: Metadata = { title: en.lab.brainy.title };
 
 export default function BrainyLabPage() {
   return <BrainyLab />;

@@ -675,7 +675,9 @@ async function openSession(options) {
 
   const pwPath = resolvePlaywright();
   const pw = await import(pathToFileURL(pwPath).href);
-  const chromium = pw.chromium ?? pw.default?.chromium;
+  const engine = String(options.browser || "chromium");
+  if (!["chromium", "webkit"].includes(engine)) throw new Error("Unsupported report browser");
+  const chromium = pw[engine] ?? pw.default?.[engine];
   if (!chromium) throw new Error("Could not load chromium from Playwright.");
 
   try {
@@ -697,7 +699,7 @@ async function openSession(options) {
 
   const browser = await chromium.launch({
     headless: options.headed !== true,
-    args: ["--no-sandbox", "--disable-dev-shm-usage"],
+    args: engine === "chromium" ? ["--no-sandbox", "--disable-dev-shm-usage"] : [],
   });
 
   /** `signedIn`: the caller has just signed in, so the saved session is fresh even with `--relogin`. */

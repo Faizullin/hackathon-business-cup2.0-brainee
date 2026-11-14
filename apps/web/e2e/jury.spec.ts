@@ -32,6 +32,7 @@ test("jury joins in one tap; families stay isolated; game ten completes an app t
       animations: "disabled",
     });
     await page.getByRole("link", { name: "Смотреть как ребёнок" }).click();
+    await expect(page).toHaveURL(/\/entry$/);
     await page.goto("/brainy");
     await expect(page.getByText("Откроется: 9 / 10 игр", { exact: true })).toBeVisible();
     await page.goto("/game/odd-one-out?recommended=1&seed=42");
