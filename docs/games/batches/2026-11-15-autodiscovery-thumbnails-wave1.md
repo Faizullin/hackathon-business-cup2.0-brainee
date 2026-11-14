@@ -39,4 +39,15 @@ Issue: #8. Branch `feature/games-autodiscovery-thumbnails`, worktree `../brainee
 - Unit: catalog thumbnail test; the three games' ported suites (34 tests, `node:test` → Vitest; locale tests now assert English-only; Color Boxes' `sharp`-based colour audit is not ported).
 - Browser: `game-cards.spec.ts` (layout tier: Learn/Entry/Explore cards render loaded 4:3 thumbnails, locked cards at 50 %) and `phaser-previews.spec.ts` (heavy tier, WebKit iPad: real pointer input via the scene's read-only `view()` positions, English-only menu, no foreign requests or console errors, exit, wallet/skills/stats unchanged, no `/api/sessions` calls).
 
-RESULTS_PLACEHOLDER
+## 5. Results (isolated: `BRAINEE_NEXT_DIR=.next-issue8`, `BRAINEE_E2E_PORT=3188`, temporary e2e DB)
+
+- `pnpm check` (Biome: 3 pre-existing warnings in `english.spec.ts`), `pnpm test` (339 unit tests), `games:build` (12 folders), `check:manifests`, `test:assets`, production build: pass.
+- `pnpm e2e` (default tier) first run: 98 passed, 2 failed (`lab.spec.ts`: alphabetical discovery opened the wrong game; fixed by the ordering rule above).
+- `pnpm e2e:full` after the fix: 214 passed, 1 failed. `games-integration.spec.ts` asserted that a four-year-old sees no Explore launch links; the three 4+ previews are correctly open now. The assertion previously passed only before the child's data loaded (all cards render locked until then). It now checks each preview's link against its age; the spec re-run passes 6/6 on WebKit iPad.
+- Screenshots reviewed at 390 × 844 and 1180 × 820: Learn grid and recommendations, Entry, Explore list, and the three new previews (start + played state).
+
+## 6. Next
+
+- Owner: physical iPad touch check of the three GSP previews (drag on Color Boxes and Sticker Scene).
+- T-147: archive family adapters (QLOBE first) and the remaining 24 titles as Explore batches, each with its thumbnail.
+- T-148: decide which previews earn real `GameResult` hooks before promotion to scored.

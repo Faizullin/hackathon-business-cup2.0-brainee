@@ -1,4 +1,5 @@
 import { recommendGames, weightedSkillGains } from "@brainee/core";
+import { previews } from "@brainee/game-catalog";
 import { allGames } from "@brainee/games";
 import { expect, test } from "@playwright/test";
 import { importedRound } from "./imported-games";
@@ -82,7 +83,11 @@ test("new catalog titles show; locked learning and Explore routes cannot launch"
     expect(response.status()).toBe(400);
   }
   await page.goto("/explore");
-  await expect(page.locator('a[href^="/explore/"]')).toHaveCount(0);
+  // A four-year-old: age-locked previews have no launch link; 4+ previews stay open.
+  for (const preview of previews)
+    await expect(page.locator(`a[href="/explore/${preview.id}"]`)).toHaveCount(
+      preview.minAge > 4 ? 0 : 1,
+    );
   await page.goto("/explore/magnet-explorer");
   await expect(page.getByTestId("explore-frame")).toHaveCount(0);
   await expect(page.getByText(/Unlocks at age 6/)).toBeVisible();
