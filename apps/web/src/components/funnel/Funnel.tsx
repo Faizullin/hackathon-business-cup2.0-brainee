@@ -22,6 +22,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { primaryButton, smallButton } from "@/components/demo/kit";
 import { AnswerSummary } from "./AnswerSummary";
 import { funnelCopy as c } from "./copy";
+import { GrowthDemo, MatchDemo, MatchTarget } from "./DemoMoments";
 import { loadFunnel, saveFunnel } from "./storage";
 
 export function Funnel() {
@@ -158,17 +159,25 @@ export function Funnel() {
         body={body}
         artClassName={["cover", "result", "offer"].includes(screen) ? "!bg-[#1c1b33]" : ""}
         art={
-          <div className="flex w-full flex-col items-center justify-center gap-3 rounded-stage">
-            <Brainy
-              stats={screen === "growth" ? BRAINY_PRESETS.now : BRAINY_PRESETS.afterQuiz}
-              mood={92}
-              animate
-              label={c.meet}
-              className={q ? "w-16 lg:w-64" : "w-40 lg:w-64"}
-            />
-            {screen === "reward" && <span className="font-display text-4xl text-sun">★</span>}
-            {screen === "benefits" && <span className="font-display text-4xl text-sun">★ + ☀</span>}
-          </div>
+          screen === "growth" ? (
+            <GrowthDemo />
+          ) : screen === "match" ? (
+            <MatchTarget />
+          ) : (
+            <div className="flex w-full flex-col items-center justify-center gap-3 rounded-stage">
+              <Brainy
+                stats={screen === "growth" ? BRAINY_PRESETS.now : BRAINY_PRESETS.afterQuiz}
+                mood={92}
+                animate
+                label={c.meet}
+                className={q ? "w-16 lg:w-64" : "w-40 lg:w-64"}
+              />
+              {screen === "reward" && <span className="font-display text-4xl text-sun">★</span>}
+              {screen === "benefits" && (
+                <span className="font-display text-4xl text-sun">★ + ☀</span>
+              )}
+            </div>
+          )
         }
         onBack={
           screen !== "cover"
@@ -192,6 +201,7 @@ export function Funnel() {
         progressLabel={c.progress}
         disabled={Boolean(q && !choiceLabel(q.id, answers[q.id]))}
       >
+        {screen === "match" && <MatchDemo />}
         {q && (
           <AnswerGroup
             label={q.title}

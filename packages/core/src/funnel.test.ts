@@ -160,3 +160,11 @@ it("suggests an off-screen task without issuing a reward", async () => {
   });
   expect(familyTaskTemplate({})).toBeNull();
 });
+
+it("keeps demo matching and stage previews pure and aligned with the real stages", async () => {
+  const { FUNNEL_SHAPES, isFunnelMatch } = await import("./funnel");
+  const { STAGES, stageOf, stagePreviewStats } = await import("./brainy");
+  expect(FUNNEL_SHAPES.filter(isFunnelMatch)).toEqual(["diamond"]);
+  expect(isFunnelMatch("unknown")).toBe(false);
+  for (const stage of STAGES) expect(stageOf(stagePreviewStats(stage.id)).id).toBe(stage.id);
+});

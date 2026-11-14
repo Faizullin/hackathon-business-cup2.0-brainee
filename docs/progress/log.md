@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · T-137 demo moments
+Added a funnel-only shape match and a real five-stage Brainy slider backed by pure tested core helpers. No game imports, sessions, rewards or network writes. Check/test/build and all 20 affected browser cases pass; phone/iPad screenshots reviewed.
+
 ## 2026-11-15 · T-136 family plan
 Saved validated funnel answers as showcase JSON, added the parent plan/edit/export card, stopping phrase and opt-in real-task template. Check/test/build pass; 24 existing and four final family-plan browser cases pass. Phone/iPad plan, task and stopping screenshots reviewed. The initial four failures were an English-test/Russian-helper mismatch, now fixed.
 

@@ -622,3 +622,7 @@ export function familyTaskTemplate(answers: FunnelDraft) {
     place: "real" as const,
   };
 }
+
+/** A preview question, with no session or reward side effects. */
+export const FUNNEL_SHAPES = ["circle", "diamond", "triangle"] as const;
+export const isFunnelMatch = (shape: string) => shape === "diamond";
