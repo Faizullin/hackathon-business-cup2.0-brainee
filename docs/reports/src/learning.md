@@ -3,19 +3,20 @@
 The implemented child features, recorded from a local production build with
 `DEMO_MODE=1`, `BRAINEE_LAB=1` and a freshly reset seeded database. Rewards and
 Brainy stats are saved through the session API and read back by polling. The
-parent view, entry screen, Leisure and Gifts are not implemented yet.
+full child/parent walkthrough is in the [MVP report](mvp.md).
 [Run instructions](README.md#learning-module).
 
 ## Recordings
 
-Each walkthrough starts on «Учимся» and plays three games without returning to
-the menu: Continue the pattern from the grid, then the «Подтянуть навык» card
-(a game for the weakest skill), then the «Следующий уровень» card. Each
-post-game screen shows stars and Brainy before → after. The third adds the
-+5 ★ bonus and «Сделать перерыв», which ends on the Brainy tab with a
-thank-you. Then it checks the updated wallet and visits the other tabs.
-Continue the pattern is answered by trying options in order, so wrong tries
-show the hint «Почти!» and the correction star.
+Each English walkthrough starts on Learn, plays Continue the Pattern from the
+grid, opens Odd One Out directly, then chooses its next level. Each post-game
+screen shows stars and Brainy before → after. The third finish adds the +5 ★
+break bonus; “Take a break” ends on the Brainy tab. The flow checks the updated
+wallet and visits the other child tabs. Pattern answers are tried in order to
+exercise hints and correction rewards. Achievement celebrations are dismissed
+before continuing. The weak-skill card is shown; its iframe game is outside
+this native-game recording helper. The games-owned loading text may still appear
+in Russian briefly; T-112 belongs to the separate games session.
 
 ### Phone · 390 × 844
 
@@ -25,7 +26,7 @@ show the hint «Почти!» and the correction star.
 
 {{flow:ipad-learning}}
 
-Recorded in Chromium at the named viewport sizes. `pnpm e2e` covers Chromium
+Recorded in WebKit with English UI and New York time at the named viewport sizes. `pnpm e2e` covers Chromium
 and WebKit; this is not a real-device or Screen Time test.
 
 ## Screenshots

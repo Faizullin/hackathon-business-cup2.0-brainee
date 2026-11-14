@@ -2,13 +2,13 @@
 
 All MVP screens, recorded from a local production build with `DEMO_MODE=1` and
 a freshly reset seeded database. Rewards, tasks, gifts and accessories are
-saved through the demo API and sync between devices by polling. **Analytics
-numbers are seeded demo data (D-21)**, not calculated. Demo parent PIN: `1234`.
+saved through the demo API and sync between devices by polling. Activity analytics use saved sessions and actions; historical/character
+radars and ranking remain labelled demo data. Demo parent PIN: `1234`.
 [Run instructions](README.md#mvp-module).
 
 ## Recordings
 
-Each walkthrough opens the app on «Во что играем сейчас?», goes to Learn,
+Each walkthrough opens the app on “What shall we play?”, goes to Learn,
 browses Leisure, watches a science video to the end (1 s = 1 min) and answers
 its quiz (a wrong answer fades, the right one pays +15 ★ once), marks a task
 done and exchanges ☀ → ★ in Gifts, and buys an accessory on the Brainy tab.
@@ -25,7 +25,7 @@ child's task in Tasks and opens Gifts & goal.
 
 ## Child screens
 
-### Entry «Во что играем сейчас?»
+### Entry “What shall we play?”
 
 {{compare:iPad (1180 × 820 landscape)=entry@ipad|Phone (390 × 844)=entry@phone}}
 
@@ -75,4 +75,4 @@ child's task in Tasks and opens Gifts & goal.
 
 The editable [template](src/mvp.md), [scenario](../../scripts/reports/scenarios/mvp.json)
 and [walkthrough actions](../../scripts/reports/scenarios/mvp.mjs) define what
-this report captures. Recorded in Chromium; `pnpm e2e` covers Chromium and WebKit.
+this report captures. Recorded in WebKit with English UI and New York time; `pnpm e2e` covers Chromium and WebKit.
