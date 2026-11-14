@@ -1,14 +1,7 @@
 "use client";
 
-import {
-  type BrainyStats,
-  type Equipped,
-  type FilmScript,
-  filmCaptionAt,
-  filmQuestionCrossed,
-  filmSceneAt,
-} from "@brainee/core";
-import { FilmStage } from "@brainee/films";
+import { type FilmScript, filmCaptionAt, filmQuestionCrossed, filmSceneAt } from "@brainee/core";
+import { type FilmNarrator, FilmStage } from "@brainee/films";
 import { Pause, Play, RotateCcw } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -20,8 +13,8 @@ type Meter = { ctx: AudioContext; analyser: AnalyserNode; data: Uint8Array<Array
 type FilmViewProps = {
   script: FilmScript;
   src: string;
-  stats: BrainyStats;
-  equipped?: Equipped;
+  /** Who leads the film: the child's own Brainy in the app (see narrators.tsx). */
+  narrator?: FilmNarrator;
   /** Seconds to resume from; questions before it count as answered. */
   startAt?: number;
   /** Lab only: seek bar, jump to questions, optional question skipping. */
@@ -41,8 +34,7 @@ export const clock = (seconds: number) => {
 export function FilmView({
   script,
   src,
-  stats,
-  equipped,
+  narrator,
   startAt = 0,
   studio = false,
   onTime,
@@ -186,8 +178,7 @@ export function FilmView({
         caption={caption}
         talk={talk}
         playing={playing}
-        stats={stats}
-        equipped={equipped}
+        narrator={narrator}
         className="w-full rounded-panel"
       />
       {/* biome-ignore lint/a11y/useMediaCaption: captions are drawn on the stage from the script */}

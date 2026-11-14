@@ -5,7 +5,10 @@ import { savedState } from "./saved-state";
 test.beforeEach(async ({ page, baseURL }) => {
   const headers = { origin: baseURL as string };
   expect((await page.request.post("/api/demo-session", { headers })).ok()).toBe(true);
+  // Resetting demo data is a parent action (D-29): unlock, reset, lock again.
+  await page.request.post("/api/parent", { headers, data: { pin: "1234" } });
   expect((await page.request.post("/api/demo-reset", { headers })).ok()).toBe(true);
+  await page.request.delete("/api/parent", { headers });
 });
 
 const audio = (page: import("@playwright/test").Page) =>
@@ -52,6 +55,34 @@ test("film: question pauses the audio, hint on a miss, praise resumes, no stars"
 
   expect((await savedState(page.request)).progress.wallet.stars).toBe(before.progress.wallet.stars);
   expect(errors).toEqual([]);
+});
+
+test("film: the child's own Brainy leads it, wearing what the child bought", async ({
+  page,
+  baseURL,
+}) => {
+  const headers = { origin: baseURL as string };
+  for (const data of [
+    { type: "buy-accessory", id: "bowtie" },
+    { type: "equip", id: "bowtie" },
+  ])
+    expect((await page.request.post("/api/actions", { headers, data })).ok()).toBe(true);
+  await page.goto("/video/rain");
+  const narrator = page.getByTestId("film").locator("[data-narrator]");
+  await expect(narrator.locator('[data-acc="glasses"]')).toHaveCount(1);
+  await expect(narrator.locator('[data-acc="bowtie"]')).toHaveCount(1);
+});
+
+test("film studio swaps the mascot without touching the film", async ({ page }) => {
+  await page.goto("/lab/film");
+  await expect(page.getByTestId("film-issues")).toContainText("Ошибок и предупреждений нет");
+  const narrator = page.locator("[data-narrator]");
+  await expect(narrator).toHaveCount(1);
+  await page.getByTestId("film-narrator").selectOption("dressed");
+  await expect(narrator.locator('[data-acc="cap"]')).toHaveCount(1);
+  await page.getByTestId("film-narrator").selectOption("none");
+  await expect(narrator).toHaveCount(0);
+  await expect(page.locator("[data-film-stage] [data-prop]").first()).toBeVisible();
 });
 
 test("film studio checks the shipped script", async ({ page }) => {

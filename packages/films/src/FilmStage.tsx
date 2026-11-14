@@ -1,18 +1,18 @@
-import { Brainy } from "@brainee/brainy";
-import type { BrainyStats, Equipped, FilmCaption, FilmScene, FilmSpot } from "@brainee/core";
+import type { FilmCaption, FilmScene, FilmSpot } from "@brainee/core";
 import { FILM_BG, FILM_PROPS } from "./art";
 import { placeProp } from "./layout";
 import { FILM_CSS, GROUND_MOTIONS } from "./motion";
+import { type FilmNarrator, NARRATOR_BOX } from "./narrator";
 
 type FilmStageProps = {
   scene: FilmScene;
   caption?: FilmCaption;
-  /** 0–1 mouth opening, from the audio level while Brainy speaks. */
+  /** 0–1 mouth opening, from the audio level while the narrator speaks. */
   talk?: number;
-  /** Props and Brainy animate only while the film plays. */
+  /** Props and the narrator animate only while the film plays. */
   playing?: boolean;
-  stats: BrainyStats;
-  equipped?: Equipped;
+  /** Who leads the film: the child's own Brainy in the app, anything else elsewhere. */
+  narrator?: FilmNarrator;
   showCaptions?: boolean;
   className?: string;
 };
@@ -25,8 +25,7 @@ export function FilmStage({
   caption,
   talk = 0,
   playing = false,
-  stats,
-  equipped,
+  narrator,
   showCaptions = true,
   className,
 }: FilmStageProps) {
@@ -79,20 +78,28 @@ export function FilmStage({
           </div>
         );
       })}
-      <div
-        data-brainy-spot={scene.brainy}
-        style={{
-          position: "absolute",
-          bottom: "2%",
-          left: SPOT[scene.brainy],
-          width: "24%",
-          transition: "left 700ms cubic-bezier(.2,.8,.2,1)",
-        }}
-      >
-        <div className="film-loop film-talker">
-          <Brainy stats={stats} equipped={equipped} talk={talk} label="" />
+      {narrator && (
+        <div
+          data-brainy-spot={scene.brainy}
+          data-narrator=""
+          style={{
+            position: "absolute",
+            bottom: `${NARRATOR_BOX.bottom}%`,
+            left: SPOT[scene.brainy],
+            width: `${NARRATOR_BOX.width}%`,
+            aspectRatio: `${NARRATOR_BOX.aspect}`,
+            transition: "left 700ms cubic-bezier(.2,.8,.2,1)",
+          }}
+        >
+          <div className="film-loop film-talker" style={{ width: "100%", height: "100%" }}>
+            {narrator({
+              talk,
+              voice: caption?.who ?? (caption ? "brainy" : undefined),
+              spot: scene.brainy,
+            })}
+          </div>
         </div>
-      </div>
+      )}
       {showCaptions && caption && (
         <p
           className="film-caption"

@@ -2,13 +2,24 @@
 
 import { BRAINY_PRESETS } from "@brainee/brainy";
 import { checkFilm, type FilmIssue, type FilmScript } from "@brainee/core";
-import { FILM_ART, FILM_IDS, filmLayoutIssues } from "@brainee/films";
-import { useEffect, useState } from "react";
+import { FILM_ART, FILM_IDS, type FilmNarrator, filmLayoutIssues } from "@brainee/films";
+import { useEffect, useMemo, useState } from "react";
 import { FilmView } from "@/components/film/FilmView";
+import { brainyNarrator } from "@/components/film/narrators";
 import { useFilmScript } from "@/components/film/useFilmScript";
 import { ru } from "@/i18n/ru";
 
 type Local = { script: FilmScript | null; issues: FilmIssue[]; audio?: string };
+
+// The narrator slot takes any mascot; the lab swaps between a few to show it.
+const NARRATORS = {
+  now: brainyNarrator(BRAINY_PRESETS.now),
+  afterQuiz: brainyNarrator(BRAINY_PRESETS.afterQuiz),
+  onlyFun: brainyNarrator(BRAINY_PRESETS.onlyFun),
+  dressed: brainyNarrator(BRAINY_PRESETS.now, { head: "cap", face: "glasses", neck: "bowtie" }),
+  none: undefined,
+} satisfies Record<string, FilmNarrator | undefined>;
+type NarratorKey = keyof typeof NARRATORS;
 
 function issuesOf(value: unknown): FilmIssue[] {
   const issues = checkFilm(value, FILM_ART);
@@ -23,6 +34,8 @@ export function FilmLab() {
   const [id, setId] = useState<string>(FILM_IDS[0]);
   const shipped = useFilmScript(id);
   const [local, setLocal] = useState<Local | null>(null);
+  const [mascot, setMascot] = useState<NarratorKey>("now");
+  const narrator = useMemo(() => NARRATORS[mascot], [mascot]);
   useEffect(() => () => void (local?.audio && URL.revokeObjectURL(local.audio)), [local?.audio]);
 
   const loadScript = async (file?: File) => {
@@ -61,7 +74,7 @@ export function FilmLab() {
             key={`${script.id}-${audio}`}
             script={script}
             src={audio}
-            stats={BRAINY_PRESETS.now}
+            narrator={narrator}
             studio
           />
         )}
@@ -79,6 +92,21 @@ export function FilmLab() {
           >
             {FILM_IDS.map((film) => (
               <option key={film}>{film}</option>
+            ))}
+          </select>
+        </label>
+        <label className="flex flex-col gap-1 text-sm">
+          {t.narrator}
+          <select
+            value={mascot}
+            onChange={(e) => setMascot(e.target.value as NarratorKey)}
+            className="min-h-12 rounded-xl border border-border bg-card px-3"
+            data-testid="film-narrator"
+          >
+            {(Object.keys(NARRATORS) as NarratorKey[]).map((key) => (
+              <option key={key} value={key}>
+                {t.narrators[key]}
+              </option>
             ))}
           </select>
         </label>

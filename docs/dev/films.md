@@ -98,6 +98,16 @@ A film is **an mp3 plus a JSON script**. The browser draws it, so no video is re
 - No facts that aren't in the audio.
 - Don't re-encode the mp3 unless it exceeds 15 MB.
 
+## Narrator: a replaceable mascot
+The film never names its host. `FilmStage` has a **narrator slot**: the player passes a `FilmNarrator`, a function that gets `{ talk, voice, spot }` each frame and returns any SVG/React mascot. The mascot fills a box 24% of the stage wide with Brainy's 264×300 aspect, 2% above the bottom (`NARRATOR_BOX`). The layout check measures overlaps against that box, so swapping the mascot doesn't change how scenes are staged.
+
+- In the child app, `/video/<id>` passes `brainyNarrator(stats, equipped)` (`apps/web/src/components/film/narrators.tsx`), so **the child's own Brainy leads the lecture**: its look comes from their saved stats, and it wears the accessories they bought and equipped.
+- Another mascot (a guest character, a seasonal costume, a partner character) is just another `FilmNarrator`. Scripts, art and checks stay unchanged.
+- `/lab/film` has a «Маскот» selector (Brainy looks, Brainy with accessories, none) to preview the swap.
+- `packages/films` does not depend on `@brainee/brainy`.
+
+The script fields `brainy` (spot) and `who: "brainy"` keep their names for compatibility; they mean "the narrator".
+
 ## Player behaviour (child)
 - Only «Пауза / Смотреть». The progress bar isn't tappable, and nothing autoplays after the end.
 - A question pauses the audio, and Brainy stands centre-stage. A wrong answer dims that option and shows `hint` + «Послушать ещё раз». The right answer shows `praise`, then the film continues after 1.8 s or on «Дальше».

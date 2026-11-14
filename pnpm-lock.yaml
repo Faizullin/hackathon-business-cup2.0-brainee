@@ -215,9 +215,6 @@ importers:
 
   packages/films:
     dependencies:
-      '@brainee/brainy':
-        specifier: workspace:*
-        version: link:../brainy
       '@brainee/core':
         specifier: workspace:*
         version: link:../core

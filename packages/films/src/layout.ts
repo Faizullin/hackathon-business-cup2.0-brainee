@@ -1,12 +1,13 @@
 import type { FilmIssue, FilmScene, FilmScript, FilmSpot } from "@brainee/core";
 import { FILM_BG, FILM_PROPS } from "./art";
+import { NARRATOR_BOX } from "./narrator";
 
 /** A box on the 16:9 stage, in % of stage width (x, w) and height (y, h). */
 export type Box = { x: number; y: number; w: number; h: number };
 const STAGE_RATIO = 16 / 9;
-/** Brainy's box on the stage in % (FilmStage: 24% wide, 264×300 viewBox, 2% from the bottom). */
-const BRAINY_W = 24;
-const BRAINY_H = BRAINY_W * (300 / 264) * STAGE_RATIO;
+/** The narrator's box on the stage in % (FilmStage's NARRATOR_BOX), whoever the mascot is. */
+const BRAINY_W = NARRATOR_BOX.width;
+const BRAINY_H = (BRAINY_W / NARRATOR_BOX.aspect) * STAGE_RATIO;
 const SPOT_X: Record<FilmSpot, number> = { left: 4, center: 38, right: 72 };
 
 const pct = (value: unknown) => Number.parseFloat(String(value ?? 0));
@@ -31,7 +32,7 @@ export function placeProp(key: string, bg?: string): Box | undefined {
 export const propBox = (key: string) => placeProp(key);
 
 export function brainyBox(spot: FilmSpot): Box {
-  return { x: SPOT_X[spot], y: 98 - BRAINY_H, w: BRAINY_W, h: BRAINY_H };
+  return { x: SPOT_X[spot], y: 100 - NARRATOR_BOX.bottom - BRAINY_H, w: BRAINY_W, h: BRAINY_H };
 }
 
 /** Share of the smaller box covered by the other one. */

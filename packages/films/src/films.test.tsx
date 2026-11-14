@@ -9,12 +9,15 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { FILM_BG, FILM_PROPS } from "./art";
 import { FilmStage } from "./FilmStage";
-import { FILM_ART, FILM_IDS, filmLayoutIssues, placeProp } from "./index";
+import { FILM_ART, FILM_IDS, type FilmNarrator, filmLayoutIssues, placeProp } from "./index";
 import { FILM_MOTIONS, GROUND_MOTIONS } from "./motion";
 
 const DIR = join(import.meta.dirname, "../../../apps/web/public/media/films");
 const MAX_MP3_BYTES = 15 * 1024 * 1024;
-const stats = { brain: 50, eyes: 50, mouth: 50, arms: 50, legs: 50, resp: 50 };
+/** Any mascot fits the narrator slot; tests use a plain stub. */
+const mascot: FilmNarrator = ({ talk, voice, spot }) => (
+  <svg aria-hidden="true" viewBox="0 0 264 300" data-mascot={`${spot}:${voice ?? "-"}:${talk}`} />
+);
 const ids = existsSync(DIR)
   ? readdirSync(DIR)
       .filter((f) => f.endsWith(".json"))
@@ -79,11 +82,40 @@ describe("grounded props", () => {
       renderToStaticMarkup(
         <FilmStage
           scene={{ t: 0, bg, props: ["rocket", "cloud"], brainy: "left" }}
-          stats={stats}
+          narrator={mascot}
         />,
       );
     expect(html("yard")).toContain("film-still");
     expect(html("space")).toContain("film-bob");
+  });
+});
+
+describe("replaceable narrator", () => {
+  const scene = { t: 0, bg: "yard", props: ["sun", "cloud"], brainy: "right" as const };
+  it("draws whatever mascot the player passes, with talk, voice and spot", () => {
+    const html = renderToStaticMarkup(
+      <FilmStage
+        scene={scene}
+        caption={{ t: 0, end: 2, text: "Hi!", who: "brainy" }}
+        talk={0.6}
+        narrator={mascot}
+      />,
+    );
+    expect(html).toContain('data-mascot="right:brainy:0.6"');
+    expect(html).toContain("data-narrator");
+  });
+  it("tells the mascot who speaks, and works with no narrator at all", () => {
+    const guest = renderToStaticMarkup(
+      <FilmStage
+        scene={scene}
+        caption={{ t: 0, end: 2, text: "Hi", who: "guest" }}
+        narrator={mascot}
+      />,
+    );
+    expect(guest).toContain('data-mascot="right:guest:0"');
+    const empty = renderToStaticMarkup(<FilmStage scene={scene} />);
+    expect(empty).not.toContain("data-narrator");
+    expect(empty).toContain('data-prop="sun"');
   });
 });
 
@@ -126,7 +158,7 @@ describe.each(ids)("film %s", (id) => {
   it("renders every scene", () => {
     for (const scene of script.scenes) {
       const html = renderToStaticMarkup(
-        <FilmStage scene={filmSceneAt(script, scene.t)} stats={stats} />,
+        <FilmStage scene={filmSceneAt(script, scene.t)} narrator={mascot} />,
       );
       expect(html).toContain(`data-bg="${scene.bg}"`);
     }

@@ -4,6 +4,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (merge master; replaceable film mascot, T-115)
+- Merged `master` into `feature/audio_to_movie`. Conflicts were docs only; master already used D-29/T-107–T-109, so the film work became D-30 and T-111–T-114.
+- `FilmStage` now has a narrator slot (`FilmNarrator`). The player passes the child's own Brainy (stats + bought accessories); `/lab/film` swaps mascots; `packages/films` no longer imports Brainy. An e2e test buys and equips a bow tie, then sees it on the film's narrator.
+
 ## 2026-11-14 (films: props stand on the ground, T-113)
 - Feedback: props looked like they were flying. Cause: every prop had one fixed spot in the upper frame plus bobbing motions. Backgrounds now declare a `ground` line and standing props a `base`; the stage places them on the ground and keeps them still. 85 scenes were affected. The check now fails on standing props in sky/space/cloud/sea scenes; 6 scenes and 7 Brainy spots were fixed. Verified by measuring standing props during playback (no vertical movement) and screenshots.
 

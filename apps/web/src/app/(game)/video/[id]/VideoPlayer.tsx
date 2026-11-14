@@ -6,12 +6,13 @@ import { ArrowLeft, Pause, Play } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { SCIENCE_ICONS } from "@/components/child/LeisureScreen";
 import { coralButton, outlineButton, primaryButton } from "@/components/demo/kit";
 import { FilmView } from "@/components/film/FilmView";
+import { brainyNarrator } from "@/components/film/narrators";
 import { useFilmScript } from "@/components/film/useFilmScript";
 import { ru } from "@/i18n/ru";
 
@@ -204,6 +205,14 @@ function FilmPlayer({ video }: { video: ScienceVideo }) {
     router.push("/leisure");
   };
 
+  // The child's own Brainy leads the lecture: saved look and bought accessories.
+  const stats = snapshot?.progress.stats;
+  const equipped = snapshot?.showcase.equipped;
+  const narrator = useMemo(
+    () => (stats ? brainyNarrator(stats, equipped) : undefined),
+    [stats, equipped],
+  );
+
   if (!snapshot) return null;
   return (
     <section className="mx-auto flex w-full max-w-3xl flex-col gap-4 p-4">
@@ -225,8 +234,7 @@ function FilmPlayer({ video }: { video: ScienceVideo }) {
         <FilmView
           script={film.script}
           src={film.script.audio}
-          stats={snapshot.progress.stats}
-          equipped={snapshot.showcase.equipped}
+          narrator={narrator}
           startAt={startAt}
           onTime={onTime}
           onEnded={onEnded}
