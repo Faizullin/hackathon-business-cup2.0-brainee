@@ -1,0 +1,72 @@
+import { Brainy } from "@brainee/brainy";
+import { stageOf } from "@brainee/core";
+import { StarIcon, SunIcon } from "@brainee/ui/components/child-icons";
+import Link from "next/link";
+import { ru } from "@/i18n/ru";
+import { demoChild } from "@/lib/demo-child";
+
+// Top dock on Learn / Leisure / Gifts (docs/product/screens.md#brainy-dock-every-child-screen).
+export function BrainyDock() {
+  const { stats, equipped, wallet, mood, weekGoal } = demoChild;
+  const stage = stageOf(stats);
+  const t = ru.child.dock;
+  return (
+    <section
+      data-testid="brainy-dock"
+      aria-label={t.label}
+      className="flex items-center gap-3 rounded-panel border border-border bg-card p-3 sm:gap-5 sm:p-4"
+    >
+      <Link
+        href="/brainy"
+        aria-label={t.openBrainy}
+        className="shrink-0 rounded-2xl transition-transform duration-(--dur-press) active:scale-95"
+      >
+        <Brainy stats={stats} equipped={equipped} label="" className="h-24 w-auto sm:h-[136px]" />
+      </Link>
+
+      <div className="flex min-w-0 flex-1 flex-col gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full bg-secondary px-3 py-1 text-sm font-semibold">
+            {ru.stages[stage.id]}
+          </span>
+          {stage.next && (
+            <span className="text-muted-foreground text-xs">
+              {t.toNext(ru.stages[stage.next], stage.pointsToNext)}
+            </span>
+          )}
+        </div>
+        <div>
+          <div className="flex justify-between text-xs font-medium">
+            <span>{t.mood}</span>
+            <span>{mood}%</span>
+          </div>
+          <div aria-hidden="true" className="mt-1 h-2 overflow-hidden rounded-full bg-line">
+            <span className="block h-full rounded-full bg-mint" style={{ width: `${mood}%` }} />
+          </div>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <span
+            data-testid="wallet-stars"
+            className="flex items-center gap-1 rounded-full bg-secondary px-3 py-1 font-semibold"
+          >
+            <StarIcon className="size-4" />
+            {wallet.stars}
+            <span className="sr-only">{t.stars}</span>
+          </span>
+          <span className="flex items-center gap-1 rounded-full bg-secondary px-3 py-1 font-semibold">
+            <SunIcon className="size-4" />
+            {wallet.suns}
+            <span className="sr-only">{t.suns}</span>
+          </span>
+          <Link
+            href="/gifts"
+            className="flex min-h-9 items-center gap-1 rounded-full border border-border px-3 text-sm font-semibold transition-transform duration-(--dur-press) active:scale-95"
+          >
+            {t.goal(weekGoal.earned, weekGoal.target)}
+            <SunIcon className="size-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -33,9 +33,9 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [ ] T-29 Port GSP `bridge-core` → `packages/game-bridge` (drop PECS parts, global `Brainee`) + `engine-phaser` / `engine-gdevelop` kits + `IframeGame` and host hook in `GameHost` → [games.md](../dev/games.md#bridge-embedded-games-port-gsp-packagesbridge-core)
 
 ## P3 · Child flow · [screens.md#child](../product/screens.md#child)
-- [ ] T-30 Child app shell: Brainy dock + 4-tab bottom bar in `(child)/layout`, fullscreen game layout, app-feel checklist → [ui.md](../dev/ui.md#app-shell-route-group-layouts-own-the-chrome)
+- [x] T-30 Child app shell: Brainy dock + 4-tab bottom bar in `(child)/layout`, fullscreen game layout, app-feel checklist → [ui.md](../dev/ui.md#app-shell-route-group-layouts-own-the-chrome)
 - [ ] T-31 Entry screen (no close, logs the choice)
-- [ ] T-32 Learn tab (recommendations + grid)
+- [ ] T-32 Learn tab (recommendations + grid); the game grid exists, «Брейни советует» recommendations remain
 - [x] T-33 Game: Odd one out (2 levels × 4 rounds, seeded), tested at `/lab`; wiring into the child flow is T-32/T-35
 - [ ] T-34 Game: Continue the pattern
 - [ ] T-35 Post-game screen: before → after, "Что дальше?", break after 3

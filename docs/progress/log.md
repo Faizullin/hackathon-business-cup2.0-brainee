@@ -4,6 +4,11 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (shell)
+- Single `master` branch (local + GitHub); personal notes → gitignored `.local/`.
+- T-20 Brainy renderer + `/lab/brainy`, T-27 accessory rules, T-30 child shell (tab bar, dock, Brainy tab, fullscreen game). D-16 game scaling + T-89 – T-91.
+- Verified: check clean; 51 unit, 44 e2e (Chromium + WebKit, phone + iPad); screenshots reviewed.
+
 ## 2026-11-14 (game contract)
 - T-28: core types + seeded RNG; games kit, lazy registry, `GameHost` + error boundary; `pnpm check:games` in `pnpm check`.
 - T-33 Odd one out (seeded), T-16 `/lab` (event stream, prod 404 unless `BRAINEE_LAB=1`), T-21 – T-23 core economy/stage/mood rules.

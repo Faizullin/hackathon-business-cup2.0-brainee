@@ -17,7 +17,7 @@ Icons: Lucide for parent and system controls; the prototype's custom SVGs for Br
 
 ```
 app/layout.tsx              # html/body, fonts, providers only (no visual chrome)
-app/(child)/layout.tsx      # Brainy dock (top) + 4-tab bottom bar; tabs = ViewTransition boundaries
+app/(child)/layout.tsx      # 4-tab bottom bar; (child)/(docked)/layout.tsx adds the Brainy dock (not on the Brainy tab)
 app/(game)/game/[id]/       # fullscreen sibling group: no dock or tab bar
 app/(parent)/layout.tsx     # 3-tab bottom bar on phone, side rail on iPad landscape
 app/(auth)/layout.tsx       # centered single column

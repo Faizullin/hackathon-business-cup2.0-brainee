@@ -37,17 +37,19 @@ One app, so child and parent share the session, the domain and a live Brainy.
 apps/web/
 ├─ src/app/
 │  ├─ layout.tsx, page.tsx    # Fonts/providers only; / redirects to /learn
-│  ├─ (child)/learn/          # Starter page; other child routes planned
+│  ├─ (child)/layout.tsx      # Child shell: content + persistent 4-tab bottom bar (T-30)
+│  ├─ (child)/(docked)/       # Brainy dock layout: learn (game grid), leisure, gifts (stubs)
+│  ├─ (child)/brainy/         # Brainy tab (no dock): big Brainy + stage path
 │  ├─ (parent)/analytics/     # Starter page; barrier, data and other parent routes planned
 │  ├─ (auth)/login/           # Welcome page; sessions, quiz and onboarding planned
-│  ├─ (game)/game/[id]/       # Planned: fullscreen sibling group (T-30)
-│  ├─ lab/                   # Dev-only game lab + event stream (T-16)
+│  ├─ (game)/game/[id]/       # Fullscreen play (no dock/tab bar); `?level=&seed=`
+│  ├─ lab/, lab/brainy/       # Dev-only game lab + event stream; Brainy presets (T-16, T-20)
 │  └─ api/                   # Planned: route handlers + /api/state (polled version + snapshot)
 ├─ public/media/             # Planned: own-domain media
 └─ e2e/                      # Scaffold smoke tests (Chromium + WebKit)
 ```
 
-Each route group has its own nested layout and opts into the shared `AppFrame` for starter chrome. Fullscreen games will use a sibling group to bypass child chrome. Parent routes currently contain a placeholder only, with no family data or actions; the parent barrier (T-40) and session handling (T-52) must land before either is added. `/lab` remains T-16.
+Child routes use their own shell (tab bar; dock via the nested `(docked)` group); parent and auth routes still use the starter `AppFrame`. Fullscreen games use the sibling `(game)` group. Child data comes from the `demoChild` fixture (`apps/web/src/lib/demo-child.ts`) until the session (T-52) and polled state (T-55). Parent routes currently contain a placeholder only, with no family data or actions; the parent barrier (T-40) and session handling (T-52) must land before either is added.
 
 ## Package responsibilities
 

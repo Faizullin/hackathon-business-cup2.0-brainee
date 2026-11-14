@@ -7,7 +7,45 @@ export const ru = {
   },
   learn: {
     title: "Учимся",
-    description: "Маленькие открытия каждый день. Скоро здесь появятся игры вместе с Брейни.",
+    description: "Маленькие открытия каждый день. Выбирай игру и помогай Брейни расти.",
+    allGames: "Все развивающие игры",
+  },
+  child: {
+    tabsLabel: "Разделы",
+    tabs: { learn: "Учимся", leisure: "Отдых", gifts: "Подарки", brainy: "Брейни" },
+    dock: {
+      label: "Брейни и кошелёк",
+      openBrainy: "Открыть Брейни",
+      mood: "Самочувствие",
+      stars: "звёзд",
+      suns: "солнышек",
+      goal: (earned: number, target: number) => `${earned} / ${target}`,
+      toNext: (stage: string, points: number) => `до «${stage}»: ${points}`,
+    },
+    leisure: {
+      title: "Отдых",
+      description: "Скоро здесь появятся игры, мультфильмы и научпоп за звёзды.",
+    },
+    gifts: {
+      title: "Подарки",
+      description: "Скоро здесь появятся цель недели, подарки от родителей и задания.",
+    },
+    brainyPage: { title: "Мой Брейни" },
+    game: {
+      exit: "Выйти",
+      level: (n: number) => `уровень ${n}`,
+      done: "Игра пройдена!",
+      again: "Ещё раз",
+      enough: "Хватит на сегодня",
+    },
+  },
+  skills: {
+    attention: "Внимание",
+    logic: "Логика",
+    memory: "Память",
+    reading: "Чтение",
+    speech: "Речь",
+    motor: "Моторика",
   },
   analytics: {
     title: "Аналитика",
