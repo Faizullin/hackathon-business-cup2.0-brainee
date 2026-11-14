@@ -91,7 +91,7 @@ test("a finished game moves the child's skills by the game's weights and lands i
   expect(after.progress.skills.attention).toBe(Math.min(100, before.progress.skills.attention + 1));
   expect(after.showcase.feed.find((item) => item.kind === "game")).toMatchObject({
     kind: "game",
-    title: "Продолжи узор · 1",
+    title: "Continue the Pattern · 1",
   });
   await page.request.post("/api/sessions/stop", { headers });
 });

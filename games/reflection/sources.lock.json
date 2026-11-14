@@ -1,0 +1,630 @@
+{
+  "repository": "llaske/sugarizer",
+  "commit": "60ccdbcb004de1a706749c7314edfa0d160288b4",
+  "files": [
+    {
+      "upstream": "activities/Reflection.activity/LICENSE",
+      "path": "LICENSE",
+      "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "upstream": "activities/Reflection.activity/NOTICE",
+      "path": "NOTICE",
+      "gitBlob": "489c1b014cd4e3b8accb71df3771020b28d59d63",
+      "sha256": "8d2dfb230ff6a72a6160fe4db432b1e6a51c65c33048d25309d01bddabb8322d"
+    },
+    {
+      "upstream": "activities/Reflection.activity/activity/activity-icon.svg",
+      "path": "activity/activity-icon.svg",
+      "gitBlob": "d601cfce85feeb94c69b03417969eb457dc4122f",
+      "sha256": "20adfa3b1a2426fadbba42b909c4803b3d46e5ba4760615dc2790b93dbd0353f"
+    },
+    {
+      "upstream": "activities/Reflection.activity/activity/activity.info",
+      "path": "activity/activity.info",
+      "gitBlob": "a68ed6696afe7c9775c4958d801df18fc4956435",
+      "sha256": "6aa338537fcf0980f235e0713d4819ce17e6fad1f98797f89d622820197bc35d"
+    },
+    {
+      "upstream": "activities/Reflection.activity/css/activity.css",
+      "path": "css/activity.css",
+      "gitBlob": "f910dfb2b6296e2eb3ed865d875bd57346d72fd1",
+      "sha256": "b8206742a06ace00ec8654eea15ae98fddb18eab8843d135c4830c8709189ec4"
+    },
+    {
+      "upstream": "activities/Reflection.activity/css/introjs.css",
+      "path": "css/introjs.css",
+      "gitBlob": "d67f1aa7fcd51990b6f9b084e39856569949320b",
+      "sha256": "bda7c7930bf4408837f57ef54b4d424c2ecad0ffcc64ffb7d8d7d6d10011c7e1"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/dialog-cancel.svg",
+      "path": "icons/dialog-cancel.svg",
+      "gitBlob": "dab4ae2d998db43a22de7219b00ce27c482ac13c",
+      "sha256": "104a5d019af45a27f6c20585a0615c510eb59a57657b0fbac3b9570352b61e4b"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/go-left.svg",
+      "path": "icons/go-left.svg",
+      "gitBlob": "9909519276287a09818ba04abf07c6044afb3e3d",
+      "sha256": "d47b54af1d904ad5940db324794cefebcd9361e3fd066338dd39b8591a23cc49"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/go-right.svg",
+      "path": "icons/go-right.svg",
+      "gitBlob": "c03bc7955d6e05fa415a339090ff488348c70089",
+      "sha256": "2148b5c6e74c338f17fc233919407e20241659bf986010bd82ecf8250ec37708"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/help.svg",
+      "path": "icons/help.svg",
+      "gitBlob": "3ebda0a2a23b8027cf41b3f5869b9e7f81b08731",
+      "sha256": "a71e1a9b23444107a65efb6911eab58f707600b526398251412ad6d4c52cfbb5"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/my-colors.svg",
+      "path": "icons/my-colors.svg",
+      "gitBlob": "ff589f2cc83957a0646ec84273ee7f1d510d6060",
+      "sha256": "3008232483696c36cf99fd62d36f733a9db55a4d16be5eaeebadf01b85bbfef0"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/new-game-bilateral.svg",
+      "path": "icons/new-game-bilateral.svg",
+      "gitBlob": "be0d797e36f7e156eb7263ba780b2fca9e616e56",
+      "sha256": "0595ec1ebbbd1e726e42e95ca6627fdb17506974fa112c37fcebd86b862cbc0e"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/new-game-horizontal.svg",
+      "path": "icons/new-game-horizontal.svg",
+      "gitBlob": "bebfbff27058ff948cd74beec1200e4b68f4ec93",
+      "sha256": "f906bdce5f4589df2555917527a94f34bdcd274b2db55f6deb9135374fb03951"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/new-game-vertical.svg",
+      "path": "icons/new-game-vertical.svg",
+      "gitBlob": "4fb45ffe4b7314428495ffa2bdf94d292bdfbdf7",
+      "sha256": "5ff6768cf2ab2c5ae9ba42e489db5b839c14e9cd92ef06d7c0395d5e8c9458d3"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/rainbow-colors.svg",
+      "path": "icons/rainbow-colors.svg",
+      "gitBlob": "9a723820381f2af7251dba576e1dbcd9a2b7ef01",
+      "sha256": "6ce6498fcec920aed436570a57e8e1d2df56b28b4a0fd7e1e1bb0d75b80a1ac6"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/robot-off.svg",
+      "path": "icons/robot-off.svg",
+      "gitBlob": "549e5c7b78886d127413236627311891f0f9e15f",
+      "sha256": "d5709f7f81a69927c6a6ed7eb1729b9361e24c411c39dc5bf38768e0b6e7d68a"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/robot-on.svg",
+      "path": "icons/robot-on.svg",
+      "gitBlob": "85b9b193fedf5cf582fea249c760a802831fa492",
+      "sha256": "ca61ae02280593a6943da8dde6c6fc898089e6fc76ca629d2945e1e4d4233121"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/view-fullscreen.svg",
+      "path": "icons/view-fullscreen.svg",
+      "gitBlob": "df39aedf4e5e4ca39e9689aee5f33bf5f992564d",
+      "sha256": "c56a3067f626ffeecb492f9cc76e7afb9cb0be7ee52fb1a137b14a37c0311eff"
+    },
+    {
+      "upstream": "activities/Reflection.activity/icons/view-return.svg",
+      "path": "icons/view-return.svg",
+      "gitBlob": "123bb30d338f50b110bdce35f0f4f87fa2c7f223",
+      "sha256": "2921b3156d892e85754383e56910d35e14d88ed9cc753f23b2c080e50605fc69"
+    },
+    {
+      "upstream": "activities/Reflection.activity/index.html",
+      "path": "index.html",
+      "gitBlob": "7b805ec71aca136ea870ae815988a7be56603060",
+      "sha256": "96a69bf0122b62a1acba7434e6d3eb88b860600585f4c990de49ec8c03d801ec"
+    },
+    {
+      "upstream": "activities/Reflection.activity/js/activity.js",
+      "path": "js/activity.js",
+      "gitBlob": "19132ffe661f4c4517ab79bfa5cfd0ba7ecc6409",
+      "sha256": "521bdee7987d3d59792eaed746aab60d3b03434e9e75e8b85fe7d4d3932546d3"
+    },
+    {
+      "upstream": "activities/Reflection.activity/js/game.js",
+      "path": "js/game.js",
+      "gitBlob": "169d2c24a73ea9a818295012add4fae35d1400b3",
+      "sha256": "ef5bf77055654fb53a5fdd7325bc2a81017be36eeacedae342fe7fcdb34166b0"
+    },
+    {
+      "upstream": "activities/Reflection.activity/js/loader.js",
+      "path": "js/loader.js",
+      "gitBlob": "c5ed22a483c68e7d713a73e6f38ecfd6973100b5",
+      "sha256": "9751f4ae6f1fead8eb1ef17010084201e07b59356590e5810689b788a0c6f31f"
+    },
+    {
+      "upstream": "activities/Reflection.activity/js/symmetrydot.js",
+      "path": "js/symmetrydot.js",
+      "gitBlob": "1d43c762f1dc73c78e74880f5fc1f85796d65d57",
+      "sha256": "1494f43180c71f182a2ec99c8edebae8bb6b74d6b151c352638c71b274c78e54"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/axios.min.js",
+      "path": "lib/axios.min.js",
+      "gitBlob": "fc6c8b6187d36612a5bc7ea2f2d81b34ca2dfd62",
+      "sha256": "24b9a49d375465e659dbaecb3fda81fbf0d3eedbf138e29cb5229e502d8a4fa1"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/domReady.js",
+      "path": "lib/domReady.js",
+      "gitBlob": "2b541220981460dc926ec5930850f03f5bfc8fc7",
+      "sha256": "ec290b1238d503170b7eea6c31fb8b7a18ef9cb62d719850436d2375d0fc219e"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/easeljs.js",
+      "path": "lib/easeljs.js",
+      "gitBlob": "c19b381f138beecf9252ee2c6eac996c9be2a9fa",
+      "sha256": "78b64d73fafad705e97d5f05bef7f43282189a00b388ec2ad2f00755f7e1e5bd"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/i18next.min.js",
+      "path": "lib/i18next.min.js",
+      "gitBlob": "08f5469cfe93c3937869ca3da6678e64297d0811",
+      "sha256": "c9473614e2a553ebce2920e274e88b24d335bfbe9aa7224d0e3f70c26c7a0224"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/intro.js",
+      "path": "lib/intro.js",
+      "gitBlob": "5c6616384dc77cb143472e6a1955a47968358396",
+      "sha256": "b864d82729b02675ed98de93de3ea903a112e1fdaee2f0aca6ee60f65be208ce"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/l10n.js",
+      "path": "lib/l10n.js",
+      "gitBlob": "c725283f96d8a4a3b15416a5e6a31adcc81ca33b",
+      "sha256": "2cf9fcea15e6f3b1013263e6f3a08c98a17b19772ea795ecbf315696bf011e15"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/require.js",
+      "path": "lib/require.js",
+      "gitBlob": "5b2687543f380c72cd7bf9e5d354f6ce87130e49",
+      "sha256": "28f160507103c810bf8c5c0dd1f951502c709788a084c0b7cfc9b603c38d7ea5"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/LICENSE",
+      "path": "lib/sugar-web/LICENSE",
+      "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/README.md",
+      "path": "lib/sugar-web/README.md",
+      "gitBlob": "de87a7250acfb14cdd381f6c69b55542d335617a",
+      "sha256": "8ebe63cd4119c00aac582102e4e2e2b419909db1e4b6c32165aebd94f8de8409"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/activity/activity.js",
+      "path": "lib/sugar-web/activity/activity.js",
+      "gitBlob": "16d56e07c71ca32fc178bc1a8ffa27470e29db45",
+      "sha256": "e6c0b41e32443dd3a7fc52310dc53a8ef5fd30ef86609e24605b014ef092f337"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/activity/shortcut.js",
+      "path": "lib/sugar-web/activity/shortcut.js",
+      "gitBlob": "508e92ab14d1cd41f5bf95246e312d93c7f8a663",
+      "sha256": "6e545e81446fe86c443067fc149c36d2f92da92eb48ddcb42c94ad76f572c0fd"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/bus.js",
+      "path": "lib/sugar-web/bus.js",
+      "gitBlob": "2cdfa4ac0ae8364eb8114bcc67815aca518c360f",
+      "sha256": "2c8149fb7b76f4791a8e7d772a1d622cf70e5495f4730f670c566a2fb00b0d79"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/bus/sugarizer.js",
+      "path": "lib/sugar-web/bus/sugarizer.js",
+      "gitBlob": "a8b15337c56ea09908e6b429d28e8b7658c8db54",
+      "sha256": "b2f062badf78cc4d3b44a496f03cc822be4c49eefe9e4eb719343c98f97cfb80"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/bus/sugaros.js",
+      "path": "lib/sugar-web/bus/sugaros.js",
+      "gitBlob": "f8279b7000183645dde7b5bc5be20f52852bdf8e",
+      "sha256": "b4c91f7f08e679bf7009755b3d680bb8318d8a8c2f203604a2f1c2dc53be4000"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/datastore.js",
+      "path": "lib/sugar-web/datastore.js",
+      "gitBlob": "c1a396f8fd6dd6d1da9d4db581e191c095e69d3a",
+      "sha256": "759885165f1d35ab4827ff3b7be277d8c702dec2fbf193593be0f777853f2638"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/datastore/sugarizer.js",
+      "path": "lib/sugar-web/datastore/sugarizer.js",
+      "gitBlob": "d10934dc251e9efe06620dd6198a20ab3480d17b",
+      "sha256": "4a339ccf0f7b109fd0032278323ee9fc00962dd908325e88a9569f83824a4245"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/datastore/sugaros.js",
+      "path": "lib/sugar-web/datastore/sugaros.js",
+      "gitBlob": "ebb3f19f3eec9e168dd152a094e5126d7e99bf75",
+      "sha256": "b49b846a545420b1d5e0a2e3b778e2f206bd8cfef38bc1bd8cf04676d6157f8a"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/dictstore.js",
+      "path": "lib/sugar-web/dictstore.js",
+      "gitBlob": "99bfc332853eaefe0d652c3c828d56adc4817a46",
+      "sha256": "2efaf7175b86a89949fc998e5253987dc89b518b31ec07229a44b4cb2b3a1afe"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/env.js",
+      "path": "lib/sugar-web/env.js",
+      "gitBlob": "5fad83eadc772e69a1d71175b20381f9f503d656",
+      "sha256": "13817fdf0fb136ea0aefe0046034175b6c146a8fbc363bbf25e3e119c9964781"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/README.md",
+      "path": "lib/sugar-web/graphics/README.md",
+      "gitBlob": "3a82062150baabb832af2177f329c7c016c249dd",
+      "sha256": "a1df7d87159b2aed559ba355e7d5be7cd05e2030a5496ec3808dd126c2b3ef9f"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/activitypalette.html",
+      "path": "lib/sugar-web/graphics/activitypalette.html",
+      "gitBlob": "ef19db0bc9992328ce43aafec4d33202f9505775",
+      "sha256": "dd08fd5c6271efd3982a6d1e43d905dc80e9834c404c93fcca958cd4091c55c3"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/activitypalette.js",
+      "path": "lib/sugar-web/graphics/activitypalette.js",
+      "gitBlob": "e41ccf0ee8647dff0132495006f24b69e4fabd3f",
+      "sha256": "892ae3f5294d92422a22ef947750a67d552e53cda9a8efd785510ab0f7804340"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/css/sugar-200dpi.css",
+      "path": "lib/sugar-web/graphics/css/sugar-200dpi.css",
+      "gitBlob": "f5d70f58e2453a470c906f09bb71ecd19c0aae13",
+      "sha256": "b5d00510f500f2c5ff3e23d19cef879b923ffd85b88df11c1814ea2e899c8fcc"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/css/sugar-200dpi.less",
+      "path": "lib/sugar-web/graphics/css/sugar-200dpi.less",
+      "gitBlob": "614c5ed162e6723f4ba58c3588e9ed8c26e998af",
+      "sha256": "bb293065b7cc0e745901ff38b54d1d82639f3fb668a9f46487c7e48f030ee94e"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/css/sugar-96dpi.css",
+      "path": "lib/sugar-web/graphics/css/sugar-96dpi.css",
+      "gitBlob": "95b8bb2f10aafa90fe3e2f7f080ab892ea670c63",
+      "sha256": "318b91baa0aaf6ab71d7c11499b77b1c519e5fa3ce99a159564d76db637ee758"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/css/sugar-96dpi.less",
+      "path": "lib/sugar-web/graphics/css/sugar-96dpi.less",
+      "gitBlob": "ea91f492083eeae5c884de2be8132123ce1863ba",
+      "sha256": "bcec36c36cebc395e640d0024d299817245551575149f5219f2e918392354c9d"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/css/sugar.less",
+      "path": "lib/sugar-web/graphics/css/sugar.less",
+      "gitBlob": "8378b2c3f5e941b5674b1fd6ca32472e92d63b4d",
+      "sha256": "24ac40217c7b256e0391ade8a5f1da894adca6538ca9b4ed5eaa02928e2e9aa9"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/grid.js",
+      "path": "lib/sugar-web/graphics/grid.js",
+      "gitBlob": "3322bb8c548b11c7371e9a7c5509112e0cfef2de",
+      "sha256": "6706b0ffd78dcc768bf08ae9909d5a0c02cbfd668f94b6e4a094f90e40293779"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icon.js",
+      "path": "lib/sugar-web/graphics/icon.js",
+      "gitBlob": "18b87bd658f6283b5f5620b661ddc5c0c3dbdcc9",
+      "sha256": "a470b2c567445c8fb11b6c4e95c8b6ca2215a506df34c37a7306e8ab740f7e6c"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/activity-stop.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/activity-stop.svg",
+      "gitBlob": "11b82e817cfac5b16d4284b8b0558e02a274ba19",
+      "sha256": "70d9dfaacc1500e8534f08b8986f7ea4d07d5deb4fce70c31dd9e7ed5ebcbf77"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/checkbox-checked-selected.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/checkbox-checked-selected.svg",
+      "gitBlob": "8ec1223a7c4689ca092fc4ac56840c8c218cbc89",
+      "sha256": "2649cf9c7cbff4c63f3784ccf37ca2ea53acf99c052662237494869bb31432c4"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/checkbox-checked.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/checkbox-checked.svg",
+      "gitBlob": "3cfce18f6a89628f720128e118a39dc9ace9eec3",
+      "sha256": "33b543e11a772884b507bc39c4dfe713b93f105db5ff244dbc30f4225ce67d3c"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/checkbox-unchecked-selected.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/checkbox-unchecked-selected.svg",
+      "gitBlob": "2263279eb340d99a401e993314b63b6e0a3a4ec5",
+      "sha256": "e6d984e4a81679dfa8fabd154cd558bcfdc4cbb5ea6b9e2f8f06a4389507d6c8"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/checkbox-unchecked.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/checkbox-unchecked.svg",
+      "gitBlob": "e1587823ef64d95a04aacc4f153fd6067b739e23",
+      "sha256": "5b3346d70ba105a103afd97e3fad11468bcad4c5c848c53dc5779c79d981a184"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/dialog-cancel-active.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/dialog-cancel-active.svg",
+      "gitBlob": "dc0d688f65dac61f78af6a48b822b60c0bb1330c",
+      "sha256": "66c44e738a451df62cf83d18ebb7dac087f36b438498558d05e85e4edd08b40e"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/dialog-cancel.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/dialog-cancel.svg",
+      "gitBlob": "dab4ae2d998db43a22de7219b00ce27c482ac13c",
+      "sha256": "104a5d019af45a27f6c20585a0615c510eb59a57657b0fbac3b9570352b61e4b"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/dialog-ok-active.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/dialog-ok-active.svg",
+      "gitBlob": "45de8401adf283381cf3ed2fd8bfb3fbd402f5d2",
+      "sha256": "042fa92b81988231b68712669769f24c1c49d62e3283b5de14fd25da1de3e424"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/dialog-ok.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/dialog-ok.svg",
+      "gitBlob": "69e5a2a13c044cdf47f145409be5201c61c0cb6b",
+      "sha256": "31acb6ce5ee590c7abc20500d85671ab16daa63edf3bf85a5ed13e3930f34d38"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/entry-cancel-active.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/entry-cancel-active.svg",
+      "gitBlob": "467509e7593ea5b8a5ff6115a42facd4ac55f286",
+      "sha256": "06befd7cfa50b796529b601ecb4b127e2187b23f2ccd7af6268539c15fb9c82b"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/entry-cancel-disabled.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/entry-cancel-disabled.svg",
+      "gitBlob": "55b4cdb8780a2a59abe07b4516a4f69c623203de",
+      "sha256": "080028df3a962c8e9213d87630860bd5a4ebbe1661e4ec6029d90fe4764ae06e"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/entry-cancel.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/entry-cancel.svg",
+      "gitBlob": "5339a7e94f28fc0f5f2850f80d1e262ef4f1ce51",
+      "sha256": "66e77d12d95ba90afa7f660474256888bb7f6abbcc8222c70782de66883b3b61"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/radio-active-selected.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/radio-active-selected.svg",
+      "gitBlob": "c1d1085a0d0f2b3d43176e9441f76e983311960d",
+      "sha256": "a5728887907a438747e2d2c4eee4b11d8908967542a5c3ae1c0abd2b3022fac3"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/radio-active.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/radio-active.svg",
+      "gitBlob": "a5fe591560517fa237e3ed9a6317617039534878",
+      "sha256": "57c9bce60b70fe7bee42c577ab1e2cd04c3db27cdd466cc691088f6ea790992c"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/radio-selected.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/radio-selected.svg",
+      "gitBlob": "a24b97e652729ebf99aefcf5b8eb61fc19365e4b",
+      "sha256": "de739ae9f1de918ebd90e5ea6c47854c1bbcc1426b820247ae8448ffa4c823ba"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/radio.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/radio.svg",
+      "gitBlob": "d250286248404161f98ad04568d65bd76e9c2af0",
+      "sha256": "a019c0ffc29a7edee8a31d5b7e4b8658da4624651cdfe5bca2e83c329e198ff7"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/zoom-groups.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/zoom-groups.svg",
+      "gitBlob": "b88462ff501943fc7793270d318e2bdb82b5988b",
+      "sha256": "3722967bec752a0e7413d97b85eb3b0d63a12502580f6ffbd8ecde4446d9b5b4"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/zoom-home.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/zoom-home.svg",
+      "gitBlob": "5578fecbffac7ddecc80918829f4543a059b9541",
+      "sha256": "bc24cb1569c0e2467f56fe487b1b24d15c589677c58bd53c0429931dc4277b4b"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/actions/zoom-neighborhood.svg",
+      "path": "lib/sugar-web/graphics/icons/actions/zoom-neighborhood.svg",
+      "gitBlob": "8d3f8d13448798b3f96ed869d48a817402e697a1",
+      "sha256": "6885a07881836b292aaf72ac668a24c83538956a6d44481711bef80f01bee9ec"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/emblems/arrow-down.svg",
+      "path": "lib/sugar-web/graphics/icons/emblems/arrow-down.svg",
+      "gitBlob": "2de1a9e3486b33521b308b7dff859fc4b83e26b0",
+      "sha256": "47761607107147fc620ecb95244c7a9f584de2578ef4882cabca830729b97ff6"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/icons/emblems/arrow-up.svg",
+      "path": "lib/sugar-web/graphics/icons/emblems/arrow-up.svg",
+      "gitBlob": "a977f4a86a9bc3d57f9fe0da2941c6df10e540bc",
+      "sha256": "e53a340a8302bdb94fdc77e6b2c1d53e27638162b5609a32834007110c46e338"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/menupalette.html",
+      "path": "lib/sugar-web/graphics/menupalette.html",
+      "gitBlob": "daf5fd579f70e96eebe159b2cf5d42447cba473b",
+      "sha256": "b2ea6fc1c78e80a919fa5835d82d7e2cdcad5a4a3aac0e5bd81aec3550ba42dc"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/menupalette.js",
+      "path": "lib/sugar-web/graphics/menupalette.js",
+      "gitBlob": "27fe8edf8cbb8214505387643227d22d7ddd3dae",
+      "sha256": "e39dbd5279c7f17d44eb7f06b69135817349d7057c1ece2b687995b27e172490"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/palette.js",
+      "path": "lib/sugar-web/graphics/palette.js",
+      "gitBlob": "2f1d0b9a3249cdcd941f9747e6ab24031a62e817",
+      "sha256": "ed7e1f1498feebec03bae5160d9bf1af07eed0173f0c85ff591d6f992468b399"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/radiobuttonsgroup.js",
+      "path": "lib/sugar-web/graphics/radiobuttonsgroup.js",
+      "gitBlob": "782a176366023ac93701c33fe800bed24382af1b",
+      "sha256": "d5b58102b154e457af2a013ec73bf3e744660387c7a81cbe711fb4fbed9f3cc1"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/graphics/xocolor.js",
+      "path": "lib/sugar-web/graphics/xocolor.js",
+      "gitBlob": "96d9a63b1e70429517f3200c56c33ee0d5a67fd9",
+      "sha256": "72420384c6ac5e9c05ac03fc0149ecf239c429d188e38df7d1c0b6e091f110ff"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/package.json",
+      "path": "lib/sugar-web/package.json",
+      "gitBlob": "0c2dec139a880cc224bf0dfd2477abb064540ad7",
+      "sha256": "3e9ec8ec59b1e3a2440537473fe2b4114c79408b483d6f9f44dbfd8c8da736f0"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/presence.js",
+      "path": "lib/sugar-web/presence.js",
+      "gitBlob": "0e253ddadec564e7a2f55d2f643dc90c609e2a94",
+      "sha256": "c097586437836e8b7e8782f1a7c687282ff22593119e5f6b8a91398398842ea2"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/functional/datastoreSpec.js",
+      "path": "lib/sugar-web/test/functional/datastoreSpec.js",
+      "gitBlob": "530d3f01c5780f4b5b60e467c8ee45ed90b2d8f3",
+      "sha256": "b2e43a7e32c5a16d7194942b4cfd631a7d9d4a0fe167bdaf86309c23393eeb11"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/functional/toolkitContractSpec.js",
+      "path": "lib/sugar-web/test/functional/toolkitContractSpec.js",
+      "gitBlob": "09b83b151f22d05bb3302397f0e5a3d557c9cf04",
+      "sha256": "86abb0d2a7fba5d16dfaea4378f1757a179f5d74bf1fb8f2888a9db7add1d124"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/graphics/iconSpec.js",
+      "path": "lib/sugar-web/test/graphics/iconSpec.js",
+      "gitBlob": "18fb353b8ce6ec13d69768695d5b826a3afb1cdd",
+      "sha256": "28011df4b046b0864e0977356fe9781868edd74c458045f1eec5fc077d913774"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/graphics/menupaletteSpec.js",
+      "path": "lib/sugar-web/test/graphics/menupaletteSpec.js",
+      "gitBlob": "3f4758bb88e3443da3f292030a0ad9ab5fd72c6a",
+      "sha256": "4cbdf5b55a2d1996e1b982ef0c2ebe3a82e26a231685017f9702970544f0c079"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/graphics/paletteSpec.js",
+      "path": "lib/sugar-web/test/graphics/paletteSpec.js",
+      "gitBlob": "a50fd32bb01a721e888926bdf9f6329570434e17",
+      "sha256": "417b5bf3d5f6a1c253eb57543550ee359b1f6b40e30be8754dfdf35b045512f0"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/graphics/radiobuttonsgroupSpec.js",
+      "path": "lib/sugar-web/test/graphics/radiobuttonsgroupSpec.js",
+      "gitBlob": "2c63775cdd94ebd835c5dd8328ea43cdc230ccc9",
+      "sha256": "330f226146a49678b036a875804b41c455f10a20e8dc70d7a37685b1f39a60cb"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/karma-shared.conf.js",
+      "path": "lib/sugar-web/test/karma-shared.conf.js",
+      "gitBlob": "9ff061f0ed2d1cc3deace7dfa0b933cbec1707f1",
+      "sha256": "90e4edeef4e668bc12b021e0960f9a668d2168a9fac03bec7f5a4b4d3106bc93"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/karma-unit.conf.js",
+      "path": "lib/sugar-web/test/karma-unit.conf.js",
+      "gitBlob": "889c20698f8a0266bdee638672b66def73a48b1c",
+      "sha256": "302816ae5ad5d84713af4a9437afc4104160db762ce9524687a86e58b42e7e61"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/karma.conf.js",
+      "path": "lib/sugar-web/test/karma.conf.js",
+      "gitBlob": "9c2d69ed2cf0021981d90aa90fe97ae92a6bdf96",
+      "sha256": "b1a6b1faab53d9167e98efeb22c3b464eab4df3d93df335bec0a46ad53c1441d"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/loader.js",
+      "path": "lib/sugar-web/test/loader.js",
+      "gitBlob": "7c83cc931fab09fa232bc9fb531b3148aa2628a8",
+      "sha256": "be16ff75157490d54b7edb45b927664cfb017f514f361be7eaea8f9a382152f3"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/unit/busSpec.js",
+      "path": "lib/sugar-web/test/unit/busSpec.js",
+      "gitBlob": "2a0ecbec2b1af88cebaaf8722bd3b30e993d8bd3",
+      "sha256": "d9ebf768695241a8a3d5df83cca1de87b844dcb46d169f04a4280972de228b23"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/unit/datastoreSpec.js",
+      "path": "lib/sugar-web/test/unit/datastoreSpec.js",
+      "gitBlob": "b166c82a4d3fcfb27ee2b089257fd9e3eb614e7e",
+      "sha256": "0266937ff758c1dd4c7a47f84375333d962eda9bd73182ac408e21f9ad63d8d3"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/unit/dictstoreSpec.js",
+      "path": "lib/sugar-web/test/unit/dictstoreSpec.js",
+      "gitBlob": "38528df32035991384e42d86e73e8a2d4c9079c3",
+      "sha256": "c45630c6fd5e98923d8bb0524dd734dc9ca1ed5714d920eac8b386b310c6694c"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/sugar-web/test/unit/envSpec.js",
+      "path": "lib/sugar-web/test/unit/envSpec.js",
+      "gitBlob": "3ed8c593cf90bd8a9c284092db7b64b452eea4f6",
+      "sha256": "42b47891454974bd914121508902afbf8fb20f8f63edc0f9da436ecc9bbe0602"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/text.js",
+      "path": "lib/text.js",
+      "gitBlob": "aaff3fc2de7a2e9ff08a20150ff9c8d0d1acd62a",
+      "sha256": "6289f13f7d655ef5afb8545ff27e00e6b7139acd0f1848e17fea2ac45cbfc6d0"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/tutorial.js",
+      "path": "lib/tutorial.js",
+      "gitBlob": "7d57150b98f86800d8d53c46103a9c2443fe918b",
+      "sha256": "dc12109f17b3bb41d84a92ae8c8d82ba207e9df22d3bb6aeb8ebd718022a2e73"
+    },
+    {
+      "upstream": "activities/Reflection.activity/lib/tweenjs.js",
+      "path": "lib/tweenjs.js",
+      "gitBlob": "553b0665fd1e66c76864f59c07c83e4b2d6d7141",
+      "sha256": "20604e3122f8c9e74f8a1b5393586a5bc2c56cfcfa6510be974f0b75e7e46d78"
+    },
+    {
+      "upstream": "activities/Reflection.activity/locales/en.json",
+      "path": "locales/en.json",
+      "gitBlob": "61540ccd973dfc2a0e148f7b510268e299e15f09",
+      "sha256": "c817ed6396c8bfc435ff1f0e6d38158343b2f4949f4bece36d240db111a785b0"
+    },
+    {
+      "upstream": "activities/Reflection.activity/locales/es.json",
+      "path": "locales/es.json",
+      "gitBlob": "3b37281dc88e18ceadb6493f931812117b2e2fff",
+      "sha256": "e97167aa9758598a429dcf6f02617d7bb9bc18fd700034078760b53fdea81de4"
+    },
+    {
+      "upstream": "activities/Reflection.activity/locales/fr.json",
+      "path": "locales/fr.json",
+      "gitBlob": "376c3b8bec072c6a4a9c9ffd59cb0b028ea867ae",
+      "sha256": "cd85b255c9b9cd32d544bd0b4fa3b5c3a0d0c99f3b497da671112cc231f08057"
+    },
+    {
+      "upstream": "activities/Reflection.activity/locales/pl.json",
+      "path": "locales/pl.json",
+      "gitBlob": "3caf6d4747e5640a78da12b0a95e1b02a1b7af28",
+      "sha256": "89b191089b6aa9777bc0d9f745840c822640110af2147892f819a4d5339ed1dd"
+    },
+    {
+      "upstream": "activities/Reflection.activity/package.json",
+      "path": "package.json",
+      "gitBlob": "504a401dad39ea25005a936481cfc08eec4d0181",
+      "sha256": "c6b509999fb104609ab6170650d12b47a944daf04965834a5421248ec789afce"
+    },
+    {
+      "upstream": "activities/Reflection.activity/setup.py",
+      "path": "setup.py",
+      "gitBlob": "ad218b21257b6eddca054948f2269b0a103168f2",
+      "sha256": "5be678fda148228f4eaa641e643fc1be69f99781e1d8052c06e65cc09643034c"
+    }
+  ]
+}

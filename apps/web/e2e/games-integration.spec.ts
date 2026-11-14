@@ -1,0 +1,137 @@
+import { recommendGames, weightedSkillGains } from "@brainee/core";
+import { allGames } from "@brainee/games";
+import { expect, test } from "@playwright/test";
+import { importedRound } from "./imported-games";
+import { newFamily } from "./new-family";
+import { savedState } from "./saved-state";
+import { completeTangram } from "./tangram";
+
+const imported = ["tangram-tales", "reflection", "rhythm-copycat", "secret-message-copy"];
+for (const id of imported) {
+  test(`${id}: English launch, gains, parent progress, history recommendations and next level`, async ({
+    page,
+    context,
+    baseURL,
+  }, info) => {
+    test.setTimeout(90000);
+    await context.addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
+    await newFamily(page.request, baseURL as string, 8);
+    const before = await savedState(page.request);
+    const game = allGames.find((g) => g.id === id);
+    if (!game) throw new Error(`Missing game ${id}`);
+    await page.goto(`/game/${id}?level=1&seed=42`);
+    await expect(page.getByRole("heading", { name: game.title, exact: true })).toBeVisible();
+    await expect(page.getByTestId("embedded-game")).toHaveAttribute("data-ready", "true", {
+      timeout: 10000,
+    });
+    for (let round = 0; round < 4; round++) {
+      if (id === "tangram-tales") await completeTangram(page);
+      else await importedRound(page, id, 1, round);
+    }
+    await expect(page.getByTestId("post-game")).toBeVisible();
+    const after = await savedState(page.request);
+    expect(after.progress.wallet.stars - before.progress.wallet.stars).toBe(12);
+    const gains = weightedSkillGains({ level: 1, rounds: 4, corrections: 0 }, game.weights);
+    for (const [skill, gain] of Object.entries(gains)) {
+      const key = skill as keyof typeof after.progress.skills;
+      expect(after.progress.skills[key] - before.progress.skills[key]).toBe(gain);
+    }
+    expect(after.latestGame?.gameId).toBe(id);
+    expect(after.learningHistory?.some((entry) => entry.gameId === id)).toBe(true);
+    await page.screenshot({ path: info.outputPath(`${id}-post-en.png`), fullPage: true });
+    await page.getByTestId("next-level").click();
+    await expect(page).toHaveURL(new RegExp(`/game/${id}\\?level=2`));
+    await expect(page.getByTestId("embedded-game")).toHaveAttribute("data-ready", "true", {
+      timeout: 10000,
+    });
+    await page.getByRole("button", { name: /Exit/ }).click();
+    await expect(page).toHaveURL(/\/learn$/);
+    expect((await savedState(page.request)).progress.wallet.stars).toBe(
+      after.progress.wallet.stars,
+    );
+    const expected = recommendGames(
+      after.progress.skills,
+      after.showcase.ageAverages,
+      allGames.filter((g) => g.minAge <= 8),
+      after.learningHistory ?? [],
+      Date.now(),
+    );
+    const links = page.getByTestId("recommended-game");
+    for (let i = 0; i < expected.length; i++)
+      await expect(links.nth(i)).toHaveAttribute(
+        "href",
+        `/game/${expected[i]?.game.id}?recommended=1`,
+      );
+    await page.goto("/analytics");
+    await expect(page.getByTestId("parent-latest-game")).toContainText(game.title);
+    await expect(page.getByTestId("parent-latest-game")).toContainText("+12");
+    await context.addCookies([{ name: "brainee_locale", value: "ru", url: baseURL as string }]);
+    await page.reload();
+    await expect(page.getByTestId("parent-latest-game")).not.toContainText(game.title);
+    await expect(page.getByTestId("event-feed")).not.toContainText(game.title);
+  });
+}
+
+test("new catalog titles switch language; locked learning and Explore routes cannot launch", async ({
+  page,
+  context,
+  baseURL,
+}) => {
+  await newFamily(page.request, baseURL as string, 4);
+  for (const locale of ["en", "ru"]) {
+    await context.addCookies([{ name: "brainee_locale", value: locale, url: baseURL as string }]);
+    await page.goto("/learn");
+    await expect(
+      page.getByText(locale === "en" ? "Mirror Grid" : "Зеркальная сетка", { exact: true }),
+    ).toBeVisible();
+    for (const id of imported) {
+      await expect(page.locator(`a[href="/game/${id}"]`)).toHaveCount(0);
+      const response = await page.request.post("/api/sessions/start", {
+        headers: { origin: baseURL as string },
+        data: { gameId: id, level: 1, seed: 42 },
+      });
+      expect(response.status()).toBe(400);
+    }
+    await page.goto("/explore");
+    await expect(page.locator('a[href^="/explore/"]')).toHaveCount(0);
+    await page.goto("/explore/magnet-explorer");
+    await expect(page.getByTestId("explore-frame")).toHaveCount(0);
+    await expect(
+      page.getByText(locale === "en" ? /Unlocks at age 6/ : /Откроется с 6/),
+    ).toBeVisible();
+  }
+});
+
+for (const locale of ["en", "ru"]) {
+  test(`iframe timeout and recovery preserve rewards (${locale})`, async ({
+    page,
+    context,
+    baseURL,
+  }) => {
+    await context.addCookies([{ name: "brainee_locale", value: locale, url: baseURL as string }]);
+    await newFamily(page.request, baseURL as string, 8);
+    const before = await savedState(page.request);
+    await page.route("**/games/reflection/index.html*", (route) =>
+      route.fulfill({
+        contentType: "text/html",
+        body: "<!doctype html><title>Silent game</title>",
+      }),
+    );
+    await page.goto("/game/reflection?seed=42");
+    await expect(page.locator("main").getByRole("alert")).toHaveText(
+      locale === "en"
+        ? "The game could not load. Please try again later."
+        : "Игра не загрузилась. Попробуй ещё раз позже.",
+      { timeout: 12000 },
+    );
+    await expect(page.getByTestId("embedded-game")).toHaveCount(0);
+    await page.unroute("**/games/reflection/index.html*");
+    await page.reload();
+    await expect(page.getByTestId("embedded-game")).toHaveAttribute("data-ready", "true", {
+      timeout: 10000,
+    });
+    expect((await savedState(page.request)).progress.wallet.stars).toBe(
+      before.progress.wallet.stars,
+    );
+  });
+}

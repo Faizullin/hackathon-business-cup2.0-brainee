@@ -4,6 +4,9 @@ import type { ComponentType } from "react";
 
 /** Hosts supply localized strings; isolated games never import an application. */
 export type GameText = {
+  loading: string;
+  loadError: string;
+  runtimeError: string;
   round(current: number, total: number): string;
   shape(index: number): string;
   choice(index: number): string;
@@ -19,6 +22,7 @@ export type GameText = {
 };
 
 export type GameProps = {
+  locale?: "en" | "ru";
   level: number;
   /** Deterministic rounds: same seed → same game. */
   seed: number;
@@ -32,7 +36,7 @@ export type GameMeta = {
   id: string;
   version: string;
   kind: GameKind;
-  /** Russian UI title. */
+  /** English catalog title; callers localize for display. */
   title: string;
   skills: { main: Skill; secondary?: Skill };
   /** D-23: this game's share of each trained ability (sums to 1); mirrors the Game row. */

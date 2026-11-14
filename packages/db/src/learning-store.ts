@@ -136,6 +136,13 @@ export async function startGameSession(db: Database, tokenHash: string, input: u
       .where(and(eq(games.id, gameId), eq(games.enabled, true), eq(games.kind, "dev")))
       .get();
     if (!game) throw new LearningStoreError("invalid-input");
+    const child = await tx
+      .select({ birthYear: children.birthYear })
+      .from(children)
+      .where(eq(children.id, access.childId))
+      .get();
+    if (!child || now.getUTCFullYear() - child.birthYear < game.minAge)
+      throw new LearningStoreError("invalid-input");
     const { recommended, ...launchFields } = input as Record<string, unknown>;
     if (recommended !== undefined && typeof recommended !== "boolean")
       throw new LearningStoreError("invalid-input");

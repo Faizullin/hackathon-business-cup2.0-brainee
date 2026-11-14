@@ -325,6 +325,9 @@ export const en: Dictionary = {
     motor: "Motor skills",
   },
   games: {
+    loading: "Loading game…",
+    loadError: "The game could not load. Please try again later.",
+    runtimeError: "Something went wrong with the game. Please try again later.",
     round: (current: number, total: number) => `Round ${current} of ${total}`,
     shape: (index: number) => `Shape ${index}`,
     choice: (index: number) => `Option ${index}`,

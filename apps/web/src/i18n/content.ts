@@ -148,6 +148,12 @@ const PAIRS: readonly (readonly [string, string])[] = [
   ["Odd One Out", "Найди лишний"],
   ["Continue the Pattern", "Продолжи узор"],
   ["Picture Puzzle", "Собери картинку"],
+  ["Tangram Tales", "Истории танграма"],
+  ["Mirror Grid", "Зеркальная сетка"],
+  ["Rhythm Copycat", "Ритм-повторялка"],
+  ["Secret Message Lab", "Секретное послание"],
+  ["Magnet Mission Lab", "Лаборатория магнитов"],
+  ["Neighborhood Route Planner", "Маршрут по району"],
 ];
 
 const toRu = new Map(PAIRS.map(([en, ru]) => [en, ru]));
@@ -155,7 +161,14 @@ const toEn = new Map(PAIRS.map(([en, ru]) => [ru, en]));
 
 /** One content string in the given locale; unknown text is returned unchanged. */
 export function translateContent(text: string, locale: Locale) {
-  return (locale === "ru" ? toRu.get(text) : toEn.get(text)) ?? text;
+  const translations = locale === "ru" ? toRu : toEn;
+  const direct = translations.get(text);
+  if (direct) return direct;
+  // Saved game-feed entries append the level to the catalog title.
+  const gameEntry = /^(.*)( · \d+)$/.exec(text);
+  if (gameEntry?.[1] && translations.has(gameEntry[1]))
+    return `${translations.get(gameEntry[1])}${gameEntry[2]}`;
+  return text;
 }
 
 /** Deep copy of seeded content with every known string translated. */

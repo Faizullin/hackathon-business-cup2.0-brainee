@@ -76,7 +76,7 @@ function SharedLearning({ children }: { children: ReactNode }) {
   const client = useQueryClient();
   const pathname = usePathname();
   const active =
-    /^\/(learn|leisure|gifts|brainy|game|entry|video|analytics|tasks|rewards|settings|fun|cartoon)(\/|$)/.test(
+    /^\/(learn|leisure|gifts|brainy|game|entry|video|analytics|tasks|rewards|settings|fun|cartoon|explore)(\/|$)/.test(
       pathname,
     );
   const accessReady = useRef(false);

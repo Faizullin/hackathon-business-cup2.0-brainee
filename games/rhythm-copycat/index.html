@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>Ритм-повторялка</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./session.css" />
+  <script src="../bridge.js"></script>
+</head>
+<body>
+  <main id="game">
+    <div class="session-hud">
+      <div class="session-progress">Ритм 1 из 4</div>
+      <button class="session-sound-btn" type="button" data-action="toggle-sound">Звук: выкл</button>
+    </div>
+
+    <section class="rc-screen rc-play" data-screen="play">
+      <div class="rc-bg" aria-hidden="true"></div>
+
+      <div class="rc-board">
+        <header class="rc-plaque">
+          <img src="./assets/ui/plaque.webp" alt="" draggable="false" />
+          <p data-prompt aria-live="polite">Слушай и смотри!</p>
+        </header>
+
+        <p class="session-message" role="status">Внимательно запоминай последовательность</p>
+
+        <fieldset class="rc-pads" aria-label="Площадки ритма">
+          <button class="rc-pad" type="button" data-pad="clap" aria-label="Хлопок (Clap)">
+            <img src="./assets/pads/clap.webp" alt="" draggable="false" />
+            <span class="rc-pad-label" style="--label-color:#4f8fd8">Хлоп</span>
+          </button>
+          <button class="rc-pad" type="button" data-pad="stomp" aria-label="Топот (Stomp)">
+            <img src="./assets/pads/stomp.webp" alt="" draggable="false" />
+            <span class="rc-pad-label" style="--label-color:#6cb232">Топ</span>
+          </button>
+          <button class="rc-pad" type="button" data-pad="tap" aria-label="Стук (Tap)">
+            <img src="./assets/pads/tap.webp" alt="" draggable="false" />
+            <span class="rc-pad-label" style="--label-color:#e88a2d">Тук</span>
+          </button>
+          <button class="rc-pad" type="button" data-pad="shake" aria-label="Шейк (Shake)">
+            <img src="./assets/pads/shake.webp" alt="" draggable="false" />
+            <span class="rc-pad-label" style="--label-color:#e8543f">Шейк</span>
+          </button>
+        </fieldset>
+
+        <div class="rc-tray">
+          <img class="rc-tray-art" src="./assets/ui/tray.webp" alt="" draggable="false" />
+          <div class="rc-chips" data-chips aria-hidden="true"></div>
+        </div>
+
+        <div class="rc-listen-row">
+          <button class="rc-pill rc-listen" type="button" data-action="listen" aria-label="Повторить показ ритма">
+            <img src="./assets/ui/button.webp" alt="" draggable="false" />
+            <span>ЕЩЁ РАЗ</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="rc-kiki rc-kiki-play" data-kiki-play>
+        <img data-kiki-img class="rc-kiki-actor" src="./assets/kiki/poses/neutral.webp" alt="Кики" draggable="false" style="max-height: 28vh; width: auto;" />
+      </div>
+    </section>
+  </main>
+  <script type="module" src="./session.js"></script>
+</body>
+</html>

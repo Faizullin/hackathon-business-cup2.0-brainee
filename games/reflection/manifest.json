@@ -1,0 +1,26 @@
+{
+  "id": "reflection",
+  "version": "0.1.0",
+  "kind": "dev",
+  "title": "Mirror Grid",
+  "engine": "sugarizer-easeljs",
+  "runtime": "embedded",
+  "entry": "/games/reflection/index.html",
+  "skills": {
+    "main": "logic",
+    "secondary": "attention"
+  },
+  "weights": {
+    "logic": 0.7,
+    "attention": 0.3
+  },
+  "minAge": 7,
+  "levels": 3,
+  "roundsPerSession": 4,
+  "bridge": {
+    "protocol": 2,
+    "contract": "reflection@1"
+  },
+  "sizeBudgetBytes": 2000000,
+  "license": "Apache-2.0"
+}

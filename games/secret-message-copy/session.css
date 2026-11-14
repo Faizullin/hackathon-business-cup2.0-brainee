@@ -1,0 +1,275 @@
+/* Secret Message Lab — session styling & host integration */
+
+:root {
+  --sm-gold: #f5bd35;
+  --sm-navy: #123f50;
+  --sm-coral: #e8543f;
+  --sm-teal: #2299a8;
+}
+
+.session-hud {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.session-progress {
+  font-size: clamp(16px, 3.5vw, 22px);
+  font-weight: 700;
+  color: #fff;
+  background: rgba(18, 63, 80, 0.92);
+  border: 2px solid var(--sm-gold);
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.session-sound-btn {
+  pointer-events: auto;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 8px 14px;
+  border-radius: 24px;
+  border: 2px solid var(--sm-gold);
+  background: #fff;
+  color: #123f50;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  touch-action: manipulation;
+}
+
+.session-sound-btn:active {
+  transform: scale(0.96);
+}
+
+.session-sound-btn.is-active {
+  background: var(--sm-gold);
+  color: #123f50;
+}
+
+#play-stage {
+  z-index: 10;
+}
+
+.session-footer {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.session-message {
+  min-height: 28px;
+  max-width: min(90vw, 540px);
+  font-size: clamp(15px, 3vw, 19px);
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+  background: rgba(18, 63, 80, 0.88);
+  padding: 4px 16px;
+  border-radius: 12px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.session-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+}
+
+.session-btn {
+  min-height: 48px;
+  min-width: 120px;
+  padding: 10px 24px;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 24px;
+  border: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.1s,
+    opacity 0.2s;
+}
+
+.session-btn:active {
+  transform: scale(0.96);
+}
+
+.session-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.session-btn-check {
+  background: var(--sm-gold);
+  color: #123f50;
+}
+
+.session-btn-clear {
+  background: #eef2f7;
+  color: #4a5568;
+}
+
+.session-btn-peek {
+  background: var(--sm-teal);
+  color: #fff;
+}
+
+.session-timer-bar {
+  width: min(80vw, 400px);
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.session-timer-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--sm-gold);
+  transition: width 0.1s linear;
+}
+
+/* Ensure tokens fit in sequence */
+.memory-sequence,
+.copy-sequence {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(6px, 1.5vw, 14px);
+  flex-wrap: wrap;
+}
+
+.copy-slot {
+  width: clamp(48px, 9vw, 68px);
+  height: clamp(48px, 9vw, 68px);
+  border: 2px dashed rgba(21, 63, 99, 0.4);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.copy-slot.is-filled {
+  border-style: solid;
+  border-color: var(--sm-gold);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.copy-slot.is-wrong {
+  border-color: var(--sm-coral);
+  animation: sm-shake 0.4s ease;
+}
+
+@keyframes sm-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+.stamp-dock {
+  position: absolute;
+  z-index: 30;
+  right: 50%;
+  bottom: clamp(75px, 12vh, 110px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2vw, 24px);
+  transform: translateX(50%);
+  pointer-events: auto;
+}
+
+.stamp-button {
+  min-width: 56px;
+  min-height: 56px;
+  width: clamp(56px, 10vw, 84px);
+  height: clamp(56px, 10vw, 84px);
+  border-radius: 16px;
+  touch-action: manipulation;
+  pointer-events: auto;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid var(--sm-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.stamp-button > img {
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.session-complete {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 63, 80, 0.96);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  color: #fff;
+  text-align: center;
+  padding: 24px;
+}
+
+.session-complete h1 {
+  font-size: clamp(26px, 5vw, 38px);
+  color: var(--sm-gold);
+  margin-bottom: 16px;
+}
+
+.session-complete p {
+  font-size: clamp(18px, 3.5vw, 22px);
+  max-width: 520px;
+}
+
+@media (max-width: 500px) {
+  .session-actions {
+    width: 100%;
+    gap: 6px;
+  }
+  .session-btn {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+}

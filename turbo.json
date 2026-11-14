@@ -7,7 +7,15 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**", "dist/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "!.next/dev/**",
+        "dist/**",
+        ".next-games/**",
+        "!.next-games/cache/**",
+        "!.next-games/dev/**"
+      ]
     },
     "dev": {
       "cache": false,
@@ -24,5 +32,6 @@
     "DATABASE_URL",
     "DATABASE_AUTH_TOKEN",
     "BRAINEE_DEFAULT_LOCALE"
-  ]
+  ],
+  "globalEnv": ["BRAINEE_NEXT_DIR"]
 }

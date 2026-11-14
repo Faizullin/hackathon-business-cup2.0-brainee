@@ -2,7 +2,7 @@
   "id": "continue-pattern",
   "version": "0.1.0",
   "kind": "dev",
-  "title": "Продолжи узор",
+  "title": "Continue the Pattern",
   "engine": "react",
   "runtime": "react",
   "entry": "ContinuePattern.tsx",

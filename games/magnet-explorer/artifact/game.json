@@ -1,0 +1,30 @@
+{
+  "id": "magnet-explorer",
+  "title": "Magnet Explorer",
+  "category": "sensorial-science",
+  "path": "games/magnet-explorer/",
+  "icon": "🧲",
+  "entry": "index.html",
+  "age": { "min": 5, "max": 6 },
+  "status": "beta",
+  "accent": "#58a945",
+  "shareTitle": "Magnet Explorer — A Hands-On Magnetic Science Game",
+  "description": "Drag a friendly magnet, test real materials, sweep up steel treasures, and guide a shiny ball through a wooden maze.",
+  "learningGoals": [
+    "Observe magnetic and non-magnetic behavior through direct testing",
+    "Recognize several familiar steel objects without claiming every metal is magnetic",
+    "Explore how magnetic attraction changes with distance"
+  ],
+  "interactionModel": "Direct magnet interaction: bring a magnet near objects, sweep for magnetic treasures, and guide a steel ball through a maze.",
+  "feedbackModel": "Near-field steel objects snap to the magnet with a clink, glow, and haptic pulse; other materials bounce gently with supportive recorded narration.",
+  "uses": ["shared/js/voice-clips.js", "shared/js/narrator.js", "shared/js/audio-unlock.js", "shared/js/sfx.js", "shared/js/bgm.js", "shared/js/hud.js", "shared/js/screens.js", "shared/js/timers.js", "shared/js/rng.js", "shared/js/tap.js", "shared/js/debug-harness.js", "shared/js/idle-nudge.js", "shared/assets/music/whimsical-toy-workshop.mp3", "games/magnet-explorer/assets/"],
+  "modes": [
+    { "id": "test-lab", "title": "Test Lab", "skill": "direct proximity testing" },
+    { "id": "treasure-sweep", "title": "Treasure Sweep", "skill": "find magnetic objects" },
+    { "id": "magnet-maze", "title": "Magnet Maze", "skill": "guide a steel ball" }
+  ],
+  "license": { "code": "MIT", "assets": "CC-BY-4.0" },
+  "credits": "Kaigani; GPT Image 2 object system; local Krea 2 environments; Qwen voice-clone narration. Full provenance in ASSETS.md. Built with Codex for QLOBE Kids.",
+  "characters": [],
+  "conceptVideo": null
+}

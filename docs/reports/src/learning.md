@@ -15,8 +15,8 @@ break bonus; “Take a break” ends on the Brainy tab. The flow checks the upda
 wallet and visits the other child tabs. Pattern answers are tried in order to
 exercise hints and correction rewards. Achievement celebrations are dismissed
 before continuing. The weak-skill card is shown; its iframe game is outside
-this native-game recording helper. The games-owned loading text may still appear
-in Russian briefly; T-112 belongs to the separate games session.
+this native-game recording helper. The catalog now includes seven learning games and two unscored Explore previews.
+Catalog titles and host loading/error messages follow the English/Russian switch.
 
 ### Phone · 390 × 844
 

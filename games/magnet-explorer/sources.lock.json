@@ -1,0 +1,702 @@
+{
+  "repository": "kaigani/qlobe-kids",
+  "commit": "60967634e6cc313c41a5aa8067bed9f0f616176c",
+  "files": [
+    {
+      "upstream": "games/magnet-explorer/ASSETS.md",
+      "path": "ASSETS.md",
+      "gitBlob": "ca94b4eea1b9d8b7e28ac11f7e72eedcfe96962c",
+      "sha256": "035febb39e137e2306efc9905b461235b2edd7962cbb94294a79a4a53c11c331"
+    },
+    {
+      "upstream": "LICENSE",
+      "path": "LICENSE",
+      "gitBlob": "69b618370281183db43e6a24ccfd944a5b62a145",
+      "sha256": "f308b595b213721db303e73e6e7d00b1e57ec9bfc193842e68c9ca481fb90632"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-bolt.m4a",
+      "path": "assets/audio/magnet-voice-bolt.m4a",
+      "gitBlob": "474516e1e6ac98918c45dbf309c6634f93102e9d",
+      "sha256": "127924788603834cb5b702cbd2b1c0a1fcf5d8bd63dbd9e74f79c3a628eaf2a8"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-bolt.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-bolt.m4a.recipe.json",
+      "gitBlob": "14ddc814e4fdde9b053562d2921d4b83200685b2",
+      "sha256": "42b8a173760bb98adfb467dde8863b64fef72764db17d117f9d8b2ffff9ed42f"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-complete.m4a",
+      "path": "assets/audio/magnet-voice-complete.m4a",
+      "gitBlob": "a3f7b0ea8f7fc3a00baaf195a111380de0fa7676",
+      "sha256": "e0649049507d33a0f8c14c8416e39f790922fb5c297c39ea9e81834d28075a99"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-complete.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-complete.m4a.recipe.json",
+      "gitBlob": "ad59e81c94115bd92ec0703f4e6d5ec0a651b14f",
+      "sha256": "d94d466c0eed288e3040a9d5c413c12b0368263e3e1d45c5a305064e1f1a11fe"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-cork.m4a",
+      "path": "assets/audio/magnet-voice-cork.m4a",
+      "gitBlob": "9fac1fb6bcea006502756b991f83ce4da66f9e65",
+      "sha256": "9ca5da7b2c3a775f1b6faabaeeb48cf774fa464dcee5d8809cdb84714005c4af"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-cork.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-cork.m4a.recipe.json",
+      "gitBlob": "db7daf0d71e1423f8d1865482bcfa18e56248191",
+      "sha256": "ebdfdb3747bbc5a1faa0fdaca92816184511ba15f1268f18864787fb5f73d492"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-intro.m4a",
+      "path": "assets/audio/magnet-voice-intro.m4a",
+      "gitBlob": "de21c0b4f2521f1cce8311c7ec09797e50af8a2e",
+      "sha256": "6776266dd02e69662050f600b9a7a854e17dfcf27ede73269c175f31320b1b07"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-intro.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-intro.m4a.recipe.json",
+      "gitBlob": "5af86dda2bc976816b4841727d165ab428f660ba",
+      "sha256": "3ac75d7c172caf05f058a47e9df40efaf90556a6e3585799efe6aef4ab8b4e15"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-leaf.m4a",
+      "path": "assets/audio/magnet-voice-leaf.m4a",
+      "gitBlob": "5e4103e332496841f0bfe406381b1ac76e4c602b",
+      "sha256": "ffb938bdd43bfb249d88c4496700d5fcdbb5bd37fb7b530dfad7f3b79d47f129"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-leaf.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-leaf.m4a.recipe.json",
+      "gitBlob": "6324f68ceb8474fe91c5f2690cb7cb6dd207de7f",
+      "sha256": "85b1b48a19bd1dfcd6aa07559ef89d04c49a692395cdace57248ee130f15e7b7"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-magnetic.m4a",
+      "path": "assets/audio/magnet-voice-magnetic.m4a",
+      "gitBlob": "ab4ea938000d5ea2f646a7c28164efa6ff974120",
+      "sha256": "a13150af01f2bff8b72c6931abbd2597205b0cddf602ee4a1cf9626d903e075e"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-magnetic.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-magnetic.m4a.recipe.json",
+      "gitBlob": "fe6be27410db30b442b3ed482475034656e72360",
+      "sha256": "2da20ddf56103d569ab78b964eafde164ff59f4a390be607c7984e6f7317734e"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-maze-done.m4a",
+      "path": "assets/audio/magnet-voice-maze-done.m4a",
+      "gitBlob": "9418effcc0a908dc2c0d92f3504a1dbda6e7a892",
+      "sha256": "978b3e6cfc1129e709c97af7e6044ac582b82aa73af75c371ddaf63d6db01726"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-maze-done.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-maze-done.m4a.recipe.json",
+      "gitBlob": "fe20ae074c07b27f7e9f42997236a2d6a6198bc6",
+      "sha256": "739c3b5a3a1efeefc0b26d12906753e0e7b83abeec04c3e16a1883ef9892c894"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-maze-near.m4a",
+      "path": "assets/audio/magnet-voice-maze-near.m4a",
+      "gitBlob": "57e286657c5c8a1fbb042f5d8205f8499219ca39",
+      "sha256": "64997f282dfe7538444bdc6275027bde65bd5ffabf414b01800b097152f09a9d"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-maze-near.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-maze-near.m4a.recipe.json",
+      "gitBlob": "2f97ea485d405abfce0e0fe70ae8dafd79cbce21",
+      "sha256": "19cc51d9423929b0ca7d8b94a347a82d5ed56d861cddfe8ca3413a4edc2a8042"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-mode-maze.m4a",
+      "path": "assets/audio/magnet-voice-mode-maze.m4a",
+      "gitBlob": "557646d6b2cd39ff2ef1a43fda1cda5a3b0693f0",
+      "sha256": "2ff28eb2c239064c20a6665ca63a7938e53cf4d373059912beb3e1d1dbf23e5f"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-mode-maze.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-mode-maze.m4a.recipe.json",
+      "gitBlob": "3b0191a3653be00d19896cb6855a33d3aa0dbc90",
+      "sha256": "63cb68b899092e173541dc47ad60768debee6957cbfa2ef0c1fd6bc5acc9f763"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-mode-sweep.m4a",
+      "path": "assets/audio/magnet-voice-mode-sweep.m4a",
+      "gitBlob": "336e4bbcb226aee5e615b71e00253f8d1b609198",
+      "sha256": "6c46b8e21007d9c6818d71a66f4190f9396d38d06e5a4406bcb9c067f415df8a"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-mode-sweep.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-mode-sweep.m4a.recipe.json",
+      "gitBlob": "0d8819bc6e4638628de5ab6d83cec358ad915822",
+      "sha256": "a0f29aa81ed8518bbb587f72957ca49f14669de16e49e7848f2ac8e9607cc37d"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-mode-test.m4a",
+      "path": "assets/audio/magnet-voice-mode-test.m4a",
+      "gitBlob": "d485ffae73db8e1af86f468a60c9687d20cde820",
+      "sha256": "9d1b1184275da4a346aff56c51ccd93c11b91cbb719363a1081f0eb2b30d8854"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-mode-test.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-mode-test.m4a.recipe.json",
+      "gitBlob": "ca4310aed08a0e028664328b9c06e2792749d35f",
+      "sha256": "9351e62fb679f196cf6810ca4307759293b5d81db4934309ea93f4339786b8f5"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-nail.m4a",
+      "path": "assets/audio/magnet-voice-nail.m4a",
+      "gitBlob": "64bd9cead89f7779c76002f43bf06d305602e103",
+      "sha256": "0ee71fe571dc3c62dd97a809408389db11d58be6a7c69c333ff0b2ce2f3bc7ae"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-nail.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-nail.m4a.recipe.json",
+      "gitBlob": "14080b6a1d746ed2f35d469e1c71bce7e92fe1f5",
+      "sha256": "e2bc80e250467520c87c87c469faedb697ae14535d4b1aeced04b37886e7d177"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-nonmagnetic.m4a",
+      "path": "assets/audio/magnet-voice-nonmagnetic.m4a",
+      "gitBlob": "75ae74478b241ed3d29e9d7a55e08de1955cf988",
+      "sha256": "99b73046bb03e70cce574f293cbd8c0561379746cd0def5315f007659e425b9a"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-nonmagnetic.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-nonmagnetic.m4a.recipe.json",
+      "gitBlob": "8ddf0b17412d6ed59f300d9b7f2aeb683044b431",
+      "sha256": "c5cf74fb3546a9ef70728eb96a2256f207f966ab4ad109b3fe14efb85ab8e48f"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-nudge.m4a",
+      "path": "assets/audio/magnet-voice-nudge.m4a",
+      "gitBlob": "e2cc6a3550056826b69576829c295409ff4448fa",
+      "sha256": "b75bad52dea8477784319e13fd3227ffcf10ca2d7c5dbdf7d78e5ecc51b48f6f"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-nudge.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-nudge.m4a.recipe.json",
+      "gitBlob": "6f1c1ed1bbb4ed852fc7815215966fde521d02e9",
+      "sha256": "05d8767cc33b08be5cdc8d3517e031814e35069c87f0a0ddd51662d9a0270ff7"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-paperclip.m4a",
+      "path": "assets/audio/magnet-voice-paperclip.m4a",
+      "gitBlob": "11e5934848f2dd4d3016cecb14f213ab5590865a",
+      "sha256": "92fdd61af40bae87f02e7ba1e05ca3365c8b603fe4c9577b6860f9d50cea8add"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-paperclip.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-paperclip.m4a.recipe.json",
+      "gitBlob": "5fc060e1eb7fa5cc77a385ea7c0994153aaef9a4",
+      "sha256": "22b2ff44e683fdd2c6d426078fcc355d716a2e57820372c43e53850bd2857a88"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-plastic-button.m4a",
+      "path": "assets/audio/magnet-voice-plastic-button.m4a",
+      "gitBlob": "f0256444001061f1814b1fa93843d6aa618d3761",
+      "sha256": "3af35068d328ba1998bfdda1769d5b23f26196c803e99a88004b538671358774"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-plastic-button.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-plastic-button.m4a.recipe.json",
+      "gitBlob": "cb95b0d39120756b12f84dcd61fb30ac1cec336f",
+      "sha256": "8961ed42bbaabd798cafd40ca5cd020f49747d78434f0d7799ec84b5cd6dff54"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-pom-pom.m4a",
+      "path": "assets/audio/magnet-voice-pom-pom.m4a",
+      "gitBlob": "f5615ba6f69888b7186c9e969998dba47536821c",
+      "sha256": "f9786cc1544aa7a085b08fef3adf99009df9ada3f2b1bd501f8f710f6572990b"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-pom-pom.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-pom-pom.m4a.recipe.json",
+      "gitBlob": "e73d94a58c73408e12aae837d1ccd1a1446697ba",
+      "sha256": "7da85bd94ebb309aba61cb7af8bf9d2017cd5f71e8725a81082a705e2319b754"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-rubber-duck.m4a",
+      "path": "assets/audio/magnet-voice-rubber-duck.m4a",
+      "gitBlob": "a10f66b26fbe93edc9d2d32003b3fe22734d4084",
+      "sha256": "ecb0b7a9529383e0f1e32b6471251f5696c0fa33ff3e22658a829bbe4bb970a5"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-rubber-duck.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-rubber-duck.m4a.recipe.json",
+      "gitBlob": "96a1b1e36efa1d05d49e1e612629de796786c1ea",
+      "sha256": "51b58a106e75ac4fe7c8e67593e7ac00bf04fec92b74b3548dac7760aed2dac9"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-safety-pin.m4a",
+      "path": "assets/audio/magnet-voice-safety-pin.m4a",
+      "gitBlob": "6121b726a55cd4c03020d8b366d6c96f0682f2a0",
+      "sha256": "ecda9f12553fd9eba426c6177e2d933290c18a793b10f216f8c97187686f1a11"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-safety-pin.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-safety-pin.m4a.recipe.json",
+      "gitBlob": "43f2b848c1a89308fe2cd923363c7e3cfbe6afa6",
+      "sha256": "07e99d8bc1bfdf951cc486e2b98e485132ae885f124e66ededeb2338568165c8"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-steel-can.m4a",
+      "path": "assets/audio/magnet-voice-steel-can.m4a",
+      "gitBlob": "12ad53d8d0d938882914592fe5227432b20d1fb6",
+      "sha256": "79db4746bfe22f1f43e4f020d6ace58d7f091d6995bd95abb00c1d4d67ef1ac1"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-steel-can.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-steel-can.m4a.recipe.json",
+      "gitBlob": "a3c85f5680601cc08f1c93302d84bcffd793f800",
+      "sha256": "5ed7e3d29ad0a012ce7741ed9fbd6dd392b2458ccac4b12daae57b6c72cf871c"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-sweep-done.m4a",
+      "path": "assets/audio/magnet-voice-sweep-done.m4a",
+      "gitBlob": "38976d6a43e5ed41972fca436636433c0f462ce8",
+      "sha256": "b1733462fa897984c778d03b075a63d6d7468d3eca7e12b3c202821aadc1e309"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-sweep-done.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-sweep-done.m4a.recipe.json",
+      "gitBlob": "7c1f364422b87368dee688a667fd16e2cb59bda7",
+      "sha256": "ccc3091c3404f5b7fd08ffcc01bec54f97271fe58635ada164a654d04ae8dabc"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-treasure.m4a",
+      "path": "assets/audio/magnet-voice-treasure.m4a",
+      "gitBlob": "9745f45eec068fa8c72a0dfd9d27826cf60f021a",
+      "sha256": "f11c5decb14402f4772ed3bad9e561a2e4240adee50d3384fc423bf6b8f59a44"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-treasure.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-treasure.m4a.recipe.json",
+      "gitBlob": "b6c98ce970eefa1bcf9632a51f79b69b54202bbc",
+      "sha256": "3f7f4a586a30bfe7cd8b114c9951e6e8cc7477f6d39677e6f53c7b7cf725cd3b"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-washer.m4a",
+      "path": "assets/audio/magnet-voice-washer.m4a",
+      "gitBlob": "7c994d6cb6f9c0b0678fc2b3d0218d35025701ce",
+      "sha256": "dd2049a3992c1aa715cc8488eb09e540cdcd8243be7e587912365ac9a556ce75"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-washer.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-washer.m4a.recipe.json",
+      "gitBlob": "c29d0f43991b1cdc49314cc029df8ee882c9e9b6",
+      "sha256": "c6559c37b5c0dddfca1a4f62cbd663c8a2c7c262311d0f4799dabbc4110535ea"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-wood-block.m4a",
+      "path": "assets/audio/magnet-voice-wood-block.m4a",
+      "gitBlob": "bc299a2f6e6df978a4616ec060b6e6ccf3c29370",
+      "sha256": "846c6d1b7e987b71535ba8b4869da2d1fef51b0ec7362f8eaaeb309398a521b8"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/magnet-voice-wood-block.m4a.recipe.json",
+      "path": "assets/audio/magnet-voice-wood-block.m4a.recipe.json",
+      "gitBlob": "1ac62ee52e1540ef974c5af093f777fa28c682e7",
+      "sha256": "392cfbe6b0a21a46ebdca3a506b92a8f5593ce66a248c82a25dd5dcece40a092"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/audio/manifest.json",
+      "path": "assets/audio/manifest.json",
+      "gitBlob": "97a96e8c1597561f048c857e9bd8aeff333b2e94",
+      "sha256": "bfdfacdbb60caa2387cbb20a45cc6c057f8e4a9930059c1d056793e4985f9d16"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/backgrounds/maze.webp",
+      "path": "assets/backgrounds/maze.webp",
+      "gitBlob": "dc6f96b34f2b81ca8d544f9fe8a0ab884944d7dc",
+      "sha256": "40aec26a90c7ca254697d0fc17b1fba6df75ceedba90a5482d665d0b7fae9ad4"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/backgrounds/maze.webp.recipe.json",
+      "path": "assets/backgrounds/maze.webp.recipe.json",
+      "gitBlob": "cdade6f94398f8e3ae5e5c3259b7ff5a7c236a69",
+      "sha256": "a3dba55b32fd60a97c09106b39df6e9f32f69804b1580298c71a7197c194fe16"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/backgrounds/splash.webp",
+      "path": "assets/backgrounds/splash.webp",
+      "gitBlob": "864b6f992a3e2b96c660784e61f42eff266c69b5",
+      "sha256": "db9b0d2de7654217c506ed5dc0824fe278a5e38c314b4e777af16c9b1e1ca6c5"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/backgrounds/splash.webp.recipe.json",
+      "path": "assets/backgrounds/splash.webp.recipe.json",
+      "gitBlob": "59b41c1c5a8acfb3f64a23592379009a668719bf",
+      "sha256": "f8c2534f7a465a70134d5f4699c4d638dbd0580adc50c321e0dda60cd29e7665"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/backgrounds/workbench.webp",
+      "path": "assets/backgrounds/workbench.webp",
+      "gitBlob": "c13d9fa029760f72a97ea66d4ac7e336bc1071b8",
+      "sha256": "ec7ae01157e2070229cbbf7616d61023957a0f374bc119748a3c1b8bf9e94093"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/backgrounds/workbench.webp.recipe.json",
+      "path": "assets/backgrounds/workbench.webp.recipe.json",
+      "gitBlob": "c56a8b0025686d8f61a0a7b1bfb1a619d78c1fb5",
+      "sha256": "8e173fd949317924aeb5d57ed9ba74e297f19d00ede29a48ff559630306fbb2a"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/bolt.png",
+      "path": "assets/objects/bolt.png",
+      "gitBlob": "6c60cf5156bfa9730b8d1f214df4b7742e7f2a93",
+      "sha256": "40b56d492bf80ec03119680c4728c2d037937fda8e6edaeb6ba6e1c553e0037a"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/boxes.json",
+      "path": "assets/objects/boxes.json",
+      "gitBlob": "02d15d6e0ef915bc7c74c052feeeeaf21195cf0f",
+      "sha256": "dcb3475f2ec5af7c2c07f541b4ce8436002051d29885d409db018e8bf810e32c"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/cork.png",
+      "path": "assets/objects/cork.png",
+      "gitBlob": "93da5639fc32b7143078152b795508750f2491e5",
+      "sha256": "38ee3a7dcbcd375f542592f06c8604bc3a4d1e63290540521835bcdfccc99d7c"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/leaf.png",
+      "path": "assets/objects/leaf.png",
+      "gitBlob": "1d5a11bb8282edab585d6a57cbbf9a2b63318ecc",
+      "sha256": "377e0cc56d401a1d5443d3018617251b85241695ec0f26f116a52c7cfb25afcd"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/magnet.png",
+      "path": "assets/objects/magnet.png",
+      "gitBlob": "63050631b223bffad3a5e1d5fac2182cd667d491",
+      "sha256": "872fe039ac521d5d5fbaf3a1e7553d7213f97dc53a4c5380eb5b8175593748f7"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/nail.png",
+      "path": "assets/objects/nail.png",
+      "gitBlob": "2d488d1bfa7bc6b87f57d8a469fd97b59686ca0d",
+      "sha256": "f29b7e51ee6c1f58793c0806d0e020f942a0f61e099c45a6f7ed21ef4e3ec458"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/paperclip.png",
+      "path": "assets/objects/paperclip.png",
+      "gitBlob": "5e6c00d1f7eb4243196cf3cd409d593e7515b855",
+      "sha256": "e06bfa8657edbd9d60f4a28d3d1820f67a81b97b51a19936f0e5fcb7abaf7312"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/plastic-button.png",
+      "path": "assets/objects/plastic-button.png",
+      "gitBlob": "b0119dd9e8534d783482ce22b0be5f72bd18783a",
+      "sha256": "e9c08dc1dc677c13b0b9e06992c5be4fbc0e3260c3e1d7a3612c716cdbc4f39d"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/pom-pom.png",
+      "path": "assets/objects/pom-pom.png",
+      "gitBlob": "829e0c9ab0fcc104dd5a714f738860a8cd341da9",
+      "sha256": "df66b61603f8fc7544822f96b95c28091f9218fbd0bb7f54d0aada81766649e3"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/rubber-duck.png",
+      "path": "assets/objects/rubber-duck.png",
+      "gitBlob": "3145bf477a5a55776aed1a3c8516fe2d5563ab0c",
+      "sha256": "2a4e13586d09acae1b0d7c8efd70ef77575fdcadcfea4032181c7eb6bc1b9cd5"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/safety-pin.png",
+      "path": "assets/objects/safety-pin.png",
+      "gitBlob": "cfe8d7ada6e94ab624158221cebb3fad7b4b83bc",
+      "sha256": "2b4fc3c0c24fbfb72960db8b8a578a3a714200f53442a2d929fdde082eee1130"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/star-token.png",
+      "path": "assets/objects/star-token.png",
+      "gitBlob": "84deb1f57f38f60500a0a1eb29ef6eb8466372ae",
+      "sha256": "60eb463edfc103ff9ab4eeb42368b006eaedee0ab0c138ee8509161173b86142"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/steel-ball.png",
+      "path": "assets/objects/steel-ball.png",
+      "gitBlob": "ef91962db35344cc7e51937f3032a7ccf6312912",
+      "sha256": "ae8f9db9a3ea8c866b96e2766833522381b79c102d5f751557949d0ae3fad887"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/steel-can.png",
+      "path": "assets/objects/steel-can.png",
+      "gitBlob": "80be49efdd68e08cc2759a952da86d25aafae59f",
+      "sha256": "d456bb67b9236c44f3fdfb915dce51400c3b26de2eecf84c55213e90790f29e4"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/toy-car.png",
+      "path": "assets/objects/toy-car.png",
+      "gitBlob": "a65f872b96b5a29af8fc974f0e0a84f2abf0d82f",
+      "sha256": "45d576483d5448404f3fc41a384ded54182bd579e8184619d54630470e980a40"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/washer.png",
+      "path": "assets/objects/washer.png",
+      "gitBlob": "63955e0ec98e05e0a89f58f558cd0b31fcf44fb6",
+      "sha256": "d7ac274a00cfc8ef06ecd1a7acfb001065efd139cca82e6f43ba6cf34f9896bb"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/objects/wood-block.png",
+      "path": "assets/objects/wood-block.png",
+      "gitBlob": "793fe6ca85d18cdfebc36d48f28be2e683fa4efc",
+      "sha256": "a4fbb8f60dbe67bc92dd09b76a4108146028d8d15d034b7bbaa8a0f4b5c6e92e"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/og-image.jpg",
+      "path": "assets/og-image.jpg",
+      "gitBlob": "0ca6cecbb579034100acb702be5c4c3e23ebe0b7",
+      "sha256": "df9efa69ff0b6331aec54d7feaed55ed4c5e5eba71732c8a315476d87056a734"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/ui/badge.png",
+      "path": "assets/ui/badge.png",
+      "gitBlob": "ebcf24a0b5c23bf477fcdbdca0b11c2ce0849b47",
+      "sha256": "a067c3f1115c42b0de3c48371e1f79d69d2f8d42a64fbddfd1d38e71e579890e"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/ui/boxes.json",
+      "path": "assets/ui/boxes.json",
+      "gitBlob": "8ab0d329c42fe7eb5440c3139d149e5fc6137d25",
+      "sha256": "10fd1e6229cb1754ecac23cd4fff1100d9f1e83d8a3bd3765390e0864dc107f8"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/ui/mode-maze.png",
+      "path": "assets/ui/mode-maze.png",
+      "gitBlob": "c98de82f1b9fc3847df2f94fefbbf99afb6ea1b0",
+      "sha256": "22b509eb5cffcbc25996543fe6a89539e091c4cdf1ac1b042303c3d63f1e12ea"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/ui/mode-sweep.png",
+      "path": "assets/ui/mode-sweep.png",
+      "gitBlob": "e981b49786bff6aeab49c5728c84c7d581f06b29",
+      "sha256": "d4c66bd4adc60ec2634cf26f5891bd7f3c10b2ca800e35d6492aa6343ef324c4"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/ui/mode-test.png",
+      "path": "assets/ui/mode-test.png",
+      "gitBlob": "bbf69d9f85b1a34055987fc05229e5e06ca2f38e",
+      "sha256": "ad4a8b8dbe02bcf426cdec72e751101e6a6f8151ee2f02a2e16e10d27ff4c8e3"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/ui/sparkles.png",
+      "path": "assets/ui/sparkles.png",
+      "gitBlob": "7110a3d48747f80e9d90a5e2f45a9e8801f47d8a",
+      "sha256": "0f1dc24d1ddd4b85432e1798336daa7b9ae86261890813d2376b0155514170d8"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/ui/test-pedestal.png",
+      "path": "assets/ui/test-pedestal.png",
+      "gitBlob": "374c47ec3f84ca59f832f3e93d917036de3cd849",
+      "sha256": "65e35145d4daeac10f9e47212da00ee0e8d1c88d40a3697bb56fb6e41f9d3c53"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/ui/title.png",
+      "path": "assets/ui/title.png",
+      "gitBlob": "fb6e434e7084b4483559919afa4102b7601e52f8",
+      "sha256": "460b27694eb3ed3471041eec2adf5ba463cb4de74653fd1b47b5d3541f0efefa"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/ui/tray-magnetic.png",
+      "path": "assets/ui/tray-magnetic.png",
+      "gitBlob": "63c858804c858726b97fdd189627faecd810161d",
+      "sha256": "9b47e034dac21ebb792f575bad30a69a4f8d85618c27c28d5626278f87face77"
+    },
+    {
+      "upstream": "games/magnet-explorer/assets/ui/tray-nonmagnetic.png",
+      "path": "assets/ui/tray-nonmagnetic.png",
+      "gitBlob": "acea88a31d9a74fa71c3c84d78f1a7d4a6055b62",
+      "sha256": "9f7338109bbb31efe70dd848a6efee3a5bb016e214477ceb2376b5cb84386e8c"
+    },
+    {
+      "upstream": "games/magnet-explorer/config.js",
+      "path": "config.js",
+      "gitBlob": "00c75d8ed654cc8e4f32478f2d5caf3470cc6507",
+      "sha256": "fcf2da08379efd5682ac94994f415873f0e82c8175802609da428078527ed358"
+    },
+    {
+      "upstream": "games/magnet-explorer/config.json",
+      "path": "config.json",
+      "gitBlob": "1f0221b82263ca708bf11a1cf5889694882ccf4c",
+      "sha256": "03f990626663210bfe5fcf9ad14f10927d29ebaf63c90e81699da14df8fff7ae"
+    },
+    {
+      "upstream": "games/magnet-explorer/css/style.css",
+      "path": "css/style.css",
+      "gitBlob": "ec4a3fd3347b30f177ac83ba2e77509b888e9efe",
+      "sha256": "b864869605215cce0c126b068dbc087cafe5ee59755700d64731e72db0a59b27"
+    },
+    {
+      "upstream": "games/magnet-explorer/data/lines.json",
+      "path": "data/lines.json",
+      "gitBlob": "df38ac742f114aa3bc9ea615bac9476ed76647ce",
+      "sha256": "496b13c1a1226d0fc57d03e5b6ce7d537532d5d3d98014f7aede1a9d59417e4f"
+    },
+    {
+      "upstream": "games/magnet-explorer/game-design.md",
+      "path": "game-design.md",
+      "gitBlob": "1c142e9157addf710ab93835c6456c39bf73e369",
+      "sha256": "0f1f02d86c6307fd8ff5f11e517481a650088677ef5d3be225ffe783f64e18b5"
+    },
+    {
+      "upstream": "games/magnet-explorer/game.json",
+      "path": "game.json",
+      "gitBlob": "9ddfedd668a97d2711e5e2ca0a9a3be9097e0c67",
+      "sha256": "b06dadf62c8ea62694e7c3276cf06ef6a414ac3439ccb07a8b960460d3b24c91"
+    },
+    {
+      "upstream": "games/magnet-explorer/index.html",
+      "path": "index.html",
+      "gitBlob": "4f6f87f115d8db4edc44fcc2eec159e48e58e7e4",
+      "sha256": "885d5ec48ef2b5cf36dd1510718a31438de769b6027c22d6ebf57325e9512749"
+    },
+    {
+      "upstream": "games/magnet-explorer/js/main.js",
+      "path": "js/main.js",
+      "gitBlob": "c95bee4487faa00e78c1b69f393892f24e0abc3d",
+      "sha256": "5e8f64c827e20bff868f3975b35c3821717e3a1cde521a548053ddfee7458fe7"
+    },
+    {
+      "upstream": "shared/assets/music/whimsical-toy-workshop.mp3",
+      "path": "shared/assets/music/whimsical-toy-workshop.mp3",
+      "gitBlob": "9253c1aac5fcd4d6da77264d33516d59cb6285c9",
+      "sha256": "2cf2d7d962b3a8aa2ea94816e3f94672f65d39edacfaa513aa99a90af115b813"
+    },
+    {
+      "upstream": "shared/assets/ui/btn-back.png",
+      "path": "shared/assets/ui/btn-back.png",
+      "gitBlob": "62469d88f664b0d0132007b691f33bb238df9eae",
+      "sha256": "ec281efe1b88698e3d9c2b0ab51d0cfe491c007cdb681ef7c8bb630b665e9df2"
+    },
+    {
+      "upstream": "shared/assets/ui/btn-home.png",
+      "path": "shared/assets/ui/btn-home.png",
+      "gitBlob": "cbb5375e1c876643b3c0bee0845bcfe6e984d158",
+      "sha256": "57584d95063b2e92f968a520a1f2d7121933a81235ce905231205b6c512c592d"
+    },
+    {
+      "upstream": "shared/assets/ui/btn-play.png",
+      "path": "shared/assets/ui/btn-play.png",
+      "gitBlob": "6179d87795cd18033d8fab1ed50f45d8f9ffcf3e",
+      "sha256": "72c9ade1a7dde0dac1a1252e0d994d4c1a0caf72a2d0362dc35e707b2286d31b"
+    },
+    {
+      "upstream": "shared/assets/ui/btn-sound.png",
+      "path": "shared/assets/ui/btn-sound.png",
+      "gitBlob": "0a5d5b1a53ee1b67f8b0768b77c9769a00a1189c",
+      "sha256": "fc99a248cbe5683d28fc768ff3d1ec11a15283ccb7e159d552cb657670d29c12"
+    },
+    {
+      "upstream": "shared/css/base.css",
+      "path": "shared/css/base.css",
+      "gitBlob": "323ad246052ecc60ac9b21c43e22d22b36a42024",
+      "sha256": "adad7c353ad8ad4f99d4a25210305f3cfa1c3a537daf8480d1c229667f3cea39"
+    },
+    {
+      "upstream": "shared/css/hud.css",
+      "path": "shared/css/hud.css",
+      "gitBlob": "4a8feb95b2b26e9d6b29f5ef30f660e5e44381e6",
+      "sha256": "fab7082a2570599db8b13ce68413dad68ab063e8eb75917877e97f6ee6c8c1b0"
+    },
+    {
+      "upstream": "shared/css/screens.css",
+      "path": "shared/css/screens.css",
+      "gitBlob": "6427550a1c584816a5226b2552a561cf7f95eaad",
+      "sha256": "6f8993561220ad8bf2a3f340bafe14ddfd1343ef68b739283caa265759deff6a"
+    },
+    {
+      "upstream": "shared/js/audio-unlock.js",
+      "path": "shared/js/audio-unlock.js",
+      "gitBlob": "8574a0b0a6102122ec516d598c753402182b564e",
+      "sha256": "648dbfdc883f8f0730d4826090a3cc99099de1d9d4ba5272778979db55c9d0de"
+    },
+    {
+      "upstream": "shared/js/bgm.js",
+      "path": "shared/js/bgm.js",
+      "gitBlob": "0769abae5313478510fd6b6ebd842f14558049f8",
+      "sha256": "11f88ad912ed7d8dcc4b74b61dc0183854f6338718690a1f24dcc201474b289d"
+    },
+    {
+      "upstream": "shared/js/debug-harness.js",
+      "path": "shared/js/debug-harness.js",
+      "gitBlob": "d4fb5148a0e7710edd575c392e163b568a18481b",
+      "sha256": "16448064fddf145f575a0928d69ad71a92fa4b10cfe337d3967e3b9938467ea4"
+    },
+    {
+      "upstream": "shared/js/dom.js",
+      "path": "shared/js/dom.js",
+      "gitBlob": "f57a3aa6cbf925d4ea3ef92242092e84f734fe0b",
+      "sha256": "3413c5460dfe946ed29a79771edf1690f17492d0ffbb3caba593c42b275856b2"
+    },
+    {
+      "upstream": "shared/js/hud.js",
+      "path": "shared/js/hud.js",
+      "gitBlob": "982c6a7b4455e9dbbe5d3e8f8d40fa4f7490f7a7",
+      "sha256": "86584bfd294487f16189fb54443a1828d67c1b92f2d2f5dc911c714a62cdd4cb"
+    },
+    {
+      "upstream": "shared/js/idle-nudge.js",
+      "path": "shared/js/idle-nudge.js",
+      "gitBlob": "492d6bf2dab1db83ef0848ecb6f295c16184a1d7",
+      "sha256": "ba08e3c8bc4b0a215e0109ac779e6f5dcb0246cc6e4757b3cc3f247a78c3a18c"
+    },
+    {
+      "upstream": "shared/js/narrator.js",
+      "path": "shared/js/narrator.js",
+      "gitBlob": "f6a3ceb3f866cd48b9aa419fece4d9867b313d73",
+      "sha256": "6a28b5aaa17f62528e202f4296e525b89bc0fb26b4d7c4ea9fc6e1f48d467920"
+    },
+    {
+      "upstream": "shared/js/rng.js",
+      "path": "shared/js/rng.js",
+      "gitBlob": "2da3970400aba6b5904953675efe6dce0b9e067b",
+      "sha256": "e93a51b73e256a7a61163c1d375bd78e04198258a00fe3e314e9831225063dc6"
+    },
+    {
+      "upstream": "shared/js/screens.js",
+      "path": "shared/js/screens.js",
+      "gitBlob": "7c29dba8d799a9c6e2f3e2528ed78c5f4a3ec7b6",
+      "sha256": "036715fe8f4a2584049d4e3b2152f9e11d9b0734f76c7f4a16287c789f4524af"
+    },
+    {
+      "upstream": "shared/js/sfx.js",
+      "path": "shared/js/sfx.js",
+      "gitBlob": "1d2a17d5419b62943c9df1cceae330fccfa7fad0",
+      "sha256": "54ed71f7b1697633a7a21ab92922717bda1636cd82ce1f374d8cd8f123818718"
+    },
+    {
+      "upstream": "shared/js/speech.js",
+      "path": "shared/js/speech.js",
+      "gitBlob": "a74af770dcc665f37e7afdf8b33ec1dd5548113c",
+      "sha256": "ccf99a0ec9f254f2939dd7df683ca300f4ae677e08668cf233e209870073b08b"
+    },
+    {
+      "upstream": "shared/js/tap.js",
+      "path": "shared/js/tap.js",
+      "gitBlob": "18567c4c8945d38ecf92a1a8c9121aec8027da39",
+      "sha256": "679c005b02a6f0ab30f1c815adb09a8babe143ffb10f7644a08b3f6056e545e7"
+    },
+    {
+      "upstream": "shared/js/timers.js",
+      "path": "shared/js/timers.js",
+      "gitBlob": "83fd5012ac729efd550e90ccc0961aa502ba30b5",
+      "sha256": "8fcafc8d483be1191f2c767ef33ac0df0cf6c579bae8c32b1e11662e690a12a1"
+    },
+    {
+      "upstream": "shared/js/voice-clips.js",
+      "path": "shared/js/voice-clips.js",
+      "gitBlob": "79cb3baae031ff0a12839c1b058cd2ee487b7f6c",
+      "sha256": "0d239d67ba1b1f095712d288df8c6892ade5fd85e9d4129cc138543c85d7d51e"
+    },
+    {
+      "upstream": "games/magnet-explorer/tools/qa.mjs",
+      "path": "tools/qa.mjs",
+      "gitBlob": "3ab9c59e9a910e167a0f02f6f4d89bcec858d73e",
+      "sha256": "b3ea97e5ca940ad5c09df4a299fb60b7c8f76e9b4ec2fa5d9171c4d89e864ece"
+    }
+  ]
+}

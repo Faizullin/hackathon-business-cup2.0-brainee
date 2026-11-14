@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { eq } from "drizzle-orm";
 import { expect, it, onTestFinished } from "vitest";
-import { brainyStates, demoSessions, families, gameSessions, wallets } from "../schema";
+import { brainyStates, children, demoSessions, families, gameSessions, wallets } from "../schema";
 import { resetDatabase } from "../scripts/database-tools";
 import { openDatabase } from "./client";
 import { getDatabaseConfig } from "./config";
@@ -343,4 +343,24 @@ it("counts an overnight finish in the new day without replaying yesterday's stre
   expect((await getStateSnapshot(f.db, f.hash, new Date("2026-11-16T05:00:02Z"))).progress).toEqual(
     beforeReplay.progress,
   );
+});
+
+it("enforces catalog minimum ages on direct session launches", async () => {
+  const f = await fixture();
+  await f.db
+    .update(children)
+    .set({ birthYear: now.getUTCFullYear() - 4 })
+    .where(eq(children.id, demo.child.id));
+  for (const gameId of ["tangram-tales", "reflection", "rhythm-copycat", "secret-message-copy"]) {
+    await expect(startGameSession(f.db, f.hash, { ...launch, gameId }, now)).rejects.toMatchObject({
+      code: "invalid-input",
+    });
+  }
+  await f.db
+    .update(children)
+    .set({ birthYear: now.getUTCFullYear() - 7 })
+    .where(eq(children.id, demo.child.id));
+  await expect(
+    startGameSession(f.db, f.hash, { ...launch, gameId: "reflection" }, now),
+  ).resolves.toMatchObject({ gameId: "reflection" });
 });

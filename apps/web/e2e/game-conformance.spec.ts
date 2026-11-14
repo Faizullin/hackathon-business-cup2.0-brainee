@@ -1,14 +1,17 @@
 import { expect, test } from "@playwright/test";
 import { manifests } from "../../../packages/game-catalog/src";
 import { generateRounds } from "../../../packages/games/src/continue-pattern/rounds";
+import { importedRound } from "./imported-games";
 import { placePuzzlePiece } from "./picture-puzzle";
 import { answerOddOneOut } from "./play-game";
+import { completeTangram } from "./tangram";
 
 for (const game of manifests) {
   test(`${game.id}: ready, one finish, own-origin, no console errors`, async ({
     page,
     baseURL,
   }, info) => {
+    test.setTimeout(90000);
     const errors: string[] = [],
       foreign: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
@@ -20,6 +23,9 @@ for (const game of manifests) {
     });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/lab");
+    await page
+      .getByRole("combobox", { name: "Экран", exact: true })
+      .selectOption((page.viewportSize()?.width ?? 390) >= 768 ? "ipad" : "phone");
     await page.getByRole("combobox", { name: "Игра", exact: true }).selectOption(game.id);
     const stream = page.getByTestId("event-stream");
     if (game.runtime === "embedded") {
@@ -28,8 +34,12 @@ for (const game of manifests) {
       await expect(page.getByTestId("embedded-game")).toHaveAttribute("data-ready", "true", {
         timeout: 10000,
       });
-      await page.screenshot({ path: info.outputPath("puzzle-lab.png"), fullPage: true });
-      for (let round = 0; round < game.roundsPerSession; round++) await placePuzzlePiece(page);
+      await page.screenshot({ path: info.outputPath(`${game.id}-lab.png`), fullPage: false });
+      for (let round = 0; round < game.roundsPerSession; round++) {
+        if (game.id === "tangram-tales") await completeTangram(page);
+        else if (game.id === "picture-puzzle") await placePuzzlePiece(page);
+        else await importedRound(page, game.id, 3, round);
+      }
     } else {
       await expect(page.locator(`[data-game="${game.id}"]`)).toBeVisible({ timeout: 10000 });
       if (game.id === "odd-one-out") await answerOddOneOut(page);

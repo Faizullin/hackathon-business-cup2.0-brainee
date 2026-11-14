@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>Секретное послание</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./session.css" />
+  <script src="../bridge.js"></script>
+</head>
+<body>
+  <main id="game" class="secret-app" data-phase="play-moon-memory">
+    <div class="session-hud">
+      <div class="session-progress">Послание 1 из 4</div>
+      <button class="session-sound-btn" type="button" data-action="toggle-sound">Звук: выкл</button>
+    </div>
+
+    <section id="screen-play" class="game-screen play-screen">
+      <img class="scene-backdrop" src="./assets/art/backdrop-desk.webp" alt="" aria-hidden="true" />
+
+      <div id="play-stage" class="play-stage">
+        <img class="paper-sheet" src="./assets/art/paper-sheet.webp" alt="Лист секретного сообщения" />
+
+        <div id="memory-board" class="memory-board">
+          <section id="memory-sequence" class="memory-sequence" aria-label="Секретные знаки для запоминания"></section>
+          <div id="memory-cover" class="memory-cover" aria-hidden="true">
+            <img src="./assets/art/envelope-moon.webp" alt="" />
+          </div>
+          <section id="memory-copy" class="copy-sequence" aria-label="Восстановленное сообщение"></section>
+        </div>
+
+        <section id="stamp-dock" class="stamp-dock" aria-label="Штампы с символами"></section>
+
+        <img id="play-owl" class="play-owl" src="./assets/art/owl-neutral.webp" alt="Сова-почтальон" />
+      </div>
+
+      <footer class="session-footer">
+        <p class="session-message" role="status">Запомни секретное послание!</p>
+        <div class="session-actions">
+          <button class="session-btn session-btn-peek" type="button" data-action="peek" hidden>Подсмотреть</button>
+          <button class="session-btn session-btn-clear" type="button" data-action="clear">Очистить</button>
+          <button class="session-btn session-btn-check" type="button" data-action="check">Проверить</button>
+        </div>
+      </footer>
+    </section>
+  </main>
+  <script type="module" src="./session.js"></script>
+</body>
+</html>

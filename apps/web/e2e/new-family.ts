@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { type APIRequestContext, expect } from "@playwright/test";
 
 /** Bonus tests need a new child, because a fresh cookie must not reset today's reward. */
-export async function newFamily(request: APIRequestContext, baseURL: string) {
+export async function newFamily(request: APIRequestContext, baseURL: string, age = 6) {
   const credentials = { email: `test-${randomUUID()}@example.com`, password: "secret123" };
   const response = await request.post("/api/onboarding", {
     headers: { origin: baseURL },
@@ -10,7 +10,7 @@ export async function newFamily(request: APIRequestContext, baseURL: string) {
       ...credentials,
       pin: "1234",
       childName: "Мира",
-      birthYear: new Date().getUTCFullYear() - 6,
+      birthYear: new Date().getUTCFullYear() - age,
       answers: { hours: 2, content: 2, finish: 2, reaction: 2, reads: 2 },
     },
   });

@@ -48,7 +48,7 @@ type GameProps = {
   onFinish(result: GameResult): void;
 };
 ```
-`<GameHost game level seed text onRound onFinish />` renders `ReactGame` (via `load()` from the code registry) or `IframeGame` (via `runtimeUrl` from the `Game` DB row). Both run inside an error boundary. `GameText` is defined in `kit.ts`; the web host supplies Russian strings from `i18n/ru.ts`. Shared shape types and the SVG renderer live in `src/kit/`; game folders may import that kit, core, npm and their own files, never another game. `pnpm check:games` checks this boundary. **The server validates every `GameResult` before `core` rewards it** (T-81).
+`<GameHost game level seed text onRound onFinish />` renders `ReactGame` (via `load()` from the code registry) or `IframeGame` (via `runtimeUrl` from the `Game` DB row). Both run inside an error boundary. `GameText` is defined in `kit.ts`; the web host supplies the active dictionary from `i18n/en.ts` or `i18n/ru.ts` and passes the locale to the iframe handshake. Shared shape types and the SVG renderer live in `src/kit/`; game folders may import that kit, core, npm and their own files, never another game. `pnpm check:games` checks this boundary. **The server validates every `GameResult` before `core` rewards it** (T-81).
 
 Rules for every game:
 1. **Games report; `core` rewards.** A game never decides ★ or stat changes.
@@ -127,9 +127,57 @@ Odd one out and Continue the pattern → `react` runtime. Prototype lines 901–
 
 - `packages/game-bridge` ports GSP's `bridge-core` transport, endpoints, repeat-hello handshake, DOM/GDevelop adapters and tests. The drop-in script exposes `window.Brainee`; PECS, speech, card/progress host methods and analytics outbox are removed. Protocol 2 supports protocol 1 (legacy `id` normalizes to `eventId`). Every incoming message is capped at 64 KiB and 50 messages/s; the last 1,000 event IDs are deduplicated. Contract event payloads use zod. Nonce + the private transferred MessageChannel bind the connection to the iframe; these audited same-origin builds are not a security boundary.
 - `packages/engine-phaser` ports the GSP Phaser adapter, `BridgedScene`, responsive factory and esbuild helper. Scenes send `ready` only after assets and launch config are loaded. `IframeGame` waits at most 10 seconds for ready, renders an error and removes the frame on failure; unmount closes the bridge and removes the iframe's timers/audio/renderer. A finish must agree with the observed rounds and issued game/level before the existing LearningProvider submits it. Lab launches use an ephemeral ID and never save rewards.
-- Every React folder and engine game has `manifest.json`. `packages/game-catalog` validates and exports the three manifests; DB seed and embedded registry consume them. `pnpm check` validates manifests, entry paths, weights and React source budgets; `pnpm test:assets` additionally checks embedded output budgets, HTML/CSS references, pictures and bridge build. React budgets are source bytes in this light slice; embedded budgets are uncompressed artifact bytes. Version-history/rollback (`GameVersion`) and automatic path-C imports remain future work.
+- Every React folder and engine game has `manifest.json`. `packages/game-catalog` validates and exports the registered manifests; DB seed and embedded registry consume them. `pnpm check` validates manifests, entry paths, weights and React source budgets; `pnpm test:assets` additionally checks embedded output budgets, HTML/CSS references, pictures and bridge build. React budgets are source bytes in this light slice; embedded budgets are uncompressed artifact bytes. Version-history/rollback (`GameVersion`) and automatic path-C imports remain future work.
 - `games/picture-puzzle` is path B. Phaser 4 and the Rex jigsaw cutter are bundled locally, with Kenney CC0 pictures and preserved licences. **One session = four successful piece placements**, not four pictures. Each rejected placement increments mistakes; a successfully placed piece with one or more prior rejections increments corrections once. Picture changes reset per-piece attempts, retain the issued level and continue the four-placement counter. At four, input stops and exactly one `GameResult` is emitted. Partial play never finishes. Seed selects the starting picture; no family calendar/timezone dependency. Five levels retain GSP's short-side `<700px` cap at 3×4 pieces. The host's Russian chrome surrounds language-light canvas controls; no remote speech/font is used.
-- `pnpm games:build` replaces the public puzzle directory and emits `public/games/bridge.js`; `pnpm build` runs it first. Generated artifacts stay ignored. Use `pnpm games:build` before `pnpm dev` on a fresh checkout. `pnpm db:push && pnpm db:seed` adds runtime columns/catalog to existing local data; `pnpm demo` starts from a full reset.
+- `pnpm games:build` replaces the public embedded-game directories and emits `public/games/bridge.js`; `pnpm build` runs it first. Generated artifacts stay ignored. Use `pnpm games:build` before `pnpm dev` on a fresh checkout. `pnpm db:push && pnpm db:seed` adds runtime columns/catalog to existing local data; `pnpm demo` starts from a full reset.
 - `game-conformance.spec.ts` loops all manifests in Chromium/WebKit, phone/landscape iPad: ready within 10 seconds, real pointer input, exactly one finish, no console errors/foreign requests. Puzzle coverage includes rejection→correction, server receipt replay without another reward, stopping, timeout cleanup and screenshots. `pnpm test` retains the ported bridge/geometry/layout tests.
 
 The sections above describing full GDevelop build tooling, per-version trust tiers and external artifact imports are the longer-term design; this slice supplies its generic GDevelop bridge adapter, but not a GDevelop export kit.
+
+## Pinned path C: Tangram Tales (T-105)
+
+`games/tangram-tales/artifact/` contains 47 selected, unmodified QLOBE files from commit `60967634e6cc313c41a5aa8067bed9f0f616176c`, including MIT LICENSE. `sources.lock.json` records upstream paths, Git blob hashes and SHA-256; `pnpm check` checks every retained byte. The handoff launcher was reviewed but not executed: only the selected pinned files were fetched and verified outside the repo. Normal builds are offline.
+
+`scripts/build-tangram.mjs` copies that artifact and applies a bounded guided-mode port plus `session.js`/`session.css`/Russian HTML to `public/games/tangram-tales/`. The served engine omits debug, free play, shelf, storage, narration and idle prompting. The original 16 silhouettes, shape-family equivalence, target geometry and snapping remain. Native buttons use select-then-place input, including keyboard activation; orientation snaps automatically. Drag/hold rotation is omitted from this simplified guided version. Controls fit the phone iframe and landscape iPad; no race between pointer-up replacement and compatibility click.
+
+The manifest specifies logic .7 / motor .3, age 6+, three levels. Levels leave 4/5/6 pieces to place, selected deterministically by the issued seed. A session selects four distinct silhouettes from the 16. **Round = one fully assembled silhouette confirmed with «Проверить».** Check while incomplete reports one mistake; completing after one or more failed checks reports exactly one correction. Selection, failed placement and rotation never count as rounds/mistakes. Four rounds produce exactly one finish; pagehide/unmount stops without finishing. All timing is elapsed monotonic time, with no family timezone dependency.
+
+`game-conformance.spec.ts` covers the same ready/finish/network/console contract as every other listed game. `tangram.spec.ts` covers a failed check → correction → four silhouettes → one persisted reward and idempotent receipt replay, stopping, levels 1/2 and repeated mistakes with one correction; level 3 is covered by conformance/reward tests. All run on Chromium/WebKit at phone and landscape iPad sizes. No debug/win helper or programmatic game-state mutation is used.
+
+## Learning batch and Explore previews
+
+The registry now contains seven scored games: Odd One Out, Continue the Pattern, Picture Puzzle, Tangram Tales, Mirror Grid (`reflection`), Rhythm Copycat and Secret Message Lab (`secret-message-copy`). The last three use four-task sessions and three levels. Their manifests are the source of truth for ages and weights.
+
+Mirror Grid retains Sugarizer's local EaselJS rendering and reflection exercise in a standalone session shell; journal/server/home dependencies are removed. Rhythm and Secret Message use simplified QLOBE sessions with retained local artwork/audio. All three report failed checks, completed tasks and one correction for each completed task with previous mistakes. Feedback locks prevent repeated clicks from completing a task twice. Exit destroys the iframe without a finish.
+
+`packages/game-catalog/src/previews.ts` separately validates `preview.json` for Magnet Explorer and Neighborhood Route Planner. These run at `/explore/<id>`, accessible through a secondary link below Learn. They are excluded from the learning catalog, database game seed and learning sessions. Their bridge accepts lifecycle messages only. The host never issues or finishes a scored session; real-input acceptance tests compare wallet, skills and stats before/after and reject session requests. Exit messages check origin, iframe source and game ID. Unmount removes the iframe and its audio/timers; camera and microphone are denied.
+
+Prefer iPad landscape (1180×820) for design review; retain phone regression checks. Learning acceptance uses real controls, one failed check followed by a correction, four tasks, one saved receipt and idempotent replay. Conformance loads all seven learning games at `/lab`, checks ready within ten seconds, one finish, no console errors and no foreign requests. Preview specs exercise drawing/dragging and exit without fabricated completion events.
+
+For future imports, start with an unchanged pinned game in Explore: retain its language and visual design, remove external services/debug entry points, add only lifecycle/exit handling and test iPad controls. Promote only the best candidates to Learn after implementing genuine attempt/completion hooks. Generic open/close activity is not evidence of skill improvement or a completed learning round. See [external-games.md](../product/external-games.md).
+
+## Master integration (T-112 / T-113)
+
+All seven scored manifests feed the React/embedded registry, Learn, live-history recommendations,
+launch routes and DB seed. New imports have three levels and four completed tasks per session:
+Tangram 6+ (logic .7 / motor .3), Mirror Grid 7+ (logic .7 / attention .3),
+Rhythm 5+ and Secret Message 6+ (memory .7 / attention .3). The session API checks
+minimum age as well as enabled status; catalog cards and Explore direct launches respect age locks.
+Explore participates in shared state loading but never issues a learning session or grants rewards.
+
+English catalog titles and localized host loading/error text use the active app dictionary;
+the locale also travels in the bridge handshake. Russian catalog titles and saved game-feed
+entries remain translated. Imported scored-game instructions are currently Russian; Explore
+retains the original English gameplay. Full bilingual in-game instructions remain a follow-up.
+The original pinned bytes and licenses are unchanged; only host/session code and served build
+transforms are adapted. Stable button hit areas keep visual feedback from moving input targets.
+
+`games-integration.spec.ts` covers the new games' English host flow, calculated skill gains,
+saved history recommendations, parent progress, next-level launch, age locks, Russian feed titles
+and iframe timeout/reload recovery, alongside the imported real-input conformance and replay tests.
+
+Publishing this merge requires an application rebuild/redeploy and adding the missing catalog
+rows with the non-reset seed command (`pnpm db:seed`) against the intended deployment database.
+This integration does not run that command against production. Do not use `db:reset` or the
+shared-family refresh to install game catalog entries. Unimported titles in
+[the remaining queue](../product/external-games.md) stay unregistered and unavailable to children.

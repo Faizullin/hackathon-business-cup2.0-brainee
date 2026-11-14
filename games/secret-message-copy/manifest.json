@@ -1,0 +1,26 @@
+{
+  "id": "secret-message-copy",
+  "version": "0.1.0",
+  "kind": "dev",
+  "title": "Secret Message Lab",
+  "engine": "qlobe-dom",
+  "runtime": "embedded",
+  "entry": "/games/secret-message-copy/index.html",
+  "skills": {
+    "main": "memory",
+    "secondary": "attention"
+  },
+  "weights": {
+    "memory": 0.7,
+    "attention": 0.3
+  },
+  "minAge": 6,
+  "levels": 3,
+  "roundsPerSession": 4,
+  "bridge": {
+    "protocol": 2,
+    "contract": "secret-message-copy@1"
+  },
+  "sizeBudgetBytes": 3500000,
+  "license": "MIT"
+}

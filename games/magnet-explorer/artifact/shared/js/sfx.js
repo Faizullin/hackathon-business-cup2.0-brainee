@@ -1,0 +1,326 @@
+// sfx.js — WebAudio-synthesized sound effects. Zero audio files.
+// One shared AudioContext (created lazily, unlocked on first gesture).
+
+let ctx = null;
+let master = null;
+let selfHealAttached = false;
+const playCounts = Object.create(null);
+const MASTER_GAIN = 0.5;
+let muted = false;
+
+function mark(name) {
+  playCounts[name] = (playCounts[name] || 0) + 1;
+}
+
+/** Lightweight QA telemetry; contains counts only, never child/user data. */
+export function stats() {
+  return { ...playCounts };
+}
+
+/**
+ * Silence (or unsilence) every effect at once. Every effect routes through
+ * the one master gain node, so this replaces the `if (state.muted) return;`
+ * proxy ~7 games wrap around every `sfx.xxx()` call — mute the channel here
+ * instead of gating each call site by hand.
+ */
+export function setMuted(on) {
+  muted = !!on;
+  if (master) master.gain.value = muted ? 0 : MASTER_GAIN;
+}
+
+/** @returns {boolean} */
+export function isMuted() {
+  return muted;
+}
+
+/** Lazily build the AudioContext + master gain. Safe to call repeatedly. */
+function ensure() {
+  if (ctx) return ctx;
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return null;
+  ctx = new AC();
+  master = ctx.createGain();
+  master.gain.value = muted ? 0 : MASTER_GAIN;
+  master.connect(ctx.destination);
+  attachSelfHeal();
+  return ctx;
+}
+
+// iPadOS parks the context on 'interrupted' (non-standard) after a call, Siri,
+// or another app taking the audio session, and on 'suspended' when the page is
+// backgrounded — neither state recovers on its own, so resume on anything that
+// isn't 'running'.
+function resume() {
+  if (ctx && ctx.state !== 'running') ctx.resume().catch(() => {});
+}
+
+// Try to recover as soon as the page is back in front, so effects work again
+// before the next touch rather than because of it. Attached once, with the
+// context.
+function attachSelfHeal() {
+  if (selfHealAttached) return;
+  selfHealAttached = true;
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) resume(); });
+  window.addEventListener('pageshow', () => resume());
+  // catches an interruption that happens while the page stays foregrounded
+  if (ctx.addEventListener) {
+    ctx.addEventListener('statechange', () => { if (!document.hidden) resume(); });
+  }
+}
+
+/** Resume the context — cheap, call from every user gesture (iOS unlock). */
+export function unlock() {
+  ensure();
+  resume();
+}
+
+/** Current audio time, or 0 if no context. */
+function now() {
+  return ctx ? ctx.currentTime : 0;
+}
+
+/**
+ * Play a single oscillator note with an envelope.
+ * @param {object} o
+ */
+function note({ type = 'sine', f0, f1, t0 = 0, dur = 0.2, gain = 0.4, dest }) {
+  if (!ensure()) return;
+  const start = now() + t0;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(f0, start);
+  if (f1 != null) osc.frequency.exponentialRampToValueAtTime(Math.max(1, f1), start + dur);
+  g.gain.setValueAtTime(0.0001, start);
+  g.gain.exponentialRampToValueAtTime(gain, start + Math.min(0.02, dur * 0.3));
+  g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+  osc.connect(g);
+  g.connect(dest || master);
+  osc.start(start);
+  osc.stop(start + dur + 0.05);
+}
+
+/** A short buffer of white noise for whoosh effects. */
+function noiseBuffer(seconds) {
+  const len = Math.floor(ctx.sampleRate * seconds);
+  const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+  return buf;
+}
+
+// ---- Effects ----------------------------------------------------------
+
+/** Tile tap: bright sine blip 600 -> 900 Hz. */
+export function pop() {
+  note({ type: 'sine', f0: 600, f1: 900, dur: 0.08, gain: 0.4 });
+}
+
+/** Tile un-slot: reverse blip 700 -> 400 Hz. */
+export function unpop() {
+  note({ type: 'sine', f0: 700, f1: 400, dur: 0.1, gain: 0.35 });
+}
+
+/** Tile flying: band-passed noise sweep. */
+export function whoosh() {
+  if (!ensure()) return;
+  const start = now();
+  const src = ctx.createBufferSource();
+  src.buffer = noiseBuffer(0.2);
+  const bp = ctx.createBiquadFilter();
+  bp.type = 'bandpass';
+  bp.frequency.setValueAtTime(500, start);
+  bp.frequency.exponentialRampToValueAtTime(2200, start + 0.15);
+  bp.Q.value = 1.2;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.0001, start);
+  g.gain.exponentialRampToValueAtTime(0.25, start + 0.04);
+  g.gain.exponentialRampToValueAtTime(0.0001, start + 0.16);
+  src.connect(bp);
+  bp.connect(g);
+  g.connect(master);
+  src.start(start);
+  src.stop(start + 0.22);
+}
+
+/** Bonus word: triangle arpeggio C6-E6-G6 staggered. */
+export function sparkle() {
+  const freqs = [1046.5, 1318.5, 1568.0]; // C6 E6 G6
+  freqs.forEach((f, i) => {
+    note({ type: 'triangle', f0: f, dur: 0.22, gain: 0.35, t0: i * 0.06 });
+  });
+  note({ type: 'triangle', f0: 2093.0, dur: 0.25, gain: 0.25, t0: 0.18 }); // C7 sparkle
+}
+
+/** Picture word: C-major chord swell + quick octave arpeggio. */
+export function tada() {
+  // chord swell
+  [523.25, 659.25, 783.99].forEach((f) => {
+    note({ type: 'sine', f0: f, dur: 0.7, gain: 0.22 });
+  });
+  // quick rising arpeggio on top
+  [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
+    note({ type: 'triangle', f0: f, dur: 0.3, gain: 0.28, t0: 0.12 + i * 0.08 });
+  });
+}
+
+/** Silly blend: goofy saw wobble 300 -> 150 Hz with vibrato. */
+export function silly() {
+  if (!ensure()) return;
+  const start = now();
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(300, start);
+  osc.frequency.exponentialRampToValueAtTime(150, start + 0.5);
+  // vibrato LFO ~8 Hz
+  const lfo = ctx.createOscillator();
+  const lfoGain = ctx.createGain();
+  lfo.frequency.value = 8;
+  lfoGain.gain.value = 30;
+  lfo.connect(lfoGain);
+  lfoGain.connect(osc.frequency);
+  g.gain.setValueAtTime(0.0001, start);
+  g.gain.exponentialRampToValueAtTime(0.22, start + 0.05);
+  g.gain.exponentialRampToValueAtTime(0.0001, start + 0.5);
+  osc.connect(g);
+  g.connect(master);
+  osc.start(start);
+  lfo.start(start);
+  osc.stop(start + 0.55);
+  lfo.stop(start + 0.55);
+}
+
+/** Subtle synthesized boing for animal reveals. */
+export function boing() {
+  if (!ensure()) return;
+  const start = now();
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(180, start);
+  osc.frequency.exponentialRampToValueAtTime(520, start + 0.08);
+  osc.frequency.exponentialRampToValueAtTime(220, start + 0.3);
+  g.gain.setValueAtTime(0.0001, start);
+  g.gain.exponentialRampToValueAtTime(0.2, start + 0.03);
+  g.gain.exponentialRampToValueAtTime(0.0001, start + 0.32);
+  osc.connect(g);
+  g.connect(master);
+  osc.start(start);
+  osc.stop(start + 0.35);
+}
+
+/** Tiny UI click. */
+export function tick() {
+  note({ type: 'square', f0: 880, dur: 0.04, gain: 0.18 });
+}
+
+/** Soft paper-scissor snip: a bright click with a tiny, filtered paper hush. */
+export function snip() {
+  mark('snip');
+  if (!ensure()) return;
+  const start = now();
+  const blade = ctx.createOscillator();
+  const bladeGain = ctx.createGain();
+  const paper = ctx.createBufferSource();
+  const paperFilter = ctx.createBiquadFilter();
+  const paperGain = ctx.createGain();
+  blade.type = 'triangle';
+  blade.frequency.setValueAtTime(1320, start);
+  blade.frequency.exponentialRampToValueAtTime(660, start + 0.055);
+  bladeGain.gain.setValueAtTime(0.11, start);
+  bladeGain.gain.exponentialRampToValueAtTime(0.0001, start + 0.07);
+  paper.buffer = noiseBuffer(0.08);
+  paperFilter.type = 'bandpass';
+  paperFilter.frequency.value = 2400;
+  paperFilter.Q.value = 1.8;
+  paperGain.gain.setValueAtTime(0.055, start);
+  paperGain.gain.exponentialRampToValueAtTime(0.0001, start + 0.075);
+  blade.connect(bladeGain);
+  bladeGain.connect(master);
+  paper.connect(paperFilter);
+  paperFilter.connect(paperGain);
+  paperGain.connect(master);
+  blade.start(start);
+  blade.stop(start + 0.075);
+  paper.start(start);
+}
+
+/** Friendly toy-car rev: a short rising motor burble, never a harsh engine roar. */
+export function vroom() {
+  mark('vroom');
+  if (!ensure()) return;
+  const start = now();
+  const osc = ctx.createOscillator();
+  const wobble = ctx.createOscillator();
+  const wobbleGain = ctx.createGain();
+  const g = ctx.createGain();
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(78, start);
+  osc.frequency.exponentialRampToValueAtTime(150, start + 0.28);
+  wobble.type = 'sine';
+  wobble.frequency.value = 19;
+  wobbleGain.gain.value = 9;
+  wobble.connect(wobbleGain);
+  wobbleGain.connect(osc.frequency);
+  g.gain.setValueAtTime(0.0001, start);
+  g.gain.exponentialRampToValueAtTime(0.16, start + 0.025);
+  g.gain.exponentialRampToValueAtTime(0.0001, start + 0.52);
+  osc.connect(g);
+  g.connect(master);
+  osc.start(start);
+  wobble.start(start);
+  osc.stop(start + 0.55);
+  wobble.stop(start + 0.55);
+}
+
+/** Sustained friendly motor for an animated drive-along payoff. */
+export function motor(durationMs = 2200) {
+  mark('motor');
+  if (!ensure()) return;
+  const start = now();
+  const dur = Math.max(0.8, Math.min(4.2, Number(durationMs) / 1000 || 2.2));
+  const engine = ctx.createOscillator();
+  const purr = ctx.createOscillator();
+  const wobble = ctx.createOscillator();
+  const wobbleGain = ctx.createGain();
+  const filter = ctx.createBiquadFilter();
+  const g = ctx.createGain();
+  engine.type = 'sawtooth';
+  engine.frequency.setValueAtTime(92, start);
+  engine.frequency.exponentialRampToValueAtTime(142, start + Math.min(0.45, dur * 0.25));
+  engine.frequency.setValueAtTime(128, start + Math.min(0.65, dur * 0.32));
+  engine.frequency.exponentialRampToValueAtTime(108, start + dur);
+  purr.type = 'triangle';
+  purr.frequency.setValueAtTime(184, start);
+  purr.frequency.exponentialRampToValueAtTime(220, start + dur);
+  wobble.type = 'sine';
+  wobble.frequency.value = 17;
+  wobbleGain.gain.value = 11;
+  wobble.connect(wobbleGain);
+  wobbleGain.connect(engine.frequency);
+  filter.type = 'lowpass';
+  filter.frequency.value = 620;
+  filter.Q.value = 0.8;
+  g.gain.setValueAtTime(0.0001, start);
+  g.gain.exponentialRampToValueAtTime(0.18, start + 0.08);
+  g.gain.setValueAtTime(0.16, start + Math.max(0.12, dur - 0.22));
+  g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+  engine.connect(filter);
+  purr.connect(filter);
+  filter.connect(g);
+  g.connect(master);
+  engine.start(start);
+  purr.start(start);
+  wobble.start(start);
+  engine.stop(start + dur + 0.05);
+  purr.stop(start + dur + 0.05);
+  wobble.stop(start + dur + 0.05);
+}
+
+/** Soft two-note toy horn for a finished road. */
+export function honk() {
+  mark('honk');
+  note({ type: 'triangle', f0: 392, dur: 0.2, gain: 0.34 });
+  note({ type: 'triangle', f0: 523.25, dur: 0.26, gain: 0.34, t0: 0.18 });
+}

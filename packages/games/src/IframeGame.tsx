@@ -34,14 +34,14 @@ export function IframeGame(props: Props) {
       setFailed(true);
       latest.current.onError?.(new Error(message));
     }
-    const timer = setTimeout(() => fail("Игра не загрузилась. Попробуй ещё раз позже."), 10000);
+    const timer = setTimeout(() => fail(latest.current.text.loadError), 10000);
     const bridge = new HostBridge({
       frame: () => frame.current?.contentWindow,
       context: {
         sessionId: sessionId ?? createId(),
         gameId: game.id,
         version: game.version,
-        locale: "ru",
+        locale: props.locale ?? "en",
       },
       config: { level, seed, protocols: [BRIDGE_PROTOCOL, BRIDGE_PROTOCOL - 1] },
       handshakeTimeoutMs: 10000,
@@ -54,7 +54,7 @@ export function IframeGame(props: Props) {
           clearTimeout(timer);
           setReady(true);
           latest.current.onReady?.();
-        } else if (phase === "error") fail("Ошибка игры. Попробуй ещё раз позже.");
+        } else if (phase === "error") fail(latest.current.text.runtimeError);
       },
       onEvent(event) {
         if (stopped || finished || !isReady) return;
@@ -99,11 +99,11 @@ export function IframeGame(props: Props) {
       clearTimeout(timer);
       bridge.close();
     };
-  }, [game.id, game.version, game.roundsPerSession, level, seed, sessionId]);
+  }, [game.id, game.version, game.roundsPerSession, level, seed, sessionId, props.locale]);
   if (failed)
     return (
       <p role="alert" className="p-6 text-center">
-        Игра не загрузилась. Попробуй ещё раз позже.
+        {props.text.loadError}
       </p>
     );
   return (

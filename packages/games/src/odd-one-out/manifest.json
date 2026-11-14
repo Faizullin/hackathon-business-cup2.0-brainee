@@ -2,7 +2,7 @@
   "id": "odd-one-out",
   "version": "0.1.0",
   "kind": "dev",
-  "title": "Найди лишний",
+  "title": "Odd One Out",
   "engine": "react",
   "runtime": "react",
   "entry": "OddOneOut.tsx",

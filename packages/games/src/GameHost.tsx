@@ -25,7 +25,7 @@ function lazyGame(game: Extract<GameDefinition, { runtime: "react" }>) {
 }
 
 class GameErrorBoundary extends Component<
-  { children: ReactNode; onError?(error: Error): void },
+  { children: ReactNode; message: string; onError?(error: Error): void },
   { failed: boolean }
 > {
   state = { failed: false };
@@ -42,7 +42,7 @@ class GameErrorBoundary extends Component<
     if (this.state.failed) {
       return (
         <p role="alert" className="p-6 text-center font-medium">
-          Игра не загрузилась. Попробуй ещё раз позже.
+          {this.props.message}
         </p>
       );
     }
@@ -57,18 +57,18 @@ class GameErrorBoundary extends Component<
 export function GameHost({ game, onError, ...props }: HostProps) {
   if (game.runtime === "embedded") {
     return (
-      <GameErrorBoundary onError={onError}>
+      <GameErrorBoundary onError={onError} message={props.text.loadError}>
         <IframeGame game={game} onError={onError} {...props} />
       </GameErrorBoundary>
     );
   }
   const Game = lazyGame(game);
   return (
-    <GameErrorBoundary onError={onError}>
+    <GameErrorBoundary onError={onError} message={props.text.loadError}>
       <Suspense
         fallback={
           <p role="status" className="p-6 text-center text-muted-foreground">
-            Загружаем игру…
+            {props.text.loading}
           </p>
         }
       >

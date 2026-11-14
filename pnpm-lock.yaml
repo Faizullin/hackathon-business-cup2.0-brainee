@@ -38,6 +38,12 @@ importers:
       '@brainee/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@brainee/game-bridge':
+        specifier: workspace:*
+        version: link:../../packages/game-bridge
+      '@brainee/game-catalog':
+        specifier: workspace:*
+        version: link:../../packages/game-catalog
       '@brainee/games':
         specifier: workspace:*
         version: link:../../packages/games

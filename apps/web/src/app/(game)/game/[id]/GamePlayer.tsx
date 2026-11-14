@@ -50,7 +50,7 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
   const boot = useRef<Promise<IssuedGame> | null>(null);
   const router = useRouter();
   const safeLevel = clampLevel(level, game?.levels ?? 1);
-  const { t: i18n, tc } = useI18n();
+  const { t: i18n, tc, locale } = useI18n();
   const t = i18n.child.game;
   const sync = i18n.child.sync;
   const matches =
@@ -103,7 +103,12 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
   if (!game) return null;
   if (completion && issued)
     return (
-      <PostGameScreen game={game} level={issued.level} seed={issued.seed} completion={completion} />
+      <PostGameScreen
+        game={{ ...game, title: tc(game.title) }}
+        level={issued.level}
+        seed={issued.seed}
+        completion={completion}
+      />
     );
   if (phase !== "playing" || !issued) {
     const failed = phase === "save-error" || phase === "start-error";
@@ -181,9 +186,10 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
         </p>
       </header>
       <GameHost
+        locale={locale}
         sessionId={issued.sessionId}
         text={i18n.games}
-        game={game}
+        game={{ ...game, title: tc(game.title) }}
         level={issued.level}
         seed={issued.seed}
         onRound={(event) => setEvents((list) => [...list, event])}

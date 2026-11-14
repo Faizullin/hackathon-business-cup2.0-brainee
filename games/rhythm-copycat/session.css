@@ -1,0 +1,202 @@
+/* Rhythm Copycat — session styling & host integration */
+
+:root {
+  --rc-accent: #2dd2d3;
+  --rc-text: #2c3e50;
+  --rc-hud-bg: rgba(255, 255, 255, 0.92);
+}
+
+.session-hud {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.session-progress {
+  font-size: clamp(16px, 3.5vw, 22px);
+  font-weight: 700;
+  color: #fff;
+  background: rgba(45, 210, 211, 0.9);
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.5px;
+}
+
+.session-sound-btn {
+  pointer-events: auto;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 8px 14px;
+  border-radius: 24px;
+  border: 2px solid #2dd2d3;
+  background: #fff;
+  color: #2c3e50;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  touch-action: manipulation;
+}
+
+.session-sound-btn:active {
+  transform: scale(0.96);
+}
+
+.session-sound-btn.is-active {
+  background: #2dd2d3;
+  color: #fff;
+}
+
+/* Expanded tray support for 5 to 8 beats */
+.rc-tray.rc-tray-len5 {
+  width: min(70vw, 620px);
+}
+.rc-tray.rc-tray-len6 {
+  width: min(78vw, 680px);
+}
+.rc-tray.rc-tray-len7 {
+  width: min(85vw, 740px);
+}
+.rc-tray.rc-tray-len8 {
+  width: min(92vw, 800px);
+}
+
+.rc-chips {
+  flex-wrap: wrap;
+  gap: clamp(4px, 1.2vw, 10px);
+  padding: 6px 12px;
+}
+
+.rc-chip {
+  width: clamp(38px, 6.5vw, 56px);
+  height: clamp(38px, 6.5vw, 56px);
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.rc-chip.is-socket {
+  background: rgba(255, 255, 255, 0.45);
+  border-style: dashed;
+}
+
+.rc-chip.is-shown {
+  background: var(--chip-color, #2dd2d3);
+  border-style: solid;
+}
+
+.rc-chip.is-active {
+  transform: scale(1.15);
+  box-shadow: 0 0 12px var(--chip-color, #ffd23f);
+}
+
+.rc-plaque {
+  padding: 6px 16px;
+}
+
+.rc-plaque p {
+  font-size: clamp(18px, 3.8vw, 26px);
+  font-weight: 700;
+}
+
+/* Touch-first pads >= 48px */
+.rc-pad {
+  min-width: 64px;
+  min-height: 64px;
+  touch-action: manipulation;
+}
+
+.rc-pad:focus-visible {
+  outline: 4px solid #ffd23f;
+  outline-offset: 4px;
+}
+
+.session-message {
+  min-height: 28px;
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  margin-top: 4px;
+}
+
+.session-complete {
+  position: absolute;
+  inset: 0;
+  background: rgba(45, 210, 211, 0.96);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  color: #fff;
+  text-align: center;
+  padding: 24px;
+}
+
+.session-complete h1 {
+  font-size: clamp(28px, 5vw, 40px);
+  margin-bottom: 16px;
+}
+
+.session-complete p {
+  font-size: clamp(18px, 3.5vw, 24px);
+  max-width: 500px;
+}
+
+fieldset.rc-pads {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-inline-size: 0;
+}
+
+/* This standalone shell does not load the upstream safe-area stylesheet. */
+.rc-kiki-play {
+  left: 12px;
+  bottom: 12px;
+  width: clamp(80px, 15vw, 120px);
+  pointer-events: none;
+}
+
+.rc-kiki-play img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Keep the input hit area stationary while its illustration gives feedback. */
+.rc-pad,
+.rc-pad:active {
+  transform: none;
+  transition: filter 200ms ease;
+}
+.rc-pad.is-hit,
+.rc-pad.is-demo-hit {
+  animation: none;
+}
+.rc-pad img {
+  pointer-events: none;
+}
+.rc-pad.is-hit img {
+  animation: rc-hit 460ms ease;
+}
+.rc-pad.is-demo-hit img {
+  animation: rc-demo-hit 460ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rc-pad.is-hit img,
+  .rc-pad.is-demo-hit img {
+    animation: none;
+  }
+}

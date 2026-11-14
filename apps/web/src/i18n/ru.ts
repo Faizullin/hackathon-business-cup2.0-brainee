@@ -327,6 +327,9 @@ export const ru = {
     motor: "Моторика",
   },
   games: {
+    loading: "Загружаем игру…",
+    loadError: "Игра не загрузилась. Попробуй ещё раз позже.",
+    runtimeError: "Ошибка игры. Попробуй ещё раз позже.",
     round: (current: number, total: number) => `Раунд ${current} из ${total}`,
     shape: (index: number) => `Фигура ${index}`,
     choice: (index: number) => `Ответ ${index}`,

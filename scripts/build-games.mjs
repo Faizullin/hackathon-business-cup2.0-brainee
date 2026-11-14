@@ -3,6 +3,7 @@ import { cpSync, mkdirSync, rmSync } from "node:fs";
 import { resolve } from "node:path";
 import { build } from "esbuild";
 import { buildPhaserPackage } from "../packages/engine-phaser/buildPhaserPackage.mjs";
+import { buildTangram } from "./build-tangram.mjs";
 
 const destination = resolve("apps/web/public/games");
 mkdirSync(destination, { recursive: true });
@@ -27,3 +28,18 @@ cpSync(
 cpSync("games/picture-puzzle/licenses", `${destination}/picture-puzzle/licenses`, {
   recursive: true,
 });
+
+rmSync(`${destination}/tangram-tales`, { recursive: true, force: true });
+buildTangram(`${destination}/tangram-tales`);
+
+for (const id of [
+  "reflection",
+  "rhythm-copycat",
+  "secret-message-copy",
+  "magnet-explorer",
+  "neighborhood-map-walk",
+]) {
+  const { buildGame } = await import(`../games/${id}/build.mjs`);
+  rmSync(`${destination}/${id}`, { recursive: true, force: true });
+  await buildGame(`${destination}/${id}`);
+}

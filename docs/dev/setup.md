@@ -130,7 +130,30 @@ Not now. Deploying is the final roadmap step (T-14): Vercel Hobby + Turso free p
 
 ## Embedded games (T-29 / T-85)
 
-- `pnpm games:build` bundles the local bridge and Phaser Picture Puzzle, replacing `apps/web/public/games/picture-puzzle/`. Run before `pnpm dev` on a new checkout or after changing an embedded game; `pnpm build` does this automatically.
+- `pnpm games:build` builds the local bridge and all registered learning games and Explore previews, replacing their directories under `apps/web/public/games/`. Run before `pnpm dev` on a new checkout or after changing an embedded game; `pnpm build` does this automatically.
 - `pnpm test:assets` verifies built entries, referenced assets, pictures, bridge script and manifest size budgets. `pnpm check:manifests` validates every listed game's manifest; included in `pnpm check`.
 - For an existing DB, run `pnpm db:push && pnpm db:seed` to add game runtime columns and catalog entries. `pnpm demo` resets the local demo as usual.
 - `/lab` now includes «Собери картинку». Its events use the same `round`/`finish` contract as React games; embedded ready changes the event stream to `data-status="connected"`. Standalone: `/games/picture-puzzle/index.html?level=3&seed=42`.
+
+### Isolated game worktree verification
+
+When a task explicitly authorizes a worktree, keep its SQLite and build output separate:
+
+```sh
+DATABASE_URL=file:./data/games.db pnpm db:reset
+DATABASE_URL=file:./data/games.db BRAINEE_NEXT_DIR=.next-games DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web exec next dev --port 3001
+DATABASE_URL=file:./data/games.db BRAINEE_NEXT_DIR=.next-games BRAINEE_E2E_PORT=3101 BRAINEE_LAB=1 DEMO_MODE=1 pnpm e2e
+```
+
+`BRAINEE_E2E_PORT` defaults to 3100; tests still create and clean up their own temporary database. `BRAINEE_NEXT_DIR` defaults to `.next` and is passed through Turbo. Run `pnpm games:build` before dev. `pnpm check:manifests` additionally checks pinned path-C source hashes; `pnpm test:assets` checks the generated local output and size budgets. No import-time network is used by these commands.
+
+
+### Games-only iPad review
+
+In an isolated games worktree, build once with `BRAINEE_NEXT_DIR=.next-games pnpm build`, then run the focused iPad Safari suite:
+
+```sh
+BRAINEE_NEXT_DIR=.next-games BRAINEE_E2E_PORT=3114 pnpm --filter @brainee/web e2e game-conformance.spec.ts picture-puzzle.spec.ts tangram.spec.ts reflection.spec.ts rhythm-copycat.spec.ts secret-message-copy.spec.ts magnet-explorer.spec.ts neighborhood-map-walk.spec.ts --project=webkit-ipad
+```
+
+The test server owns a temporary SQLite database. Review generated `apps/web/test-results` screenshots. `/lab` tests explicitly select the iPad frame on tablet projects. For an unchanged app build, `pnpm games:build && pnpm test:assets` refreshes static game-only edits without rebuilding Next. Run the full four-project matrix before broader integration; keep unrelated onboarding/settings failures separate from game acceptance. Do not merge this games branch into master without a new explicit instruction.

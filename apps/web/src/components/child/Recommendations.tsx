@@ -27,7 +27,7 @@ export function useRecommendations() {
       snapshot.learningHistory ?? [],
       Date.now(),
     );
-    // The MVP catalog has two games: top up with the rest by their main-skill gap.
+    // Fill gaps with remaining age-eligible games when a top skill has no candidate.
     const extra = open
       .filter((game) => game.kind === "dev" && !recs.some((rec) => rec.game.id === game.id))
       .map((game) => {

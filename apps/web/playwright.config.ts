@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { defineConfig } from "@playwright/test";
 
+const port = Number(process.env.BRAINEE_E2E_PORT ?? 3100);
 const databasePath = join(tmpdir(), `brainee-e2e-${randomUUID()}.db`);
 
 export default defineConfig({
@@ -17,7 +18,7 @@ export default defineConfig({
   metadata: { databasePath },
   globalTeardown: "./e2e/cleanup-database.ts",
   use: {
-    baseURL: "http://127.0.0.1:3100",
+    baseURL: `http://127.0.0.1:${port}`,
     colorScheme: "light",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
@@ -35,9 +36,8 @@ export default defineConfig({
     { name: "webkit-ipad", use: { browserName: "webkit", viewport: { width: 1180, height: 820 } } },
   ],
   webServer: {
-    command:
-      "pnpm --filter @brainee/db db:reset && pnpm exec next start --hostname 127.0.0.1 --port 3100",
-    url: "http://127.0.0.1:3100/learn",
+    command: `pnpm --filter @brainee/db db:reset && pnpm exec next start --hostname 127.0.0.1 --port ${port}`,
+    url: `http://127.0.0.1:${port}/learn`,
     reuseExistingServer: false,
     env: {
       NEXT_TELEMETRY_DISABLED: "1",

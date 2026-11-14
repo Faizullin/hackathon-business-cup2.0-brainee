@@ -53,7 +53,10 @@ test("a game opens fullscreen from Learn and exits back", async ({ page }) => {
   await expect(page).toHaveURL(/\/learn$/);
 });
 
-test("unknown games return 404", async ({ page }) => {
-  const response = await page.goto("/game/not-a-game");
-  expect(response?.status()).toBe(404);
+test("unknown games show the not-found screen and cannot launch", async ({ page }) => {
+  // Next streams the root loading boundary before this dynamic route resolves.
+  await page.goto("/game/not-a-game");
+  await expect(page.getByRole("heading", { name: "Страница не найдена" })).toBeVisible();
+  await expect(page.locator('meta[name="robots"]').first()).toHaveAttribute("content", "noindex");
+  await expect(page.getByTestId("embedded-game")).toHaveCount(0);
 });

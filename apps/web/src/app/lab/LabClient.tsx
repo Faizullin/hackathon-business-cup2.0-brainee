@@ -20,7 +20,7 @@ const fieldClass =
   "min-h-12 rounded-xl border border-border bg-card px-3 text-foreground focus-visible:outline-3 focus-visible:outline-ring";
 
 export function LabClient() {
-  const { t: ru, tc } = useI18n();
+  const { t: ru, tc, locale } = useI18n();
   const ids = { game: useId(), level: useId(), seed: useId(), frame: useId() };
   const [gameId, setGameId] = useState(allGames[0]?.id ?? "");
   const [level, setLevel] = useState(1);
@@ -124,13 +124,14 @@ export function LabClient() {
           className={`mx-auto w-full ${FRAMES[frame]} rounded-panel border border-border bg-background`}
         >
           <GameHost
+            locale={locale}
             onReady={() => {
               setConnected(true);
               setEvents((list) => [...list, { type: "ready" }]);
             }}
             text={ru.games}
             key={`${game.id}-${safeLevel}-${seed}-${run}`}
-            game={game}
+            game={{ ...game, title: tc(game.title) }}
             level={safeLevel}
             seed={seed}
             onRound={(event) => setEvents((list) => [...list, { type: "round", event }])}

@@ -2,7 +2,7 @@
   "id": "picture-puzzle",
   "version": "0.1.0",
   "kind": "dev",
-  "title": "Собери картинку",
+  "title": "Picture Puzzle",
   "engine": "phaser",
   "runtime": "embedded",
   "entry": "/games/picture-puzzle/index.html",
