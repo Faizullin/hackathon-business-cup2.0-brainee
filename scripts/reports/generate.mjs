@@ -125,12 +125,12 @@ export function renderFlow(flow, media) {
   const seconds = (flow.durationMs / 1000).toFixed(1);
   const checks = flow.checks.passed + flow.checks.failed;
   const when = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "Asia/Almaty",
+    timeZone: "America/New_York",
     dateStyle: "medium",
     timeStyle: "short",
   }).format(new Date(flow.startedAt));
   const lines = [
-    `**${cell(flow.title)}** (flow \`${flow.flow}\`): ${flow.status}, ${checks ? `${flow.checks.passed} of ${checks} checks passed` : "no checks"}, ${seconds} s, ${flow.viewport ?? flow.surface}. Recorded ${when} (Asia/Almaty) against \`${flow.target}\`.`,
+    `**${cell(flow.title)}** (flow \`${flow.flow}\`): ${flow.status}, ${checks ? `${flow.checks.passed} of ${checks} checks passed` : "no checks"}, ${seconds} s, ${flow.viewport ?? flow.surface}. Recorded ${when} (America/New_York) against \`${flow.target}\`.`,
   ];
   if (flow.note) lines.push("", flow.note);
   lines.push(
@@ -258,7 +258,7 @@ export async function generateReport({ root, module, capture, worklist, flowsDir
   const verification = [];
   if (rows.length) {
     const date = new Intl.DateTimeFormat("en-CA", {
-      timeZone: "Asia/Almaty",
+      timeZone: "America/New_York",
       dateStyle: "medium",
       timeStyle: "short",
     }).format(new Date(manifest.generatedAt));
@@ -267,8 +267,8 @@ export async function generateReport({ root, module, capture, worklist, flowsDir
       : "";
     verification.push(
       module.surface === "device"
-        ? `Captured ${date} (Asia/Almaty): ${rows.length} screens, taken by hand on a booted simulator or device.${commit}`
-        : `Captured ${date} (Asia/Almaty): ${rows.length} scenarios, ${viewports.join(" and ")}; ${module.localeLabel ?? "English"}, light theme. No failed steps, redirects, JavaScript errors, HTTP errors or unexpected failed requests. ${cancellations.length} known lifecycle request cancellations remain in the manifest.${commit} Imported static references are not live captures.`,
+        ? `Captured ${date} (America/New_York): ${rows.length} screens, taken by hand on a booted simulator or device.${commit}`
+        : `Captured ${date} (America/New_York): ${rows.length} scenarios, ${viewports.join(" and ")}; ${module.localeLabel ?? "English"}, light theme. No failed steps, redirects, JavaScript errors, HTTP errors or unexpected failed requests. ${cancellations.length} known lifecycle request cancellations remain in the manifest.${commit} Imported static references are not live captures.`,
     );
   }
   if (flows.length)

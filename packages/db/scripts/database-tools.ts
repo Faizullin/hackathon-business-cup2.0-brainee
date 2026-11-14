@@ -6,7 +6,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { openDatabase } from "../src/client";
 import type { DatabaseConfig } from "../src/config";
-import { seedDemo } from "../src/seed";
+import { refreshDemo, seedDemo } from "../src/seed";
 
 const require = createRequire(import.meta.url);
 const packageDirectory = fileURLToPath(new URL("..", import.meta.url));
@@ -31,10 +31,10 @@ export function runDrizzle(config: DatabaseConfig, command: "push" | "studio" = 
   );
 }
 
-export async function seedDatabase(config: DatabaseConfig) {
+export async function seedDatabase(config: DatabaseConfig, refresh = false) {
   const connection = await openDatabase(config);
   try {
-    await seedDemo(connection.db);
+    await (refresh ? refreshDemo : seedDemo)(connection.db);
   } finally {
     connection.client.close();
   }

@@ -10,7 +10,7 @@ import { useLearning } from "./LearningProvider";
 /** D-22: every game shows its minimum age; games above the child's age stay locked. */
 export function GameGrid() {
   const { snapshot } = useLearning();
-  const { t } = useI18n();
+  const { t, tc } = useI18n();
   const age = snapshot ? new Date().getFullYear() - snapshot.child.birthYear : 10;
   return (
     <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -26,7 +26,7 @@ export function GameGrid() {
               </span>
             </span>
             <span>
-              <span className="block font-semibold">{game.title}</span>
+              <span className="block font-semibold">{tc(game.title)}</span>
               <span className="text-muted-foreground text-sm">{skill}</span>
             </span>
           </>

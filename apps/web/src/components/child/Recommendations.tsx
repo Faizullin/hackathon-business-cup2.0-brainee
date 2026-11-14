@@ -54,7 +54,7 @@ export function RecommendationCards({
   onChoose?: (gameId: string) => void;
 }) {
   const recs = useRecommendations();
-  const { t } = useI18n();
+  const { t, tc } = useI18n();
   const te = t.child.entry;
   return (
     <ul className={cn("grid gap-3", big ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-3")}>
@@ -79,7 +79,7 @@ export function RecommendationCards({
                 </span>
               )}
               <ChildIcon name="learn" className={cn("text-sky", big ? "size-12" : "size-9")} />
-              <span className={cn("font-semibold", big && "text-lg")}>{rec.game.title}</span>
+              <span className={cn("font-semibold", big && "text-lg")}>{tc(rec.game.title)}</span>
               <span className="text-muted-foreground text-sm">
                 {te.reason(skill, rec.score, rec.ageAverage)}
               </span>

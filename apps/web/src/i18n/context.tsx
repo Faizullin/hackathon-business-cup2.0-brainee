@@ -9,6 +9,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { translateContent } from "./content";
 import { en } from "./en";
 import { ru } from "./ru";
 import type { Dictionary, Locale } from "./types";
@@ -22,12 +23,15 @@ export interface I18nContextValue {
   locale: Locale;
   setLocale: (next: Locale) => void;
   t: Dictionary;
+  /** Seeded content or game titles in the current locale. */
+  tc: (text: string) => string;
 }
 
 const defaultContext: I18nContextValue = {
   locale: DEFAULT_LOCALE,
   setLocale: () => {},
   t: en,
+  tc: (text) => translateContent(text, DEFAULT_LOCALE),
 };
 
 const I18nContext = createContext<I18nContextValue>(defaultContext);
@@ -93,6 +97,7 @@ export function I18nProvider({
       locale,
       setLocale,
       t: dictionaries[locale] ?? dictionaries[DEFAULT_LOCALE],
+      tc: (text: string) => translateContent(text, locale),
     }),
     [locale, setLocale],
   );

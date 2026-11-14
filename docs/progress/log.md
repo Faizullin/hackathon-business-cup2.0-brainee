@@ -4,6 +4,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (US-English demo content, locale test fix)
+- T-110 / D-30: shared demo and jury seeds rewritten for the US audience (Mia, Ava, `mom@example.com`, US names, en-US numbers, New York time); Russian switch maps seeded strings and game titles via `i18n/content.ts`. Small i18n fixes: backpack progress wording, video minutes, default task skill, cartoon icon check, "Neighborhood" ranking scope.
+- `pnpm db:refresh-demo` replaces only the shared demo family (local or cloud). Fixed e2e locale: the global Playwright `cookie` header overrode the session jar (401s, English UI); now `BRAINEE_DEFAULT_LOCALE=ru` on the test server. Report captures use `brainee_locale` + New York time.
+
 ## 2026-11-14 (Bilingual EN/RU localization and English default)
 - Completed T-104: implemented full bilingual support (EN/RU with English as default) across all child, parent, entry, and auth views per ADR D-22 and AGENTS.md.
 - Added comprehensive English dictionary `apps/web/src/i18n/en.ts` mirroring `ru.ts`, typed `I18nProvider` / `useI18n()` with SSR cookie `brainee_locale` (1 year, SameSite=Lax) and `localStorage` sync.

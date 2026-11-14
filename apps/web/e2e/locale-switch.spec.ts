@@ -1,12 +1,14 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Bilingual localization & locale switching", () => {
-  test("defaults to English on home page, allows switching to Russian and persists", async ({
+  test("shows English, allows switching to Russian and persists", async ({
     page,
     context,
+    baseURL,
   }) => {
-    // Clear cookies to test default locale
+    // The test server falls back to Russian (BRAINEE_DEFAULT_LOCALE); production defaults to English.
     await context.clearCookies();
+    await context.addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
 
     // 1. Home page in English by default
     await page.goto("/");

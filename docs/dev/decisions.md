@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-30 · US English is the primary locale and demo content · 2026-11-14 · accepted · supersedes D-22 language order
+**Context:** the US is the main future audience; T-104 made English the default UI, but seeds, names and report captures still assumed Russian/Kazakhstan.
+**Decision:** English is the default locale (`brainee_locale` cookie, Russian by switch). The shared demo and jury seeds are US English (child "Mia", jury child "Ava", login `mom@example.com`, US names, en-US numbers, America/New_York). The Russian UI translates seeded strings and current game titles at display time through `[en, ru]` pairs in `apps/web/src/i18n/content.ts`; parent-typed text is shown as written. `pnpm db:refresh-demo` replaces only the shared demo family, so the cloud DB can be updated without wiping jury families. Report captures use `brainee_locale` and New York time.
+**Consequences:** new seed strings need a pair in `content.ts` for the RU switch. Game manifests (games worktree) still carry Russian titles, mapped in the web layer until they move to English keys. E2E keeps Russian selectors through the server-only fallback `BRAINEE_DEFAULT_LOCALE=ru` (a Playwright `cookie` header replaced the session cookie jar and broke API calls); recordings set the `brainee_locale` cookie. English recordings/specs are a follow-up.
+
 ## D-29 · Jury access and a live presentation loop · 2026-11-14 · accepted · extends D-21/D-24/D-25
 **Context:** a visitor should try child and parent roles without setup, while real families keep quiz-first onboarding.
 **Decision:** demo-only `POST /api/jury` creates an isolated `jury` family, generated scrypt credentials, nine real completed sessions and an elevated device cookie; creation deletes jury families older than seven days. Credentials are returned once and retained in this tab's session storage. `/signup` uses neutral quiz answers; both signup paths end at pairing/Screen Time setup. Add only `game_sessions.recommended`; session history drives recommendations and live analytics. Radar history, character radar and ranking remain explicitly illustrative.
@@ -43,7 +48,7 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 **Decision:** every learning game has `weights` (ability → share, sum 1) and a `minAge`, stored on the `games` row and mirrored in game metadata. Children have six ability scores (`brainy_states.skills`). A completed session earns a budget `(3 + (level − 1)) × (0.5 + 0.5 × first-try accuracy)`, split by weights into whole-point ability gains (`weightedSkillGains`); abilities update, and body parts grow by the summed gains of their abilities (logic/memory → brain, attention → eyes, speech/reading → mouth, motor → arms). Parent radar "now" and recommendations read the live scores. Science-video eyes gains also train attention.
 **Consequences:** Odd one out (attention 1.0) keeps +3 eyes at level 1; Continue the pattern (logic 0.7, attention 0.3) gives logic +2/attention +1. Calibration remains a methodologist's choice in one place (`stat-gains.ts`).
 
-## D-22 · Russian now, English later; catalog for ages 4–10 · 2026-11-14 · accepted
+## D-22 · Russian now, English later; catalog for ages 4–10 · 2026-11-14 · language order superseded by D-30
 **Context:** the 30-game handoff assumes US English for ages 6–9; the PRD is Russian with younger children.
 **Decision:** the product stays Russian for now; an English locale (`en.ts`) comes later. The catalog spans ages 4–10; each game has a recommended minimum age, games above the child's age show locked «Откроется с N лет», and recommendations only offer open games.
 **Consequences:** English-only external games wait for the locale or must be language-light.

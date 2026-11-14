@@ -38,7 +38,7 @@ pnpm report --module learning --video # saved child learning loop
 
 The command defaults to the `mvp` module and `http://127.0.0.1:3123`.
 It records Chromium at phone (390 × 844) and iPad (1180 × 820) viewport sizes,
-in Russian, light theme, with timestamps shown in Asia/Almaty. Both recordings
+in Russian, light theme, with timestamps shown in America/New_York. Both recordings
 show the same continuous flow. `--video` requires successful MP4 conversion;
 conversion errors fail the run instead of silently publishing a video-less report.
 

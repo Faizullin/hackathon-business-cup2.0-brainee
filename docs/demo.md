@@ -25,7 +25,7 @@ On the parent phone create a jury family, open Settings and generate a child pai
 | 5 | Open Brainy; buy and wear an accessory | Observe Brainy | The worn item follows the mascot |
 | 6 | Buy Snake time in Leisure; play, pause and reopen | Observe saved balance | Purchased minutes count only during play; another purchase adds time |
 
-Science placeholders resume position and pay ★ only after the correct answer. Bought cartoons require Play and restart from zero on each visit, with no watch-next. Snake is playable; other fun titles remain catalog previews. Real media is deferred. For the shared seeded family, login is `mama@example.com` / `demo1234`, PIN `1234`; its existing backpack/badge are valid, and a game today completes the garden streak.
+Science placeholders resume position and pay ★ only after the correct answer. Bought cartoons require Play and restart from zero on each visit, with no watch-next. Snake is playable; other fun titles remain catalog previews. Real media is deferred. For the shared seeded family, login is `mom@example.com` / `demo1234`, PIN `1234`; its existing backpack/badge are valid, and a game today completes the garden streak.
 
 ## Rehearsal checklist
 

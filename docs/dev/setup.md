@@ -29,6 +29,7 @@ Available commands:
 | `pnpm test` | Run the workspace Vitest suites through Turborepo (`core` rules, game rounds, DB) |
 | `pnpm db:push` | Apply `packages/db/schema.ts` to the local SQLite file using Drizzle Kit |
 | `pnpm db:seed` | Add missing demo fixtures without overwriting balances |
+| `pnpm db:refresh-demo` | Replace only the shared demo family with the current seed; other and jury families stay. With `.env.deployed` vars it updates the cloud DB |
 | `pnpm db:reset` | Delete the database + WAL/SHM files, push schema and seed the demo |
 | `pnpm db:studio` | Open Drizzle's local data inspector |
 | `pnpm check` | Biome lint + format checks, game boundaries and manifests, then workspace TypeScript checks |

@@ -6,12 +6,15 @@ import {
   type GameResult,
 } from "@brainee/core";
 import { manifests } from "@brainee/game-catalog";
+import { eq } from "drizzle-orm";
 import {
   brainyStates,
   children,
+  demoSessions,
   families,
   gameSessions,
   games,
+  pairingCodes,
   parents,
   showcases,
   wallets,
@@ -52,12 +55,12 @@ export const demo = {
   parent: {
     id: "demo-parent",
     familyId: "demo-family",
-    // Demo login from the MVP prototype: mama@example.com / demo1234 (public demo credentials).
-    email: "mama@example.com",
+    // Demo login from the MVP prototype: mom@example.com / demo1234 (public demo credentials).
+    email: "mom@example.com",
     pinHash: `scrypt$${pinSalt}$${scryptSync("1234", pinSalt, 64).toString("hex")}`,
     passwordHash: `scrypt$${pinSalt}$${scryptSync("demo1234", pinSalt, 64).toString("hex")}`,
   },
-  child: { id: "demo-child", familyId: "demo-family", name: "Саша", birthYear: 2020 },
+  child: { id: "demo-child", familyId: "demo-family", name: "Mia", birthYear: 2020 },
   wallet: { childId: "demo-child", stars: 340, suns: 6 },
   brainy: {
     childId: "demo-child",
@@ -130,4 +133,24 @@ export async function seedDemo(db: Database) {
       .values({ childId: demo.child.id, data: demoShowcase })
       .onConflictDoNothing();
   });
+}
+
+/**
+ * Replace only the shared demo family with the current seed (other and jury families stay).
+ * Explicit child-first deletes, because remote libSQL connections may not enforce cascades.
+ */
+export async function refreshDemo(db: Database) {
+  const childId = demo.child.id;
+  await db.transaction(async (transaction) => {
+    await transaction.delete(gameSessions).where(eq(gameSessions.childId, childId));
+    await transaction.delete(demoSessions).where(eq(demoSessions.childId, childId));
+    await transaction.delete(pairingCodes).where(eq(pairingCodes.childId, childId));
+    await transaction.delete(showcases).where(eq(showcases.childId, childId));
+    await transaction.delete(brainyStates).where(eq(brainyStates.childId, childId));
+    await transaction.delete(wallets).where(eq(wallets.childId, childId));
+    await transaction.delete(children).where(eq(children.id, childId));
+    await transaction.delete(parents).where(eq(parents.familyId, demo.family.id));
+    await transaction.delete(families).where(eq(families.id, demo.family.id));
+  });
+  await seedDemo(db);
 }

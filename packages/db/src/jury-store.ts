@@ -32,7 +32,7 @@ export async function createJuryFamily(db: Database, now: Date) {
     db,
     {
       ...credentials,
-      childName: "Мира",
+      childName: "Ava",
       birthYear: now.getUTCFullYear() - 6,
       answers: NEUTRAL_QUIZ,
       timeZone: "America/New_York",
@@ -67,17 +67,15 @@ export async function createJuryFamily(db: Database, now: Date) {
     data.earned = [];
     data.tasks[0] = {
       id: "jury-app",
-      title: "Сыграть в учебную игру",
+      title: "Play a learning game",
       place: "app",
-      skill: "Логика",
+      skill: "Logic",
       reward: 15,
       status: "todo",
     };
     data.entryLog = { took: 9, other: 3 };
     data.requests = data.requests.map((r) => ({ ...r, delivered: false, at: now.toISOString() }));
-    data.feed = [
-      { kind: "game", at: now.toISOString(), title: "Демонстрационная история", amount: 12 },
-    ];
+    data.feed = [{ kind: "game", at: now.toISOString(), title: "Demo history", amount: 12 }];
     data.fun = data.fun.map((g) => ({ ...g, forever: false, until: null, remainingSeconds: 0 }));
     await tx.update(showcases).set({ data }).where(eq(showcases.childId, access.child.id));
     await tx

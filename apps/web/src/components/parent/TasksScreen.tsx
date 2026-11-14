@@ -25,7 +25,7 @@ export function TasksScreen() {
   const t = i18n.parent.tasks;
   const [title, setTitle] = useState("");
   const [place, setPlace] = useState<TaskPlace>("real");
-  const [skill, setSkill] = useState("Ответственность");
+  const [skill, setSkill] = useState(t.defaultSkill);
   const [reward, setReward] = useState(2);
   if (!snapshot) return null;
   const { tasks, templates, recommendations, taskHistory = [] } = snapshot.showcase;

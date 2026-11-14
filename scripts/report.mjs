@@ -236,9 +236,9 @@ try {
     "--locale-id",
     settings.localeId ?? "ru-RU",
     "--locale-cookie",
-    "Next-Locale",
+    "brainee_locale",
     "--timezone",
-    "Asia/Almaty",
+    "America/New_York",
     "--settle",
     "1500",
   ];

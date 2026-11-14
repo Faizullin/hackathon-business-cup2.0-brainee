@@ -15,6 +15,7 @@
     "test": "vitest run",
     "db:push": "tsx --env-file-if-exists=../../apps/web/.env.local scripts/manage.ts push",
     "db:seed": "tsx --env-file-if-exists=../../apps/web/.env.local scripts/manage.ts seed",
+    "db:refresh-demo": "tsx --env-file-if-exists=../../apps/web/.env.local scripts/manage.ts refresh-demo",
     "db:reset": "tsx --env-file-if-exists=../../apps/web/.env.local scripts/manage.ts reset",
     "db:studio": "tsx --env-file-if-exists=../../apps/web/.env.local scripts/manage.ts studio"
   },

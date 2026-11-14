@@ -102,7 +102,7 @@ function Player({ id }: { id: string }) {
             />
           </div>
           <p className="mt-1 text-muted-foreground text-sm">
-            {position} / {video.minutes} мин
+            {position} / {i18n.child.leisure.minutes(video.minutes)}
           </p>
         </div>
       </div>

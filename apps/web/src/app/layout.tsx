@@ -26,8 +26,9 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const cookieStore = await cookies();
   const rawLocale = cookieStore.get(LOCALE_COOKIE)?.value;
-  const initialLocale: Locale =
-    rawLocale === "ru" || rawLocale === "en" ? rawLocale : DEFAULT_LOCALE;
+  // BRAINEE_DEFAULT_LOCALE only lets the Russian-language test server change the fallback.
+  const fallback: Locale = process.env.BRAINEE_DEFAULT_LOCALE === "ru" ? "ru" : DEFAULT_LOCALE;
+  const initialLocale: Locale = rawLocale === "ru" || rawLocale === "en" ? rawLocale : fallback;
 
   return (
     <html lang={initialLocale} className={`${onest.variable} ${unbounded.variable}`}>

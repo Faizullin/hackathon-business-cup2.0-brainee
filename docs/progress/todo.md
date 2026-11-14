@@ -136,6 +136,9 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
   - [x] Settings (child, PIN, timezone, devices/account), one-time pairing/revocation, adult-task fallback; stage celebration/feed and task empty states.
   - [x] Onboarding polish: progress, answer reactions, story, hold/reduced-motion reveal and optional referral field.
 - [x] T-104 English locale `en.ts` + locale switch (D-22), before English-only external games
+- [x] T-110 US-English seeds and demo family (Mia, `mom@example.com`, US names/numbers, New York time), RU display map for seeded content and game titles, `db:refresh-demo`, report locale cookie/timezone fix (D-30)
+- [ ] T-111 English recordings and e2e locale: port report scenarios/selectors to English (or run both locales) and re-record MVP + learning
+- [ ] T-112 Games worktree: English manifest titles plus i18n for `GameHost`/`IframeGame` error and loading strings (currently Russian)
 - [ ] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
 - [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).
 - [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run
