@@ -14,6 +14,24 @@ function mulberry32(seed) {
 const bridge = window.Brainee.connect({ contract: "reflection@1" });
 await bridge.ready;
 
+// Game-local copy. The platform is English-only.
+const t = {
+  title: "Mirror Grid",
+  progress: (n) => `Pattern ${n} of 4`,
+  vertical: "Color the right half as a mirror image of the left.",
+  bilateral: "Color the other parts as mirror images of the sample.",
+  wrong: "Not quite symmetrical yet. Try again!",
+  next: "You did it! Build the next pattern.",
+  done: "Great! All 4 patterns are done!",
+  doneTitle: "All 4 patterns are done!",
+  check: "Check",
+  colors: ["white", "blue", "red"],
+  dot: (x, y, color, sample) => `${sample ? "Sample" : "Dot"} ${x}, ${y}: ${color}`,
+};
+// A solved pattern stays on screen briefly; Check is ignored meanwhile, so a double tap cannot
+// grade the next, still empty pattern.
+const FEEDBACK_MS = 700;
+
 const session = {
   level: Math.max(1, Math.min(3, Number(bridge.config?.level) || 1)),
   rounds: 0,
@@ -22,7 +40,6 @@ const session = {
   hadMistake: false,
   finished: false,
   started: performance.now(),
-  message: "Раскрась вторую половину как зеркальное отражение.",
 };
 
 const rng = mulberry32((Number(bridge.config?.seed) || 42) + session.level * 100);
@@ -41,7 +58,7 @@ function generateTasks() {
   const minColored = Math.max(2, Math.floor(totalSample * 0.35));
   const maxColored = Math.floor(totalSample * 0.7);
 
-  for (let t = 0; t < 4; t++) {
+  for (let task = 0; task < 4; task++) {
     const grid = Array.from({ length: gridWidth }, () => Array(gridHeight).fill(0));
     let colored = 0;
     while (colored < minColored) {
@@ -67,8 +84,10 @@ const tasks = generateTasks();
 // Current grid dot colors (x, y)
 const currentGrid = Array.from({ length: gridWidth }, () => Array(gridHeight).fill(0));
 let showingSmile = false;
+let feedbackTimer = 0;
 
 // DOM elements
+const app = document.getElementById("game-app");
 const canvas = document.getElementById("actualcanvas");
 const overlay = document.getElementById("dots-overlay");
 const progressEl = document.getElementById("session-progress");
@@ -77,11 +96,18 @@ const checkBtn = document.getElementById("check-btn");
 const completeModal = document.getElementById("session-complete");
 const container = document.getElementById("canvas-container");
 
-// EaselJS Stage setup
+document.title = t.title;
+document.querySelector(".game-title").textContent = t.title;
+completeModal.querySelector("h1").textContent = t.doneTitle;
+checkBtn.textContent = t.check;
+
+// The canvas is redrawn on demand only; there is no animation loop to keep alive.
 const stage = new window.createjs.Stage(canvas);
-stage.mouseEventsEnabled = true;
-window.createjs.Ticker.setFPS(30);
-window.createjs.Ticker.addEventListener("tick", () => stage.update());
+
+// `data-turn` exposes the input state (play | feedback | done) without relying on copy.
+function setTurn(turn) {
+  app.setAttribute("data-turn", turn);
+}
 
 function isSampleDot(x, y) {
   if (isBilateral) {
@@ -118,6 +144,7 @@ function updateLayout() {
   layout.offsetX = (layout.canvasSize - layout.cellStep * gridWidth) / 2;
   layout.offsetY = (layout.canvasSize - layout.cellStep * gridHeight) / 2;
 
+  placeButtons();
   renderBoard();
 }
 
@@ -150,9 +177,49 @@ function showSmileShape(radius, colourHex) {
   return s;
 }
 
+// One persistent DOM button per dot is the only input path. Buttons are created once and only
+// moved on resize, so a tap never lands on an element that a previous tap replaced.
+const buttons = [];
+for (let x = 0; x < gridWidth; x++) {
+  for (let y = 0; y < gridHeight; y++) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = `dot-btn${isSampleDot(x, y) ? " sample-dot" : ""}`;
+    btn.dataset.x = String(x);
+    btn.dataset.y = String(y);
+    btn.disabled = isSampleDot(x, y);
+    btn.addEventListener("click", () => cycleDotColor(x, y));
+    overlay.appendChild(btn);
+    buttons.push(btn);
+  }
+}
+
+function placeButtons() {
+  // At least 48px where the grid allows it, but never wider than one cell: overlapping
+  // neighbours would steal taps near dot edges.
+  const diameter = Math.min(Math.max(48, layout.radius * 2), layout.cellStep);
+  for (const btn of buttons) {
+    const { cx, cy } = getDotCenter(Number(btn.dataset.x), Number(btn.dataset.y));
+    btn.style.left = `${cx - diameter / 2}px`;
+    btn.style.top = `${cy - diameter / 2}px`;
+    btn.style.width = `${diameter}px`;
+    btn.style.height = `${diameter}px`;
+  }
+}
+
+function syncButtons() {
+  for (const btn of buttons) {
+    const x = Number(btn.dataset.x);
+    const y = Number(btn.dataset.y);
+    const colorIdx = currentGrid[x][y];
+    btn.dataset.color = String(colorIdx);
+    btn.disabled = isSampleDot(x, y) || session.finished;
+    btn.setAttribute("aria-label", t.dot(x + 1, y + 1, t.colors[colorIdx], isSampleDot(x, y)));
+  }
+}
+
 function renderBoard() {
   stage.removeAllChildren();
-  overlay.innerHTML = "";
 
   // Background plate
   const bg = new window.createjs.Shape();
@@ -161,27 +228,15 @@ function renderBoard() {
 
   // Sample area subtle highlight
   const sampleHighlight = new window.createjs.Shape();
-  if (isBilateral) {
-    sampleHighlight.graphics
-      .beginFill("#EFF6FF")
-      .drawRoundRect(
-        layout.offsetX + 2,
-        layout.offsetY + 2,
-        layout.cellStep * (gridWidth / 2) - 4,
-        layout.cellStep * (gridHeight / 2) - 4,
-        12,
-      );
-  } else {
-    sampleHighlight.graphics
-      .beginFill("#EFF6FF")
-      .drawRoundRect(
-        layout.offsetX + 2,
-        layout.offsetY + 2,
-        layout.cellStep * (gridWidth / 2) - 4,
-        layout.cellStep * gridHeight - 4,
-        12,
-      );
-  }
+  sampleHighlight.graphics
+    .beginFill("#EFF6FF")
+    .drawRoundRect(
+      layout.offsetX + 2,
+      layout.offsetY + 2,
+      layout.cellStep * (gridWidth / 2) - 4,
+      layout.cellStep * (isBilateral ? gridHeight / 2 : gridHeight) - 4,
+      12,
+    );
   stage.addChild(sampleHighlight);
 
   // Mirror axis lines (prominent contrasting lines)
@@ -210,15 +265,12 @@ function renderBoard() {
     stage.addChild(hLine);
   }
 
-  // Draw dots and wire overlay buttons
   for (let x = 0; x < gridWidth; x++) {
     for (let y = 0; y < gridHeight; y++) {
       const { cx, cy } = getDotCenter(x, y);
-      const isSample = isSampleDot(x, y);
       const colorIdx = currentGrid[x][y];
       const colorHex = colors[colorIdx];
 
-      // EaselJS circle shape
       const circle = new window.createjs.Shape();
       circle.graphics
         .setStrokeStyle(1.5)
@@ -230,47 +282,23 @@ function renderBoard() {
       circle.y = cy;
       stage.addChild(circle);
 
-      // Smile face on completed round
+      // Smile face on a solved pattern
       if (showingSmile) {
         const smile = showSmileShape(layout.radius, colorHex);
         smile.x = cx;
         smile.y = cy;
         stage.addChild(smile);
       }
-
-      // DOM Overlay Button for accessibility, touch, and reliable testing
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = `dot-btn${isSample ? " sample-dot" : ""}`;
-      btn.dataset.x = String(x);
-      btn.dataset.y = String(y);
-      btn.dataset.color = String(colorIdx);
-      btn.setAttribute("aria-label", `Точка ${x}, ${y}: цвет ${colorIdx}`);
-
-      const diameter = Math.max(48, layout.radius * 2);
-      btn.style.left = `${cx - diameter / 2}px`;
-      btn.style.top = `${cy - diameter / 2}px`;
-      btn.style.width = `${diameter}px`;
-      btn.style.height = `${diameter}px`;
-
-      if (isSample || session.finished) {
-        btn.disabled = true;
-      } else {
-        btn.addEventListener("click", () => cycleDotColor(x, y));
-        circle.on("click", () => cycleDotColor(x, y));
-      }
-
-      overlay.appendChild(btn);
     }
   }
 
+  syncButtons();
   stage.update();
 }
 
 function cycleDotColor(x, y) {
-  if (session.finished || isSampleDot(x, y)) return;
+  if (session.finished || showingSmile || isSampleDot(x, y)) return;
   currentGrid[x][y] = (currentGrid[x][y] + 1) % colors.length;
-  showingSmile = false;
   renderBoard();
 }
 
@@ -282,12 +310,10 @@ function loadTask(roundIndex) {
       currentGrid[x][y] = isSampleDot(x, y) ? task[x][y] : 0;
     }
   }
-  progressEl.textContent = `Узор ${roundIndex + 1} из 4`;
-  session.message = isBilateral
-    ? "Раскрась остальные части как зеркальное отражение образца."
-    : "Раскрась правую половину как зеркальное отражение левой.";
-  messageEl.textContent = session.message;
+  progressEl.textContent = t.progress(roundIndex + 1);
+  messageEl.textContent = isBilateral ? t.bilateral : t.vertical;
   renderBoard();
+  setTurn("play");
 }
 
 function checkSymmetry() {
@@ -319,31 +345,28 @@ function checkSymmetry() {
 }
 
 function onCheck() {
-  if (session.finished) return;
+  if (session.finished || showingSmile) return;
 
-  const correct = checkSymmetry();
-  if (!correct) {
+  if (!checkSymmetry()) {
     session.mistakes++;
     session.hadMistake = true;
-    session.message = "Пока не совсем симметрично. Попробуй ещё раз!";
-    messageEl.textContent = session.message;
+    messageEl.textContent = t.wrong;
     bridge.track("round", { correct: false, afterMistake: false });
     return;
   }
 
-  // Correct pattern completed!
   bridge.track("round", { correct: true, afterMistake: session.hadMistake });
   session.rounds++;
   if (session.hadMistake) session.corrections++;
   session.hadMistake = false;
+  showingSmile = true;
 
   if (session.rounds === 4) {
     session.finished = true;
     checkBtn.disabled = true;
-    showingSmile = true;
     renderBoard();
-    session.message = "Отлично! Все 4 узора готовы!";
-    messageEl.textContent = session.message;
+    setTurn("done");
+    messageEl.textContent = t.done;
     completeModal.style.display = "flex";
     bridge.track("finish", {
       gameId: "reflection",
@@ -353,24 +376,28 @@ function onCheck() {
       corrections: session.corrections,
       durationMs: Math.round(performance.now() - session.started),
     });
-  } else {
-    session.message = "Получилось! Собери следующий узор.";
-    messageEl.textContent = session.message;
-    loadTask(session.rounds);
+    return;
   }
+
+  renderBoard();
+  setTurn("feedback");
+  messageEl.textContent = t.next;
+  feedbackTimer = setTimeout(() => {
+    if (!session.finished) loadTask(session.rounds);
+  }, FEEDBACK_MS);
 }
 
 checkBtn.addEventListener("click", onCheck);
 
-window.addEventListener("resize", () => {
-  updateLayout();
-});
+const onResize = () => updateLayout();
+window.addEventListener("resize", onResize);
 
 window.addEventListener(
   "pagehide",
   () => {
     session.finished = true;
-    window.createjs.Ticker.removeAllEventListeners("tick");
+    clearTimeout(feedbackTimer);
+    window.removeEventListener("resize", onResize);
     stage.removeAllChildren();
     bridge.close();
   },

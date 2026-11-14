@@ -1,60 +1,31 @@
 const bridge = window.Brainee.connect({ contract: "secret-message-copy@1" });
 await bridge.ready;
 
-// Game-local copy. The host sends its locale in the bridge handshake; non-English host locales
-// fall back to Russian (an unbridged standalone build defaults to English).
-const TEXT = {
-  ru: {
-    title: "Секретное послание",
-    progress: (n) => `Послание ${n} из 4`,
-    soundOn: "Звук: вкл",
-    soundOff: "Звук: выкл",
-    preview: (s) => `Запомни секретное послание! (${s} сек)`,
-    recall: "Восстанови секретное послание и нажми «Проверить»!",
-    incomplete: (a, b) => `Заполни все знаки (${a} из ${b})!`,
-    correct: "Верно! Сообщение расшифровано.",
-    wrong: "В послании есть ошибки. Проверь знаки и нажми ещё раз!",
-    doneStatus: "Все 4 послания доставлены!",
-    doneTitle: "Все 4 секретных послания доставлены!",
-    doneText: "Сова-курьер передала все сообщения получателям!",
-    peek: "Подсмотреть",
-    clear: "Очистить",
-    check: "Проверить",
-    sheet: "Лист секретного сообщения",
-    sequence: "Секретные знаки для запоминания",
-    copy: "Восстановленное сообщение",
-    dock: "Штампы с символами",
-    owl: "Сова-почтальон",
-    stamp: (label) => `Поставить знак «${label}»`,
-    symbols: { star: "Звезда", moon: "Луна", heart: "Сердце", leaf: "Лист", sun: "Солнце" },
-  },
-  en: {
-    title: "Secret Message Lab",
-    progress: (n) => `Message ${n} of 4`,
-    soundOn: "Sound: on",
-    soundOff: "Sound: off",
-    preview: (s) => `Remember the secret message! (${s} s)`,
-    recall: "Rebuild the secret message and press “Check”!",
-    incomplete: (a, b) => `Fill in all the signs (${a} of ${b})!`,
-    correct: "Correct! The message is decoded.",
-    wrong: "The message has mistakes. Check the signs and try again!",
-    doneStatus: "All 4 messages delivered!",
-    doneTitle: "All 4 secret messages delivered!",
-    doneText: "The owl courier delivered every message!",
-    peek: "Peek",
-    clear: "Clear",
-    check: "Check",
-    sheet: "Secret message sheet",
-    sequence: "Secret signs to remember",
-    copy: "Rebuilt message",
-    dock: "Sign stamps",
-    owl: "Owl courier",
-    stamp: (label) => `Stamp “${label}”`,
-    symbols: { star: "Star", moon: "Moon", heart: "Heart", leaf: "Leaf", sun: "Sun" },
-  },
+// Game-local copy. The platform is English-only.
+const t = {
+  title: "Secret Message Lab",
+  progress: (n) => `Message ${n} of 4`,
+  soundOn: "Sound: on",
+  soundOff: "Sound: off",
+  preview: (s) => `Remember the secret message! (${s} s)`,
+  recall: "Rebuild the secret message and press “Check”!",
+  incomplete: (a, b) => `Fill in all the signs (${a} of ${b})!`,
+  correct: "Correct! The message is decoded.",
+  wrong: "The message has mistakes. Check the signs and try again!",
+  doneStatus: "All 4 messages delivered!",
+  doneTitle: "All 4 secret messages delivered!",
+  doneText: "The owl courier delivered every message!",
+  peek: "Peek",
+  clear: "Clear",
+  check: "Check",
+  sheet: "Secret message sheet",
+  sequence: "Secret signs to remember",
+  copy: "Rebuilt message",
+  dock: "Sign stamps",
+  owl: "Owl courier",
+  stamp: (label) => `Stamp “${label}”`,
+  symbols: { star: "Star", moon: "Moon", heart: "Heart", leaf: "Leaf", sun: "Sun" },
 };
-const locale = bridge.context?.locale === "en" ? "en" : "ru";
-const t = TEXT[locale];
 
 const session = {
   level: Math.max(1, Math.min(3, Number(bridge.config?.level) || 1)),
@@ -121,7 +92,6 @@ const soundBtn = document.querySelector("[data-action='toggle-sound']");
 const owlImg = document.getElementById("play-owl");
 
 function applyStaticText() {
-  document.documentElement.lang = locale;
   document.title = t.title;
   if (soundBtn) soundBtn.textContent = t.soundOff;
   if (peekBtn) peekBtn.textContent = t.peek;

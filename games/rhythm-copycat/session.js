@@ -3,62 +3,32 @@ import * as perc from "./js/percussion.js";
 const bridge = window.Brainee.connect({ contract: "rhythm-copycat@1" });
 await bridge.ready;
 
-// Game-local copy. The host sends its locale in the bridge handshake; non-English host locales
-// fall back to Russian (an unbridged standalone build defaults to English).
-const TEXT = {
-  ru: {
-    title: "Ритм-повторялка",
-    progress: (n) => `Ритм ${n} из 4`,
-    soundOn: "Звук: вкл",
-    soundOff: "Звук: выкл",
-    watch: "Слушай и смотри!",
-    watchHint: "Внимательно запоминай последовательность",
-    turn: "Твоя очередь!",
-    turnHint: "Повтори ритм на площадках!",
-    great: "Отлично!",
-    next: "Отлично! Следующий ритм.",
-    wrong: "Не совсем так. Давай повторим показ!",
-    doneTitle: "Все 4 ритма выполнены!",
-    doneText: "Ритмы получились отлично!",
-    pads: "Площадки ритма",
-    replay: "ЕЩЁ РАЗ",
-    replayLabel: "Повторить показ ритма",
-    kiki: "Кики",
-    actions: {
-      clap: ["Хлоп", "Хлопок"],
-      stomp: ["Топ", "Топот"],
-      tap: ["Тук", "Стук"],
-      shake: ["Шейк", "Шейк"],
-    },
-  },
-  en: {
-    title: "Rhythm Copycat",
-    progress: (n) => `Rhythm ${n} of 4`,
-    soundOn: "Sound: on",
-    soundOff: "Sound: off",
-    watch: "Listen and watch!",
-    watchHint: "Remember the sequence carefully",
-    turn: "Your turn!",
-    turnHint: "Repeat the rhythm on the pads!",
-    great: "Great!",
-    next: "Great! Next rhythm.",
-    wrong: "Not quite. Let's watch it again!",
-    doneTitle: "All 4 rhythms done!",
-    doneText: "Your rhythms sounded great!",
-    pads: "Rhythm pads",
-    replay: "AGAIN",
-    replayLabel: "Replay the rhythm",
-    kiki: "Kiki",
-    actions: {
-      clap: ["Clap", "Clap"],
-      stomp: ["Stomp", "Stomp"],
-      tap: ["Tap", "Tap"],
-      shake: ["Shake", "Shake"],
-    },
+// Game-local copy. The platform is English-only.
+const t = {
+  title: "Rhythm Copycat",
+  progress: (n) => `Rhythm ${n} of 4`,
+  soundOn: "Sound: on",
+  soundOff: "Sound: off",
+  watch: "Listen and watch!",
+  watchHint: "Remember the sequence carefully",
+  turn: "Your turn!",
+  turnHint: "Repeat the rhythm on the pads!",
+  great: "Great!",
+  next: "Great! Next rhythm.",
+  wrong: "Not quite. Let's watch it again!",
+  doneTitle: "All 4 rhythms done!",
+  doneText: "Your rhythms sounded great!",
+  pads: "Rhythm pads",
+  replay: "AGAIN",
+  replayLabel: "Replay the rhythm",
+  kiki: "Kiki",
+  actions: {
+    clap: ["Clap", "Clap"],
+    stomp: ["Stomp", "Stomp"],
+    tap: ["Tap", "Tap"],
+    shake: ["Shake", "Shake"],
   },
 };
-const locale = bridge.context?.locale === "en" ? "en" : "ru";
-const t = TEXT[locale];
 
 const session = {
   level: Math.max(1, Math.min(3, Number(bridge.config?.level) || 1)),
@@ -135,7 +105,6 @@ const kikiImg = document.querySelector("[data-kiki-img]");
 const mainGame = document.getElementById("game");
 
 function applyStaticText() {
-  document.documentElement.lang = locale;
   document.title = t.title;
   document.querySelector(".rc-pads")?.setAttribute("aria-label", t.pads);
   for (const pad of pads) {
