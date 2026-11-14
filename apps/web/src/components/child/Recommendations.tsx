@@ -7,7 +7,7 @@ import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { useMemo } from "react";
 import { Chip } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";
 
 /** T-25 on seeded skill scores and illustrative age averages (T-83 keeps real norms open). */
@@ -54,11 +54,12 @@ export function RecommendationCards({
   onChoose?: (gameId: string) => void;
 }) {
   const recs = useRecommendations();
-  const t = ru.child.entry;
+  const { t } = useI18n();
+  const te = t.child.entry;
   return (
     <ul className={cn("grid gap-3", big ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-3")}>
       {recs.map((rec, index) => {
-        const skill = ru.skills[rec.skill];
+        const skill = t.skills[rec.skill];
         return (
           <li key={rec.game.id}>
             <Link
@@ -74,13 +75,13 @@ export function RecommendationCards({
             >
               {index === 0 && (
                 <span>
-                  <Chip tone="coral">{t.top}</Chip>
+                  <Chip tone="coral">{te.top}</Chip>
                 </span>
               )}
               <ChildIcon name="learn" className={cn("text-sky", big ? "size-12" : "size-9")} />
               <span className={cn("font-semibold", big && "text-lg")}>{rec.game.title}</span>
               <span className="text-muted-foreground text-sm">
-                {t.reason(skill, rec.score, rec.ageAverage)}
+                {te.reason(skill, rec.score, rec.ageAverage)}
               </span>
             </Link>
           </li>

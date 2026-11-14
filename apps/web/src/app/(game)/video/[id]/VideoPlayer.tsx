@@ -9,7 +9,7 @@ import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { SCIENCE_ICONS } from "@/components/child/LeisureScreen";
 import { coralButton, outlineButton, primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 
 // T-37: pause/play is the only control. No seeking, no "watch next". 1 s = 1 min in the demo.
 function Player({ id }: { id: string }) {
@@ -21,7 +21,8 @@ function Player({ id }: { id: string }) {
   const [wrong, setWrong] = useState<number[]>([]);
   const [solved, setSolved] = useState(false);
   const saved = useRef(false);
-  const t = ru.child.video;
+  const { t: i18n } = useI18n();
+  const t = i18n.child.video;
   useEffect(() => {
     if (video && position === null) setPosition(video.solved ? 0 : video.position);
   }, [video, position]);

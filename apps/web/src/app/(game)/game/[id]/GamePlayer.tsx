@@ -15,7 +15,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { StopLearningButton } from "@/components/child/StopLearningButton";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 import {
   canRetryFinish,
   type IssuedGame,
@@ -50,8 +50,9 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
   const boot = useRef<Promise<IssuedGame> | null>(null);
   const router = useRouter();
   const safeLevel = clampLevel(level, game?.levels ?? 1);
-  const t = ru.child.game;
-  const sync = ru.child.sync;
+  const { t: i18n } = useI18n();
+  const t = i18n.child.game;
+  const sync = i18n.child.sync;
   const matches =
     !initialPending ||
     (initialPending.issued.gameId === gameId &&
@@ -181,7 +182,7 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
       </header>
       <GameHost
         sessionId={issued.sessionId}
-        text={ru.games}
+        text={i18n.games}
         game={game}
         level={issued.level}
         seed={issued.seed}

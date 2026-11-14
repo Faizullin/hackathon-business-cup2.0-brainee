@@ -27,7 +27,7 @@ import {
   smallButton,
   useAct,
 } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";
 
 const FUN_ICONS = { snake: Worm, rocket: Rocket, drum: Drum, target: Crosshair, maze: Route };
@@ -37,6 +37,8 @@ export const SCIENCE_ICONS = { wave: Fish, bee: Flower2, planet: Orbit, dino: Bo
 export function LeisureScreen() {
   const { snapshot } = useLearning();
   const { run, busy, notice } = useAct();
+  const { t: i18n } = useI18n();
+  const t = i18n.child.leisure;
   const [now, setNow] = useState(() => new Date());
   const [soon, setSoon] = useState<string | null>(null);
   useEffect(() => {
@@ -46,7 +48,6 @@ export function LeisureScreen() {
   if (!snapshot) return null;
   const { fun, cartoons, science } = snapshot.showcase;
   const stars = snapshot.progress.wallet.stars;
-  const t = ru.child.leisure;
   return (
     <>
       <Panel as="h1" title={t.title} note={t.description}>

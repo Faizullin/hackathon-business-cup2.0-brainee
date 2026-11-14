@@ -109,7 +109,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-72 Landing page (`apps/landing`), stretch goal
 - [ ] T-73 Pitch deck
 - [ ] T-74 Freeze `master`, tag the demo build
-- [ ] T-14 **Deploy (free tiers only)**: Turso cloud database provisioned and seeded (`libsql://brainee-demo-...`); `getDatabaseConfig`, `openDatabase`, `drizzle.config.ts` and `scripts/manage.ts` updated and tested with `DATABASE_AUTH_TOKEN`; Vercel Hobby project deployment next → [D-15](../dev/decisions.md)
+- [x] T-14 **Deploy (free tiers only)**: Turso cloud database provisioned and seeded (`libsql://brainee-demo-...`); `packages/db` updated with `DATABASE_AUTH_TOKEN` support; Vercel Next.js project deployed and live at `https://brainee.vercel.app` → [D-15](../dev/decisions.md)
 
 ## Backlog / ideas
 - [x] T-80 Define a smallest end-to-end demo slice and prioritize it ahead of optional features → [scope above](#smallest-end-to-end-demo-slice-t-80).
@@ -135,7 +135,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
   - [x] Daily bonus shared across devices; family-local daily/weekly rollover, fresh task quota and read-only task history (D-26).
   - [x] Settings (child, PIN, timezone, devices/account), one-time pairing/revocation, adult-task fallback; stage celebration/feed and task empty states.
   - [x] Onboarding polish: progress, answer reactions, story, hold/reduced-motion reveal and optional referral field.
-- [ ] T-104 English locale `en.ts` + locale switch (D-22), before English-only external games
+- [x] T-104 English locale `en.ts` + locale switch (D-22), before English-only external games
 - [ ] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
 - [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).
 - [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run

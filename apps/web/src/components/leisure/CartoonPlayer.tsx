@@ -4,13 +4,15 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton, Panel, primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
+
 export function CartoonPlayer({ id }: { id: string }) {
   const { snapshot } = useLearning();
-  const [position, setPosition] = useState(0),
-    [playing, setPlaying] = useState(false);
-  const cartoon = snapshot?.showcase.cartoons.find((c) => c.id === id),
-    end = 12;
+  const { t } = useI18n();
+  const [position, setPosition] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const cartoon = snapshot?.showcase.cartoons.find((c) => c.id === id);
+  const end = 12;
   useEffect(() => {
     if (!playing) return;
     const timer = setInterval(() => setPosition((p) => Math.min(end, p + 1)), 1000);
@@ -27,32 +29,32 @@ export function CartoonPlayer({ id }: { id: string }) {
   if (!snapshot) return null;
   return (
     <div className="mx-auto w-full max-w-2xl p-4">
-      <Panel as="h1" title={cartoon?.title ?? ru.cartoon.title} note={ru.cartoon.placeholder}>
+      <Panel as="h1" title={cartoon?.title ?? t.cartoon.title} note={t.cartoon.placeholder}>
         {cartoon?.owned ? (
           position < end ? (
             <>
               <Brainy stats={snapshot.progress.stats} className="mx-auto h-56 w-auto" />
               <progress
-                aria-label={ru.cartoon.title}
+                aria-label={t.cartoon.title}
                 value={position}
                 max={end}
                 className="w-full"
               />
               <button type="button" className={primaryButton} onClick={() => setPlaying(!playing)}>
-                {playing ? ru.cartoon.pause : position ? ru.cartoon.play : ru.cartoon.begin}
+                {playing ? t.cartoon.pause : position ? t.cartoon.play : t.cartoon.begin}
               </button>
             </>
           ) : (
-            <p role="status">{ru.cartoon.end}</p>
+            <p role="status">{t.cartoon.end}</p>
           )
         ) : (
-          <p>{ru.cartoon.locked}</p>
+          <p>{t.cartoon.locked}</p>
         )}
         <Link className={outlineButton} href="/learn">
-          {ru.playTime.learn}
+          {t.playTime.learn}
         </Link>
         <Link className={outlineButton} href="/leisure">
-          {ru.playTime.leisure}
+          {t.playTime.leisure}
         </Link>
       </Panel>
     </div>

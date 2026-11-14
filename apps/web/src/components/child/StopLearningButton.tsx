@@ -3,7 +3,7 @@
 import { Button } from "@brainee/ui/components/button";
 import { useRouter } from "next/navigation";
 import { type ReactNode, useRef, useState } from "react";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";
 
 export function StopLearningButton({
@@ -16,6 +16,7 @@ export function StopLearningButton({
   variant?: "default" | "secondary" | "ghost";
 }) {
   const { stop } = useLearning();
+  const { t } = useI18n();
   const router = useRouter();
   const locked = useRef(false);
   const [busy, setBusy] = useState(false);
@@ -38,11 +39,11 @@ export function StopLearningButton({
   return (
     <span className="flex flex-col gap-2">
       <Button variant={variant} size="child" disabled={busy} onClick={() => void leave()}>
-        {busy ? ru.child.sync.wait : children}
+        {busy ? t.child.sync.wait : children}
       </Button>
       {error && (
         <span role="alert" className="text-sm">
-          {ru.child.sync.stopError}
+          {t.child.sync.stopError}
         </span>
       )}
     </span>

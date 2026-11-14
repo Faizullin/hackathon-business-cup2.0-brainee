@@ -8,7 +8,7 @@ import { ArrowRight } from "@brainee/ui/components/icons";
 import Link from "next/link";
 import { useLearning } from "@/components/child/LearningProvider";
 import { StopLearningButton } from "@/components/child/StopLearningButton";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 
 export function PostGameScreen({
   game,
@@ -22,7 +22,8 @@ export function PostGameScreen({
   completion: LearningCompletion;
 }) {
   const { snapshot } = useLearning();
-  const t = ru.child.game;
+  const { t: i18n } = useI18n();
+  const t = i18n.child.game;
   // T-94: prefer a different game for the weak skill; fall back to this one if it's the only fit.
   const practice =
     practiceGame(
@@ -62,7 +63,7 @@ export function PostGameScreen({
         <p className="flex flex-wrap justify-center gap-2 text-sm" data-testid="skill-gains">
           {Object.entries(completion.skillGains).map(([skill, gain]) => (
             <span key={skill} className="rounded-full bg-sky/15 px-3 py-1 font-medium">
-              {t.skillGain(ru.skills[skill as keyof typeof ru.skills] ?? skill, gain as number)}
+              {t.skillGain(i18n.skills[skill as keyof typeof i18n.skills] ?? skill, gain as number)}
             </span>
           ))}
         </p>
@@ -74,7 +75,7 @@ export function PostGameScreen({
             data-testid={`stat-gain-${stat}`}
             className="rounded-full bg-mint/15 px-4 py-2 font-semibold"
           >
-            {ru.lab.brainy.statNames[stat as keyof typeof ru.lab.brainy.statNames]} +{gain}
+            {i18n.lab.brainy.statNames[stat as keyof typeof i18n.lab.brainy.statNames]} +{gain}
             <span className="ml-2 text-sm font-normal">
               {completion.before.stats[stat as keyof typeof completion.gains]} →{" "}
               {completion.after.stats[stat as keyof typeof completion.gains]}
@@ -124,7 +125,7 @@ export function PostGameScreen({
               <span className="text-sm text-mint">{t.practice}</span>
               <strong>{practice.title}</strong>
               <span className="text-muted-foreground text-sm">
-                {ru.skills[practice.skills.main as keyof typeof ru.skills]}
+                {i18n.skills[practice.skills.main as keyof typeof i18n.skills]}
               </span>
             </Link>
           )}

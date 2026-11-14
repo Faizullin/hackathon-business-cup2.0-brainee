@@ -4,24 +4,25 @@ import { allGames } from "@brainee/games";
 import { ChildIcon } from "@brainee/ui/components/child-icons";
 import { Lock } from "@brainee/ui/components/icons";
 import Link from "next/link";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";
 
 /** D-22: every game shows its minimum age; games above the child's age stay locked. */
 export function GameGrid() {
   const { snapshot } = useLearning();
+  const { t } = useI18n();
   const age = snapshot ? new Date().getFullYear() - snapshot.child.birthYear : 10;
   return (
     <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {allGames.map((game) => {
-        const skill = ru.skills[game.skills.main as keyof typeof ru.skills] ?? game.skills.main;
+        const skill = t.skills[game.skills.main as keyof typeof t.skills] ?? game.skills.main;
         const locked = age < game.minAge;
         const body = (
           <>
             <span className="flex items-start justify-between gap-2">
               <ChildIcon name="learn" className="size-10 text-sky" />
               <span className="rounded-full bg-secondary px-2 py-0.5 font-medium text-xs">
-                {locked ? ru.learn.lockedAge(game.minAge) : ru.learn.fromAge(game.minAge)}
+                {locked ? t.learn.lockedAge(game.minAge) : t.learn.fromAge(game.minAge)}
               </span>
             </span>
             <span>

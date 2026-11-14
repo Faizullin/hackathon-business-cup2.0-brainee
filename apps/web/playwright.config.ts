@@ -21,6 +21,9 @@ export default defineConfig({
     colorScheme: "light",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
+    extraHTTPHeaders: {
+      cookie: "brainee_locale=ru",
+    },
   },
   projects: [
     {

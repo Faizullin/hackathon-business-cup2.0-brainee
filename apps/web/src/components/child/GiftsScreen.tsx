@@ -12,18 +12,19 @@ import {
   primaryButton,
   useAct,
 } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";
 
 // Child Gifts tab: weekly goal, parent's gift shop (☀ only), tasks from mom, ☀ → ★ exchange.
 export function GiftsScreen() {
   const { snapshot } = useLearning();
   const { run, busy, notice } = useAct();
+  const { t: i18n } = useI18n();
   if (!snapshot) return null;
   const { weekGoal, gifts, tasks } = snapshot.showcase;
   const { wallet } = snapshot.progress;
   const prize = gifts.find((g) => g.id === weekGoal.giftId)?.title ?? "";
-  const t = ru.child.gifts;
+  const t = i18n.child.gifts;
   return (
     <>
       <Panel as="h1" title={t.title} note={t.description}>
@@ -64,7 +65,7 @@ export function GiftsScreen() {
       </Panel>
       <Panel title={t.tasks}>
         {tasks.length === 0 && (
-          <p className="text-muted-foreground text-sm">{ru.parent.tasks.empty}</p>
+          <p className="text-muted-foreground text-sm">{i18n.parent.tasks.empty}</p>
         )}
         <ul className="grid gap-3 lg:grid-cols-2">
           {tasks.map((task) => (
@@ -87,7 +88,7 @@ export function GiftsScreen() {
                     task.status === "done" ? "mint" : task.status === "check" ? "sun" : undefined
                   }
                 >
-                  {ru.child.taskStatus[task.status]}
+                  {i18n.child.taskStatus[task.status]}
                 </Chip>
                 {task.status === "todo" &&
                   (task.place === "real" ? (

@@ -4,6 +4,16 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (Bilingual EN/RU localization and English default)
+- Completed T-104: implemented full bilingual support (EN/RU with English as default) across all child, parent, entry, and auth views per ADR D-22 and AGENTS.md.
+- Added comprehensive English dictionary `apps/web/src/i18n/en.ts` mirroring `ru.ts`, typed `I18nProvider` / `useI18n()` with SSR cookie `brainee_locale` (1 year, SameSite=Lax) and `localStorage` sync.
+- Added floating locale pill on entry/auth/onboarding, compact header toggle in Parent Shell, and radio cards in Parent Settings. Added Playwright e2e spec `e2e/locale-switch.spec.ts`. All checks, unit tests, and typechecks pass.
+
+## 2026-11-14 (Vercel production deployment & live domain brainee.vercel.app)
+- Completed T-14: linked and deployed production Next.js app to Vercel connected to remote Turso libSQL database.
+- Added root Turborepo output mapping (`apps/web/.next`) and configured Vercel environment variables (`DATABASE_URL`, `DATABASE_AUTH_TOKEN`, `DEMO_MODE=1`, `BRAINEE_LAB=1`).
+- Configured production domain alias `https://brainee.vercel.app` (and `hackathon-business-cup20-brainee.vercel.app`). Verified live HTTP/2 200 responses for root, `/jury`, and `/games/` same-origin assets.
+
 ## 2026-11-14 (Turso remote database deployment configuration)
 - First deployment phase for T-14: configured `packages/db` (`getDatabaseConfig`, `openDatabase`, `drizzle.config.ts`, `database-tools.ts`, `manage.ts`) to support remote libSQL/Turso URLs (`libsql://`) and `DATABASE_AUTH_TOKEN`, skipping local SQLite PRAGMAs/directories on cloud connections.
 - Provisioned cloud database `brainee-demo` on Turso in Frankfurt (`aws-eu-central-1`), pushed schema and seeded demo showcase data. Created `.env.deployed` (gitignored) with cloud credentials.

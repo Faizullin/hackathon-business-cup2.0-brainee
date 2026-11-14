@@ -4,7 +4,7 @@ import type { ShowcaseAction } from "@brainee/core";
 import { cn } from "@brainee/ui/lib/utils";
 import { type ReactNode, useCallback, useState } from "react";
 import { useLearning } from "@/components/child/LearningProvider";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 
 export function Panel({
   title,
@@ -99,6 +99,7 @@ export function Meter({
 /** Runs a demo action, keeps a short status line, and exposes `busy` for buttons. */
 export function useAct() {
   const { act } = useLearning();
+  const { t } = useI18n();
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<{ text: string; ok: boolean } | null>(null);
   const run = useCallback(
@@ -107,7 +108,7 @@ export function useAct() {
       try {
         const error = await act(action);
         if (error)
-          setNotice({ text: ru.actionErrors[error] ?? ru.child.sync.updateError, ok: false });
+          setNotice({ text: t.actionErrors[error] ?? t.child.sync.updateError, ok: false });
         else if (success) setNotice({ text: success, ok: true });
         else setNotice(null);
         return error === null;
@@ -115,7 +116,7 @@ export function useAct() {
         setBusy(false);
       }
     },
-    [act],
+    [act, t],
   );
   return { run, busy, notice };
 }
