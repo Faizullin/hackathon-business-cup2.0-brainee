@@ -41,11 +41,6 @@ function PinGate() {
     <section className="mx-auto flex max-w-sm flex-col items-center gap-5 rounded-panel border border-border bg-card p-6 text-center">
       <h1>{tp.pinTitle}</h1>
       <p className="text-muted-foreground text-sm">{adult ? tp.adultNote : tp.pinNote}</p>
-      {!adult && (
-        <p data-testid="demo-pin-hint" className="font-semibold text-sm">
-          Demo PIN: 1234
-        </p>
-      )}
       <button
         type="button"
         className={outlineButton}
