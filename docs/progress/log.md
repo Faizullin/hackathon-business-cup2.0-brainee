@@ -1,7 +1,10 @@
 # Log
 
 ## 2026-11-15 · Lavender and published platform merge trial
-Resolved all 32 conflicts in the isolated worktree: D-33 films, D-34 English-only behavior, lavender Brainy speech and UI, and unchanged upstream game input fixes. Check/build/assets/manifests, 301 unit tests, 76 focused browser cases and the separate 4-case WebKit iPad film spec pass; requested phone/iPad screenshots reviewed. The owner shortened the full run after 95 passes and two stale font-count failures, now fixed; 311 cases had no result. T-139 remains open. No push, deploy or main-checkout edits.
+Resolved all 32 conflicts in the isolated worktree: D-33 films, D-34 English-only behavior, lavender Brainy speech and UI, and unchanged upstream game input fixes. Check/build/assets/manifests, 301 unit tests, 76 focused browser cases and the separate 4-case WebKit iPad film spec pass; requested phone/iPad screenshots reviewed. The owner shortened the full run after 95 passes and two stale font-count failures, now fixed; 311 cases had no result. T-139 remains open. Preserved concurrent master recordings and the T-143 audit. No push, deploy or main-checkout edits.
+
+## 2026-11-15 · T-143 game archive audit
+Compared the 30-game handoff with source manifests and Explore registrations: four scored imports, two previews, 24 remaining. Documented the inventory, causes of integration overhead and a proposed reuse of the Explore container with four family adapters and no analytics for new previews (T-144). Static inspection only; existing browser verification gaps remain. No runtime changes or deployment.
 
 ## 2026-11-15 · T-142 parent patterns
 Added Today/Week cards, attention actions, session rows, grouped event sources and recent-event reward reconciliation. Check/test/build and 68 affected Chromium/WebKit phone/iPad cases pass; parent screenshots reviewed. Fixed saved-cover funnel bookmarks. Full serial e2e and recordings remain next.
