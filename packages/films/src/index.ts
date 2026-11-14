@@ -1,7 +1,7 @@
 export { FILM_BG, FILM_PROPS, type FilmBackground, type FilmProp, PALETTE } from "./art";
 export { FILM_IDS, hasFilm } from "./catalog";
 export { FilmStage } from "./FilmStage";
-export { brainyBox, filmLayoutIssues, propBox } from "./layout";
+export { type Box, brainyBox, filmLayoutIssues, placeProp, propBox } from "./layout";
 export { FILM_CSS, FILM_MOTIONS, type FilmMotion } from "./motion";
 
 import { FILM_BG, FILM_PROPS } from "./art";

@@ -139,6 +139,8 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
 - [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).
 - [x] T-107 Interactive films from ElevenLabs podcasts (D-29) → [films.md](../dev/films.md): `core/film.ts` format + checks, `packages/films` art/stage, `/video/[id]` film player, `/lab/film` studio, `make_film.py`, `pnpm check:films`, first film `sky-blue` (English, 8 questions, 83 scenes)
+- [x] T-109 Films `rain` («Rain», 8 questions, 79 scenes) and `sun-goes` («Where the sun goes», 7 questions, 84 scenes); 5 backgrounds + 23 props added; `make_film.py` uses word timestamps; `sky-blue` retitled «Why the sky is blue?»
+- [x] T-110 Film props stand on the ground: background `ground` lines, prop `base`/`floats`, standing props never bob; check forbids standing props on ground-less scenes; marbles, clothesline, flashlight/orange redrawn or grounded; scenes fixed in all three films
 - [ ] T-108 Film follow-ups: second on-stage character for `guest` voices; English player chrome with T-104; physical iPad check of the Web Audio mouth (with T-84); confirm the Russian/English choice for future podcasts
 - [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run
 - [x] T-96 `mvp` report module: every page + child → parent walkthrough; `scaffold` report retired → [reports/mvp.md](../reports/mvp.md)

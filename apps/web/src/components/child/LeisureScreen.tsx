@@ -4,11 +4,13 @@ import { funMinutesLeft } from "@brainee/core";
 import {
   Bone,
   Clapperboard,
+  CloudRain,
   Crosshair,
   Drum,
   Fish,
   Flower2,
   Headphones,
+  Moon,
   Orbit,
   Play,
   Rocket,
@@ -32,7 +34,15 @@ import { ru } from "@/i18n/ru";
 import { useLearning } from "./LearningProvider";
 
 const FUN_ICONS = { snake: Worm, rocket: Rocket, drum: Drum, target: Crosshair, maze: Route };
-export const SCIENCE_ICONS = { wave: Fish, bee: Flower2, planet: Orbit, dino: Bone, sun: Sun };
+export const SCIENCE_ICONS = {
+  wave: Fish,
+  bee: Flower2,
+  planet: Orbit,
+  dino: Bone,
+  sun: Sun,
+  rain: CloudRain,
+  moon: Moon,
+};
 
 // Leisure tab (T-36): fun-game shop for ★, cartoons for ★, free science videos.
 export function LeisureScreen() {

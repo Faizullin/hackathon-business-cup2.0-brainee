@@ -4,6 +4,13 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (films: props stand on the ground, T-110)
+- Feedback: props looked like they were flying. Cause: every prop had one fixed spot in the upper frame plus bobbing motions. Backgrounds now declare a `ground` line and standing props a `base`; the stage places them on the ground and keeps them still. 85 scenes were affected. The check now fails on standing props in sky/space/cloud/sea scenes; 6 scenes and 7 Brainy spots were fixed. Verified by measuring standing props during playback (no vertical movement) and screenshots.
+
+## 2026-11-14 (films: rain and sun-goes, T-109)
+- Two more ElevenLabs podcasts (English) became films: `rain` (8 questions, 79 scenes) and `sun-goes` (7 questions, 84 scenes). Added 5 backgrounds, 23 props and two card icons. `sky-blue` retitled «Why the sky is blue?»; its source file was renamed to match.
+- `make_film.py` now takes caption times from word timestamps: segment times were ~1.2 s early on Rain. Checks: 244 unit tests, full e2e 224/224, first-question play-through for both new films in Chromium and WebKit.
+
 ## 2026-11-14 (interactive films, T-107)
 - The task targeted a nonexistent vanilla prototype (`assets/film.js`, `tools/*.py`), so it was adapted to the monorepo (D-29, [films.md](../dev/films.md)): `core/film.ts` checks, `packages/films` art/stage, `/video/[id]` film player, `/lab/film`, `make_film.py` (local faster-whisper via uv, ffmpeg decode), `pnpm check:films`.
 - First film `sky-blue` came from the ElevenLabs mp3, which turned out to be **English**. Captions were proofread; 8 question pauses were placed from `silencedetect` silences; 83 scenes. Checks: 208 unit tests, full e2e 224/224.

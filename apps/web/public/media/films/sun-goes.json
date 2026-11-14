@@ -1,0 +1,1931 @@
+{
+  "id": "sun-goes",
+  "title": "Where the sun goes",
+  "lang": "en",
+  "skill": "attention",
+  "duration": 740.83,
+  "audio": "/media/films/sun-goes.mp3",
+  "scenes": [
+    {
+      "t": 0,
+      "bg": "morning",
+      "props": ["sun", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 7.58,
+      "bg": "sunset",
+      "props": ["moon", "stars"],
+      "brainy": "right"
+    },
+    {
+      "t": 18.12,
+      "bg": "bedroom",
+      "props": ["moon", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 27.2,
+      "bg": "bedroom",
+      "props": ["bed", "moon"],
+      "brainy": "left"
+    },
+    {
+      "t": 35.12,
+      "bg": "morning",
+      "props": ["sun", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 42.64,
+      "bg": "bedroom",
+      "props": ["moon", "bed"],
+      "brainy": "left"
+    },
+    {
+      "t": 50.92,
+      "bg": "night",
+      "props": ["moon", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 57.22,
+      "bg": "night",
+      "props": ["bed", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 68.72,
+      "bg": "sky",
+      "props": ["sun", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 75.04,
+      "bg": "morning",
+      "props": ["bird", "tree"],
+      "brainy": "left"
+    },
+    {
+      "t": 86.3,
+      "bg": "sky",
+      "props": ["sun", "star"],
+      "brainy": "left"
+    },
+    {
+      "t": 95.74,
+      "bg": "yard",
+      "props": ["rocket", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 105.24,
+      "bg": "room",
+      "props": ["rocket", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 113.78,
+      "bg": "yard",
+      "props": ["rocket", "cloud"],
+      "brainy": "center"
+    },
+    {
+      "t": 120.96,
+      "bg": "sky",
+      "props": ["rocket", "bird"],
+      "brainy": "left"
+    },
+    {
+      "t": 127.66,
+      "bg": "space",
+      "props": ["rocket", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 131.14,
+      "bg": "space",
+      "props": ["question", "stars"],
+      "brainy": "center"
+    },
+    {
+      "t": 134.4,
+      "bg": "space",
+      "props": ["sun", "stars"],
+      "brainy": "right"
+    },
+    {
+      "t": 144.5,
+      "bg": "space",
+      "props": ["sun", "rocket"],
+      "brainy": "left"
+    },
+    {
+      "t": 158.54,
+      "bg": "sky",
+      "props": ["sun", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 162.7,
+      "bg": "room",
+      "props": ["lamp", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 172.62,
+      "bg": "space",
+      "props": ["sun", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 183.58,
+      "bg": "space",
+      "props": ["sun", "star"],
+      "brainy": "center"
+    },
+    {
+      "t": 193.62,
+      "bg": "space",
+      "props": ["sun", "stars"],
+      "brainy": "right"
+    },
+    {
+      "t": 204.54,
+      "bg": "space",
+      "props": ["rocket", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 210.04,
+      "bg": "space",
+      "props": ["earth", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 223.14,
+      "bg": "space",
+      "props": ["ball", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 232.1,
+      "bg": "yard",
+      "props": ["house", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 243.3,
+      "bg": "yard",
+      "props": ["ball", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 255.62,
+      "bg": "space",
+      "props": ["earth", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 267.94,
+      "bg": "morning",
+      "props": ["bird", "house"],
+      "brainy": "left"
+    },
+    {
+      "t": 278.46,
+      "bg": "yard",
+      "props": ["house", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 284.16,
+      "bg": "space",
+      "props": ["question", "earth"],
+      "brainy": "center"
+    },
+    {
+      "t": 288.48,
+      "bg": "space",
+      "props": ["earth", "stars"],
+      "brainy": "right"
+    },
+    {
+      "t": 299.0,
+      "bg": "space",
+      "props": ["earth", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 307.71,
+      "bg": "yard",
+      "props": ["top", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 314.9,
+      "bg": "yard",
+      "props": ["top", "sun"],
+      "brainy": "center"
+    },
+    {
+      "t": 322.18,
+      "bg": "space",
+      "props": ["earth", "stars"],
+      "brainy": "right"
+    },
+    {
+      "t": 331.38,
+      "bg": "yard",
+      "props": ["top", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 339.64,
+      "bg": "yard",
+      "props": ["top", "cloud"],
+      "brainy": "center"
+    },
+    {
+      "t": 349.78,
+      "bg": "yard",
+      "props": ["top", "bird"],
+      "brainy": "center"
+    },
+    {
+      "t": 354.14,
+      "bg": "space",
+      "props": ["daynight", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 363.16,
+      "bg": "space",
+      "props": ["daynight", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 374.7,
+      "bg": "room",
+      "props": ["lamp", "stars"],
+      "brainy": "center"
+    },
+    {
+      "t": 385.74,
+      "bg": "bedroom",
+      "props": ["lamp", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 398.18,
+      "bg": "space",
+      "props": ["daynight", "sun"],
+      "brainy": "right"
+    },
+    {
+      "t": 402.0,
+      "bg": "bedroom",
+      "props": ["question", "moon"],
+      "brainy": "center"
+    },
+    {
+      "t": 406.78,
+      "bg": "space",
+      "props": ["daynight", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 415.16,
+      "bg": "yard",
+      "props": ["car", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 426.3,
+      "bg": "space",
+      "props": ["earth", "stars"],
+      "brainy": "center"
+    },
+    {
+      "t": 434.42,
+      "bg": "space",
+      "props": ["daynight", "sun"],
+      "brainy": "right"
+    },
+    {
+      "t": 438.6,
+      "bg": "night",
+      "props": ["rocket", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 447.02,
+      "bg": "night",
+      "props": ["bed", "moon"],
+      "brainy": "left"
+    },
+    {
+      "t": 455.14,
+      "bg": "morning",
+      "props": ["rocket", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 460.84,
+      "bg": "morning",
+      "props": ["house", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 470.56,
+      "bg": "morning",
+      "props": ["question", "house"],
+      "brainy": "center"
+    },
+    {
+      "t": 476.02,
+      "bg": "space",
+      "props": ["daynight", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 490.4,
+      "bg": "bedroom",
+      "props": ["moon", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 500.21,
+      "bg": "morning",
+      "props": ["house", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 506.26,
+      "bg": "space",
+      "props": ["daynight", "stars"],
+      "brainy": "center"
+    },
+    {
+      "t": 513.04,
+      "bg": "morning",
+      "props": ["bird", "tree"],
+      "brainy": "left"
+    },
+    {
+      "t": 521.46,
+      "bg": "sunset",
+      "props": ["bird", "house"],
+      "brainy": "left"
+    },
+    {
+      "t": 531.72,
+      "bg": "yard",
+      "props": ["cookie", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 540.48,
+      "bg": "space",
+      "props": ["daynight", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 551.4,
+      "bg": "night",
+      "props": ["moon", "stars"],
+      "brainy": "center"
+    },
+    {
+      "t": 559.42,
+      "bg": "space",
+      "props": ["daynight", "stars"],
+      "brainy": "right"
+    },
+    {
+      "t": 566.08,
+      "bg": "bedroom",
+      "props": ["flashlight", "orange"],
+      "brainy": "left"
+    },
+    {
+      "t": 582.8,
+      "bg": "room",
+      "props": ["orange", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 590.18,
+      "bg": "kitchen",
+      "props": ["flashlight", "orange"],
+      "brainy": "left"
+    },
+    {
+      "t": 598.76,
+      "bg": "kitchen",
+      "props": ["flashlight", "orange"],
+      "brainy": "left"
+    },
+    {
+      "t": 607.0,
+      "bg": "kitchen",
+      "props": ["question", "orange"],
+      "brainy": "center"
+    },
+    {
+      "t": 612.82,
+      "bg": "kitchen",
+      "props": ["flashlight", "orange"],
+      "brainy": "left"
+    },
+    {
+      "t": 626.64,
+      "bg": "space",
+      "props": ["daynight", "sun"],
+      "brainy": "right"
+    },
+    {
+      "t": 639.94,
+      "bg": "yard",
+      "props": ["rocket", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 650.66,
+      "bg": "yard",
+      "props": ["star", "cloud"],
+      "brainy": "center"
+    },
+    {
+      "t": 658.46,
+      "bg": "night",
+      "props": ["question", "moon"],
+      "brainy": "center"
+    },
+    {
+      "t": 663.32,
+      "bg": "space",
+      "props": ["sun", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 672.24,
+      "bg": "space",
+      "props": ["question", "earth"],
+      "brainy": "center"
+    },
+    {
+      "t": 677.68,
+      "bg": "yard",
+      "props": ["top", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 687.36,
+      "bg": "yard",
+      "props": ["star", "sun"],
+      "brainy": "center"
+    },
+    {
+      "t": 692.46,
+      "bg": "space",
+      "props": ["daynight", "sun"],
+      "brainy": "right"
+    },
+    {
+      "t": 704.08,
+      "bg": "space",
+      "props": ["sun", "stars"],
+      "brainy": "left"
+    },
+    {
+      "t": 715.46,
+      "bg": "night",
+      "props": ["moon", "stars"],
+      "brainy": "center"
+    },
+    {
+      "t": 733.98,
+      "bg": "morning",
+      "props": ["star", "cloud"],
+      "brainy": "center"
+    }
+  ],
+  "questions": [
+    {
+      "t": 134.16,
+      "q": "What do you see out of the rocket window?",
+      "options": ["The sun", "The moon", "A rainbow"],
+      "answer": 0,
+      "hint": "Almost! It is big, bright and yellow.",
+      "praise": "Yes! It's the sun, shining in space.",
+      "replayFrom": 127.66
+    },
+    {
+      "t": 287.85,
+      "q": "What shape is our Earth?",
+      "options": ["Flat like a pancake", "Round like a ball", "Square like a box"],
+      "answer": 1,
+      "hint": "Almost! Remember the ant on the beach ball.",
+      "praise": "Yes! The Earth is round like a ball.",
+      "replayFrom": 223.14
+    },
+    {
+      "t": 406.24,
+      "q": "When it's night, what is happening?",
+      "options": ["The sun turns off", "The sun hides", "Our side turns away"],
+      "answer": 2,
+      "hint": "Almost! Remember turning away from the lamp.",
+      "praise": "Yes! Our side turned away from the sun.",
+      "replayFrom": 354.14
+    },
+    {
+      "t": 475.83,
+      "q": "When you sleep, what do kids far away do?",
+      "options": ["They sleep too", "They wake up", "They go swimming"],
+      "answer": 1,
+      "hint": "Almost! On their side the sun is shining.",
+      "praise": "Yes! Far away, kids are waking up.",
+      "replayFrom": 455.14
+    },
+    {
+      "t": 612.08,
+      "q": "What happens when the sticker faces the light?",
+      "options": ["It gets bright", "It gets dark", "It falls off"],
+      "answer": 0,
+      "hint": "Almost! The flashlight is the sun.",
+      "praise": "Yes! Bright, like daytime at your house.",
+      "replayFrom": 594.94
+    },
+    {
+      "t": 662.83,
+      "q": "Does the sun go to sleep at night?",
+      "options": ["Yes, in a bed", "No, it keeps shining", "Yes, behind hills"],
+      "answer": 1,
+      "hint": "Almost! The sun never gets tired.",
+      "praise": "Yes! The sun never sleeps. It always shines.",
+      "replayFrom": 150.76
+    },
+    {
+      "t": 676.96,
+      "q": "What does the Earth do all day and night?",
+      "options": ["It stays still", "It gets smaller", "It spins around"],
+      "answer": 2,
+      "hint": "Almost! Remember spinning like a top.",
+      "praise": "Yes! The Earth spins around and around.",
+      "replayFrom": 307.71
+    }
+  ],
+  "captions": [
+    {
+      "t": 0.78,
+      "end": 3.28,
+      "text": "Hi there, I'm Brainy, your brain buddy."
+    },
+    {
+      "t": 3.82,
+      "end": 7.06,
+      "text": "Today I have a bright and sleepy riddle for you."
+    },
+    {
+      "t": 7.58,
+      "end": 9.36,
+      "text": "Every morning the sun comes up."
+    },
+    {
+      "t": 9.92,
+      "end": 11.8,
+      "text": "Every evening the sun goes down."
+    },
+    {
+      "t": 12.42,
+      "end": 14.46,
+      "text": "But where does the sun go at night?"
+    },
+    {
+      "t": 15.22,
+      "end": 16.12,
+      "text": "Does it go somewhere?"
+    },
+    {
+      "t": 16.76,
+      "end": 17.48,
+      "text": "Does it hide?"
+    },
+    {
+      "t": 18.12,
+      "end": 19.32,
+      "text": "Let's find out together."
+    },
+    {
+      "t": 20.02,
+      "end": 23.3,
+      "text": "Picture this, it's evening and you're in your pajamas."
+    },
+    {
+      "t": 24.02,
+      "end": 26.64,
+      "text": "You brushed your teeth, swish, swish, swish."
+    },
+    {
+      "t": 27.2,
+      "end": 28.92,
+      "text": "Your mom tucks you into bed."
+    },
+    {
+      "t": 29.38,
+      "end": 30.54,
+      "text": "You look out the window."
+    },
+    {
+      "t": 31.18,
+      "end": 34.44,
+      "text": "The sky is dark, the sun is gone."
+    },
+    {
+      "t": 35.12,
+      "end": 38.08,
+      "text": "But tomorrow morning it will peek through your curtains again."
+    },
+    {
+      "t": 38.58,
+      "end": 41.98,
+      "text": "It always comes back, but where was it all night?"
+    },
+    {
+      "t": 42.64,
+      "end": 45.52,
+      "text": "And you ask, “Mom, where did the sun go?”"
+    },
+    {
+      "t": 46.3,
+      "end": 50.26,
+      "text": "Your mom smiles and says, “Hmm, where do you think?”"
+    },
+    {
+      "t": 50.92,
+      "end": 54.18,
+      "text": "I asked that same question a long time ago"
+    },
+    {
+      "t": 54.5,
+      "end": 56.72,
+      "text": "and I had some very funny ideas."
+    },
+    {
+      "t": 57.22,
+      "end": 59.26,
+      "text": "My first idea was about bedtime."
+    },
+    {
+      "t": 59.78,
+      "end": 62.38,
+      "text": "I thought the sun got tired, just like me."
+    },
+    {
+      "t": 62.8,
+      "end": 65.7,
+      "text": "So it went to sleep in a big cozy bed"
+    },
+    {
+      "t": 65.7,
+      "end": 68.1,
+      "text": "with a big fluffy sun pillow."
+    },
+    {
+      "t": 68.72,
+      "end": 70.94,
+      "text": "Ah, but that's not right."
+    },
+    {
+      "t": 71.52,
+      "end": 74.36,
+      "text": "The sun never gets tired, it never sleeps."
+    },
+    {
+      "t": 75.04,
+      "end": 77.56,
+      "text": "My second idea was even sillier."
+    },
+    {
+      "t": 77.88,
+      "end": 80.54,
+      "text": "I thought the sun hid behind the hills at night,"
+    },
+    {
+      "t": 80.76,
+      "end": 82.02,
+      "text": "like playing hide-and-seek."
+    },
+    {
+      "t": 82.48,
+      "end": 85.26,
+      "text": "And in the morning it peeked out again, peekaboo."
+    },
+    {
+      "t": 86.3,
+      "end": 89.02,
+      "text": "No, the sun doesn't play hide-and-seek."
+    },
+    {
+      "t": 89.56,
+      "end": 92.8,
+      "text": "I really used to think these things and that's okay."
+    },
+    {
+      "t": 93.22,
+      "end": 95.38,
+      "text": "Being wrong is how we start learning."
+    },
+    {
+      "t": 95.74,
+      "end": 97.78,
+      "text": "So let's find the real answer"
+    },
+    {
+      "t": 97.78,
+      "end": 99.86,
+      "text": "and we'll find it on an adventure."
+    },
+    {
+      "t": 100.52,
+      "end": 102.02,
+      "text": "Here is my secret plan."
+    },
+    {
+      "t": 102.66,
+      "end": 104.7,
+      "text": "We are going to build a rocket,"
+    },
+    {
+      "t": 105.24,
+      "end": 107.7,
+      "text": "a rocket made from a big cardboard box."
+    },
+    {
+      "t": 108.18,
+      "end": 110.86,
+      "text": "We draw buttons on it, we draw a little window."
+    },
+    {
+      "t": 111.42,
+      "end": 113.78,
+      "text": "Now climb inside with me, sit down,"
+    },
+    {
+      "t": 113.78,
+      "end": 116.4,
+      "text": "hold on tight, let's count together."
+    },
+    {
+      "t": 116.88,
+      "end": 120.4,
+      "text": "Three, two, one, blast off."
+    },
+    {
+      "t": 120.96,
+      "end": 122.74,
+      "text": "Whoosh, up we go."
+    },
+    {
+      "t": 123.22,
+      "end": 127.12,
+      "text": "Past the clouds, past the birds, higher and higher."
+    },
+    {
+      "t": 127.66,
+      "end": 130.4,
+      "text": "We are flying all the way up into space."
+    },
+    {
+      "t": 131.14,
+      "end": 133.68,
+      "text": "Oh, look out the window, what do you see?"
+    },
+    {
+      "t": 134.4,
+      "end": 137.8,
+      "text": "It's the sun, big and bright and yellow."
+    },
+    {
+      "t": 138.46,
+      "end": 140.28,
+      "text": "Now look closely at the sun."
+    },
+    {
+      "t": 140.82,
+      "end": 141.92,
+      "text": "Is it moving away?"
+    },
+    {
+      "t": 142.45,
+      "end": 143.56,
+      "text": "Is it going to bed?"
+    },
+    {
+      "t": 144.5,
+      "end": 146.98,
+      "text": "No, it's just staying right there"
+    },
+    {
+      "t": 147.37,
+      "end": 149.92,
+      "text": "and it's shining, shining, shining."
+    },
+    {
+      "t": 150.76,
+      "end": 152.4,
+      "text": "The sun is always shining,"
+    },
+    {
+      "t": 152.86,
+      "end": 156.18,
+      "text": "morning, lunchtime, evening and even at night."
+    },
+    {
+      "t": 156.76,
+      "end": 158.04,
+      "text": "It never turns off."
+    },
+    {
+      "t": 158.54,
+      "end": 159.82,
+      "text": "Even on a cloudy day,"
+    },
+    {
+      "t": 160.06,
+      "end": 162.02,
+      "text": "the sun is shining above the clouds."
+    },
+    {
+      "t": 162.7,
+      "end": 164.34,
+      "text": "Think of the lamp in your living room."
+    },
+    {
+      "t": 164.78,
+      "end": 166.96,
+      "text": "When it's on, it shines all the time."
+    },
+    {
+      "t": 167.46,
+      "end": 168.98,
+      "text": "It doesn't jump around the room,"
+    },
+    {
+      "t": 168.98,
+      "end": 171.96,
+      "text": "it stays in one place and keeps glowing."
+    },
+    {
+      "t": 172.62,
+      "end": 175.1,
+      "text": "The sun is a little bit like that big lamp,"
+    },
+    {
+      "t": 175.6,
+      "end": 178.06,
+      "text": "a giant warm lamp in space."
+    },
+    {
+      "t": 178.7,
+      "end": 179.74,
+      "text": "Let's say it together."
+    },
+    {
+      "t": 180.26,
+      "end": 182.28,
+      "text": "The sun never stops shining."
+    },
+    {
+      "t": 183.58,
+      "end": 185.6,
+      "text": "One more time, a little louder."
+    },
+    {
+      "t": 186.24,
+      "end": 188.42,
+      "text": "The sun never stops shining."
+    },
+    {
+      "t": 189.1,
+      "end": 189.98,
+      "text": "Great job."
+    },
+    {
+      "t": 190.7,
+      "end": 193.02,
+      "text": "So here is our first big idea."
+    },
+    {
+      "t": 193.62,
+      "end": 195.52,
+      "text": "The sun doesn't go anywhere."
+    },
+    {
+      "t": 196.02,
+      "end": 197.62,
+      "text": "It always keeps shining."
+    },
+    {
+      "t": 198.24,
+      "end": 201.38,
+      "text": "But wait, if the sun is always shining,"
+    },
+    {
+      "t": 202.14,
+      "end": 203.54,
+      "text": "why is it dark at night?"
+    },
+    {
+      "t": 204.54,
+      "end": 206.62,
+      "text": "Let's fly our rocket a little farther."
+    },
+    {
+      "t": 207.28,
+      "end": 209.28,
+      "text": "Let's turn around and look back at home."
+    },
+    {
+      "t": 210.04,
+      "end": 212.08,
+      "text": "Wow, look at that."
+    },
+    {
+      "t": 212.74,
+      "end": 215.6,
+      "text": "Do you see that big round blue ball"
+    },
+    {
+      "t": 215.98,
+      "end": 219.44,
+      "text": "with green and brown spots and white swirls?"
+    },
+    {
+      "t": 219.88,
+      "end": 220.96,
+      "text": "That's the Earth."
+    },
+    {
+      "t": 221.48,
+      "end": 222.48,
+      "text": "That's our home."
+    },
+    {
+      "t": 223.14,
+      "end": 223.92,
+      "text": "Here's a secret."
+    },
+    {
+      "t": 224.54,
+      "end": 227.58,
+      "text": "The Earth is round like a giant ball,"
+    },
+    {
+      "t": 228.1,
+      "end": 231.48,
+      "text": "not flat like a pancake, round like a ball."
+    },
+    {
+      "t": 232.1,
+      "end": 235.32,
+      "text": "It's so big that it looks flat when we stand on it."
+    },
+    {
+      "t": 235.98,
+      "end": 239.4,
+      "text": "All the people, all the houses, all the trees,"
+    },
+    {
+      "t": 240.1,
+      "end": 242.62,
+      "text": "they are all on this one big ball."
+    },
+    {
+      "t": 243.3,
+      "end": 246.52,
+      "text": "Think about a tiny ant on a big beach ball."
+    },
+    {
+      "t": 247.16,
+      "end": 249.02,
+      "text": "The ant walks and walks."
+    },
+    {
+      "t": 249.62,
+      "end": 251.7,
+      "text": "To the ant, the ball looks flat."
+    },
+    {
+      "t": 252.3,
+      "end": 254.8,
+      "text": "It's too small to see that the ball is round."
+    },
+    {
+      "t": 255.62,
+      "end": 257.66,
+      "text": "We are like that tiny ant,"
+    },
+    {
+      "t": 257.86,
+      "end": 260.04,
+      "text": "and the Earth is our giant ball."
+    },
+    {
+      "t": 260.68,
+      "end": 262.9,
+      "text": "And here's a fun surprise about a ball."
+    },
+    {
+      "t": 263.74,
+      "end": 267.28,
+      "text": "Imagine you walk and walk, always straight ahead."
+    },
+    {
+      "t": 267.94,
+      "end": 271.28,
+      "text": "You walk over hills, you sail across the seas."
+    },
+    {
+      "t": 272.06,
+      "end": 275.16,
+      "text": "You keep going for a very, very long time."
+    },
+    {
+      "t": 275.84,
+      "end": 276.92,
+      "text": "Where would you end up?"
+    },
+    {
+      "t": 278.46,
+      "end": 280.4,
+      "text": "Right back home where you started"
+    },
+    {
+      "t": 280.84,
+      "end": 283.54,
+      "text": "because the Earth is round like a ball."
+    },
+    {
+      "t": 284.16,
+      "end": 287.55,
+      "text": "So can you guess what shape is our Earth?"
+    },
+    {
+      "t": 288.48,
+      "end": 291.38,
+      "text": "You're right, it's round like a ball."
+    },
+    {
+      "t": 292.02,
+      "end": 294.24,
+      "text": "So here is our second big idea."
+    },
+    {
+      "t": 294.84,
+      "end": 298.32,
+      "text": "We live on the Earth and the Earth is a giant ball."
+    },
+    {
+      "t": 299.0,
+      "end": 301.54,
+      "text": "Now look very closely at the Earth."
+    },
+    {
+      "t": 302.1,
+      "end": 303.46,
+      "text": "Do you see something happening?"
+    },
+    {
+      "t": 304.68,
+      "end": 307.2,
+      "text": "It's moving, it's turning."
+    },
+    {
+      "t": 307.71,
+      "end": 310.7,
+      "text": "The Earth is spinning around slowly,"
+    },
+    {
+      "t": 311.44,
+      "end": 314.16,
+      "text": "around and around like a spinning top."
+    },
+    {
+      "t": 314.9,
+      "end": 316.88,
+      "text": "Here is our science word for today."
+    },
+    {
+      "t": 317.4,
+      "end": 320.46,
+      "text": "It's called rotation, rotation."
+    },
+    {
+      "t": 322.18,
+      "end": 325.2,
+      "text": "Rotation means spinning around and around."
+    },
+    {
+      "t": 326.0,
+      "end": 328.0,
+      "text": "The Earth's rotation never stops."
+    },
+    {
+      "t": 328.56,
+      "end": 330.84,
+      "text": "It spins all day and all night."
+    },
+    {
+      "t": 331.38,
+      "end": 332.86,
+      "text": "Let's spin like the Earth."
+    },
+    {
+      "t": 333.42,
+      "end": 334.92,
+      "text": "Stand up if you can."
+    },
+    {
+      "t": 335.5,
+      "end": 336.54,
+      "text": "Hold out your arms."
+    },
+    {
+      "t": 337.14,
+      "end": 339.0,
+      "text": "Now turn around slowly."
+    },
+    {
+      "t": 339.64,
+      "end": 341.5,
+      "text": "Slowly, not too fast."
+    },
+    {
+      "t": 342.24,
+      "end": 345.76,
+      "text": "Around and around and around."
+    },
+    {
+      "t": 346.82,
+      "end": 349.12,
+      "text": "Okay, stop, sit down."
+    },
+    {
+      "t": 349.78,
+      "end": 350.88,
+      "text": "Are you a little dizzy?"
+    },
+    {
+      "t": 351.48,
+      "end": 353.56,
+      "text": "You were spinning just like our Earth."
+    },
+    {
+      "t": 354.14,
+      "end": 357.06,
+      "text": "Now look at the sun again and look at the Earth."
+    },
+    {
+      "t": 357.78,
+      "end": 359.66,
+      "text": "The sun shines on the Earth"
+    },
+    {
+      "t": 359.66,
+      "end": 362.66,
+      "text": "but it can only light up one side at a time."
+    },
+    {
+      "t": 363.16,
+      "end": 365.52,
+      "text": "The side that faces the sun is bright."
+    },
+    {
+      "t": 366.2,
+      "end": 367.34,
+      "text": "That side has day."
+    },
+    {
+      "t": 368.08,
+      "end": 370.4,
+      "text": "The other side faces away from the sun."
+    },
+    {
+      "t": 370.98,
+      "end": 373.86,
+      "text": "That side is dark and that side has night."
+    },
+    {
+      "t": 374.7,
+      "end": 376.74,
+      "text": "You can try this right now with your body."
+    },
+    {
+      "t": 377.38,
+      "end": 379.4,
+      "text": "Imagine there's a lamp in front of you."
+    },
+    {
+      "t": 380.0,
+      "end": 381.82,
+      "text": "Your face looks at the lamp."
+    },
+    {
+      "t": 382.34,
+      "end": 383.5,
+      "text": "Your face is bright."
+    },
+    {
+      "t": 384.1,
+      "end": 385.04,
+      "text": "That's like day."
+    },
+    {
+      "t": 385.74,
+      "end": 387.64,
+      "text": "Now turn around slowly."
+    },
+    {
+      "t": 388.4,
+      "end": 390.8,
+      "text": "Turn, turn, turn."
+    },
+    {
+      "t": 391.78,
+      "end": 393.76,
+      "text": "Now the back of your head looks at the lamp."
+    },
+    {
+      "t": 394.32,
+      "end": 395.74,
+      "text": "Your face is in the dark."
+    },
+    {
+      "t": 396.28,
+      "end": 397.22,
+      "text": "That's like night."
+    },
+    {
+      "t": 398.18,
+      "end": 401.32,
+      "text": "You just made day and night with your own head."
+    },
+    {
+      "t": 402.0,
+      "end": 405.72,
+      "text": "So when it's night at your house, what is happening?"
+    },
+    {
+      "t": 406.78,
+      "end": 407.38,
+      "text": "You're right."
+    },
+    {
+      "t": 408.04,
+      "end": 410.56,
+      "text": "Our side of the Earth turned away from the sun."
+    },
+    {
+      "t": 411.26,
+      "end": 414.42,
+      "text": "But wait, why don't we feel the Earth spinning?"
+    },
+    {
+      "t": 415.16,
+      "end": 417.96,
+      "text": "Think about riding in a car on a smooth road."
+    },
+    {
+      "t": 418.48,
+      "end": 421.38,
+      "text": "If you close your eyes, it feels like you're not moving."
+    },
+    {
+      "t": 422.08,
+      "end": 425.7,
+      "text": "The Earth spins so smoothly that we don't feel it at all."
+    },
+    {
+      "t": 426.3,
+      "end": 427.24,
+      "text": "Let's say it together."
+    },
+    {
+      "t": 427.92,
+      "end": 429.48,
+      "text": "The Earth spins around."
+    },
+    {
+      "t": 430.32,
+      "end": 430.78,
+      "text": "Wonderful."
+    },
+    {
+      "t": 431.64,
+      "end": 433.78,
+      "text": "So here is our third big idea."
+    },
+    {
+      "t": 434.42,
+      "end": 436.48,
+      "text": "Night comes when our side of Earth"
+    },
+    {
+      "t": 436.48,
+      "end": 438.02,
+      "text": "turns away from the sun."
+    },
+    {
+      "t": 438.6,
+      "end": 441.32,
+      "text": "Let's fly our rocket all the way around the Earth."
+    },
+    {
+      "t": 441.84,
+      "end": 443.52,
+      "text": "Let's look at the dark side first."
+    },
+    {
+      "t": 444.36,
+      "end": 444.84,
+      "text": "Shh."
+    },
+    {
+      "t": 445.54,
+      "end": 446.38,
+      "text": "It's night here."
+    },
+    {
+      "t": 447.02,
+      "end": 448.62,
+      "text": "Kids are sleeping in their beds."
+    },
+    {
+      "t": 449.26,
+      "end": 450.66,
+      "text": "The stars are twinkling."
+    },
+    {
+      "t": 451.34,
+      "end": 452.22,
+      "text": "The moon is out."
+    },
+    {
+      "t": 452.78,
+      "end": 454.22,
+      "text": "Everything is quiet."
+    },
+    {
+      "t": 455.14,
+      "end": 456.9,
+      "text": "Now let's fly to the other side."
+    },
+    {
+      "t": 457.44,
+      "end": 457.92,
+      "text": "Zoom."
+    },
+    {
+      "t": 458.88,
+      "end": 460.34,
+      "text": "The sun is shining here."
+    },
+    {
+      "t": 460.84,
+      "end": 462.64,
+      "text": "It's morning on this side of the Earth."
+    },
+    {
+      "t": 463.12,
+      "end": 464.36,
+      "text": "Kids are waking up."
+    },
+    {
+      "t": 464.92,
+      "end": 465.56,
+      "text": "Yawn."
+    },
+    {
+      "t": 466.08,
+      "end": 466.68,
+      "text": "Stretch."
+    },
+    {
+      "t": 467.48,
+      "end": 468.54,
+      "text": "They're eating breakfast."
+    },
+    {
+      "t": 469.22,
+      "end": 470.0,
+      "text": "Crunch, crunch."
+    },
+    {
+      "t": 470.56,
+      "end": 472.78,
+      "text": "They're putting on their shoes to go outside."
+    },
+    {
+      "t": 473.7,
+      "end": 475.32,
+      "text": "Do you know what this means?"
+    },
+    {
+      "t": 476.02,
+      "end": 477.52,
+      "text": "When you go to sleep at night,"
+    },
+    {
+      "t": 477.94,
+      "end": 481.32,
+      "text": "other kids far, far away are waking up."
+    },
+    {
+      "t": 481.92,
+      "end": 483.2,
+      "text": "The sun didn't go away."
+    },
+    {
+      "t": 483.68,
+      "end": 485.4,
+      "text": "It's just shining on them now."
+    },
+    {
+      "t": 485.86,
+      "end": 487.54,
+      "text": "And when you wake up in the morning,"
+    },
+    {
+      "t": 488.0,
+      "end": 489.78,
+      "text": "those kids are getting ready for bed."
+    },
+    {
+      "t": 490.4,
+      "end": 493.56,
+      "text": "Once, I talked to a friend who lives far away."
+    },
+    {
+      "t": 494.18,
+      "end": 495.64,
+      "text": "It was evening at my house."
+    },
+    {
+      "t": 496.06,
+      "end": 497.04,
+      "text": "I was in my pajamas."
+    },
+    {
+      "t": 497.59,
+      "end": 499.38,
+      "text": "I said, “Good night, friend.”"
+    },
+    {
+      "t": 500.21,
+      "end": 502.38,
+      "text": "And my friend said, good night."
+    },
+    {
+      "t": 502.82,
+      "end": 503.88,
+      "text": "It's morning here."
+    },
+    {
+      "t": 504.34,
+      "end": 505.56,
+      "text": "I just ate my breakfast."
+    },
+    {
+      "t": 506.26,
+      "end": 509.5,
+      "text": "We were on different sides of the same big ball."
+    },
+    {
+      "t": 509.94,
+      "end": 510.82,
+      "text": "I had night."
+    },
+    {
+      "t": 511.26,
+      "end": 512.46,
+      "text": "My friend had day."
+    },
+    {
+      "t": 513.04,
+      "end": 516.06,
+      "text": "And look at the edge right between day and night."
+    },
+    {
+      "t": 516.66,
+      "end": 519.44,
+      "text": "On that edge, the sun is just coming up."
+    },
+    {
+      "t": 519.94,
+      "end": 520.76,
+      "text": "That's a sunrise."
+    },
+    {
+      "t": 521.46,
+      "end": 524.52,
+      "text": "And on the other edge, the sun is going down."
+    },
+    {
+      "t": 524.92,
+      "end": 525.8,
+      "text": "That's a sunset."
+    },
+    {
+      "t": 526.46,
+      "end": 529.28,
+      "text": "The sun is not really moving up or down."
+    },
+    {
+      "t": 529.7,
+      "end": 531.0,
+      "text": "We are the ones turning."
+    },
+    {
+      "t": 531.72,
+      "end": 533.62,
+      "text": "Think about sharing a cookie with a friend."
+    },
+    {
+      "t": 534.24,
+      "end": 535.24,
+      "text": "You take one half."
+    },
+    {
+      "t": 535.7,
+      "end": 537.14,
+      "text": "Your friend takes the other half."
+    },
+    {
+      "t": 537.7,
+      "end": 539.96,
+      "text": "The Earth shares the sunlight the same way."
+    },
+    {
+      "t": 540.48,
+      "end": 542.1,
+      "text": "One half of the Earth gets sunlight."
+    },
+    {
+      "t": 542.62,
+      "end": 543.96,
+      "text": "The other half gets night."
+    },
+    {
+      "t": 544.42,
+      "end": 545.26,
+      "text": "And then they switch."
+    },
+    {
+      "t": 545.92,
+      "end": 548.5,
+      "text": "Every time the Earth spins all the way around,"
+    },
+    {
+      "t": 548.86,
+      "end": 550.86,
+      "text": "we get one day and one night."
+    },
+    {
+      "t": 551.4,
+      "end": 552.4,
+      "text": "Let's say it together."
+    },
+    {
+      "t": 552.84,
+      "end": 555.22,
+      "text": "When I sleep, someone wakes up."
+    },
+    {
+      "t": 555.82,
+      "end": 559.14,
+      "text": "Yes, when I sleep, someone wakes up."
+    },
+    {
+      "t": 559.42,
+      "end": 561.54,
+      "text": "So here is our fourth big idea."
+    },
+    {
+      "t": 562.32,
+      "end": 565.66,
+      "text": "Our night is daytime for kids on the other side."
+    },
+    {
+      "t": 566.08,
+      "end": 567.96,
+      "text": "Now it's time for a home experiment."
+    },
+    {
+      "t": 568.72,
+      "end": 571.22,
+      "text": "Remember, always do this with a grown-up."
+    },
+    {
+      "t": 571.84,
+      "end": 574.48,
+      "text": "We're going to make day and night in your room."
+    },
+    {
+      "t": 575.02,
+      "end": 576.04,
+      "text": "Here's what you need."
+    },
+    {
+      "t": 576.66,
+      "end": 580.36,
+      "text": "A flashlight, an orange or any round ball,"
+    },
+    {
+      "t": 580.74,
+      "end": 582.3,
+      "text": "and one small sticker."
+    },
+    {
+      "t": 582.8,
+      "end": 585.7,
+      "text": "Step one, put the sticker on the orange."
+    },
+    {
+      "t": 586.28,
+      "end": 587.48,
+      "text": "The sticker is you."
+    },
+    {
+      "t": 588.02,
+      "end": 589.56,
+      "text": "It's your house on the Earth."
+    },
+    {
+      "t": 590.18,
+      "end": 592.66,
+      "text": "Step two, make the room dark."
+    },
+    {
+      "t": 593.2,
+      "end": 594.12,
+      "text": "Turn off the lights."
+    },
+    {
+      "t": 594.94,
+      "end": 598.16,
+      "text": "Step three, ask your grown-up to hold the flashlight."
+    },
+    {
+      "t": 598.76,
+      "end": 600.0,
+      "text": "Point it at the orange."
+    },
+    {
+      "t": 600.58,
+      "end": 602.16,
+      "text": "The flashlight is the sun."
+    },
+    {
+      "t": 602.82,
+      "end": 606.46,
+      "text": "Step four, hold the orange and turn it slowly,"
+    },
+    {
+      "t": 607.0,
+      "end": 608.52,
+      "text": "around and around."
+    },
+    {
+      "t": 609.2,
+      "end": 610.38,
+      "text": "Now watch the sticker."
+    },
+    {
+      "t": 610.94,
+      "end": 611.64,
+      "text": "What do you see?"
+    },
+    {
+      "t": 612.82,
+      "end": 616.38,
+      "text": "When the sticker faces the flashlight, it's bright."
+    },
+    {
+      "t": 617.04,
+      "end": 618.72,
+      "text": "That's daytime at your house."
+    },
+    {
+      "t": 619.36,
+      "end": 620.94,
+      "text": "Keep turning slowly."
+    },
+    {
+      "t": 621.82,
+      "end": 623.92,
+      "text": "Now the sticker goes to the dark side."
+    },
+    {
+      "t": 624.38,
+      "end": 626.0,
+      "text": "That's nighttime at your house."
+    },
+    {
+      "t": 626.64,
+      "end": 629.62,
+      "text": "And look, the flashlight didn't move at all."
+    },
+    {
+      "t": 630.0,
+      "end": 631.3,
+      "text": "Only the orange turned."
+    },
+    {
+      "t": 631.78,
+      "end": 633.88,
+      "text": "That's just like the sun and the Earth."
+    },
+    {
+      "t": 634.48,
+      "end": 636.12,
+      "text": "Try it again and again."
+    },
+    {
+      "t": 636.6,
+      "end": 639.36,
+      "text": "Day, night, day, night."
+    },
+    {
+      "t": 639.94,
+      "end": 642.56,
+      "text": "You just made a whole day in your hands."
+    },
+    {
+      "t": 643.3,
+      "end": 646.06,
+      "text": "Now let's fly our cardboard rocket back home."
+    },
+    {
+      "t": 646.64,
+      "end": 649.76,
+      "text": "Three, two, one, landing."
+    },
+    {
+      "t": 650.66,
+      "end": 653.18,
+      "text": "Phew, let's play a mini quiz."
+    },
+    {
+      "t": 653.76,
+      "end": 655.26,
+      "text": "Three questions, ready?"
+    },
+    {
+      "t": 655.92,
+      "end": 657.88,
+      "text": "Don't worry, just try your best."
+    },
+    {
+      "t": 658.46,
+      "end": 659.9,
+      "text": "Here comes question one."
+    },
+    {
+      "t": 660.44,
+      "end": 662.34,
+      "text": "Does the sun go to sleep at night?"
+    },
+    {
+      "t": 663.32,
+      "end": 665.78,
+      "text": "No, the sun never sleeps."
+    },
+    {
+      "t": 666.28,
+      "end": 667.62,
+      "text": "It always keeps shining."
+    },
+    {
+      "t": 668.34,
+      "end": 671.54,
+      "text": "Good thinking, every try makes your brain stronger."
+    },
+    {
+      "t": 672.24,
+      "end": 676.44,
+      "text": "Question two, what does the Earth do all day and all night?"
+    },
+    {
+      "t": 677.68,
+      "end": 681.54,
+      "text": "It spins around, around and around, like a top."
+    },
+    {
+      "t": 682.18,
+      "end": 683.32,
+      "text": "Did you say it spins?"
+    },
+    {
+      "t": 683.96,
+      "end": 684.72,
+      "text": "Great job."
+    },
+    {
+      "t": 685.24,
+      "end": 686.72,
+      "text": "And if not, now you know."
+    },
+    {
+      "t": 687.36,
+      "end": 689.62,
+      "text": "Now here is the big idea from today."
+    },
+    {
+      "t": 690.1,
+      "end": 691.72,
+      "text": "Say it to your mom or dad tonight."
+    },
+    {
+      "t": 692.46,
+      "end": 696.6,
+      "text": "At night, our side of the Earth turns away from the sun."
+    },
+    {
+      "t": 697.2,
+      "end": 698.74,
+      "text": "One more time, with me."
+    },
+    {
+      "t": 699.48,
+      "end": 703.54,
+      "text": "At night, our side of the Earth turns away from the sun."
+    },
+    {
+      "t": 704.08,
+      "end": 707.32,
+      "text": "Perfect, let's remember why one last time."
+    },
+    {
+      "t": 707.94,
+      "end": 711.7,
+      "text": "The sun always shines, the Earth spins around."
+    },
+    {
+      "t": 712.42,
+      "end": 714.92,
+      "text": "When we turn away from the sun, it's night."
+    },
+    {
+      "t": 715.46,
+      "end": 717.86,
+      "text": "And now, a question for you on the screen."
+    },
+    {
+      "t": 718.44,
+      "end": 721.44,
+      "text": "When it's night at your house, what is the sun doing?"
+    },
+    {
+      "t": 722.08,
+      "end": 724.32,
+      "text": "Is it sleeping in a big, cozy bed?"
+    },
+    {
+      "t": 724.96,
+      "end": 727.66,
+      "text": "Is it shining on kids on the other side of the Earth?"
+    },
+    {
+      "t": 728.18,
+      "end": 730.28,
+      "text": "Or is it hiding under the sea?"
+    },
+    {
+      "t": 731.02,
+      "end": 731.62,
+      "text": "Think about it."
+    },
+    {
+      "t": 732.14,
+      "end": 733.32,
+      "text": "Pick your answer on the screen."
+    },
+    {
+      "t": 733.98,
+      "end": 737.22,
+      "text": "You got a little bit smarter today, and so did I."
+    },
+    {
+      "t": 737.74,
+      "end": 739.52,
+      "text": "See you next time, little why-asker."
+    },
+    {
+      "t": 739.94,
+      "end": 740.3,
+      "text": "Bye-bye."
+    }
+  ]
+}

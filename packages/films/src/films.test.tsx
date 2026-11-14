@@ -9,8 +9,8 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { FILM_BG, FILM_PROPS } from "./art";
 import { FilmStage } from "./FilmStage";
-import { FILM_ART, FILM_IDS, filmLayoutIssues } from "./index";
-import { FILM_MOTIONS } from "./motion";
+import { FILM_ART, FILM_IDS, filmLayoutIssues, placeProp } from "./index";
+import { FILM_MOTIONS, GROUND_MOTIONS } from "./motion";
 
 const DIR = join(import.meta.dirname, "../../../apps/web/public/media/films");
 const MAX_MP3_BYTES = 15 * 1024 * 1024;
@@ -57,6 +57,36 @@ describe("film art", () => {
   });
 });
 
+describe("grounded props", () => {
+  const grounded = Object.keys(FILM_PROPS).filter((key) => FILM_PROPS[key]?.base !== undefined);
+  const withGround = Object.keys(FILM_BG).filter((key) => FILM_BG[key]?.ground !== undefined);
+  it.each(grounded)("%s stands exactly on every ground line, inside the stage", (key) => {
+    const base = FILM_PROPS[key]?.base ?? 0;
+    for (const bg of withGround) {
+      const box = placeProp(key, bg);
+      expect(box).toBeDefined();
+      if (!box) continue;
+      expect(box.y + (base / 100) * box.h).toBeCloseTo(FILM_BG[bg]?.ground ?? 0, 5);
+      expect(box.y).toBeGreaterThanOrEqual(0);
+    }
+  });
+  it("props that only stand never use a floating motion", () => {
+    for (const key of grounded.filter((k) => !FILM_PROPS[k]?.floats))
+      expect(GROUND_MOTIONS, key).toContain(FILM_PROPS[key]?.cls);
+  });
+  it("a standing rocket is drawn still; in space it floats", () => {
+    const html = (bg: string) =>
+      renderToStaticMarkup(
+        <FilmStage
+          scene={{ t: 0, bg, props: ["rocket", "cloud"], brainy: "left" }}
+          stats={stats}
+        />,
+      );
+    expect(html("yard")).toContain("film-still");
+    expect(html("space")).toContain("film-bob");
+  });
+});
+
 it("FILM_IDS lists exactly the films on disk", () => {
   expect([...FILM_IDS].sort()).toEqual([...ids].sort());
 });
@@ -70,6 +100,8 @@ describe.each(ids)("film %s", (id) => {
   it("passes the script rules", () => {
     for (const w of warnings) console.warn(`⚠ ${id} ${w.where}: ${w.message}`);
     expect(errors.map((e) => `${e.where}: ${e.message}`)).toEqual([]);
+    // A ground object on a scene without ground hangs in the air: never acceptable.
+    expect(warnings.filter((w) => w.message.includes("would float"))).toEqual([]);
     expect(script.id).toBe(id);
     console.log(
       `✓ ${id}: ${script.questions.length} questions, ${script.scenes.length} scenes, ` +

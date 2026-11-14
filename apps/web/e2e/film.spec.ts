@@ -21,7 +21,7 @@ test("film: question pauses the audio, hint on a miss, praise resumes, no stars"
   page.on("pageerror", (error) => errors.push(String(error)));
   page.on("console", (message) => message.type() === "error" && errors.push(message.text()));
   await page.goto("/leisure");
-  await page.getByRole("link", { name: /Why Is the Sky Blue\?/ }).click();
+  await page.getByRole("link", { name: /Why the sky is blue\?/ }).click();
   await expect(page).toHaveURL(/\/video\/sky-blue$/);
   const film = page.getByTestId("film");
   await expect(film.locator("[data-film-stage]")).toHaveAttribute("data-bg", "yard");

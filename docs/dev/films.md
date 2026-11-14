@@ -20,7 +20,7 @@ A film is **an mp3 plus a JSON script**. The browser draws it, so no video is re
 ```jsonc
 {
   "id": "sky-blue",              // latin, digits, dashes
-  "title": "Why Is the Sky Blue?",
+  "title": "Why the sky is blue?",
   "lang": "en",                  // ru | kk | en: language of the audio; q/options/hint/praise match it
   "skill": "attention",          // attention | reading | logic | memory | speech
   "duration": 753.52,            // seconds, from the mp3
@@ -41,10 +41,11 @@ A film is **an mp3 plus a JSON script**. The browser draws it, so no video is re
    - With `ELEVENLABS_API_KEY` in the environment: `--engine elevenlabs --lang rus|kaz|eng`, plus `--diarize` for two voices. Never write the key to a file or print it.
    - Otherwise, use local Whisper through uv, with no system install:
      `uv run --no-project --python 3.12 --with faster-whisper python -I scripts/films/make_film.py videos/audio/<file>.mp3 --id <id> --title "<title>" --engine whisper --model small`
-     Language is auto-detected; force it with `--lang ru`. On CPU-only Macs, `small` transcribes 12 min in about 3 min. Audio is decoded by system `ffmpeg` because faster-whisper's PyAV path breaks on new PyAV releases.
+     Language is auto-detected; force it with `--lang ru`. On CPU-only Macs, `small` transcribes 12 min in about 3 min. Audio is decoded by system `ffmpeg` because faster-whisper's PyAV path breaks on new PyAV releases. Caption times come from word timestamps; segment-level times drifted by ~1 s on a 12-minute podcast.
    - Output: `apps/web/public/media/films/<id>.{mp3,json}` with captions, question stubs from phrases ending in "?", and one scene. The script refuses to overwrite a JSON without `--force`. Files over 15 MB are re-encoded to mono 64 kbps; say so in the handoff.
-2. **Fix captions.** Read all of them and fix only the text (punctuation, quotes, names, misheard words). Don't move `t`/`end` without a reason.
-3. **Questions.**
+2. **Keep an untouched copy of the draft** and author from it. Placing questions shortens caption `end` values, so re-running an authoring pass on an edited file moves pauses.
+3. **Fix captions.** Read all of them and fix only the text (punctuation, quotes, names, misheard words). Don't move `t`/`end` without a reason.
+4. **Questions.**
    - Find the real questions, including rhetorical ones the host answers immediately, and any closing «мини-квиз».
    - Set `t` inside the silence right after the question: the speech end + 0.3 s. Whisper's `end` often includes trailing silence or runs into the answer, so measure: `LC_ALL=C ffmpeg -i <mp3> -af silencedetect=noise=-35dB:d=0.25 -f null -`. Then set that caption's `end` to the silence start. That is a measured fix, not an invented timestamp.
    - When the host answers right away, the pause still comes before the answer, so the child answers and then hears the confirmation.
@@ -52,7 +53,7 @@ A film is **an mp3 plus a JSON script**. The browser draws it, so no video is re
    - `hint` nudges without giving the answer away. `praise` is short and states the fact.
    - `replayFrom` is the `t` of the caption where the fact was told. It must be **before** `t`: «Послушать ещё раз» replays it, then the question appears again.
    - Aim for 2–4 questions per 5 minutes. If the audio has none, add 2 on key facts, in pauses between phrases.
-4. **Scenes.**
+5. **Scenes.**
    - First scene at `t: 0`. Change scenes at the start of a phrase (that caption's `t`), every 8–15 s or on a topic change.
    - 2–4 props each, using only keys from `FILM_BG`/`FILM_PROPS`.
    - `brainy`: `left` while explaining, `center` before a question and at the finale, `right` for variety.
@@ -62,10 +63,12 @@ A film is **an mp3 plus a JSON script**. The browser draws it, so no video is re
      - palette `#EE5A4A #F2AE12 #E5731A #139E80 #3C68EE #FF8FA3` plus tints/ink;
      - `cls` from `FILM_MOTIONS` (`swim bob sway fly buzz spin drift rise twinkle pop`);
      - `style: at(left, top, width)` in % of the stage;
+     - **things that stand** (house, tree, bed, puddle, jar…) get `base`: the viewBox y where they touch the ground. The stage then puts them on the background's `ground` line instead of `style.top`, and turns floating motions into `still` while they stand. Use `still`, `sway` (from the root), `buzz`, `drift` or `spin` for them. Add `floats: true` only when the thing may also fly where there is no ground (rocket, beach ball in space);
+     - a new background with a floor, grass or table needs `ground` (% of stage height); sky, space, the sunbeam, a cloud and the sea have none;
      - no recognisable characters or brands.
    - Placement zones: top-left = sky things, top-centre = the question bubble and light/air diagrams, right = objects. Brainy stands bottom-left/centre/right at 24% width.
-5. **Voices.** With `--diarize`, the first voice is `brainy` and the others are `guest`. Check that Brainy is the host who explains; if not, swap them. A second on-screen character needs engine work, so describe it in the handoff instead.
-6. **Register and catalog.**
+6. **Voices.** With `--diarize`, the first voice is `brainy` and the others are `guest`. Check that Brainy is the host who explains; if not, swap them. A second on-screen character needs engine work, so describe it in the handoff instead.
+7. **Register and catalog.**
    - Add the `id` to `FILM_IDS` in `packages/films/src/catalog.ts`.
    - Add a `science` entry with the same `id` to the seed:
      - `title` (2–4 words for a child);
@@ -74,11 +77,12 @@ A film is **an mp3 plus a JSON script**. The browser draws it, so no video is re
      - `colors` (2 hex values);
      - the final ★ `question` / `options` / `answer`, taken from the audio's main idea.
    - Run `pnpm db:reset` (or a scratch `DATABASE_URL`) to see it.
-7. **Check.**
+8. **Check.**
    - Run `pnpm format` first: Biome formats the script JSON, and `pnpm check` fails without it.
    - `pnpm check:films` must pass. It covers:
      - script rules;
-     - prop overlap with each other and with Brainy;
+     - standing things on a background without ground (a hard error: they would hang in the air);
+     - prop overlap with each other and with Brainy, measured where the props are really drawn;
      - `FILM_IDS` matching the files on disk;
      - mp3 ≤ 15 MB, with a duration that matches `ffprobe`;
      - a matching seed entry and minutes;
@@ -104,4 +108,4 @@ A film is **an mp3 plus a JSON script**. The browser draws it, so no video is re
 ## Known limits
 - One character on stage. A `guest` voice only stops Brainy's mouth.
 - The mouth uses `createMediaElementSource`, so audio routes through Web Audio. It's created on the first tap, which iOS requires. The physical iPad check stays with T-62/T-84.
-- Prop positions are fixed per prop. The layout check flags crowded combinations rather than auto-placing them.
+- Horizontal positions are fixed per prop; standing props get their height from the background's ground line. The layout check flags crowded combinations rather than auto-placing them.

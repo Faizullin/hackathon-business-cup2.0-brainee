@@ -55,15 +55,22 @@ def whisper_captions(path: Path, lang: str | None, model: str) -> tuple[list[dic
     ).stdout
     whisper = WhisperModel(model, device="auto", compute_type="int8")
     segments, info = whisper.transcribe(
-        np.frombuffer(pcm, dtype=np.float32), language=lang, vad_filter=True, beam_size=5
+        np.frombuffer(pcm, dtype=np.float32),
+        language=lang,
+        vad_filter=True,
+        beam_size=5,
+        word_timestamps=True,  # segment-level times drift by ~1 s on long audio
     )
     print(f"  language: {info.language} ({info.language_probability:.0%})", file=sys.stderr)
     captions = []
     for seg in segments:
         text = seg.text.strip()
+        words = seg.words or []
+        start = words[0].start if words else seg.start
+        end = words[-1].end if words else seg.end
         if text:
-            captions.append({"t": round(seg.start, 2), "end": round(seg.end, 2), "text": text})
-            print(f"  {seg.start:7.2f}  {text}", file=sys.stderr)
+            captions.append({"t": round(start, 2), "end": round(end, 2), "text": text})
+            print(f"  {start:7.2f}  {text}", file=sys.stderr)
     return captions, info.language
 
 

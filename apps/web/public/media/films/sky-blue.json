@@ -1,6 +1,6 @@
 {
   "id": "sky-blue",
-  "title": "Why Is the Sky Blue?",
+  "title": "Why the sky is blue?",
   "lang": "en",
   "skill": "attention",
   "duration": 753.52,
@@ -134,7 +134,7 @@
     },
     {
       "t": 195.92,
-      "bg": "sunbeam",
+      "bg": "room",
       "props": ["colors", "crayons"],
       "brainy": "left"
     },
@@ -424,7 +424,7 @@
       "t": 635.43,
       "bg": "kitchen",
       "props": ["flashlight", "glass"],
-      "brainy": "right"
+      "brainy": "left"
     },
     {
       "t": 647.23,

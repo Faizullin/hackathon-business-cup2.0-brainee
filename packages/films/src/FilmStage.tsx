@@ -1,7 +1,8 @@
 import { Brainy } from "@brainee/brainy";
 import type { BrainyStats, Equipped, FilmCaption, FilmScene, FilmSpot } from "@brainee/core";
 import { FILM_BG, FILM_PROPS } from "./art";
-import { FILM_CSS } from "./motion";
+import { placeProp } from "./layout";
+import { FILM_CSS, GROUND_MOTIONS } from "./motion";
 
 type FilmStageProps = {
   scene: FilmScene;
@@ -55,15 +56,24 @@ export function FilmStage({
       )}
       {scene.props.map((key) => {
         const prop = FILM_PROPS[key];
-        if (!prop) return null;
+        const box = placeProp(key, scene.bg);
+        if (!prop || !box) return null;
+        const standing = prop.base !== undefined && bg?.ground !== undefined;
+        const cls = standing && !GROUND_MOTIONS.includes(prop.cls) ? "still" : prop.cls;
         return (
           <div
             key={`${scene.t}-${key}`}
             className="film-enter"
             data-prop={key}
-            style={{ position: "absolute", ...prop.style }}
+            data-grounded={standing ? "" : undefined}
+            style={{
+              position: "absolute",
+              left: `${box.x}%`,
+              top: `${box.y}%`,
+              width: `${box.w}%`,
+            }}
           >
-            <svg viewBox="0 0 100 100" aria-hidden="true" className={`film-loop film-${prop.cls}`}>
+            <svg viewBox="0 0 100 100" aria-hidden="true" className={`film-loop film-${cls}`}>
               {prop.svg}
             </svg>
           </div>

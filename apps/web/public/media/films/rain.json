@@ -1,0 +1,2135 @@
+{
+  "id": "rain",
+  "title": "Rain",
+  "lang": "en",
+  "skill": "attention",
+  "duration": 739.16,
+  "audio": "/media/films/rain.mp3",
+  "scenes": [
+    {
+      "t": 0,
+      "bg": "rainy",
+      "props": ["raincloud", "drop"],
+      "brainy": "left"
+    },
+    {
+      "t": 7.38,
+      "bg": "rainy",
+      "props": ["raincloud", "puddle"],
+      "brainy": "left"
+    },
+    {
+      "t": 18.6,
+      "bg": "room",
+      "props": ["raincloud", "boots"],
+      "brainy": "left"
+    },
+    {
+      "t": 28.4,
+      "bg": "rainy",
+      "props": ["boots", "puddle"],
+      "brainy": "left"
+    },
+    {
+      "t": 35.86,
+      "bg": "rainy",
+      "props": ["puddle", "drop"],
+      "brainy": "left"
+    },
+    {
+      "t": 42.24,
+      "bg": "rainy",
+      "props": ["raincloud", "cloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 48.16,
+      "bg": "yard",
+      "props": ["cloud", "tree"],
+      "brainy": "left"
+    },
+    {
+      "t": 58.78,
+      "bg": "rainy",
+      "props": ["raincloud", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 68.68,
+      "bg": "sky",
+      "props": ["cloud", "sun"],
+      "brainy": "right"
+    },
+    {
+      "t": 76.52,
+      "bg": "sky",
+      "props": ["wateringcan", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 86.64,
+      "bg": "yard",
+      "props": ["star", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 100.56,
+      "bg": "yard",
+      "props": ["drop", "cloud"],
+      "brainy": "center"
+    },
+    {
+      "t": 112.74,
+      "bg": "yard",
+      "props": ["drop", "puddle"],
+      "brainy": "left"
+    },
+    {
+      "t": 125.44,
+      "bg": "yard",
+      "props": ["puddle", "drop"],
+      "brainy": "left"
+    },
+    {
+      "t": 134.36,
+      "bg": "yard",
+      "props": ["sun", "puddle"],
+      "brainy": "left"
+    },
+    {
+      "t": 144.2,
+      "bg": "yard",
+      "props": ["sun", "drop"],
+      "brainy": "center"
+    },
+    {
+      "t": 156.14,
+      "bg": "sky",
+      "props": ["sun", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 170.58,
+      "bg": "sky",
+      "props": ["air", "star"],
+      "brainy": "right"
+    },
+    {
+      "t": 183.76,
+      "bg": "yard",
+      "props": ["clothesline", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 189.8,
+      "bg": "yard",
+      "props": ["question", "clothesline"],
+      "brainy": "center"
+    },
+    {
+      "t": 194.36,
+      "bg": "yard",
+      "props": ["sun", "air"],
+      "brainy": "right"
+    },
+    {
+      "t": 202.5,
+      "bg": "yard",
+      "props": ["puddle", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 208.72,
+      "bg": "sky",
+      "props": ["sun", "cloud"],
+      "brainy": "center"
+    },
+    {
+      "t": 219.64,
+      "bg": "sky",
+      "props": ["sun", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 226.48,
+      "bg": "yard",
+      "props": ["house", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 231.74,
+      "bg": "yard",
+      "props": ["tree", "bird"],
+      "brainy": "left"
+    },
+    {
+      "t": 238.28,
+      "bg": "sky",
+      "props": ["cloud", "air"],
+      "brainy": "right"
+    },
+    {
+      "t": 251.2,
+      "bg": "cloudland",
+      "props": ["drop", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 263.5,
+      "bg": "cloudland",
+      "props": ["air", "drop"],
+      "brainy": "right"
+    },
+    {
+      "t": 274.2,
+      "bg": "cloudland",
+      "props": ["question", "drop"],
+      "brainy": "center"
+    },
+    {
+      "t": 280.28,
+      "bg": "sky",
+      "props": ["cloud", "drop"],
+      "brainy": "right"
+    },
+    {
+      "t": 295.6,
+      "bg": "room",
+      "props": ["mirror", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 306.3,
+      "bg": "room",
+      "props": ["mirror", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 315.62,
+      "bg": "room",
+      "props": ["juice", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 321.38,
+      "bg": "room",
+      "props": ["question", "juice"],
+      "brainy": "center"
+    },
+    {
+      "t": 327.32,
+      "bg": "room",
+      "props": ["juice", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 337.34,
+      "bg": "sky",
+      "props": ["cloud", "drop"],
+      "brainy": "center"
+    },
+    {
+      "t": 346.14,
+      "bg": "cloudland",
+      "props": ["air", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 352.14,
+      "bg": "cloudland",
+      "props": ["drop", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 360.5,
+      "bg": "sea",
+      "props": ["drop", "waves"],
+      "brainy": "left"
+    },
+    {
+      "t": 366.92,
+      "bg": "yard",
+      "props": ["puddle", "drop"],
+      "brainy": "left"
+    },
+    {
+      "t": 375.58,
+      "bg": "cloudland",
+      "props": ["bounce", "drop"],
+      "brainy": "right"
+    },
+    {
+      "t": 383.76,
+      "bg": "cloudland",
+      "props": ["drop", "air"],
+      "brainy": "center"
+    },
+    {
+      "t": 397.16,
+      "bg": "cloudland",
+      "props": ["question", "drop"],
+      "brainy": "center"
+    },
+    {
+      "t": 402.08,
+      "bg": "rainy",
+      "props": ["raincloud", "drop"],
+      "brainy": "right"
+    },
+    {
+      "t": 416.14,
+      "bg": "room",
+      "props": ["raincloud", "drop"],
+      "brainy": "left"
+    },
+    {
+      "t": 431.22,
+      "bg": "cloudland",
+      "props": ["raincloud", "drop"],
+      "brainy": "center"
+    },
+    {
+      "t": 442.14,
+      "bg": "rainy",
+      "props": ["raincloud", "bird"],
+      "brainy": "left"
+    },
+    {
+      "t": 447.4,
+      "bg": "rainy",
+      "props": ["house", "bird"],
+      "brainy": "left"
+    },
+    {
+      "t": 453.18,
+      "bg": "rainy",
+      "props": ["puddle", "boots"],
+      "brainy": "left"
+    },
+    {
+      "t": 459.66,
+      "bg": "rainy",
+      "props": ["raincloud", "star"],
+      "brainy": "center"
+    },
+    {
+      "t": 469.58,
+      "bg": "rainy",
+      "props": ["raincloud", "drop"],
+      "brainy": "right"
+    },
+    {
+      "t": 476.78,
+      "bg": "yard",
+      "props": ["puddle", "flower"],
+      "brainy": "left"
+    },
+    {
+      "t": 492.54,
+      "bg": "mountains",
+      "props": ["river", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 501.64,
+      "bg": "sky",
+      "props": ["sun", "raincloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 513.4,
+      "bg": "yard",
+      "props": ["carousel", "cloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 522.74,
+      "bg": "sky",
+      "props": ["raincloud", "sun"],
+      "brainy": "right"
+    },
+    {
+      "t": 530.76,
+      "bg": "mountains",
+      "props": ["glass", "raincloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 538.74,
+      "bg": "yard",
+      "props": ["carousel", "cloud"],
+      "brainy": "center"
+    },
+    {
+      "t": 550.32,
+      "bg": "sky",
+      "props": ["sun", "raincloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 558.26,
+      "bg": "kitchen",
+      "props": ["jar", "raincloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 576.5,
+      "bg": "kitchen",
+      "props": ["jar", "air"],
+      "brainy": "right"
+    },
+    {
+      "t": 584.64,
+      "bg": "kitchen",
+      "props": ["jar", "raincloud"],
+      "brainy": "left"
+    },
+    {
+      "t": 593.44,
+      "bg": "kitchen",
+      "props": ["question", "jar"],
+      "brainy": "center"
+    },
+    {
+      "t": 599.26,
+      "bg": "kitchen",
+      "props": ["jar", "air"],
+      "brainy": "left"
+    },
+    {
+      "t": 614.1,
+      "bg": "kitchen",
+      "props": ["jar", "raincloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 627.1,
+      "bg": "yard",
+      "props": ["star", "sun"],
+      "brainy": "left"
+    },
+    {
+      "t": 635.66,
+      "bg": "yard",
+      "props": ["star", "cloud"],
+      "brainy": "center"
+    },
+    {
+      "t": 642.16,
+      "bg": "yard",
+      "props": ["question", "sun"],
+      "brainy": "center"
+    },
+    {
+      "t": 648.54,
+      "bg": "yard",
+      "props": ["sun", "puddle"],
+      "brainy": "left"
+    },
+    {
+      "t": 656.58,
+      "bg": "sky",
+      "props": ["question", "cloud"],
+      "brainy": "center"
+    },
+    {
+      "t": 660.88,
+      "bg": "sky",
+      "props": ["cloud", "drop"],
+      "brainy": "right"
+    },
+    {
+      "t": 670.1,
+      "bg": "rainy",
+      "props": ["question", "drop"],
+      "brainy": "center"
+    },
+    {
+      "t": 675.96,
+      "bg": "rainy",
+      "props": ["raincloud", "drop"],
+      "brainy": "left"
+    },
+    {
+      "t": 685.02,
+      "bg": "yard",
+      "props": ["star", "sun"],
+      "brainy": "center"
+    },
+    {
+      "t": 694.22,
+      "bg": "rainy",
+      "props": ["raincloud", "puddle"],
+      "brainy": "left"
+    },
+    {
+      "t": 704.82,
+      "bg": "sky",
+      "props": ["sun", "raincloud"],
+      "brainy": "right"
+    },
+    {
+      "t": 716.66,
+      "bg": "yard",
+      "props": ["puddle", "sun"],
+      "brainy": "center"
+    },
+    {
+      "t": 732.34,
+      "bg": "yard",
+      "props": ["star", "sun"],
+      "brainy": "center"
+    }
+  ],
+  "questions": [
+    {
+      "t": 193.82,
+      "q": "Where did the water in wet clothes go?",
+      "options": ["Into the ground", "Up into the air", "Into the sun"],
+      "answer": 1,
+      "hint": "Almost! The sun warmed the water.",
+      "praise": "Yes! The water floated up into the air.",
+      "replayFrom": 179.46
+    },
+    {
+      "t": 279.87,
+      "q": "What do tiny drops make together?",
+      "options": ["A cloud", "A rainbow", "A puddle"],
+      "answer": 0,
+      "hint": "Almost! It is big and white in the sky.",
+      "praise": "Yes! Tiny drops together make a cloud.",
+      "replayFrom": 264.82
+    },
+    {
+      "t": 326.69,
+      "q": "Is the cold glass dry or wet outside?",
+      "options": ["Dry", "Frozen", "Wet"],
+      "answer": 2,
+      "hint": "Almost! Remember the foggy mirror.",
+      "praise": "Yes! Drops from the air made it wet.",
+      "replayFrom": 303.32
+    },
+    {
+      "t": 401.84,
+      "q": "What happens when drops get big and heavy?",
+      "options": ["They float higher", "They fall down", "They disappear"],
+      "answer": 1,
+      "hint": "Almost! Heavy things can't float.",
+      "praise": "Yes! Heavy drops fall down as rain.",
+      "replayFrom": 383.76
+    },
+    {
+      "t": 598.73,
+      "q": "What shows up under the cold plate?",
+      "options": ["Tiny water drops", "Little stones", "Soap bubbles"],
+      "answer": 0,
+      "hint": "Almost! Think of the foggy mirror.",
+      "praise": "Yes! Tiny drops, just like in a cloud.",
+      "replayFrom": 563.88
+    },
+    {
+      "t": 646.88,
+      "q": "What makes water float up from a puddle?",
+      "options": ["The cold wind", "The warm sun", "A big bird"],
+      "answer": 1,
+      "hint": "Almost! It shines and feels warm.",
+      "praise": "Yes! The warm sun lifts water up.",
+      "replayFrom": 157.68
+    },
+    {
+      "t": 659.61,
+      "q": "What is a cloud made of?",
+      "options": ["Soft cotton", "Gray smoke", "Water drops"],
+      "answer": 2,
+      "hint": "Almost! Think of the drops we became.",
+      "praise": "Yes! Clouds are made of tiny water drops.",
+      "replayFrom": 284.34
+    },
+    {
+      "t": 674.4,
+      "q": "Why do raindrops fall from the cloud?",
+      "options": ["They get too heavy", "The cloud cries", "The wind pushes"],
+      "answer": 0,
+      "hint": "Almost! Remember bump, bump, bigger!",
+      "praise": "Yes! Drops join, get heavy and fall.",
+      "replayFrom": 402.08
+    }
+  ],
+  "captions": [
+    {
+      "t": 0.3,
+      "end": 3.22,
+      "text": "Hi there! Hi there! I'm Brainy, your brain buddy!"
+    },
+    {
+      "t": 3.84,
+      "end": 6.88,
+      "text": "Today I have a wet and wonderful riddle for you."
+    },
+    {
+      "t": 7.38,
+      "end": 9.8,
+      "text": "Have you ever seen rain falling from the sky?"
+    },
+    {
+      "t": 10.48,
+      "end": 12.78,
+      "text": "Drip, drop, drip, drop."
+    },
+    {
+      "t": 13.28,
+      "end": 15.22,
+      "text": "But where does rain come from?"
+    },
+    {
+      "t": 15.78,
+      "end": 18.1,
+      "text": "And how does all that water get up there?"
+    },
+    {
+      "t": 18.6,
+      "end": 19.86,
+      "text": "Let's find out together!"
+    },
+    {
+      "t": 20.6,
+      "end": 23.0,
+      "text": "Picture this. It's a grey morning."
+    },
+    {
+      "t": 23.54,
+      "end": 24.42,
+      "text": "You look out the window."
+    },
+    {
+      "t": 25.08,
+      "end": 27.12,
+      "text": "Plip, plop, plip, plop."
+    },
+    {
+      "t": 27.66,
+      "end": 28.4,
+      "text": "It's raining!"
+    },
+    {
+      "t": 28.4,
+      "end": 30.94,
+      "text": "You put on your boots and your raincoat."
+    },
+    {
+      "t": 31.28,
+      "end": 32.64,
+      "text": "You go outside with your dad."
+    },
+    {
+      "t": 33.06,
+      "end": 35.48,
+      "text": "And you find a big round puddle."
+    },
+    {
+      "t": 35.86,
+      "end": 36.38,
+      "text": "Splash!"
+    },
+    {
+      "t": 36.86,
+      "end": 38.16,
+      "text": "You jump right in!"
+    },
+    {
+      "t": 38.68,
+      "end": 39.68,
+      "text": "Your dad laughs."
+    },
+    {
+      "t": 40.22,
+      "end": 41.64,
+      "text": "Your boots are all wet."
+    },
+    {
+      "t": 42.24,
+      "end": 43.86,
+      "text": "Then you look up at the clouds."
+    },
+    {
+      "t": 44.24,
+      "end": 44.78,
+      "text": "And you ask,"
+    },
+    {
+      "t": 45.28,
+      "end": 47.4,
+      "text": "“Dad, where does rain come from?”"
+    },
+    {
+      "t": 48.16,
+      "end": 49.48,
+      "text": "Your dad says,"
+    },
+    {
+      "t": 50.02,
+      "end": 52.0,
+      "text": "“Hmm, that's a big question.”"
+    },
+    {
+      "t": 52.48,
+      "end": 55.48,
+      "text": "I asked that same question a long time ago."
+    },
+    {
+      "t": 55.48,
+      "end": 57.98,
+      "text": "And I had some very funny ideas."
+    },
+    {
+      "t": 58.78,
+      "end": 61.32,
+      "text": "My first idea was about sad clouds."
+    },
+    {
+      "t": 61.82,
+      "end": 63.4,
+      "text": "I thought the clouds were crying."
+    },
+    {
+      "t": 64.16,
+      "end": 67.9,
+      "text": "Big grey sad clouds crying big tears."
+    },
+    {
+      "t": 68.68,
+      "end": 70.66,
+      "text": "But that's not right."
+    },
+    {
+      "t": 71.26,
+      "end": 72.36,
+      "text": "Clouds don't have feelings."
+    },
+    {
+      "t": 72.94,
+      "end": 73.66,
+      "text": "They don't cry."
+    },
+    {
+      "t": 74.3,
+      "end": 76.08,
+      "text": "Rain is not tears at all."
+    },
+    {
+      "t": 76.52,
+      "end": 78.94,
+      "text": "My second idea was even sillier."
+    },
+    {
+      "t": 79.3,
+      "end": 82.46,
+      "text": "I thought there was a giant watering can up in the sky."
+    },
+    {
+      "t": 82.46,
+      "end": 85.36,
+      "text": "And someone tipped it over to water the flowers."
+    },
+    {
+      "t": 86.64,
+      "end": 89.58,
+      "text": "No, there is no watering can up there."
+    },
+    {
+      "t": 89.92,
+      "end": 91.9,
+      "text": "I really used to think these things."
+    },
+    {
+      "t": 92.28,
+      "end": 93.12,
+      "text": "And that's okay."
+    },
+    {
+      "t": 93.64,
+      "end": 95.54,
+      "text": "Being wrong is how we start learning."
+    },
+    {
+      "t": 96.04,
+      "end": 98.04,
+      "text": "So let's find the real answer."
+    },
+    {
+      "t": 98.36,
+      "end": 100.0,
+      "text": "And we'll find it on an adventure."
+    },
+    {
+      "t": 100.56,
+      "end": 102.2,
+      "text": "Here is my secret plan."
+    },
+    {
+      "t": 102.76,
+      "end": 105.3,
+      "text": "We are going to turn into water drops."
+    },
+    {
+      "t": 105.72,
+      "end": 107.88,
+      "text": "Tiny, shiny drops of water."
+    },
+    {
+      "t": 108.36,
+      "end": 109.14,
+      "text": "Close your eyes."
+    },
+    {
+      "t": 109.76,
+      "end": 110.56,
+      "text": "Wiggle your fingers."
+    },
+    {
+      "t": 110.56,
+      "end": 112.3,
+      "text": "Let's count together."
+    },
+    {
+      "t": 112.74,
+      "end": 116.12,
+      "text": "Three, two, one, drip."
+    },
+    {
+      "t": 116.72,
+      "end": 118.52,
+      "text": "Wow, look at us."
+    },
+    {
+      "t": 118.94,
+      "end": 120.0,
+      "text": "We're water drops."
+    },
+    {
+      "t": 120.4,
+      "end": 124.88,
+      "text": "We're so small and so round and so shiny."
+    },
+    {
+      "t": 125.44,
+      "end": 126.66,
+      "text": "And where are we?"
+    },
+    {
+      "t": 127.18,
+      "end": 129.22,
+      "text": "We're in that big puddle in the yard."
+    },
+    {
+      "t": 129.6,
+      "end": 131.84,
+      "text": "There are lots of other drops here with us."
+    },
+    {
+      "t": 132.26,
+      "end": 132.9,
+      "text": "Hello, drops."
+    },
+    {
+      "t": 133.44,
+      "end": 133.72,
+      "text": "Hello."
+    },
+    {
+      "t": 134.36,
+      "end": 135.7,
+      "text": "The rain has stopped now."
+    },
+    {
+      "t": 135.98,
+      "end": 136.7,
+      "text": "And look up."
+    },
+    {
+      "t": 137.1,
+      "end": 138.3,
+      "text": "The sun is coming out."
+    },
+    {
+      "t": 138.3,
+      "end": 141.08,
+      "text": "The sun is shining right on our puddle."
+    },
+    {
+      "t": 141.28,
+      "end": 143.52,
+      "text": "Oh, it feels so warm."
+    },
+    {
+      "t": 144.2,
+      "end": 144.78,
+      "text": "Warm?"
+    },
+    {
+      "t": 145.34,
+      "end": 145.96,
+      "text": "Warmer?"
+    },
+    {
+      "t": 146.38,
+      "end": 147.34,
+      "text": "Warmer still."
+    },
+    {
+      "t": 148.0,
+      "end": 150.72,
+      "text": "Hey, something is happening to me."
+    },
+    {
+      "t": 151.14,
+      "end": 153.18,
+      "text": "I'm getting lighter and lighter."
+    },
+    {
+      "t": 153.68,
+      "end": 155.68,
+      "text": "I'm floating up out of the puddle."
+    },
+    {
+      "t": 156.14,
+      "end": 157.16,
+      "text": "Here's what's happening."
+    },
+    {
+      "t": 157.68,
+      "end": 159.12,
+      "text": "When the sun warms water,"
+    },
+    {
+      "t": 159.54,
+      "end": 161.44,
+      "text": "the water can rise into the air."
+    },
+    {
+      "t": 161.82,
+      "end": 163.92,
+      "text": "It turns into something we can't see."
+    },
+    {
+      "t": 164.32,
+      "end": 165.3,
+      "text": "It's still water,"
+    },
+    {
+      "t": 165.54,
+      "end": 167.86,
+      "text": "but it's so light it floats up."
+    },
+    {
+      "t": 167.86,
+      "end": 170.18,
+      "text": "Like a tiny invisible feather."
+    },
+    {
+      "t": 170.58,
+      "end": 172.54,
+      "text": "Here is our science word for today."
+    },
+    {
+      "t": 172.94,
+      "end": 174.68,
+      "text": "It's called evaporation."
+    },
+    {
+      "t": 175.2,
+      "end": 178.68,
+      "text": "E-vap-o-ra-tion."
+    },
+    {
+      "t": 179.46,
+      "end": 183.28,
+      "text": "Evaporation means water warms up and floats into the air."
+    },
+    {
+      "t": 183.76,
+      "end": 187.18,
+      "text": "Have you ever seen wet clothes hanging outside on a sunny day?"
+    },
+    {
+      "t": 187.76,
+      "end": 189.14,
+      "text": "In the morning, they are wet."
+    },
+    {
+      "t": 189.8,
+      "end": 191.54,
+      "text": "By lunchtime, they are dry."
+    },
+    {
+      "t": 192.16,
+      "end": 193.38,
+      "text": "Where did the water go?"
+    },
+    {
+      "t": 194.36,
+      "end": 195.12,
+      "text": "You're right."
+    },
+    {
+      "t": 195.68,
+      "end": 197.48,
+      "text": "It floated up into the air."
+    },
+    {
+      "t": 197.48,
+      "end": 199.28,
+      "text": "That's evaporation."
+    },
+    {
+      "t": 199.9,
+      "end": 201.86,
+      "text": "And remember a puddle after the rain?"
+    },
+    {
+      "t": 202.5,
+      "end": 204.68,
+      "text": "The next sunny day, the puddle is gone."
+    },
+    {
+      "t": 205.36,
+      "end": 208.0,
+      "text": "The sun lifted the water up into the sky."
+    },
+    {
+      "t": 208.72,
+      "end": 209.68,
+      "text": "Let's say it together."
+    },
+    {
+      "t": 210.46,
+      "end": 212.28,
+      "text": "The sun lifts water up."
+    },
+    {
+      "t": 213.16,
+      "end": 215.0,
+      "text": "One more time, a little louder."
+    },
+    {
+      "t": 215.74,
+      "end": 217.58,
+      "text": "The sun lifts water up."
+    },
+    {
+      "t": 218.14,
+      "end": 219.02,
+      "text": "Great job."
+    },
+    {
+      "t": 219.64,
+      "end": 221.74,
+      "text": "So here is our first big idea."
+    },
+    {
+      "t": 222.36,
+      "end": 223.92,
+      "text": "The sun warms water"
+    },
+    {
+      "t": 223.92,
+      "end": 226.48,
+      "text": "and the water floats up into the air."
+    },
+    {
+      "t": 226.48,
+      "end": 228.7,
+      "text": "Up, up, up we go."
+    },
+    {
+      "t": 229.38,
+      "end": 231.44,
+      "text": "We float past the roof of the house."
+    },
+    {
+      "t": 231.74,
+      "end": 234.46,
+      "text": "We float past the tall tree in the yard."
+    },
+    {
+      "t": 235.06,
+      "end": 236.38,
+      "text": "We float past a bird."
+    },
+    {
+      "t": 236.92,
+      "end": 237.52,
+      "text": "Hello, bird!"
+    },
+    {
+      "t": 238.28,
+      "end": 240.5,
+      "text": "Higher and higher and higher."
+    },
+    {
+      "t": 241.34,
+      "end": 243.12,
+      "text": "Do you feel that?"
+    },
+    {
+      "t": 243.74,
+      "end": 245.2,
+      "text": "It's getting cold up here."
+    },
+    {
+      "t": 245.84,
+      "end": 248.18,
+      "text": "High in the sky, the air is cold."
+    },
+    {
+      "t": 248.84,
+      "end": 250.58,
+      "text": "Much colder than down in the yard."
+    },
+    {
+      "t": 251.2,
+      "end": 253.92,
+      "text": "And when we get cold, something changes."
+    },
+    {
+      "t": 253.92,
+      "end": 256.36,
+      "text": "We stop being invisible."
+    },
+    {
+      "t": 256.98,
+      "end": 260.58,
+      "text": "We turn back into tiny, tiny drops of water."
+    },
+    {
+      "t": 261.12,
+      "end": 262.74,
+      "text": "Smaller than a grain of sugar."
+    },
+    {
+      "t": 263.5,
+      "end": 264.24,
+      "text": "And guess what?"
+    },
+    {
+      "t": 264.82,
+      "end": 267.04,
+      "text": "Lots of other tiny drops are here too."
+    },
+    {
+      "t": 267.56,
+      "end": 269.08,
+      "text": "We all crowd together."
+    },
+    {
+      "t": 269.78,
+      "end": 271.12,
+      "text": "So many drops."
+    },
+    {
+      "t": 271.64,
+      "end": 273.66,
+      "text": "More than all the sand on a beach."
+    },
+    {
+      "t": 274.2,
+      "end": 277.66,
+      "text": "And all of us together make something big and white."
+    },
+    {
+      "t": 278.3,
+      "end": 279.34,
+      "text": "What do you think it is?"
+    },
+    {
+      "t": 280.28,
+      "end": 281.02,
+      "text": "You're right!"
+    },
+    {
+      "t": 281.48,
+      "end": 281.98,
+      "text": "A cloud."
+    },
+    {
+      "t": 281.98,
+      "end": 283.56,
+      "text": "Here's a secret."
+    },
+    {
+      "t": 284.34,
+      "end": 286.24,
+      "text": "A cloud is not made of cotton."
+    },
+    {
+      "t": 286.88,
+      "end": 287.94,
+      "text": "It's not made of smoke."
+    },
+    {
+      "t": 288.74,
+      "end": 291.44,
+      "text": "A cloud is made of tiny drops of water."
+    },
+    {
+      "t": 292.04,
+      "end": 295.0,
+      "text": "So many that nobody could ever count them all."
+    },
+    {
+      "t": 295.6,
+      "end": 297.04,
+      "text": "You can see this at home too."
+    },
+    {
+      "t": 297.72,
+      "end": 300.0,
+      "text": "Think about your bathroom after a warm bath."
+    },
+    {
+      "t": 300.7,
+      "end": 302.6,
+      "text": "The mirror gets all foggy, right?"
+    },
+    {
+      "t": 303.32,
+      "end": 305.78,
+      "text": "The warm water floated up into the air."
+    },
+    {
+      "t": 306.3,
+      "end": 308.38,
+      "text": "Then it touched the cold mirror"
+    },
+    {
+      "t": 308.38,
+      "end": 311.6,
+      "text": "and it turned back into tiny drops on the glass."
+    },
+    {
+      "t": 312.2,
+      "end": 314.98,
+      "text": "That foggy mirror is a little bit like a cloud."
+    },
+    {
+      "t": 315.62,
+      "end": 316.56,
+      "text": "Here's another one."
+    },
+    {
+      "t": 317.1,
+      "end": 319.52,
+      "text": "Take a cold glass of juice out of the fridge."
+    },
+    {
+      "t": 320.02,
+      "end": 320.88,
+      "text": "Wait a little bit."
+    },
+    {
+      "t": 321.38,
+      "end": 323.48,
+      "text": "Then touch the outside of the glass."
+    },
+    {
+      "t": 324.34,
+      "end": 326.2,
+      "text": "Is it dry or is it wet?"
+    },
+    {
+      "t": 327.32,
+      "end": 327.96,
+      "text": "It's wet!"
+    },
+    {
+      "t": 328.64,
+      "end": 330.54,
+      "text": "Tiny drops showed up on the glass."
+    },
+    {
+      "t": 331.24,
+      "end": 334.18,
+      "text": "That water came from the air, not from the juice."
+    },
+    {
+      "t": 334.78,
+      "end": 337.34,
+      "text": "The cold glass turned it back into drops."
+    },
+    {
+      "t": 337.34,
+      "end": 339.04,
+      "text": "Let's say it together."
+    },
+    {
+      "t": 339.76,
+      "end": 341.28,
+      "text": "Clouds are made of water."
+    },
+    {
+      "t": 342.04,
+      "end": 342.64,
+      "text": "Wonderful!"
+    },
+    {
+      "t": 343.48,
+      "end": 345.48,
+      "text": "So here is our second big idea."
+    },
+    {
+      "t": 346.14,
+      "end": 349.28,
+      "text": "Cold air turns water back into tiny drops."
+    },
+    {
+      "t": 349.7,
+      "end": 351.38,
+      "text": "Together they make a cloud."
+    },
+    {
+      "t": 352.14,
+      "end": 353.96,
+      "text": "Now we're inside the cloud."
+    },
+    {
+      "t": 354.46,
+      "end": 355.74,
+      "text": "It's crowded in here."
+    },
+    {
+      "t": 356.2,
+      "end": 357.12,
+      "text": "Drops everywhere."
+    },
+    {
+      "t": 357.94,
+      "end": 359.86,
+      "text": "And look, I've made a new friend."
+    },
+    {
+      "t": 360.5,
+      "end": 362.66,
+      "text": "She's a tiny drop from far away."
+    },
+    {
+      "t": 363.36,
+      "end": 364.52,
+      "text": "“Hi,” she says."
+    },
+    {
+      "t": 365.08,
+      "end": 366.92,
+      "text": "“I came all the way from the sea.”"
+    },
+    {
+      "t": 366.92,
+      "end": 368.7,
+      "text": "“Hi,” I say."
+    },
+    {
+      "t": 369.2,
+      "end": 370.92,
+      "text": "“I came from a puddle in a yard.”"
+    },
+    {
+      "t": 372.04,
+      "end": 375.2,
+      "text": "Water drops come from everywhere to make a cloud."
+    },
+    {
+      "t": 375.58,
+      "end": 377.26,
+      "text": "And we're all bumping around."
+    },
+    {
+      "t": 377.9,
+      "end": 378.1,
+      "text": "Bump!"
+    },
+    {
+      "t": 378.52,
+      "end": 379.62,
+      "text": "Oh, excuse me."
+    },
+    {
+      "t": 380.12,
+      "end": 380.46,
+      "text": "Bump!"
+    },
+    {
+      "t": 380.88,
+      "end": 381.66,
+      "text": "Oh, sorry."
+    },
+    {
+      "t": 382.48,
+      "end": 383.16,
+      "text": "Hey!"
+    },
+    {
+      "t": 383.76,
+      "end": 386.18,
+      "text": "When I bumped that drop, we stuck together."
+    },
+    {
+      "t": 386.94,
+      "end": 388.82,
+      "text": "Now we're one bigger drop."
+    },
+    {
+      "t": 389.42,
+      "end": 389.72,
+      "text": "Bump!"
+    },
+    {
+      "t": 390.24,
+      "end": 391.66,
+      "text": "Another drop joins us."
+    },
+    {
+      "t": 392.28,
+      "end": 392.86,
+      "text": "Bump, bump!"
+    },
+    {
+      "t": 393.42,
+      "end": 394.12,
+      "text": "Two more!"
+    },
+    {
+      "t": 394.12,
+      "end": 396.54,
+      "text": "We're getting bigger and bigger."
+    },
+    {
+      "t": 397.16,
+      "end": 398.94,
+      "text": "And heavier and heavier."
+    },
+    {
+      "t": 399.48,
+      "end": 401.32,
+      "text": "Can you guess what happens next?"
+    },
+    {
+      "t": 402.08,
+      "end": 404.86,
+      "text": "When a drop gets too big and too heavy,"
+    },
+    {
+      "t": 405.36,
+      "end": 406.66,
+      "text": "it can't float anymore."
+    },
+    {
+      "t": 407.62,
+      "end": 408.44,
+      "text": "You're right!"
+    },
+    {
+      "t": 408.92,
+      "end": 409.84,
+      "text": "It falls down."
+    },
+    {
+      "t": 410.36,
+      "end": 411.86,
+      "text": "And that's what rain is."
+    },
+    {
+      "t": 412.44,
+      "end": 415.5,
+      "text": "Rain is water drops that got too heavy to float."
+    },
+    {
+      "t": 416.14,
+      "end": 418.82,
+      "text": "Have you ever watched drops on a window when it rains?"
+    },
+    {
+      "t": 419.42,
+      "end": 421.36,
+      "text": "A little drop sits on the glass."
+    },
+    {
+      "t": 421.36,
+      "end": 423.74,
+      "text": "Then it meets another little drop."
+    },
+    {
+      "t": 424.04,
+      "end": 425.22,
+      "text": "They join together."
+    },
+    {
+      "t": 425.8,
+      "end": 426.8,
+      "text": "Now it's bigger."
+    },
+    {
+      "t": 427.4,
+      "end": 428.78,
+      "text": "And then, whoosh!"
+    },
+    {
+      "t": 429.22,
+      "end": 430.66,
+      "text": "It slides down the window."
+    },
+    {
+      "t": 431.22,
+      "end": 433.42,
+      "text": "That's just like raindrops in a cloud."
+    },
+    {
+      "t": 434.0,
+      "end": 437.0,
+      "text": "Little drops join, get heavy, and fall."
+    },
+    {
+      "t": 437.76,
+      "end": 438.38,
+      "text": "Here we go."
+    },
+    {
+      "t": 438.96,
+      "end": 440.04,
+      "text": "We're too heavy now."
+    },
+    {
+      "t": 440.58,
+      "end": 441.3,
+      "text": "Hold on tight."
+    },
+    {
+      "t": 442.14,
+      "end": 442.82,
+      "text": "Wee!"
+    },
+    {
+      "t": 443.02,
+      "end": 444.58,
+      "text": "We're falling out of the cloud."
+    },
+    {
+      "t": 445.12,
+      "end": 446.78,
+      "text": "Down, down, down."
+    },
+    {
+      "t": 447.4,
+      "end": 449.42,
+      "text": "Past the bird, past the tree,"
+    },
+    {
+      "t": 449.42,
+      "end": 452.34,
+      "text": "past the roof, and splash!"
+    },
+    {
+      "t": 453.18,
+      "end": 454.94,
+      "text": "We land right back in the puddle."
+    },
+    {
+      "t": 455.52,
+      "end": 456.78,
+      "text": "We're home again."
+    },
+    {
+      "t": 457.46,
+      "end": 459.04,
+      "text": "Let's make the rain sound together."
+    },
+    {
+      "t": 459.66,
+      "end": 461.68,
+      "text": "Pat your knees with your hands slowly."
+    },
+    {
+      "t": 462.42,
+      "end": 463.78,
+      "text": "Pat, pat, pat."
+    },
+    {
+      "t": 464.4,
+      "end": 465.12,
+      "text": "Now faster!"
+    },
+    {
+      "t": 465.72,
+      "end": 466.52,
+      "text": "Pat, pat, pat, pat!"
+    },
+    {
+      "t": 467.04,
+      "end": 468.96,
+      "text": "That sounds just like rain."
+    },
+    {
+      "t": 469.58,
+      "end": 471.7,
+      "text": "So here is our third big idea."
+    },
+    {
+      "t": 472.34,
+      "end": 474.2,
+      "text": "Drops in a cloud join together,"
+    },
+    {
+      "t": 474.6,
+      "end": 476.78,
+      "text": "get heavy, and fall as rain."
+    },
+    {
+      "t": 476.78,
+      "end": 479.82,
+      "text": "But wait, our adventure isn't over."
+    },
+    {
+      "t": 480.46,
+      "end": 482.92,
+      "text": "Do you know what happens to rain after it falls?"
+    },
+    {
+      "t": 483.68,
+      "end": 485.72,
+      "text": "Some rain makes puddles, like ours."
+    },
+    {
+      "t": 486.58,
+      "end": 488.28,
+      "text": "Some rain soaks into the ground,"
+    },
+    {
+      "t": 488.76,
+      "end": 491.82,
+      "text": "and the flowers and trees drink it up, slurp."
+    },
+    {
+      "t": 492.54,
+      "end": 494.12,
+      "text": "Some rain runs into rivers,"
+    },
+    {
+      "t": 494.62,
+      "end": 497.28,
+      "text": "and the rivers carry it all the way to the sea."
+    },
+    {
+      "t": 497.82,
+      "end": 498.86,
+      "text": "And then what happens?"
+    },
+    {
+      "t": 499.64,
+      "end": 501.1,
+      "text": "The sun comes out again."
+    },
+    {
+      "t": 501.64,
+      "end": 502.76,
+      "text": "It warms the puddles."
+    },
+    {
+      "t": 503.16,
+      "end": 504.12,
+      "text": "It warms the rivers."
+    },
+    {
+      "t": 504.12,
+      "end": 505.96,
+      "text": "It warms the sea."
+    },
+    {
+      "t": 506.46,
+      "end": 508.92,
+      "text": "And the water floats up into the sky again."
+    },
+    {
+      "t": 509.5,
+      "end": 512.76,
+      "text": "It makes new clouds, and new rain falls down."
+    },
+    {
+      "t": 513.4,
+      "end": 515.7,
+      "text": "Round and round and round it goes."
+    },
+    {
+      "t": 516.48,
+      "end": 518.3,
+      "text": "Think about a merry-go-round at the park."
+    },
+    {
+      "t": 518.86,
+      "end": 520.4,
+      "text": "It goes around and around."
+    },
+    {
+      "t": 520.98,
+      "end": 521.98,
+      "text": "It never really stops."
+    },
+    {
+      "t": 522.74,
+      "end": 523.98,
+      "text": "Water is like that too."
+    },
+    {
+      "t": 524.6,
+      "end": 527.66,
+      "text": "Up to the sky, down as rain, and up again."
+    },
+    {
+      "t": 528.26,
+      "end": 530.24,
+      "text": "Here's my favorite secret of all."
+    },
+    {
+      "t": 530.76,
+      "end": 532.46,
+      "text": "The water in your glass at dinner?"
+    },
+    {
+      "t": 532.46,
+      "end": 535.04,
+      "text": "It might have been inside a cloud once."
+    },
+    {
+      "t": 535.52,
+      "end": 538.04,
+      "text": "It might have been rain on a far away mountain."
+    },
+    {
+      "t": 538.74,
+      "end": 542.06,
+      "text": "Water goes on big trips, again and again."
+    },
+    {
+      "t": 542.7,
+      "end": 543.58,
+      "text": "Let's say it together."
+    },
+    {
+      "t": 544.2,
+      "end": 546.08,
+      "text": "Up and down, round and round."
+    },
+    {
+      "t": 546.76,
+      "end": 549.64,
+      "text": "Yes, up and down, round and round."
+    },
+    {
+      "t": 550.32,
+      "end": 552.46,
+      "text": "So here is our fourth big idea."
+    },
+    {
+      "t": 553.08,
+      "end": 555.86,
+      "text": "Rain falls down, the sun lifts it up,"
+    },
+    {
+      "t": 556.24,
+      "end": 557.74,
+      "text": "and around it goes again."
+    },
+    {
+      "t": 558.26,
+      "end": 560.32,
+      "text": "Now it's time for a home experiment."
+    },
+    {
+      "t": 560.32,
+      "end": 563.36,
+      "text": "Remember, always do this with a grown-up."
+    },
+    {
+      "t": 563.88,
+      "end": 566.56,
+      "text": "We're going to make a little rain cloud in a jar."
+    },
+    {
+      "t": 567.2,
+      "end": 568.22,
+      "text": "Here is what you need."
+    },
+    {
+      "t": 568.74,
+      "end": 572.26,
+      "text": "A big glass jar, some warm water from the tap,"
+    },
+    {
+      "t": 572.94,
+      "end": 575.7,
+      "text": "a small plate, and a few ice cubes."
+    },
+    {
+      "t": 576.5,
+      "end": 577.18,
+      "text": "Step one."
+    },
+    {
+      "t": 577.68,
+      "end": 580.62,
+      "text": "Ask your grown-up to pour warm water into the jar."
+    },
+    {
+      "t": 581.0,
+      "end": 582.34,
+      "text": "Just fill the bottom part."
+    },
+    {
+      "t": 582.84,
+      "end": 584.02,
+      "text": "The grown-up does the pouring."
+    },
+    {
+      "t": 584.64,
+      "end": 585.48,
+      "text": "Step two."
+    },
+    {
+      "t": 586.1,
+      "end": 588.92,
+      "text": "Put the small plate on top of the jar like a lid."
+    },
+    {
+      "t": 588.92,
+      "end": 590.32,
+      "text": "Step three."
+    },
+    {
+      "t": 590.84,
+      "end": 592.92,
+      "text": "Put the ice cubes on top of the plate."
+    },
+    {
+      "t": 593.44,
+      "end": 596.54,
+      "text": "Now, wait and watch for a few minutes with your grown-up."
+    },
+    {
+      "t": 597.08,
+      "end": 598.22,
+      "text": "What do you think will happen?"
+    },
+    {
+      "t": 599.26,
+      "end": 600.86,
+      "text": "Look under the plate!"
+    },
+    {
+      "t": 601.54,
+      "end": 603.66,
+      "text": "Tiny drops of water are showing up."
+    },
+    {
+      "t": 604.14,
+      "end": 607.34,
+      "text": "The warm water floated up, just like from the puddle."
+    },
+    {
+      "t": 607.82,
+      "end": 609.68,
+      "text": "Then it touched the cold plate,"
+    },
+    {
+      "t": 610.06,
+      "end": 613.58,
+      "text": "and it turned back into tiny drops, just like in a cloud."
+    },
+    {
+      "t": 614.1,
+      "end": 614.74,
+      "text": "Keep watching."
+    },
+    {
+      "t": 615.34,
+      "end": 616.62,
+      "text": "The drops join together."
+    },
+    {
+      "t": 616.62,
+      "end": 618.78,
+      "text": "They get bigger and heavier."
+    },
+    {
+      "t": 619.38,
+      "end": 620.5,
+      "text": "And then, drip!"
+    },
+    {
+      "t": 621.04,
+      "end": 622.92,
+      "text": "They fall back down into the jar."
+    },
+    {
+      "t": 623.4,
+      "end": 624.26,
+      "text": "That's rain!"
+    },
+    {
+      "t": 624.78,
+      "end": 626.48,
+      "text": "You made rain in a jar!"
+    },
+    {
+      "t": 627.1,
+      "end": 629.36,
+      "text": "If you don't see much at first, that's okay."
+    },
+    {
+      "t": 629.8,
+      "end": 631.96,
+      "text": "Just wait a little longer and look again."
+    },
+    {
+      "t": 632.56,
+      "end": 634.26,
+      "text": "Now we're back to being us again."
+    },
+    {
+      "t": 634.76,
+      "end": 635.04,
+      "text": "Phew!"
+    },
+    {
+      "t": 635.66,
+      "end": 637.2,
+      "text": "Let's play a mini-quiz."
+    },
+    {
+      "t": 637.78,
+      "end": 638.48,
+      "text": "Three questions."
+    },
+    {
+      "t": 639.06,
+      "end": 639.3,
+      "text": "Ready?"
+    },
+    {
+      "t": 639.82,
+      "end": 640.46,
+      "text": "Don't worry."
+    },
+    {
+      "t": 640.74,
+      "end": 641.64,
+      "text": "Just try your best."
+    },
+    {
+      "t": 642.16,
+      "end": 643.54,
+      "text": "Here comes question one."
+    },
+    {
+      "t": 643.54,
+      "end": 646.58,
+      "text": "What makes water float up from a puddle?"
+    },
+    {
+      "t": 648.54,
+      "end": 649.36,
+      "text": "The warm sun!"
+    },
+    {
+      "t": 649.82,
+      "end": 652.22,
+      "text": "The sun lifts water up into the air."
+    },
+    {
+      "t": 652.62,
+      "end": 653.28,
+      "text": "Good thinking!"
+    },
+    {
+      "t": 653.84,
+      "end": 655.86,
+      "text": "Every try makes your brain stronger."
+    },
+    {
+      "t": 656.58,
+      "end": 657.32,
+      "text": "Question two."
+    },
+    {
+      "t": 657.88,
+      "end": 659.31,
+      "text": "What is a cloud made of?"
+    },
+    {
+      "t": 660.88,
+      "end": 662.48,
+      "text": "Tiny drops of water."
+    },
+    {
+      "t": 662.94,
+      "end": 664.76,
+      "text": "Not cotton and not smoke."
+    },
+    {
+      "t": 665.24,
+      "end": 666.3,
+      "text": "Did you say water?"
+    },
+    {
+      "t": 666.8,
+      "end": 667.56,
+      "text": "Great job!"
+    },
+    {
+      "t": 668.08,
+      "end": 669.52,
+      "text": "And if not, now you know."
+    },
+    {
+      "t": 670.1,
+      "end": 670.92,
+      "text": "Question three."
+    },
+    {
+      "t": 670.92,
+      "end": 674.0,
+      "text": "Why do raindrops fall down from the cloud?"
+    },
+    {
+      "t": 675.96,
+      "end": 679.18,
+      "text": "Little drops join together and get too heavy to float."
+    },
+    {
+      "t": 679.54,
+      "end": 681.44,
+      "text": "So they fall down as rain."
+    },
+    {
+      "t": 681.86,
+      "end": 683.16,
+      "text": "That was a tricky one!"
+    },
+    {
+      "t": 683.6,
+      "end": 684.42,
+      "text": "Thank you for trying!"
+    },
+    {
+      "t": 685.02,
+      "end": 686.72,
+      "text": "You did all three questions!"
+    },
+    {
+      "t": 687.16,
+      "end": 688.52,
+      "text": "I'm so proud of you!"
+    },
+    {
+      "t": 689.06,
+      "end": 691.34,
+      "text": "Now here is the big idea from today."
+    },
+    {
+      "t": 691.92,
+      "end": 693.44,
+      "text": "Say it to your mom or dad tonight."
+    },
+    {
+      "t": 694.22,
+      "end": 698.02,
+      "text": "Rain is water that floats up and falls back down."
+    },
+    {
+      "t": 698.48,
+      "end": 699.98,
+      "text": "One more time with me."
+    },
+    {
+      "t": 699.98,
+      "end": 704.4,
+      "text": "Rain is water that floats up and falls back down."
+    },
+    {
+      "t": 704.82,
+      "end": 705.38,
+      "text": "Perfect!"
+    },
+    {
+      "t": 706.0,
+      "end": 708.06,
+      "text": "Let's remember how one last time."
+    },
+    {
+      "t": 708.7,
+      "end": 710.34,
+      "text": "The sun lifts water up."
+    },
+    {
+      "t": 710.84,
+      "end": 712.86,
+      "text": "The cold air makes it into clouds."
+    },
+    {
+      "t": 713.5,
+      "end": 716.14,
+      "text": "The drops get heavy and fall as rain."
+    },
+    {
+      "t": 716.66,
+      "end": 718.88,
+      "text": "And now a question for you on the screen."
+    },
+    {
+      "t": 719.5,
+      "end": 722.6,
+      "text": "On a sunny day, a puddle in your yard goes away."
+    },
+    {
+      "t": 723.14,
+      "end": 724.28,
+      "text": "Where did the water go?"
+    },
+    {
+      "t": 724.86,
+      "end": 726.4,
+      "text": "Did it float up into the air?"
+    },
+    {
+      "t": 726.88,
+      "end": 728.26,
+      "text": "Did it turn into sand?"
+    },
+    {
+      "t": 728.26,
+      "end": 730.64,
+      "text": "Or did a bird drink it all up?"
+    },
+    {
+      "t": 731.18,
+      "end": 731.86,
+      "text": "Think about it!"
+    },
+    {
+      "t": 732.34,
+      "end": 734.22,
+      "text": "You got a little bit smarter today!"
+    },
+    {
+      "t": 734.72,
+      "end": 735.5,
+      "text": "And so did I!"
+    },
+    {
+      "t": 735.96,
+      "end": 737.88,
+      "text": "See you next time, little why-asker!"
+    },
+    {
+      "t": 738.34,
+      "end": 738.78,
+      "text": "Bye-bye!"
+    }
+  ]
+}
