@@ -3,6 +3,7 @@ import { manifests } from "../../../packages/game-catalog/src";
 import { generateRounds } from "../../../packages/games/src/continue-pattern/rounds";
 import { placePuzzlePiece } from "./picture-puzzle";
 import { answerOddOneOut } from "./play-game";
+import { completeTangram } from "./tangram";
 
 for (const game of manifests) {
   test(`${game.id}: ready, one finish, own-origin, no console errors`, async ({
@@ -28,8 +29,11 @@ for (const game of manifests) {
       await expect(page.getByTestId("embedded-game")).toHaveAttribute("data-ready", "true", {
         timeout: 10000,
       });
-      await page.screenshot({ path: info.outputPath("puzzle-lab.png"), fullPage: true });
-      for (let round = 0; round < game.roundsPerSession; round++) await placePuzzlePiece(page);
+      await page.screenshot({ path: info.outputPath(`${game.id}-lab.png`), fullPage: true });
+      for (let round = 0; round < game.roundsPerSession; round++) {
+        if (game.id === "tangram-tales") await completeTangram(page);
+        else await placePuzzlePiece(page);
+      }
     } else {
       await expect(page.locator(`[data-game="${game.id}"]`)).toBeVisible({ timeout: 10000 });
       if (game.id === "odd-one-out") await answerOddOneOut(page);

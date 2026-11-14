@@ -1,0 +1,288 @@
+{
+  "repository": "kaigani/qlobe-kids",
+  "commit": "60967634e6cc313c41a5aa8067bed9f0f616176c",
+  "files": [
+    {
+      "upstream": "LICENSE",
+      "path": "LICENSE",
+      "gitBlob": "69b618370281183db43e6a24ccfd944a5b62a145",
+      "sha256": "f308b595b213721db303e73e6e7d00b1e57ec9bfc193842e68c9ca481fb90632"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/ghost-large-a.webp",
+      "path": "assets/pieces/ghost-large-a.webp",
+      "gitBlob": "7236e11f291c4f143d3b2f1c3bd770fedaafd216",
+      "sha256": "7c8b5b2a63c556984eaa8b0b55262f9b1fc042e21a103375c153be429fb6c25d"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/ghost-large-b.webp",
+      "path": "assets/pieces/ghost-large-b.webp",
+      "gitBlob": "c7035c7decbac67e5e40eb032b824b193ee168c6",
+      "sha256": "f84afa6351c1d90787dec1cc7ff22193281c42d000e33aa530fc41713d0d486d"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/ghost-medium.webp",
+      "path": "assets/pieces/ghost-medium.webp",
+      "gitBlob": "74c349dd7b9f98554b413097033e571b5e5d5d92",
+      "sha256": "096808d92f5d025036baaf32e4492600035abc9f0c6949099ce646adeb782949"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/ghost-parallelogram.webp",
+      "path": "assets/pieces/ghost-parallelogram.webp",
+      "gitBlob": "52837676d18f59bc5b33482d18ca5ab692d3f95b",
+      "sha256": "aafa1787a56d260af3f089a1089034b5b83045fc3bc5c7c7111a9434ab4d9d4c"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/ghost-small-a.webp",
+      "path": "assets/pieces/ghost-small-a.webp",
+      "gitBlob": "9d6987170d29a71bcba12a382a2bd90919f77ab0",
+      "sha256": "8c677da1478c6254aa9e0c0788c1d37a9ed9167cf03b0f2b01edf74959ec7e28"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/ghost-small-b.webp",
+      "path": "assets/pieces/ghost-small-b.webp",
+      "gitBlob": "1f154f25eda26783787dc596692ea013f76aa0f7",
+      "sha256": "9793fb94ddbc9de31ba5e1327f11152be82f2b5d305b8eb1c56f9529c5bc8b5b"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/ghost-square.webp",
+      "path": "assets/pieces/ghost-square.webp",
+      "gitBlob": "4a87eef9d51a6040de933300856e83de304c6115",
+      "sha256": "c041c2d4b11ae0edc1a8239be08fcaa337f6bd20ae98a39fb3e6705ae9dfcb69"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/large-a.webp",
+      "path": "assets/pieces/large-a.webp",
+      "gitBlob": "0e4595d270ee140232b7c367280ec3aeac864bac",
+      "sha256": "9c4a3fadeab49c351ea0d157f9d4f9f3f0ddd6b65d694fb547a908867526f241"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/large-b.webp",
+      "path": "assets/pieces/large-b.webp",
+      "gitBlob": "57a5f05a116a6c87fb4686d304596e0b4fb28478",
+      "sha256": "63757399343d5cbf3c924ab954960ddbfd458f8f37ff1541d5431e130b423285"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/medium.webp",
+      "path": "assets/pieces/medium.webp",
+      "gitBlob": "2e1faa3cc3ce735102b03bb899a2a683f4eb49e5",
+      "sha256": "0c0f5433ed0aa6ff1e1246220a286a89161a92b6b4124a67198c2781ffb58f1f"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/parallelogram.webp",
+      "path": "assets/pieces/parallelogram.webp",
+      "gitBlob": "0c78498c30ad3801ec7bac46e554cb0ab6130f3f",
+      "sha256": "c77091570986f22935a6d8cfe3d4b0e2ae1a28e80eaf1bc7ea68d8a76f9213ec"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/small-a.webp",
+      "path": "assets/pieces/small-a.webp",
+      "gitBlob": "d06342342e6ada6a255d5818df2f0e383d368ea3",
+      "sha256": "2c108063724cca026ab5079c7bc72f064f95d45348027c3947c4e382a08ff967"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/small-b.webp",
+      "path": "assets/pieces/small-b.webp",
+      "gitBlob": "72b5cb4d430f1aa23aedb85fde30b032d71d1cde",
+      "sha256": "71f5bcd0ab404acc9268244e87916262d5fdb210e9fbbbe4749b3ee578d39540"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/pieces/square.webp",
+      "path": "assets/pieces/square.webp",
+      "gitBlob": "4efffaac355e297c43842089a333ee2260f5231f",
+      "sha256": "79baa0d4aded3e373c19947f3f99307b09eb9fb2b2ba9da33df601ca55c5caaf"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/scenes/bird.webp",
+      "path": "assets/scenes/bird.webp",
+      "gitBlob": "e82c4724a7251c5e5deb3b709b1f152c88d184db",
+      "sha256": "e0838c3ff02ec402e20a4543c250894d26ccc53c603b5490b4a79af4c0560646"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/scenes/fish.webp",
+      "path": "assets/scenes/fish.webp",
+      "gitBlob": "f6db12f7a30809150cc25e51741efbcf6396e927",
+      "sha256": "15afcfbda027e636595eb19034f599fcef55f2758fef5ebbe3e566d80cd8d0a8"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/scenes/fox.webp",
+      "path": "assets/scenes/fox.webp",
+      "gitBlob": "08135c6be09f2a4e5e203411e26d2e775b812a54",
+      "sha256": "4686123b232be98a87d74d7a5bcefdd19cf240b55a7f307200b595f1dfc3c66a"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/splash.webp",
+      "path": "assets/splash.webp",
+      "gitBlob": "396764497add1329fceb3de9618a100fb533590c",
+      "sha256": "0cb3f55d41dbb4b98a5b859f97bbb98da98c95c49896136896c49ff4aa7a9e05"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/theatre.webp",
+      "path": "assets/theatre.webp",
+      "gitBlob": "faff80ff93e82e93d1fb51918bf58802e2f725a0",
+      "sha256": "66cdd02e6c9028468ae458d5bfd041dea91f571e7a6c6728f63a530c25d30d40"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/title.webp",
+      "path": "assets/title.webp",
+      "gitBlob": "6077a2b8d3d70af9bbf55ed49c120be888f8254a",
+      "sha256": "094d07a07046335613a43a8e6510112809bd3398799cc2bd591fff57feab2756"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/badge.webp",
+      "path": "assets/ui/badge.webp",
+      "gitBlob": "ee74758a27bfa91ab33435f3366109c589dfc1aa",
+      "sha256": "9ee654a8b1c4823dca09ad6067e151909583486e4fe2eee0be3d808333d37b68"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/bird-card.webp",
+      "path": "assets/ui/bird-card.webp",
+      "gitBlob": "743f2fc5e7acd5cb1228e3fdbd9fe7d1969eb0ec",
+      "sha256": "bf3e4e94439d9c3a3b0c2b506f886c2619d5967e114e8e3b3b839cd1db63d579"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/button-again.webp",
+      "path": "assets/ui/button-again.webp",
+      "gitBlob": "278d6faf0a9aaf3dbd7e3c5e7ee96762f623b1e7",
+      "sha256": "7aeb74f557270f5b7c8678072efe2df1b6171c518a49e968b6ae1de1979739f6"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/button-done.webp",
+      "path": "assets/ui/button-done.webp",
+      "gitBlob": "582d4673e1f3b37634fbeb39b501fbeef6f4fe6c",
+      "sha256": "2048d6e4372d0aaec353119826d52d59cbbbdb49a7ba0a81778ff9568ee6955a"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/button-next.webp",
+      "path": "assets/ui/button-next.webp",
+      "gitBlob": "afc295d2ceb3c599f3d6372973bb6149ce1d2a36",
+      "sha256": "54dc75218555289851073294047ec6826d4f19322f33b441fd337bb78f755b08"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/button-play.webp",
+      "path": "assets/ui/button-play.webp",
+      "gitBlob": "8ef165e790ddba03f232e3b1a279394761341905",
+      "sha256": "e81a057e36adf4ad7ed9c480591f3c4afb3564aad5a20502b88f2b45d8b6cc85"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/button-turn.webp",
+      "path": "assets/ui/button-turn.webp",
+      "gitBlob": "278d6faf0a9aaf3dbd7e3c5e7ee96762f623b1e7",
+      "sha256": "7aeb74f557270f5b7c8678072efe2df1b6171c518a49e968b6ae1de1979739f6"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/completion-star.webp",
+      "path": "assets/ui/completion-star.webp",
+      "gitBlob": "69e80226fbf5c9402979b0bde7119fc80918131e",
+      "sha256": "08d7e2b6f0f45da8ff939f24e34a06b3fc20c1d45e1945c955d1f223698eb904"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/face-eye.webp",
+      "path": "assets/ui/face-eye.webp",
+      "gitBlob": "1ebe60a9906353adfa2cc9348cc47c86988df0eb",
+      "sha256": "9d5d9d986bd892933ceb0157843780fc0bb9480757c1d2232dee61a136d4c536"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/face-nose.webp",
+      "path": "assets/ui/face-nose.webp",
+      "gitBlob": "a28da0b08e92aca458a2d41466bfaab1b9612c70",
+      "sha256": "082b3426c513aab86ae3edb4eeaa7a5a255862df30f67c8a1040b295b77482bd"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/fish-card.webp",
+      "path": "assets/ui/fish-card.webp",
+      "gitBlob": "94f7c80b3b6adbda1aa0012f0f00a880f12dc2aa",
+      "sha256": "677151afa031c467f56ddc7f0728fc973c4eebe7afafeea381f5daf46635db9a"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/fox-card.webp",
+      "path": "assets/ui/fox-card.webp",
+      "gitBlob": "a229e5590dc8f6b48aa0766ae32b42171d918c55",
+      "sha256": "f83992ea6db02e44b8bbce374881e21d2bab41d7d33fddbcaf492b3d624e043e"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/free-card.webp",
+      "path": "assets/ui/free-card.webp",
+      "gitBlob": "086274ebba73125ee8be95b630d488addd100317",
+      "sha256": "afe33821000dcc0c7aa828403e02307d012f10a5c9e50317656186cd35a4c4fa"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/prompt-plate.webp",
+      "path": "assets/ui/prompt-plate.webp",
+      "gitBlob": "93f179475e3d5fa2a20e2113a66429586d671baa",
+      "sha256": "fb247aa78ab722d544151722b5beeadc7e820423d3ea7ca1f2a1bac757765a24"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/tray.webp",
+      "path": "assets/ui/tray.webp",
+      "gitBlob": "a82256763b87f192f886c121718da38588cda2ab",
+      "sha256": "3db4a010b424f354ecaa8f1bbb0873a418d3fd2c23953fce67270f5cd2b28483"
+    },
+    {
+      "upstream": "games/tangram-tales/assets/ui/turn-clockwise.webp",
+      "path": "assets/ui/turn-clockwise.webp",
+      "gitBlob": "7fd17c7f1ea64206d84769bb1798a7aa540109fc",
+      "sha256": "e59fefa4e3ee12ef1ae82130c64f317c2f5f3f986c793ddb471fd3bede4674f6"
+    },
+    {
+      "upstream": "games/tangram-tales/config.js",
+      "path": "config.js",
+      "gitBlob": "a142040e8c48afa385d4182e080d723f82b621f7",
+      "sha256": "e0a98e13be4dcd2fee23f2d73446186ea54e2617ddb47f0a719010a2d22a3535"
+    },
+    {
+      "upstream": "games/tangram-tales/config.json",
+      "path": "config.json",
+      "gitBlob": "fb7a558fd2b15c236ff9b239bb4ea53f02b2e7cf",
+      "sha256": "b065abebe58004a9afeda4f03b56f5d0afe838de1224ae7d16353df22c5c2e17"
+    },
+    {
+      "upstream": "games/tangram-tales/css/style.css",
+      "path": "css/style.css",
+      "gitBlob": "9672c48b5322b0e26ff10e384fd29959840d85a2",
+      "sha256": "2f8150c97f6df7e8d550a25b63de488896b949193b12076aa7ca99d48214fd05"
+    },
+    {
+      "upstream": "games/tangram-tales/js/main.js",
+      "path": "js/main.js",
+      "gitBlob": "566170cc8dce22b79fec6c51a16c3190a0bd7a13",
+      "sha256": "e55da78ca9b69b29b1c0f458ffe11402176a14ffa9449c90ec84244f9d20afba"
+    },
+    {
+      "upstream": "shared/js/dom.js",
+      "path": "shared/js/dom.js",
+      "gitBlob": "f57a3aa6cbf925d4ea3ef92242092e84f734fe0b",
+      "sha256": "3413c5460dfe946ed29a79771edf1690f17492d0ffbb3caba593c42b275856b2"
+    },
+    {
+      "upstream": "shared/js/preload.js",
+      "path": "shared/js/preload.js",
+      "gitBlob": "39a6d1088533f4269f76f9f2340ff7cddb27935e",
+      "sha256": "84508ea987c2fa357fbeaacf602880a261c1a67b21fb29614311fd7fb6018f63"
+    },
+    {
+      "upstream": "shared/js/rng.js",
+      "path": "shared/js/rng.js",
+      "gitBlob": "2da3970400aba6b5904953675efe6dce0b9e067b",
+      "sha256": "e93a51b73e256a7a61163c1d375bd78e04198258a00fe3e314e9831225063dc6"
+    },
+    {
+      "upstream": "shared/js/stage/drag-to-slot-dom.js",
+      "path": "shared/js/stage/drag-to-slot-dom.js",
+      "gitBlob": "8607f30669f76658827ad103e49acb2016980229",
+      "sha256": "19c66cf6a9de76a97a2e4a83bd7e55b1cc2a1975f7c0f31bde7e2f024d698782"
+    },
+    {
+      "upstream": "shared/js/tap.js",
+      "path": "shared/js/tap.js",
+      "gitBlob": "18567c4c8945d38ecf92a1a8c9121aec8027da39",
+      "sha256": "679c005b02a6f0ab30f1c815adb09a8babe143ffb10f7644a08b3f6056e545e7"
+    },
+    {
+      "upstream": "games/tangram-tales/tales.json",
+      "path": "tales.json",
+      "gitBlob": "74e78b030b73f90b86136906158ac7f7a9c391e0",
+      "sha256": "70d283332038c7c866f8ec6654a6a1a5085bba632beab4eda9a5f249c55b89e7"
+    }
+  ]
+}

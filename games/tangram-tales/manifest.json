@@ -1,0 +1,26 @@
+{
+  "id": "tangram-tales",
+  "version": "0.1.0",
+  "kind": "dev",
+  "title": "Истории танграма",
+  "engine": "qlobe-dom",
+  "runtime": "embedded",
+  "entry": "/games/tangram-tales/index.html",
+  "skills": {
+    "main": "logic",
+    "secondary": "motor"
+  },
+  "weights": {
+    "logic": 0.7,
+    "motor": 0.3
+  },
+  "minAge": 6,
+  "levels": 3,
+  "roundsPerSession": 4,
+  "bridge": {
+    "protocol": 2,
+    "contract": "tangram-tales@1"
+  },
+  "sizeBudgetBytes": 2000000,
+  "license": "MIT"
+}

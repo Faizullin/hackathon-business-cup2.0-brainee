@@ -139,7 +139,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-110 US-English seeds and demo family (Mia, `mom@example.com`, US names/numbers, New York time), RU display map for seeded content and game titles, `db:refresh-demo`, report locale cookie/timezone fix (D-30)
 - [ ] T-111 English recordings and e2e locale: port report scenarios/selectors to English (or run both locales) and re-record MVP + learning
 - [ ] T-112 Games worktree: English manifest titles plus i18n for `GameHost`/`IframeGame` error and loading strings (currently Russian)
-- [ ] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
+- [x] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
 - [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).
 - [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run
 - [x] T-96 `mvp` report module: every page + child → parent walkthrough; `scaffold` report retired → [reports/mvp.md](../reports/mvp.md)
@@ -153,3 +153,6 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-107 One-tap isolated jury families, root role chooser, neutral simple signup and post-signup device setup (D-29).
 - [x] T-108 History-based recommendations, automatic app tasks, live activity analytics and earned rewards with progress/celebrations/feed (D-29).
 - [x] T-109 Playable Snake with saved active-time credit/top-ups/forever and restart-from-zero cartoon placeholder (D-29).
+
+- [ ] T-110 Complete learning imports and unscored Explore batch: Tangram acceptance, Rhythm Copycat, Secret Message Lab, Mirror Grid; Neighborhood and Magnet previews.
+- [ ] T-111 Remaining external game waves; see external-games.md.

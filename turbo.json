@@ -2,19 +2,33 @@
   "$schema": "https://turborepo.com/schema.json",
   "tasks": {
     "typecheck": {
-      "dependsOn": ["^typecheck"],
+      "dependsOn": [
+        "^typecheck"
+      ],
       "outputs": []
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**", "dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "!.next/dev/**",
+        "dist/**",
+        ".next-games/**",
+        "!.next-games/cache/**",
+        "!.next-games/dev/**"
+      ]
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
     "test": {
-      "dependsOn": ["^typecheck"],
+      "dependsOn": [
+        "^typecheck"
+      ],
       "outputs": []
     }
   },
@@ -23,6 +37,7 @@
     "BRAINEE_LAB",
     "DATABASE_URL",
     "DATABASE_AUTH_TOKEN",
-    "BRAINEE_DEFAULT_LOCALE"
+    "BRAINEE_DEFAULT_LOCALE",
+    "BRAINEE_NEXT_DIR"
   ]
 }

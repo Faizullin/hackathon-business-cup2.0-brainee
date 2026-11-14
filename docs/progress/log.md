@@ -1,5 +1,9 @@
 # Log
 
+## 2026-11-14 — T-105 pinned Tangram Tales
+Imported the first priority path-C game in the isolated `games` worktree: original MIT QLOBE artifact and hashes, Russian four-silhouette adapter, three levels, manifest/seed registration, offline build/source/asset checks and real-input reward/conformance coverage. Simplified to native select/place with snapping; removed free/debug/audio/storage paths. D-31 records the artifact/adapter boundary; T-107/T-108 retain the remaining ordered waves. Final post-rebase verification is pending; no push/deployment.
+
+
 Append-only, **newest first**. One entry per session, 2–5 lines. Reference task IDs.
 
 ---

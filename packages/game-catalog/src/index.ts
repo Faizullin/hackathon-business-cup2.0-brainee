@@ -1,5 +1,6 @@
 import { z } from "zod";
 import puzzle from "../../../games/picture-puzzle/manifest.json" with { type: "json" };
+import tangram from "../../../games/tangram-tales/manifest.json" with { type: "json" };
 import pattern from "../../games/src/continue-pattern/manifest.json" with { type: "json" };
 import odd from "../../games/src/odd-one-out/manifest.json" with { type: "json" };
 
@@ -37,4 +38,6 @@ export const manifestSchema = z
     if (game.runtime === "embedded" && game.entry !== `/games/${game.id}/index.html`)
       ctx.addIssue({ code: "custom", message: "Embedded entry must be same-origin" });
   });
-export const manifests = [odd, pattern, puzzle].map((value) => manifestSchema.parse(value));
+export const manifests = [odd, pattern, puzzle, tangram].map((value) =>
+  manifestSchema.parse(value),
+);

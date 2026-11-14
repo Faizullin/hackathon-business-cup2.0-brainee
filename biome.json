@@ -7,6 +7,12 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!!docs/ideas", "!!**/*.md", "!!pnpm-lock.yaml"]
+    "includes": [
+      "**",
+      "!!docs/ideas",
+      "!!**/*.md",
+      "!!pnpm-lock.yaml",
+      "!!games/tangram-tales/artifact"
+    ]
   }
 }

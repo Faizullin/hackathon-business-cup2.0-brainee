@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { build } from "esbuild";
@@ -29,6 +30,20 @@ if (new Set(manifests.map((game) => game.id)).size !== manifests.length)
   throw new Error("Duplicate game ids");
 for (const dir of discovered) {
   const manifest = JSON.parse(readFileSync(`${dir}/manifest.json`, "utf8"));
+  if (manifest.engine === "qlobe-dom") {
+    const lock = JSON.parse(readFileSync(`${dir}/sources.lock.json`, "utf8"));
+    if (!/^[a-f0-9]{40}$/.test(lock.commit)) throw new Error("Unpinned source");
+    for (const file of lock.files) {
+      const content = readFileSync(`${dir}/artifact/${file.path}`);
+      const blob = createHash("sha1")
+        .update(`blob ${content.length}\0`)
+        .update(content)
+        .digest("hex");
+      const hash = createHash("sha256").update(content).digest("hex");
+      if (blob !== file.gitBlob || hash !== file.sha256)
+        throw new Error(`Changed pinned artifact: ${file.path}`);
+    }
+  }
   if (!manifests.some((game) => game.id === manifest.id))
     throw new Error(`Unregistered manifest: ${dir}`);
 }
@@ -54,8 +69,9 @@ for (const game of manifests) {
         statSync(resolve(dirname(file), match[1]));
       }
     }
-    for (const picture of ["bear", "dog", "elephant", "pig", "rabbit"])
-      statSync(resolve(base, `assets/pictures/${picture}.png`));
+    if (game.id === "picture-puzzle")
+      for (const picture of ["bear", "dog", "elephant", "pig", "rabbit"])
+        statSync(resolve(base, `assets/pictures/${picture}.png`));
     statSync(resolve(base, "../bridge.js"));
   }
 }
