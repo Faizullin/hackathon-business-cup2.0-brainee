@@ -40,14 +40,13 @@ export async function playRhythmInput(
   makeMistake = false,
   roundIndex?: number,
 ) {
-  const text =
-    RHYTHM_TEXT[(await frame.locator("html").getAttribute("lang")) === "en" ? "en" : "ru"];
+  const text = RHYTHM_TEXT;
   if (typeof roundIndex === "number")
     await expect(frame.locator(".session-progress")).toHaveText(text.progress(roundIndex + 1), {
       timeout: 10000,
     });
 
-  // Input opens only after the demo; the copy must match the issued locale.
+  // Input opens only after the demo.
   await expect(frame.locator("#game")).toHaveAttribute("data-turn", "player", { timeout: 10000 });
   await expect(frame.locator("[data-prompt]")).toHaveText(text.turn);
 
@@ -65,7 +64,4 @@ export async function playRhythmInput(
   }
 }
 
-const RHYTHM_TEXT = {
-  ru: { progress: (n: number) => `Ритм ${n} из 4`, turn: "Твоя очередь!" },
-  en: { progress: (n: number) => `Rhythm ${n} of 4`, turn: "Your turn!" },
-};
+const RHYTHM_TEXT = { progress: (n: number) => `Rhythm ${n} of 4`, turn: "Your turn!" };

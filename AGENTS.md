@@ -23,7 +23,7 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - **Never read `docs/ideas/PRD Брейни.pdf`.** It's 24 pages of Russian, mostly images. Its content is condensed in [docs/product/](docs/product/).
 - **Never read the whole prototype HTML** (~1,170 lines). Use the line map in [docs/ideas/README.md](docs/ideas/README.md) and read only the range you need.
 - Each fact lives in one doc. Link to it; don't copy it. Update the original when it changes.
-- Keep docs in English (cheaper in tokens than Russian). Quote UI strings in Russian.
+- Keep docs in English (cheaper in tokens than Russian). The product UI, including games, is English-only.
 
 ## Hard rules (break these and the product breaks)
 

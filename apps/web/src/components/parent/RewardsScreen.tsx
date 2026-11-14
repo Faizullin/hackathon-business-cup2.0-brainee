@@ -15,7 +15,7 @@ import { useI18n } from "@/i18n";
 
 const input = "min-h-11 w-full rounded-xl border border-border bg-background px-3 text-base";
 
-// T-46 for the demo: rules, weekly goal, gift shop CRUD, child requests → «Вручено».
+// T-46 for the demo: rules, weekly goal, gift shop CRUD, child requests → "Delivered".
 export function RewardsScreen() {
   const { snapshot } = useLearning();
   const { run, busy, notice } = useAct();

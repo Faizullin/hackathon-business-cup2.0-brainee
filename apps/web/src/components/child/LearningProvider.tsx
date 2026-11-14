@@ -19,7 +19,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { localizeContent, translateContent, useI18n } from "@/i18n";
+import { localizeContent, translateContent } from "@/i18n";
 import {
   type FinishReply,
   type IssuedGame,
@@ -127,19 +127,18 @@ function SharedLearning({ children }: { children: ReactNode }) {
     retry: false,
     refetchInterval: (query) => (query.state.data ? 3000 : false),
   });
-  const { locale } = useI18n();
-  // Seeded showcase text and game titles follow the device locale; logic keeps the raw data.
+  // Seeded showcase text and game titles display in English; logic keeps the raw data.
   const snapshot = useMemo(
     () =>
       state.data && {
         ...state.data,
-        showcase: localizeContent(state.data.showcase, locale),
+        showcase: localizeContent(state.data.showcase),
         latestGame: state.data.latestGame && {
           ...state.data.latestGame,
-          title: translateContent(state.data.latestGame.title, locale),
+          title: translateContent(state.data.latestGame.title),
         },
       },
-    [state.data, locale],
+    [state.data],
   );
   useEffect(() => {
     if (state.error && "status" in state.error && state.error.status === 419)

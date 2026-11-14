@@ -34,7 +34,7 @@ test("state is cookie-authorized, versioned and refreshed after a finish or stop
   expect((await request.post("/api/sessions", { headers, data: body })).status()).toBe(200);
   const after = await savedState(request);
   expect(after).toMatchObject({
-    latestGame: { id: sessionId, title: "Продолжи узор" },
+    latestGame: { id: sessionId, title: "Continue the Pattern" },
     progress: { wallet: { stars: before.progress.wallet.stars + 13 }, streak: { inRow: 1 } },
   });
   // A newly earned reward may add a version during the first snapshot read.
@@ -128,14 +128,14 @@ test("failed initial reads show no fake wallet; keyboard retry loads saved state
     }),
   );
   await page.goto("/learn");
-  await expect(
-    page.getByRole("alert").filter({ hasText: "Не удалось загрузить Брейни" }),
-  ).toHaveText("Не удалось загрузить Брейни. Попробуй ещё раз.");
+  await expect(page.getByRole("alert").filter({ hasText: "Could not load Brainy" })).toHaveText(
+    "Could not load Brainy. Please try again.",
+  );
   await expect(page.getByTestId("wallet-stars")).toHaveCount(0);
   await page.screenshot({ path: testInfo.outputPath("state-error.png"), fullPage: true });
   await page.unroute("**/api/state*");
   // Keyboard coverage stays independent of the host's WebKit mouse-coordinate issue.
-  await page.getByRole("button", { name: "Попробовать ещё раз" }).focus();
+  await page.getByRole("button", { name: "Try again" }).focus();
   await page.keyboard.press("Enter");
   const actual = await readyState(page);
   await expect(page.getByTestId("wallet-stars")).toContainText(
@@ -157,19 +157,19 @@ test("a background read failure preserves confirmed state and recovers", async (
     }),
   );
   await expect(
-    page.getByRole("alert").filter({ hasText: "Пока не удалось обновить прогресс" }),
-  ).toContainText("Пока не удалось обновить прогресс", {
+    page.getByRole("alert").filter({ hasText: "Could not update progress yet" }),
+  ).toContainText("Could not update progress yet", {
     timeout: 10_000,
   });
   await expect(page.getByTestId("wallet-stars")).toContainText(
     String(before.progress.wallet.stars),
   );
-  await expect(page.getByRole("heading", { name: "Учимся", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Learn", exact: true })).toBeVisible();
   await page.unroute("**/api/state*");
-  await page.getByRole("button", { name: "Попробовать ещё раз" }).focus();
+  await page.getByRole("button", { name: "Try again" }).focus();
   await page.keyboard.press("Enter");
   await expect(
-    page.getByRole("alert").filter({ hasText: "Пока не удалось обновить прогресс" }),
+    page.getByRole("alert").filter({ hasText: "Could not update progress yet" }),
   ).toHaveCount(0);
 });
 
@@ -189,12 +189,12 @@ test("expired access asks for a reload without silently replacing an issued sess
       body: '{"error":"unauthorized"}',
     }),
   );
-  await expect(page.getByText("Открой занятие заново, чтобы обновить Брейни.")).toBeVisible({
+  await expect(page.getByText("Reopen the session to refresh Brainy.")).toBeVisible({
     timeout: 10_000,
   });
   expect(accessRequests).toBe(1);
   await page.unroute("**/api/state*");
-  await page.getByRole("button", { name: "Открыть заново" }).focus();
+  await page.getByRole("button", { name: "Reopen" }).focus();
   await page.keyboard.press("Enter");
   await readyState(page);
   expect(accessRequests).toBe(2);
@@ -206,13 +206,13 @@ test("expired access asks for a reload without silently replacing an issued sess
       body: '{"error":"unauthorized"}',
     }),
   );
-  await page.getByRole("link", { name: "с 4 лет Найди лишний Внимание", exact: true }).click();
-  await expect(page.getByText("Открой занятие заново, чтобы обновить Брейни.")).toBeVisible();
+  await page.getByRole("link", { name: "ages 4+ Odd One Out Attention", exact: true }).click();
+  await expect(page.getByText("Reopen the session to refresh Brainy.")).toBeVisible();
   await expect(page.locator("[data-game]")).toHaveCount(0);
   expect(accessRequests).toBe(2);
   await page.screenshot({ path: testInfo.outputPath("expired-launch.png"), fullPage: true });
   await page.unroute("**/api/sessions/start");
-  await page.getByRole("button", { name: "Открыть заново" }).focus();
+  await page.getByRole("button", { name: "Reopen" }).focus();
   await page.keyboard.press("Enter");
   await expect(page.locator('[data-game="odd-one-out"]')).toBeVisible();
   expect(accessRequests).toBe(3);

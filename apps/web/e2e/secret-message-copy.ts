@@ -37,8 +37,7 @@ export async function playSecretMessageInput(
   makeMistake = false,
   roundIndex?: number,
 ) {
-  const text =
-    SECRET_TEXT[(await frame.locator("html").getAttribute("lang")) === "en" ? "en" : "ru"];
+  const text = SECRET_TEXT;
   if (typeof roundIndex === "number")
     await expect(frame.locator(".session-progress")).toHaveText(text.progress(roundIndex + 1), {
       timeout: 8000,
@@ -69,14 +68,7 @@ export async function playSecretMessageInput(
 }
 
 const SECRET_TEXT = {
-  ru: {
-    progress: (n: number) => `Послание ${n} из 4`,
-    check: "Проверить",
-    wrong: "В послании есть ошибки. Проверь знаки и нажми ещё раз!",
-  },
-  en: {
-    progress: (n: number) => `Message ${n} of 4`,
-    check: "Check",
-    wrong: "The message has mistakes. Check the signs and try again!",
-  },
+  progress: (n: number) => `Message ${n} of 4`,
+  check: "Check",
+  wrong: "The message has mistakes. Check the signs and try again!",
 };

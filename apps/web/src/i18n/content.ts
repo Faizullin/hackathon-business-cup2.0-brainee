@@ -1,7 +1,6 @@
-import type { Locale } from "./types";
-
-// Seeded demo content is US English (the main audience). These [en, ru] pairs translate
-// seed strings and game titles at display time; parent-typed text is shown as written.
+// The platform is English-only. Seeded demo content is English; these [en, ru] pairs only map
+// Russian strings saved by earlier builds (seed text, feed titles) back to English for display.
+// Parent-typed text is shown as written.
 const PAIRS: readonly (readonly [string, string])[] = [
   ["Sunday", "Воскресенье"],
   ["Sophia N.", "София Н."],
@@ -156,28 +155,26 @@ const PAIRS: readonly (readonly [string, string])[] = [
   ["Neighborhood Route Planner", "Маршрут по району"],
 ];
 
-const toRu = new Map(PAIRS.map(([en, ru]) => [en, ru]));
 const toEn = new Map(PAIRS.map(([en, ru]) => [ru, en]));
 
-/** One content string in the given locale; unknown text is returned unchanged. */
-export function translateContent(text: string, locale: Locale) {
-  const translations = locale === "ru" ? toRu : toEn;
-  const direct = translations.get(text);
+/** One content string in English; unknown text is returned unchanged. */
+export function translateContent(text: string) {
+  const direct = toEn.get(text);
   if (direct) return direct;
   // Saved game-feed entries append the level to the catalog title.
   const gameEntry = /^(.*)( · \d+)$/.exec(text);
-  if (gameEntry?.[1] && translations.has(gameEntry[1]))
-    return `${translations.get(gameEntry[1])}${gameEntry[2]}`;
+  const title = gameEntry?.[1] ? toEn.get(gameEntry[1]) : undefined;
+  if (title) return `${title}${gameEntry?.[2]}`;
   return text;
 }
 
-/** Deep copy of seeded content with every known string translated. */
-export function localizeContent<T>(value: T, locale: Locale): T {
-  if (typeof value === "string") return translateContent(value, locale) as T;
-  if (Array.isArray(value)) return value.map((item) => localizeContent(item, locale)) as T;
+/** Deep copy of seeded content with every known string in English. */
+export function localizeContent<T>(value: T): T {
+  if (typeof value === "string") return translateContent(value) as T;
+  if (Array.isArray(value)) return value.map((item) => localizeContent(item)) as T;
   if (value && typeof value === "object")
     return Object.fromEntries(
-      Object.entries(value).map(([key, item]) => [key, localizeContent(item, locale)]),
+      Object.entries(value).map(([key, item]) => [key, localizeContent(item)]),
     ) as T;
   return value;
 }

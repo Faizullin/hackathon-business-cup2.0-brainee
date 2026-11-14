@@ -1,7 +1,6 @@
 import { EARNED_THRESHOLDS } from "@brainee/core";
-import type { Dictionary } from "./types";
 
-export const en: Dictionary = {
+export const en = {
   rewardProgress: (id: string, value: number, target: number, starts: number) =>
     id === "heroCape"
       ? `Unlocks: ${value} / ${target} completed · ${starts} / ${EARNED_THRESHOLDS.heroWindow} started via advice`
@@ -107,11 +106,6 @@ export const en: Dictionary = {
     timezone: "Timezone",
     devices: "Devices",
     account: "Account",
-    language: "Language",
-    languageOptions: {
-      en: "🇬🇧 English (Default)",
-      ru: "🇷🇺 Русский",
-    },
     name: "Child's name",
     year: "Birth year",
     promise: "Child's promise: tasks per day",

@@ -10,7 +10,6 @@ import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton } from "@/components/demo/kit";
 import { NavigationBadge } from "@/components/demo/NavigationBadge";
-import { HeaderLocaleToggle } from "@/components/LocaleSwitcher";
 import { useI18n } from "@/i18n";
 
 function PinGate() {
@@ -172,7 +171,6 @@ export function ParentShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-2">
-            <HeaderLocaleToggle />
             {snapshot?.parentUnlocked ? (
               // ROUTES.md §3.3: hand the device back — locks parent mode, child re-enters via /entry.
               <button

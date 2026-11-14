@@ -32,7 +32,6 @@ function AvailablePreview({ game }: { game: Preview }) {
   const [status, setStatus] = useState("loading");
   const router = useRouter();
   const { locale, tc } = useI18n();
-  const ru = locale === "ru";
   useEffect(() => {
     let stopped = false;
     const timer = setTimeout(() => {
@@ -82,18 +81,14 @@ function AvailablePreview({ game }: { game: Preview }) {
     <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-2">
       <header className="flex items-center justify-between gap-3 px-4">
         <Link href="/explore" className="min-h-12 py-3">
-          ← {ru ? "Выйти" : "Exit"}
+          ← Exit
         </Link>
         <h1 className="text-lg">{tc(game.title)}</h1>
-        <span className="text-sm">{ru ? "Без звёзд" : "No stars"}</span>
+        <span className="text-sm">No stars</span>
       </header>
-      {status === "loading" && <p role="status">{ru ? "Загружаем игру…" : "Loading…"}</p>}
+      {status === "loading" && <p role="status">Loading…</p>}
       {status === "error" ? (
-        <p role="alert">
-          {ru
-            ? "Игра не загрузилась. Вернись к списку и попробуй снова."
-            : "Could not load. Return to the list and try again."}
-        </p>
+        <p role="alert">Could not load. Return to the list and try again.</p>
       ) : (
         <iframe
           ref={frame}

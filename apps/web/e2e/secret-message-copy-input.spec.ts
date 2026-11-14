@@ -35,7 +35,7 @@ test("secret-message-copy: touch stamps, slot removal and a double-tapped Check 
 
   await check.tap();
   await check.tap();
-  await expect(frame.locator(".session-progress")).toHaveText("Послание 2 из 4");
+  await expect(frame.locator(".session-progress")).toHaveText("Message 2 of 4");
   const stream = page.getByTestId("event-stream");
   await expect(stream.locator('[data-event="round"]')).toHaveCount(1);
   await expect(stream.locator('[data-event="round"]')).toContainText(

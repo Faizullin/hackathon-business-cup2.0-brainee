@@ -32,11 +32,11 @@ test("daily rollover reaches both devices, archives tasks and resets weekly prog
       args: [before.child.id],
     });
     await expect(page.getByTestId("child-task-t3")).toHaveCount(0, { timeout: 10_000 });
-    await expect(parent.getByText("На сегодня заданий пока нет.")).toBeVisible({ timeout: 10_000 });
-    await expect(parent.getByTestId("task-limit")).toHaveText("Сегодня 0 из 5 заданий");
-    await parent.getByText("История заданий", { exact: true }).click();
+    await expect(parent.getByText("No tasks for today yet.")).toBeVisible({ timeout: 10_000 });
+    await expect(parent.getByTestId("task-limit")).toHaveText("Today 0 of 5 tasks");
+    await parent.getByText("Task history", { exact: true }).click();
     await expect(
-      parent.getByTestId("task-history").getByText("Срок истёк", { exact: true }),
+      parent.getByTestId("task-history").getByText("Expired", { exact: true }),
     ).toHaveCount(3);
     await expect(parent.getByTestId("task-history").getByRole("button")).toHaveCount(0);
     const after = await savedState(page.request);
