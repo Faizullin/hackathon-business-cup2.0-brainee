@@ -23,6 +23,9 @@ function Entry() {
       <div className="flex items-center gap-4 rounded-panel border border-border bg-card p-4">
         <Brainy
           stats={snapshot.progress.stats}
+          mood={snapshot.progress.mood}
+          earned={snapshot.showcase.earned}
+          animate
           equipped={snapshot.showcase.equipped}
           label=""
           className="h-28 w-auto shrink-0"

@@ -36,7 +36,7 @@ for (const reducedMotion of ["reduce", "no-preference"] as const) {
       String(before.progress.wallet.stars + 12),
     );
     if (reducedMotion === "reduce")
-      await expect(page.locator(".brainy-idle").first()).toHaveCSS("animation-name", "none");
+      await expect(page.locator("svg[data-brainy]").first()).toHaveCSS("animation-name", "none");
   });
 }
 

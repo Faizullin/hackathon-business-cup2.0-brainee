@@ -32,9 +32,12 @@ export function BrainyDock() {
         <ViewTransition name="brainy-hero">
           <Brainy
             stats={stats}
+            mood={mood}
+            earned={snapshot.showcase.earned}
+            animate
             equipped={equipped}
             label=""
-            className="brainy-idle h-24 w-auto sm:h-[136px] lg:h-44"
+            className="h-24 w-auto sm:h-[136px] lg:h-44"
           />
         </ViewTransition>
       </Link>

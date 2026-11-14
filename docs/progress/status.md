@@ -23,7 +23,7 @@ Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 **Lavender redesign and parent funnel** per [plans/redesign.md](../plans/redesign.md) (T-131–T-142, D-35/D-36/D-37; visuals from [product/design.md](../product/design.md)), after the PR #1 films integration (issue #5). Games continue separately (issue #4). The jury-ready MVP stays working throughout: see [demo.md](../demo.md).
 
 ## Handoff
-- Lavender redesign on master: T-133 core funnel rules and T-131 shared lavender tokens/fonts/icons/motion are complete. Existing quizStart and translations are unchanged. Manrope is local, with local Onest fallback for existing Cyrillic copy.
-- Verification: pnpm check, pnpm test and production build pass. T-131 affected Playwright matrix: 56/56 across Chromium/WebKit, phone/iPad. Reviewed Learn screenshots in all four projects; no horizontal overflow. In-app Browser unavailable; screenshots came from Playwright.
-- Next: T-132 Brain component, then remaining tasks in plans/redesign.md order. Final full serial e2e and T-139 recordings remain pending.
-- No push, deployment or production data access. Game internals remain untouched.
+- Lavender redesign on master: T-133 core funnel, T-131 shared visual system and T-132 Brain component port are complete. Brainy uses mood for energy, body stats for geometry, real stages for size/lightning, re-anchored accessories and earned flags. Kid mode is default; animated heroes share one demand-driven 30 fps ticker, paused for reduced motion, hidden documents and off-screen instances.
+- Verification: check, workspace tests and production build pass. T-131 browser matrix 56/56; T-132 corrected matrix 60/60 across Chromium/WebKit phone/iPad. Initial T-132 run exposed stale Eyes/idle-class test selectors; fixed and rerun. Four reference states and screenshots reviewed in all projects.
+- Next: T-134 shared step/answer components, then T-140, T-141 and funnel/product tasks in plans/redesign.md order. Final full serial e2e and T-139 recordings remain pending.
+- No push, deployment or production data access. Game internals and existing translations remain untouched.

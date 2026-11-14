@@ -55,6 +55,8 @@ export function PostGameScreen({
           >
             <Brainy
               stats={completion[when].stats}
+              mood={completion[when].mood}
+              earned={snapshot?.showcase.earned}
               equipped={snapshot?.showcase.equipped ?? {}}
               label={t[when]}
               className="mx-auto h-auto w-full max-w-48"

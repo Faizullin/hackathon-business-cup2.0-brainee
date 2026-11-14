@@ -2,64 +2,116 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { Brainy } from "./Brainy";
 import { brainyModel, mixColor } from "./model";
-import { BRAINY_PRESETS } from "./presets";
+import { createTicker } from "./ticker";
 
-const base = { brain: 50, eyes: 50, mouth: 50, arms: 50, legs: 50, resp: 50 };
-
-describe("brainy visual thresholds", () => {
-  it.each([
-    ["brainStar", { brain: 73 }, { brain: 72 }],
-    ["eyeCircles", { eyes: 44 }, { eyes: 45 }],
-    ["sleepyZ", { eyes: 34 }, { eyes: 35 }],
-    ["biceps", { arms: 56 }, { arms: 55 }],
-    ["backpack", { resp: 70 }, { resp: 69 }],
-  ] as const)("%s switches exactly at its threshold", (flag, on, off) => {
-    expect(brainyModel({ ...base, ...on }).flags[flag]).toBe(true);
-    expect(brainyModel({ ...base, ...off }).flags[flag]).toBe(false);
-  });
-
-  it("shows video screens only when the body average is below 38", () => {
-    const at = (v: number) => ({ brain: v, eyes: v, mouth: v, arms: v, legs: v, resp: 0 });
-    expect(brainyModel(at(37)).flags.screens).toBe(true);
-    expect(brainyModel(at(38)).flags.screens).toBe(false);
-  });
-
-  it("hides the brain star under a hat", () => {
-    expect(brainyModel({ ...base, brain: 90 }, { head: "cap" }).flags.brainStar).toBe(false);
-  });
-
-  it("shifts color from sleepy green to pink with the average", () => {
-    expect(brainyModel(BRAINY_PRESETS.afterQuiz).fill).toBe("#a7bc8c");
-    expect(
-      brainyModel({ ...base, brain: 100, eyes: 100, mouth: 100, arms: 100, legs: 100 }).fill,
-    ).toBe("#ff8fa3");
+const stats = (n: number) => ({ brain: n, eyes: n, mouth: n, arms: n, legs: n, resp: n });
+describe("lavender Brain model", () => {
+  it("uses mood independently of body stats, with peach kid-safe low energy", () => {
+    expect(brainyModel(stats(90), {}, 10).fill).toBe("#f2b8a8");
+    expect(brainyModel(stats(10), {}, 92).fill).toBe("#FF9EC2");
+    expect(brainyModel(stats(90), {}, 0, 0, "full").fill).toBe("#bdb97e");
     expect(mixColor("#000000", "#ffffff", 0.5)).toBe("#808080");
+    expect(brainyModel(stats(50), {}, Number.NaN).energy).toBe(0);
+    expect(brainyModel(stats(50), {}, 120).energy).toBe(100);
+  });
+  it("maps each body part and stage while keeping responsibility separate", () => {
+    const low = brainyModel(stats(10));
+    const high = brainyModel(stats(90));
+    expect(high.lobeScale).toBeGreaterThan(low.lobeScale);
+    expect(high.eyeRadius).toBeGreaterThan(low.eyeRadius);
+    expect(high.mouth).not.toBe(low.mouth);
+    expect(high.limbWidth).toBeGreaterThan(low.limbWidth);
+    expect(high.handRadius).toBeGreaterThan(low.handRadius);
+    expect(high.legL).not.toBe(low.legL);
+    expect(high.scale).toBeGreaterThan(low.scale);
+    expect(brainyModel({ ...stats(50), resp: 70 }).flags.backpack).toBe(true);
+    expect(brainyModel({ ...stats(50), resp: 69 }).flags.backpack).toBe(false);
+    expect(brainyModel({ ...stats(50), eyes: 34 }).flags.sleepyZ).toBe(true);
+    expect(brainyModel({ ...stats(50), eyes: 35 }).flags.sleepyZ).toBe(false);
+  });
+  it("gates lightning at the top stage and sparkles at energy 75", () => {
+    expect(Number(brainyModel(stats(70), {}, 92).b0.op)).toBeGreaterThan(0);
+    expect(Number(brainyModel(stats(69), {}, 92).b0.op)).toBe(0);
+    expect(Number(brainyModel(stats(90), {}, 74).b0.op)).toBe(0);
+    expect(Number(brainyModel(stats(10), {}, 75).sparkleOpacity)).toBeGreaterThan(0);
+    expect(Number(brainyModel(stats(10), {}, 74).sparkleOpacity)).toBe(0);
+  });
+  it("animates posture but keeps static eyes open; never produces unsafe kid effects", () => {
+    const a = brainyModel(stats(90), {}, 92, 0);
+    const b = brainyModel(stats(90), {}, 92, 0.2);
+    expect(a.bodyTransform).not.toBe(b.bodyTransform);
+    expect(Number(a.lid)).toBe(0);
+    for (const mood of [0, 10, 38, 62, 92, 100]) {
+      const m = brainyModel(stats(mood), {}, mood);
+      expect(m.rotOpacity).toBe(0);
+      expect(m.f0.op).toBe(0);
+      expect(Number(m.z0.op)).toBe(0);
+      expect(JSON.stringify(m)).not.toMatch(/NaN|Infinity/);
+    }
   });
 });
-
-describe("<Brainy />", () => {
-  it("renders the after-quiz preset sleepy and the now preset with backpack", () => {
-    const sleepy = renderToStaticMarkup(<Brainy stats={BRAINY_PRESETS.afterQuiz} />);
-    expect(sleepy).toContain('data-part="zz"');
-    expect(sleepy).toContain('data-part="screen"');
-    expect(sleepy).toContain('aria-hidden="true"');
-    const now = renderToStaticMarkup(
-      <Brainy stats={BRAINY_PRESETS.now} equipped={{ face: "glasses" }} />,
-    );
-    expect(now).toContain('data-part="backpack"');
-    expect(now).toContain('data-acc="glasses"');
-    expect(now).not.toContain('data-part="zz"');
+describe("Brain SVG", () => {
+  it("keeps reference geometry, paint order, accessible and decorative APIs", () => {
+    const html = renderToStaticMarkup(<Brainy stats={stats(50)} label="Brainy" />);
+    expect(html).toContain('viewBox="-30 -40 280 268"');
+    expect(html).toContain('role="img"');
+    expect(html).toContain('data-brainy=""');
+    expect(html.indexOf('cy="85"')).toBeLessThan(html.indexOf('cy="78"'));
+    expect(renderToStaticMarkup(<Brainy stats={stats(10)} />)).toContain('aria-hidden="true"');
+    expect(html).not.toContain("#5F6B2E");
+    expect(html).not.toContain("#A9BC55");
+    expect(html).not.toContain('data-part="screen"');
   });
-
-  it("gives every instance unique clip-path ids", () => {
+  it("renders all six accessories and earned flags at their new anchors", () => {
+    for (const [slot, ids] of Object.entries({
+      head: ["cowboy", "cap", "phones"],
+      face: ["glasses"],
+      neck: ["bowtie", "scarf"],
+    })) {
+      for (const id of ids) {
+        const html = renderToStaticMarkup(<Brainy stats={stats(50)} equipped={{ [slot]: id }} />);
+        expect(html).toContain(`data-acc="${id}"`);
+      }
+    }
     const html = renderToStaticMarkup(
-      <>
-        <Brainy stats={base} />
-        <Brainy stats={base} />
-      </>,
+      <Brainy
+        stats={stats(10)}
+        earned={["captainBackpack", "heroCape", "explorerBadge", "ownGarden"]}
+      />,
     );
-    const ids = [...html.matchAll(/<clipPath id="([^"]+)"/g)].map((m) => m[1]);
-    expect(ids).toHaveLength(4);
-    expect(new Set(ids).size).toBe(4);
+    for (const flag of ["backpack", "cape", "badge", "garden"])
+      expect(html).toContain(`data-part="${flag}"`);
   });
+});
+it("shares one ticker, throttles to 30 fps and cancels when the last hero leaves", () => {
+  const queue = new Map<number, (t: number) => void>();
+  let id = 0;
+  let calls = 0;
+  const ticker = createTicker(
+    (fn) => {
+      queue.set(++id, fn);
+      return id;
+    },
+    (id) => {
+      queue.delete(id);
+    },
+  );
+  const a = ticker.subscribe(() => calls++);
+  const b = ticker.subscribe(() => calls++);
+  expect(queue.size).toBe(1);
+  const frame = (t: number) => {
+    const entry = [...queue.entries()][0];
+    if (!entry) throw Error("No frame");
+    queue.delete(entry[0]);
+    entry[1](t);
+  };
+  frame(0);
+  frame(16);
+  expect(calls).toBe(0);
+  frame(34);
+  expect(calls).toBe(2);
+  a();
+  expect(queue.size).toBe(1);
+  b();
+  expect(queue.size).toBe(0);
 });

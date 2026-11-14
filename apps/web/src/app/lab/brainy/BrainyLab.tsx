@@ -18,6 +18,8 @@ import { useId, useState } from "react";
 import { Brainy } from "@/components/Brainy";
 import { useI18n } from "@/i18n";
 
+import { brainyLabCopy as copy } from "./copy";
+
 const STAT_KEYS = ["brain", "eyes", "mouth", "arms", "legs", "resp"] as const;
 const fieldClass =
   "min-h-12 rounded-xl border border-border bg-card px-3 text-foreground focus-visible:outline-3 focus-visible:outline-ring";
@@ -27,6 +29,8 @@ export function BrainyLab() {
   const baseId = useId();
   const [stats, setStats] = useState<BrainyStats>({ ...BRAINY_PRESETS.now });
   const [equipped, setEquipped] = useState<Equipped>({ face: "glasses" });
+  const [mood, setMood] = useState(72);
+  const [animate, setAnimate] = useState(true);
   const stage = stageOf(stats);
   const t = ru.lab.brainy;
 
@@ -51,9 +55,21 @@ export function BrainyLab() {
           ))}
         </div>
         <div className="flex w-full flex-wrap items-end justify-center gap-6 rounded-panel border border-border bg-card p-6">
-          <Brainy stats={stats} equipped={equipped} className="h-auto w-full max-w-[320px]" />
+          <Brainy
+            stats={stats}
+            mood={mood}
+            animate={animate}
+            equipped={equipped}
+            className="h-auto w-full max-w-[320px]"
+          />
           {/* Dock size (~136 px) to check legibility when small. */}
-          <Brainy stats={stats} equipped={equipped} label="" className="h-[136px] w-auto" />
+          <Brainy
+            stats={stats}
+            mood={mood}
+            equipped={equipped}
+            label=""
+            className="h-[136px] w-auto"
+          />
         </div>
         <div data-testid="brainy-stage" className="w-full max-w-md text-center">
           <p className="font-heading text-lg font-semibold">{ru.stages[stage.id]}</p>
@@ -74,9 +90,72 @@ export function BrainyLab() {
             ))}
           </ol>
         </div>
+        <fieldset className="grid w-full grid-cols-2 gap-3" aria-label={copy.references}>
+          {copy.states.map((state) => (
+            <button
+              type="button"
+              key={state.mood}
+              className="lv-press rounded-stage bg-card p-3 ring-1 ring-border"
+              onClick={() => {
+                setMood(state.mood);
+                setStats({
+                  brain: state.mood,
+                  eyes: state.mood,
+                  mouth: state.mood,
+                  arms: state.mood,
+                  legs: state.mood,
+                  resp: 10,
+                });
+              }}
+            >
+              <Brainy
+                stats={{
+                  brain: state.mood,
+                  eyes: state.mood,
+                  mouth: state.mood,
+                  arms: state.mood,
+                  legs: state.mood,
+                  resp: 10,
+                }}
+                mood={state.mood}
+                label=""
+                className="mx-auto h-28 w-auto"
+              />
+              <span className="font-display text-lg">{state.mood}</span>
+              <span className="block text-sm">{state.title}</span>
+            </button>
+          ))}
+        </fieldset>
       </section>
 
       <aside className="flex flex-col gap-4 rounded-panel border border-border bg-card p-4">
+        <label className="flex flex-col gap-1">
+          {copy.energy}: {mood}
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={mood}
+            onChange={(e) => setMood(Number(e.target.value))}
+          />
+        </label>
+        <label className="flex flex-col gap-1">
+          {copy.stage}
+          <input
+            type="range"
+            min="0"
+            max="4"
+            value={stage.index}
+            onChange={(e) => {
+              const n = STAGES[Number(e.target.value)]?.min ?? 0;
+              setStats((s) => ({ ...s, brain: n, eyes: n, mouth: n, arms: n, legs: n }));
+            }}
+          />
+        </label>
+        <label className="flex min-h-12 items-center gap-2">
+          <input type="checkbox" checked={animate} onChange={(e) => setAnimate(e.target.checked)} />
+          {copy.animate}
+        </label>
         <h2 className="font-heading font-semibold">{t.stats}</h2>
         {STAT_KEYS.map((key) => (
           <label

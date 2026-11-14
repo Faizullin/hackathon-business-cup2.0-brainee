@@ -57,6 +57,9 @@ export function StageCelebration({
           </Dialog.Title>
           <Brainy
             stats={snapshot.progress.stats}
+            mood={snapshot.progress.mood}
+            earned={snapshot.showcase.earned}
+            animate
             equipped={snapshot.showcase.equipped}
             className="brainy-stage h-48 w-48"
           />

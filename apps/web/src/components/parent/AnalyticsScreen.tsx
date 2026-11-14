@@ -101,7 +101,14 @@ export function AnalyticsScreen() {
 
       <Panel className="sm:flex-row sm:items-center">
         <div className="flex items-end justify-center gap-2">
-          <Brainy stats={progress.stats} equipped={showcase.equipped} className="h-44 w-auto" />
+          <Brainy
+            stats={progress.stats}
+            mood={progress.mood}
+            earned={showcase.earned}
+            animate
+            equipped={showcase.equipped}
+            className="h-44 w-auto"
+          />
           <figure className="flex flex-col items-center opacity-70">
             <Brainy stats={a.quizStats} label={t.afterQuiz} className="h-20 w-auto" />
             <figcaption className="text-xs">{t.afterQuiz}</figcaption>

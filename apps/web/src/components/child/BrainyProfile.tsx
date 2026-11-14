@@ -46,7 +46,14 @@ export function BrainyProfile() {
           </p>
         )}
         <ViewTransition name="brainy-hero">
-          <Brainy stats={stats} equipped={equipped} className="h-auto w-full max-w-[320px]" />
+          <Brainy
+            stats={stats}
+            mood={snapshot.progress.mood}
+            earned={earned}
+            animate
+            equipped={equipped}
+            className="h-auto w-full max-w-[320px]"
+          />
         </ViewTransition>
         <p className="font-heading text-lg font-semibold">{i18n.stages[stage.id]}</p>
         {stage.next && (
