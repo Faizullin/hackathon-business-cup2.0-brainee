@@ -4,7 +4,16 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { eq } from "drizzle-orm";
 import { expect, it, onTestFinished } from "vitest";
-import { children, families, wallets } from "../schema";
+import {
+  brainyStates,
+  children,
+  demoSessions,
+  families,
+  gameSessions,
+  games,
+  parents,
+  wallets,
+} from "../schema";
 import { resetDatabase, runDrizzle, seedDatabase } from "../scripts/database-tools";
 import { openDatabase } from "./client";
 import { getDatabaseConfig } from "./config";
@@ -33,6 +42,11 @@ it("creates the schema and seed that another connection can read", async () => {
   const { db } = await fixture.seeded();
   expect(await db.select().from(families)).toEqual([demo.family]);
   expect(await db.select().from(children)).toEqual([demo.child]);
+  expect(await db.select().from(parents)).toEqual([demo.parent]);
+  expect(demo.parent.pinHash).toMatch(/^scrypt\$/);
+  expect(await db.select().from(brainyStates)).toEqual([demo.brainy]);
+  expect(await db.select().from(games)).toEqual([...demo.games]);
+  expect(await db.select().from(gameSessions)).toEqual([demo.history]);
   const reopened = await openDatabase(fixture.config);
   try {
     expect(await reopened.db.select().from(wallets)).toEqual([demo.wallet]);
@@ -51,12 +65,18 @@ it("allows more than one child in a family", async () => {
 it("enforces parent references and cascading child/wallet deletion", async () => {
   const fixture = await temporaryDatabase();
   const { db, client } = await fixture.seeded();
-  await expect(
-    client.execute({
-      sql: "INSERT INTO children (id, family_id, name, birth_year) VALUES (?, ?, ?, ?)",
-      args: ["orphan", "missing-family", "Саша", 2020],
-    }),
-  ).rejects.toThrow(/FOREIGN KEY/);
+  const orphanWrites = await Promise.allSettled(
+    ["orphan-a", "orphan-b"].map((id) =>
+      client.execute({
+        sql: "INSERT INTO children (id, family_id, name, birth_year) VALUES (?, ?, ?, ?)",
+        args: [id, "missing-family", "Саша", 2020],
+      }),
+    ),
+  );
+  for (const attempt of orphanWrites) {
+    expect(attempt.status).toBe("rejected");
+    if (attempt.status === "rejected") expect(String(attempt.reason)).toMatch(/FOREIGN KEY/);
+  }
   await db.delete(families).where(eq(families.id, demo.family.id));
   expect(await db.select().from(children)).toEqual([]);
   expect(await db.select().from(wallets)).toEqual([]);
@@ -77,11 +97,39 @@ it("repeated seed preserves existing balances and creates no duplicates", async 
   const fixture = await temporaryDatabase();
   const { db } = await fixture.seeded();
   await db.update(wallets).set({ stars: 123 }).where(eq(wallets.childId, demo.child.id));
+  await db
+    .update(brainyStates)
+    .set({ eyes: 99.5, mood: 55 })
+    .where(eq(brainyStates.childId, demo.child.id));
+  await db.update(families).set({ version: 8 }).where(eq(families.id, demo.family.id));
+  await db.update(games).set({ enabled: false }).where(eq(games.id, "odd-one-out"));
   await seedDatabase(fixture.config);
   await seedDatabase(fixture.config);
   expect(await db.select().from(families)).toHaveLength(1);
   expect(await db.select().from(children)).toHaveLength(1);
   expect(await db.select().from(wallets)).toEqual([{ ...demo.wallet, stars: 123 }]);
+  expect((await db.select().from(brainyStates).get())?.eyes).toBe(99.5);
+  expect((await db.select().from(families).get())?.version).toBe(8);
+  expect((await db.select().from(games).where(eq(games.id, "odd-one-out")).get())?.enabled).toBe(
+    false,
+  );
+  expect(await db.select().from(gameSessions)).toHaveLength(1);
+});
+
+it("constrains Brainy values, family versions, catalog values and history references", async () => {
+  const fixture = await temporaryDatabase();
+  const { db } = await fixture.seeded();
+  for (const invalid of [{ brain: -1 }, { resp: 101 }, { mood: 101 }])
+    await expect(db.update(brainyStates).set(invalid)).rejects.toThrow();
+  for (const version of [-1, 0.5, Number.MAX_SAFE_INTEGER + 1])
+    await expect(db.update(families).set({ version })).rejects.toThrow();
+  await expect(db.update(games).set({ levels: 0 })).rejects.toThrow();
+  await expect(db.update(gameSessions).set({ childId: "missing" })).rejects.toThrow();
+  await expect(db.update(gameSessions).set({ completion: null })).rejects.toThrow();
+  await db.delete(families).where(eq(families.id, demo.family.id));
+  expect(await db.select().from(parents)).toEqual([]);
+  expect(await db.select().from(brainyStates)).toEqual([]);
+  expect(await db.select().from(gameSessions)).toEqual([]);
 });
 
 it("rolls back the whole transaction when a wallet write fails", async () => {
@@ -100,8 +148,32 @@ it("push preserves data; reset removes stale schema and restores the demo", asyn
   const fixture = await temporaryDatabase();
   const { db, client } = await fixture.seeded();
   await db.update(wallets).set({ stars: 999 }).where(eq(wallets.childId, demo.child.id));
+  await db.insert(demoSessions).values({
+    tokenHash: "push-test-session",
+    childId: demo.child.id,
+    createdAt: new Date("2026-11-14"),
+    expiresAt: new Date("2026-11-15"),
+  });
+  await db.insert(gameSessions).values({
+    id: "push-test-game",
+    childId: demo.child.id,
+    demoSessionHash: "push-test-session",
+    gameId: "odd-one-out",
+    level: 1,
+    seed: 0,
+    startedAt: new Date("2026-11-14"),
+  });
   runDrizzle(fixture.config);
   expect(await db.select().from(wallets)).toEqual([{ ...demo.wallet, stars: 999 }]);
+  expect(await db.select().from(brainyStates)).toEqual([demo.brainy]);
+  expect(await db.select().from(parents)).toEqual([demo.parent]);
+  expect(await db.select().from(demoSessions)).toHaveLength(1);
+  expect(
+    await db.select().from(gameSessions).where(eq(gameSessions.id, "push-test-game")).get(),
+  ).toMatchObject({ demoSessionHash: "push-test-session", status: "pending" });
+  expect(
+    await db.select().from(gameSessions).where(eq(gameSessions.id, demo.history.id)).get(),
+  ).toEqual(demo.history);
   await client.execute("CREATE TABLE stale_demo (id TEXT)");
   client.close();
   await resetDatabase(fixture.config);

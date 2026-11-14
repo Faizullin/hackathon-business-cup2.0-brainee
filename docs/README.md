@@ -27,6 +27,7 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [dev/architecture.md](dev/architecture.md) | Stack, monorepo layout, package responsibilities |
 | [dev/decisions.md](dev/decisions.md) | Why we chose what we chose (ADR log) |
 | [dev/setup.md](dev/setup.md) | Install, run, env vars, iPad testing (deploy = final step) |
+| [dev/sessions.md](dev/sessions.md) | Demo cookie, issued game sessions, finish validation, atomic rewards and retry contract |
 | [dev/conventions.md](dev/conventions.md) | Code style, naming, testing, git |
 | [dev/games.md](dev/games.md) | Game runtimes, bridge + engine kits to port from game-store-planning, testing, reusable games |
 | [dev/ui.md](dev/ui.md) | UI and motion system: Base UI components, page transitions, Motion, app shell, mobile app-feel checklist |
@@ -41,6 +42,7 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 - **Build a child screen** → `screens.md` (that section) → `dev/ui.md` → `mechanics.md` if it touches stars or stats → prototype range from `ideas/README.md`
 - **Build parent analytics** → `screens.md` §Parent → `data-model.md`
 - **Write economy or stat logic** → `mechanics.md` → `data-model.md` §How stats change
+- **Save games or wire shared state** → `dev/sessions.md` → `product/data-model.md` → `dev/setup.md`
 - **Infra, auth or deploy** → `architecture.md` → `rules.md` §Technical requirements → `decisions.md`
 - **Demo prep** → `rules.md` §Acceptance criteria → `status.md`
 

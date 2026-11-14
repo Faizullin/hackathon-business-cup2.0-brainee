@@ -13,6 +13,7 @@
   "dependencies": {
     "@brainee/brainy": "workspace:*",
     "@brainee/core": "workspace:*",
+    "@brainee/db": "workspace:*",
     "@brainee/games": "workspace:*",
     "@brainee/ui": "workspace:*",
     "next": "16.4.6",

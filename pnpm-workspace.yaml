@@ -16,4 +16,7 @@ minimumReleaseAgeExclude:
   - motion-dom@14.14.0
   - motion@14.14.0
 
+patchedDependencies:
+  "@libsql/client@0.18.0": patches/@libsql__client@0.18.0.patch
+
 saveExact: true

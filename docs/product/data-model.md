@@ -2,7 +2,9 @@
 
 Source: PRD §7. All stats, balances and tasks will live on the server and sync between the child's device and the parent's phone. This is the product spec; `packages/db/schema.ts` is the current implemented schema, and this file tracks its scope below.
 
-**Implemented in T-13:** `packages/db/schema.ts` defines Family (`id`, `plan`, `created_at`), Child (`id`, `family_id`, `name`, `birth_year`) and Wallet (`child_id`, `stars`, `suns`). Foreign keys support multiple children per family; wallet balances are nonnegative integers. `packages/db/src/seed.ts` owns the idempotent demo fixture. Remaining entities/fields, scenario seeds and data flows below are planned (T-50/T-51 and feature tasks); no family data is shown in the UI yet.
+**Implemented (T-13 + T-50/T-51 demo subset):** `packages/db/schema.ts` defines Family (including shared state version), Parent (PIN hash), Child, Wallet, BrainyState (fractional 0–100 values, mood, quiz baseline), Game catalog and GameSession (issued launch, result counters, status and completion receipt). `DemoSession` stores hashed cookie access and its learning run. Foreign keys support multiple children per family; wallet balances are nonnegative integers. Stage is computed by core. The [session API](../dev/sessions.md) saves results atomically; the UI still reads a fixture/client preview until T-55.
+
+`packages/db/src/seed.ts` owns the idempotent **now** scenario: one family/parent/child, Brainy, wallet, the two React games and one historical completed game consistent with the starting state. The quiz baseline is a snapshot, not a second active scenario. Seed reruns preserve earned balances/stats, versions, disabled catalog entries and history. Private cookie access rows are generated only at runtime. Other entities/fields and the other scenario modes remain T-50/T-51.
 
 ## Entities (MVP minimum)
 

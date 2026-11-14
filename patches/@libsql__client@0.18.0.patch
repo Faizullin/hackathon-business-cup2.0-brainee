@@ -1,0 +1,216 @@
+diff --git a/lib-cjs/sqlite3.js b/lib-cjs/sqlite3.js
+index 21a13a83b6f8f8d5057fb9ea7edd97cc8881f955..1b8d246653d23ca2e670a95e6de44936c34bf0e0 100644
+--- a/lib-cjs/sqlite3.js
++++ b/lib-cjs/sqlite3.js
+@@ -173,7 +173,7 @@ class ConnectionPool {
+         // the next borrower would silently inherit it.
+         if (db.open && db.inTransaction) {
+             try {
+-                db.prepare("ROLLBACK").run();
++                executeControl(db, "ROLLBACK");
+             }
+             catch {
+                 // the connection is unusable; drop it rather than reuse it
+@@ -276,7 +276,7 @@ class Sqlite3Client {
+         const db = await this.#pool.acquire();
+         try {
+             this.#checkUsable(db);
+-            executeStmt(db, (0, util_1.transactionModeToBegin)(mode), this.#intMode);
++            executeControl(db, (0, util_1.transactionModeToBegin)(mode));
+             const resultSets = [];
+             for (let i = 0; i < stmts.length; i++) {
+                 try {
+@@ -299,7 +299,7 @@ class Sqlite3Client {
+                     throw e;
+                 }
+             }
+-            executeStmt(db, "COMMIT", this.#intMode);
++            executeControl(db, "COMMIT");
+             return resultSets;
+         }
+         finally {
+@@ -313,7 +313,7 @@ class Sqlite3Client {
+         try {
+             this.#checkUsable(db);
+             executeStmt(db, "PRAGMA foreign_keys=off", this.#intMode);
+-            executeStmt(db, (0, util_1.transactionModeToBegin)("deferred"), this.#intMode);
++            executeControl(db, (0, util_1.transactionModeToBegin)("deferred"));
+             const resultSets = [];
+             for (let i = 0; i < stmts.length; i++) {
+                 try {
+@@ -332,12 +332,12 @@ class Sqlite3Client {
+                     throw e;
+                 }
+             }
+-            executeStmt(db, "COMMIT", this.#intMode);
++            executeControl(db, "COMMIT");
+             return resultSets;
+         }
+         finally {
+             if (db.inTransaction) {
+-                executeStmt(db, "ROLLBACK", this.#intMode);
++                executeControl(db, "ROLLBACK");
+             }
+             executeStmt(db, "PRAGMA foreign_keys=on", this.#intMode);
+             this.#pool.release(db);
+@@ -348,7 +348,7 @@ class Sqlite3Client {
+         const db = await this.#pool.acquire(true);
+         try {
+             this.#checkUsable(db);
+-            executeStmt(db, (0, util_1.transactionModeToBegin)(mode), this.#intMode);
++            executeControl(db, (0, util_1.transactionModeToBegin)(mode));
+         }
+         catch (e) {
+             this.#pool.release(db);
+@@ -482,7 +482,7 @@ class Sqlite3Transaction {
+         }
+         try {
+             this.#checkNotClosed();
+-            executeStmt(db, "ROLLBACK", this.#intMode);
++            executeControl(db, "ROLLBACK");
+         }
+         finally {
+             this.#settle();
+@@ -490,7 +490,7 @@ class Sqlite3Transaction {
+     }
+     async commit() {
+         try {
+-            executeStmt(this.#getDatabase(), "COMMIT", this.#intMode);
++            executeControl(this.#getDatabase(), "COMMIT");
+         }
+         finally {
+             this.#settle();
+@@ -505,7 +505,7 @@ class Sqlite3Transaction {
+             // `client.close()` may have closed this connection already, and
+             // reading `inTransaction` on a closed database aborts the process.
+             if (db.open && db.inTransaction) {
+-                executeStmt(db, "ROLLBACK", this.#intMode);
++                executeControl(db, "ROLLBACK");
+             }
+         }
+         finally {
+@@ -526,6 +526,16 @@ class Sqlite3Transaction {
+     }
+ }
+ exports.Sqlite3Transaction = Sqlite3Transaction;
++// Transaction controls must not leave a prepared statement active after SQLITE_BUSY.
++// https://github.com/tursodatabase/libsql-client-ts/issues/361
++function executeControl(db, sql) {
++    try {
++        db.exec(sql);
++    }
++    catch (e) {
++        throw mapSqliteError(e);
++    }
++}
+ function executeStmt(db, stmt, intMode) {
+     let sql;
+     let args;
+diff --git a/lib-esm/sqlite3.js b/lib-esm/sqlite3.js
+index bfeed75499001ad72e43d4919465108d946bb165..af7b2abf7320508402b5e00617493ba274eda7bc 100644
+--- a/lib-esm/sqlite3.js
++++ b/lib-esm/sqlite3.js
+@@ -151,7 +151,7 @@ export class ConnectionPool {
+         // the next borrower would silently inherit it.
+         if (db.open && db.inTransaction) {
+             try {
+-                db.prepare("ROLLBACK").run();
++                executeControl(db, "ROLLBACK");
+             }
+             catch {
+                 // the connection is unusable; drop it rather than reuse it
+@@ -253,7 +253,7 @@ export class Sqlite3Client {
+         const db = await this.#pool.acquire();
+         try {
+             this.#checkUsable(db);
+-            executeStmt(db, transactionModeToBegin(mode), this.#intMode);
++            executeControl(db, transactionModeToBegin(mode));
+             const resultSets = [];
+             for (let i = 0; i < stmts.length; i++) {
+                 try {
+@@ -276,7 +276,7 @@ export class Sqlite3Client {
+                     throw e;
+                 }
+             }
+-            executeStmt(db, "COMMIT", this.#intMode);
++            executeControl(db, "COMMIT");
+             return resultSets;
+         }
+         finally {
+@@ -290,7 +290,7 @@ export class Sqlite3Client {
+         try {
+             this.#checkUsable(db);
+             executeStmt(db, "PRAGMA foreign_keys=off", this.#intMode);
+-            executeStmt(db, transactionModeToBegin("deferred"), this.#intMode);
++            executeControl(db, transactionModeToBegin("deferred"));
+             const resultSets = [];
+             for (let i = 0; i < stmts.length; i++) {
+                 try {
+@@ -309,12 +309,12 @@ export class Sqlite3Client {
+                     throw e;
+                 }
+             }
+-            executeStmt(db, "COMMIT", this.#intMode);
++            executeControl(db, "COMMIT");
+             return resultSets;
+         }
+         finally {
+             if (db.inTransaction) {
+-                executeStmt(db, "ROLLBACK", this.#intMode);
++                executeControl(db, "ROLLBACK");
+             }
+             executeStmt(db, "PRAGMA foreign_keys=on", this.#intMode);
+             this.#pool.release(db);
+@@ -325,7 +325,7 @@ export class Sqlite3Client {
+         const db = await this.#pool.acquire(true);
+         try {
+             this.#checkUsable(db);
+-            executeStmt(db, transactionModeToBegin(mode), this.#intMode);
++            executeControl(db, transactionModeToBegin(mode));
+         }
+         catch (e) {
+             this.#pool.release(db);
+@@ -458,7 +458,7 @@ export class Sqlite3Transaction {
+         }
+         try {
+             this.#checkNotClosed();
+-            executeStmt(db, "ROLLBACK", this.#intMode);
++            executeControl(db, "ROLLBACK");
+         }
+         finally {
+             this.#settle();
+@@ -466,7 +466,7 @@ export class Sqlite3Transaction {
+     }
+     async commit() {
+         try {
+-            executeStmt(this.#getDatabase(), "COMMIT", this.#intMode);
++            executeControl(this.#getDatabase(), "COMMIT");
+         }
+         finally {
+             this.#settle();
+@@ -481,7 +481,7 @@ export class Sqlite3Transaction {
+             // `client.close()` may have closed this connection already, and
+             // reading `inTransaction` on a closed database aborts the process.
+             if (db.open && db.inTransaction) {
+-                executeStmt(db, "ROLLBACK", this.#intMode);
++                executeControl(db, "ROLLBACK");
+             }
+         }
+         finally {
+@@ -501,6 +501,16 @@ export class Sqlite3Transaction {
+         }
+     }
+ }
++// Transaction controls must not leave a prepared statement active after SQLITE_BUSY.
++// https://github.com/tursodatabase/libsql-client-ts/issues/361
++function executeControl(db, sql) {
++    try {
++        db.exec(sql);
++    }
++    catch (e) {
++        throw mapSqliteError(e);
++    }
++}
+ function executeStmt(db, stmt, intMode) {
+     let sql;
+     let args;

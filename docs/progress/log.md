@@ -4,6 +4,11 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (saved sessions)
+- T-50/T-51 demo subset + T-52 cookie access; T-54 issued games and atomic saved results, T-81 session validation/replay/rollback tests. D-18 contract; D-19 native driver patch and deferred optional indexes (T-92).
+- Verified: check/build; 82 unit tests; 40 Chromium UI/API + 8 WebKit API/browser-fetch tests; demo-off 404/no-DB smoke. Full WebKit UI is blocked by an independently reproduced native coordinate failure (T-93); Learn screenshot reviewed.
+- Next: T-55 state polling and UI integration, then T-40/T-41 parent proof. Broad entity/scenario/PIN/task work stays open; no deployment changes.
+
 ## 2026-11-14 (learning loop)
 - T-80 defines the connected demo slice; T-35 implements the per-tab post-game loop, Brainy/wallet updates, stop and one-time third-game break bonus (D-17). No DB writes yet.
 - T-34 adds Continue the pattern (2 × 4 seeded rounds), shared shape kit and localized host text; T-24/T-25 add tested gain-policy and recommendation functions without inventing calibration/age norms.

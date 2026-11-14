@@ -35,7 +35,7 @@ export function isLearningProgress(value: unknown): value is LearningProgress {
   );
 }
 
-/** Pure preview transition. Server validation/persistence still belongs to T-81/T-54. */
+/** Pure transition. The host validates the issued session and owns persistence. */
 export function finishLearningSession(before: LearningProgress, result: GameResult) {
   if (!isLearningProgress(before)) throw new RangeError("Invalid learning progress.");
   const stats = applyStatGains(before.stats, prototypeStatGains(result.gameId));

@@ -1,4 +1,10 @@
+import { randomUUID } from "node:crypto";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 import { defineConfig } from "@playwright/test";
+
+const databasePath = join(tmpdir(), `brainee-e2e-${randomUUID()}.db`);
 
 export default defineConfig({
   testDir: "./e2e",
@@ -7,6 +13,8 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 1 : 2,
   reporter: "list",
+  metadata: { databasePath },
+  globalTeardown: "./e2e/cleanup-database.ts",
   use: {
     baseURL: "http://127.0.0.1:3100",
     colorScheme: "light",
@@ -26,9 +34,15 @@ export default defineConfig({
     { name: "webkit-ipad", use: { browserName: "webkit", viewport: { width: 820, height: 1180 } } },
   ],
   webServer: {
-    command: "pnpm exec next start --hostname 127.0.0.1 --port 3100",
+    command:
+      "pnpm --filter @brainee/db db:reset && pnpm exec next start --hostname 127.0.0.1 --port 3100",
     url: "http://127.0.0.1:3100/learn",
     reuseExistingServer: false,
-    env: { NEXT_TELEMETRY_DISABLED: "1", BRAINEE_LAB: "1" },
+    env: {
+      NEXT_TELEMETRY_DISABLED: "1",
+      BRAINEE_LAB: "1",
+      DEMO_MODE: "1",
+      DATABASE_URL: pathToFileURL(databasePath).href,
+    },
   },
 });

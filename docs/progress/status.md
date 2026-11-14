@@ -2,7 +2,7 @@
 
 > A snapshot: **overwrite it, don't append.** History goes in [log.md](log.md); tasks go in [todo.md](todo.md).
 
-**Updated:** 2026-11-14 · **Phase:** P1 Scaffold (in progress)
+**Updated:** 2026-11-14 · **Phase:** P5 Data (demo subset)
 
 ## Phases
 
@@ -13,22 +13,22 @@
 | P2 | Core logic + Brainy + game contract | 🔄 in progress (T-26, T-29 left) | T-20 – T-29 |
 | P3 | Child flow | 🔄 in progress (two games + post-game preview done) | T-30 – T-38 |
 | P4 | Parent flow | ⬜ todo | T-40 – T-46 |
-| P5 | Data, auth, live sync | ⬜ todo | T-50 – T-55 |
+| P5 | Data, auth, live sync | 🔄 in progress (demo session/result API done; polling next) | T-50 – T-55 |
 | P6 | PWA + allowlist on a real device | ⬜ todo | T-60 – T-63 |
 | P7 | Demo & pitch → **deploy last** | ⬜ todo | T-70 – T-74, then T-14 |
 
 Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 
 ## Current focus
-The [smallest connected demo](todo.md#smallest-end-to-end-demo-slice-t-80) is scoped. Its child flow works as a per-tab preview (T-34/T-35); next is the shared data slice that will let the parent see a saved result.
+The [smallest connected demo](todo.md#smallest-end-to-end-demo-slice-t-80) has saved-session APIs. Next: T-55 shared state and UI integration, then the parent proof. The child UI still runs its per-tab preview.
 
 ## Handoff
-- **Last session:** T-80 records the exact demo task scope. T-35 adds Brainy before/after, actual capped stat chips, earned stars, next choices, stop/thank-you and the one-time third-game bonus/break. Core owns the transition; dock and Brainy tab read the same preview. T-34 adds Continue the pattern (2 × 4 seeded rounds), shared `kit/Shape` and host-supplied game text. T-24 adds injected gain-policy/70–30 splitting + ability rollup; T-25 adds entry recommendations. D-17 records the preview boundary. Verified: `pnpm check`, `pnpm test` (70 unit tests), `pnpm e2e` (64 tests in Chromium + WebKit, phone + iPad); WebKit post-game, break and pattern screenshots reviewed.
+- **Last session:** implemented the T-50/T-51 demo subset (Parent/BrainyState/Game/GameSession, hashed cookie access/run, family version and one idempotent seeded scenario). T-52 cookie access and T-54 start/finish/stop APIs exist; T-81 session validation/replay/atomicity are tested. D-18 defines the [contract](../dev/sessions.md); D-19 records a pinned native libSQL transaction-control patch and deferred optional indexes. Broad T-50/T-51/T-52/T-81 remain open for their other scope. Verified: build and `pnpm check`; 82 unit tests; all 40 Chromium tests and 8 WebKit API/browser-fetch tests. Demo-off smoke: all five endpoint requests return 404 without creating a DB. Full WebKit UI tests are blocked by T-93 (see below); the existing Learn screenshot was reviewed.
 - **Next (in order):**
-  1. T-50/T-51 demo subset: Parent, BrainyState, Game, GameSession and wallet/state versioning for one deterministic family. Read [data-model.md](../product/data-model.md) and the T-80 scope; leave unrelated entities out of this increment and the broad task checkboxes open.
-  2. T-52 seeded family session, then T-81/T-54: validate and deduplicate finishes, call core and atomically save rewards/stats/session. Cover retries and rollback before wiring the UI.
-  3. T-55: versioned state endpoint + polling; replace the [temporary preview](../dev/ui.md#temporary-learning-preview-t-35). T-40/T-41 demo subset: PIN barrier, parent Brainy/balance/latest game, then the two-device proof (T-70/T-71).
-  4. After the connected proof: T-31/T-32 entry and Learn recommendations using T-25, with explicitly labelled/supplied age averages (T-83). Embedded games and motion polish remain later.
-- **Notes:** `demoChild` still initializes client data; there are no DB writes or parent sync. Prototype per-game gains remain in `prototypeStatGains`; the new T-24 policy has no approved calibration. T-25 requires age averages/history/time and is not wired to the entry UI. Mood decay is still TBD. Stale `.next/dev/types` after moving routes: delete `apps/web/.next/dev`.
+  1. T-55: read [sessions.md](../dev/sessions.md), add a cookie-authorized versioned `/api/state`, then polling and UI wiring. Obtain the issued game ID/seed before play, retain that ID for finish retries, and show only server-acknowledged rewards. Replace preview progress writes; a replayed receipt may contain an older wallet, so refetch current state.
+  2. T-40/T-41 demo subset: PIN barrier and parent Brainy/balance/latest game. The demo child cookie alone must not grant parent privilege. Then the two-device proof (T-70/T-71).
+  3. T-93 QA: fix the local WebKit input-coordinate problem and rerun the full suite. A standalone bare-button repro and attempts are in [setup.md](../dev/setup.md#webkit-pointer-diagnostics-t-93); do not weaken click assertions. T-92 tracks removal of the driver workaround once upstream regressions pass.
+  4. After the connected proof: T-31/T-32 entry and Learn recommendations using T-25, with supplied/labelled age averages (T-83). Other entities, scenario switching, embedded games and motion polish remain later.
+- **Notes:** APIs are off unless `DEMO_MODE=1` and the database is prepared; there is no automatic seed/reset on requests. The browser UI still reads `demoChild` and its local preview, not the new API. Saved run state is cookie-scoped; the current preview is per-tab. Prototype gains, age averages and mood decay retain their existing product TBDs. Stale route types: delete `apps/web/.next/dev`.
 - **Rules to keep:** single `master` branch; no deploy work before T-14; don't assume a long-running process or a writable disk; `getDatabaseConfig` stays `file:`-only until T-14.
-- **Blockers / open questions:** none for the demo data slice. Product TBDs remain in [overview.md](../product/overview.md#open-questions-tbd).
+- **Blockers / open questions:** T-93 blocks complete WebKit UI verification on this Mac: requested click coordinates produce unrelated native pointer coordinates, including on a bare button. Reinstall, headed mode and one worker did not resolve it. API tests pass in WebKit; Chromium UI/API and DB tests pass. No blocker to implementing T-55. Product TBDs remain in [overview.md](../product/overview.md#open-questions-tbd).

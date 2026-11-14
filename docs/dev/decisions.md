@@ -6,6 +6,16 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-19 · Keep pinned SQLite tooling compatible with concurrent demo writes · 2026-11-14 · accepted
+**Context:** regression tests reproduced a failed-BEGIN/COMMIT statement remaining active in the native libSQL binding and duplicate index creation during repeated Drizzle Kit pushes with CHECK constraints. Upstream reports: [libSQL #361](https://github.com/tursodatabase/libsql-client-ts/issues/361), [Drizzle #4574](https://github.com/drizzle-team/drizzle-orm/issues/4574).
+**Decision:** apply a pnpm patch to `@libsql/client@0.18.0` (ESM and CJS) so transaction controls use native `exec`, preserving error mapping. Use one configured native handle per request-owned client, WAL, and bounded whole-transaction SQLITE_BUSY retries. Keep optional secondary indexes/email uniqueness out of the demo schema while the pinned Kit rebuild bug persists.
+**Consequences:** no dependency upgrade or new service. Independent-connection concurrency and parallel FK writes are tested; repeated pushes retain state/history/access references. Remove the patch and restore indexes only when replacement versions pass these regressions (T-92).
+
+## D-18 · Server-issued demo games and atomic completion receipts · 2026-11-14 · accepted · extends D-07/D-17
+**Context:** the connected demo needs durable rewards and repeat-safe finishes before UI polling is wired.
+**Decision:** explicit demo opt-in, an opaque cookie stored as a hash, a server-issued pending game ID, strict core result validation, and a transaction saving rewards/state/history/version together. Retries return an immutable receipt. Contract and trust boundaries: [sessions.md](sessions.md).
+**Consequences:** API data survives requests/process restarts; no auth provider or shared server memory. The parent PIN and current-state polling are separate follow-ups; the existing UI preview is unchanged.
+
 ## D-17 · Per-tab learning preview before server rewards · 2026-11-14 · accepted
 **Context:** T-35 must demonstrate changed Brainy/wallet state across child and fullscreen game routes before T-54 persistence exists.
 **Decision:** a root client provider calls pure core transitions and keeps a transient per-tab snapshot; no API writes or shared server memory. The storage, stopping and replacement boundary is documented in [ui.md](ui.md#temporary-learning-preview-t-35).

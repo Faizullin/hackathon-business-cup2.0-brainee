@@ -8,7 +8,8 @@ import { type DatabaseConfig, getDatabaseConfig } from "./config";
 // A factory keeps imports side-effect free. Runtime callers own the connection lifetime.
 export async function openDatabase(config: DatabaseConfig = getDatabaseConfig()) {
   await mkdir(dirname(config.path), { recursive: true });
-  const client = createClient({ url: config.url });
+  // Keep every operation on the handle configured below (FKs, timeout, WAL).
+  const client = createClient({ url: config.url, concurrency: 1 });
   try {
     await client.execute("PRAGMA foreign_keys = ON");
     await client.execute("PRAGMA busy_timeout = 5000");

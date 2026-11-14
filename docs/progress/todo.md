@@ -12,7 +12,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - Parent proof: T-40 (PIN barrier) and T-41 (Brainy, balance and latest completed game).
 - Verification/demo: T-70 (this slice's Playwright checks) and T-71 (two-device walkthrough).
 
-**Done when:** one finish updates balance/stats once, retrying it pays nothing twice, both devices converge through polling, and the third game offers a break with exactly one bonus. Refresh restores server state. This session builds the client preview; it does not satisfy the saved/two-device part yet. Slice-only work does not complete broader tasks such as all T-41 analytics or all T-50 entities.
+**Done when:** one finish updates balance/stats once, retrying it pays nothing twice, both devices converge through polling, and the third game offers a break with exactly one bonus. Refresh restores server state. The client preview and saved-session APIs exist; UI polling and parent proof remain. Slice-only work does not complete broader tasks such as all T-41 analytics or all T-50 entities.
 
 Other task IDs stay outside this slice. T-24/T-25 are available as pure core improvements; entry flow, tasks/gifts, leisure, advanced analytics, embedded games and motion polish wait. Deployment remains the final task (T-14).
 
@@ -68,10 +68,13 @@ Other task IDs stay outside this slice. T-24/T-25 are available as pure core imp
 
 ## P5 · Data, auth, live sync · [data-model.md](../product/data-model.md)
 - [ ] T-50 Drizzle SQLite schema for every entity
+  - [x] Connected-demo subset: Parent, BrainyState, Game, GameSession, cookie access/run and family version; constraints + FK tests → [data-model.md](../product/data-model.md)
 - [ ] T-51 Seeds: demo family, scenarios "после квиза / сейчас / только развлечения"
+  - [x] One deterministic **now** scenario with quiz baseline, two games, hashed parent PIN and consistent history; reruns preserve progress
 - [ ] T-52 Demo session (`DEMO_MODE`, seeded family) + parent PIN barrier; Better Auth = stretch goal
+  - [x] Explicit opt-in, opaque HttpOnly cookie, hashed token, expiry, same-origin mutations; parent barrier remains T-40 → [sessions.md](../dev/sessions.md)
 - [ ] T-53 Onboarding quiz → starting stats
-- [ ] T-54 API: session finish → core → db
+- [x] T-54 API: issued game start/finish/stop → core → atomic saved state and receipt; UI integration is T-55 → [sessions.md](../dev/sessions.md)
 - [ ] T-55 Live updates by short polling: `/api/state` version + TanStack Query (~3 s) in child and parent UIs → [D-15](../dev/decisions.md)
 
 ## P6 · PWA + allowlist · [rules.md](../product/rules.md#device-lockdown)
@@ -91,6 +94,7 @@ Other task IDs stay outside this slice. T-24/T-25 are available as pure core imp
 ## Backlog / ideas
 - [x] T-80 Define a smallest end-to-end demo slice and prioritize it ahead of optional features → [scope above](#smallest-end-to-end-demo-slice-t-80).
 - [ ] T-81 Specify server-side result validation, idempotency and atomic wallet/task updates.
+  - [x] Session/result validation, concurrent replay protection, atomic wallet/Brainy/run/history/version and rollback tests → [sessions.md](../dev/sessions.md); task updates await T-44
 - [ ] T-82 Define demo versus production boundaries for sessions, parent PIN, child data and backups.
 - [ ] T-83 Resolve reward incentives and clarify the evidence and labels for skill scores, age averages and seeded rankings.
 - [ ] T-84 Validate the PWA and two-device sync on a real iPad early over LAN (no deployment needed); define offline behavior and source licensed demo media.
@@ -100,6 +104,8 @@ Other task IDs stay outside this slice. T-24/T-25 are available as pure core imp
 - [ ] T-89 Manifest schema (zod) for all games + CI validation: id, version, engine, runtime, entry, skills, levels, bridge protocol/contract, size budget, license → [games.md](../dev/games.md#scaling-three-paths-in-one-contract-d-16)
 - [ ] T-90 Game conformance suite (Playwright, Chromium + WebKit): load, ready ≤ 10 s, one finish, zero foreign requests, size budget, no console errors; required before a game is listed
 - [ ] T-91 (Later) External game artifacts (path C): `games:import <id>@<version>` with checksum, `GameVersion` table, enable/disable/rollback
+- [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
+- [ ] T-93 Resolve WebKit's native mouse-coordinate failure on this Mac, then rerun the complete UI suite; a bare-button repro is in [setup.md](../dev/setup.md#webkit-pointer-diagnostics-t-93)
 - Additional learning games (Sounds & letters, Repeat after Brainy, Magic garden, Expedition, Error detective)
 - Fun games beyond the first one
 - Push notification on `stage_up`

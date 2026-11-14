@@ -19,6 +19,7 @@
     "db:studio": "tsx --env-file-if-exists=../../apps/web/.env.local scripts/manage.ts studio"
   },
   "dependencies": {
+    "@brainee/core": "workspace:*",
     "@libsql/client": "0.18.0",
     "drizzle-orm": "0.45.4"
   },
