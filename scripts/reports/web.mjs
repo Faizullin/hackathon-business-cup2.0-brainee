@@ -625,7 +625,7 @@ viewer.addEventListener('click',(event)=>{if(event.target===viewer)viewer.close(
 
 // ── Browser session (shots and flows) ─────────────────────────────────────────
 const VIEWPORTS = {
-  ipad: { name: "ipad", width: 820, height: 1180 },
+  ipad: { name: "ipad", width: 1180, height: 820 },
   phone: { name: "phone", width: 390, height: 844, isMobile: true, deviceScaleFactor: 2 },
   desktop: { name: "desktop", width: 1440, height: 900 },
   mobile: { name: "mobile", width: 390, height: 844, isMobile: true, deviceScaleFactor: 2 },

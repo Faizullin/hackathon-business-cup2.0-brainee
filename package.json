@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "turbo run dev",
+    "demo": "pnpm db:reset && DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web dev",
     "build": "turbo run build",
     "start": "pnpm --filter @brainee/web start",
     "e2e": "pnpm build && pnpm --filter @brainee/web e2e",

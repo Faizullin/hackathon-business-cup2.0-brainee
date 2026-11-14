@@ -9,12 +9,17 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: { default: ru.app.name, template: `%s · ${ru.app.name}` },
   description: ru.app.description,
+  appleWebApp: { capable: true, title: ru.app.name, statusBarStyle: "default" },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f1f4fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#10121c" },
+  ],
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

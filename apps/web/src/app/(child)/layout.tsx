@@ -3,7 +3,8 @@ import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { TabBar } from "@/components/child/TabBar";
 import { ru } from "@/i18n/ru";
 
-// Child app shell: content + persistent bottom tab bar. Fullscreen games use the sibling (game) group.
+// Child app shell: content + persistent tab bar (bottom on phones, left rail in iPad landscape).
+// Fullscreen games use the sibling (game) group.
 export default function ChildLayout({ children }: { children: ReactNode }) {
   return (
     <LearningBoundary>
@@ -18,8 +19,14 @@ export default function ChildLayout({ children }: { children: ReactNode }) {
           id="main-content"
           data-mode="child"
           tabIndex={-1}
-          className="mx-auto flex w-full max-w-[1180px] flex-col gap-5 pt-[max(16px,env(safe-area-inset-top))] pr-[max(16px,env(safe-area-inset-right))] pb-[calc(96px+env(safe-area-inset-bottom))] pl-[max(16px,env(safe-area-inset-left))]"
+          className="mx-auto flex w-full max-w-[1180px] flex-col gap-5 pt-[max(16px,env(safe-area-inset-top))] pr-[max(16px,env(safe-area-inset-right))] pb-[calc(96px+env(safe-area-inset-bottom))] pl-[max(16px,env(safe-area-inset-left))] lg:max-w-none lg:pb-[max(24px,env(safe-area-inset-bottom))] lg:pl-[calc(120px+env(safe-area-inset-left))] xl:pr-8"
         >
+          <p
+            data-testid="rotate-hint"
+            className="hidden rounded-xl bg-sky/10 p-3 text-center font-medium text-sm [@media(min-width:700px)_and_(orientation:portrait)]:block"
+          >
+            {ru.child.rotateHint}
+          </p>
           <ViewTransition default="page-fade">{children}</ViewTransition>
         </main>
         <TabBar />

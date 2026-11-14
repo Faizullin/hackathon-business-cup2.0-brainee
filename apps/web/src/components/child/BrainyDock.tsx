@@ -20,15 +20,20 @@ export function BrainyDock() {
     <section
       data-testid="brainy-dock"
       aria-label={t.label}
-      className="flex items-center gap-3 rounded-panel border border-border bg-card p-3 sm:gap-5 sm:p-4"
+      className="flex items-center gap-3 rounded-panel border border-border bg-card p-3 sm:gap-5 sm:p-4 lg:flex-col lg:items-stretch lg:gap-4 lg:p-5"
     >
       <Link
         href="/brainy"
         aria-label={t.openBrainy}
-        className="shrink-0 rounded-2xl transition-transform duration-(--dur-press) active:scale-95"
+        className="shrink-0 rounded-2xl transition-transform duration-(--dur-press) active:scale-95 lg:self-center"
       >
         <ViewTransition name="brainy-hero">
-          <Brainy stats={stats} equipped={equipped} label="" className="h-24 w-auto sm:h-[136px]" />
+          <Brainy
+            stats={stats}
+            equipped={equipped}
+            label=""
+            className="h-24 w-auto sm:h-[136px] lg:h-44"
+          />
         </ViewTransition>
       </Link>
 

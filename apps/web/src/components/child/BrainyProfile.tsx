@@ -28,8 +28,8 @@ export function BrainyProfile() {
   const weakest = BODY_STATS.reduce((a, b) => (stats[a] <= stats[b] ? a : b));
   const suggestion = practiceGame(stats, reactGames);
   return (
-    <>
-      <section className="flex flex-col items-center gap-4 rounded-panel border border-border bg-card p-5 text-center sm:p-8">
+    <div className="flex flex-col gap-5 lg:grid lg:grid-cols-[minmax(0,400px)_minmax(0,1fr)] lg:items-start">
+      <section className="flex flex-col items-center gap-4 rounded-panel border border-border bg-card p-5 text-center sm:p-8 lg:sticky lg:top-[max(16px,env(safe-area-inset-top))]">
         <h1>{t.title}</h1>
         {resting && (
           <p role="status" className="rounded-xl bg-mint/10 p-3">
@@ -71,102 +71,105 @@ export function BrainyProfile() {
           ))}
         </ol>
       </section>
-
-      <Panel title={t.stats}>
-        <dl aria-label={t.stats} className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {[...BODY_STATS, "resp" as const].map((stat) => (
-            <div key={stat} className="flex flex-col gap-1.5 rounded-xl bg-secondary p-3">
-              <div className="flex items-baseline justify-between gap-2">
-                <dt className="font-semibold">
-                  {ru.lab.brainy.statNames[stat]}{" "}
-                  <span className="font-normal text-muted-foreground text-xs">
-                    {t.trains[stat]}
-                  </span>
-                </dt>
-                <dd data-testid={`brainy-stat-${stat}`} className="font-semibold">
-                  {stats[stat]}
-                </dd>
+      <div className="flex min-w-0 flex-col gap-5">
+        <Panel title={t.stats}>
+          <dl aria-label={t.stats} className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {[...BODY_STATS, "resp" as const].map((stat) => (
+              <div key={stat} className="flex flex-col gap-1.5 rounded-xl bg-secondary p-3">
+                <div className="flex items-baseline justify-between gap-2">
+                  <dt className="font-semibold">
+                    {ru.lab.brainy.statNames[stat]}{" "}
+                    <span className="font-normal text-muted-foreground text-xs">
+                      {t.trains[stat]}
+                    </span>
+                  </dt>
+                  <dd data-testid={`brainy-stat-${stat}`} className="font-semibold">
+                    {stats[stat]}
+                  </dd>
+                </div>
+                <Meter value={stats[stat]} />
               </div>
-              <Meter value={stats[stat]} />
-            </div>
-          ))}
-        </dl>
-      </Panel>
+            ))}
+          </dl>
+        </Panel>
 
-      <Panel title={t.shop} note={`★ ${snapshot.progress.wallet.stars}`}>
-        <Notice notice={notice} />
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {ACCESSORIES.map((item) => {
-            const has = owned.includes(item.id);
-            const worn = equipped[item.slot] === item.id;
-            return (
-              <li
-                key={item.id}
-                className={cn(
-                  "flex flex-col items-center gap-2 rounded-xl border border-border p-3 text-center",
-                  worn && "border-mint bg-mint/5",
-                )}
-              >
-                <Brainy
-                  stats={stats}
-                  equipped={{ ...equipped, [item.slot]: item.id }}
-                  label=""
-                  className="h-24 w-auto"
-                />
-                <span className="font-semibold text-sm">{ru.accessories[item.id]}</span>
-                {!has ? (
-                  <button
-                    type="button"
-                    disabled={busy}
-                    className={primaryButton}
-                    onClick={() => run({ type: "buy-accessory", id: item.id })}
-                  >
-                    {t.buy(item.priceStars)}
-                  </button>
-                ) : worn ? (
-                  <button
-                    type="button"
-                    disabled={busy}
-                    className={outlineButton}
-                    onClick={() => run({ type: "unequip", slot: item.slot })}
-                  >
-                    {t.remove}
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    disabled={busy}
-                    className={outlineButton}
-                    onClick={() => run({ type: "equip", id: item.id })}
-                  >
-                    {t.wear}
-                  </button>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </Panel>
+        <Panel title={t.shop} note={`★ ${snapshot.progress.wallet.stars}`}>
+          <Notice notice={notice} />
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {ACCESSORIES.map((item) => {
+              const has = owned.includes(item.id);
+              const worn = equipped[item.slot] === item.id;
+              return (
+                <li
+                  key={item.id}
+                  className={cn(
+                    "flex flex-col items-center gap-2 rounded-xl border border-border p-3 text-center",
+                    worn && "border-mint bg-mint/5",
+                  )}
+                >
+                  <Brainy
+                    stats={stats}
+                    equipped={{ ...equipped, [item.slot]: item.id }}
+                    label=""
+                    className="h-24 w-auto"
+                  />
+                  <span className="font-semibold text-sm">{ru.accessories[item.id]}</span>
+                  {!has ? (
+                    <button
+                      type="button"
+                      disabled={busy}
+                      className={primaryButton}
+                      onClick={() => run({ type: "buy-accessory", id: item.id })}
+                    >
+                      {t.buy(item.priceStars)}
+                    </button>
+                  ) : worn ? (
+                    <button
+                      type="button"
+                      disabled={busy}
+                      className={outlineButton}
+                      onClick={() => run({ type: "unequip", slot: item.slot })}
+                    >
+                      {t.remove}
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      disabled={busy}
+                      className={outlineButton}
+                      onClick={() => run({ type: "equip", id: item.id })}
+                    >
+                      {t.wear}
+                    </button>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </Panel>
 
-      <Panel title={t.earned}>
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {EARNED_REWARDS.map((reward) => {
-            const has = earned.includes(reward);
-            return (
-              <li
-                key={reward}
-                className={cn(
-                  "rounded-xl p-3 text-center text-sm font-semibold",
-                  has ? "bg-sun/20" : "border-2 border-border border-dashed text-muted-foreground",
-                )}
-              >
-                {t.earnedNames[reward]}
-                {!has && <span className="block font-normal text-xs">{t.locked}</span>}
-              </li>
-            );
-          })}
-        </ul>
-      </Panel>
-    </>
+        <Panel title={t.earned}>
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {EARNED_REWARDS.map((reward) => {
+              const has = earned.includes(reward);
+              return (
+                <li
+                  key={reward}
+                  className={cn(
+                    "rounded-xl p-3 text-center text-sm font-semibold",
+                    has
+                      ? "bg-sun/20"
+                      : "border-2 border-border border-dashed text-muted-foreground",
+                  )}
+                >
+                  {t.earnedNames[reward]}
+                  {!has && <span className="block font-normal text-xs">{t.locked}</span>}
+                </li>
+              );
+            })}
+          </ul>
+        </Panel>
+      </div>
+    </div>
   );
 }

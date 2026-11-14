@@ -8,7 +8,7 @@
 - Nothing else: no Docker, no database server, no cloud accounts.
 
 ## First run
-Enable demo access using the [database setup](#local-database-and-tests) before starting the child flow (`DEMO_MODE=1` in `apps/web/.env.local`). Then:
+Fastest manual run: `pnpm demo` (resets `data/dev.db`, then starts the dev server with `DEMO_MODE=1 BRAINEE_LAB=1`). Otherwise enable demo access using the [database setup](#local-database-and-tests) (`DEMO_MODE=1` in `apps/web/.env.local`, or `DEMO_MODE=1 pnpm dev`; `turbo.json` passes `DEMO_MODE`, `BRAINEE_LAB` and `DATABASE_URL` through). Without it every child/parent screen shows «Не удалось загрузить Брейни». Then:
 ```bash
 pnpm install
 pnpm db:reset
@@ -35,7 +35,7 @@ Available commands:
 | `pnpm typecheck` | Run each package's `typecheck` through Turborepo |
 | `pnpm format` | Format source and config files; Markdown and frozen prototype sources are excluded |
 
-Before opening child screens, set `DEMO_MODE=1` in `apps/web/.env.local` ([database setup below](#local-database-and-tests)). `/` redirects to `/learn`; the child now requires saved state and shows a retry screen if unavailable. `/analytics` and `/login` remain placeholders. **`/lab`** is an independent game harness ([games.md](games.md#lab)): on in `pnpm dev`, 404 in production unless `BRAINEE_LAB=1` (the e2e server sets it). Parent access/view remains a follow-up.
+Before opening child screens, set `DEMO_MODE=1` in `apps/web/.env.local` ([database setup below](#local-database-and-tests)). `/` redirects to the entry screen `/entry`; child and parent screens require saved state and show a retry screen if unavailable. Parent pages (`/analytics`, `/tasks`, `/rewards`) need PIN `1234`. **`/lab`** is an independent game harness ([games.md](games.md#lab)): on in `pnpm dev`, 404 in production unless `BRAINEE_LAB=1` (the e2e server sets it). Parent access/view remains a follow-up.
 
 pnpm permits the esbuild install script required by tsx/Drizzle Kit and Vitest's toolchain. Other dependency build scripts remain subject to pnpm's approval settings.
 

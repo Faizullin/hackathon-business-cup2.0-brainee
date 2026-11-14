@@ -17,5 +17,6 @@
       "dependsOn": ["^typecheck"],
       "outputs": []
     }
-  }
+  },
+  "globalPassThroughEnv": ["DEMO_MODE", "BRAINEE_LAB", "DATABASE_URL"]
 }

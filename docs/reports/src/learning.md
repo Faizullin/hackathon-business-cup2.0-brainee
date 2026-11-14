@@ -21,7 +21,7 @@ show the hint «Почти!» and the correction star.
 
 {{flow:phone-learning}}
 
-### iPad viewport · 820 × 1180
+### iPad viewport · 1180 × 820 landscape
 
 {{flow:ipad-learning}}
 
@@ -32,25 +32,25 @@ and WebKit; this is not a real-device or Screen Time test.
 
 ### Learn
 
-{{compare:iPad (820 × 1180)=learn@ipad|Phone (390 × 844)=learn@phone}}
+{{compare:iPad (1180 × 820 landscape)=learn@ipad|Phone (390 × 844)=learn@phone}}
 
 ### Odd one out
 
-{{compare:iPad (820 × 1180)=odd-one-out@ipad|Phone (390 × 844)=odd-one-out@phone}}
+{{compare:iPad (1180 × 820 landscape)=odd-one-out@ipad|Phone (390 × 844)=odd-one-out@phone}}
 
 ### Continue the pattern, level 2
 
-{{compare:iPad (820 × 1180)=continue-pattern@ipad|Phone (390 × 844)=continue-pattern@phone}}
+{{compare:iPad (1180 × 820 landscape)=continue-pattern@ipad|Phone (390 × 844)=continue-pattern@phone}}
 
 ### Brainy tab
 
-{{compare:iPad (820 × 1180)=brainy@ipad|Phone (390 × 844)=brainy@phone}}
+{{compare:iPad (1180 × 820 landscape)=brainy@ipad|Phone (390 × 844)=brainy@phone}}
 
 ### Developer lab (`/lab`, not in the product)
 
-{{compare:iPad (820 × 1180)=lab@ipad|Phone (390 × 844)=lab@phone}}
+{{compare:iPad (1180 × 820 landscape)=lab@ipad|Phone (390 × 844)=lab@phone}}
 
-{{compare:iPad (820 × 1180)=lab-brainy@ipad|Phone (390 × 844)=lab-brainy@phone}}
+{{compare:iPad (1180 × 820 landscape)=lab-brainy@ipad|Phone (390 × 844)=lab-brainy@phone}}
 
 ## Logs and capture checks
 

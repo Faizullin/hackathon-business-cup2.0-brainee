@@ -15,7 +15,7 @@ function Entry() {
   const t = ru.child.entry;
   const first = recs[0];
   return (
-    <section className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-5 p-4 sm:p-8">
+    <section className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-5 p-4 sm:p-8 lg:max-w-5xl">
       <h1 className="text-center">{t.title}</h1>
       <div className="flex items-center gap-4 rounded-panel border border-border bg-card p-4">
         <Brainy

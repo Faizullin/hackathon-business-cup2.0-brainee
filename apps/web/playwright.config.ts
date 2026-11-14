@@ -29,10 +29,10 @@ export default defineConfig({
     },
     {
       name: "chromium-ipad",
-      use: { browserName: "chromium", viewport: { width: 820, height: 1180 } },
+      use: { browserName: "chromium", viewport: { width: 1180, height: 820 } },
     },
     { name: "webkit-phone", use: { browserName: "webkit", viewport: { width: 390, height: 844 } } },
-    { name: "webkit-ipad", use: { browserName: "webkit", viewport: { width: 820, height: 1180 } } },
+    { name: "webkit-ipad", use: { browserName: "webkit", viewport: { width: 1180, height: 820 } } },
   ],
   webServer: {
     command:

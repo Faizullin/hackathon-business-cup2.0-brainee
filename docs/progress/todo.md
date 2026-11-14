@@ -32,7 +32,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 | 9 | Ranking hidden from child, no last names | ✅ parent-only, initials (T-43) |
 | 10 | Own-domain only; works with Screen Time allowlist | e2e checks foreign requests; T-60–T-62 remain |
 
-**Left before deployment (in order):** T-70 acceptance walkthrough → T-71 two-device demo script → T-60 PWA manifest/icons → T-61 network audit → T-62/T-84 iPad over LAN → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Nice-to-have: T-85 one playable fun game, T-53 onboarding quiz.
+**Left before deployment (in order):** T-70 acceptance walkthrough → T-71 two-device demo script → T-61 network audit → T-62/T-84 iPad over LAN → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Nice-to-have: T-85 one playable fun game, T-53 onboarding quiz.
 
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
@@ -98,7 +98,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
   - [x] Parent consumer; child ↔ parent sync verified in `mvp-pages.spec.ts`
 
 ## P6 · PWA + allowlist · [rules.md](../product/rules.md#device-lockdown)
-- [ ] T-60 Serwist PWA manifest + icons + offline shell
+- [x] T-60 PWA manifest + generated icons (`/manifest.webmanifest`, `/icon`, `/apple-icon`), standalone, theme colors; offline shell not needed for the demo
 - [ ] T-61 Audit: zero foreign-domain requests (DevTools network)
 - [ ] T-62 Test on an iPad: over LAN during development; with Screen Time "Allowed Websites Only" after T-14
 - [ ] T-63 Onboarding wizard for setting up the allowlist (stretch goal)
@@ -126,6 +126,8 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-91 (Later) External game artifacts (path C): `games:import <id>@<version>` with checksum, `GameVersion` table, enable/disable/rollback
 - [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
 - [x] T-94 Post-game «Подтянуть навык» card should prefer a different game than the one just played (the report shows it repeating Odd one out next to its own next-level card) → [screens.md](../product/screens.md#game-screen-and-no-exit-flow)
+- [x] T-98 iPad landscape layout (1180 × 820): left tab rail, dock as side column, two-column Brainy tab; portrait-tablet rotate hint; e2e/report iPad viewport switched to landscape
+- [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run
 - [x] T-96 `mvp` report module: every page + child → parent walkthrough; `scaffold` report retired → [reports/mvp.md](../reports/mvp.md)
 - [ ] T-97 Showcase follow-ups after the pitch: real Task/Gift/Request tables, computed analytics, playable fun games and cartoons, presenter «Сбросить демо» button (endpoint exists)
 - [x] T-95 `learning` report module: phone/iPad recordings of the saved three-game loop, break, tabs and `/lab` → [reports/learning.md](../reports/learning.md)

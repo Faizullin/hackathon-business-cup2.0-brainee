@@ -32,6 +32,7 @@ export const ru = {
       stopError: "Не удалось закончить занятие. Нажми ещё раз.",
     },
     tabsLabel: "Разделы",
+    rotateHint: "Поверни iPad горизонтально — так удобнее играть.",
     tabs: { learn: "Учимся", leisure: "Отдых", gifts: "Подарки", brainy: "Брейни" },
     dock: {
       label: "Брейни и кошелёк",

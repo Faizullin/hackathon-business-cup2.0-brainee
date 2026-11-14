@@ -21,7 +21,7 @@ show the hint «Почти!» and the correction star.
 
 ### Phone · 390 × 844
 
-**Phone: three saved games, break and child tabs** (flow `phone-learning`): PASSED, 27 of 27 checks passed, 43.6 s, phone. Recorded Nov 14, 2026, 6:00 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/learn`.
+**Phone: three saved games, break and child tabs** (flow `phone-learning`): PASSED, 27 of 27 checks passed, 38.2 s, phone. Recorded Nov 14, 2026, 6:24 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/learn`.
 
 [![Phone: three saved games, break and child tabs: click to play the recording](videos/learning/phone-learning.jpg)](videos/learning/phone-learning.mp4)
 
@@ -29,71 +29,71 @@ show the hint «Почти!» and the correction star.
 
 | Time | Source | Entry |
 | --- | --- | --- |
-| 00:00.058 | step | open /learn |
-| 00:01.629 | check | Learn opens with saved state |
-| 00:01.632 | check | The Brainy dock shows the saved wallet |
-| 00:01.635 | check | The document language is Russian |
-| 00:01.635 | check | The screen fits without horizontal scrolling |
-| 00:01.635 | check | The two self-hosted font families load |
-| 00:01.635 | step | call checkSurface |
-| 00:02.837 | step | wait 1200 |
-| 00:02.837 | mark | Game 1: open Continue the pattern from the Learn grid |
-| 00:02.945 | step | click {"by":"role","role":"link","name":"Продолжи узор Логика","exact":true} |
-| 00:03.046 | check | The game opens fullscreen |
-| 00:03.327 | mark | Play Continue the pattern |
-| 00:17.206 | check | Four rounds played (5 corrected) |
-| 00:17.206 | step | call playGame |
-| 00:17.235 | check | Game 1: «Игра пройдена!» shows stars and Brainy before → after |
-| 00:17.236 | check | No break suggestion before the third game |
-| 00:19.942 | step | call showPostGame |
-| 00:19.942 | mark | Game 2: «Что дальше?» practice card |
-| 00:19.955 | step | click {"by":"testId","value":"practice-game"} |
-| 00:20.740 | mark | Play Odd one out |
-| 00:25.555 | check | Four rounds played |
-| 00:25.555 | step | call playGame |
-| 00:25.580 | check | Game 2: «Игра пройдена!» shows stars and Brainy before → after |
-| 00:25.580 | check | No break suggestion before the third game |
-| 00:28.287 | step | call showPostGame |
-| 00:28.287 | mark | Game 3: next level card |
-| 00:28.305 | step | click {"by":"testId","value":"next-level"} |
-| 00:28.382 | mark | Play Odd one out |
-| 00:33.136 | check | Four rounds played |
-| 00:33.136 | step | call playGame |
-| 00:33.162 | check | Game 3: «Игра пройдена!» shows stars and Brainy before → after |
-| 00:33.164 | check | The third game adds the one-time +5 ★ break bonus |
-| 00:35.869 | step | call showPostGame |
-| 00:35.869 | mark | Take the suggested break |
-| 00:35.888 | step | click {"by":"role","role":"button","name":"Сделать перерыв","exact":true} |
-| 00:35.921 | check | The break ends on the Brainy tab |
-| 00:35.926 | check | Brainy thanks the child |
-| 00:35.927 | check | The document language is Russian |
-| 00:35.927 | check | The screen fits without horizontal scrolling |
-| 00:35.927 | check | The two self-hosted font families load |
-| 00:35.927 | step | call checkSurface |
-| 00:37.428 | step | wait 1500 |
-| 00:37.428 | mark | Visit the other tabs |
-| 00:37.454 | step | click {"by":"role","role":"link","name":"Учимся","exact":true} |
-| 00:37.528 | check | Learn shows the updated wallet |
-| 00:38.529 | step | wait 1000 |
-| 00:38.552 | step | click {"by":"role","role":"link","name":"Отдых","exact":true} |
-| 00:38.628 | check | Leisure placeholder (T-36) |
-| 00:39.429 | step | wait 800 |
-| 00:39.453 | step | click {"by":"role","role":"link","name":"Подарки","exact":true} |
-| 00:39.529 | check | Gifts placeholder (T-38) |
-| 00:40.331 | step | wait 800 |
-| 00:40.353 | step | click {"by":"role","role":"link","name":"Открыть Брейни","exact":true} |
-| 00:40.455 | check | The dock opens the Brainy tab |
-| 00:40.457 | check | The document language is Russian |
-| 00:40.457 | check | The screen fits without horizontal scrolling |
-| 00:40.457 | check | The two self-hosted font families load |
-| 00:40.457 | step | call checkSurface |
-| 00:41.659 | step | wait 1200 |
+| 00:00.048 | step | open /learn |
+| 00:01.613 | check | Learn opens with saved state |
+| 00:01.616 | check | The Brainy dock shows the saved wallet |
+| 00:01.617 | check | The document language is Russian |
+| 00:01.617 | check | The screen fits without horizontal scrolling |
+| 00:01.617 | check | The two self-hosted font families load |
+| 00:01.617 | step | call checkSurface |
+| 00:02.818 | step | wait 1200 |
+| 00:02.818 | mark | Game 1: open Continue the pattern from the Learn grid |
+| 00:02.919 | step | click {"by":"role","role":"link","name":"Продолжи узор Логика","exact":true} |
+| 00:03.020 | check | The game opens fullscreen |
+| 00:03.299 | mark | Play Continue the pattern |
+| 00:11.816 | check | Four rounds played (2 corrected) |
+| 00:11.816 | step | call playGame |
+| 00:11.846 | check | Game 1: «Игра пройдена!» shows stars and Brainy before → after |
+| 00:11.847 | check | No break suggestion before the third game |
+| 00:14.556 | step | call showPostGame |
+| 00:14.556 | mark | Game 2: «Что дальше?» practice card |
+| 00:14.583 | step | click {"by":"testId","value":"practice-game"} |
+| 00:15.367 | mark | Play Odd one out |
+| 00:20.219 | check | Four rounds played |
+| 00:20.219 | step | call playGame |
+| 00:20.247 | check | Game 2: «Игра пройдена!» shows stars and Brainy before → after |
+| 00:20.247 | check | No break suggestion before the third game |
+| 00:22.955 | step | call showPostGame |
+| 00:22.955 | mark | Game 3: next level card |
+| 00:22.986 | step | click {"by":"testId","value":"next-level"} |
+| 00:23.065 | mark | Play Odd one out |
+| 00:27.879 | check | Four rounds played |
+| 00:27.879 | step | call playGame |
+| 00:27.907 | check | Game 3: «Игра пройдена!» shows stars and Brainy before → after |
+| 00:27.913 | check | The third game adds the one-time +5 ★ break bonus |
+| 00:30.616 | step | call showPostGame |
+| 00:30.616 | mark | Take the suggested break |
+| 00:30.652 | step | click {"by":"role","role":"button","name":"Сделать перерыв","exact":true} |
+| 00:30.679 | check | The break ends on the Brainy tab |
+| 00:30.682 | check | Brainy thanks the child |
+| 00:30.683 | check | The document language is Russian |
+| 00:30.683 | check | The screen fits without horizontal scrolling |
+| 00:30.683 | check | The two self-hosted font families load |
+| 00:30.683 | step | call checkSurface |
+| 00:32.184 | step | wait 1500 |
+| 00:32.184 | mark | Visit the other tabs |
+| 00:32.213 | step | click {"by":"role","role":"link","name":"Учимся","exact":true} |
+| 00:32.287 | check | Learn shows the updated wallet |
+| 00:33.289 | step | wait 1000 |
+| 00:33.312 | step | click {"by":"role","role":"link","name":"Отдых","exact":true} |
+| 00:33.386 | check | Leisure placeholder (T-36) |
+| 00:34.189 | step | wait 800 |
+| 00:34.216 | step | click {"by":"role","role":"link","name":"Подарки","exact":true} |
+| 00:34.293 | check | Gifts placeholder (T-38) |
+| 00:35.094 | step | wait 800 |
+| 00:35.116 | step | click {"by":"role","role":"link","name":"Открыть Брейни","exact":true} |
+| 00:35.216 | check | The dock opens the Brainy tab |
+| 00:35.217 | check | The document language is Russian |
+| 00:35.217 | check | The screen fits without horizontal scrolling |
+| 00:35.217 | check | The two self-hosted font families load |
+| 00:35.217 | step | call checkSurface |
+| 00:36.418 | step | wait 1200 |
 
 </details>
 
-### iPad viewport · 820 × 1180
+### iPad viewport · 1180 × 820 landscape
 
-**iPad viewport: three saved games, break and child tabs** (flow `ipad-learning`): PASSED, 27 of 27 checks passed, 40.3 s, ipad. Recorded Nov 14, 2026, 6:01 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/learn`.
+**iPad viewport: three saved games, break and child tabs** (flow `ipad-learning`): PASSED, 27 of 27 checks passed, 52.0 s, ipad. Recorded Nov 14, 2026, 6:25 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/learn`.
 
 [![iPad viewport: three saved games, break and child tabs: click to play the recording](videos/learning/ipad-learning.jpg)](videos/learning/ipad-learning.mp4)
 
@@ -101,65 +101,65 @@ show the hint «Почти!» and the correction star.
 
 | Time | Source | Entry |
 | --- | --- | --- |
-| 00:00.075 | step | open /learn |
-| 00:01.634 | check | Learn opens with saved state |
-| 00:01.636 | check | The Brainy dock shows the saved wallet |
-| 00:01.636 | check | The document language is Russian |
-| 00:01.636 | check | The screen fits without horizontal scrolling |
-| 00:01.636 | check | The two self-hosted font families load |
-| 00:01.636 | step | call checkSurface |
-| 00:02.838 | step | wait 1200 |
-| 00:02.838 | mark | Game 1: open Continue the pattern from the Learn grid |
-| 00:02.858 | step | click {"by":"role","role":"link","name":"Продолжи узор Логика","exact":true} |
-| 00:02.959 | check | The game opens fullscreen |
-| 00:03.239 | mark | Play Continue the pattern |
-| 00:13.457 | check | Four rounds played (3 corrected) |
-| 00:13.457 | step | call playGame |
-| 00:13.487 | check | Game 1: «Игра пройдена!» shows stars and Brainy before → after |
-| 00:13.488 | check | No break suggestion before the third game |
-| 00:16.194 | step | call showPostGame |
-| 00:16.194 | mark | Game 2: «Что дальше?» practice card |
-| 00:16.219 | step | click {"by":"testId","value":"practice-game"} |
-| 00:17.001 | mark | Play Odd one out |
-| 00:21.736 | check | Four rounds played |
-| 00:21.736 | step | call playGame |
-| 00:21.761 | check | Game 2: «Игра пройдена!» shows stars and Brainy before → after |
-| 00:21.762 | check | No break suggestion before the third game |
-| 00:24.467 | step | call showPostGame |
-| 00:24.467 | mark | Game 3: next level card |
-| 00:24.488 | step | click {"by":"testId","value":"next-level"} |
-| 00:24.565 | mark | Play Odd one out |
-| 00:29.300 | check | Four rounds played |
-| 00:29.300 | step | call playGame |
-| 00:29.326 | check | Game 3: «Игра пройдена!» shows stars and Brainy before → after |
-| 00:29.328 | check | The third game adds the one-time +5 ★ break bonus |
-| 00:32.032 | step | call showPostGame |
-| 00:32.032 | mark | Take the suggested break |
-| 00:32.056 | step | click {"by":"role","role":"button","name":"Сделать перерыв","exact":true} |
-| 00:32.086 | check | The break ends on the Brainy tab |
-| 00:32.089 | check | Brainy thanks the child |
-| 00:32.089 | check | The document language is Russian |
-| 00:32.089 | check | The screen fits without horizontal scrolling |
-| 00:32.089 | check | The two self-hosted font families load |
-| 00:32.089 | step | call checkSurface |
-| 00:33.591 | step | wait 1500 |
-| 00:33.591 | mark | Visit the other tabs |
-| 00:33.600 | step | click {"by":"role","role":"link","name":"Учимся","exact":true} |
-| 00:33.674 | check | Learn shows the updated wallet |
-| 00:34.677 | step | wait 1000 |
-| 00:34.703 | step | click {"by":"role","role":"link","name":"Отдых","exact":true} |
-| 00:34.781 | check | Leisure placeholder (T-36) |
-| 00:35.584 | step | wait 800 |
-| 00:35.609 | step | click {"by":"role","role":"link","name":"Подарки","exact":true} |
-| 00:35.661 | check | Gifts placeholder (T-38) |
-| 00:36.463 | step | wait 800 |
-| 00:36.483 | step | click {"by":"role","role":"link","name":"Открыть Брейни","exact":true} |
-| 00:36.585 | check | The dock opens the Brainy tab |
-| 00:36.586 | check | The document language is Russian |
-| 00:36.586 | check | The screen fits without horizontal scrolling |
-| 00:36.586 | check | The two self-hosted font families load |
-| 00:36.586 | step | call checkSurface |
-| 00:37.788 | step | wait 1200 |
+| 00:00.046 | step | open /learn |
+| 00:01.608 | check | Learn opens with saved state |
+| 00:01.610 | check | The Brainy dock shows the saved wallet |
+| 00:01.610 | check | The document language is Russian |
+| 00:01.610 | check | The screen fits without horizontal scrolling |
+| 00:01.610 | check | The two self-hosted font families load |
+| 00:01.610 | step | call checkSurface |
+| 00:02.812 | step | wait 1200 |
+| 00:02.812 | mark | Game 1: open Continue the pattern from the Learn grid |
+| 00:02.853 | step | click {"by":"role","role":"link","name":"Продолжи узор Логика","exact":true} |
+| 00:02.955 | check | The game opens fullscreen |
+| 00:03.233 | mark | Play Continue the pattern |
+| 00:17.201 | check | Four rounds played (5 corrected) |
+| 00:17.201 | step | call playGame |
+| 00:17.229 | check | Game 1: «Игра пройдена!» shows stars and Brainy before → after |
+| 00:17.230 | check | No break suggestion before the third game |
+| 00:19.937 | step | call showPostGame |
+| 00:19.937 | mark | Game 2: «Что дальше?» practice card |
+| 00:19.967 | step | click {"by":"testId","value":"practice-game"} |
+| 00:20.750 | mark | Play Odd one out |
+| 00:25.563 | check | Four rounds played |
+| 00:25.563 | step | call playGame |
+| 00:25.589 | check | Game 2: «Игра пройдена!» shows stars and Brainy before → after |
+| 00:25.590 | check | No break suggestion before the third game |
+| 00:28.297 | step | call showPostGame |
+| 00:28.297 | mark | Game 3: next level card |
+| 00:28.329 | step | click {"by":"testId","value":"next-level"} |
+| 00:28.406 | mark | Play Odd one out |
+| 00:33.176 | check | Four rounds played |
+| 00:33.176 | step | call playGame |
+| 00:33.202 | check | Game 3: «Игра пройдена!» shows stars and Brainy before → after |
+| 00:33.203 | check | The third game adds the one-time +5 ★ break bonus |
+| 00:35.909 | step | call showPostGame |
+| 00:35.909 | mark | Take the suggested break |
+| 00:35.932 | step | click {"by":"role","role":"button","name":"Сделать перерыв","exact":true} |
+| 00:36.013 | check | The break ends on the Brainy tab |
+| 00:36.017 | check | Brainy thanks the child |
+| 00:36.018 | check | The document language is Russian |
+| 00:36.018 | check | The screen fits without horizontal scrolling |
+| 00:36.018 | check | The two self-hosted font families load |
+| 00:36.018 | step | call checkSurface |
+| 00:37.520 | step | wait 1500 |
+| 00:37.520 | mark | Visit the other tabs |
+| 00:37.570 | step | click {"by":"role","role":"link","name":"Учимся","exact":true} |
+| 00:37.663 | check | Learn shows the updated wallet |
+| 00:38.666 | step | wait 1000 |
+| 00:38.700 | step | click {"by":"role","role":"link","name":"Отдых","exact":true} |
+| 00:38.761 | check | Leisure placeholder (T-36) |
+| 00:39.580 | step | wait 800 |
+| 00:39.612 | step | click {"by":"role","role":"link","name":"Подарки","exact":true} |
+| 00:39.738 | check | Gifts placeholder (T-38) |
+| 00:40.541 | step | wait 800 |
+| 00:40.560 | step | click {"by":"role","role":"link","name":"Открыть Брейни","exact":true} |
+| 00:40.661 | check | The dock opens the Brainy tab |
+| 00:40.665 | check | The document language is Russian |
+| 00:40.665 | check | The screen fits without horizontal scrolling |
+| 00:40.665 | check | The two self-hosted font families load |
+| 00:40.665 | step | call checkSurface |
+| 00:41.866 | step | wait 1200 |
 
 </details>
 
@@ -170,40 +170,40 @@ and WebKit; this is not a real-device or Screen Time test.
 
 ### Learn
 
-| iPad (820 × 1180) | Phone (390 × 844) |
+| iPad (1180 × 820 landscape) | Phone (390 × 844) |
 | --- | --- |
 | ![learn](screens/learning/learn.png) | ![learn](screens/learning/learn-phone.png) |
 | _learn_ | _learn_ |
 
 ### Odd one out
 
-| iPad (820 × 1180) | Phone (390 × 844) |
+| iPad (1180 × 820 landscape) | Phone (390 × 844) |
 | --- | --- |
 | ![odd-one-out](screens/learning/odd-one-out.png) | ![odd-one-out](screens/learning/odd-one-out-phone.png) |
 | _odd-one-out_ | _odd-one-out_ |
 
 ### Continue the pattern, level 2
 
-| iPad (820 × 1180) | Phone (390 × 844) |
+| iPad (1180 × 820 landscape) | Phone (390 × 844) |
 | --- | --- |
 | ![continue-pattern](screens/learning/continue-pattern.png) | ![continue-pattern](screens/learning/continue-pattern-phone.png) |
 | _continue-pattern_ | _continue-pattern_ |
 
 ### Brainy tab
 
-| iPad (820 × 1180) | Phone (390 × 844) |
+| iPad (1180 × 820 landscape) | Phone (390 × 844) |
 | --- | --- |
 | ![brainy](screens/learning/brainy.png) | ![brainy](screens/learning/brainy-phone.png) |
 | _brainy_ | _brainy_ |
 
 ### Developer lab (`/lab`, not in the product)
 
-| iPad (820 × 1180) | Phone (390 × 844) |
+| iPad (1180 × 820 landscape) | Phone (390 × 844) |
 | --- | --- |
 | ![lab](screens/learning/lab.png) | ![lab](screens/learning/lab-phone.png) |
 | _lab_ | _lab_ |
 
-| iPad (820 × 1180) | Phone (390 × 844) |
+| iPad (1180 × 820 landscape) | Phone (390 × 844) |
 | --- | --- |
 | ![lab-brainy](screens/learning/lab-brainy.png) | ![lab-brainy](screens/learning/lab-brainy-phone.png) |
 | _lab-brainy_ | _lab-brainy_ |
@@ -212,7 +212,7 @@ and WebKit; this is not a real-device or Screen Time test.
 
 [Download the flow timelines (JSON)](logs/learning.json).
 
-Captured Nov 14, 2026, 6:00 p.m. (Asia/Almaty): 12 scenarios, ipad and phone; Russian, light theme. No failed steps, redirects, JavaScript errors, HTTP errors or unexpected failed requests. 0 known lifecycle request cancellations remain in the manifest. Source: `09a7732` with working-tree changes. Imported static references are not live captures. Flows: `phone-learning` PASSED (27 checks), `ipad-learning` PASSED (27 checks). Timelines: [JSON log](logs/learning.json).
+Captured Nov 14, 2026, 6:24 p.m. (Asia/Almaty): 12 scenarios, ipad and phone; Russian, light theme. No failed steps, redirects, JavaScript errors, HTTP errors or unexpected failed requests. 0 known lifecycle request cancellations remain in the manifest. Source: `2f20f13` with working-tree changes. Imported static references are not live captures. Flows: `phone-learning` PASSED (27 checks), `ipad-learning` PASSED (27 checks). Timelines: [JSON log](logs/learning.json).
 
 The editable [template](src/learning.md), [scenario](../../scripts/reports/scenarios/learning.json)
 and [walkthrough actions](../../scripts/reports/scenarios/learning.mjs) define

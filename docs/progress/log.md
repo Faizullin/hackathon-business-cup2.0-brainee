@@ -4,6 +4,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (landscape)
+- Manual-run error explained/fixed: Turborepo strict env mode stripped `DEMO_MODE` (and no `.env.local`) → API 404 → load error. Added `globalPassThroughEnv` and `pnpm demo`.
+- T-98 iPad landscape layout (rail, dock column, two-column Brainy) + portrait rotate hint; iPad e2e/report viewport → 1180 × 820. T-60 manifest + generated icons + theme color.
+
 ## 2026-11-14 (all pages)
 - D-21 seeded showcase + `/api/actions`, PIN barrier (`/api/parent`), `/api/demo-reset`. Built entry, Learn advice, Leisure, video player, Gifts, Brainy shop, parent Analytics/Tasks/Gifts & goal, SVG charts, ViewTransition route fades; T-94 fixed.
 - Verified: check; 94 unit; 132 e2e (Chromium/WebKit, phone/iPad) incl. parent → child task sync. New `mvp` report (20 shots, 2 walkthroughs); `learning` re-recorded; `scaffold` report retired.

@@ -49,7 +49,7 @@ export function RecommendationCards({
   const recs = useRecommendations();
   const t = ru.child.entry;
   return (
-    <ul className={cn("grid gap-3", big ? "sm:grid-cols-2" : "sm:grid-cols-3")}>
+    <ul className={cn("grid gap-3", big ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-3")}>
       {recs.map((rec, index) => {
         const skill = ru.skills[rec.skill];
         return (

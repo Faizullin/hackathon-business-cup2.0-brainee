@@ -19,7 +19,7 @@ child's task in Tasks and opens Gifts & goal.
 
 {{flow:phone-mvp}}
 
-### iPad viewport · 820 × 1180
+### iPad viewport · 1180 × 820 landscape
 
 {{flow:ipad-mvp}}
 
@@ -27,45 +27,45 @@ child's task in Tasks and opens Gifts & goal.
 
 ### Entry «Во что играем сейчас?»
 
-{{compare:iPad (820 × 1180)=entry@ipad|Phone (390 × 844)=entry@phone}}
+{{compare:iPad (1180 × 820 landscape)=entry@ipad|Phone (390 × 844)=entry@phone}}
 
 ### Learn
 
-{{compare:iPad (820 × 1180)=learn@ipad|Phone (390 × 844)=learn@phone}}
+{{compare:iPad (1180 × 820 landscape)=learn@ipad|Phone (390 × 844)=learn@phone}}
 
 ### Leisure
 
-{{compare:iPad (820 × 1180)=leisure@ipad|Phone (390 × 844)=leisure@phone}}
+{{compare:iPad (1180 × 820 landscape)=leisure@ipad|Phone (390 × 844)=leisure@phone}}
 
 ### Science video player
 
-{{compare:iPad (820 × 1180)=video@ipad|Phone (390 × 844)=video@phone}}
+{{compare:iPad (1180 × 820 landscape)=video@ipad|Phone (390 × 844)=video@phone}}
 
 ### Gifts
 
-{{compare:iPad (820 × 1180)=gifts@ipad|Phone (390 × 844)=gifts@phone}}
+{{compare:iPad (1180 × 820 landscape)=gifts@ipad|Phone (390 × 844)=gifts@phone}}
 
 ### Brainy
 
-{{compare:iPad (820 × 1180)=brainy@ipad|Phone (390 × 844)=brainy@phone}}
+{{compare:iPad (1180 × 820 landscape)=brainy@ipad|Phone (390 × 844)=brainy@phone}}
 
 ## Parent screens
 
 ### PIN barrier
 
-{{compare:iPad (820 × 1180)=parent-pin@ipad|Phone (390 × 844)=parent-pin@phone}}
+{{compare:iPad (1180 × 820 landscape)=parent-pin@ipad|Phone (390 × 844)=parent-pin@phone}}
 
 ### Analytics
 
-{{compare:iPad (820 × 1180)=analytics@ipad|Phone (390 × 844)=analytics@phone}}
+{{compare:iPad (1180 × 820 landscape)=analytics@ipad|Phone (390 × 844)=analytics@phone}}
 
 ### Tasks
 
-{{compare:iPad (820 × 1180)=tasks@ipad|Phone (390 × 844)=tasks@phone}}
+{{compare:iPad (1180 × 820 landscape)=tasks@ipad|Phone (390 × 844)=tasks@phone}}
 
 ### Gifts & goal
 
-{{compare:iPad (820 × 1180)=rewards@ipad|Phone (390 × 844)=rewards@phone}}
+{{compare:iPad (1180 × 820 landscape)=rewards@ipad|Phone (390 × 844)=rewards@phone}}
 
 ## Logs and capture checks
 
