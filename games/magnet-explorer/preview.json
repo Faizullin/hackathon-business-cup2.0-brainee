@@ -5,5 +5,13 @@
   "minAge": 6,
   "license": "MIT",
   "sizeBudgetBytes": 7000000,
-  "mode": "explore"
+  "mode": "explore",
+  "thumbnail": "/games/magnet-explorer/thumbnail.svg",
+  "explore": {
+    "family": "qlobe",
+    "viewport": "responsive",
+    "orientation": "landscape",
+    "audio": true,
+    "readiness": "bridge"
+  }
 }

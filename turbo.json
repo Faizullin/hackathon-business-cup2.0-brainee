@@ -1,5 +1,10 @@
 {
   "$schema": "https://turborepo.com/schema.json",
+  "globalDependencies": [
+    "games/*/manifest.json",
+    "games/*/preview.json",
+    "packages/games/src/*/manifest.json"
+  ],
   "tasks": {
     "typecheck": {
       "dependsOn": ["^typecheck"],

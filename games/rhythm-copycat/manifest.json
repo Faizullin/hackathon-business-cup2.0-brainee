@@ -22,5 +22,6 @@
     "contract": "rhythm-copycat@1"
   },
   "sizeBudgetBytes": 2500000,
-  "license": "MIT"
+  "license": "MIT",
+  "thumbnail": "/games/rhythm-copycat/thumbnail.svg"
 }

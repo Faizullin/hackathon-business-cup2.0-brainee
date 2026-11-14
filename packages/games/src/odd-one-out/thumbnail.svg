@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 160 120"><rect x="0.5" y="0.5" width="159" height="119" rx="18" fill="#F2F1FA" stroke="#E6E4F2"/>
+<rect x="38" y="17" width="26" height="26" rx="7" fill="#FFFFFF" stroke="#E6E4F2"/>
+<rect x="67" y="17" width="26" height="26" rx="7" fill="#FFFFFF" stroke="#E6E4F2"/>
+<rect x="96" y="17" width="26" height="26" rx="7" fill="#FFFFFF" stroke="#E6E4F2"/>
+<rect x="38" y="46" width="26" height="26" rx="7" fill="#FFFFFF" stroke="#E6E4F2"/>
+<rect x="67" y="46" width="26" height="26" rx="7" fill="#FFFFFF" stroke="#E6E4F2"/>
+<rect x="96" y="46" width="26" height="26" rx="7" fill="#FFFFFF" stroke="#E6E4F2"/>
+<rect x="38" y="75" width="26" height="26" rx="7" fill="#FFFFFF" stroke="#E6E4F2"/>
+<rect x="67" y="75" width="26" height="26" rx="7" fill="#FFFFFF" stroke="#E6E4F2"/>
+<rect x="96" y="75" width="26" height="26" rx="7" fill="#FFFFFF" stroke="#E6E4F2"/>
+<circle cx="51" cy="30" r="8" fill="#5A3FE0"/>
+<circle cx="80" cy="30" r="8" fill="#5A3FE0"/>
+<circle cx="109" cy="30" r="8" fill="#5A3FE0"/>
+<circle cx="51" cy="59" r="8" fill="#5A3FE0"/>
+<circle cx="80" cy="59" r="8" fill="#5A3FE0"/>
+<circle cx="51" cy="88" r="8" fill="#5A3FE0"/>
+<circle cx="80" cy="88" r="8" fill="#5A3FE0"/>
+<circle cx="109" cy="88" r="8" fill="#5A3FE0"/>
+<rect x="94.5" y="44.5" width="29" height="29" rx="8" fill="#ECE8FF" stroke="#FF6F9F" stroke-width="3"/><path d="M109 50 L118 66 L100 66 Z" fill="#FF6F9F"/></svg>

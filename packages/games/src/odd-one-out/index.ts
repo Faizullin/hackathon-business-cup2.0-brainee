@@ -7,3 +7,5 @@ export const oddOneOut: GameDefinition = {
   skills: manifest.skills as GameDefinition["skills"],
   load: () => import("./OddOneOut"),
 };
+
+export default oddOneOut;

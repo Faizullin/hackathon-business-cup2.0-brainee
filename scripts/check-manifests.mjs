@@ -1,8 +1,13 @@
+// Validates every discovered game folder against the catalog schema, pinned sources and budgets.
+// `--assets` additionally checks the built public output (run after `pnpm games:build`).
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import { build } from "esbuild";
+import { writeGeneratedModules } from "./discover-games.mjs";
 
+const discovered = writeGeneratedModules();
 const result = await build({
   entryPoints: ["packages/game-catalog/src/index.ts"],
   bundle: true,
@@ -10,34 +15,38 @@ const result = await build({
   format: "esm",
   write: false,
 });
-const { manifests, previews } = await import(
+const { manifests, previews, THUMBNAIL_MAX_BYTES } = await import(
   `data:text/javascript;base64,${Buffer.from(result.outputFiles[0].text).toString("base64")}`
 );
+const assets = process.argv.includes("--assets");
 const files = (dir) =>
   readdirSync(dir).flatMap((name) => {
     const path = `${dir}/${name}`;
     return statSync(path).isDirectory() ? files(path) : [path];
   });
-const discovered = [
-  ...readdirSync("packages/games/src")
-    .filter((name) => name !== "kit" && statSync(`packages/games/src/${name}`).isDirectory())
-    .map((name) => `packages/games/src/${name}`),
-  ...readdirSync("games")
-    .filter((name) => statSync(`games/${name}`).isDirectory())
-    .map((name) => `games/${name}`),
-];
-if (
-  new Set([...manifests, ...previews].map((game) => game.id)).size !==
-  manifests.length + previews.length
-)
+const catalog = [...manifests, ...previews];
+if (new Set(catalog.map((game) => game.id)).size !== catalog.length)
   throw new Error("Duplicate game ids");
-for (const dir of discovered) {
-  const manifest = JSON.parse(
-    readFileSync(
-      `${dir}/${existsSync(`${dir}/preview.json`) ? "preview" : "manifest"}.json`,
-      "utf8",
-    ),
-  );
+if (catalog.length !== discovered.length)
+  throw new Error(`Catalog has ${catalog.length} games but ${discovered.length} folders exist`);
+
+/** Card images: small, self-contained vector art (no text, scripts or outside references). */
+function checkThumbnail(path) {
+  const svg = readFileSync(path, "utf8");
+  if (Buffer.byteLength(svg) > THUMBNAIL_MAX_BYTES)
+    throw new Error(`${path} is over ${THUMBNAIL_MAX_BYTES} bytes`);
+  if (!/^<svg[^>]*viewBox="0 0 (\d+) (\d+)"/.test(svg)) throw new Error(`${path}: needs a viewBox`);
+  const [, w, h] = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
+  if (Number(w) * 3 !== Number(h) * 4) throw new Error(`${path}: thumbnails are 4:3`);
+  if (/<(text|script|image|foreignObject|style)\b|href=|url\(|@import|font-family/i.test(svg))
+    throw new Error(`${path}: no text, scripts, styles or outside references`);
+}
+
+for (const folder of discovered) {
+  const game = catalog.find((entry) => entry.id === folder.id);
+  if (!game) throw new Error(`Unregistered manifest: ${folder.dir}`);
+  const { dir } = folder;
+  checkThumbnail(join(dir, "thumbnail.svg"));
   if (existsSync(`${dir}/sources.lock.json`)) {
     const lock = JSON.parse(readFileSync(`${dir}/sources.lock.json`, "utf8"));
     if (!/^[a-f0-9]{40}$/.test(lock.commit)) throw new Error("Unpinned source");
@@ -52,37 +61,33 @@ for (const dir of discovered) {
         throw new Error(`Changed pinned artifact: ${file.path}`);
     }
   }
-  if (![...manifests, ...previews].some((game) => game.id === manifest.id))
-    throw new Error(`Unregistered manifest: ${dir}`);
-}
-for (const game of [...manifests, ...previews.map((p) => ({ ...p, runtime: "embedded" }))]) {
-  const path =
-    game.runtime === "embedded"
-      ? `games/${game.id}/${game.mode === "explore" ? "preview" : "manifest"}.json`
-      : `packages/games/src/${game.id}/manifest.json`;
-  if (JSON.parse(readFileSync(path)).id !== game.id) throw new Error(`Missing manifest ${game.id}`);
-  const sourceFiles = game.runtime === "react" ? files(`packages/games/src/${game.id}`) : [];
-  if (sourceFiles.reduce((sum, file) => sum + statSync(file).size, 0) > game.sizeBudgetBytes)
-    throw new Error(`${game.id} exceeds source size budget`);
-  if (game.runtime === "react") statSync(resolve(`packages/games/src/${game.id}`, game.entry));
-  if (process.argv.includes("--assets") && game.runtime === "embedded") {
-    const base = resolve(`apps/web/public/games/${game.id}`);
-    const paths = files(base);
-    if (paths.reduce((sum, file) => sum + statSync(file).size, 0) > game.sizeBudgetBytes)
-      throw new Error(`${game.id} exceeds size budget`);
-    for (const file of paths.filter((file) => /\.(html|css)$/.test(file))) {
-      const text = readFileSync(file, "utf8");
-      for (const match of text.matchAll(/(?:src=["']|url\(["']?)([^"')>\s]+)/g)) {
-        if (/^(https?:)?\/\//.test(match[1])) throw new Error(`Foreign asset ${match[1]}`);
-        statSync(resolve(dirname(file), match[1]));
-      }
-    }
-    if (game.id === "picture-puzzle")
-      for (const picture of ["bear", "dog", "elephant", "pig", "rabbit"])
-        statSync(resolve(base, `assets/pictures/${picture}.png`));
-    statSync(resolve(base, "../bridge.js"));
+  if (folder.runtime === "react") {
+    const sourceFiles = files(dir);
+    if (sourceFiles.reduce((sum, file) => sum + statSync(file).size, 0) > game.sizeBudgetBytes)
+      throw new Error(`${game.id} exceeds source size budget`);
+    statSync(resolve(dir, game.entry));
   }
+  if (!assets) continue;
+  const base = resolve(`apps/web/public/games/${game.id}`);
+  checkThumbnail(join(base, "thumbnail.svg"));
+  if (folder.runtime !== "embedded") continue;
+  const paths = files(base);
+  if (paths.reduce((sum, file) => sum + statSync(file).size, 0) > game.sizeBudgetBytes)
+    throw new Error(`${game.id} exceeds size budget`);
+  for (const file of paths.filter((file) => /\.(html|css)$/.test(file))) {
+    const text = readFileSync(file, "utf8");
+    for (const match of text.matchAll(/(?:src=["']|url\(["']?)([^"')>\s]+)/g)) {
+      if (/^(https?:)?\/\//.test(match[1])) throw new Error(`Foreign asset ${match[1]}`);
+      if (match[1].startsWith("data:")) continue;
+      statSync(resolve(dirname(file), match[1]));
+    }
+  }
+  // Optional per-game hook for assets loaded from code (canvas images, audio).
+  const script = join(dir, "build.mjs");
+  const { checkAssets } = await import(pathToFileURL(script).href);
+  checkAssets?.(base);
+  statSync(resolve(base, "../bridge.js"));
 }
 console.log(
-  `Validated ${manifests.length} learning manifests and ${previews.length} previews${process.argv.includes("--assets") ? " and built assets" : ""}`,
+  `Validated ${manifests.length} learning manifests and ${previews.length} previews with thumbnails${assets ? " and built assets" : ""}`,
 );

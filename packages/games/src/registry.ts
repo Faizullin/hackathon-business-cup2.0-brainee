@@ -1,11 +1,10 @@
 import { manifests } from "@brainee/game-catalog";
-// React entry points stay in code; embedded metadata comes from the same manifests as DB seed.
-
-import { continuePattern } from "./continue-pattern";
 import type { GameDefinition } from "./kit";
-import { oddOneOut } from "./odd-one-out";
+// React folders register themselves (default export); embedded metadata comes from the same
+// discovered manifests as the DB seed. See scripts/discover-games.mjs.
+import { discoveredReactGames } from "./react-games.generated";
 
-export const reactGames: readonly GameDefinition[] = [oddOneOut, continuePattern];
+export const reactGames: readonly GameDefinition[] = discoveredReactGames;
 export const allGames: readonly GameDefinition[] = [
   ...reactGames,
   ...manifests

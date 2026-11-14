@@ -45,6 +45,8 @@ export type GameMeta = {
   minAge: number;
   levels: number;
   roundsPerSession: number;
+  /** Same-origin card image, `/games/<id>/thumbnail.svg` (copied by games:build). */
+  thumbnail: string;
 };
 
 export type ReactGameModule = { default: ComponentType<GameProps> };
