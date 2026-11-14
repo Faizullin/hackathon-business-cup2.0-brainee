@@ -32,13 +32,14 @@ test("odd-one-out plays to the end in the lab and reports a valid result", async
 
 test("the same seed replays the same board; level 2 uses 12 cells", async ({ page }) => {
   await page.goto("/lab");
+  await expect(page.getByRole("button", { name: /^Фигура \d+$/ })).toHaveCount(9);
   const board = () =>
     page
       .locator('[data-game="odd-one-out"] svg')
       .evaluateAll((els) => els.map((e) => e.innerHTML).join("|"));
   const first = await board();
   await page.getByRole("button", { name: "Перезапустить" }).click();
-  expect(await board()).toBe(first);
+  await expect.poll(board).toBe(first);
 
   await page.getByLabel("Уровень").selectOption("2");
   await expect(page.getByRole("button", { name: /^Фигура \d+$/ })).toHaveCount(12);

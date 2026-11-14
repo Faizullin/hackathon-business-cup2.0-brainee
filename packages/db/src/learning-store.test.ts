@@ -19,6 +19,7 @@ import {
   stopGameRun,
 } from "./learning-store";
 import { demo } from "./seed";
+import { getStateSnapshot } from "./state-store";
 
 const now = new Date("2026-11-14T12:00:00Z");
 const later = (ms: number) => new Date(now.getTime() + ms);
@@ -237,7 +238,7 @@ it("rejects missing, foreign, expired and invalid results without granting anyth
   expect((await f.db.select().from(families).get())?.version).toBe(0);
 });
 
-it("pays a third-game bonus once per browser session and stopping cancels pending games", async () => {
+it("pays a third-game bonus once per day and stopping cancels pending games", async () => {
   const f = await fixture();
   for (let i = 0; i < 3; i++) {
     const session = await startGameSession(f.db, f.hash, launch, later(i * 3000));
@@ -269,4 +270,77 @@ it("pays a third-game bonus once per browser session and stopping cancels pendin
   }
   expect((await f.db.select().from(wallets).get())?.stars).toBe(340 + 6 * 12 + 5);
   expect((await f.db.select().from(families).get())?.version).toBe(7);
+});
+
+it("shares the daily bonus across concurrent devices and allows it again after local midnight", async () => {
+  const f = await fixture();
+  const other = await f.connect();
+  const second = await createDemoAccess(other.db, now);
+  const secondHash = demoTokenHash(second.token) as string;
+  const play = async (db: typeof f.db, hash: string, at: Date) => {
+    const session = await startGameSession(db, hash, launch, at);
+    return finishGameSession(db, hash, session.sessionId, result, new Date(at.getTime() + 2000));
+  };
+  for (const hash of [f.hash, secondHash]) {
+    await play(f.db, hash, later(0));
+    await play(f.db, hash, later(3000));
+  }
+  const finishes = await Promise.all([
+    play(f.db, f.hash, later(6000)),
+    play(other.db, secondHash, later(6000)),
+  ]);
+  expect(finishes.map((save) => save.completion.bonus).sort()).toEqual([0, 5]);
+  const fresh = await createDemoAccess(f.db, later(10000));
+  const freshHash = demoTokenHash(fresh.token) as string;
+  expect((await getStateSnapshot(f.db, freshHash, later(10000))).progress.streak.bonusGiven).toBe(
+    true,
+  );
+  for (let i = 0; i < 3; i++)
+    expect((await play(f.db, freshHash, later(15000 + i * 3000))).completion.bonus).toBe(0);
+  const tomorrow = new Date("2026-11-14T19:00:00Z");
+  const reset = await getStateSnapshot(f.db, f.hash, tomorrow);
+  expect(reset.progress.streak).toEqual({ inRow: 0, bonusGiven: false });
+  expect((await getStateSnapshot(other.db, secondHash, tomorrow)).progress.streak).toEqual(
+    reset.progress.streak,
+  );
+  for (let i = 0; i < 3; i++) {
+    expect(
+      (await play(f.db, f.hash, new Date(tomorrow.getTime() + i * 3000))).completion.bonus,
+    ).toBe(i === 2 ? 5 : 0);
+  }
+});
+
+it("counts an overnight finish in the new day without replaying yesterday's streak or reward", async () => {
+  const f = await fixture();
+  for (let i = 0; i < 2; i++) {
+    const started = await startGameSession(f.db, f.hash, launch, later(i * 3000));
+    await finishGameSession(f.db, f.hash, started.sessionId, result, later(i * 3000 + 2000));
+  }
+  const started = await startGameSession(f.db, f.hash, launch, new Date("2026-11-14T18:59:59Z"));
+  const saved = await finishGameSession(
+    f.db,
+    f.hash,
+    started.sessionId,
+    result,
+    new Date("2026-11-14T19:00:01Z"),
+  );
+  expect(saved.completion).toMatchObject({
+    bonus: 0,
+    after: { streak: { inRow: 1, bonusGiven: false } },
+  });
+  const beforeReplay = await getStateSnapshot(f.db, f.hash, new Date("2026-11-15T19:00:01Z"));
+  expect(
+    (
+      await finishGameSession(
+        f.db,
+        f.hash,
+        started.sessionId,
+        result,
+        new Date("2026-11-15T19:00:02Z"),
+      )
+    ).replayed,
+  ).toBe(true);
+  expect((await getStateSnapshot(f.db, f.hash, new Date("2026-11-15T19:00:02Z"))).progress).toEqual(
+    beforeReplay.progress,
+  );
 });

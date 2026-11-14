@@ -11,6 +11,7 @@ import {
   type Slot,
   unequip,
 } from "./accessories";
+import type { ArchivedTask, FamilyCalendar } from "./calendar";
 import { buyGift, exchangeSuns } from "./economy";
 import type { Ability, Wallet } from "./types";
 
@@ -120,6 +121,8 @@ export type Analytics = {
 };
 
 export type Showcase = {
+  calendar?: FamilyCalendar;
+  taskHistory?: ArchivedTask[];
   equipped: Equipped;
   owned: AccessoryId[];
   earned: string[];

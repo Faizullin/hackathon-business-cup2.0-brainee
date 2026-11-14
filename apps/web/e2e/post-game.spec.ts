@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { newFamily } from "./new-family";
 import { finishOddOneOut } from "./play-game";
 import { readyState } from "./saved-state";
 
@@ -61,7 +62,9 @@ test("a finish saves Brainy and the shared wallet, with a real stopping point", 
 
 test("three completed games offer a break and save exactly one bonus", async ({
   page,
+  baseURL,
 }, testInfo) => {
+  await newFamily(page.request, baseURL as string);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/game/odd-one-out?level=1&seed=7");
   const before = await readyState(page);

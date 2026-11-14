@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { newFamily } from "./new-family";
 
 const result = {
   gameId: "odd-one-out",
@@ -183,9 +184,10 @@ test("session routes reject foreign origins, unissued finishes, invalid JSON and
 test("the saved run pays one third-game bonus and stopping abandons unfinished games", async ({
   request,
   baseURL,
+  browser,
 }) => {
   const headers = { origin: baseURL as string };
-  await request.post("/api/demo-session", { headers });
+  const credentials = await newFamily(request, baseURL as string);
   for (let i = 0; i < 3; i++) {
     const started = await request.post("/api/sessions/start", {
       headers,
@@ -198,6 +200,26 @@ test("the saved run pays one third-game bonus and stopping abandons unfinished g
       bonus: i === 2 ? 5 : 0,
       suggestBreak: i === 2,
     });
+  }
+  const other = await browser.newContext({ baseURL });
+  try {
+    expect(
+      (await other.request.post("/api/auth/login", { headers, data: credentials })).status(),
+    ).toBe(200);
+    for (let i = 0; i < 3; i++) {
+      const start = await other.request.post("/api/sessions/start", {
+        headers,
+        data: { gameId: result.gameId, level: 1 },
+      });
+      const finish = await other.request.post("/api/sessions", {
+        headers,
+        data: { sessionId: (await start.json()).sessionId, result },
+      });
+      expect(finish.status()).toBe(200);
+      expect((await finish.json()).completion.bonus).toBe(0);
+    }
+  } finally {
+    await other.close();
   }
   const pending = await request.post("/api/sessions/start", {
     headers,

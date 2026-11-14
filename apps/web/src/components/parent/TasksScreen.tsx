@@ -27,7 +27,7 @@ export function TasksScreen() {
   const [skill, setSkill] = useState("Ответственность");
   const [reward, setReward] = useState(2);
   if (!snapshot) return null;
-  const { tasks, templates, recommendations } = snapshot.showcase;
+  const { tasks, templates, recommendations, taskHistory = [] } = snapshot.showcase;
   const full = tasks.length >= TASKS_PER_DAY;
   const submit = async (event: FormEvent) => {
     event.preventDefault();
@@ -49,6 +49,7 @@ export function TasksScreen() {
       <Notice notice={notice} />
       <div className="grid gap-5 lg:grid-cols-2">
         <Panel title={t.today}>
+          {tasks.length === 0 && <p className="text-muted-foreground text-sm">{t.empty}</p>}
           <ul className="flex flex-col gap-2">
             {tasks.map((task) => (
               <li
@@ -178,6 +179,27 @@ export function TasksScreen() {
           </div>
         </Panel>
       </div>
+      {taskHistory.length > 0 && (
+        <Panel>
+          <details data-testid="task-history">
+            <summary className="cursor-pointer font-semibold">{t.history}</summary>
+            <ul className="mt-3 flex flex-col gap-2">
+              {taskHistory.map((task) => (
+                <li
+                  key={`${task.day}-${task.id}`}
+                  className="flex flex-wrap items-center gap-2 rounded-xl border border-border p-3 text-sm"
+                >
+                  <span className="flex-1">{task.title}</span>
+                  <time dateTime={task.day} className="text-muted-foreground">
+                    {task.day}
+                  </time>
+                  <Chip>{task.status === "done" ? ru.child.taskStatus.done : t.expired}</Chip>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </Panel>
+      )}
       <Panel title={t.recs}>
         <ul className="grid gap-3 lg:grid-cols-3">
           {recommendations.map((rec) => (

@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-26 · Persist calendar rollover in the showcase · 2026-11-14 · accepted · extends D-25
+**Context:** ROUTES.md requires family-local daily/weekly resets and a daily bonus that cannot be reclaimed by opening another device.
+**Decision:** keep calendar keys, IANA timezone and the child's shared bonus flag in the existing showcase JSON. Use `Asia/Almaty` as the MVP default until Settings exposes timezone selection. Core computes rollover; state reads and relevant mutations persist it transactionally and bump the family version. Cookie streak counters reset together at midnight; completion receipts remain immutable. Retain the latest 100 archived tasks in the showcase and show them read-only to parents.
+**Consequences:** no cron, new service or schema migration. Undated demo/legacy data is dated on first use without erasing it; an existing paid session flag is retained conservatively. New families are dated at signup. Demo content reset clears task history but preserves calendar/bonus; use a full DB reset for a new bonus rehearsal. Mechanics: [calendar resets](../product/mechanics.md#calendar-resets).
+
 ## D-25 · ROUTES.md is the product spec, reduced for our stack · 2026-11-14 · accepted · extends D-15, D-16, D-21
 **Context:** new inputs in `docs/ideas/`: `ROUTES.md` + `brainy-mvp.zip` (routes, roles, rules, events, clickable prototype) and a 30-game handoff for external learning games. Summary: [routes-spec.md](../product/routes-spec.md), [external-games.md](../product/external-games.md).
 **Decision:** adopt ROUTES.md behaviour with reductions: polling stays (no SSE, no Web Push; «Требует внимания», badges and an event feed instead); our current paths stay (mapping in routes-spec); events live as a capped feed in the showcase; mood decay and resets are computed on read (no cron); the prototype's Google Fonts/cdnjs are never copied. External games: all source licences are permissive (QLOBE-kids MIT, Sugarizer Apache-2.0, H5P MIT, h5p-standalone MIT, Blockly Games Apache-2.0); they come in as path C artifacts after T-29, starting with Tangram Tales. Ranking stays fake/seeded; privacy work and the science-video media question wait.

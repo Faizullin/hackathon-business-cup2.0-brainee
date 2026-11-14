@@ -20,13 +20,18 @@ Source: PRD §3–4. Implement in `packages/core` (logic) and `packages/brainy` 
 | Learning-game round solved on the first try | +3★ |
 | Mistake, then corrected ("звезда за исправление"; trains *learning from mistakes*) | +4★ |
 | Science video watched to the end + correct answer | +15★ |
-| 3 learning games in a row | one-time +5★ and a break suggestion |
+| 3 learning games in a row | +5★ once per child per local day, plus a break suggestion |
 
 ### Shop prices (prototype reference)
 Fun game 10 min: 30–40★; forever: 450–600★. Cartoon: 30–60★. Accessory: 50–120★.
 
 ### Weekly goal
 The parent sets a ☀ target due Sunday and a prize. It counts **☀ earned this week, not the current balance**, so buying a gift doesn't reduce goal progress.
+
+### Calendar resets
+Days use the saved family timezone (MVP default: `Asia/Almaty`; timezone selection is deferred to Settings). At local midnight, all device streaks and the shared daily bonus flag reset. Yesterday's completed tasks move to history; assigned and awaiting-confirmation tasks become `expired`. They cannot earn rewards later. Today starts empty, with a fresh five-task quota. Parent history retains the latest 100 tasks.
+
+On Monday at local midnight, weekly earned ☀ resets to zero; the goal target and prize stay. Wallets, stats, purchases, gift requests and solved videos are preserved. Rollover happens on reads and relevant writes, including after several idle days, without a cron job. A game finished across midnight counts in the new day; replaying an old receipt pays nothing again. Stopping or opening another device never renews the day's bonus. Persistence: [D-26](../dev/decisions.md).
 
 ## Brainy
 

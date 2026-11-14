@@ -16,7 +16,7 @@ import {
 } from "./learning-store";
 import { demo } from "./seed";
 import { demoShowcase } from "./showcase-seed";
-import { applyShowcase, setParentUnlock } from "./showcase-store";
+import { applyShowcase, resetShowcase, setParentUnlock } from "./showcase-store";
 import { getStateSnapshot } from "./state-store";
 
 const now = new Date("2026-11-14T12:00:00Z");
@@ -156,4 +156,77 @@ it("parent actions need the PIN; a confirmed task pays suns and bumps the versio
   await expect(applyShowcase(f.db, hash, { type: "nope" }, now)).rejects.toMatchObject({
     code: "invalid-input",
   });
+});
+
+it("rolls days and weeks forward once, archives expired tasks and resets the daily quota", async () => {
+  const f = await fixture();
+  const before = await getStateSnapshot(f.db, f.hash, now);
+  const monday = new Date("2026-11-15T19:00:00Z");
+  const [first, second] = await Promise.all([
+    getStateSnapshot(f.db, f.hash, monday),
+    getStateSnapshot(f.observer.db, f.hash, monday),
+  ]);
+  expect(first).toEqual(second);
+  expect(first.version).toBe(before.version + 1);
+  expect(first.progress.wallet).toEqual(before.progress.wallet);
+  expect(first.progress.stats).toEqual(before.progress.stats);
+  expect(first.showcase.tasks).toEqual([]);
+  expect(first.showcase.taskHistory?.map((task) => task.status)).toEqual([
+    "done",
+    "expired",
+    "expired",
+    "expired",
+  ]);
+  expect(first.showcase.weekGoal).toEqual({ ...before.showcase.weekGoal, earned: 0 });
+  expect(first.showcase.science).toEqual(before.showcase.science);
+  expect(first.showcase.owned).toEqual(before.showcase.owned);
+  expect(first.showcase.requests).toEqual(before.showcase.requests);
+  await setParentUnlock(f.db, f.hash, "1234", monday);
+  await expect(
+    applyShowcase(f.db, f.hash, { type: "task-confirm", taskId: "t2" }, monday),
+  ).rejects.toMatchObject({ reason: "invalid-task" });
+  for (let i = 0; i < 5; i++)
+    await applyShowcase(
+      f.db,
+      f.hash,
+      {
+        type: "task-add",
+        title: `Task ${i}`,
+        skill: "Reading",
+        place: "real",
+        reward: 1,
+      },
+      monday,
+    );
+  await expect(
+    applyShowcase(
+      f.db,
+      f.hash,
+      { type: "task-add", title: "Sixth", skill: "Reading", place: "real", reward: 1 },
+      monday,
+    ),
+  ).rejects.toBeDefined();
+  const after = await getStateSnapshot(f.db, f.hash, monday);
+  expect(after.showcase.tasks).toHaveLength(5);
+  expect(after.showcase.taskHistory).toEqual(first.showcase.taskHistory);
+});
+
+it("expires yesterday's tasks before a direct action even without a prior state read", async () => {
+  const f = await fixture();
+  await getStateSnapshot(f.db, f.hash, now);
+  const tomorrow = new Date("2026-11-14T19:00:00Z");
+  await setParentUnlock(f.db, f.hash, "1234", tomorrow);
+  await expect(
+    applyShowcase(f.db, f.hash, { type: "task-confirm", taskId: "t2" }, tomorrow),
+  ).rejects.toMatchObject({ reason: "invalid-task" });
+  const after = await getStateSnapshot(f.db, f.hash, tomorrow);
+  expect(after.showcase.weekGoal.earned).toBe(6);
+  expect(after.progress.wallet).toEqual({ stars: 340, suns: 6 });
+  await f.client.execute(
+    "UPDATE showcases SET data = json_set(data, '$.calendar.bonusGiven', json('true'))",
+  );
+  await resetShowcase(f.db, f.hash, tomorrow);
+  const reset = await getStateSnapshot(f.db, f.hash, tomorrow);
+  expect(reset.progress.streak.bonusGiven).toBe(true);
+  expect(reset.showcase.taskHistory ?? []).toEqual([]);
 });

@@ -65,8 +65,22 @@ export async function showPostGame(page, { timeline, args }) {
   const breakCard = page.getByTestId("break-suggestion");
   if (args.game === 3) {
     await breakCard.waitFor();
-    const bonus = await page.getByTestId("streak-bonus").textContent();
-    timeline.check(/\+5/.test(bonus ?? ""), "The third game adds the one-time +5 ★ break bonus");
+    const bonus = page.getByTestId("streak-bonus");
+    if (await bonus.count()) {
+      timeline.check(
+        /\+5/.test((await bonus.textContent()) ?? ""),
+        "The third game adds today's +5 ★ break bonus",
+      );
+    } else {
+      // Phone and iPad recordings can share a child: the second device cannot earn it again.
+      const response = await page.request.get(new URL("/api/state", page.url()).href);
+      assert.ok(response.ok());
+      const { snapshot } = await response.json();
+      timeline.check(
+        snapshot.progress.streak.bonusGiven,
+        "Today's bonus is already claimed; the break still appears",
+      );
+    }
   } else {
     timeline.check((await breakCard.count()) === 0, "No break suggestion before the third game");
   }

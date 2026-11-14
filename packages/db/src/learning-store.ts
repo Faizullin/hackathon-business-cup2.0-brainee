@@ -20,6 +20,7 @@ import {
   showcases,
   wallets,
 } from "../schema";
+import { refreshCalendar } from "./calendar-store";
 import type { Database } from "./client";
 import { demo } from "./seed";
 
@@ -114,6 +115,7 @@ export async function createDemoAccess(db: Database, now: Date) {
 export async function startGameSession(db: Database, tokenHash: string, input: unknown, now: Date) {
   return writeTransaction(db, async (tx) => {
     const access = await requireAccess(tx, tokenHash, now);
+    await refreshCalendar(tx, access, now);
     const gameId =
       input && typeof input === "object" && "gameId" in input && typeof input.gameId === "string"
         ? input.gameId
@@ -185,6 +187,7 @@ export async function finishGameSession(
     if (elapsed < 0 || elapsed > GAME_SESSION_MS) throw new LearningStoreError("expired");
     // Client timing can differ slightly; the issued server window remains authoritative.
     if (result.durationMs > elapsed + 5000) throw new LearningStoreError("invalid-input");
+    const calendar = await refreshCalendar(tx, access, now);
     const state = await tx
       .select()
       .from(brainyStates)
@@ -206,7 +209,10 @@ export async function finishGameSession(
         skills: state.skills,
         wallet: { stars: wallet.stars, suns: wallet.suns },
         mood: moodNow(state.mood, state.updatedAt, now),
-        streak: { inRow: access.inRow, bonusGiven: access.bonusGiven },
+        streak: {
+          inRow: calendar.dayChanged ? 0 : access.inRow,
+          bonusGiven: calendar.showcase.calendar?.bonusGiven ?? false,
+        },
       },
       result,
       game.weights,
@@ -224,21 +230,15 @@ export async function finishGameSession(
         updatedAt: now,
       })
       .where(eq(brainyStates.childId, access.childId));
-    const showcase = await tx
-      .select({ data: showcases.data })
-      .from(showcases)
-      .where(eq(showcases.childId, access.childId))
-      .get();
-    if (showcase) {
-      const data = structuredClone(showcase.data);
-      addFeed(data, {
-        at: now.toISOString(),
-        kind: "game",
-        title: `${game.title} · ${result.level}`,
-        amount: completion.earnedStars,
-      });
-      await tx.update(showcases).set({ data }).where(eq(showcases.childId, access.childId));
-    }
+    const data = structuredClone(calendar.showcase);
+    if (data.calendar) data.calendar.bonusGiven = completion.after.streak.bonusGiven;
+    addFeed(data, {
+      at: now.toISOString(),
+      kind: "game",
+      title: `${game.title} · ${result.level}`,
+      amount: completion.earnedStars,
+    });
+    await tx.update(showcases).set({ data }).where(eq(showcases.childId, access.childId));
     await tx
       .update(demoSessions)
       .set(completion.after.streak)
@@ -268,9 +268,10 @@ export async function finishGameSession(
 export async function stopGameRun(db: Database, tokenHash: string, now: Date) {
   await writeTransaction(db, async (tx) => {
     const access = await requireAccess(tx, tokenHash, now);
+    const calendar = await refreshCalendar(tx, access, now);
     await tx
       .update(demoSessions)
-      .set(stopForToday({ inRow: access.inRow, bonusGiven: access.bonusGiven }))
+      .set(stopForToday({ inRow: 0, bonusGiven: calendar.showcase.calendar?.bonusGiven ?? false }))
       .where(eq(demoSessions.tokenHash, tokenHash));
     await tx
       .update(gameSessions)

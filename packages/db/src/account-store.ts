@@ -1,5 +1,5 @@
 import { randomBytes, randomUUID, scryptSync, timingSafeEqual } from "node:crypto";
-import { isQuizAnswers, quizStart, type Showcase } from "@brainee/core";
+import { advanceCalendar, isQuizAnswers, quizStart, type Showcase } from "@brainee/core";
 import { eq, sql } from "drizzle-orm";
 import {
   brainyStates,
@@ -151,7 +151,10 @@ export async function signupFromQuiz(db: Database, raw: unknown, now: Date) {
       startSnapshot: start.stats,
       updatedAt: now,
     });
-    await tx.insert(showcases).values({ childId, data: personalShowcase(input.childName, start) });
+    await tx.insert(showcases).values({
+      childId,
+      data: advanceCalendar(personalShowcase(input.childName, start), now).showcase,
+    });
     const access = await issueAccess(tx, childId, now, true);
     return { ...access, child: { id: childId, name: input.childName.trim() }, start };
   });

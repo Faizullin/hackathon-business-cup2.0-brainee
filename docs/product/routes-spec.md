@@ -28,7 +28,8 @@ Source: [ROUTES.md](../ideas/ROUTES.md) and the clickable prototype `docs/ideas/
 - ✅ Parent may cancel only assigned (`todo`) tasks; cancellation deletes the task without changing wallet, goal or stats. Pending confirmations and completed tasks stay protected.
 - ✅ Stage never drops (stats only grow).
 - ✅ Leaving mid-game pays nothing (no finish without all rounds).
-- ⏳ Bonus once per **day** (now once per run), daily/weekly resets, fun timer counting play time only, cartoon player.
+- ✅ Daily bonus shared across devices, local-midnight task/streak reset and Monday goal-progress reset; read-only parent task history → [calendar resets](mechanics.md#calendar-resets).
+- ⏳ Fun timer counting play time only, cartoon player.
 
 ## Parent dashboard additions
 - ✅ «Требует внимания» (tasks to confirm, gifts to deliver, empty day) and an 8-item event feed (`showcase.feed`, D-25).

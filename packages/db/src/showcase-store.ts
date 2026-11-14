@@ -9,6 +9,7 @@ import {
 } from "@brainee/core";
 import { eq, sql } from "drizzle-orm";
 import { brainyStates, demoSessions, families, parents, showcases, wallets } from "../schema";
+import { refreshCalendar } from "./calendar-store";
 import type { Database } from "./client";
 import { LearningStoreError, requireAccess, writeTransaction } from "./learning-store";
 import { demoShowcase } from "./showcase-seed";
@@ -76,6 +77,7 @@ export async function applyShowcase(db: Database, tokenHash: string, input: unkn
       if (!session?.parentUntil || session.parentUntil <= now)
         throw new LearningStoreError("unauthorized");
     }
+    await refreshCalendar(tx, access, now);
     const row = await tx
       .select({ data: showcases.data })
       .from(showcases)
@@ -132,9 +134,15 @@ export async function applyShowcase(db: Database, tokenHash: string, input: unkn
 export async function resetShowcase(db: Database, tokenHash: string, now: Date) {
   await writeTransaction(db, async (tx) => {
     const access = await requireAccess(tx, tokenHash, now);
+    const calendar = await refreshCalendar(tx, access, now);
     await tx
       .update(showcases)
-      .set({ data: demoShowcase })
+      .set({
+        data: {
+          ...demoShowcase,
+          calendar: calendar.showcase.calendar,
+        },
+      })
       .where(eq(showcases.childId, access.childId));
     await tx
       .update(families)

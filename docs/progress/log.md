@@ -4,6 +4,11 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (daily and weekly resets)
+- T-103 calendar slice: one daily bonus per child across devices, local-midnight task/streak rollover, Monday goal-progress reset and read-only parent history; transactional lazy persistence (D-26), no cron or schema change.
+- Added boundary, concurrency, stale-action, retry and cross-device browser checks. Demo reset clears task history but preserves daily eligibility. Fixed an existing lab-test readiness race and updated report checks for a previously claimed bonus.
+- Verified check, 107 unit tests, 29 report-tool tests and 176 e2e checks; WebKit phone/iPad screenshots reviewed. Next: Settings (child, PIN, timezone, devices), pairing and adult-task fallback; deployment deferred.
+
 ## 2026-11-14 (task cancellation and badges)
 - T-103 first slice: shared-state child/parent navigation counts and parent-only cancellation of assigned tasks. Core protects pending/completed tasks and preserves wallet, stats and weekly goal; counts sync by polling and parent badges hide while locked.
 - Verified `pnpm check`, 99 unit tests and 172 e2e checks across Chromium/WebKit phone and landscape iPad; reviewed WebKit screenshots. T-103 remains open for daily/weekly resets, daily bonus, Settings, pairing and adult-task fallback.

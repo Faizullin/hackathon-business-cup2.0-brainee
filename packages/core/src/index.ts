@@ -1,6 +1,7 @@
 // Pure rules and shared types. No React, no I/O.
 export * from "./accessories";
 export * from "./brainy";
+export * from "./calendar";
 export * from "./economy";
 export * from "./game-validation";
 export * from "./learning";
