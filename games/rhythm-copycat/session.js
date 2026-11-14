@@ -3,6 +3,63 @@ import * as perc from "./js/percussion.js";
 const bridge = window.Brainee.connect({ contract: "rhythm-copycat@1" });
 await bridge.ready;
 
+// Game-local copy. The host sends its locale in the bridge handshake; non-English host locales
+// fall back to Russian (an unbridged standalone build defaults to English).
+const TEXT = {
+  ru: {
+    title: "Ритм-повторялка",
+    progress: (n) => `Ритм ${n} из 4`,
+    soundOn: "Звук: вкл",
+    soundOff: "Звук: выкл",
+    watch: "Слушай и смотри!",
+    watchHint: "Внимательно запоминай последовательность",
+    turn: "Твоя очередь!",
+    turnHint: "Повтори ритм на площадках!",
+    great: "Отлично!",
+    next: "Отлично! Следующий ритм.",
+    wrong: "Не совсем так. Давай повторим показ!",
+    doneTitle: "Все 4 ритма выполнены!",
+    doneText: "Ритмы получились отлично!",
+    pads: "Площадки ритма",
+    replay: "ЕЩЁ РАЗ",
+    replayLabel: "Повторить показ ритма",
+    kiki: "Кики",
+    actions: {
+      clap: ["Хлоп", "Хлопок"],
+      stomp: ["Топ", "Топот"],
+      tap: ["Тук", "Стук"],
+      shake: ["Шейк", "Шейк"],
+    },
+  },
+  en: {
+    title: "Rhythm Copycat",
+    progress: (n) => `Rhythm ${n} of 4`,
+    soundOn: "Sound: on",
+    soundOff: "Sound: off",
+    watch: "Listen and watch!",
+    watchHint: "Remember the sequence carefully",
+    turn: "Your turn!",
+    turnHint: "Repeat the rhythm on the pads!",
+    great: "Great!",
+    next: "Great! Next rhythm.",
+    wrong: "Not quite. Let's watch it again!",
+    doneTitle: "All 4 rhythms done!",
+    doneText: "Your rhythms sounded great!",
+    pads: "Rhythm pads",
+    replay: "AGAIN",
+    replayLabel: "Replay the rhythm",
+    kiki: "Kiki",
+    actions: {
+      clap: ["Clap", "Clap"],
+      stomp: ["Stomp", "Stomp"],
+      tap: ["Tap", "Tap"],
+      shake: ["Shake", "Shake"],
+    },
+  },
+};
+const locale = bridge.context?.locale === "en" ? "en" : "ru";
+const t = TEXT[locale];
+
 const session = {
   level: Math.max(1, Math.min(3, Number(bridge.config?.level) || 1)),
   seed: Number(bridge.config?.seed) || 42,
@@ -53,7 +110,6 @@ function createPattern(level, roundIndex) {
   if (level === 2) {
     // Level 2: 6 beats with repeating chunks
     const chunk = [pickAction(), pickAction(), pickAction()];
-    // Either chunk repeated or chunk + variant
     return [...chunk, chunk[0], chunk[1], pickAction()];
   }
   // Level 3: 8 beats with rhythmic structure
@@ -64,12 +120,7 @@ function createPattern(level, roundIndex) {
   return [a, b, a, b, c, c, d, d];
 }
 
-const patterns = [
-  createPattern(session.level, 0),
-  createPattern(session.level, 1),
-  createPattern(session.level, 2),
-  createPattern(session.level, 3),
-];
+const patterns = [0, 1, 2, 3].map((round) => createPattern(session.level, round));
 
 // DOM references
 const promptEl = document.querySelector("[data-prompt]");
@@ -83,27 +134,61 @@ const pads = document.querySelectorAll(".rc-pad");
 const kikiImg = document.querySelector("[data-kiki-img]");
 const mainGame = document.getElementById("game");
 
+function applyStaticText() {
+  document.documentElement.lang = locale;
+  document.title = t.title;
+  document.querySelector(".rc-pads")?.setAttribute("aria-label", t.pads);
+  for (const pad of pads) {
+    const [label, name] = t.actions[pad.dataset.pad] ?? [];
+    if (!label) continue;
+    pad.setAttribute("aria-label", name);
+    const labelEl = pad.querySelector(".rc-pad-label");
+    if (labelEl) labelEl.textContent = label;
+  }
+  replayBtn?.setAttribute("aria-label", t.replayLabel);
+  const replayText = replayBtn?.querySelector("span");
+  if (replayText) replayText.textContent = t.replay;
+  if (kikiImg) kikiImg.alt = t.kiki;
+  if (soundBtn) soundBtn.textContent = t.soundOff;
+}
+
 let currentPattern = patterns[0];
 let currentInput = [];
 let isDemoPlaying = false;
 let isAcceptingInput = false;
-let demoTimeouts = [];
+// Every pending timer, so leaving the game stops demos, flashes and round transitions.
+const timers = new Set();
 
-function clearDemoTimeouts() {
-  demoTimeouts.forEach(clearTimeout);
-  demoTimeouts = [];
+function later(fn, ms) {
+  const id = setTimeout(() => {
+    timers.delete(id);
+    if (!session.finished) fn();
+  }, ms);
+  timers.add(id);
+  return id;
+}
+
+function clearTimers() {
+  for (const id of timers) clearTimeout(id);
+  timers.clear();
+}
+
+// `data-turn` exposes the input state (demo | player | feedback | done) without relying on copy.
+function setTurn(turn) {
+  mainGame?.setAttribute("data-turn", turn);
+}
+
+function setText(prompt, message) {
+  if (promptEl) promptEl.textContent = prompt;
+  if (messageEl) messageEl.textContent = message;
 }
 
 function setKikiPose(pose) {
-  if (kikiImg) {
-    kikiImg.src = `./assets/kiki/poses/${pose}.webp`;
-  }
+  if (kikiImg) kikiImg.src = `./assets/kiki/poses/${pose}.webp`;
 }
 
 function updateProgress() {
-  if (progressEl) {
-    progressEl.textContent = `Ритм ${session.rounds + 1} из 4`;
-  }
+  if (progressEl) progressEl.textContent = t.progress(Math.min(session.rounds + 1, 4));
 }
 
 function renderChips(pattern, filledCount = 0, filledActions = []) {
@@ -123,7 +208,7 @@ function renderChips(pattern, filledCount = 0, filledActions = []) {
 
     const img = document.createElement("img");
     img.src = ACTION_CHIPS[act] || "./assets/pads/clap.webp";
-    img.alt = act;
+    img.alt = isFilled ? (t.actions[act]?.[1] ?? act) : "";
     img.draggable = false;
     chip.append(img);
     chipsHost.append(chip);
@@ -145,65 +230,62 @@ function flashPad(action) {
   pad.classList.remove("is-demo-hit", "is-hit");
   void pad.offsetWidth;
   pad.classList.add(isDemoPlaying ? "is-demo-hit" : "is-hit");
-  setTimeout(() => pad.classList.remove("is-demo-hit", "is-hit"), 420);
+  later(() => pad.classList.remove("is-demo-hit", "is-hit"), 420);
 }
 
-function playActionSound(action) {
-  if (session.soundEnabled) {
-    perc.play(action);
+// Audio is optional feedback: a failing or suspended AudioContext must never block input.
+function playSound(name) {
+  if (!session.soundEnabled) return;
+  try {
+    perc.play(name);
+  } catch {
+    // Ignore audio failures.
   }
 }
 
-async function playDemo() {
+function playDemo() {
   if (session.finished) return;
-  clearDemoTimeouts();
+  clearTimers();
   isDemoPlaying = true;
   isAcceptingInput = false;
   currentInput = [];
+  for (const pad of pads) pad.classList.remove("is-demo-hit", "is-hit");
+  setTurn("demo");
   setKikiPose("neutral");
-  if (promptEl) promptEl.textContent = "Слушай и смотри!";
-  if (messageEl) messageEl.textContent = "Внимательно запоминай последовательность";
+  setText(t.watch, t.watchHint);
   renderChips(currentPattern, 0, []);
 
   const beatMs = 640;
-  for (let i = 0; i < currentPattern.length; i++) {
-    await new Promise((resolve) => {
-      const t = setTimeout(
-        () => {
-          if (session.finished) return resolve();
-          const act = currentPattern[i];
-          highlightChip(i, act);
-          flashPad(act);
-          setKikiPose(act);
-          playActionSound(act);
-          resolve();
-        },
-        i === 0 ? 400 : beatMs,
-      );
-      demoTimeouts.push(t);
-    });
-  }
-
-  await new Promise((resolve) => {
-    const t = setTimeout(() => {
+  currentPattern.forEach((act, i) => {
+    later(
+      () => {
+        highlightChip(i, act);
+        flashPad(act);
+        setKikiPose(act);
+        playSound(act);
+      },
+      400 + i * beatMs,
+    );
+  });
+  later(
+    () => {
       setKikiPose("neutral");
       isDemoPlaying = false;
       isAcceptingInput = true;
-      if (promptEl) promptEl.textContent = "Твоя очередь!";
-      if (messageEl) messageEl.textContent = "Повтори ритм на площадках!";
+      setTurn("player");
+      setText(t.turn, t.turnHint);
       renderChips(currentPattern, 0, []);
-      resolve();
-    }, 500);
-    demoTimeouts.push(t);
-  });
+    },
+    400 + (currentPattern.length - 1) * beatMs + 500,
+  );
 }
 
 function handlePadInput(action) {
   if (session.finished || isDemoPlaying || !isAcceptingInput) return;
-  playActionSound(action);
+  playSound(action);
   flashPad(action);
   setKikiPose(action);
-  setTimeout(() => {
+  later(() => {
     if (!isDemoPlaying && isAcceptingInput) setKikiPose("neutral");
   }, 400);
 
@@ -212,6 +294,7 @@ function handlePadInput(action) {
 
   if (currentInput.length === currentPattern.length) {
     isAcceptingInput = false;
+    setTurn("feedback");
     checkSequence();
   }
 }
@@ -219,112 +302,91 @@ function handlePadInput(action) {
 function checkSequence() {
   const isMatch = currentInput.every((act, i) => act === currentPattern[i]);
 
-  if (isMatch) {
-    // Completed task!
-    isAcceptingInput = false;
-    if (promptEl) promptEl.textContent = "Отлично!";
-    if (messageEl) messageEl.textContent = "Отлично! Следующий ритм.";
-    setKikiPose("celebrate");
-    if (session.soundEnabled) perc.play("strum");
-    const wasAfterMistake = session.hadMistake;
-    session.rounds++;
-    if (wasAfterMistake) session.corrections++;
-    session.hadMistake = false;
-    updateProgress();
-    bridge.track("round", { correct: true, afterMistake: wasAfterMistake });
-
-    if (session.rounds === 4) {
-      session.finished = true;
-      clearDemoTimeouts();
-      if (promptEl) promptEl.textContent = "Отлично!";
-      if (messageEl) messageEl.textContent = "Все 4 ритма выполнены!";
-      if (mainGame) {
-        mainGame.innerHTML = `
-          <div class="session-complete">
-            <h1>Все 4 ритма выполнены!</h1>
-            <p>Ты отлично справился с ритмическими узорами!</p>
-          </div>
-        `;
-      }
-      bridge.track("finish", {
-        gameId: "rhythm-copycat",
-        level: session.level,
-        rounds: session.rounds,
-        mistakes: session.mistakes,
-        corrections: session.corrections,
-        durationMs: Math.round(performance.now() - session.started),
-      });
-      return;
-    }
-
-    if (promptEl) promptEl.textContent = "Отлично!";
-    if (messageEl) messageEl.textContent = "Отлично! Следующий ритм.";
-    updateProgress();
-    setTimeout(() => {
-      if (session.finished) return;
-      currentPattern = patterns[session.rounds];
-      playDemo();
-    }, 1100);
-  } else {
-    // Failed complete sequence: counts as one attempt
+  if (!isMatch) {
+    // A complete wrong sequence counts as one attempt.
     session.mistakes++;
     session.hadMistake = true;
-    isAcceptingInput = false;
-    if (promptEl) promptEl.textContent = "Слушай и смотри!";
-    if (messageEl) messageEl.textContent = "Не совсем так. Давай повторим показ!";
+    setText(t.watch, t.wrong);
     setKikiPose("notice");
     bridge.track("round", { correct: false, afterMistake: false });
-
-    setTimeout(() => {
-      if (session.finished) return;
-      playDemo();
-    }, 1200);
+    later(playDemo, 1200);
+    return;
   }
+
+  setText(t.great, t.next);
+  setKikiPose("celebrate");
+  playSound("strum");
+  const wasAfterMistake = session.hadMistake;
+  session.rounds++;
+  if (wasAfterMistake) session.corrections++;
+  session.hadMistake = false;
+  bridge.track("round", { correct: true, afterMistake: wasAfterMistake });
+
+  if (session.rounds === 4) {
+    session.finished = true;
+    clearTimers();
+    const done = document.createElement("div");
+    done.className = "session-complete";
+    const title = document.createElement("h1");
+    title.textContent = t.doneTitle;
+    const text = document.createElement("p");
+    text.textContent = t.doneText;
+    done.append(title, text);
+    mainGame?.replaceChildren(done);
+    setTurn("done");
+    bridge.track("finish", {
+      gameId: "rhythm-copycat",
+      level: session.level,
+      rounds: session.rounds,
+      mistakes: session.mistakes,
+      corrections: session.corrections,
+      durationMs: Math.round(performance.now() - session.started),
+    });
+    return;
+  }
+
+  updateProgress();
+  later(() => {
+    currentPattern = patterns[session.rounds];
+    playDemo();
+  }, 1100);
 }
 
-// Sound toggle
-if (soundBtn) {
-  soundBtn.addEventListener("click", () => {
-    session.soundEnabled = !session.soundEnabled;
-    if (session.soundEnabled) {
+soundBtn?.addEventListener("click", () => {
+  session.soundEnabled = !session.soundEnabled;
+  if (session.soundEnabled) {
+    try {
       perc.unlock();
-      soundBtn.classList.add("is-active");
-      soundBtn.textContent = "Звук: вкл";
-    } else {
-      soundBtn.classList.remove("is-active");
-      soundBtn.textContent = "Звук: выкл";
+    } catch {
+      // Sound stays a no-op when audio cannot start.
     }
-  });
-}
+  }
+  soundBtn.classList.toggle("is-active", session.soundEnabled);
+  soundBtn.textContent = session.soundEnabled ? t.soundOn : t.soundOff;
+});
 
-// Replay button
-if (replayBtn) {
-  replayBtn.addEventListener("click", () => {
-    if (isAcceptingInput && !isDemoPlaying && !session.finished) {
-      playDemo();
-    }
-  });
-}
+replayBtn?.addEventListener("click", () => {
+  if (isAcceptingInput && !isDemoPlaying && !session.finished) playDemo();
+});
 
-// Wire pads
-pads.forEach((pad) => {
+for (const pad of pads) {
   pad.addEventListener("click", () => {
     const action = pad.dataset.pad;
     if (action) handlePadInput(action);
   });
-});
+}
 
 window.addEventListener(
   "pagehide",
   () => {
     session.finished = true;
-    clearDemoTimeouts();
+    clearTimers();
     bridge.close();
   },
   { once: true },
 );
 
-// Start
+applyStaticText();
 updateProgress();
-await playDemo();
 bridge.lifecycle("ready");
+playDemo();

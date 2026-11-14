@@ -1,4 +1,4 @@
-import type { FrameLocator } from "@playwright/test";
+import { expect, type FrameLocator } from "@playwright/test";
 
 const ACTIONS = ["clap", "stomp", "tap", "shake"];
 
@@ -40,18 +40,16 @@ export async function playRhythmInput(
   makeMistake = false,
   roundIndex?: number,
 ) {
-  if (typeof roundIndex === "number") {
-    await frame
-      .locator(".session-progress")
-      .filter({ hasText: `Ритм ${roundIndex + 1} из 4` })
-      .waitFor({ state: "visible", timeout: 10000 });
-  }
+  const text =
+    RHYTHM_TEXT[(await frame.locator("html").getAttribute("lang")) === "en" ? "en" : "ru"];
+  if (typeof roundIndex === "number")
+    await expect(frame.locator(".session-progress")).toHaveText(text.progress(roundIndex + 1), {
+      timeout: 10000,
+    });
 
-  // Wait until user's turn
-  await frame
-    .locator("[data-prompt]")
-    .filter({ hasText: "Твоя очередь" })
-    .waitFor({ state: "visible", timeout: 10000 });
+  // Input opens only after the demo; the copy must match the issued locale.
+  await expect(frame.locator("#game")).toHaveAttribute("data-turn", "player", { timeout: 10000 });
+  await expect(frame.locator("[data-prompt]")).toHaveText(text.turn);
 
   const inputSequence = makeMistake
     ? pattern.map((act, i) =>
@@ -59,9 +57,15 @@ export async function playRhythmInput(
       )
     : [...pattern];
 
-  for (const action of inputSequence) {
-    const pad = frame.locator(`.rc-pad[data-pad="${action}"]`);
-    await pad.click({ delay: 60 });
-    await new Promise((r) => setTimeout(r, 120));
+  for (const [i, action] of inputSequence.entries()) {
+    await frame.locator(`.rc-pad[data-pad="${action}"]`).click({ delay: 60 });
+    // Every tap must land exactly once before the next one.
+    if (i < inputSequence.length - 1)
+      await expect(frame.locator(".rc-chip.is-shown")).toHaveCount(i + 1);
   }
 }
+
+const RHYTHM_TEXT = {
+  ru: { progress: (n: number) => `Ритм ${n} из 4`, turn: "Твоя очередь!" },
+  en: { progress: (n: number) => `Rhythm ${n} of 4`, turn: "Your turn!" },
+};
