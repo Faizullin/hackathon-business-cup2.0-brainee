@@ -2,7 +2,7 @@
 
 | Report | Shows |
 | --- | --- |
-| [Every MVP page](mvp.md) (default) | Entry, Learn, Leisure, video quiz, Gifts, Brainy shop, parent PIN, Analytics, Tasks, Gifts & goal. Two walkthroughs, 20 screenshots |
+| [Every MVP page](mvp.md) (default) | Parent funnel cover and growth preview, Entry, Learn, Leisure, video quiz, Gifts, Brainy shop, Path, parent PIN, Analytics, Tasks, Gifts & goal. Two walkthroughs, 26 screenshots |
 | [Saved child learning loop](learning.md) | Three saved games without returning to the menu, post-game screens, the three-game break bonus, the Brainy tab, child tabs and `/lab`. Two walkthroughs, 12 screenshots |
 
 The earlier `scaffold` report (placeholder screens) was retired once every page existed.

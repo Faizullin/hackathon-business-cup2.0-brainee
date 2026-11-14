@@ -711,10 +711,8 @@
         },
         {
           "click": {
-            "by": "role",
-            "role": "link",
-            "name": "Brainy",
-            "exact": true
+            "by": "css",
+            "value": "nav a[href=\"/brainy\"]"
           }
         },
         {
@@ -1172,10 +1170,8 @@
         },
         {
           "click": {
-            "by": "role",
-            "role": "link",
-            "name": "Brainy",
-            "exact": true
+            "by": "css",
+            "value": "nav a[href=\"/brainy\"]"
           }
         },
         {
