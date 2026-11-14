@@ -45,12 +45,23 @@ export function discoverGames() {
       manifestPath: explore ? preview : manifest,
     });
   }
-  return games.map((game) => {
-    const manifest = JSON.parse(readFileSync(game.manifestPath, "utf8"));
-    if (manifest.id !== game.id)
-      throw new Error(`Folder ${relative(root, game.dir)} declares id "${manifest.id}"`);
-    return { ...game, manifest };
-  });
+  const runtimeRank = { react: 0, embedded: 1 };
+  return (
+    games
+      .map((game) => {
+        const manifest = JSON.parse(readFileSync(game.manifestPath, "utf8"));
+        if (manifest.id !== game.id)
+          throw new Error(`Folder ${relative(root, game.dir)} declares id "${manifest.id}"`);
+        return { ...game, manifest };
+      })
+      // Catalog order: React games first (the lab opens the first one), then youngest age, then id.
+      .sort(
+        (a, b) =>
+          runtimeRank[a.runtime] - runtimeRank[b.runtime] ||
+          a.manifest.minAge - b.manifest.minAge ||
+          a.id.localeCompare(b.id),
+      )
+  );
 }
 
 function importPath(from, to) {
@@ -76,7 +87,7 @@ export function writeGeneratedModules(games = discoverGames()) {
   const names = (from, count) => Array.from({ length: count }, (_, i) => `g${from + i}`).join(", ");
   write(
     catalogFile,
-    `${HEADER}${imports.join("\n")}\n\n/** Scored manifests, React games first, then embedded, each by id. */\nexport const discoveredManifests: readonly unknown[] = [${names(0, learn.length)}];\n/** Explore previews by id. */\nexport const discoveredPreviews: readonly unknown[] = [${names(learn.length, explore.length)}];\n`,
+    `${HEADER}${imports.join("\n")}\n\n/** Scored manifests: React games first, then embedded; each by minimum age, then id. */\nexport const discoveredManifests: readonly unknown[] = [${names(0, learn.length)}];\n/** Explore previews by minimum age, then id. */\nexport const discoveredPreviews: readonly unknown[] = [${names(learn.length, explore.length)}];\n`,
   );
 
   const registryFile = join(root, "packages/games/src/react-games.generated.ts");

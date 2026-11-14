@@ -138,7 +138,7 @@ for (const game of GAMES)
     await expect.poll(async () => (await view(page, game.scene)).ready).toBe(true);
     // English-only menu: no language picker, no Cyrillic copy.
     await expect(frame.locator("#game-language")).toHaveCount(0);
-    expect(await frame.locator("body").innerText()).not.toMatch(/[Ѐ-ӿ]/);
+    expect(await frame.locator("body").textContent()).not.toMatch(/[Ѐ-ӿ]/);
     await frame.locator("#start-game").click({ delay: 40 });
     await expect.poll(async () => (await view(page, game.scene)).menuOpen).toBe(false);
     await page.screenshot({ path: info.outputPath(`${game.id}-start.png`) });
