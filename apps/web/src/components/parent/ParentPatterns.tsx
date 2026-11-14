@@ -27,7 +27,7 @@ export function ParentToday({
   snapshot: StateSnapshot;
   attention: Attention[];
 }) {
-  const { t, tc } = useI18n();
+  const { t } = useI18n();
   const [dismissed, setDismissed] = useState<string[]>([]);
   const { progress, showcase, latestGame, activity, child } = snapshot;
   const zone = showcase.calendar?.timeZone ?? DEFAULT_TIME_ZONE;
@@ -175,7 +175,7 @@ export function ParentToday({
                       </time>
                       <span className="min-w-0 flex-1">
                         <span className="block text-sm font-semibold">
-                          {game ? tc(game.title) : copy.learningSession}
+                          {game ? game.title : copy.learningSession}
                         </span>
                         <span className="block text-xs text-muted-foreground">
                           {copy.minutes(Math.round((session.durationMs ?? 0) / 60000))} ·{" "}

@@ -16,7 +16,7 @@ Brainee changes:
   - Level 2: 6×6 grid, 1 vertical axis, 3 colors (white, blue, and red).
   - Level 3: 6×6 grid, 2 bilateral axes, 3 colors (white, blue, and red).
 - Visible mirror axis dividing sample side from player side.
-- Explicit Check button («Проверить»).
+- Explicit Check button ("Check").
 - Educational evaluation: failed Check reports one mistake; a completed pattern after any failed Check reports one correction.
 - Exactly 4 completed patterns emit one final `GameResult`.
 - Touch targets >= 48px.

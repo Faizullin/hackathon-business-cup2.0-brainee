@@ -12,7 +12,7 @@ A ten-slide outline and a three-minute script. The owner builds the deck. Produc
 | 4. Try it now | Jury QR/link: `https://brainee.vercel.app` | One tap creates a separate demo family; next completed game unlocks the badge |
 | 5. Two kinds of effort | ★ and ☀ beside a task | Stars support in-app choices; parent-confirmed real-life tasks earn suns |
 | 6. Parents stay involved | Family plan beside the paired iPad | A starting phrase and off-screen task, shared progress, PIN and revocable devices |
-| 7. Designed for family use | Lavender iPad rail and `/start` preview | English-first setup, one origin, calm motion and explicit stopping points |
+| 7. Designed for family use | Lavender iPad rail and `/start` preview | English-only setup, one origin, calm motion and explicit stopping points |
 | 8. What is real today | Product screenshots with “live / demo” labels | Saved actions and activity analytics work; historical/character radars and ranking are illustrative |
 | 9. What we must validate | Small pilot checklist | Comprehension, voluntary return, parent setup effort and real-device reliability—not clinical outcomes |
 | 10. Our ask | Jury link and three questions | Try both roles; tell us what was clear, what felt rewarding and where you got stuck |
@@ -40,10 +40,10 @@ Aim for about 18 seconds per slide. Rehearse at roughly 125 words per minute; pa
 “Parents begin with a short funnel that creates a family starting plan: a phrase to agree on, four small steps and an off-screen task suggestion. Parents can edit or download it. Paired phones and iPads share saved progress, and parents can revoke device access.”
 
 **7 · 1:48–2:06**
-“The lavender interface keeps the same five destinations on phone and iPad. New setup is English only; existing screens retain their language switch. Resources load from our domain, motion respects reduced-motion settings, and physical iPad verification remains a required rehearsal.”
+“The lavender interface keeps the same five destinations on phone and iPad. The whole product is English only. Resources load from our domain, motion respects reduced-motion settings, and physical iPad verification remains a required rehearsal.”
 
 **8 · 2:06–2:24**
-“This is a working presentation MVP, not a claim of validated learning improvement. Saved games, tasks and activity totals are real. Historical charts and ranking are labelled demo data. Funnel puzzles and growth sliders are previews. Media is placeholder content; pricing is pending with no checkout.”
+“This is a working presentation MVP, not a claim of validated learning improvement. Saved games, tasks and activity totals are real. Historical charts and ranking are labelled demo data. Funnel puzzles and growth sliders are previews. Interactive films use local podcast audio and drawn scenes; some other media remains placeholder content. Pricing is pending with no checkout.”
 
 **9 · 2:24–2:42**
 “Our next step is a small, consented family pilot. We want to learn whether children understand the choices, whether rewards support voluntary return, and whether parents can set up the product easily. We have no traction or clinical results to claim.”

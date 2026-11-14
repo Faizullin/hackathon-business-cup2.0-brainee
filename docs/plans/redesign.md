@@ -1,11 +1,11 @@
 # Plan: lavender redesign and parent funnel
 
-What to build, in order. **The visual source of truth is [product/design.md](../product/design.md)**: the Claude Design lavender system and the Brain component (D-36). The parent funnel comes from the [funnel analysis](../product/funnel.md). Decisions D-37 (English-only copy, existing translations untouched), D-35 (funnel at `/start`) and D-36 (design system, Brain mapping, kid-safe states, game palette) are in [decisions.md](../dev/decisions.md). Tasks are T-131–T-142 in [todo.md](../progress/todo.md).
+What to build, in order. **The visual source of truth is [product/design.md](../product/design.md)**: the Claude Design lavender system and the Brain component (D-36). The parent funnel comes from the [funnel analysis](../product/funnel.md). Decisions D-34 (English-only platform), D-35 (funnel at `/start`) and D-36 (design system, Brain mapping, kid-safe states, game palette) are in [decisions.md](../dev/decisions.md). Tasks are T-131–T-142 in [todo.md](../progress/todo.md).
 
 ## Ground rules
 
 - **Hard rules:** everything loads from our own domain; game and economy rules stay in `packages/core` (pure, tested); games never grant ★; no feeds, autoplay or kid rankings; Brainy never dies; no medical claims.
-- **English only (D-37).** New UI text goes into feature-local English copy modules. **Never edit** `apps/web/src/i18n/en.ts`, `ru.ts`, `types.ts`, `context.tsx`, `content.ts` or existing strings; restyled pages keep their current `useI18n()` strings. No Russian in new code, docs, tests or seed data. The design files contain Russian placeholder copy: write English, don't translate.
+- **English-only platform (D-34).** Host, games and films use English; there is no locale switch or locale cookie. New UI text stays in feature-local English copy modules. No Russian in new code, docs, tests or seed data. The design files contain placeholder copy: write English for this product. D-37 is superseded by D-34.
 - **Scope:** only this redesign. Don't touch unrelated games or game code: `games/**`, `packages/games/src/**`, `packages/game-catalog`, `packages/game-bridge`, `packages/engine-phaser`, `apps/web/public/games/**`, and the game specs. The host chrome around games is in scope (T-141).
 - **Keep the existing product loop working:**
   - quiz-first signup, then setup/pairing (D-24 / D-29);
@@ -21,9 +21,9 @@ What to build, in order. **The visual source of truth is [product/design.md](../
 
 ## Tasks
 
-### T-130 · Dropped (D-37)
+### T-130 · Dropped (D-34)
 
-No dictionary refactor. Follow the English-only rule above.
+The platform now serves English only. Keep feature-local English copy modules; no bilingual dictionary refactor is needed.
 
 ### T-131 · Lavender tokens, fonts and icons (fast re-skin)
 

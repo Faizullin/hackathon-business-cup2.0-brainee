@@ -24,7 +24,7 @@ test("a lost finish response survives reload, reuses the issued ID and never rep
   await page.goto("/game/odd-one-out?level=1&seed=42");
   const before = await readyState(page);
   await answerOddOneOut(page);
-  await expect(page.getByRole("button", { name: "Сохранить ещё раз" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Save again" })).toBeVisible();
   await expect(page.getByTestId("earned-stars")).toHaveCount(0);
   expect((await savedState(page.request)).progress.wallet.stars).toBe(
     before.progress.wallet.stars + 12,
@@ -55,7 +55,7 @@ test("a lost finish response survives reload, reuses the issued ID and never rep
     await page.reload();
     await expect(page.getByTestId("earned-stars")).toContainText("+12");
     await expect(
-      page.getByText(`Теперь у тебя ${before.progress.wallet.stars + 24} ★`),
+      page.getByText(`You now have ${before.progress.wallet.stars + 24} ★`),
     ).toBeVisible();
     expect(starts).toBe(1);
     expect(ids).toHaveLength(2);
@@ -97,10 +97,10 @@ test("blocked tab storage still permits an in-memory retry without optimistic re
   await page.goto("/game/odd-one-out?seed=9");
   const before = await readyState(page);
   await answerOddOneOut(page);
-  await expect(page.getByRole("button", { name: "Сохранить ещё раз" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Save again" })).toBeVisible();
   expect((await savedState(page.request)).version).toBe(before.version);
   await expect(page.getByTestId("earned-stars")).toHaveCount(0);
-  await page.getByRole("button", { name: "Сохранить ещё раз" }).click();
+  await page.getByRole("button", { name: "Save again" }).click();
   await expect(page.getByTestId("earned-stars")).toContainText("+12");
   expect(new Set(ids).size).toBe(1);
   const after = await savedState(page.request);
@@ -126,12 +126,12 @@ test("a failed state refresh after a committed finish retains the result for saf
     }),
   );
   await answerOddOneOut(page);
-  await expect(page.getByRole("button", { name: "Сохранить ещё раз" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Save again" })).toBeVisible();
   expect((await savedState(page.request)).progress.wallet.stars).toBe(
     before.progress.wallet.stars + 12,
   );
   await page.unroute("**/api/state*");
-  await page.getByRole("button", { name: "Сохранить ещё раз" }).click();
+  await page.getByRole("button", { name: "Save again" }).click();
   await expect(page.getByTestId("earned-stars")).toContainText("+12");
   expect(ids).toHaveLength(2);
   expect(new Set(ids).size).toBe(1);

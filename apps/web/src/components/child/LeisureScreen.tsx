@@ -4,15 +4,18 @@ import { funMinutesLeft } from "@brainee/core";
 import {
   Bone,
   Clapperboard,
+  CloudRain,
   Crosshair,
   Drum,
   Fish,
   Flower2,
   Headphones,
+  Moon,
   Orbit,
   Play,
   Rocket,
   Route,
+  Sun,
   Worm,
 } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
@@ -32,7 +35,15 @@ import { useLearning } from "./LearningProvider";
 import { stoppingCopy } from "./stopping-copy";
 
 const FUN_ICONS = { snake: Worm, rocket: Rocket, drum: Drum, target: Crosshair, maze: Route };
-export const SCIENCE_ICONS = { wave: Fish, bee: Flower2, planet: Orbit, dino: Bone };
+export const SCIENCE_ICONS = {
+  wave: Fish,
+  bee: Flower2,
+  planet: Orbit,
+  dino: Bone,
+  sun: Sun,
+  rain: CloudRain,
+  moon: Moon,
+};
 
 // Leisure tab (T-36): fun-game shop for ★, cartoons for ★, free science videos.
 export function LeisureScreen() {
@@ -174,7 +185,7 @@ export function LeisureScreen() {
               className="flex flex-col gap-2 rounded-panel bg-card p-3 ring-1 ring-border"
             >
               <span className="grid aspect-video place-items-center rounded-lg bg-highlight-wash">
-                {/^(Audio|Аудио)/.test(cartoon.detail) ? (
+                {/^Audio/.test(cartoon.detail) ? (
                   <Headphones aria-hidden="true" className="size-8 text-accent" />
                 ) : (
                   <Clapperboard aria-hidden="true" className="size-8 text-accent" />

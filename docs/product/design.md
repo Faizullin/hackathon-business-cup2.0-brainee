@@ -5,7 +5,7 @@
 - **Origin:** Claude Design artifact `KJGLCmeh3ZVPLGeiJfzHey` (page `dcb81aee8d83`). It is a sister concept ("Izvilina", a school brain tracker) with the same mascot and lavender system.
 - **Frozen copies** of the files we use are in [ideas/claude-design/](../ideas/claude-design/). They are `.dc.html` design-canvas files: static markup with `{{bindings}}` plus a `DCLogic` class. They need the canvas runtime (not included), so read them as source; they don't run in a browser.
   - Their Google Fonts `<link>` is reference only. We vendor fonts (hard rule).
-  - **Their visible text is Russian placeholder copy for a school product.** Write English copy for our product; don't translate it or copy it (D-37).
+  - **Their visible text is Russian placeholder copy for a school product.** Write English copy for our product; don't translate it or copy it (D-34).
 
 | File | What to take |
 |---|---|

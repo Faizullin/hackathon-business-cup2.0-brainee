@@ -1,6 +1,6 @@
 # Product overview
 
-Source: PRD §1–2, §9 (`docs/ideas/PRD Брейни.pdf`, Nov 14 2026). Condensed. If this file and the PDF disagree, this file is the one we keep current.
+Source: PRD §1–2, §9 (Nov 14 2026; original in git history, see [ideas/README.md](../ideas/README.md)). Condensed; this file is the one we keep current.
 
 ## Problem
 Gen Alpha kids grew up on YouTube Kids and short videos. Endless feeds and low-quality AI content train them for fast stimulation, so long-form attention suffers. Parental controls limit time, not content quality.
@@ -20,7 +20,7 @@ The parent pays and the child uses the product. Each has their own UI over the s
 | Brainy, stage, mood | yes, large on every screen | yes, first block in the dashboard |
 | ★ and ☀ balances | yes | yes |
 | Learning games, fun games, cartoons, science videos | yes | no |
-| Tasks | sees them, taps "Готово" | creates and confirms them |
+| Tasks | sees them, taps "Done" | creates and confirms them |
 | Gifts | buys with ☀ | creates and delivers them |
 | Skill analytics (radars, charts) | no, only through Brainy | yes |
 | Rankings, comparisons, share cards | **never** | yes |
@@ -32,7 +32,7 @@ The parent pays and the child uses the product. Each has their own UI over the s
 
 ## Constraints
 - Web only: a site or PWA, not a native app. All games and content are web versions.
-- Russian UI, CIS market.
+- English-only UI; US-first market (D-30, D-34).
 
 ## Out of MVP
 Native iPadOS wrapper with the Screen Time API; licensed hits (Jetpack Joyride) and libraries like National Geographic; district-vs-district and kindergarten-vs-kindergarten competitions; B2B dashboard for kindergartens and learning centers; merch; several children per family (**support it in the data model**, build the UI later).
@@ -42,5 +42,5 @@ Native iPadOS wrapper with the Screen Time API; licensed hits (Jetpack Joyride) 
 - Science video source at launch: open licenses, independent studios, or our own production.
 - Age averages: expert estimates first, real user data later.
 - How fast mood decays when the child doesn't play, and its floor.
-- Science videos sit in "Отдых" (Leisure). Should there be a path from them back to learning?
-- Child speech recognition for "Расскажи историю": vendor and legal setup.
+- Science videos sit in "Leisure" (Leisure). Should there be a path from them back to learning?
+- Child speech recognition for "Tell a Story": vendor and legal setup.

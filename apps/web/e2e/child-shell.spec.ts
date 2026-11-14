@@ -1,8 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-test.beforeEach(async ({ context, baseURL }) => {
-  await context.addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
-});
 test("five child tabs, live hub, hero and Path preserve phone and iPad navigation", async ({
   page,
 }, info) => {
@@ -38,11 +35,17 @@ test("five child tabs, live hub, hero and Path preserve phone and iPad navigatio
   await expect(page.getByTestId("brainy-dock")).toHaveCount(0);
   await expect(page.getByTestId("brainy-hero")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Your discoveries" })).toHaveCount(0);
+  await page.goto("/gifts");
+  await page.getByRole("link", { name: "Open Brainy", exact: true }).click();
+  await expect(page).toHaveURL(/\/brainy$/);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(errors).toEqual([]);
 });
-test("games remain fullscreen and return to Learn", async ({ page }) => {
-  await page.goto("/game/odd-one-out");
+test("a game opens fullscreen from Learn and exits back", async ({ page }) => {
+  await page.goto("/learn");
+  await page.locator('a[href="/game/odd-one-out"]').click();
+  await expect(page).toHaveURL(/\/game\/odd-one-out$/);
+  await expect(page.getByRole("button", { name: /^Shape \d+$/ })).toHaveCount(9);
   await expect(page.getByRole("navigation", { name: "Sections" })).toHaveCount(0);
   await expect(page.getByTestId("brainy-dock")).toHaveCount(0);
   await page.getByRole("button", { name: "Exit", exact: true }).click();
@@ -50,6 +53,7 @@ test("games remain fullscreen and return to Learn", async ({ page }) => {
 });
 test("unknown games cannot launch", async ({ page }) => {
   await page.goto("/game/not-a-game");
+  await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
   await expect(page.locator('meta[name="robots"]').first()).toHaveAttribute("content", "noindex");
   await expect(page.getByTestId("embedded-game")).toHaveCount(0);
 });

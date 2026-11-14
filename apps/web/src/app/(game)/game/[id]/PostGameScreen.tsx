@@ -29,7 +29,7 @@ export function PostGameScreen({
   const rewardRef = useRef<HTMLParagraphElement>(null);
   const walletRef = useRef<HTMLParagraphElement>(null);
   const { snapshot } = useLearning();
-  const { t: i18n, tc } = useI18n();
+  const { t: i18n } = useI18n();
   const t = i18n.child.game;
   // T-94: prefer a different game for the weak skill; fall back to this one if it's the only fit.
   const practice =
@@ -46,7 +46,7 @@ export function PostGameScreen({
       className="mx-auto grid w-full max-w-6xl gap-5 p-4 pb-8 sm:p-6 lg:grid-cols-2 lg:items-start"
     >
       <div className="text-center lg:col-span-2">
-        <p className="text-muted-foreground">{tc(game.title)}</p>
+        <p className="text-muted-foreground">{game.title}</p>
         <h1 className="mt-1">{t.done}</h1>
       </div>
       <div className="flex flex-col gap-4">
@@ -158,7 +158,7 @@ export function PostGameScreen({
                 data-testid="practice-game"
               >
                 <span className="text-sm text-mint">{t.practice}</span>
-                <strong>{tc(practice.title)}</strong>
+                <strong>{practice.title}</strong>
                 <span className="text-muted-foreground text-sm">
                   {i18n.skills[practice.skills.main as keyof typeof i18n.skills]}
                 </span>
@@ -172,7 +172,7 @@ export function PostGameScreen({
               <span className="text-sm text-sky">
                 {level < game.levels ? t.nextLevel : t.replay}
               </span>
-              <strong>{tc(game.title)}</strong>
+              <strong>{game.title}</strong>
               <span className="text-muted-foreground text-sm">{t.level(nextLevel)}</span>
             </Link>
           </div>

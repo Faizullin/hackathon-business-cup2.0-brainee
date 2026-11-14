@@ -14,7 +14,7 @@ test("jury joins in one tap; families stay isolated; game ten completes an app t
     if (url.protocol.startsWith("http") && url.origin !== baseURL) foreign.push(request.url());
   });
   await page.goto("/");
-  await page.getByRole("button", { name: "Войти как жюри" }).click();
+  await page.getByRole("button", { name: "Join as Jury" }).click();
   await expect(page).toHaveURL(/\/jury$/);
   await expect(page.getByTestId("jury-pin")).toHaveText(/^\d{4}$/);
   const a = await savedState(page.request);
@@ -31,18 +31,18 @@ test("jury joins in one tap; families stay isolated; game ten completes an app t
       fullPage: true,
       animations: "disabled",
     });
-    await page.getByRole("link", { name: "Смотреть как ребёнок" }).click();
+    await page.getByRole("link", { name: "View as Child" }).click();
     await expect(page).toHaveURL(/\/entry$/);
     await page.goto("/path");
     await expect(page.getByText("9 / 10", { exact: true })).toBeVisible();
     await page.goto("/game/odd-one-out?recommended=1&seed=42");
     await answerOddOneOut(page);
-    await expect(page.getByRole("dialog", { name: "Новая награда!" })).toBeVisible();
+    await expect(page.getByRole("dialog", { name: "New reward!" })).toBeVisible();
     await expect(
-      page.getByRole("dialog").getByText("Значок исследователя", { exact: true }),
+      page.getByRole("dialog").getByText("Explorer Badge", { exact: true }),
     ).toBeVisible();
     await page.screenshot({ path: info.outputPath("earned.png"), animations: "disabled" });
-    await page.getByRole("button", { name: "Здорово!" }).click();
+    await page.getByRole("button", { name: "Awesome!" }).click();
     const after = await savedState(page.request);
     expect(after.progress.wallet.stars).toBe(a.progress.wallet.stars + 27);
     expect(after.showcase.tasks.find((t) => t.id === "jury-app")?.status).toBe("done");
@@ -51,22 +51,22 @@ test("jury joins in one tap; families stay isolated; game ten completes an app t
     expect((await savedState(other.request)).progress.wallet).toEqual(b.progress.wallet);
     await page.goto("/analytics");
     await expect(page.getByTestId("computed-analytics")).toBeVisible();
+    await expect(page.locator("li").filter({ hasText: "Average focus session" })).toContainText(
+      `${after.activity?.focusMinutes} min`,
+    );
     await expect(
-      page.locator("li").filter({ hasText: "Средняя сессия концентрации" }),
-    ).toContainText(`${after.activity?.focusMinutes} мин`);
-    await expect(
-      page.locator("li").filter({ hasText: "Выбирает рекомендации Брейни" }),
+      page.locator("li").filter({ hasText: "Chooses Brainy recommendations" }),
     ).toContainText(`${after.activity?.takesRecommendation}%`);
-    await expect(page.getByText(/Доведено до конца: 10 из 10 рекомендованных игр/)).toBeVisible();
-    await expect(page.getByTestId("event-feed")).toContainText("Значок исследователя");
+    await expect(page.getByText(/Finished: 10 of 10 recommended games/)).toBeVisible();
+    await expect(page.getByTestId("event-feed")).toContainText("Explorer Badge");
     await page.screenshot({
       path: info.outputPath("analytics-real.png"),
       fullPage: true,
       animations: "disabled",
     });
     await page.goto("/settings");
-    await page.getByRole("button", { name: "Сбросить демо" }).click();
-    await expect(page.getByRole("status")).toHaveText("Сохранено");
+    await page.getByRole("button", { name: "Reset demo" }).click();
+    await expect(page.getByRole("status")).toHaveText("Saved");
     expect((await savedState(other.request)).child.id).toBe(b.child.id);
     expect(foreign).toEqual([]);
   } finally {
@@ -79,9 +79,6 @@ test("funnel signup keeps setup pairing on the same family", async ({
   browser,
   baseURL,
 }, info) => {
-  await page
-    .context()
-    .addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
   await page.goto("/start");
   await page.evaluate(() =>
     localStorage.setItem(
@@ -131,7 +128,6 @@ test("funnel signup keeps setup pairing on the same family", async ({
   });
   const device = await browser.newContext({ baseURL });
   try {
-    await device.addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
     const child = await device.newPage();
     await child.goto("/child-login");
     await child.getByLabel("6-digit code").fill((await code.textContent()) ?? "");
@@ -162,9 +158,9 @@ test("fun-game credit counts active play only; cartoon restarts and offers no ne
   ).toBe(true);
   await page.goto("/fun/snake");
   await expect(page.getByTestId("fun-time")).toContainText("10:00");
-  await page.getByRole("button", { name: "Играть", exact: true }).click();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
   await expect(page.getByTestId("fun-time")).toContainText("9:59");
-  await page.getByRole("button", { name: "Пауза", exact: true }).click();
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
   await expect
     .poll(
       async () =>
@@ -196,12 +192,12 @@ test("fun-game credit counts active play only; cartoon restarts and offers no ne
     ).toBe(true);
   await page.goto(`/cartoon/${cartoon.id}`);
   await expect(page.getByRole("progressbar")).toHaveAttribute("value", "0");
-  await page.getByRole("button", { name: "Смотреть", exact: true }).click();
+  await page.getByRole("button", { name: "Watch", exact: true }).click();
   await expect(page.getByRole("progressbar")).not.toHaveAttribute("value", "0");
   await page.reload();
   await expect(page.getByRole("progressbar")).toHaveAttribute("value", "0");
-  await page.getByRole("button", { name: "Смотреть", exact: true }).click();
-  await expect(page.getByText("Серия закончилась", { exact: true })).toBeVisible({
+  await page.getByRole("button", { name: "Watch", exact: true }).click();
+  await expect(page.getByText("Episode ended", { exact: true })).toBeVisible({
     timeout: 15000,
   });
   await expect(page.getByRole("link")).toHaveCount(2);

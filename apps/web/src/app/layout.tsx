@@ -1,9 +1,8 @@
 import { MotionProvider } from "@brainee/ui/motion-provider";
 import type { Metadata, Viewport } from "next";
-import { cookies } from "next/headers";
 import type { ReactNode } from "react";
 import { LearningProvider } from "@/components/child/LearningProvider";
-import { DEFAULT_LOCALE, I18nProvider, LOCALE_COOKIE, type Locale } from "@/i18n";
+import { I18nProvider } from "@/i18n";
 import { manrope, onest, unbounded } from "./fonts";
 import "./globals.css";
 
@@ -23,20 +22,11 @@ export const viewport: Viewport = {
   ],
 };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  const cookieStore = await cookies();
-  const rawLocale = cookieStore.get(LOCALE_COOKIE)?.value;
-  // BRAINEE_DEFAULT_LOCALE only lets the Russian-language test server change the fallback.
-  const fallback: Locale = process.env.BRAINEE_DEFAULT_LOCALE === "ru" ? "ru" : DEFAULT_LOCALE;
-  const initialLocale: Locale = rawLocale === "ru" || rawLocale === "en" ? rawLocale : fallback;
-
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang={initialLocale}
-      className={`${manrope.variable} ${onest.variable} ${unbounded.variable}`}
-    >
+    <html lang="en" className={`${manrope.variable} ${onest.variable} ${unbounded.variable}`}>
       <body>
-        <I18nProvider initialLocale={initialLocale}>
+        <I18nProvider>
           <MotionProvider>
             <LearningProvider>{children}</LearningProvider>
           </MotionProvider>

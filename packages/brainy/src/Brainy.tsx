@@ -13,6 +13,7 @@ export type BrainyProps = {
   animate?: boolean;
   effects?: BrainyEffects;
   earned?: readonly string[];
+  talk?: number;
 };
 export function Brainy({
   stats,
@@ -23,10 +24,11 @@ export function Brainy({
   animate = false,
   effects = "kid",
   earned = [],
+  talk = 0,
 }: BrainyProps) {
   const ref = useRef<SVGSVGElement>(null);
   const t = useFrame(ref, animate);
-  const m = brainyModel(stats, equipped, mood, t, effects, earned);
+  const m = brainyModel(stats, equipped, mood, t, effects, earned, talk);
   return (
     <svg
       ref={ref}
@@ -152,13 +154,18 @@ export function Brainy({
           <circle cx="130.5" cy="101.5" r="2.4" fill="#FFFFFF"></circle>
           <rect x="83" y="95.5" width="18" height={m.lid} fill={m.fill}></rect>
           <rect x="119" y="95.5" width="18" height={m.lid} fill={m.fill}></rect>
-          <path
-            d={m.mouth}
-            fill="none"
-            stroke="#1C1B33"
-            strokeWidth="5"
-            strokeLinecap="round"
-          ></path>
+          {m.talk > 0 ? (
+            <ellipse
+              data-talk=""
+              cx="110"
+              cy={m.talkMouth.y}
+              rx={m.talkMouth.rx}
+              ry={m.talkMouth.ry}
+              fill={INK}
+            />
+          ) : (
+            <path d={m.mouth} fill="none" stroke={INK} strokeWidth="5" strokeLinecap="round" />
+          )}
           <Accessories equipped={equipped} />
           {m.flags.sleepyZ && (
             <text

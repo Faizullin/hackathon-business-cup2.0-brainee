@@ -2,10 +2,8 @@ import { expect, test } from "@playwright/test";
 
 test("review lavender surfaces, compact summaries and accent roles", async ({
   page,
-  context,
   baseURL,
 }, info) => {
-  await context.addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
   await page.emulateMedia({ reducedMotion: "reduce" });
   const headers = { origin: baseURL as string };
   await page.request.post("/api/demo-session", { headers });
@@ -18,6 +16,7 @@ test("review lavender surfaces, compact summaries and accent roles", async ({
     "entry",
     "learn",
     "leisure",
+    "video/sky-blue",
     "gifts",
     "brainy",
     "path",
@@ -28,10 +27,19 @@ test("review lavender surfaces, compact summaries and accent roles", async ({
     "rewards",
     "settings",
     "login",
+    "start",
   ]) {
     await page.goto(`/${route}`);
     await expect(page.locator("h1").first()).toBeVisible();
     await page.evaluate(() => document.fonts.ready);
+    await expect(page.locator("html")).toHaveAttribute("lang", "en");
+    if (route === "video/sky-blue") {
+      await expect(page.getByTestId("film")).toBeVisible();
+      await expect(page.getByRole("slider")).toHaveCount(0);
+      expect(
+        await page.locator("audio").evaluate((node) => (node as HTMLAudioElement).paused),
+      ).toBe(true);
+    }
     if (["learn", "leisure", "gifts", "explore"].includes(route)) {
       const dock = page.getByTestId("brainy-dock");
       await expect(dock).toHaveAttribute("data-compact", "true");

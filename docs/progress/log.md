@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · Lavender and published platform merge trial
+Resolved all 32 conflicts in the isolated worktree: D-33 films, D-34 English-only behavior, lavender Brainy speech and UI, and unchanged upstream game input fixes. Check/build/assets/manifests, 301 unit tests, 76 focused browser cases and the separate 4-case WebKit iPad film spec pass; requested phone/iPad screenshots reviewed. The owner shortened the full run after 95 passes and two stale font-count failures, now fixed; 311 cases had no result. T-139 remains open. No push, deploy or main-checkout edits.
+
 ## 2026-11-15 · T-142 parent patterns
 Added Today/Week cards, attention actions, session rows, grouped event sources and recent-event reward reconciliation. Check/test/build and 68 affected Chromium/WebKit phone/iPad cases pass; parent screenshots reviewed. Fixed saved-cover funnel bookmarks. Full serial e2e and recordings remain next.
 
@@ -20,6 +23,9 @@ Separated violet active controls and pink highlights from loss brown; unified co
 
 ## 2026-11-15 · Lavender redesign checkpoint (T-131–T-134, T-140–T-141)
 Committed funnel core, lavender primitives, reference Brain renderer/ticker, step components, child heroes/Path/hub and game-host palette on master. Check/test/build pass; affected browser matrices pass (56, 60, 4, 60 and 24 cases), plus four final host captures; iPad visuals reviewed. Owner requested an orchestrator-review checkpoint. T-135–T-139 and T-142 remain, including final serial e2e and recordings. No push or deployment.
+
+## 2026-11-15 · English-only platform, input hardening and films (issues #4, #5)
+Branch `feature/english-games-and-films`: films PR #1 squash-merged with re-encoded audio (D-33); Russian removed from host, games, films, tests and docs (D-34); Rhythm/Secret Message/Mirror Grid/Tangram input hardened with new touch specs (T-113, T-115). Checks, 285 unit tests, film/manifest/asset/report checks and the full serial four-project Playwright suite run on the combined tree. Owner still records ElevenLabs voice/terms (T-124); deploy + `db:refresh-demo` after merge. No push to master, no deploy, no production DB access.
 
 ## 2026-11-15 · Merge pushed games batch into master (T-112 / T-113)
 Integrated `games@dc84a8b` (four scored imports and two unscored previews), preserved master product behavior and both conflicting ADRs (artifact ADR renumbered D-32). Completed host/catalog localization, Russian feed titles, API/Explore age gates and direct Explore state loading. Production build, checks, 172 unit tests, hashes/assets and 29 report tests pass; learning report regenerated (12 shots, two WebKit videos, 27 checks each). Owner requested immediate build/merge before the full browser matrix finished: 194 passed, six failed, four interrupted, 148 unrun; intermittent WebKit input and one Chromium locator issue remain T-113. Physical rehearsal/freeze stay open. No push, deploy, other-worktree edits or production DB changes.
@@ -50,6 +56,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 - T-87 adds bounded reward/counter/mascot motion and localized loaders. Fixed offline feedback when polling pauses; confirmed state survives disconnection. Added the owner’s T-62/T-84 rehearsal checklist and T-73 ten-slide/three-minute pitch outline.
 - Checks: `pnpm check`, 170 unit tests, 29 report-tool tests; final focused browser run 36/36 on Chromium/WebKit phone/iPad. Earlier full-suite failures and repaired targeted checks are documented in [status](status.md#handoff). Fresh English MVP/learning recordings and WebKit frames reviewed.
 - Main-product commits only; no push/deploy or games worktree changes. Owner redeploy, physical rehearsal and post-games-merge T-74 freeze remain.
+
+## 2026-11-14 (interactive films, PR #1 on `feature/audio_to_movie`)
+- T-120–T-123 (D-33, [films.md](../dev/films.md)): three English ElevenLabs podcasts became mp3 + JSON films (`sky-blue`, `rain`, `sun-goes`). Added `core/film.ts` script rules and timeline; `packages/films` art/stage with ground-standing props and a replaceable `FilmNarrator` slot (the child's own Brainy with accessories); film mode in `/video/[id]`; `/lab/film`; `make_film.py` (local faster-whisper via uv, word-timestamp captions); `pnpm check:films`.
+- Branch-side full e2e reported onboarding ×8, `/login` ×4 and jury ×1 failures while other sessions built in the same checkout; issue #5 requires them to pass on the merged tree.
 
 ## 2026-11-14 (US-English demo content, locale test fix)
 - T-110 / D-30: shared demo and jury seeds rewritten for the US audience (Mia, Ava, `mom@example.com`, US names, en-US numbers, New York time); Russian switch maps seeded strings and game titles via `i18n/content.ts`. Small i18n fixes: backpack progress wording, video minutes, default task skill, cartoon icon check, "Neighborhood" ranking scope.
@@ -94,7 +104,7 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ## 2026-11-14 (skills, onboarding)
 - Analysed new inputs (ROUTES.md + brainy-mvp.zip, 30-game handoff); licences checked (all permissive). D-22 locale/age, D-23 per-game weights → skills → body, D-24 quiz-before-signup + own login, D-25 reduced ROUTES.md adoption. Condensed in product/routes-spec.md and external-games.md.
-- Built T-100–T-102: weights/minAge, live skills, `/onboarding` + `/api/onboarding`, `/login` + `/api/auth/login`, «Вернуть ребёнку», «Требует внимания», event feed, mood decay.
+- Built T-100–T-102: weights/minAge, live skills, `/onboarding` + `/api/onboarding`, `/login` + `/api/auth/login`, "Back to Child", "Needs attention", event feed, mood decay.
 
 ## 2026-11-14 (presentation acceptance)
 - T-70 acceptance evidence and T-71 reset-first two-device script; T-61 all-route own-origin audit. Added accessory, video resume, child-ranking and task goal/responsibility checks.

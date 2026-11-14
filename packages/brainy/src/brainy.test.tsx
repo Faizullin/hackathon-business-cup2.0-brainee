@@ -50,6 +50,31 @@ describe("lavender Brain model", () => {
     }
   });
 });
+describe("film speech", () => {
+  it("clamps voice input and opens the mouth without changing the stat smile or posture", () => {
+    const model = (talk: number) => brainyModel(stats(50), {}, 72, 0, "kid", [], talk);
+    const silent = model(0);
+    expect(model(1).talkMouth.ry).toBeGreaterThan(model(0.2).talkMouth.ry);
+    expect(model(2).talkMouth).toEqual(model(1).talkMouth);
+    expect(model(-1).talk).toBe(0);
+    expect(model(Number.NaN).talk).toBe(0);
+    expect(model(1).bodyTransform).toBe(silent.bodyTransform);
+    expect(model(1).mouth).toBe(silent.mouth);
+  });
+  it("keeps the narrator static with animate off while accepting voice-driven mouth updates", () => {
+    const render = (talk = 0) =>
+      renderToStaticMarkup(<Brainy stats={stats(50)} talk={talk} animate={false} />);
+    const silent = render();
+    const talking = render(0.8);
+    expect(silent).not.toContain("data-talk");
+    expect(talking).toContain('data-talk=""');
+    expect(talking).toContain('data-frame="0"');
+    expect(talking).toBe(render(0.8));
+    expect(render(0)).toBe(silent);
+    const ry = (html: string) => Number(html.match(/data-talk="" [^>]*ry="([\d.]+)"/)?.[1]);
+    expect(ry(render(1))).toBeGreaterThan(ry(render(0.2)));
+  });
+});
 describe("Brain SVG", () => {
   it("keeps reference geometry, paint order, accessible and decorative APIs", () => {
     const html = renderToStaticMarkup(<Brainy stats={stats(50)} label="Brainy" />);

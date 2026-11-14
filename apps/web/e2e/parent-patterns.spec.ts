@@ -4,11 +4,9 @@ import { savedState } from "./saved-state";
 
 test("parent Today, Week, family feed and wallet breakdown use saved activity", async ({
   page,
-  context,
   baseURL,
 }, info) => {
   const headers = { origin: baseURL as string };
-  await context.addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.request.post("/api/demo-session", { headers });
   expect((await page.request.post("/api/parent", { headers, data: { pin: "1234" } })).ok()).toBe(

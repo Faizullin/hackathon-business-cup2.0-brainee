@@ -1,8 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-test.beforeEach(async ({ context, baseURL }) => {
-  await context.addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
-});
 test("Brainy reference states, body controls and all accessories", async ({ page }, testInfo) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -38,6 +35,8 @@ test("Brainy reference states, body controls and all accessories", async ({ page
   await expect(page.getByTestId("brainy-stage")).toContainText("Genius");
   await page.screenshot({ path: testInfo.outputPath("brainy-reference.png"), fullPage: true });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole("link", { name: "Games", exact: true }).click();
+  await expect(page.getByTestId("event-stream")).toBeVisible();
   expect(errors).toEqual([]);
 });
 test("only visible heroes animate and reduced motion stops the clock", async ({ page }) => {

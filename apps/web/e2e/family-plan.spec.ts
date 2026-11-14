@@ -7,9 +7,6 @@ test("saved family plan edits, downloads and supplies a parent-approved off-scre
   baseURL,
 }, info) => {
   const headers = { origin: baseURL as string };
-  await page
-    .context()
-    .addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
   await page.emulateMedia({ reducedMotion: "reduce" });
   const funnel = {
     goal: "ending",

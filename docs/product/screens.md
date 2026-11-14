@@ -32,7 +32,7 @@ Finishing opens the saved before/after receipt, actual gains and next choices. A
 
 Leisure separates the ★ game shop, cartoons and science. The play-time explainer states that purchased minutes count during active play; timed passes show their remaining minutes, while permanent unlocks stay available. Cartoon tiles use violet and pink washes.
 
-Science playback supports pause and saved position, with no seek control or video switching. Completion leads to a question before the server grants any reward. Bought cartoons start only after Play and end without a watch-next list. Entertainment endings reuse the calm dark stopping card and the family's phrase. Current media and catalog boundaries are in [demo.md](../demo.md).
+Science playback supports pause and saved position, with no seek control or video switching. Registered interactive films combine local audio with drawn scenes and questions that pause playback. The child's own Brainy fills the narrator slot, including equipped accessories and a talk-driven mouth. Playback starts only after Play; in-film questions grant no rewards. Completion leads to the existing final quiz before the server grants any reward. See [films.md](../dev/films.md). Bought cartoons start only after Play and end without a watch-next list. Entertainment endings reuse the calm dark stopping card and the family's phrase. Current media and catalog boundaries are in [demo.md](../demo.md).
 
 ### Gifts
 
@@ -64,7 +64,7 @@ Parents set the weekly goal and family gift list, then mark requests as delivere
 
 ### Settings
 
-Lavender fields and icon blocks retain the existing profile, language, PIN, child-device pairing, revocation and demo reset actions. Restyling does not change their access rules. Existing translated strings remain in place; new feature copy is English only.
+Lavender fields and icon blocks retain profile, PIN, child-device pairing, revocation and demo reset actions. Restyling does not change their access rules. The platform is English only, with no language selector.
 
 ## Parent start and setup
 

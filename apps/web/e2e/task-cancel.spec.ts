@@ -13,7 +13,7 @@ test("parent cancellation updates child badges without rewards; other statuses s
   await page.request.delete("/api/parent", { headers });
   await page.goto("/gifts");
   const childBadge = page
-    .getByRole("link", { name: "Подарки", exact: true })
+    .getByRole("link", { name: "Gifts", exact: true })
     .getByTestId("navigation-badge");
   await expect(childBadge).toHaveText("2");
   const before = await savedState(page.request);
@@ -31,17 +31,15 @@ test("parent cancellation updates child badges without rewards; other statuses s
     await parent.goto("/tasks");
     await expect(parent.getByTestId("navigation-badge")).toHaveCount(0);
     for (const digit of "1234")
-      await parent.getByRole("button", { name: `Цифра ${digit}` }).click();
+      await parent.getByRole("button", { name: `Digit ${digit}` }).click();
     const nav = parent
-      .getByRole("navigation", { name: "Разделы родителя" })
+      .getByRole("navigation", { name: "Parent sections" })
       .filter({ visible: true });
     await expect(
-      nav.getByRole("link", { name: "Задания", exact: true }).getByTestId("navigation-badge"),
+      nav.getByRole("link", { name: "Tasks", exact: true }).getByTestId("navigation-badge"),
     ).toHaveText("1");
     await expect(
-      nav
-        .getByRole("link", { name: "Подарки и цель", exact: true })
-        .getByTestId("navigation-badge"),
+      nav.getByRole("link", { name: "Gifts & Goal", exact: true }).getByTestId("navigation-badge"),
     ).toHaveCount(0);
     await parent.screenshot({
       path: testInfo.outputPath("parent-before-cancel.png"),
@@ -50,7 +48,7 @@ test("parent cancellation updates child badges without rewards; other statuses s
     await page.screenshot({ path: testInfo.outputPath("child-before-cancel.png"), fullPage: true });
     await parent
       .getByTestId("parent-task-t3")
-      .getByRole("button", { name: "Отменить", exact: true })
+      .getByRole("button", { name: "Cancel", exact: true })
       .click();
     await expect(parent.getByTestId("parent-task-t3")).toHaveCount(0);
     await expect(page.getByTestId("child-task-t3")).toHaveCount(0, { timeout: 10_000 });
@@ -69,10 +67,10 @@ test("parent cancellation updates child badges without rewards; other statuses s
         ).status(),
       ).toBe(409);
     }
-    await page.getByTestId("child-task-t4").getByRole("button", { name: "Готово!" }).click();
+    await page.getByTestId("child-task-t4").getByRole("button", { name: "Done!" }).click();
     await expect(childBadge).toHaveCount(0);
     await expect(
-      nav.getByRole("link", { name: "Задания", exact: true }).getByTestId("navigation-badge"),
+      nav.getByRole("link", { name: "Tasks", exact: true }).getByTestId("navigation-badge"),
     ).toHaveText("2", { timeout: 10_000 });
     await parent.screenshot({ path: testInfo.outputPath("parent-badges.png"), fullPage: true });
     await page.screenshot({ path: testInfo.outputPath("child-badges.png"), fullPage: true });

@@ -1,11 +1,10 @@
 "use client";
 import { TIME_ZONES } from "@brainee/core";
-import { ClipboardCheck, Globe, Lock, Settings, Tablet } from "@brainee/ui/components/icons";
+import { ClipboardCheck, Lock, Settings, Tablet } from "@brainee/ui/components/icons";
 import { type FormEvent, useCallback, useEffect, useState } from "react";
 import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton, Panel, primaryButton } from "@/components/demo/kit";
-import { LanguageRadioCards } from "@/components/LocaleSwitcher";
 import { useI18n } from "@/i18n";
 
 const input = "min-h-12 w-full rounded-row border border-border bg-surface-2 px-3 text-base";
@@ -99,13 +98,6 @@ export function SettingsScreen() {
         </p>
       )}
       <div className="grid gap-5 min-[1000px]:grid-cols-2">
-        <Panel title={ts.language}>
-          <Globe
-            aria-hidden="true"
-            className="size-10 rounded-row bg-violet-wash p-2 text-accent"
-          />
-          <LanguageRadioCards />
-        </Panel>
         <Panel title={ts.child}>
           <ClipboardCheck
             aria-hidden="true"

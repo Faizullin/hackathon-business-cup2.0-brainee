@@ -43,8 +43,6 @@ export default defineConfig({
       NEXT_TELEMETRY_DISABLED: "1",
       BRAINEE_LAB: "1",
       DEMO_MODE: "1",
-      // Specs assert the Russian UI; a cookie header would override the session cookie jar.
-      BRAINEE_DEFAULT_LOCALE: "ru",
       DATABASE_URL: pathToFileURL(databasePath).href,
     },
   },

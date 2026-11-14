@@ -43,8 +43,10 @@ export function brainyModel(
   t = 0,
   effects: BrainyEffects = "kid",
   earned: readonly string[] = [],
+  talk = 0,
 ) {
   const mouthWidth = 11 + clamp(stats.mouth) * 0.06;
+  const voice = clamp(talk * 100) / 100;
   const h = clamp(mood);
   const swing = Math.sin(t * 2 * Math.PI * (0.5 + 1.7 * runAmount(h)));
   const c01 = (v: number) => Math.max(0, Math.min(1, v));
@@ -304,6 +306,8 @@ export function brainyModel(
     shoeLy: f(lL.sy),
     shoeRx: f(lR.sx),
     shoeRy: f(lR.sy),
+    talk: voice,
+    talkMouth: { y: endY + 3, rx: mouthWidth * (0.55 + voice * 0.15), ry: 2 + voice * 11 },
     mouth: `M${110 - mouthWidth} ${f(endY)} Q110 ${f(ctrlY)} ${110 + mouthWidth} ${f(endY)}`,
     lid: f(lid),
     rotOpacity: effects === "full" && h < 60 ? Math.min(1, (60 - h) / 45) : 0,

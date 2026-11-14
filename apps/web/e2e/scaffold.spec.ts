@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
 
 for (const route of [
-  { path: "/", destination: "/", heading: "Добро пожаловать в Брейни" },
-  { path: "/learn", destination: "/learn", heading: "Учимся" },
-  { path: "/analytics", destination: "/analytics", heading: "Вход для родителей" },
-  { path: "/login", destination: "/login", heading: "Добро пожаловать в Брейни" },
+  { path: "/", destination: "/", heading: "Welcome to Brainy" },
+  { path: "/learn", destination: "/learn", heading: "Learn" },
+  { path: "/analytics", destination: "/analytics", heading: "Parent login" },
+  { path: "/login", destination: "/login", heading: "Welcome to Brainy" },
 ]) {
   test(`${route.path} renders its shell using only same-origin resources`, async ({
     page,
@@ -25,19 +25,21 @@ for (const route of [
     expect(response?.ok()).toBe(true);
     await expect(page).toHaveURL(`${baseURL}${route.destination}`);
     await expect(page.getByRole("heading", { name: route.heading, level: 1 })).toBeVisible();
-    await expect(page.locator("html")).toHaveAttribute("lang", "ru");
+    await expect(page.locator("html")).toHaveAttribute("lang", "en");
     await expect(page.locator("body")).toHaveCSS("background-color", "rgb(242, 241, 250)");
     const fonts = await page.evaluate(async () => {
       await document.fonts.ready;
       return {
         body: getComputedStyle(document.body).fontFamily,
         heading: getComputedStyle(document.querySelector("h1") as HTMLElement).fontFamily,
-        loaded: Array.from(document.fonts).filter((font) => font.status === "loaded").length,
+        manropeLoaded: Array.from(document.fonts).some(
+          (font) => font.status === "loaded" && font.family.toLowerCase().includes("manrope"),
+        ),
       };
     });
     expect(fonts.body.toLowerCase()).toContain("manrope");
     expect(fonts.heading.toLowerCase()).toContain("manrope");
-    expect(fonts.loaded).toBeGreaterThanOrEqual(2);
+    expect(fonts.manropeLoaded).toBe(true);
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
     ).toBe(true);
@@ -49,15 +51,14 @@ for (const route of [
     }
 
     if (route.path === "/login") {
-      const link = page.getByRole("link", { name: "К занятиям" });
+      const link = page.getByRole("link", { name: "To Learning" });
       await expect(link).toHaveCSS("min-height", "56px");
       await expect(link).toHaveCSS("transition-duration", "0.2s");
       // Safari on macOS uses Option-Tab to include links in keyboard traversal.
       const nextLinkKey =
         browserName === "webkit" && process.platform === "darwin" ? "Alt+Tab" : "Tab";
       await page.keyboard.press(nextLinkKey);
-      await expect(page.getByRole("link", { name: "Перейти к содержимому" })).toBeFocused();
-      // The locale switch adds focusable controls before the learning link.
+      await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
       for (
         let i = 0;
         i < 8 && !(await link.evaluate((node) => node === document.activeElement));
@@ -67,7 +68,7 @@ for (const route of [
       await expect(link).toBeFocused();
       await page.keyboard.press("Enter");
       await expect(page).toHaveURL(`${baseURL}/learn`);
-      await expect(page.getByRole("heading", { name: "Учимся", level: 1 })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Learn", level: 1 })).toBeVisible();
     }
 
     expect(errors).toEqual([]);
@@ -80,16 +81,16 @@ test("reduced motion disables feedback transitions and keeps navigation working"
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/login");
-  const link = page.getByRole("link", { name: "К занятиям" });
+  const link = page.getByRole("link", { name: "To Learning" });
   await expect(link).toHaveCSS("transition-duration", "0s");
   await link.click();
-  await expect(page.getByRole("heading", { name: "Учимся", level: 1 })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Learn", level: 1 })).toBeVisible();
 });
 
-test("unknown routes return a Russian 404 with a way back", async ({ page }) => {
+test("unknown routes return an English 404 with a way back", async ({ page }) => {
   const response = await page.goto("/missing-page");
   expect(response?.status()).toBe(404);
-  await expect(page.getByRole("heading", { name: "Страница не найдена" })).toBeVisible();
-  await page.getByRole("link", { name: "К занятиям" }).click();
-  await expect(page.getByRole("heading", { name: "Учимся", level: 1 })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
+  await page.getByRole("link", { name: "To Learning" }).click();
+  await expect(page.getByRole("heading", { name: "Learn", level: 1 })).toBeVisible();
 });

@@ -1,12 +1,12 @@
-# Брейни (Brainee)
+# Brainy (Brainee)
 
 A web platform (PWA) for kids aged 4–10. The parent sets it up as the **only thing the child's device can open**. Kids earn ★ stars in learning games and spend them on entertainment, and earn ☀ suns for real-life tasks and spend them on gifts from the parent. The mascot **Brainy** visibly grows as the child's skills improve. Parents get skill analytics, tasks, gifts and a weekly goal.
 
 - **Problem:** endless feeds and short videos train kids for constant stimulation. Parental controls limit screen *time*, not content *quality*.
-- **Market:** CIS, Russian UI. Parents pay, kids use it.
+- **Market:** US-first, English-only UI. Parents pay, kids use it.
 - **Context:** Business Cup 2.0 hackathon project.
 
-> **Status:** two learning games, saved rewards/Brainy, retry recovery and child-state polling work. Parent access/view is next. Run `pnpm install`, enable `DEMO_MODE=1` in `apps/web/.env.local`, then `pnpm db:reset && pnpm dev`. See [setup](docs/dev/setup.md) and [current progress](docs/progress/status.md).
+> **Status:** the lavender child/parent flow, saved rewards and family plans are being integrated with English-only games and interactive films. Current verification and remaining work are recorded in [status](docs/progress/status.md). Run `pnpm install`, enable `DEMO_MODE=1` for local demo data, then `pnpm db:reset && pnpm dev`; see [setup](docs/dev/setup.md).
 
 ## Documentation
 
@@ -17,5 +17,8 @@ A web platform (PWA) for kids aged 4–10. The parent sets it up as the **only t
 | Run the project locally | [docs/dev/setup.md](docs/dev/setup.md) |
 | Follow code conventions | [docs/dev/conventions.md](docs/dev/conventions.md) |
 | See progress and what's next | [docs/progress/status.md](docs/progress/status.md) · [todo.md](docs/progress/todo.md) |
+| Follow the lavender redesign | [design](docs/product/design.md) · [implementation plan](docs/plans/redesign.md) |
+| Build or inspect an interactive film | [docs/dev/films.md](docs/dev/films.md) |
+| Review the parent funnel | [docs/product/funnel.md](docs/product/funnel.md) |
 | Browse all docs | [docs/README.md](docs/README.md) |
 | Set up an AI agent (Claude, Gemini, Codex…) | [AGENTS.md](AGENTS.md) |

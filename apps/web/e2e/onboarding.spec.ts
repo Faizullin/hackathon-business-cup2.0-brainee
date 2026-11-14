@@ -15,11 +15,9 @@ const funnelAnswers = {
 
 test("parent funnel resumes, creates a quiz-based family and reaches device setup", async ({
   page,
+  browser,
   baseURL,
 }, info) => {
-  await page
-    .context()
-    .addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/onboarding");
   await expect(page).toHaveURL(/\/start#cover$/);
@@ -104,6 +102,26 @@ test("parent funnel resumes, creates a quiz-based family and reaches device setu
   expect(state.progress.wallet).toEqual({ stars: 50, suns: 0 });
   expect(state.progress.stats.brain).toBe(20);
   expect(state.baseline).toEqual(state.progress.stats);
+  expect(state.showcase.calendar?.timeZone).toBeTruthy();
+  expect(Math.max(...Object.values(state.progress.stats))).toBeLessThanOrEqual(40);
+  expect(state.parentUnlocked).toBe(true);
+  const other = await browser.newContext({ baseURL, viewport: page.viewportSize() });
+  try {
+    const parent = await other.newPage();
+    await parent.goto("/login");
+    await parent.getByLabel("Email").fill(email);
+    await parent.getByLabel("Password").fill("wrong-password");
+    await parent.getByRole("button", { name: "Log in", exact: true }).click();
+    await expect(parent.getByText("Invalid email or password")).toBeVisible();
+    await parent.getByLabel("Password").fill("secret123");
+    await parent.getByRole("button", { name: "Log in", exact: true }).click();
+    await expect(parent.getByRole("heading", { level: 1, name: "Analytics" })).toBeVisible();
+    await expect(parent.getByTestId("parent-energy")).toBeVisible();
+    await expect(parent.getByTestId("needs-attention")).toContainText("Assign tasks for today");
+    expect((await savedState(other.request)).child.id).toBe(state.child.id);
+  } finally {
+    await other.close();
+  }
 });
 
 test("a finished game moves the child's skills by the game's weights and lands in the parent feed", async ({
@@ -148,11 +166,11 @@ test("a finished game moves the child's skills by the game's weights and lands i
 test("login rejects unknown accounts and the demo account opens parent mode", async ({ page }) => {
   await page.goto("/login");
   await page.getByLabel("Email").fill("mom@example.com");
-  await page.getByLabel("Пароль").fill("demo1234");
-  await page.getByRole("button", { name: "Войти", exact: true }).click();
-  await expect(page.getByRole("heading", { level: 1, name: "Аналитика" })).toBeVisible();
+  await page.getByLabel("Password").fill("demo1234");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Analytics" })).toBeVisible();
   await expect(page.getByTestId("event-feed")).toBeVisible();
-  await page.getByRole("button", { name: "Вернуть ребёнку" }).click();
+  await page.getByRole("button", { name: "Back to Child" }).click();
   await expect(page).toHaveURL(/\/entry$/);
   expect((await savedState(page.request)).parentUnlocked).toBe(false);
 });

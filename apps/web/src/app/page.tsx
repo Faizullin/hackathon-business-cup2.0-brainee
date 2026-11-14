@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { AppFrame } from "@/components/AppFrame";
 import { outlineButton, Panel } from "@/components/demo/kit";
 import { JuryButton } from "@/components/JuryButton";
-import { FloatingLocalePill } from "@/components/LocaleSwitcher";
 import { useI18n } from "@/i18n";
 
 export default function HomePage() {
@@ -17,7 +16,6 @@ export default function HomePage() {
   }, []);
   return (
     <AppFrame>
-      <FloatingLocalePill />
       <main id="main-content" className="mx-auto max-w-2xl">
         <Panel as="h1" title={t.roles.title} note={t.roles.note}>
           <div className="grid gap-4 sm:grid-cols-2">

@@ -20,7 +20,7 @@ const fieldClass =
   "min-h-12 rounded-xl border border-border bg-card px-3 text-foreground focus-visible:outline-3 focus-visible:outline-ring";
 
 export function LabClient() {
-  const { t: ru, tc, locale } = useI18n();
+  const { t, locale } = useI18n();
   const ids = { game: useId(), level: useId(), seed: useId(), frame: useId() };
   const [gameId, setGameId] = useState(allGames[0]?.id ?? "");
   const [level, setLevel] = useState(1);
@@ -51,10 +51,10 @@ export function LabClient() {
 
   return (
     <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_320px]">
-      <section aria-label={tc(game.title)} className="flex flex-col gap-4">
+      <section aria-label={game.title} className="flex flex-col gap-4">
         <div className="flex flex-wrap items-end gap-3">
           <label htmlFor={ids.game} className="flex flex-col gap-1 text-sm font-medium">
-            {ru.lab.game}
+            {t.lab.game}
             <select
               id={ids.game}
               className={fieldClass}
@@ -63,13 +63,13 @@ export function LabClient() {
             >
               {allGames.map((g) => (
                 <option key={g.id} value={g.id}>
-                  {tc(g.title)}
+                  {g.title}
                 </option>
               ))}
             </select>
           </label>
           <label htmlFor={ids.level} className="flex flex-col gap-1 text-sm font-medium">
-            {ru.lab.level}
+            {t.lab.level}
             <select
               id={ids.level}
               className={fieldClass}
@@ -84,7 +84,7 @@ export function LabClient() {
             </select>
           </label>
           <label htmlFor={ids.seed} className="flex flex-col gap-1 text-sm font-medium">
-            {ru.lab.seed}
+            {t.lab.seed}
             <input
               id={ids.seed}
               type="number"
@@ -95,7 +95,7 @@ export function LabClient() {
             />
           </label>
           <label htmlFor={ids.frame} className="flex flex-col gap-1 text-sm font-medium">
-            {ru.lab.frame}
+            {t.lab.frame}
             <select
               id={ids.frame}
               className={fieldClass}
@@ -104,19 +104,19 @@ export function LabClient() {
             >
               {(Object.keys(FRAMES) as Frame[]).map((f) => (
                 <option key={f} value={f}>
-                  {ru.lab.frames[f]}
+                  {t.lab.frames[f]}
                 </option>
               ))}
             </select>
           </label>
           <Button variant="outline" onClick={() => restart()}>
-            {ru.lab.restart}
+            {t.lab.restart}
           </Button>
           <Button
             variant="ghost"
             onClick={() => restart(() => setSeed(Math.floor(Math.random() * 100000)))}
           >
-            {ru.lab.randomSeed}
+            {t.lab.randomSeed}
           </Button>
         </div>
 
@@ -129,9 +129,9 @@ export function LabClient() {
               setConnected(true);
               setEvents((list) => [...list, { type: "ready" }]);
             }}
-            text={ru.games}
+            text={t.games}
             key={`${game.id}-${safeLevel}-${seed}-${run}`}
-            game={{ ...game, title: tc(game.title) }}
+            game={game}
             level={safeLevel}
             seed={seed}
             onRound={(event) => setEvents((list) => [...list, { type: "round", event }])}
@@ -154,18 +154,18 @@ export function LabClient() {
         }
         className="flex flex-col gap-3 rounded-panel border border-border bg-card p-4"
       >
-        <h2 className="font-heading font-semibold">{ru.lab.events}</h2>
+        <h2 className="font-heading font-semibold">{t.lab.events}</h2>
         <p role="status" className="text-sm">
-          {ru.lab.status[status]}
+          {t.lab.status[status]}
         </p>
         {finish?.type === "finish" && (
           <p className="rounded-xl bg-secondary p-3 text-sm">
-            {ru.lab.rewardPreview}: <b>+{sessionStars(finish.result)} ★</b> (
-            {ru.child.game.starsEarned(roundTotal)})
+            {t.lab.rewardPreview}: <b>+{sessionStars(finish.result)} ★</b> (
+            {t.child.game.starsEarned(roundTotal)})
           </p>
         )}
         <ol className="flex max-h-[60dvh] flex-col gap-1 overflow-auto font-mono text-xs">
-          {events.length === 0 && <li className="text-muted-foreground">{ru.lab.noEvents}</li>}
+          {events.length === 0 && <li className="text-muted-foreground">{t.lab.noEvents}</li>}
           {events.map((e, i) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: append-only log
             <li key={i} data-event={e.type}>

@@ -42,7 +42,7 @@ export function completeLearningGame(streak: LearningStreak) {
   };
 }
 
-/** "Хватит на сегодня" / taking a break ends the run of games. */
+/** "That's enough for today" / taking a break ends the run of games. */
 export const stopForToday = (streak: LearningStreak): LearningStreak => ({ ...streak, inRow: 0 });
 
 export type WalletChange =

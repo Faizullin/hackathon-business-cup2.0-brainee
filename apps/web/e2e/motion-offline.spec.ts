@@ -29,7 +29,7 @@ for (const reducedMotion of ["reduce", "no-preference"] as const) {
       before.progress.wallet.stars + 12,
     );
     await page.screenshot({ path: info.outputPath(`reward-${reducedMotion}.png`), fullPage: true });
-    await page.getByRole("button", { name: "Хватит на сегодня" }).click();
+    await page.getByRole("button", { name: "Enough for today" }).click();
     await expect(page).toHaveURL(/\/brainy$/);
     await page.goto("/learn");
     await expect(page.getByTestId("wallet-stars")).toContainText(
@@ -48,11 +48,11 @@ test("going offline preserves confirmed data and recovers with a friendly retry"
   await expect(page.getByTestId("wallet-stars")).toBeVisible();
   const balance = (await page.getByTestId("wallet-stars").textContent()) ?? "";
   await context.setOffline(true);
-  const notice = page.getByRole("alert").filter({ hasText: "Сейчас нет подключения" });
+  const notice = page.getByRole("alert").filter({ hasText: "You're offline" });
   await expect(notice).toBeVisible({ timeout: 15000 });
   await expect(page.getByTestId("wallet-stars")).toHaveText(balance);
   await page.screenshot({ path: info.outputPath("offline.png"), fullPage: true });
-  await expect(page.getByRole("button", { name: "Попробовать ещё раз" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Try again" })).toBeVisible();
   await context.setOffline(false);
   await expect(notice).toHaveCount(0);
 });

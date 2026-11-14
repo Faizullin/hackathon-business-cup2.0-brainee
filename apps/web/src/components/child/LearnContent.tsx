@@ -9,7 +9,7 @@ import { useLearning } from "./LearningProvider";
 import { childDesignCopy as copy } from "./redesign-copy";
 
 export function LearnContent() {
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
   const { snapshot } = useLearning();
   return (
     <>
@@ -47,7 +47,7 @@ export function LearnContent() {
         href="/explore"
         className="rounded-xl border border-border p-4 text-sm text-muted-foreground"
       >
-        {locale === "ru" ? "Свободная игра · без звёзд →" : "Explore · free play, no stars →"}
+        Explore · free play, no stars →
       </Link>
     </>
   );

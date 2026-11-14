@@ -25,7 +25,7 @@ On the parent phone create a jury family, open Settings and generate a child pai
 | 5 | Open Brainy; buy and wear an accessory | Observe Brainy | The worn item follows the mascot |
 | 6 | Buy Snake time in Leisure; play, pause and reopen | Observe saved balance | Purchased minutes count only during play; another purchase adds time |
 
-Science placeholders resume position and pay ★ only after the correct answer. Bought cartoons require Play and restart from zero on each visit, with no watch-next. Snake is playable; other fun titles remain catalog previews. Real media is deferred. For the shared seeded family, login is `mom@example.com` / `demo1234`, PIN `1234`; its existing backpack/badge are valid, and a game today completes the garden streak.
+Science playback resumes position and pays ★ only after the final correct answer. Registered interactive films use local podcast audio, drawn scenes and pauses for questions; those in-film questions award nothing. Playback requires Play, with no next-film prompt. Bought cartoon placeholders restart from zero on each visit, with no watch-next. Snake is playable; other fun titles remain catalog previews. See [films.md](dev/films.md) for the film catalog and content review. For the shared seeded family, login is `mom@example.com` / `demo1234`, PIN `1234`; its existing backpack/badge are valid, and a game today completes the garden streak.
 
 ## Lavender and parent-plan walkthrough
 
@@ -35,7 +35,7 @@ For the separate parent setup story, open `/start?tour=1#cover`. This 25-step re
 
 Complete the funnel to see the starting family plan and **Pricing pending**. There is no checkout. Signup validates the answers and the exact birth year for the chosen age band, then opens setup. For a family created this way, Analytics shows the editable Family plan with its phrase, four steps, observation prompt and plain-text copy/download. Tasks offers an off-screen reading suggestion that fills the form for parent review. The same agreed phrase appears at the child's stopping point. These plan surfaces are conditional; a seeded jury family without funnel answers does not acquire a plan automatically.
 
-Use the new feature's English copy during this walkthrough. Existing screens retain their language switch and translated strings; the new funnel is English only. Review final screenshots and recording results in the generated reports rather than treating this walkthrough as a verification result.
+The whole product is English only, including games, films and the funnel. Review final screenshots and recording results in the generated reports rather than treating this walkthrough as a verification result.
 
 ## Rehearsal checklist
 
@@ -72,7 +72,7 @@ Use **https://brainee.vercel.app** on an iPad in landscape as the child and a ph
 - [ ] Keep both devices foregrounded. Finish a game on the iPad, then confirm a real-life task on the phone. Time each update: polling is approximately 3 seconds; allow up to 10 seconds in rehearsal and investigate longer delays. Background tabs refresh on return.
 - [ ] With Learn already loaded, enable airplane mode. Expect the last confirmed wallet plus a friendly connection/retry notice, not invented rewards or an empty page. Reconnect and retry; check balances converge without duplicate payouts. If a game finish was interrupted, retry its retained result.
 - [ ] Try a cold open while offline and document Safari's behavior. This MVP has no offline cache/service worker: a new document, uncached route or game requires a connection. Browser-native offline UI on a cold open is expected; do not promise offline play during the pitch.
-- [ ] Reopen in English and Russian; check long chart labels and touch targets. Use Reduce Motion and confirm counters settle immediately and reward flights stop.
+- [ ] Check long chart labels and touch targets. Use Reduce Motion and confirm counters settle immediately and reward flights stop.
 - [ ] Before presenting, restore connectivity, charge both devices, disable interruptions, create the presentation's fresh jury family and keep the local report videos ready as backup.
 
 Record **device/iPadOS, pass/fail, sync seconds and screenshots** for each failure. T-62 remains open until the owner performs this physical test. Freeze (T-74) follows the games merge and this rehearsal; the agent does not redeploy.

@@ -1,6 +1,6 @@
 # UI and motion system
 
-The goal is an app that **feels like a native mobile app**: a persistent tab bar, sheets you can swipe, smooth page transitions, and a living Brainy. It also has to stay calm, accessible and fast on an iPad. Visual identity follows [design.md](../product/design.md) (D-36), using the existing token names in `packages/ui`. Manrope 800 titles and UI use local fonts; Unbounded is reserved for numbers and marks. The Latin Manrope source keeps vendored Onest as the fallback for existing Cyrillic copy. Light is the reference, with a derived dark set.
+The goal is an app that **feels like a native mobile app**: a persistent tab bar, sheets you can swipe, smooth page transitions, and a living Brainy. It also has to stay calm, accessible and fast on an iPad. Visual identity follows [design.md](../product/design.md) (D-36), using the existing token names in `packages/ui`. Manrope 800 titles and UI use local fonts; Unbounded is reserved for numbers and marks. The platform is English only (D-34). Light is the reference, with a derived dark set.
 
 ## Stack: four layers, use the lightest one that works
 
@@ -95,8 +95,12 @@ The host uses `--game-*` tokens and the matching `GAME_PALETTE` from `packages/u
 
 ## Parent funnel and family plan
 
-`StepPage` owns progress, focused headings, Back and the bottom Continue action. Phone screens stack the art and answers; iPad uses art on the left and content on the right. `AnswerGroup` provides single-choice controls. The 25-step `/start` flow, early age gate, resume, review mode and signup contract are documented in [funnel.md](../product/funnel.md). New text belongs in feature-local English copy modules; restyled screens retain their existing `useI18n()` strings, and the translation files stay untouched (D-37).
+`StepPage` owns progress, focused headings, Back and the bottom Continue action. Phone screens stack the art and answers; iPad uses art on the left and content on the right. `AnswerGroup` provides single-choice controls. The 25-step `/start` flow, early age gate, resume, review mode and signup contract are documented in [funnel.md](../product/funnel.md). New text belongs in feature-local English copy modules. Existing `useI18n()` calls read the English dictionary; there are no locale controls, locale cookie or language fallback (D-34).
 
 The funnel's shape match and five-stage growth slider are previews: they create no game session or reward. A completed, validated funnel is required for signup, which converts the age band to an allowed exact birth year and ends at `/onboarding/setup`. `/onboarding` redirects to `/start`. Pricing remains pending with no checkout.
 
 Validated answers are saved as `showcase.familyPlan`; core derives the phrase, four steps and observation prompt. Analytics offers parent editing and plain-text copy/download. The same phrase appears at the child's stopping point. The related off-screen task suggestion only fills the parent task form; the parent still creates and confirms the task.
+
+## Interactive films
+
+Registered films use the lavender player chrome and `FilmView`: playback starts only after Play, questions pause playback, and completion leads to the existing final quiz. There is no seek control or next-film prompt. The narrator slot receives the child's Brainy and accessories. Its optional `talk` value opens the mouth while the design's body animation remains off when `animate` is false. `/lab/film` uses the same tokens and tests the replaceable narrator; see [films.md](films.md).
