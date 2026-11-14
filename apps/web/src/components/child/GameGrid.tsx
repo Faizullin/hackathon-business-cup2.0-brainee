@@ -1,11 +1,10 @@
 "use client";
 
 import { allGames } from "@brainee/games";
-import { Lock } from "@brainee/ui/components/icons";
 import Link from "next/link";
 import { useI18n } from "@/i18n";
+import { GameThumbnail } from "./GameThumbnail";
 import { useLearning } from "./LearningProvider";
-import { SkillIcon } from "./SkillIcon";
 
 /** D-22: every game shows its minimum age; games above the child's age stay locked. */
 export function GameGrid() {
@@ -19,9 +18,9 @@ export function GameGrid() {
         const locked = age < game.minAge;
         const body = (
           <>
-            <span className="flex items-start justify-between gap-2">
-              <SkillIcon skill={game.skills.main} />
-              <span className="rounded-full bg-secondary px-2 py-0.5 font-medium text-xs">
+            <span className="relative">
+              <GameThumbnail src={game.thumbnail} skill={game.skills.main} locked={locked} />
+              <span className="absolute top-1.5 right-1.5 rounded-full bg-card/90 px-2 py-0.5 font-medium text-xs">
                 {locked ? t.learn.lockedAge(game.minAge) : t.learn.fromAge(game.minAge)}
               </span>
             </span>
@@ -32,7 +31,7 @@ export function GameGrid() {
           </>
         );
         const card =
-          "flex min-h-32 flex-col justify-between gap-3 rounded-panel ring-1 ring-border bg-card p-4";
+          "flex min-h-32 flex-col justify-between gap-3 rounded-panel ring-1 ring-border bg-card p-3";
         return (
           <li
             key={game.id}
@@ -43,8 +42,7 @@ export function GameGrid() {
             }
           >
             {locked ? (
-              <div aria-disabled="true" className={`${card} opacity-60`}>
-                <Lock aria-hidden="true" className="size-4" />
+              <div aria-disabled="true" className={`${card} text-muted-foreground`}>
                 {body}
               </div>
             ) : (

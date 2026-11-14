@@ -22,5 +22,6 @@
     "contract": "tangram-tales@1"
   },
   "sizeBudgetBytes": 2000000,
-  "license": "MIT"
+  "license": "MIT",
+  "thumbnail": "/games/tangram-tales/thumbnail.svg"
 }

@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · #8 game auto-discovery, thumbnails and the GSP Explore wave
+Games now register from their own folders (generated, gitignored registry; D-38); shared scripts list no ids. All 12 games have 4:3 SVG thumbnails rendered on Learn, Recommendations, Entry and Explore cards (locked at 50 %). At the owner's direction the first Explore wave came from GSP: Shape Pairs, Color Boxes, Sticker Scene (English only, unscored), with declarative Explore metadata in `ExplorePlayer`. Check, 339 unit tests, build, assets pass; full e2e 214/215 with the one stale assertion fixed and its spec re-run 6/6. Handoff: docs/games/batches/2026-11-15-autodiscovery-thumbnails-wave1.md.
+
 ## 2026-11-15 · Lavender and published platform merge trial
 Resolved all 32 conflicts in the isolated worktree: D-33 films, D-34 English-only behavior, lavender Brainy speech and UI, and unchanged upstream game input fixes. Check/build/assets/manifests, 301 unit tests, 76 focused browser cases and the separate 4-case WebKit iPad film spec pass; requested phone/iPad screenshots reviewed. The owner shortened the full run after 95 passes and two stale font-count failures, now fixed; 311 cases had no result. T-139 remains open. Preserved concurrent master recordings and the T-143 audit. No push, deploy or main-checkout edits.
 

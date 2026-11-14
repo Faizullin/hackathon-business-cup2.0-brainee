@@ -7,8 +7,8 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { Chip } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
+import { GameThumbnail } from "./GameThumbnail";
 import { useLearning } from "./LearningProvider";
-import { SkillIcon } from "./SkillIcon";
 
 /** T-25 on seeded skill scores and illustrative age averages (T-83 keeps real norms open). */
 export function useRecommendations() {
@@ -68,20 +68,29 @@ export function RecommendationCards({
               onClick={() => onChoose?.(rec.game.id)}
               data-testid="recommended-game"
               className={cn(
-                "flex h-full flex-col gap-2 rounded-panel ring-1 bg-card p-4 transition-transform duration-(--dur-press) active:scale-[0.97]",
+                "flex h-full gap-3 rounded-panel ring-1 bg-card p-4 transition-transform duration-(--dur-press) active:scale-[0.97]",
+                // Compact Learn cards are a row on phones so two recommendations fit above the grid.
+                big ? "min-h-40 flex-col p-5" : "items-center sm:flex-col sm:items-stretch",
                 index === 0 ? "ring-highlight ring-2" : "ring-border",
-                big && "min-h-40 p-5",
               )}
             >
-              {index === 0 && (
-                <span>
-                  <Chip tone="highlight">{te.top}</Chip>
+              <GameThumbnail
+                src={rec.game.thumbnail}
+                skill={rec.skill}
+                className={cn(!big && "w-28 shrink-0 sm:w-full", big && "order-1")}
+              />
+              <span className={cn("flex min-w-0 flex-col gap-1", big && "contents")}>
+                {index === 0 && (
+                  <span className={cn(big && "order-0")}>
+                    <Chip tone="highlight">{te.top}</Chip>
+                  </span>
+                )}
+                <span className={cn("font-semibold", big && "order-2 text-lg")}>
+                  {rec.game.title}
                 </span>
-              )}
-              <SkillIcon skill={rec.skill} large={big} />
-              <span className={cn("font-semibold", big && "text-lg")}>{rec.game.title}</span>
-              <span className="text-muted-foreground text-sm">
-                {te.reason(skill, rec.score, rec.ageAverage)}
+                <span className={cn("text-muted-foreground text-sm", big && "order-3")}>
+                  {te.reason(skill, rec.score, rec.ageAverage)}
+                </span>
               </span>
             </Link>
           </li>

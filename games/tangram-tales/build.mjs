@@ -3,8 +3,9 @@ import { cpSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 // Path C: retain pinned originals; apply the small host/session port only to the served copy.
-export function buildTangram(destination) {
-  const root = "games/tangram-tales";
+// Called by `pnpm games:build` with this game's public directory.
+export function buildGame(destination) {
+  const root = import.meta.dirname;
   cpSync(`${root}/artifact`, destination, { recursive: true });
   cpSync(`${root}/index.html`, `${destination}/index.html`);
   cpSync(`${root}/session.css`, `${destination}/session.css`);

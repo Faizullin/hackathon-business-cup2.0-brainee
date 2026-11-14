@@ -1,6 +1,7 @@
 "use client";
 import { previews } from "@brainee/game-catalog";
 import Link from "next/link";
+import { GameThumbnail } from "@/components/child/GameThumbnail";
 import { useLearning } from "@/components/child/LearningProvider";
 import { useI18n } from "@/i18n";
 export default function ExplorePage() {
@@ -23,8 +24,9 @@ export default function ExplorePage() {
             <div
               key={game.id}
               aria-disabled="true"
-              className="rounded-panel border border-border bg-card p-5 opacity-60"
+              className="flex flex-col gap-3 rounded-panel border border-border bg-card p-4 text-muted-foreground"
             >
+              <GameThumbnail src={game.thumbnail} locked />
               <h2>{game.title}</h2>
               <p>{t.learn.lockedAge(game.minAge)}</p>
             </div>
@@ -32,8 +34,9 @@ export default function ExplorePage() {
             <Link
               key={game.id}
               href={`/explore/${game.id}`}
-              className="rounded-panel border border-border bg-card p-5"
+              className="flex flex-col gap-3 rounded-panel border border-border bg-card p-4"
             >
+              <GameThumbnail src={game.thumbnail} />
               <h2>{game.title}</h2>
               <p>{game.minAge}+ · Free play · no stars</p>
             </Link>

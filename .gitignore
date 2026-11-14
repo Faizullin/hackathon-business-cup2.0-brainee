@@ -35,3 +35,6 @@ apps/web/public/games/
 
 # Raw film sources (podcast audio/video); only the encoded film mp3 + JSON are committed
 videos/
+
+# Game registry modules written by scripts/discover-games.mjs from each game folder
+*.generated.ts

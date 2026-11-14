@@ -1,0 +1,17 @@
+{
+  "id": "sticker-scene",
+  "title": "Sticker Scene",
+  "entry": "/games/sticker-scene/index.html",
+  "minAge": 4,
+  "license": "MIT",
+  "sizeBudgetBytes": 5000000,
+  "mode": "explore",
+  "thumbnail": "/games/sticker-scene/thumbnail.svg",
+  "explore": {
+    "family": "phaser",
+    "viewport": "responsive",
+    "orientation": "any",
+    "audio": true,
+    "readiness": "bridge"
+  }
+}

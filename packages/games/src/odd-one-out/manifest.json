@@ -20,5 +20,6 @@
     "contract": "odd-one-out@1"
   },
   "sizeBudgetBytes": 100000,
-  "license": "LicenseRef-Project"
+  "license": "LicenseRef-Project",
+  "thumbnail": "/games/odd-one-out/thumbnail.svg"
 }

@@ -7,7 +7,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "turbo run dev",
+    "dev": "pnpm games:discover && turbo run dev",
     "demo": "pnpm games:build && pnpm db:reset && DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web dev",
     "build": "pnpm games:build && turbo run build",
     "start": "pnpm --filter @brainee/web start",
@@ -15,7 +15,7 @@
     "e2e:full": "pnpm build && pnpm --filter @brainee/web e2e:full",
     "report": "node scripts/report.mjs",
     "test:reports": "node --test scripts/reports/*.test.mjs",
-    "test": "turbo run test",
+    "test": "pnpm games:discover && turbo run test",
     "db:push": "pnpm --filter @brainee/db db:push",
     "db:seed": "pnpm --filter @brainee/db db:seed",
     "db:reset": "pnpm --filter @brainee/db db:reset",
@@ -23,13 +23,15 @@
     "db:studio": "pnpm --filter @brainee/db db:studio",
     "check": "biome check . && pnpm check:games && pnpm check:manifests && pnpm check:palette && pnpm typecheck",
     "format": "biome format --write .",
-    "typecheck": "turbo run typecheck",
+    "typecheck": "pnpm games:discover && turbo run typecheck",
     "check:games": "node packages/games/scripts/check-games.mjs",
     "games:build": "node scripts/build-games.mjs",
     "test:assets": "node scripts/check-manifests.mjs --assets",
     "check:manifests": "node scripts/check-manifests.mjs",
     "check:palette": "node scripts/check-game-palette.mjs",
-    "check:films": "pnpm --filter @brainee/films test"
+    "check:films": "pnpm --filter @brainee/films test",
+    "games:discover": "node scripts/discover-games.mjs",
+    "postinstall": "node scripts/discover-games.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.7",

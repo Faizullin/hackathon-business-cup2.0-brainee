@@ -22,5 +22,6 @@
     "contract": "continue-pattern@1"
   },
   "sizeBudgetBytes": 100000,
-  "license": "LicenseRef-Project"
+  "license": "LicenseRef-Project",
+  "thumbnail": "/games/continue-pattern/thumbnail.svg"
 }

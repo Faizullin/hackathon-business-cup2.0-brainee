@@ -5,5 +5,13 @@
   "minAge": 5,
   "license": "MIT",
   "sizeBudgetBytes": 6000000,
-  "mode": "explore"
+  "mode": "explore",
+  "thumbnail": "/games/neighborhood-map-walk/thumbnail.svg",
+  "explore": {
+    "family": "qlobe",
+    "viewport": "responsive",
+    "orientation": "landscape",
+    "audio": true,
+    "readiness": "bridge"
+  }
 }

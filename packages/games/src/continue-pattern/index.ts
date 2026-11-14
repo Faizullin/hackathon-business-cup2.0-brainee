@@ -7,3 +7,5 @@ export const continuePattern: GameDefinition = {
   skills: manifest.skills as GameDefinition["skills"],
   load: () => import("./ContinuePattern"),
 };
+
+export default continuePattern;
