@@ -2,6 +2,7 @@
 
 import { type ReactNode, ViewTransition } from "react";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
+import { ParentEntry } from "@/components/child/ParentEntry";
 import { TabBar } from "@/components/child/TabBar";
 import { useI18n } from "@/i18n";
 
@@ -30,6 +31,7 @@ export default function ChildLayout({ children }: { children: ReactNode }) {
           >
             {t.child.rotateHint}
           </p>
+          <ParentEntry />
           <ViewTransition default="page-fade">{children}</ViewTransition>
         </main>
         <TabBar />

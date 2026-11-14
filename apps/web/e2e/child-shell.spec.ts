@@ -57,3 +57,15 @@ test("unknown games cannot launch", async ({ page }) => {
   await expect(page.locator('meta[name="robots"]').first()).toHaveAttribute("content", "noindex");
   await expect(page.getByTestId("embedded-game")).toHaveCount(0);
 });
+
+test("the child shell links to PIN-gated parent mode and back", async ({ page, baseURL }) => {
+  const headers = { origin: baseURL as string };
+  await page.request.post("/api/demo-session", { headers });
+  await page.request.delete("/api/parent", { headers });
+  await page.goto("/learn");
+  await page.getByTestId("parent-entry").click();
+  await expect(page).toHaveURL(/\/analytics$/);
+  await expect(page.getByRole("heading", { name: "Parent login" })).toBeVisible();
+  for (const digit of "1234") await page.getByRole("button", { name: `Digit ${digit}` }).click();
+  await expect(page.getByRole("heading", { name: "Analytics", level: 1 })).toBeVisible();
+});
