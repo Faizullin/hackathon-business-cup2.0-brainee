@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-14 · Port local UI recordings and Markdown reports · 2026-11-14 · accepted
+**Context:** `../game-store-planning` already records checked Playwright flows and renders Markdown with screenshots, MP4 posters and JSON timelines. We need the same review artifacts for the current scaffold.
+**Decision:** port its local report CLI, browser driver, generator, timeline/media helpers and tests into `scripts/`. Resolve the existing pinned Playwright from `apps/web`; use local ffmpeg for video conversion. Register a Russian scaffold scenario at phone/iPad viewport sizes and commit generated artifacts under `docs/reports`.
+**Consequences:** no new npm dependencies, service or client requests. The port runs without the sibling checkout; its provenance and local adaptations are in [reports/README.md](../reports/README.md). Raw captures stay ignored. Recordings complement Chromium/WebKit e2e and do not replace real-device checks.
+
 ## D-13 · App-like UI: shadcn on Base UI + layered motion · 2026-11-14 · accepted · refines the styling/animation rows of D-01
 **Context:** we want a rich, animated, native-feeling mobile UI. Base UI v1 now covers what we need, including a swipeable Drawer with snap points (shadcn moved its drawer from Vaul to Base UI). `game-store-planning` already used `@base-ui/react`. The installed React 19.3.1 exports `ViewTransition`, and Next 16.4.6 documents it for the App Router.
 **Decision:** shadcn/ui with a `base-*` style for every interactive component, child and parent alike, restyled with the prototype tokens in `packages/ui`. Motion in four layers: CSS → React `<ViewTransition>` for routes and shared elements → Motion (`LazyMotion`) for physics, gestures and rewards. Layouts own the persistent chrome; the root layout has no visual chrome; game screens are fullscreen. Details: [ui.md](ui.md).

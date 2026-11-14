@@ -4,6 +4,11 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (12)
+- Completed T-88 / D-14: analyzed and ported game-store-planning's local browser/video/Markdown reporting pipeline, with pinned workspace Playwright, Russian phone/iPad captures and linked artifacts.
+- Generated `docs/reports/scaffold.md`: two MP4 walkthroughs (19 checks each), six screenshots and JSON timelines; documented commands, source links and local adaptations in the report guide.
+- Verified production build, `pnpm check`, 29 tooling tests and 20 Chromium/WebKit checks; inspected captures and MP4 metadata. Next: T-13, then extend reports with implemented flows.
+
 ## 2026-11-14 (11)
 - Completed T-12 per D-13: Base UI/shadcn shared components, local Onest/Unbounded WOFF2, Motion/Lucide setup, motion tokens and route-owned chrome.
 - Verified build and 20 Chromium/WebKit checks at phone/iPad widths, including fonts, keyboard links and reduced motion; inspected screenshots. Confirmed shadcn resolves shared package paths.

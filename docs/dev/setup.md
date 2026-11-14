@@ -21,6 +21,8 @@ Available commands:
 | `pnpm build` | Build the production app through Turborepo |
 | `pnpm start` | Serve the built app at `http://localhost:3000` |
 | `pnpm e2e` | Build, then run Playwright against a production server on :3100 |
+| `pnpm report --video` | Generate a Markdown UI report with recordings, screenshots and logs against a local server on :3123; [instructions](../reports/README.md) |
+| `pnpm test:reports` | Test report validation, browser capture, video conversion and report links |
 | `pnpm check` | Biome lint + format checks, then workspace TypeScript checks |
 | `pnpm typecheck` | Run each package's `typecheck` through Turborepo |
 | `pnpm format` | Format source and config files; Markdown and frozen prototype sources are excluded |

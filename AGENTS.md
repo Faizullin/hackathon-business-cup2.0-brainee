@@ -38,6 +38,8 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - `pnpm dev` — start the Next.js web app at `http://localhost:3000`.
 - `pnpm build` / `pnpm start` — build and serve the production web app.
 - `pnpm e2e` — build, then run the scaffold smoke tests in Chromium and WebKit (phone + iPad widths).
+- `pnpm report --video` — generate Markdown with phone/iPad recordings, screenshots and logs against a local server; see [docs/reports/README.md](docs/reports/README.md).
+- `pnpm test:reports` — validate the report generator, browser capture, video conversion and artifact links.
 - `pnpm check` — Biome lint/format checks, then workspace TypeScript checks.
 - `pnpm typecheck` — workspace TypeScript checks through Turborepo.
 - `pnpm format` — format source and config files with Biome.

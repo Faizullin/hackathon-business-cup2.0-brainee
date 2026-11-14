@@ -1,0 +1,250 @@
+{
+  "shots": [
+    {
+      "route": "/learn",
+      "shots": [
+        {
+          "name": "learn",
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Учимся",
+                  "exact": true
+                }
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/analytics",
+      "shots": [
+        {
+          "name": "analytics",
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Аналитика",
+                  "exact": true
+                }
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/login",
+      "shots": [
+        {
+          "name": "login",
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Добро пожаловать в Брейни",
+                  "exact": true
+                }
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "name": "phone-walkthrough",
+      "title": "Phone: welcome, learning, analytics and 404 recovery",
+      "viewport": "phone",
+      "start": "/login",
+      "steps": [
+        {
+          "expect": {
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Добро пожаловать в Брейни",
+              "exact": true
+            },
+            "message": "The welcome screen appears"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "mark": "Follow the welcome screen return link"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "К занятиям",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/learn$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Учимся",
+              "exact": true
+            },
+            "message": "The welcome link opens learning"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "wait": 800
+        },
+        {
+          "mark": "Open the parent analytics placeholder directly"
+        },
+        {
+          "goto": "/analytics"
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Аналитика",
+              "exact": true
+            },
+            "message": "The parent analytics placeholder appears"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "wait": 800
+        },
+        {
+          "call": "recoverMissing"
+        },
+        {
+          "expect": {
+            "url": "^/learn$",
+            "message": "The walkthrough ends on learning"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ipad-walkthrough",
+      "title": "iPad viewport: welcome, learning, analytics and 404 recovery",
+      "viewport": "ipad",
+      "start": "/login",
+      "steps": [
+        {
+          "expect": {
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Добро пожаловать в Брейни",
+              "exact": true
+            },
+            "message": "The welcome screen appears"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "mark": "Follow the welcome screen return link"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "К занятиям",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/learn$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Учимся",
+              "exact": true
+            },
+            "message": "The welcome link opens learning"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "wait": 800
+        },
+        {
+          "mark": "Open the parent analytics placeholder directly"
+        },
+        {
+          "goto": "/analytics"
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Аналитика",
+              "exact": true
+            },
+            "message": "The parent analytics placeholder appears"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "wait": 800
+        },
+        {
+          "call": "recoverMissing"
+        },
+        {
+          "expect": {
+            "url": "^/learn$",
+            "message": "The walkthrough ends on learning"
+          }
+        }
+      ]
+    }
+  ]
+}

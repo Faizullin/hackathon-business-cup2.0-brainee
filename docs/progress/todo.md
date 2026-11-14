@@ -82,6 +82,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [ ] T-84 Validate the own-domain PWA and two-device sync on a real iPad early; define offline behavior and source licensed demo media.
 - [ ] T-85 Port one GSP game end to end (suggest `phaser-shape-match-game`): engine kit, Russian UI, manifest, bridge events → `GameResult`, Chromium + WebKit e2e. Other candidates in [games.md](../dev/games.md#reusable-gsp-games-candidates)
 - [ ] T-87 Motion polish: `<ViewTransition>` tab/push/pop + shared elements, ★ fly-to-wallet, animated counters, Brainy idle/stage-up, `loading.tsx` Brainy loader, reduced-motion spec → [ui.md](../dev/ui.md). After the functional flow works.
+- [x] T-88 Port the local UI recording/report tooling from game-store-planning; generate phone/iPad walkthroughs with linked videos, screenshots and logs → [reports/README.md](../reports/README.md)
 - Additional learning games (Sounds & letters, Repeat after Brainy, Magic garden, Expedition, Error detective)
 - Fun games beyond the first one
 - Push notification on `stage_up`

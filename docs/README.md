@@ -10,6 +10,7 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [product/](product/) | What we build: condensed PRD | Building a feature or checking a rule | Product owner; anyone fixing a spec gap |
 | [dev/](dev/) | How we build: stack, setup, conventions, decisions | Scaffolding, adding packages, onboarding | Whoever changes the architecture |
 | [ideas/](ideas/) | Original sources: PRD PDF, HTML prototype | Porting prototype code (line map inside) | Rarely; sources are frozen |
+| [reports/](reports/) | Generated UI walkthroughs, videos, screenshots and logs | Reviewing current UI or recording a demo | Whoever changes a report scenario |
 
 ## Files
 
@@ -31,6 +32,8 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [dev/ui.md](dev/ui.md) | UI and motion system: Base UI components, page transitions, Motion, app shell, mobile app-feel checklist |
 | [dev/agent-tooling.md](dev/agent-tooling.md) | Which agent skills and MCP servers to use or skip, and why |
 | [ideas/README.md](ideas/README.md) | What the source files are + prototype line map |
+| [reports/README.md](reports/README.md) | Recording commands, artifact map and analysis of the game-store-planning reporting pipeline |
+| [reports/scaffold.md](reports/scaffold.md) | Current starter screens: phone/iPad videos, screenshot comparisons and linked JSON logs |
 
 ## Reading paths by task
 
