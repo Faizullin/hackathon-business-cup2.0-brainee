@@ -9,6 +9,7 @@ export function LabNav() {
   const LINKS = [
     { href: "/lab", label: ru.lab.nav.games },
     { href: "/lab/brainy", label: ru.lab.nav.brainy },
+    { href: "/lab/film", label: ru.lab.nav.film },
   ] as const;
 
   const pathname = usePathname();

@@ -1,0 +1,5 @@
+{
+  "extends": "@brainee/config/tsconfig/react.json",
+  "compilerOptions": { "resolveJsonModule": true, "types": ["node"] },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "vitest.config.ts"]
+}

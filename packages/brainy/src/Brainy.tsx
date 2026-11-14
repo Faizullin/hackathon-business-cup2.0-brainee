@@ -8,6 +8,8 @@ type BrainyProps = {
   /** Localized accessible name (decorative by default); pass "" when a visible label already describes Brainy. */
   label?: string;
   className?: string;
+  /** 0–1: how open the mouth is while Brainy talks (films). 0 keeps the stat-driven smile. */
+  talk?: number;
 };
 
 // Head bumps: [x factor, y factor, radius factor] (prototype).
@@ -27,7 +29,7 @@ const SCREENS = [
 ] as const;
 const SIDES = [-1, 1] as const;
 
-export function Brainy({ stats, equipped = {}, label = "", className }: BrainyProps) {
+export function Brainy({ stats, equipped = {}, label = "", className, talk = 0 }: BrainyProps) {
   const uid = useId().replace(/:/g, "");
   const m = brainyModel(stats, equipped);
   const { cx, cy, rx, ry, fill: F, dark: D } = m;
@@ -200,13 +202,24 @@ export function Brainy({ stats, equipped = {}, label = "", className }: BrainyPr
         </g>
       )}
 
-      <path
-        d={`M${cx - m.mouth.w} ${m.mouth.y} Q${cx} ${m.mouth.y + m.mouth.curve} ${cx + m.mouth.w} ${m.mouth.y}`}
-        stroke={INK}
-        strokeWidth="4"
-        fill="none"
-        strokeLinecap="round"
-      />
+      {talk > 0 ? (
+        <ellipse
+          data-talk=""
+          cx={cx}
+          cy={m.mouth.y + 3}
+          rx={m.mouth.w * (0.55 + talk * 0.15)}
+          ry={2 + Math.min(talk, 1) * 11}
+          fill={INK}
+        />
+      ) : (
+        <path
+          d={`M${cx - m.mouth.w} ${m.mouth.y} Q${cx} ${m.mouth.y + m.mouth.curve} ${cx + m.mouth.w} ${m.mouth.y}`}
+          stroke={INK}
+          strokeWidth="4"
+          fill="none"
+          strokeLinecap="round"
+        />
+      )}
 
       {equipped.neck === "bowtie" && (
         <g data-acc="bowtie">

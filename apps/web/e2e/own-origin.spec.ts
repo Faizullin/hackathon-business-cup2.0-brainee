@@ -35,8 +35,12 @@ test("every route and its resources stay on our origin", async ({ page, context,
     "/video/ocean",
     "/video/mars",
     "/video/dinos",
+    "/video/sky-blue",
+    "/video/rain",
+    "/video/sun-goes",
     "/lab",
     "/lab/brainy",
+    "/lab/film",
     "/not-found",
   ]) {
     await page.goto(path);

@@ -20,6 +20,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 - Checks: `pnpm check`, 170 unit tests, 29 report-tool tests; final focused browser run 36/36 on Chromium/WebKit phone/iPad. Earlier full-suite failures and repaired targeted checks are documented in [status](status.md#handoff). Fresh English MVP/learning recordings and WebKit frames reviewed.
 - Main-product commits only; no push/deploy or games worktree changes. Owner redeploy, physical rehearsal and post-games-merge T-74 freeze remain.
 
+## 2026-11-14 (interactive films, PR #1 on `feature/audio_to_movie`)
+- T-120–T-123 (D-33, [films.md](../dev/films.md)): three English ElevenLabs podcasts became mp3 + JSON films (`sky-blue`, `rain`, `sun-goes`). Added `core/film.ts` script rules and timeline; `packages/films` art/stage with ground-standing props and a replaceable `FilmNarrator` slot (the child's own Brainy with accessories); film mode in `/video/[id]`; `/lab/film`; `make_film.py` (local faster-whisper via uv, word-timestamp captions); `pnpm check:films`.
+- Branch-side full e2e reported onboarding ×8, `/login` ×4 and jury ×1 failures while other sessions built in the same checkout; issue #5 requires them to pass on the merged tree.
+
 ## 2026-11-14 (US-English demo content, locale test fix)
 - T-110 / D-30: shared demo and jury seeds rewritten for the US audience (Mia, Ava, `mom@example.com`, US names, en-US numbers, New York time); Russian switch maps seeded strings and game titles via `i18n/content.ts`. Small i18n fixes: backpack progress wording, video minutes, default task skill, cartoon icon check, "Neighborhood" ranking scope.
 - `pnpm db:refresh-demo` replaces only the shared demo family (local or cloud). Fixed e2e locale: the global Playwright `cookie` header overrode the session jar (401s, English UI); now `BRAINEE_DEFAULT_LOCALE=ru` on the test server. Report captures use `brainee_locale` + New York time.
