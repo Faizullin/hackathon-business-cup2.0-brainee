@@ -191,11 +191,11 @@ test("fun-game credit counts active play only; cartoon restarts and offers no ne
       ).ok(),
     ).toBe(true);
   await page.goto(`/cartoon/${cartoon.id}`);
-  await expect(page.getByRole("progressbar")).toHaveAttribute("value", "0");
+  await expect(page.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
   await page.getByRole("button", { name: "Watch", exact: true }).click();
-  await expect(page.getByRole("progressbar")).not.toHaveAttribute("value", "0");
+  await expect(page.getByRole("progressbar")).not.toHaveAttribute("aria-valuenow", "0");
   await page.reload();
-  await expect(page.getByRole("progressbar")).toHaveAttribute("value", "0");
+  await expect(page.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
   await page.getByRole("button", { name: "Watch", exact: true }).click();
   await expect(page.getByText("Episode ended", { exact: true })).toBeVisible({
     timeout: 15000,

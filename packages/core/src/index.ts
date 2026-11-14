@@ -3,6 +3,7 @@ export * from "./accessories";
 export * from "./activity";
 export * from "./brainy";
 export * from "./calendar";
+export * from "./catalog-sync";
 export * from "./economy";
 export * from "./film";
 export * from "./funnel";

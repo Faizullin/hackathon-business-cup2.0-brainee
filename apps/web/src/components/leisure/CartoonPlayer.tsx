@@ -40,12 +40,19 @@ export function CartoonPlayer({ id }: { id: string }) {
                 equipped={snapshot.showcase.equipped}
                 className="mx-auto h-56 w-auto rounded-stage bg-violet-wash"
               />
-              <progress
+              <div
+                role="progressbar"
                 aria-label={t.cartoon.title}
-                value={position}
-                max={end}
-                className="w-full"
-              />
+                aria-valuemin={0}
+                aria-valuemax={end}
+                aria-valuenow={position}
+                className="h-3 w-full overflow-hidden rounded-full bg-violet-wash"
+              >
+                <span
+                  className="block h-full rounded-full bg-primary transition-[width] duration-1000 ease-linear"
+                  style={{ width: `${(position / end) * 100}%` }}
+                />
+              </div>
               <button type="button" className={primaryButton} onClick={() => setPlaying(!playing)}>
                 {playing ? t.cartoon.pause : position ? t.cartoon.play : t.cartoon.begin}
               </button>
