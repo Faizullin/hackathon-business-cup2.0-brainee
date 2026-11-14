@@ -153,7 +153,19 @@ DATABASE_URL=file:./data/games.db BRAINEE_NEXT_DIR=.next-games BRAINEE_E2E_PORT=
 In an isolated games worktree, build once with `BRAINEE_NEXT_DIR=.next-games pnpm build`, then run the focused iPad Safari suite:
 
 ```sh
-BRAINEE_NEXT_DIR=.next-games BRAINEE_E2E_PORT=3114 pnpm --filter @brainee/web e2e game-conformance.spec.ts picture-puzzle.spec.ts tangram.spec.ts reflection.spec.ts rhythm-copycat.spec.ts secret-message-copy.spec.ts magnet-explorer.spec.ts neighborhood-map-walk.spec.ts --project=webkit-ipad
+BRAINEE_NEXT_DIR=.next-games BRAINEE_E2E_PORT=3114 pnpm --filter @brainee/web e2e picture-puzzle.spec.ts tangram.spec.ts reflection.spec.ts rhythm-copycat.spec.ts secret-message-copy.spec.ts magnet-explorer.spec.ts neighborhood-map-walk.spec.ts --project=webkit-ipad
 ```
 
 The test server owns a temporary SQLite database. Review generated `apps/web/test-results` screenshots. `/lab` tests explicitly select the iPad frame on tablet projects. For an unchanged app build, `pnpm games:build && pnpm test:assets` refreshes static game-only edits without rebuilding Next. Run the full four-project matrix before broader integration; keep unrelated onboarding/settings failures separate from game acceptance. Do not merge this games branch into master without a new explicit instruction.
+
+### E2E matrix (tiered)
+
+`pnpm e2e` runs about 200 tests, not every spec on every project. Tiers are defined in `apps/web/playwright.config.ts`:
+
+| Project | Runs |
+|---|---|
+| `webkit-ipad` (demo device) | every spec: games, touch, films, flows |
+| `chromium-phone` | everything except game specs: product flows, API, language |
+| `chromium-ipad`, `webkit-phone` | responsive layout specs only |
+
+Add a new spec to `GAME_SPECS` or `LAYOUT_SPECS` there if it belongs to a narrower tier.
