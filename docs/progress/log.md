@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · Lavender review corrections
+Separated violet active controls and pink highlights from loss brown; unified compact Energy cards, improved Learn and Path, parent targets and game framing. Check/test/build pass, 92 affected browser tests pass, and the requested 11 pages were reviewed on phone and iPad. Continuing with T-135; no push or deployment.
+
 ## 2026-11-15 · Lavender redesign checkpoint (T-131–T-134, T-140–T-141)
 Committed funnel core, lavender primitives, reference Brain renderer/ticker, step components, child heroes/Path/hub and game-host palette on master. Check/test/build pass; affected browser matrices pass (56, 60, 4, 60 and 24 cases), plus four final host captures; iPad visuals reviewed. Owner requested an orchestrator-review checkpoint. T-135–T-139 and T-142 remain, including final serial e2e and recordings. No push or deployment.
 

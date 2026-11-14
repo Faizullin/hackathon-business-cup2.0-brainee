@@ -4,7 +4,6 @@ import { StarIcon, SunIcon } from "@brainee/ui/components/child-icons";
 import { cn } from "@brainee/ui/lib/utils";
 import {
   Chip,
-  coralButton,
   Meter,
   Notice,
   outlineButton,
@@ -54,7 +53,7 @@ export function GiftsScreen() {
               <button
                 type="button"
                 disabled={busy || wallet.suns < gift.price}
-                className={wallet.suns >= gift.price ? coralButton : outlineButton}
+                className={wallet.suns >= gift.price ? primaryButton : outlineButton}
                 onClick={() => run({ type: "buy-gift", giftId: gift.id }, t.bought(gift.title))}
               >
                 {gift.price} <SunIcon className="size-4" />
@@ -95,7 +94,7 @@ export function GiftsScreen() {
                     <button
                       type="button"
                       disabled={busy}
-                      className={cn(coralButton, "ml-auto")}
+                      className={cn(primaryButton, "ml-auto")}
                       onClick={() => run({ type: "task-done", taskId: task.id })}
                     >
                       {t.done}

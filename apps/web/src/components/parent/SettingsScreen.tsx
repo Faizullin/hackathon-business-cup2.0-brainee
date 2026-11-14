@@ -100,11 +100,11 @@ export function SettingsScreen() {
       )}
       <div className="grid gap-5 min-[1000px]:grid-cols-2">
         <Panel title={ts.language}>
-          <Globe aria-hidden="true" className="size-6 text-coral" />
+          <Globe aria-hidden="true" className="size-6 text-accent" />
           <LanguageRadioCards />
         </Panel>
         <Panel title={ts.child}>
-          <ClipboardCheck aria-hidden="true" className="size-6 text-coral" />
+          <ClipboardCheck aria-hidden="true" className="size-6 text-accent" />
           <form
             key={`${data.child.name}-${data.child.birthYear}-${data.child.promise}`}
             onSubmit={submitChild}
@@ -150,7 +150,7 @@ export function SettingsScreen() {
           </form>
         </Panel>
         <Panel title={ts.security}>
-          <Lock aria-hidden="true" className="size-6 text-coral" />
+          <Lock aria-hidden="true" className="size-6 text-accent" />
           <form
             onSubmit={async (e) => {
               e.preventDefault();
@@ -197,7 +197,7 @@ export function SettingsScreen() {
           </form>
         </Panel>
         <Panel title={ts.timezone}>
-          <Settings aria-hidden="true" className="size-6 text-coral" />
+          <Settings aria-hidden="true" className="size-6 text-accent" />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -239,7 +239,7 @@ export function SettingsScreen() {
           </form>
         </Panel>
         <Panel title={ts.devices}>
-          <Tablet aria-hidden="true" className="size-6 text-coral" />
+          <Tablet aria-hidden="true" className="size-6 text-accent" />
           <p className="text-muted-foreground text-sm">{ts.pairingNote}</p>
           <button
             type="button"

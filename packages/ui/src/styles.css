@@ -17,7 +17,7 @@
   --color-secondary-foreground: var(--ink);
   --color-muted: var(--surface-2);
   --color-muted-foreground: var(--muted);
-  --color-accent: var(--surface-2);
+  --color-accent: var(--accent);
   --color-accent-foreground: var(--ink);
   --color-destructive: var(--coral);
   --color-border: var(--line);
@@ -28,6 +28,8 @@
   --color-violet-wash: var(--violet-wash);
   --color-gain-wash: var(--gain-wash);
   --color-loss-wash: var(--loss-wash);
+  --color-highlight: var(--highlight);
+  --color-highlight-wash: var(--highlight-wash);
   --color-pink: var(--pink);
   --color-night: var(--night);
   --font-display: var(--font-d);

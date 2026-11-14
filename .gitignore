@@ -2,6 +2,7 @@ node_modules/
 .pnpm-store/
 .turbo/
 .next/
+.next-*/
 out/
 dist/
 coverage/
@@ -27,7 +28,6 @@ apps/web/public/games/
 *.log
 .vercel
 
-.next-games/
 
 # Pinned game content is not local SQLite data.
 !games/*/artifact/data/

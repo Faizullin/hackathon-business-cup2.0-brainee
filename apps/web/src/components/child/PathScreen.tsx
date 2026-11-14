@@ -1,5 +1,6 @@
 "use client";
 import { EARNED_REWARDS, rewardProgress, STAGES, stageOf } from "@brainee/core";
+import { Backpack, BadgeCheck, ShieldCheck, Sprout } from "@brainee/ui/components/icons";
 import { Brainy } from "@/components/Brainy";
 import { Meter, Panel } from "@/components/demo/kit";
 import { useLearning } from "./LearningProvider";
@@ -79,7 +80,13 @@ export function PathScreen() {
         </div>
         <Panel title={copy.badges}>
           <ul className="grid grid-cols-3 gap-3">
-            {EARNED_REWARDS.map((id, i) => {
+            {EARNED_REWARDS.map((id) => {
+              const Icon = {
+                captainBackpack: Backpack,
+                explorerBadge: BadgeCheck,
+                ownGarden: Sprout,
+                heroCape: ShieldCheck,
+              }[id];
               const has = snapshot.showcase.earned.includes(id);
               const p = rewards?.[id];
               return (
@@ -88,16 +95,20 @@ export function PathScreen() {
                   className={`flex flex-col items-center gap-3 rounded-row bg-bg p-3 text-center text-xs ${has ? "" : "opacity-50"}`}
                 >
                   <span className="flex size-12 items-center justify-center rounded-row bg-violet-wash font-display text-lg text-mint">
-                    {i + 1}
+                    <Icon aria-hidden="true" className="size-7" />
                   </span>
                   <span className="font-bold">{copy.rewardNames[id]}</span>
-                  {p && (
-                    <>
-                      <span>{copy.progress(p.value, p.target)}</span>
-                      <span className="w-full">
-                        <Meter value={(p.value / p.target) * 100} />
-                      </span>
-                    </>
+                  {has ? (
+                    <span className="font-bold text-mint">{copy.earned}</span>
+                  ) : (
+                    p && (
+                      <>
+                        <span>{copy.progress(p.value, p.target)}</span>
+                        <span className="w-full">
+                          <Meter value={(p.value / p.target) * 100} />
+                        </span>
+                      </>
+                    )
                   )}
                 </li>
               );

@@ -8,10 +8,7 @@ test("lavender host frame and round progress keep saved game behavior", async ({
   await expect(frame).toBeVisible();
   await expect(frame.locator("[data-game]")).toBeVisible();
   await expect(frame).toHaveCSS("border-radius", "28px");
-  await expect(page.getByRole("progressbar", { name: "Round progress" })).toHaveAttribute(
-    "aria-valuenow",
-    "0",
-  );
+  await expect(page.getByRole("progressbar", { name: "Round progress" })).toHaveCount(0);
   await page.screenshot({ path: info.outputPath("game-host.png"), fullPage: true });
   await finishOddOneOut(page);
   await expect(page.getByTestId("post-game")).toBeVisible();

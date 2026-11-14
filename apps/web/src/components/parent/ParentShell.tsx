@@ -6,6 +6,7 @@ import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type ReactNode, useState, ViewTransition } from "react";
+import { BrandMark } from "@/components/BrandMark";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton } from "@/components/demo/kit";
@@ -151,7 +152,7 @@ export function ParentShell({ children }: { children: ReactNode }) {
       </a>
       <header className="sticky top-0 z-20 border-border border-b bg-card/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-[1180px] items-center gap-3 px-4 pt-[max(8px,env(safe-area-inset-top))] pb-2">
-          <p className="font-display font-bold text-coral text-xl">{t.app.name}</p>
+          <BrandMark name={t.app.name} />
           <nav aria-label={tp.tabsLabel} className="ml-4 hidden gap-1 min-[1000px]:flex">
             {tabs.map(({ href, label }) => (
               <Link
@@ -160,8 +161,8 @@ export function ParentShell({ children }: { children: ReactNode }) {
                 aria-description={badge(href) ? t.notifications(badge(href)) : undefined}
                 aria-current={pathname === href ? "page" : undefined}
                 className={cn(
-                  "rounded-xl px-3 py-2 font-semibold text-sm",
-                  pathname === href ? "bg-secondary text-foreground" : "text-muted-foreground",
+                  "flex min-h-11 items-center rounded-xl px-3 py-2 font-semibold text-sm",
+                  pathname === href ? "bg-violet-wash text-accent" : "text-muted-foreground",
                 )}
               >
                 <span className="inline-flex items-center gap-1">
@@ -228,7 +229,7 @@ export function ParentShell({ children }: { children: ReactNode }) {
                 aria-current={pathname === href ? "page" : undefined}
                 className={cn(
                   "flex min-h-16 flex-col items-center justify-center gap-0.5 font-semibold text-xs transition-transform duration-(--dur-press) active:scale-95",
-                  pathname === href ? "text-coral" : "text-muted-foreground",
+                  pathname === href ? "text-accent" : "text-muted-foreground",
                 )}
               >
                 <Icon aria-hidden="true" className="size-6" />

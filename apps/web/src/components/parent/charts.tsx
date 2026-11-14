@@ -1,5 +1,10 @@
 // Small hand-rolled SVG charts (D-21): no chart dependency for the demo.
-const COLORS = { coral: "var(--coral)", sky: "var(--sky)", mint: "var(--mint)", sun: "var(--sun)" };
+const COLORS = {
+  accent: "var(--accent)",
+  sky: "var(--sky)",
+  mint: "var(--mint)",
+  sun: "var(--sun)",
+};
 export type ChartColor = keyof typeof COLORS;
 
 export function Radar({

@@ -2,13 +2,13 @@
 
 import { type Ability, type AbilityScores, recommendGames } from "@brainee/core";
 import { allGames } from "@brainee/games";
-import { ChildIcon } from "@brainee/ui/components/child-icons";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { useMemo } from "react";
 import { Chip } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";
+import { SkillIcon } from "./SkillIcon";
 
 /** T-25 on seeded skill scores and illustrative age averages (T-83 keeps real norms open). */
 export function useRecommendations() {
@@ -68,17 +68,17 @@ export function RecommendationCards({
               onClick={() => onChoose?.(rec.game.id)}
               data-testid="recommended-game"
               className={cn(
-                "flex h-full flex-col gap-2 rounded-panel border bg-card p-4 transition-transform duration-(--dur-press) active:scale-[0.97]",
-                index === 0 ? "border-coral border-2" : "border-border",
+                "flex h-full flex-col gap-2 rounded-panel ring-1 bg-card p-4 transition-transform duration-(--dur-press) active:scale-[0.97]",
+                index === 0 ? "ring-highlight ring-2" : "ring-border",
                 big && "min-h-40 p-5",
               )}
             >
               {index === 0 && (
                 <span>
-                  <Chip tone="coral">{te.top}</Chip>
+                  <Chip tone="highlight">{te.top}</Chip>
                 </span>
               )}
-              <ChildIcon name="learn" className={cn("text-sky", big ? "size-12" : "size-9")} />
+              <SkillIcon skill={rec.skill} large={big} />
               <span className={cn("font-semibold", big && "text-lg")}>{tc(rec.game.title)}</span>
               <span className="text-muted-foreground text-sm">
                 {te.reason(skill, rec.score, rec.ageAverage)}

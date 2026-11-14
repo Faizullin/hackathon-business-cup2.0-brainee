@@ -21,7 +21,7 @@ export function FloatingLocalePill({ className }: { className?: string }) {
         className={cn(
           "rounded-full px-2.5 py-1 font-semibold text-xs transition-colors",
           locale === "en"
-            ? "bg-secondary text-foreground shadow-xs"
+            ? "bg-violet-wash text-accent shadow-xs"
             : "text-muted-foreground hover:text-foreground",
         )}
       >
@@ -34,7 +34,7 @@ export function FloatingLocalePill({ className }: { className?: string }) {
         className={cn(
           "rounded-full px-2.5 py-1 font-semibold text-xs transition-colors",
           locale === "ru"
-            ? "bg-secondary text-foreground shadow-xs"
+            ? "bg-violet-wash text-accent shadow-xs"
             : "text-muted-foreground hover:text-foreground",
         )}
       >
@@ -62,7 +62,7 @@ export function HeaderLocaleToggle({ className }: { className?: string }) {
         className={cn(
           "rounded-lg px-2 py-1 transition-colors",
           locale === "en"
-            ? "bg-card text-foreground shadow-xs"
+            ? "bg-violet-wash text-accent shadow-xs"
             : "text-muted-foreground hover:text-foreground",
         )}
       >
@@ -76,7 +76,7 @@ export function HeaderLocaleToggle({ className }: { className?: string }) {
         className={cn(
           "rounded-lg px-2 py-1 transition-colors",
           locale === "ru"
-            ? "bg-card text-foreground shadow-xs"
+            ? "bg-violet-wash text-accent shadow-xs"
             : "text-muted-foreground hover:text-foreground",
         )}
       >
@@ -96,7 +96,7 @@ export function LanguageRadioCards() {
         className={cn(
           "flex cursor-pointer items-center gap-3 rounded-xl border p-4 text-left font-medium transition-all",
           locale === "en"
-            ? "border-coral bg-coral/5 text-foreground ring-2 ring-coral/20"
+            ? "border-accent bg-violet-wash text-accent ring-2 ring-accent/20"
             : "border-border bg-card text-muted-foreground hover:border-border/80 hover:bg-secondary/40",
         )}
       >
@@ -111,7 +111,7 @@ export function LanguageRadioCards() {
         <span
           className={cn(
             "flex size-5 shrink-0 items-center justify-center rounded-full border",
-            locale === "en" ? "border-coral bg-coral" : "border-muted-foreground/40",
+            locale === "en" ? "border-accent bg-accent" : "border-muted-foreground/40",
           )}
         >
           {locale === "en" && <span className="size-2 rounded-full bg-white" />}
@@ -123,7 +123,7 @@ export function LanguageRadioCards() {
         className={cn(
           "flex cursor-pointer items-center gap-3 rounded-xl border p-4 text-left font-medium transition-all",
           locale === "ru"
-            ? "border-coral bg-coral/5 text-foreground ring-2 ring-coral/20"
+            ? "border-accent bg-violet-wash text-accent ring-2 ring-accent/20"
             : "border-border bg-card text-muted-foreground hover:border-border/80 hover:bg-secondary/40",
         )}
       >
@@ -138,7 +138,7 @@ export function LanguageRadioCards() {
         <span
           className={cn(
             "flex size-5 shrink-0 items-center justify-center rounded-full border",
-            locale === "ru" ? "border-coral bg-coral" : "border-muted-foreground/40",
+            locale === "ru" ? "border-accent bg-accent" : "border-muted-foreground/40",
           )}
         >
           {locale === "ru" && <span className="size-2 rounded-full bg-white" />}

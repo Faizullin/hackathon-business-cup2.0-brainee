@@ -24,6 +24,9 @@
   --gain-wash: #e3e9ff;
   --loss-wash: #fde6d8;
   --pink: #ff9ec2;
+  --highlight: #ff9ec2;
+  --highlight-wash: #fff4f8;
+  --accent: var(--mint);
   --night: #2e2b55;
   --ring: #8c76ff;
   --game-surface: var(--bg);
@@ -56,6 +59,7 @@
     --violet-wash: #33295b;
     --gain-wash: #263256;
     --loss-wash: #482d28;
+    --highlight-wash: #402b43;
   }
 }
 
@@ -75,4 +79,5 @@
   --violet-wash: #33295b;
   --gain-wash: #263256;
   --loss-wash: #482d28;
+  --highlight-wash: #402b43;
 }

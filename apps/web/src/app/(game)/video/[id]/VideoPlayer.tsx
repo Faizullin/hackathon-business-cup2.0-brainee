@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { SCIENCE_ICONS } from "@/components/child/LeisureScreen";
-import { coralButton, outlineButton, primaryButton } from "@/components/demo/kit";
+import { outlineButton, primaryButton } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
 
 // T-37: pause/play is the only control. No seeking, no "watch next". 1 s = 1 min in the demo.
@@ -130,11 +130,7 @@ function Player({ id }: { id: string }) {
                   type="button"
                   disabled={wrong.includes(index)}
                   onClick={() => answer(index)}
-                  className={cn(
-                    coralButton,
-                    "min-h-14 text-base",
-                    wrong.includes(index) && "opacity-30",
-                  )}
+                  className={cn("min-h-14 text-base", wrong.includes(index) && "opacity-30")}
                 >
                   {option}
                 </button>

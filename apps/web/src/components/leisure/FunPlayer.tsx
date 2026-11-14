@@ -104,7 +104,7 @@ export function FunPlayer({ id }: { id: string }) {
   const remaining = left ?? game?.remainingSeconds ?? 0;
   const locked = !game || id !== "snake" || (!game.forever && remaining <= 0);
   return (
-    <div className="mx-auto grid w-full max-w-4xl gap-4 p-4 lg:grid-cols-2">
+    <div className="mx-auto grid w-full max-w-4xl gap-4 p-4 [--color-coral:var(--accent)] lg:grid-cols-2">
       <Panel as="h1" title={t.title}>
         <p data-testid="fun-time">
           {game?.forever

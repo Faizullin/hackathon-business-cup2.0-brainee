@@ -146,11 +146,11 @@ export function LeisureScreen() {
               key={cartoon.id}
               className="flex flex-col gap-2 rounded-xl border border-border p-3"
             >
-              <span className="grid aspect-video place-items-center rounded-lg bg-coral/15">
+              <span className="grid aspect-video place-items-center rounded-lg bg-highlight-wash">
                 {/^(Audio|Аудио)/.test(cartoon.detail) ? (
-                  <Headphones aria-hidden="true" className="size-8 text-coral" />
+                  <Headphones aria-hidden="true" className="size-8 text-accent" />
                 ) : (
-                  <Clapperboard aria-hidden="true" className="size-8 text-coral" />
+                  <Clapperboard aria-hidden="true" className="size-8 text-accent" />
                 )}
               </span>
               <span className="font-semibold">{cartoon.title}</span>

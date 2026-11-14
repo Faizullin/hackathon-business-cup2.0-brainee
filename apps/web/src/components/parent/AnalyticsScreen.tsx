@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
+import { childDesignCopy } from "@/components/child/redesign-copy";
 import { Chip, Meter, outlineButton, Panel, primaryButton } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
 import { Bars, Legend, Radar } from "./charts";
@@ -84,7 +85,7 @@ export function AnalyticsScreen() {
       {attention.length > 0 && (
         <section
           data-testid="needs-attention"
-          className="flex flex-col gap-2 rounded-panel border-2 border-coral/40 bg-coral/5 p-4"
+          className="flex flex-col gap-2 rounded-panel border-2 border-coral/40 bg-loss-wash p-4"
         >
           <h2 className="font-heading font-semibold text-lg">{i18n.parent.attention.title}</h2>
           <ul className="flex flex-wrap gap-2">
@@ -135,7 +136,7 @@ export function AnalyticsScreen() {
           </ol>
           <div className="flex flex-wrap gap-2 text-sm">
             <Chip tone="mint">
-              {i18n.child.dock.mood}: {progress.mood}%
+              {childDesignCopy.energy}: {progress.mood}%
             </Chip>
             <span data-testid="parent-stars">
               <Chip>★ {progress.wallet.stars}</Chip>
@@ -178,7 +179,7 @@ export function AnalyticsScreen() {
         ))}
       </ul>
 
-      <p className="rounded-panel border border-coral/30 bg-coral/5 p-4">
+      <p className="rounded-panel border border-coral/30 bg-loss-wash p-4">
         {t.insight(
           a.insight.improved,
           a.insight.improvedDelta,
@@ -186,7 +187,10 @@ export function AnalyticsScreen() {
           a.insight.value,
           a.insight.average,
         )}{" "}
-        <Link href="/tasks" className="font-semibold text-coral underline-offset-4 hover:underline">
+        <Link
+          href="/tasks"
+          className="font-semibold text-accent underline-offset-4 hover:underline"
+        >
           {t.insightLink}
         </Link>
       </p>
@@ -198,13 +202,13 @@ export function AnalyticsScreen() {
             labels={a.skills.labels}
             series={[
               { values: a.skills.monthAgo, color: "sky" },
-              { values: skillsNow, color: "coral" },
+              { values: skillsNow, color: "accent" },
             ]}
             average={a.skills.average}
           />
           <Legend
             items={[
-              { label: t.now, color: "coral" },
+              { label: t.now, color: "accent" },
               { label: t.monthAgo, color: "sky" },
               { label: t.average, dashed: true },
             ]}
@@ -231,7 +235,7 @@ export function AnalyticsScreen() {
             label={t.week}
             categories={a.week.days}
             stacks={[
-              { values: a.week.learning, color: "coral" },
+              { values: a.week.learning, color: "accent" },
               { values: a.week.science, color: "mint" },
               { values: a.week.fun, color: "sun" },
             ]}
@@ -239,7 +243,7 @@ export function AnalyticsScreen() {
           />
           <Legend
             items={[
-              { label: t.learning, color: "coral" },
+              { label: t.learning, color: "accent" },
               { label: t.science, color: "mint" },
               { label: t.fun, color: "sun" },
             ]}
@@ -324,7 +328,7 @@ export function AnalyticsScreen() {
               key={row.place}
               className={cn(
                 "flex items-center gap-3 rounded-xl px-3 py-2",
-                row.me ? "bg-coral/10 font-semibold" : "bg-secondary/50",
+                row.me ? "bg-highlight-wash font-semibold" : "bg-secondary/50",
               )}
             >
               <span className="w-12 text-muted-foreground">{row.place}</span>
@@ -336,7 +340,7 @@ export function AnalyticsScreen() {
       </Panel>
 
       <Panel>
-        <div className="flex flex-col items-center gap-3 rounded-xl bg-gradient-to-br from-coral/15 via-sun/15 to-sky/15 p-5 text-center sm:flex-row sm:text-left">
+        <div className="flex flex-col items-center gap-3 rounded-xl bg-gradient-to-br from-highlight-wash via-violet-wash to-gain-wash p-5 text-center sm:flex-row sm:text-left">
           <Brainy
             stats={progress.stats}
             equipped={showcase.equipped}

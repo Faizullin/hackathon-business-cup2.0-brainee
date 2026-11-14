@@ -73,7 +73,7 @@ export function OnboardingQuiz() {
       className="h-2 overflow-hidden rounded-full bg-line"
     >
       <div
-        className="h-full bg-coral transition-[width] motion-reduce:transition-none"
+        className="h-full bg-accent transition-[width] motion-reduce:transition-none"
         style={{ width: `${((phase === "signup" ? 7 : step) / 7) * 100}%` }}
       />
     </div>
@@ -239,7 +239,7 @@ export function OnboardingQuiz() {
           {to.back}
         </button>
         {error && (
-          <p role="alert" className="rounded-xl bg-coral/15 p-3 text-sm">
+          <p role="alert" className="rounded-xl bg-loss-wash p-3 text-sm">
             {error}
           </p>
         )}

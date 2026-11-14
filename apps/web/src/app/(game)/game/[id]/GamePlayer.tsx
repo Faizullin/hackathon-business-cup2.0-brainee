@@ -186,26 +186,6 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
           {events.reduce((sum, event) => sum + roundStars(event), 0)}
         </p>
       </header>
-      <div className="flex items-center gap-3 px-2">
-        <div
-          role="progressbar"
-          aria-label={hostCopy.progress}
-          aria-valuemin={0}
-          aria-valuemax={game.roundsPerSession}
-          aria-valuenow={events.filter((e) => e.correct).length}
-          className="h-2 flex-1 overflow-hidden rounded-full bg-(--game-selected-wash)"
-        >
-          <span
-            className="block h-full rounded-full bg-(--game-selected) transition-[width] duration-500"
-            style={{
-              width: `${Math.min(100, (events.filter((e) => e.correct).length / game.roundsPerSession) * 100)}%`,
-            }}
-          />
-        </div>
-        <span className="font-display text-xs">
-          {events.filter((e) => e.correct).length}/{game.roundsPerSession}
-        </span>
-      </div>
       {events.length > 0 && (
         <p
           role="status"
@@ -217,7 +197,7 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
       )}
       <div
         data-testid="game-host-frame"
-        className="min-h-0 flex-1 overflow-hidden rounded-stage bg-(--game-tile) ring-1 ring-(--game-tile-ring)"
+        className="min-h-0 overflow-hidden rounded-stage bg-(--game-tile) ring-1 ring-(--game-tile-ring) lg:mx-auto lg:w-full lg:max-w-[680px]"
       >
         <GameHost
           locale={locale}

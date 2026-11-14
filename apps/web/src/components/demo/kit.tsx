@@ -49,13 +49,14 @@ export function Chip({
   tone,
 }: {
   children: ReactNode;
-  tone?: "mint" | "sun" | "sky" | "coral";
+  tone?: "mint" | "sun" | "sky" | "coral" | "highlight";
 }) {
   const tones = {
     mint: "bg-violet-wash text-mint",
     sun: "bg-sun/20 text-foreground",
     sky: "bg-gain-wash text-sky",
     coral: "bg-loss-wash text-coral",
+    highlight: "bg-highlight-wash text-ink",
   };
   return (
     <span
@@ -137,5 +138,4 @@ export function Notice({ notice }: { notice: { text: string; ok: boolean } | nul
 export const smallButton =
   "inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl px-3.5 text-sm font-semibold transition-transform duration-(--dur-press) active:scale-95 disabled:opacity-50 disabled:pointer-events-none";
 export const primaryButton = `${smallButton} bg-primary text-primary-foreground`;
-export const coralButton = `${smallButton} bg-coral text-white`;
 export const outlineButton = `${smallButton} ring-1 ring-border bg-card`;
