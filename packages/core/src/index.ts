@@ -9,6 +9,7 @@ export * from "./game-validation";
 export * from "./learning";
 export * from "./leisure";
 export * from "./onboarding";
+export * from "./parent-report";
 export * from "./random";
 export * from "./recommendations";
 export * from "./settings";

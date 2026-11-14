@@ -1,17 +1,17 @@
 "use client";
 
-import { ABILITIES, STAGES, stageOf } from "@brainee/core";
+import { ABILITIES, stageOf } from "@brainee/core";
 import { Share2 } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
 import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
-import { childDesignCopy } from "@/components/child/redesign-copy";
-import { Chip, Meter, outlineButton, Panel, primaryButton } from "@/components/demo/kit";
+import { Chip, outlineButton, Panel, primaryButton } from "@/components/demo/kit";
 import { FamilyPlanCard } from "@/components/family-plan/FamilyPlanCard";
 import { useI18n } from "@/i18n";
 import { Bars, Legend, Radar } from "./charts";
+import { ParentFeed, ParentToday, ParentWeek } from "./ParentPatterns";
 
 type Scope = "district" | "city" | "country";
 type Kind = "growth" | "absolute";
@@ -19,13 +19,13 @@ type Kind = "growth" | "absolute";
 // D-29: saved activity metrics; illustrative historical/character radars and ranking.
 export function AnalyticsScreen() {
   const { snapshot } = useLearning();
-  const { t: i18n, locale } = useI18n();
+  const { t: i18n } = useI18n();
   const t = i18n.analytics;
   const [scope, setScope] = useState<Scope>("district");
   const [kind, setKind] = useState<Kind>("growth");
   const [shared, setShared] = useState(false);
   if (!snapshot) return null;
-  const { child, progress, latestGame, showcase } = snapshot;
+  const { child, progress, showcase } = snapshot;
   const live = snapshot.activity;
   const seeded = showcase.analytics;
   const a = live
@@ -55,7 +55,6 @@ export function AnalyticsScreen() {
       }
     : seeded;
   const stage = stageOf(progress.stats);
-  const age = new Date().getFullYear() - child.birthYear;
   const table = a.ranking[scope][kind];
   // D-23: the "now" outline is the child's live ability scores, moved by every finished game.
   const skillsNow = ABILITIES.map((skill) => Math.round(progress.skills[skill]));
@@ -83,78 +82,8 @@ export function AnalyticsScreen() {
         <Chip tone="sun">{t.demoNote}</Chip>
       </div>
 
-      <FamilyPlanCard />
-      {attention.length > 0 && (
-        <section
-          data-testid="needs-attention"
-          className="flex flex-col gap-2 rounded-panel border-2 border-coral/40 bg-loss-wash p-4"
-        >
-          <h2 className="font-heading font-semibold text-lg">{i18n.parent.attention.title}</h2>
-          <ul className="flex flex-wrap gap-2">
-            {attention.map((item) => (
-              <li key={item.text}>
-                <Link href={item.href} className={primaryButton}>
-                  {item.text}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      <Panel className="sm:flex-row sm:items-center">
-        <div className="flex items-end justify-center gap-2">
-          <Brainy
-            stats={progress.stats}
-            mood={progress.mood}
-            earned={showcase.earned}
-            animate
-            equipped={showcase.equipped}
-            className="h-44 w-auto"
-          />
-          <figure className="flex flex-col items-center opacity-70">
-            <Brainy stats={a.quizStats} label={t.afterQuiz} className="h-20 w-auto" />
-            <figcaption className="text-xs">{t.afterQuiz}</figcaption>
-          </figure>
-        </div>
-        <div className="flex min-w-0 flex-1 flex-col gap-2">
-          <h2 className="font-heading font-semibold text-xl">{t.age(child.name, age)}</h2>
-          <p className="text-muted-foreground text-sm">
-            {t.weeks(a.weeks, i18n.stages.sleepy, i18n.stages[stage.id])}
-          </p>
-          <ol className="grid grid-cols-5 gap-1 text-[10px] leading-tight sm:text-xs">
-            {STAGES.map((s, i) => (
-              <li key={s.id} className="flex flex-col gap-1">
-                <Meter
-                  value={i < stage.index ? 100 : i === stage.index ? stage.progress * 100 : 0}
-                />
-                <span
-                  className={cn("[overflow-wrap:anywhere]", i === stage.index && "font-semibold")}
-                >
-                  {i18n.stages[s.id]}
-                </span>
-              </li>
-            ))}
-          </ol>
-          <div className="flex flex-wrap gap-2 text-sm">
-            <Chip tone="mint">
-              {childDesignCopy.energy}: {progress.mood}%
-            </Chip>
-            <span data-testid="parent-stars">
-              <Chip>★ {progress.wallet.stars}</Chip>
-            </span>
-            <Chip>☀ {progress.wallet.suns}</Chip>
-            {latestGame && (
-              <span data-testid="parent-latest-game">
-                <Chip tone="sky">
-                  {latestGame.title} · {i18n.child.game.level(latestGame.level)} · +
-                  {latestGame.starsEarned}★
-                </Chip>
-              </span>
-            )}
-          </div>
-        </div>
-      </Panel>
+      <ParentToday snapshot={snapshot} attention={attention} />
+      <ParentWeek snapshot={snapshot} />
 
       <p className="text-sm text-muted-foreground" data-testid="computed-analytics">
         {i18n.liveAnalytics.note}
@@ -232,25 +161,6 @@ export function AnalyticsScreen() {
             ]}
           />
         </Panel>
-        <Panel title={t.week} note={i18n.liveAnalytics.week}>
-          <Bars
-            label={t.week}
-            categories={a.week.days}
-            stacks={[
-              { values: a.week.learning, color: "accent" },
-              { values: a.week.science, color: "mint" },
-              { values: a.week.fun, color: "sun" },
-            ]}
-            max={100}
-          />
-          <Legend
-            items={[
-              { label: t.learning, color: "accent" },
-              { label: t.science, color: "mint" },
-              { label: t.fun, color: "sun" },
-            ]}
-          />
-        </Panel>
         <Panel title={t.hard} note={i18n.liveAnalytics.recommended}>
           <Bars
             label={t.hard}
@@ -263,30 +173,8 @@ export function AnalyticsScreen() {
         </Panel>
       </div>
 
-      <Panel title={i18n.parent.feed.title}>
-        {showcase.feed.length === 0 ? (
-          <p className="text-muted-foreground">{i18n.parent.feed.empty}</p>
-        ) : (
-          <ol className="flex flex-col gap-1" data-testid="event-feed">
-            {showcase.feed.slice(0, 8).map((item) => (
-              <li
-                key={`${item.at}-${item.kind}-${item.title ?? ""}`}
-                className="flex items-baseline justify-between gap-3 rounded-xl bg-secondary/50 px-3 py-2 text-sm"
-              >
-                <span>
-                  {i18n.parent.feed.kinds[item.kind]?.(item.title ?? "", item.amount ?? 0)}
-                </span>
-                <time dateTime={item.at} className="shrink-0 text-muted-foreground text-xs">
-                  {new Date(item.at).toLocaleString(locale === "ru" ? "ru-RU" : "en-US", {
-                    dateStyle: "short",
-                    timeStyle: "short",
-                  })}
-                </time>
-              </li>
-            ))}
-          </ol>
-        )}
-      </Panel>
+      <ParentFeed snapshot={snapshot} />
+      <FamilyPlanCard />
 
       <Panel title={t.ranking} note={t.rankingNote}>
         <div className="flex flex-wrap gap-2">

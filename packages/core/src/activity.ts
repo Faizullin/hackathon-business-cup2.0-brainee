@@ -54,10 +54,12 @@ export function activitySummary(
     .sort((a, b) => b.startedAt - a.startedAt)
     .slice(0, EARNED_THRESHOLDS.heroWindow);
   const entries = showcase.entryLog.took + showcase.entryLog.other;
+  const todaySessions = completed
+    .filter((s) => calendarKeys(new Date(s.finishedAt as number), zone).day === day)
+    .sort((a, b) => (b.finishedAt as number) - (a.finishedAt as number));
   return {
-    learningStarsToday: completed
-      .filter((s) => calendarKeys(new Date(s.finishedAt as number), zone).day === day)
-      .reduce((sum, s) => sum + (s.starsEarned ?? 0), 0),
+    todaySessions,
+    learningStarsToday: todaySessions.reduce((sum, s) => sum + (s.starsEarned ?? 0), 0),
     learning,
     science,
     streakDays: streak,

@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · T-142 parent patterns
+Added Today/Week cards, attention actions, session rows, grouped event sources and recent-event reward reconciliation. Check/test/build and 68 affected Chromium/WebKit phone/iPad cases pass; parent screenshots reviewed. Fixed saved-cover funnel bookmarks. Full serial e2e and recordings remain next.
+
 ## 2026-11-15 · T-138 remaining product surfaces
 Restyled entry, completion/break, leisure/films, quest rows, shop and settings surfaces; preserved saved behavior and test IDs. Check/test/build and 64 affected cases pass, followed by 16 final visual-fix cases. Reviewed phone/iPad screenshots and fixed entry heading overlap.
 

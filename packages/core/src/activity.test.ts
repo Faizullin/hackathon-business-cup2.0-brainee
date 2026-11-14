@@ -107,3 +107,15 @@ it("totals actual learning stars for the family day, excluding incomplete and pr
   );
   expect(a.learningStarsToday).toBe(29);
 });
+
+it("lists only completed sessions on the family day, newest first and without future sessions", () => {
+  const at = new Date("2026-11-16T06:30:00Z");
+  const history = [
+    { ...session(0), finishedAt: Date.parse("2026-11-16T04:30:00Z") },
+    { ...session(0), finishedAt: Date.parse("2026-11-16T05:30:00Z") },
+    { ...session(0), finishedAt: Date.parse("2026-11-16T06:00:00Z") },
+    { ...session(0), finishedAt: Date.parse("2026-11-16T07:00:00Z") },
+    session(0, false),
+  ];
+  expect(activitySummary(history, showcase, at).todaySessions).toEqual([history[2], history[1]]);
+});

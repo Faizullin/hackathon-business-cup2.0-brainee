@@ -58,7 +58,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-22 Exchange ☀→★ 1:10, one-way; gifts ☀ only
 - [x] T-23 Stage + mood math (stage thresholds, +8 mood per game); mood decay rate is still a product TBD
 - [x] T-24 Session skill gains (70/30), ability → body rollup; injected level/accuracy policy, calibration still TBD → [data-model.md](../product/data-model.md#how-stats-change)
-- [x] T-25 Entry recommendation algorithm (3 largest gaps, least-played in 7 days); explicit age-average/history/time inputs → [screens.md](../product/screens.md#entry-screen-во-что-играем-сейчас)
+- [x] T-25 Entry recommendation algorithm (3 largest gaps, least-played in 7 days); explicit age-average/history/time inputs → [screens.md](../product/screens.md#entry)
 - [x] T-26 Weekly goal counted by confirmed ☀; 5-tasks-a-day limit (`applyShowcaseAction`, D-21)
 - [x] T-27 Accessory slots (one per slot; earned vs. bought): catalog, `equip`/`unequip`, `buyAccessory` in `core`
 - [x] T-28 Game contract: `GameResult`/`Skill` types in `core`, `GameDefinition` + lazy registry + error boundary in `games`; `pnpm check:games` (no cross-game imports) → [games.md](../dev/games.md)
@@ -173,5 +173,5 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-138 Restyle product pages from [design.md](../product/design.md) patterns
 - [x] T-140 Child shell: dark hero brain card + tab bar Learn · Leisure · [Brainy hub] · Path · Gifts; new Path tab
 - [x] T-141 Game palette tokens `--game-*` / `GAME_PALETTE` + host chrome (game folders out of scope)
-- [ ] T-142 Parent patterns: Today/Week cards, needs-attention actions, earned breakdown
+- [x] T-142 Parent patterns: Today/Week cards, needs-attention actions, earned breakdown
 - [ ] T-139 Docs, full serial e2e, re-record reports after T-135–T-138

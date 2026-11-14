@@ -12,6 +12,7 @@ import {
   useAct,
 } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
+import { RewardBreakdown } from "./ParentPatterns";
 
 const input = "min-h-11 w-full rounded-xl border border-border bg-background px-3 text-base";
 
@@ -43,6 +44,7 @@ export function RewardsScreen() {
       <h1>{t.title}</h1>
       <p className="rounded-panel bg-sun/15 p-4 font-semibold">{t.rules}</p>
       <Notice notice={notice} />
+      <RewardBreakdown snapshot={snapshot} />
       <div className="grid gap-5 lg:grid-cols-2">
         <Panel title={t.goal}>
           <div className="flex items-center justify-between text-sm font-semibold">
