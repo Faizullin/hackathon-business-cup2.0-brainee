@@ -20,10 +20,10 @@
 Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 
 ## Current focus
-The Next.js app scaffold is ready (T-11). Next: finish `packages/ui` and self-hosted fonts (T-12), following [architecture.md](../dev/architecture.md).
+The shared UI foundation is ready (T-12). Next: package/Vitest setup and local SQLite reset (T-13), following [architecture.md](../dev/architecture.md).
 
 ## Handoff
-- **Last session:** researched page transitions, loaders, icons and UI style against the installed Next.js/React versions and current primary docs. Turned into the UI system [ui.md](../dev/ui.md) + D-13 (shadcn on Base UI, CSS → ViewTransition → Motion); polish is now T-87 (renamed from T-86 to avoid reusing a removed ID). No runtime changes. T-11 remains complete; its production build and 16 browser checks passed in the previous session.
-- **Next:** finish T-12 (now includes the Base UI/shadcn setup, Motion, Lucide, moving visual chrome out of the root layout) → finish T-13 (the `core` source stub exists; `brainy`, `games`, `db`, Vitest and SQLite do not). Then implement `/lab` and port the game pipeline as planned. Parent auth/barrier is still pending T-40/T-52; keep family data/actions out of the placeholder until then.
+- **Last session:** completed T-12 per D-13: `base-maia` shadcn setup targeting `packages/ui`, Button/Card/Skeleton, Lucide, vendored Cyrillic-capable fonts via `next/font/local`, motion tokens and strict async LazyMotion provider. Route layouts now own starter chrome through `AppFrame`; root has fonts/providers only. Build and all 20 Chromium/WebKit checks pass, including fonts, same-origin requests, keyboard links and reduced motion. Inspected phone/iPad screenshots; in-app browser remains unavailable.
+- **Next:** T-13 in small steps: add empty `brainy`/`games`/`db` packages and Vitest; configure SQLite/Drizzle; implement and verify `db:reset`. Then `/lab` and game pipeline. Parent barrier/session remain T-40/T-52; do not put family data/actions in the placeholder. Game/reward transitions remain T-87.
 - **Blockers / open questions:** none blocking the scaffold. Product TBDs remain in [overview.md](../product/overview.md#open-questions-tbd).
-- **Not committed:** this session's research/progress documentation. No commit or push was requested.
+- **Version control:** this session's changes belong to the T-12 commit, without co-author trailers; no push requested. Future completed work should follow that preference.

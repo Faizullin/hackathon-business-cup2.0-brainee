@@ -1,6 +1,6 @@
 # Architecture
 
-> **Status: app scaffolded (T-10/T-11).** Workspace config, the Next.js app, prototype tokens in `ui`, and an empty source-exported `core` exist. Other packages and product features are planned. When reality differs from this file, update this file. The reasoning behind each choice is in [decisions.md](decisions.md).
+> **Status: UI foundation ready (T-10 – T-12).** Workspace config, the Next.js app, the Base UI/shadcn UI package with fonts/motion setup, and an empty source-exported `core` exist. Other packages and product features are planned. When reality differs from this file, update this file. The reasoning behind each choice is in [decisions.md](decisions.md).
 
 **Guiding principle: local-first, zero infrastructure.** One SQLite file, media in the repo, one Node process. Clone → `pnpm dev` works with no accounts, Docker or cloud services.
 
@@ -36,17 +36,18 @@ One app, so child and parent share the session, the domain and a live Brainy.
 ```
 apps/web/
 ├─ src/app/
-│  ├─ layout.tsx, page.tsx    # Shared root shell; / redirects to /learn
+│  ├─ layout.tsx, page.tsx    # Fonts/providers only; / redirects to /learn
 │  ├─ (child)/learn/          # Starter page; other child routes planned
 │  ├─ (parent)/analytics/     # Starter page; barrier, data and other parent routes planned
 │  ├─ (auth)/login/           # Welcome page; sessions, quiz and onboarding planned
+│  ├─ (game)/game/[id]/       # Planned: fullscreen sibling group (T-30)
 │  ├─ lab/                   # Planned: dev-only game lab + event stream
 │  └─ api/                   # Planned: route handlers + /api/stream (SSE)
 ├─ public/media/             # Planned: own-domain media
 └─ e2e/                      # Scaffold smoke tests (Chromium + WebKit)
 ```
 
-Each route group has its own nested layout. Parent routes currently contain a placeholder only, with no family data or actions; the parent barrier (T-40) and session handling (T-52) must land before either is added. `/lab` remains T-16.
+Each route group has its own nested layout and opts into the shared `AppFrame` for starter chrome. Fullscreen games will use a sibling group to bypass child chrome. Parent routes currently contain a placeholder only, with no family data or actions; the parent barrier (T-40) and session handling (T-52) must land before either is added. `/lab` remains T-16.
 
 ## Package responsibilities
 

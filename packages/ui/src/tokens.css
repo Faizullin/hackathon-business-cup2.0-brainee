@@ -1,4 +1,4 @@
-/* Prototype tokens. Fonts will be self-hosted via next/font in T-12. */
+/* Prototype palette with font families provided by next/font/local. */
 :root {
   color-scheme: light;
   --bg: #f1f4fa;
@@ -12,8 +12,8 @@
   --orange: #e5731a;
   --mint: #139e80;
   --sky: #3c68ee;
-  --font-d: "Unbounded", "Arial Black", system-ui, sans-serif;
-  --font-b: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-d: var(--font-unbounded, "Unbounded"), "Arial Black", system-ui, sans-serif;
+  --font-b: var(--font-onest, "Onest"), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --r: 18px;
 }
 

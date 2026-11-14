@@ -1,9 +1,12 @@
 import type { ReactNode } from "react";
+import { AppFrame } from "@/components/AppFrame";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <main id="main-content" data-mode="auth" className="mx-auto max-w-xl">
-      {children}
-    </main>
+    <AppFrame className="max-w-xl">
+      <main id="main-content" data-mode="auth" tabIndex={-1}>
+        {children}
+      </main>
+    </AppFrame>
   );
 }

@@ -1,0 +1,24 @@
+/* biome-ignore-all lint/complexity/noImportantStyles: Reduced-motion preferences must override utility and inline animation styles. */
+:root {
+  --dur-press: 120ms;
+  --dur-nav: 180ms;
+  --dur-sheet: 280ms;
+  --dur-reward: 500ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,13 @@
+Onest and Unbounded variable fonts, downloaded from Google Fonts on 2026-11-14.
+Both include Cyrillic and Latin characters. Original glyphs and weight ranges are retained.
+The TTF files were converted to WOFF2 with FontTools (font.flavor = "woff2").
+
+Onest: https://github.com/google/fonts/tree/main/ofl/onest
+Source: Onest[wght].ttf
+License: OFL-Onest.txt
+
+Unbounded: https://github.com/google/fonts/tree/main/ofl/unbounded
+Source: Unbounded[wght].ttf
+License: OFL-Unbounded.txt
+
+These files are bundled by next/font/local and served from our own domain.

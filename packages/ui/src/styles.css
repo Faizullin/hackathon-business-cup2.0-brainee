@@ -1,0 +1,29 @@
+@import "./tokens.css";
+@import "./motion.css";
+
+@source "./";
+
+/* Base UI/shadcn semantics mapped to the prototype palette. */
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--surface);
+  --color-secondary: var(--surface-2);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--surface-2);
+  --color-muted-foreground: var(--muted);
+  --color-accent: var(--surface-2);
+  --color-accent-foreground: var(--ink);
+  --color-destructive: var(--coral);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--sky);
+  --font-sans: var(--font-b);
+  --font-heading: var(--font-d);
+  --radius-lg: var(--r);
+}

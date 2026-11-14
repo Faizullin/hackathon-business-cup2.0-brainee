@@ -1,5 +1,5 @@
 @import "@brainee/config/tailwind.css";
-@import "@brainee/ui/tokens.css";
+@import "@brainee/ui/styles.css";
 
 @source "../";
 
@@ -24,5 +24,12 @@
     outline: 3px solid var(--sky);
     outline-offset: 2px;
     border-radius: 8px;
+  }
+
+  button,
+  [role="button"],
+  a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 }

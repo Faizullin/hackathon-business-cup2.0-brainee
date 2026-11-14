@@ -11,7 +11,7 @@
 - Name things after the PRD: `stars`, `suns`, `mood`, `stage`, `resp`, the `brain|eyes|mouth|arms|legs` stats.
 - Currencies are integers. Never store ★ and ☀ in one field without a currency tag.
 - No URLs to foreign domains in the client. Assets go in `public/media` or the game's `assets/`.
-- Components: `PascalCase.tsx`; everything else: `kebab-case.ts`.
+- Components: `PascalCase.tsx`; everything else: `kebab-case.ts`. Copied shadcn primitives keep their upstream kebab-case filenames.
 - Lint and format with **Biome** (`pnpm check`). No ESLint or Prettier.
 
 ## Data
@@ -28,6 +28,8 @@
 - Branches: `feat/<task-id>-short-name`, `fix/...`, `docs/...`.
 - Commits: Conventional Commits (`feat(core): add star rules [T-21]`), with the task ID from [todo.md](../progress/todo.md).
 - Keep `master` deployable.
+- Commit completed work without `Co-authored-by` trailers. Push only when explicitly requested.
+- End the chat handoff with a brief completion note and the next small tasks.
 
 ## Docs
 Upkeep rules: [docs/README.md](../README.md#upkeep). Agent skills: [agent-tooling.md](agent-tooling.md).

@@ -18,11 +18,12 @@ Icons: Lucide for parent and system controls; the prototype's custom SVGs for Br
 ```
 app/layout.tsx              # html/body, fonts, providers only (no visual chrome)
 app/(child)/layout.tsx      # Brainy dock (top) + 4-tab bottom bar; tabs = ViewTransition boundaries
-app/(child)/game/[id]/      # fullscreen: no dock, no tab bar (own layout or route group)
+app/(game)/game/[id]/       # fullscreen sibling group: no dock or tab bar
 app/(parent)/layout.tsx     # 3-tab bottom bar on phone, side rail on iPad landscape
 app/(auth)/layout.tsx       # centered single column
 ```
 - Persistent parts (tab bar, dock, wallet) live in layouts, so they never re-animate when you navigate. Only the page content transitions.
+- A nested game layout cannot remove its parent layout's chrome; T-30 uses the sibling `(game)` group for fullscreen play.
 - Tab switch → cross-fade (150–200 ms). Drill-in (card → game) → slide in and back. Typed with `addTransitionType('push' | 'pop' | 'tab')`.
 - The entry screen («Во что играем сейчас?») is a full-screen sheet that can't be dismissed (product rule): Base UI Dialog, not a swipeable Drawer.
 - Bottom sheets (accessory preview, gift confirm, parent "new task") use Base UI Drawer with snap points.
@@ -39,6 +40,8 @@ app/(auth)/layout.tsx       # centered single column
 | Spring (Motion) | `{ type: 'spring', stiffness: 400, damping: 30 }` | Brainy, counters, drag |
 
 **Calm by design** (product rules): every reward animation runs once and ends. No looping attention-grabbers, no slot-machine effects, no confetti on every tap. A big celebration is reserved for stage-up and finishing the weekly goal.
+
+T-12 provides these tokens, a shared spring, CSS reduced-motion overrides and a strict `LazyMotion` provider with `MotionConfig reducedMotion="user"`. Page transitions and reward effects remain T-87; use `m.*` from `motion/react-m` inside this provider when adding them. Base UI Button styles provide 48px default and 56px child targets. Links share the styles while preserving anchor semantics.
 
 ## Patterns per screen
 - **Dock Brainy:** subtle idle breathing (scale 1 → 1.02, 3 s). Reacts when stats change (bounce + color shift). Uses a shared `view-transition-name` with the Brainy tab.

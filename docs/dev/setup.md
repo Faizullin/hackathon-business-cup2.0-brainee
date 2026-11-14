@@ -1,6 +1,6 @@
 # Setup
 
-> **Status: app scaffolded (T-10/T-11).** Install, development server, production build and browser smoke tests work. Database and game commands are planned and listed separately.
+> **Status: UI foundation ready (T-10 – T-12).** Install, development server, production build and browser smoke tests work. Database and game commands are planned and listed separately.
 
 ## Prerequisites
 - Node.js >= 22.13; `.nvmrc` selects Node 22.
@@ -33,10 +33,20 @@ Install browser binaries once, then run the spec:
 pnpm --filter @brainee/web exec playwright install chromium webkit
 pnpm e2e
 ```
-The suite checks routing, return links, Russian metadata/content, light/dark tokens, overflow, console errors and own-domain requests at 390px and 820px in both engines. It saves `/learn` screenshots in `apps/web/test-results/` (gitignored). WebKit emulation does not replace the real-device Screen Time check (T-62).
+The suite has 20 checks for routing, keyboard return links, locally loaded fonts, Russian content, light/dark tokens, reduced motion, touch target sizes, overflow, console errors and own-domain requests at 390px and 820px in both engines. It saves `/learn` screenshots in `apps/web/test-results/` (gitignored). On macOS, WebKit keyboard traversal uses Option-Tab to include links. WebKit emulation does not replace the real-device Screen Time check (T-62).
 
 ## Shared config and internal packages
-`packages/config` exports strict TypeScript presets (`base.json`, `react.json`, `nextjs.json`), the shared Biome config, and a Tailwind v4 CSS entry. The app uses the Tailwind PostCSS plugin; utility names map to the prototype variables in `packages/ui/src/tokens.css`. Fonts currently use local fallbacks; `next/font` integration and shared components remain T-12.
+`packages/config` exports strict TypeScript presets (`base.json`, `react.json`, `nextjs.json`), the shared Biome config, and a Tailwind v4 CSS entry. The app uses the Tailwind PostCSS plugin and `@brainee/ui/styles.css`. UI and motion guidance lives in [ui.md](ui.md).
+
+`packages/ui` contains the `base-maia` shadcn Button (Base UI), Card and Skeleton, shared button/link styles, Lucide exports, palette/motion tokens, and `MotionProvider` (`MotionConfig` + async `LazyMotion`, strict mode). It exports TS source directly and participates in `pnpm typecheck`. Its semantic `text-muted-foreground` maps to the prototype's `--muted` text color; `bg-muted` maps to `--surface-2`.
+
+Both `components.json` files target the shared package. Add primitives from the app, then adapt their styles and targets to [ui.md](ui.md):
+```bash
+pnpm dlx shadcn@4.23.0 add dialog --cwd apps/web
+```
+The CLI is used during development; it is not a runtime dependency. Existing setup uses Base UI and Lucide; avoid rerunning `init` over the prototype theme. Links use `buttonVariants` with Next's `Link`, retaining anchor semantics rather than using a Base UI Button's `render` prop.
+
+`apps/web/src/app/fonts.ts` loads vendored Onest/Unbounded variable WOFF2 files through `next/font/local`. They include Cyrillic and Latin, require no font download at build time, and are served as own-domain Next assets. Source and license information is in `packages/ui/src/fonts/SOURCES.txt` and the adjacent OFL files. The root layout owns fonts/providers only; each route group opts into `AppFrame` for its starter chrome.
 
 Internal packages use the `@brainee/*` scope and `workspace:*` references. `@brainee/core` is the first empty example: its package exports point directly at `src/index.ts`, with no `dist/` or build script. Its TypeScript config extends `@brainee/config/tsconfig/base.json`. The web app configures workspace packages in `transpilePackages`.
 
