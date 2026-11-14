@@ -179,6 +179,7 @@ export const en: Dictionary = {
   },
   child: {
     sync: {
+      offline: "You're offline. Your saved progress is safe. Reconnect and try again.",
       title: "Brainy is waiting for you",
       loading: "Loading your progress…",
       loadError: "Could not load Brainy. Please try again.",

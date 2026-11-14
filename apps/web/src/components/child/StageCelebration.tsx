@@ -1,8 +1,8 @@
 "use client";
-import { Brainy } from "@brainee/brainy";
 import { type StateSnapshot, stageOf } from "@brainee/core";
 import { Dialog } from "@brainee/ui/components/dialog";
 import { useEffect, useRef, useState } from "react";
+import { Brainy } from "@/components/Brainy";
 import { primaryButton } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
 
@@ -58,7 +58,7 @@ export function StageCelebration({
           <Brainy
             stats={snapshot.progress.stats}
             equipped={snapshot.showcase.equipped}
-            className="h-48 w-48"
+            className="brainy-stage h-48 w-48"
           />
           <p className="font-semibold">
             {reward ? t.child.brainyPage.earnedNames[reward] : t.stages[stage.id]}

@@ -1,13 +1,16 @@
 "use client";
 
-import { Brainy } from "@brainee/brainy";
 import { type LearningCompletion, practiceGame } from "@brainee/core";
 import { allGames, type GameDefinition } from "@brainee/games";
 import { StarIcon } from "@brainee/ui/components/child-icons";
 import { ArrowRight } from "@brainee/ui/components/icons";
 import Link from "next/link";
+import { useRef } from "react";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
+import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
 import { StopLearningButton } from "@/components/child/StopLearningButton";
+import { RewardFlight } from "@/components/RewardFlight";
 import { useI18n } from "@/i18n";
 
 export function PostGameScreen({
@@ -21,6 +24,8 @@ export function PostGameScreen({
   seed: number;
   completion: LearningCompletion;
 }) {
+  const rewardRef = useRef<HTMLParagraphElement>(null);
+  const walletRef = useRef<HTMLParagraphElement>(null);
   const { snapshot } = useLearning();
   const { t: i18n, tc } = useI18n();
   const t = i18n.child.game;
@@ -88,13 +93,19 @@ export function PostGameScreen({
         <p
           className="flex items-center justify-center gap-2 font-heading text-2xl font-semibold"
           data-testid="earned-stars"
+          ref={rewardRef}
         >
           <StarIcon className="size-7" />+{completion.earnedStars}
         </p>
         <p className="mt-1 text-sm">{t.starsEarned(completion.gameStars)}</p>
-        <p className="text-muted-foreground text-sm">
-          {t.balance(snapshot?.progress.wallet.stars ?? completion.after.wallet.stars)}
+        <p ref={walletRef} className="text-muted-foreground text-sm">
+          <AnimatedNumber
+            value={snapshot?.progress.wallet.stars ?? completion.after.wallet.stars}
+            from={completion.before.wallet.stars}
+            format={t.balance}
+          />
         </p>
+        <RewardFlight from={rewardRef} to={walletRef} />
       </div>
       {completion.suggestBreak && (
         <aside
@@ -123,7 +134,7 @@ export function PostGameScreen({
               data-testid="practice-game"
             >
               <span className="text-sm text-mint">{t.practice}</span>
-              <strong>{practice.title}</strong>
+              <strong>{tc(practice.title)}</strong>
               <span className="text-muted-foreground text-sm">
                 {i18n.skills[practice.skills.main as keyof typeof i18n.skills]}
               </span>

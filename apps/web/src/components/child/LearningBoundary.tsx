@@ -4,8 +4,10 @@ import { Button } from "@brainee/ui/components/button";
 import { buttonVariants } from "@brainee/ui/lib/button-variants";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { BrainyLoader } from "@/components/BrainyLoader";
 import { useI18n } from "@/i18n";
 import { LearningApiError, pendingGameHref } from "@/lib/learning-api";
+import { useOffline } from "@/lib/use-offline";
 import { useLearning } from "./LearningProvider";
 
 export function LearningBoundary({
@@ -16,6 +18,7 @@ export function LearningBoundary({
   game?: boolean;
 }) {
   const { ready, error } = useLearning();
+  const offline = useOffline();
   const { t } = useI18n();
   const Container = game ? "section" : "main";
   if (!ready)
@@ -25,14 +28,17 @@ export function LearningBoundary({
         className="mx-auto flex max-w-xl flex-col items-center gap-4 p-6 text-center"
       >
         <h1>{t.child.sync.title}</h1>
-        <p role={error ? "alert" : "status"}>
-          {error
-            ? isExpired(error)
-              ? t.child.sync.accessError
-              : t.child.sync.loadError
-            : t.child.sync.loading}
-        </p>
-        {error && <RetryStateButton />}
+        {!error && !offline && <BrainyLoader />}
+        {(error || offline) && (
+          <p role="alert">
+            {offline
+              ? t.child.sync.offline
+              : isExpired(error)
+                ? t.child.sync.accessError
+                : t.child.sync.loadError}
+          </p>
+        )}
+        {(error || offline) && <RetryStateButton />}
       </Container>
     );
   return (
@@ -45,14 +51,19 @@ export function LearningBoundary({
 
 export function LearningNotice() {
   const { error, pending } = useLearning();
+  const offline = useOffline();
   const { t } = useI18n();
-  if (!error && !pending) return null;
+  if (!error && !pending && !offline) return null;
   return (
     <aside className="mx-auto flex max-w-xl flex-col items-center gap-3 p-4 text-center">
-      {error && (
+      {(error || offline) && (
         <>
           <p role="alert">
-            {isExpired(error) ? t.child.sync.accessError : t.child.sync.updateError}
+            {offline
+              ? t.child.sync.offline
+              : isExpired(error)
+                ? t.child.sync.accessError
+                : t.child.sync.updateError}
           </p>
           <RetryStateButton />
         </>

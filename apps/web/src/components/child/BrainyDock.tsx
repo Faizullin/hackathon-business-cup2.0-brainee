@@ -1,10 +1,11 @@
 "use client";
 
-import { Brainy } from "@brainee/brainy";
 import { stageOf } from "@brainee/core";
 import { StarIcon, SunIcon } from "@brainee/ui/components/child-icons";
 import Link from "next/link";
 import { ViewTransition } from "react";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
+import { Brainy } from "@/components/Brainy";
 import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";
 
@@ -33,7 +34,7 @@ export function BrainyDock() {
             stats={stats}
             equipped={equipped}
             label=""
-            className="h-24 w-auto sm:h-[136px] lg:h-44"
+            className="brainy-idle h-24 w-auto sm:h-[136px] lg:h-44"
           />
         </ViewTransition>
       </Link>
@@ -64,12 +65,12 @@ export function BrainyDock() {
             className="flex items-center gap-1 rounded-full bg-secondary px-3 py-1 font-semibold"
           >
             <StarIcon className="size-4" />
-            {wallet.stars}
+            <AnimatedNumber value={wallet.stars} />
             <span className="sr-only">{td.stars}</span>
           </span>
           <span className="flex items-center gap-1 rounded-full bg-secondary px-3 py-1 font-semibold">
             <SunIcon className="size-4" />
-            {wallet.suns}
+            <AnimatedNumber value={wallet.suns} />
             <span className="sr-only">{td.suns}</span>
           </span>
           <Link

@@ -34,10 +34,11 @@ test("state is cookie-authorized, versioned and refreshed after a finish or stop
   expect((await request.post("/api/sessions", { headers, data: body })).status()).toBe(200);
   const after = await savedState(request);
   expect(after).toMatchObject({
-    version: before.version + 1,
     latestGame: { id: sessionId, title: "Продолжи узор" },
     progress: { wallet: { stars: before.progress.wallet.stars + 13 }, streak: { inRow: 1 } },
   });
+  // A newly earned reward may add a version during the first snapshot read.
+  expect(after.version).toBeGreaterThan(before.version);
   expect(after.progress.stats.brain).toBe(Math.min(100, before.progress.stats.brain + 2));
   await request.post("/api/sessions/stop", { headers });
   const stopped = await request.get(`/api/state?since=${after.version}`);

@@ -27,13 +27,20 @@ test("English child and parent loop, with Russian seeded-content smoke", async (
   await page.goto("/game/odd-one-out?seed=42");
   const shapes = page.getByRole("button", { name: /^Shape \d+$/ });
   await expect(shapes).toHaveCount(9);
-  const svg = await shapes
-    .locator("svg")
-    .evaluateAll((nodes) => nodes.map((node) => node.innerHTML));
-  await shapes
-    .nth(svg.findIndex((shape) => svg.filter((other) => other === shape).length === 1))
-    .click();
-  await expect(page.getByRole("button", { name: "Next", exact: true })).toBeVisible();
+  for (let round = 0; round < 4; round++) {
+    const svg = await shapes
+      .locator("svg")
+      .evaluateAll((nodes) => nodes.map((node) => node.innerHTML));
+    await shapes
+      .nth(svg.findIndex((shape) => svg.filter((other) => other === shape).length === 1))
+      .click();
+    await page.getByRole("button", { name: round === 3 ? "Done" : "Next", exact: true }).click();
+  }
+  await expect(page.getByTestId("post-game")).toBeVisible();
+  await expect(page.getByTestId("practice-game")).not.toContainText(/[А-Яа-яЁё]/);
+  const celebration = page.getByRole("dialog");
+  await expect(celebration).toBeVisible();
+  await celebration.getByRole("button", { name: "Awesome!" }).click();
   await page.goto("/analytics");
   for (const n of credentials.pin)
     await page.getByRole("button", { name: `Digit ${n}`, exact: true }).click();
