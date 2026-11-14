@@ -19,7 +19,8 @@ export function loadFunnel() {
 export function saveFunnel(screen: string, answers: FunnelDraft) {
   try {
     const { storage, key } = funnelStorage();
-    storage.setItem(key, JSON.stringify({ version: VERSION, screen, resumeAt: screen, answers }));
+    const resumeAt = screen === "cover" ? restoreFunnel(storage.getItem(key)).resumeAt : screen;
+    storage.setItem(key, JSON.stringify({ version: VERSION, screen, resumeAt, answers }));
   } catch {
     /* The current session still works when storage is unavailable. */
   }

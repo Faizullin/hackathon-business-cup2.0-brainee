@@ -194,3 +194,17 @@ test("funnel guards deep links, handles outside ages, browser Back, migration an
   await expect(page.getByTestId("parent-funnel")).toHaveAttribute("data-step", "result");
   await page.screenshot({ path: info.outputPath("funnel-migrated.png"), fullPage: true });
 });
+
+test("opening a saved cover preserves its last story bookmark", async ({ page }) => {
+  await page.goto("/start");
+  await page.evaluate((all) => {
+    const { attempt: _attempt, moment: _moment, ...answers } = all;
+    localStorage.setItem(
+      "brainy.us-parent-quiz.v2",
+      JSON.stringify({ version: 4, screen: "cover", resumeAt: "week", answers }),
+    );
+  }, funnelAnswers);
+  await page.goto("/start");
+  await page.getByRole("button", { name: "Continue my plan", exact: true }).click();
+  await expect(page.getByTestId("parent-funnel")).toHaveAttribute("data-step", "week");
+});
