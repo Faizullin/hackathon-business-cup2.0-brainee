@@ -22,10 +22,10 @@ export function StarIcon(props: ComponentProps<"svg">) {
 export function SunIcon(props: ComponentProps<"svg">) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <circle cx="12" cy="12" r="5" fill="var(--orange)" />
+      <circle cx="12" cy="12" r="5" fill="var(--sun)" />
       <path
         d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"
-        stroke="var(--orange)"
+        stroke="var(--sun)"
         strokeWidth="2"
         strokeLinecap="round"
       />
