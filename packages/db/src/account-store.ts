@@ -39,6 +39,8 @@ export class AccountError extends Error {
   }
 }
 
+/** Demo/hackathon parent PIN used by the shared demo, jury families and prefilled signup. */
+export const DEMO_PIN = "1234";
 export const MIN_CHILD_AGE = 4;
 export const MAX_CHILD_AGE = 10;
 const STARTER_STARS = 50;

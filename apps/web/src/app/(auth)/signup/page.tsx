@@ -7,6 +7,9 @@ import { funnelCopy as c } from "@/components/funnel/copy";
 import { loadFunnel } from "@/components/funnel/storage";
 import { useI18n } from "@/i18n";
 
+// Hackathon demo: every family uses PIN 1234 unless the parent changes it in Settings.
+const DEMO_PIN_HINT = { pin: "1234" } as const;
+
 export default function Signup() {
   const { t } = useI18n();
   const [error, setError] = useState("");
@@ -73,6 +76,7 @@ export default function Signup() {
               minLength={name === "password" ? 6 : undefined}
               maxLength={name === "pin" ? 4 : 100}
               pattern={name === "pin" ? "[0-9]{4}" : undefined}
+              defaultValue={name === "pin" ? DEMO_PIN_HINT.pin : undefined}
             />
           </label>
         ))}
