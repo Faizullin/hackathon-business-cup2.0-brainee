@@ -170,7 +170,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-135 Parent funnel at `/start` → signup → setup; `/onboarding` redirects; pricing pending, no checkout
 - [x] T-136 Family plan: `showcase.familyPlan`, parent card, phrase on the child's stopping point, off-screen task template
 - [x] T-137 Demo moments: funnel-local shape-match step (no game code, no session/rewards), real-stage growth slider
-- [ ] T-138 Restyle product pages from [design.md](../product/design.md) patterns
+- [x] T-138 Restyle product pages from [design.md](../product/design.md) patterns
 - [x] T-140 Child shell: dark hero brain card + tab bar Learn · Leisure · [Brainy hub] · Path · Gifts; new Path tab
 - [x] T-141 Game palette tokens `--game-*` / `GAME_PALETTE` + host chrome (game folders out of scope)
 - [ ] T-142 Parent patterns: Today/Week cards, needs-attention actions, earned breakdown

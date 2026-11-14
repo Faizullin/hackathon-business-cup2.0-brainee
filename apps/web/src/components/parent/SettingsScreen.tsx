@@ -8,7 +8,7 @@ import { outlineButton, Panel, primaryButton } from "@/components/demo/kit";
 import { LanguageRadioCards } from "@/components/LocaleSwitcher";
 import { useI18n } from "@/i18n";
 
-const input = "min-h-12 w-full rounded-xl border border-border bg-background px-3 text-base";
+const input = "min-h-12 w-full rounded-row border border-border bg-surface-2 px-3 text-base";
 type Data = {
   jury: boolean;
   child: { name: string; birthYear: number; promise: number };
@@ -100,11 +100,17 @@ export function SettingsScreen() {
       )}
       <div className="grid gap-5 min-[1000px]:grid-cols-2">
         <Panel title={ts.language}>
-          <Globe aria-hidden="true" className="size-6 text-accent" />
+          <Globe
+            aria-hidden="true"
+            className="size-10 rounded-row bg-violet-wash p-2 text-accent"
+          />
           <LanguageRadioCards />
         </Panel>
         <Panel title={ts.child}>
-          <ClipboardCheck aria-hidden="true" className="size-6 text-accent" />
+          <ClipboardCheck
+            aria-hidden="true"
+            className="size-10 rounded-row bg-violet-wash p-2 text-accent"
+          />
           <form
             key={`${data.child.name}-${data.child.birthYear}-${data.child.promise}`}
             onSubmit={submitChild}
@@ -150,7 +156,7 @@ export function SettingsScreen() {
           </form>
         </Panel>
         <Panel title={ts.security}>
-          <Lock aria-hidden="true" className="size-6 text-accent" />
+          <Lock aria-hidden="true" className="size-10 rounded-row bg-violet-wash p-2 text-accent" />
           <form
             onSubmit={async (e) => {
               e.preventDefault();
@@ -197,7 +203,10 @@ export function SettingsScreen() {
           </form>
         </Panel>
         <Panel title={ts.timezone}>
-          <Settings aria-hidden="true" className="size-6 text-accent" />
+          <Settings
+            aria-hidden="true"
+            className="size-10 rounded-row bg-violet-wash p-2 text-accent"
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -239,7 +248,10 @@ export function SettingsScreen() {
           </form>
         </Panel>
         <Panel title={ts.devices}>
-          <Tablet aria-hidden="true" className="size-6 text-accent" />
+          <Tablet
+            aria-hidden="true"
+            className="size-10 rounded-row bg-violet-wash p-2 text-accent"
+          />
           <p className="text-muted-foreground text-sm">{ts.pairingNote}</p>
           <button
             type="button"

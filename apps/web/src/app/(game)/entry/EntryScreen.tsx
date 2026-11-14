@@ -17,10 +17,10 @@ function Entry() {
   const te = t.child.entry;
   const first = recs[0];
   return (
-    <section className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-5 p-4 sm:p-8 lg:max-w-5xl">
+    <section className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-5 p-4 pt-20 sm:p-8 lg:max-w-5xl">
       <FloatingLocalePill />
       <h1 className="text-center">{te.title}</h1>
-      <div className="flex items-center gap-4 rounded-panel border border-border bg-card p-4">
+      <div className="flex items-center gap-4 rounded-stage bg-[#1c1b33] p-5 text-white shadow-xl shadow-[#1c1b33]/15">
         <Brainy
           stats={snapshot.progress.stats}
           mood={snapshot.progress.mood}
@@ -28,10 +28,10 @@ function Entry() {
           animate
           equipped={snapshot.showcase.equipped}
           label=""
-          className="h-28 w-auto shrink-0"
+          className="h-32 w-auto shrink-0 rounded-full bg-[#f2f1fa]"
         />
         {first && (
-          <p className="relative rounded-2xl bg-sky/10 p-4 font-heading font-semibold text-lg">
+          <p className="relative rounded-2xl bg-night p-4 font-heading font-semibold text-lg">
             {te.ask(t.skills[first.skill].toLowerCase())}
           </p>
         )}

@@ -10,6 +10,7 @@ import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
 import { StopLearningButton } from "@/components/child/StopLearningButton";
+import { stoppingCopy } from "@/components/child/stopping-copy";
 import { StoppingPhrase } from "@/components/family-plan/StoppingPhrase";
 import { RewardFlight } from "@/components/RewardFlight";
 import { useI18n } from "@/i18n";
@@ -48,116 +49,134 @@ export function PostGameScreen({
         <p className="text-muted-foreground">{tc(game.title)}</p>
         <h1 className="mt-1">{t.done}</h1>
       </div>
-      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-panel border border-border bg-card p-3 sm:p-5">
-        {(["before", "after"] as const).map((when, index) => (
-          <figure
-            key={when}
-            className={index === 1 ? "col-start-3 row-start-1" : "col-start-1 row-start-1"}
+      <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-stage bg-card p-3 ring-1 ring-border sm:p-5">
+          {(["before", "after"] as const).map((when, index) => (
+            <figure
+              key={when}
+              className={index === 1 ? "col-start-3 row-start-1" : "col-start-1 row-start-1"}
+            >
+              <Brainy
+                stats={completion[when].stats}
+                mood={completion[when].mood}
+                earned={snapshot?.showcase.earned}
+                equipped={snapshot?.showcase.equipped ?? {}}
+                label={t[when]}
+                className="mx-auto h-auto w-full max-w-48"
+              />
+              <figcaption className="text-center text-sm font-semibold">{t[when]}</figcaption>
+            </figure>
+          ))}
+          <ArrowRight aria-hidden="true" className="col-start-2 row-start-1 size-6 text-mint" />
+        </div>
+        {Object.keys(completion.skillGains ?? {}).length > 0 && (
+          <p className="flex flex-wrap justify-center gap-2 text-sm" data-testid="skill-gains">
+            {Object.entries(completion.skillGains).map(([skill, gain]) => (
+              <span
+                key={skill}
+                className="lv-gainA rounded-full bg-gain-wash px-3 py-1 font-medium"
+              >
+                {t.skillGain(
+                  i18n.skills[skill as keyof typeof i18n.skills] ?? skill,
+                  gain as number,
+                )}
+              </span>
+            ))}
+          </p>
+        )}
+        <div className="flex flex-wrap justify-center gap-2 " aria-live="polite">
+          {Object.entries(completion.gains).map(([stat, gain]) => (
+            <p
+              key={stat}
+              data-testid={`stat-gain-${stat}`}
+              className="lv-gainB rounded-full bg-violet-wash px-4 py-2 font-semibold"
+            >
+              {i18n.lab.brainy.statNames[stat as keyof typeof i18n.lab.brainy.statNames]} +{gain}
+              <span className="ml-2 text-sm font-normal">
+                {completion.before.stats[stat as keyof typeof completion.gains]} →{" "}
+                {completion.after.stats[stat as keyof typeof completion.gains]}
+              </span>
+            </p>
+          ))}
+          {Object.keys(completion.gains).length === 0 && <p>{t.statsUnchanged}</p>}
+        </div>
+        <div className="rounded-stage bg-card p-5 text-center ring-1 ring-border">
+          <p
+            className="lv-bub mx-auto flex w-fit items-center justify-center gap-2 rounded-full bg-highlight px-6 py-3 font-display text-3xl text-[#1c1b33]"
+            data-testid="earned-stars"
+            ref={rewardRef}
+          >
+            <StarIcon className="size-7" />+{completion.earnedStars}
+          </p>
+          <p className="mt-1 text-sm">{t.starsEarned(completion.gameStars)}</p>
+          <p ref={walletRef} className="text-muted-foreground text-sm">
+            <AnimatedNumber
+              value={snapshot?.progress.wallet.stars ?? completion.after.wallet.stars}
+              from={completion.before.wallet.stars}
+              format={t.balance}
+            />
+          </p>
+          <RewardFlight from={rewardRef} to={walletRef} />
+        </div>
+        <div className="flex flex-col gap-3">
+          {!completion.suggestBreak && <StoppingPhrase />}
+          <StopLearningButton href="/brainy">{t.enough}</StopLearningButton>
+        </div>
+      </div>
+      <div className="flex flex-col gap-5">
+        {completion.suggestBreak && (
+          <aside
+            data-testid="break-suggestion"
+            className="flex flex-col items-center gap-4 rounded-stage bg-[#1c1b33] p-6 text-center text-white shadow-xl shadow-[#1c1b33]/15"
           >
             <Brainy
-              stats={completion[when].stats}
-              mood={completion[when].mood}
-              earned={snapshot?.showcase.earned}
+              stats={completion.after.stats}
+              mood={completion.after.mood}
               equipped={snapshot?.showcase.equipped ?? {}}
-              label={t[when]}
-              className="mx-auto h-auto w-full max-w-48"
+              earned={snapshot?.showcase.earned}
+              className="h-32 w-32 rounded-full bg-[#f2f1fa]"
             />
-            <figcaption className="text-center text-sm font-semibold">{t[when]}</figcaption>
-          </figure>
-        ))}
-        <ArrowRight aria-hidden="true" className="col-start-2 row-start-1 size-6 text-mint" />
-      </div>
-      {Object.keys(completion.skillGains ?? {}).length > 0 && (
-        <p className="flex flex-wrap justify-center gap-2 text-sm" data-testid="skill-gains">
-          {Object.entries(completion.skillGains).map(([skill, gain]) => (
-            <span key={skill} className="rounded-full bg-sky/15 px-3 py-1 font-medium">
-              {t.skillGain(i18n.skills[skill as keyof typeof i18n.skills] ?? skill, gain as number)}
-            </span>
-          ))}
-        </p>
-      )}
-      <div className="flex flex-wrap justify-center gap-2 lg:col-start-1" aria-live="polite">
-        {Object.entries(completion.gains).map(([stat, gain]) => (
-          <p
-            key={stat}
-            data-testid={`stat-gain-${stat}`}
-            className="rounded-full bg-mint/15 px-4 py-2 font-semibold"
-          >
-            {i18n.lab.brainy.statNames[stat as keyof typeof i18n.lab.brainy.statNames]} +{gain}
-            <span className="ml-2 text-sm font-normal">
-              {completion.before.stats[stat as keyof typeof completion.gains]} →{" "}
-              {completion.after.stats[stat as keyof typeof completion.gains]}
-            </span>
-          </p>
-        ))}
-        {Object.keys(completion.gains).length === 0 && <p>{t.statsUnchanged}</p>}
-      </div>
-      <div className="text-center lg:col-start-1">
-        <p
-          className="flex items-center justify-center gap-2 font-heading text-2xl font-semibold"
-          data-testid="earned-stars"
-          ref={rewardRef}
-        >
-          <StarIcon className="size-7" />+{completion.earnedStars}
-        </p>
-        <p className="mt-1 text-sm">{t.starsEarned(completion.gameStars)}</p>
-        <p ref={walletRef} className="text-muted-foreground text-sm">
-          <AnimatedNumber
-            value={snapshot?.progress.wallet.stars ?? completion.after.wallet.stars}
-            from={completion.before.wallet.stars}
-            format={t.balance}
-          />
-        </p>
-        <RewardFlight from={rewardRef} to={walletRef} />
-      </div>
-      {completion.suggestBreak && (
-        <aside
-          data-testid="break-suggestion"
-          className="flex flex-col items-center gap-3 lg:col-start-2 rounded-panel border border-mint bg-mint/10 p-4 text-center"
-        >
-          <h2 className="font-heading font-semibold">{t.breakTitle}</h2>
-          <StoppingPhrase />
-          {completion.bonus > 0 && <p data-testid="streak-bonus">{t.bonus(completion.bonus)}</p>}
-          <StopLearningButton href="/brainy" variant="default">
-            {t.breakAction}
-          </StopLearningButton>
-        </aside>
-      )}
-      <section
-        aria-labelledby="next-steps"
-        className="flex flex-col gap-3 lg:col-start-2 lg:row-start-2 lg:row-span-2"
-      >
-        <h2 id="next-steps" className="font-heading text-lg font-semibold">
-          {t.next}
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {practice && (
+            <h2 className="font-heading text-xl">{t.breakTitle}</h2>
+            <p className="text-sm text-[#cfcde6]">{stoppingCopy.breakReason}</p>
+            <StoppingPhrase />
+            {completion.bonus > 0 && <p data-testid="streak-bonus">{t.bonus(completion.bonus)}</p>}
+            <StopLearningButton href="/brainy" variant="default">
+              {t.breakAction}
+            </StopLearningButton>
+            <p className="text-xs text-[#cfcde6]">{stoppingCopy.available}</p>
+          </aside>
+        )}
+        <section aria-labelledby="next-steps" className="flex flex-col gap-3 ">
+          <h2 id="next-steps" className="font-heading text-lg font-semibold">
+            {t.next}
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {practice && (
+              <Link
+                href={`/game/${practice.id}?level=1&seed=${(seed + 1) >>> 0}`}
+                className={card}
+                data-testid="practice-game"
+              >
+                <span className="text-sm text-mint">{t.practice}</span>
+                <strong>{tc(practice.title)}</strong>
+                <span className="text-muted-foreground text-sm">
+                  {i18n.skills[practice.skills.main as keyof typeof i18n.skills]}
+                </span>
+              </Link>
+            )}
             <Link
-              href={`/game/${practice.id}?level=1&seed=${(seed + 1) >>> 0}`}
+              href={`/game/${game.id}?level=${nextLevel}&seed=${(seed + 1) >>> 0}`}
               className={card}
-              data-testid="practice-game"
+              data-testid="next-level"
             >
-              <span className="text-sm text-mint">{t.practice}</span>
-              <strong>{tc(practice.title)}</strong>
-              <span className="text-muted-foreground text-sm">
-                {i18n.skills[practice.skills.main as keyof typeof i18n.skills]}
+              <span className="text-sm text-sky">
+                {level < game.levels ? t.nextLevel : t.replay}
               </span>
+              <strong>{tc(game.title)}</strong>
+              <span className="text-muted-foreground text-sm">{t.level(nextLevel)}</span>
             </Link>
-          )}
-          <Link
-            href={`/game/${game.id}?level=${nextLevel}&seed=${(seed + 1) >>> 0}`}
-            className={card}
-            data-testid="next-level"
-          >
-            <span className="text-sm text-sky">{level < game.levels ? t.nextLevel : t.replay}</span>
-            <strong>{tc(game.title)}</strong>
-            <span className="text-muted-foreground text-sm">{t.level(nextLevel)}</span>
-          </Link>
-        </div>
-      </section>
-      <div className="flex flex-col gap-3">
-        <StoppingPhrase />
-        <StopLearningButton href="/brainy">{t.enough}</StopLearningButton>
+          </div>
+        </section>
       </div>
     </section>
   );

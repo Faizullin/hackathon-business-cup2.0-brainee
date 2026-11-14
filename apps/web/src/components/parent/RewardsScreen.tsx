@@ -92,7 +92,7 @@ export function RewardsScreen() {
               {requests.map((request) => (
                 <li
                   key={request.id}
-                  className="flex items-center gap-3 rounded-xl border border-border p-3"
+                  className="flex items-center gap-3 min-h-[60px] rounded-row bg-card p-4 ring-1 ring-border"
                 >
                   <span className="flex-1">
                     <span className="block font-semibold">{request.title}</span>
@@ -126,7 +126,7 @@ export function RewardsScreen() {
           {gifts.map((gift) => (
             <li
               key={gift.id}
-              className="flex items-center gap-3 rounded-xl border border-border p-3"
+              className="flex items-center gap-3 min-h-[60px] rounded-row bg-card p-4 ring-1 ring-border"
             >
               <span className="flex-1 font-semibold">
                 {gift.title}{" "}

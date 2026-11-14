@@ -72,8 +72,8 @@ export function BrainyProfile() {
                 <li
                   key={item.id}
                   className={cn(
-                    "flex flex-col items-center gap-2 rounded-xl border border-border p-3 text-center",
-                    worn && "border-mint bg-mint/5",
+                    "flex flex-col items-center gap-2 rounded-panel bg-card p-3 text-center ring-1 ring-border",
+                    worn && "bg-violet-wash ring-2 ring-mint",
                   )}
                 >
                   <Brainy

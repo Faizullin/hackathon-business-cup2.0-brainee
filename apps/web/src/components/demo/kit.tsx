@@ -127,7 +127,7 @@ export function Notice({ notice }: { notice: { text: string; ok: boolean } | nul
       role={notice.ok ? "status" : "alert"}
       className={cn(
         "rounded-xl p-3 text-sm font-medium",
-        notice.ok ? "bg-gain-wash text-sky" : "bg-loss-wash text-coral",
+        notice.ok ? "lv-gainA bg-gain-wash text-sky" : "lv-lossA bg-loss-wash text-coral",
       )}
     >
       {notice.text}

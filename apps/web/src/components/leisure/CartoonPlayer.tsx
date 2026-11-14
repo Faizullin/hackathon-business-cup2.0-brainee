@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton, Panel, primaryButton } from "@/components/demo/kit";
+import { StoppingPhrase } from "@/components/family-plan/StoppingPhrase";
 import { useI18n } from "@/i18n";
 
 export function CartoonPlayer({ id }: { id: string }) {
@@ -33,7 +34,12 @@ export function CartoonPlayer({ id }: { id: string }) {
         {cartoon?.owned ? (
           position < end ? (
             <>
-              <Brainy stats={snapshot.progress.stats} className="mx-auto h-56 w-auto" />
+              <Brainy
+                stats={snapshot.progress.stats}
+                mood={snapshot.progress.mood}
+                equipped={snapshot.showcase.equipped}
+                className="mx-auto h-56 w-auto rounded-stage bg-violet-wash"
+              />
               <progress
                 aria-label={t.cartoon.title}
                 value={position}
@@ -45,7 +51,12 @@ export function CartoonPlayer({ id }: { id: string }) {
               </button>
             </>
           ) : (
-            <p role="status">{t.cartoon.end}</p>
+            <div className="space-y-4 rounded-stage bg-[#1c1b33] p-6 text-white">
+              <p role="status" className="font-heading text-xl">
+                {t.cartoon.end}
+              </p>
+              <StoppingPhrase />
+            </div>
           )
         ) : (
           <p>{t.cartoon.locked}</p>

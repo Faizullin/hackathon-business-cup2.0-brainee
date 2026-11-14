@@ -15,6 +15,7 @@ test("review lavender surfaces, compact summaries and accent roles", async ({
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   for (const route of [
+    "entry",
     "learn",
     "leisure",
     "gifts",
@@ -24,6 +25,7 @@ test("review lavender surfaces, compact summaries and accent roles", async ({
     "game/odd-one-out",
     "analytics",
     "tasks",
+    "rewards",
     "settings",
     "login",
   ]) {
@@ -37,6 +39,12 @@ test("review lavender surfaces, compact summaries and accent roles", async ({
       await expect(dock).toContainText("Energy");
       await expect(dock).not.toContainText("+0");
       await expect(dock.getByRole("link", { name: /Weekly goal/ })).toBeVisible();
+    }
+    if (route === "leisure") {
+      await page.getByText("Your play time", { exact: true }).click();
+      await expect(page.getByTestId("leisure-time")).toContainText(
+        "Pausing or leaving keeps the remaining time",
+      );
     }
     if (route === "learn") {
       const first = page.getByTestId("recommended-game").first();

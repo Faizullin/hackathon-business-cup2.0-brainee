@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · T-138 remaining product surfaces
+Restyled entry, completion/break, leisure/films, quest rows, shop and settings surfaces; preserved saved behavior and test IDs. Check/test/build and 64 affected cases pass, followed by 16 final visual-fix cases. Reviewed phone/iPad screenshots and fixed entry heading overlap.
+
 ## 2026-11-15 · T-137 demo moments
 Added a funnel-only shape match and a real five-stage Brainy slider backed by pure tested core helpers. No game imports, sessions, rewards or network writes. Check/test/build and all 20 affected browser cases pass; phone/iPad screenshots reviewed.
 

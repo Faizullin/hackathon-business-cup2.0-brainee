@@ -29,6 +29,7 @@ import {
 } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";
+import { stoppingCopy } from "./stopping-copy";
 
 const FUN_ICONS = { snake: Worm, rocket: Rocket, drum: Drum, target: Crosshair, maze: Route };
 export const SCIENCE_ICONS = { wave: Fish, bee: Flower2, planet: Orbit, dino: Bone };
@@ -53,6 +54,29 @@ export function LeisureScreen() {
       <Panel as="h1" title={t.title} note={t.description}>
         <span />
       </Panel>
+      <details data-testid="leisure-time" className="rounded-panel bg-card p-4 ring-1 ring-border">
+        <summary className="min-h-11 cursor-pointer font-heading text-lg">
+          {stoppingCopy.timeTitle}
+        </summary>
+        <p className="mb-4 text-sm text-muted-foreground">{stoppingCopy.timeNote}</p>
+        <dl className="space-y-2">
+          {fun.map((game) => (
+            <div
+              key={game.id}
+              className="flex justify-between gap-3 rounded-row bg-violet-wash p-3 text-sm"
+            >
+              <dt>{game.title}</dt>
+              <dd className="font-semibold text-accent">
+                {game.forever
+                  ? stoppingCopy.owned
+                  : funMinutesLeft(game, now) > 0
+                    ? stoppingCopy.minutes(funMinutesLeft(game, now))
+                    : stoppingCopy.noTime}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </details>
       <Notice notice={notice} />
       <Panel title={t.shop} note={`★ ${stars}`}>
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -60,9 +84,12 @@ export function LeisureScreen() {
             const Icon = FUN_ICONS[game.icon as keyof typeof FUN_ICONS] ?? Play;
             const left = funMinutesLeft(game, now);
             return (
-              <li key={game.id} className="flex flex-col gap-3 rounded-xl border border-border p-3">
+              <li
+                key={game.id}
+                className="flex flex-col gap-3 rounded-panel bg-card p-3 ring-1 ring-border"
+              >
                 <div className="flex items-center gap-3">
-                  <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-sky/15">
+                  <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-gain-wash">
                     <Icon aria-hidden="true" className="size-6 text-sky" />
                   </span>
                   <span className="min-w-0">
@@ -144,7 +171,7 @@ export function LeisureScreen() {
           {cartoons.map((cartoon) => (
             <li
               key={cartoon.id}
-              className="flex flex-col gap-2 rounded-xl border border-border p-3"
+              className="flex flex-col gap-2 rounded-panel bg-card p-3 ring-1 ring-border"
             >
               <span className="grid aspect-video place-items-center rounded-lg bg-highlight-wash">
                 {/^(Audio|Аудио)/.test(cartoon.detail) ? (
@@ -183,7 +210,7 @@ export function LeisureScreen() {
                   href={`/video/${video.id}`}
                   className="flex items-center gap-3 rounded-xl p-3 text-white transition-transform duration-(--dur-press) active:scale-[0.98]"
                   style={{
-                    background: `linear-gradient(135deg, ${video.colors[0]}, ${video.colors[1]})`,
+                    background: "linear-gradient(135deg, var(--night), var(--accent))",
                   }}
                 >
                   <Icon aria-hidden="true" className="size-10 shrink-0" />
