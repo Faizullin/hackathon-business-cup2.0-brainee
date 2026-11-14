@@ -44,6 +44,10 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-15 (merge, short tests, catalog fix)
+- Merged origin/master (films D-33, English-only D-34, input fixes) into the lavender redesign. Seeding now upserts game catalog rows from manifests (production had stale titles). E2E cut from 408 to a 96-test default (`pnpm e2e`, ~3 min) with the complete matrix in `pnpm e2e:full`; duplicate conformance/review specs removed.
+- Default run green on WebKit iPad and Chromium phone. Known: Picture Puzzle wrong-drop check is flaky on WebKit iPad (full-only, tracked for issue #8).
+
 ## 2026-11-15 (English-only rule, design refs)
 - D-37 supersedes D-34: English-only copy in feature modules, existing translation files untouched, no Russian in new work; T-130 dropped. Added a design line map and implementation notes to [product/design.md](../product/design.md) and per-task design references in [plans/redesign.md](../plans/redesign.md); plan scope excludes unrelated games.
 

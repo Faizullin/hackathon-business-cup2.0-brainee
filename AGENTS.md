@@ -34,6 +34,8 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - **Redesign:** follow [docs/plans/redesign.md](docs/plans/redesign.md). The visual source of truth is [docs/product/design.md](docs/product/design.md) (D-36), with the funnel in [docs/product/funnel.md](docs/product/funnel.md) (D-35). Brainy is a port of the design's Brain component driven by our stats and mood, kid-safe (no rot, stink or flies). Don't add checkout or third-party analytics.
 - **Product rules:** no feeds, autoplay or "watch next". Kids never see rankings. Brainy never dies. No medical claims. → [rules.md](docs/product/rules.md#product-rules)
 
+- **Keep tests short.** Use `pnpm e2e` (the fast core run) for everyday work. Run `pnpm e2e:full` only for game work or a release. Don't add specs that duplicate existing coverage or re-run stable checks on every project; put new heavy game specs in `HEAVY_GAME_SPECS`. Never edit the Playwright config while a run is in progress.
+
 ## Commands
 
 - `pnpm install` — install the workspace using the pinned package manager and lockfile.
