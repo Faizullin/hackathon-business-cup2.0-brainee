@@ -6,6 +6,19 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-36 · Claude Design lavender system and the Brain component · 2026-11-15 · accepted · extends D-35, supersedes D-13 visual identity
+**Context:** the owner's Claude Design artifact (frozen copies in `docs/ideas/claude-design/`) shows the full lavender child and parent apps and a live Brain mascot. It shares tokens with the funnel export.
+**Decision:**
+- **Visual source of truth:** [product/design.md](../product/design.md).
+- **Tokens:** remap onto the existing names for a fast re-skin. Manrope for UI and titles, Unbounded only for numbers. Lucide icons at 2 px. Gains are blue (`#2847C7` on `#E3E9FF`) and losses peach (`#9A3B12` on `#FDE6D8`), not green/red.
+- **Brainy:** becomes a port of `Brain.dc.html`, driven by our data: energy = mood; stage → size, with lightning only at the top stage; body stats → lobes, eyes, smile, limbs, legs. The current API is kept.
+- **Kid-safe states:** the child app never shows rot, stink or flies (`effects="kid"`).
+- **Child tabs:** Learn · Leisure · Brainy hub · Path · Gifts.
+- **Game palette:** `--game-*` / `GAME_PALETTE` in `packages/ui`, shared by the host and React/Phaser games; pinned artifacts keep their art.
+- **Not taken:** school, grades, league and TikTok features, kid rankings, Google Fonts.
+
+**Consequences:** plan [plans/redesign.md](../plans/redesign.md) gains T-140–T-142, and T-138 is unblocked. Games adopt the palette inside their folders via issue #4. The "full" brainrot effects stay unused unless the owner records a new decision.
+
 ## D-35 · Parent funnel at /start and the lavender design · 2026-11-15 · accepted (defaults; owner may revise) · extends D-24, supersedes D-13 tokens
 **Context:** the Brainy Funnel Export (a 25-screen US parent quiz plus the "AppLavender" tokens) replaces the prototype look and the child-habit quiz; see [funnel.md](../product/funnel.md).
 **Decision:** port the funnel into the Next app as the parent entry at `/start` (`/onboarding` redirects there), with logic in `packages/core/src/funnel.ts`. Five funnel answers map onto the existing `QuizAnswers`, so `quizStart` and quiz-first signup stay unchanged. Funnel answers are stored as `showcase.familyPlan`, and the plan is computed in core. Lavender tokens keep the current token names; Manrope is vendored; Brainy keeps the parametric renderer in the new pink/violet look. The offer shows "pricing pending": no checkout, no payment provider and no third-party analytics.

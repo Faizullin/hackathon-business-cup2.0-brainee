@@ -14,6 +14,9 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-15 (Claude Design reference)
+- Analysed the owner's Claude Design artifact (lavender child/parent apps, live Brain component); froze key files in `docs/ideas/claude-design/`; wrote [product/design.md](../product/design.md) and D-36 (tokens remap, Manrope/Unbounded rule, Brain → Brainy mapping with kid-safe states, Learn · Leisure · Brainy hub · Path · Gifts, game palette). Plan gains T-140–T-142.
+
 ## 2026-11-15 (funnel analysis and redesign plan)
 - Analysed the Brainy Funnel Export (25 parent screens, engine logic, lavender tokens, mascot): [product/funnel.md](../product/funnel.md) with phone/iPad screenshots. Funnel answers map onto the existing `quizStart` inputs.
 - Added [plans/redesign.md](../plans/redesign.md) (T-130–T-139), D-34 (new work English only) and D-35 (funnel at `/start`, lavender tokens, parametric Brainy, no checkout). GitHub issues #3 redesign, #4 games, #5 PR #1 films.

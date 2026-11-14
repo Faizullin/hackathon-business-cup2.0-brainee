@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Извилина — мозг</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: {{w}}px; height: {{hgt}}px; display: flex">
+<svg width="100%" height="100%" viewBox="-30 -40 280 268" role="img" aria-label="{{label}}">
+
+<ellipse cx="110" cy="219" rx="{{shadowRx}}" ry="5" fill="#1C1B33" opacity="0.1"></ellipse>
+
+<circle cx="110" cy="{{glowY}}" r="{{glowR}}" fill="#FFE066" opacity="{{glowOp}}"></circle>
+
+<g fill="#A9BC55">
+<circle cx="{{z0.x}}" cy="{{z0.y}}" r="{{z0.r}}" opacity="{{z0.op}}"></circle>
+<circle cx="{{z1.x}}" cy="{{z1.y}}" r="{{z1.r}}" opacity="{{z1.op}}"></circle>
+<circle cx="{{z2.x}}" cy="{{z2.y}}" r="{{z2.r}}" opacity="{{z2.op}}"></circle>
+<circle cx="{{z3.x}}" cy="{{z3.y}}" r="{{z3.r}}" opacity="{{z3.op}}"></circle>
+<circle cx="{{z4.x}}" cy="{{z4.y}}" r="{{z4.r}}" opacity="{{z4.op}}"></circle>
+<circle cx="{{z5.x}}" cy="{{z5.y}}" r="{{z5.r}}" opacity="{{z5.op}}"></circle>
+</g>
+
+<g fill="none" stroke="#1C1B33" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<path d="{{legL}}"></path>
+<path d="{{legR}}"></path>
+<path d="{{armL}}"></path>
+<path d="{{armR}}"></path>
+</g>
+<ellipse cx="{{shoeLx}}" cy="{{shoeLy}}" rx="11" ry="6.5" fill="#5A3FE0"></ellipse>
+<ellipse cx="{{shoeRx}}" cy="{{shoeRy}}" rx="11" ry="6.5" fill="#5A3FE0"></ellipse>
+<circle cx="{{handLx}}" cy="{{handLy}}" r="6.5" fill="#FFFFFF" stroke="#1C1B33" stroke-width="3"></circle>
+<circle cx="{{handRx}}" cy="{{handRy}}" r="6.5" fill="#FFFFFF" stroke="#1C1B33" stroke-width="3"></circle>
+
+<g transform="{{bodyTransform}}">
+<g fill="{{shade}}">
+<circle cx="70" cy="85" r="44"></circle><circle cx="110" cy="65" r="46"></circle><circle cx="150" cy="85" r="44"></circle>
+<circle cx="62" cy="125" r="38"></circle><circle cx="110" cy="131" r="44"></circle><circle cx="158" cy="125" r="38"></circle>
+</g>
+<g fill="{{fill}}">
+<circle cx="70" cy="78" r="44"></circle><circle cx="110" cy="58" r="46"></circle><circle cx="150" cy="78" r="44"></circle>
+<circle cx="62" cy="118" r="38"></circle><circle cx="110" cy="124" r="44"></circle><circle cx="158" cy="118" r="38"></circle>
+</g>
+<g fill="none" stroke="{{fold}}" stroke-width="5" stroke-linecap="round" opacity="0.6">
+<path d="M110 20 C104 44 116 64 110 86"></path>
+<path d="M44 82 Q60 64 80 76"></path>
+<path d="M140 70 Q158 58 176 76"></path>
+<path d="M44 124 Q60 140 80 128"></path>
+<path d="M140 130 Q158 142 176 124"></path>
+<path d="M78 44 Q92 34 98 50"></path>
+<path d="M124 48 Q134 34 148 44"></path>
+</g>
+<g fill="#5F6B2E" opacity="{{rotOpacity}}">
+<circle cx="66" cy="66" r="9"></circle><circle cx="152" cy="62" r="7"></circle><circle cx="164" cy="120" r="10"></circle>
+<circle cx="54" cy="132" r="6"></circle><circle cx="132" cy="40" r="5"></circle><circle cx="84" cy="152" r="7"></circle>
+</g>
+<g fill="#FF6F9F" opacity="{{cheekOpacity}}">
+<ellipse cx="78" cy="122" rx="9" ry="5.5"></ellipse><ellipse cx="142" cy="122" rx="9" ry="5.5"></ellipse>
+</g>
+<circle cx="92" cy="104" r="7.5" fill="#1C1B33"></circle><circle cx="128" cy="104" r="7.5" fill="#1C1B33"></circle>
+<circle cx="94.5" cy="101.5" r="2.4" fill="#FFFFFF"></circle><circle cx="130.5" cy="101.5" r="2.4" fill="#FFFFFF"></circle>
+<rect x="83" y="95.5" width="18" height="{{lid}}" fill="{{fill}}"></rect>
+<rect x="119" y="95.5" width="18" height="{{lid}}" fill="{{fill}}"></rect>
+<path d="{{mouth}}" fill="none" stroke="#1C1B33" stroke-width="5" stroke-linecap="round"></path>
+</g>
+
+<g fill="#5A3FE0" opacity="{{sparkleOpacity}}">
+<path d="{{star1}}"></path>
+<path d="{{star2}}"></path>
+<path d="{{star3}}"></path>
+<path d="{{star4}}"></path>
+</g>
+
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="{{b0.d}}" stroke="#FFAE1A" stroke-width="6" opacity="{{b0.op}}"></path><path d="{{b0.d}}" stroke="#FFF6C8" stroke-width="2.2" opacity="{{b0.op}}"></path>
+<path d="{{b1.d}}" stroke="#FFAE1A" stroke-width="6" opacity="{{b1.op}}"></path><path d="{{b1.d}}" stroke="#FFF6C8" stroke-width="2.2" opacity="{{b1.op}}"></path>
+<path d="{{b2.d}}" stroke="#FFAE1A" stroke-width="6" opacity="{{b2.op}}"></path><path d="{{b2.d}}" stroke="#FFF6C8" stroke-width="2.2" opacity="{{b2.op}}"></path>
+<path d="{{b3.d}}" stroke="#FFAE1A" stroke-width="6" opacity="{{b3.op}}"></path><path d="{{b3.d}}" stroke="#FFF6C8" stroke-width="2.2" opacity="{{b3.op}}"></path>
+<path d="{{b4.d}}" stroke="#FFAE1A" stroke-width="6" opacity="{{b4.op}}"></path><path d="{{b4.d}}" stroke="#FFF6C8" stroke-width="2.2" opacity="{{b4.op}}"></path>
+<path d="{{b5.d}}" stroke="#FFAE1A" stroke-width="6" opacity="{{b5.op}}"></path><path d="{{b5.d}}" stroke="#FFF6C8" stroke-width="2.2" opacity="{{b5.op}}"></path>
+<path d="{{b6.d}}" stroke="#FFAE1A" stroke-width="6" opacity="{{b6.op}}"></path><path d="{{b6.d}}" stroke="#FFF6C8" stroke-width="2.2" opacity="{{b6.op}}"></path>
+</g>
+<g fill="#FFFFFF" stroke="#FFAE1A" stroke-width="2">
+<circle cx="{{b0.ex}}" cy="{{b0.ey}}" r="{{b0.r}}" opacity="{{b0.op}}"></circle>
+<circle cx="{{b1.ex}}" cy="{{b1.ey}}" r="{{b1.r}}" opacity="{{b1.op}}"></circle>
+<circle cx="{{b2.ex}}" cy="{{b2.ey}}" r="{{b2.r}}" opacity="{{b2.op}}"></circle>
+<circle cx="{{b3.ex}}" cy="{{b3.ey}}" r="{{b3.r}}" opacity="{{b3.op}}"></circle>
+<circle cx="{{b4.ex}}" cy="{{b4.ey}}" r="{{b4.r}}" opacity="{{b4.op}}"></circle>
+<circle cx="{{b5.ex}}" cy="{{b5.ey}}" r="{{b5.r}}" opacity="{{b5.op}}"></circle>
+<circle cx="{{b6.ex}}" cy="{{b6.ey}}" r="{{b6.r}}" opacity="{{b6.op}}"></circle>
+</g>
+
+<path d="{{sweat}}" fill="#6FA8FF" opacity="{{sweatOpacity}}"></path>
+
+<g fill="none" stroke-width="4" stroke-linecap="round">
+<path d="{{w0.d}}" stroke="{{w0.c}}" opacity="{{w0.op}}"></path>
+<path d="{{w1.d}}" stroke="{{w1.c}}" opacity="{{w1.op}}"></path>
+<path d="{{w2.d}}" stroke="{{w2.c}}" opacity="{{w2.op}}"></path>
+<path d="{{w3.d}}" stroke="{{w3.c}}" opacity="{{w3.op}}"></path>
+<path d="{{w4.d}}" stroke="{{w4.c}}" opacity="{{w4.op}}"></path>
+<path d="{{w5.d}}" stroke="{{w5.c}}" opacity="{{w5.op}}"></path>
+<path d="{{w6.d}}" stroke="{{w6.c}}" opacity="{{w6.op}}"></path>
+</g>
+
+<g fill="#9BB04A">
+<circle cx="{{p0.x}}" cy="{{p0.y}}" r="{{p0.r}}" opacity="{{p0.op}}"></circle>
+<circle cx="{{p1.x}}" cy="{{p1.y}}" r="{{p1.r}}" opacity="{{p1.op}}"></circle>
+<circle cx="{{p2.x}}" cy="{{p2.y}}" r="{{p2.r}}" opacity="{{p2.op}}"></circle>
+<circle cx="{{p3.x}}" cy="{{p3.y}}" r="{{p3.r}}" opacity="{{p3.op}}"></circle>
+<circle cx="{{p4.x}}" cy="{{p4.y}}" r="{{p4.r}}" opacity="{{p4.op}}"></circle>
+</g>
+
+<g opacity="{{f0.op}}">
+<ellipse cx="{{f0.wlx}}" cy="{{f0.wy}}" rx="4" ry="{{f0.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<ellipse cx="{{f0.wrx}}" cy="{{f0.wy}}" rx="4" ry="{{f0.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<circle cx="{{f0.x}}" cy="{{f0.y}}" r="3.5" fill="#1C1B33"></circle>
+</g>
+<g opacity="{{f1.op}}">
+<ellipse cx="{{f1.wlx}}" cy="{{f1.wy}}" rx="4" ry="{{f1.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<ellipse cx="{{f1.wrx}}" cy="{{f1.wy}}" rx="4" ry="{{f1.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<circle cx="{{f1.x}}" cy="{{f1.y}}" r="3.5" fill="#1C1B33"></circle>
+</g>
+<g opacity="{{f2.op}}">
+<ellipse cx="{{f2.wlx}}" cy="{{f2.wy}}" rx="4" ry="{{f2.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<ellipse cx="{{f2.wrx}}" cy="{{f2.wy}}" rx="4" ry="{{f2.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<circle cx="{{f2.x}}" cy="{{f2.y}}" r="3.5" fill="#1C1B33"></circle>
+</g>
+<g opacity="{{f3.op}}">
+<ellipse cx="{{f3.wlx}}" cy="{{f3.wy}}" rx="4" ry="{{f3.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<ellipse cx="{{f3.wrx}}" cy="{{f3.wy}}" rx="4" ry="{{f3.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<circle cx="{{f3.x}}" cy="{{f3.y}}" r="3.5" fill="#1C1B33"></circle>
+</g>
+<g opacity="{{f4.op}}">
+<ellipse cx="{{f4.wlx}}" cy="{{f4.wy}}" rx="4" ry="{{f4.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<ellipse cx="{{f4.wrx}}" cy="{{f4.wy}}" rx="4" ry="{{f4.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<circle cx="{{f4.x}}" cy="{{f4.y}}" r="3.5" fill="#1C1B33"></circle>
+</g>
+<g opacity="{{f5.op}}">
+<ellipse cx="{{f5.wlx}}" cy="{{f5.wy}}" rx="4" ry="{{f5.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<ellipse cx="{{f5.wrx}}" cy="{{f5.wy}}" rx="4" ry="{{f5.flap}}" fill="#FFFFFF" stroke="#1C1B33" stroke-width="1.5"></ellipse>
+<circle cx="{{f5.x}}" cy="{{f5.y}}" r="3.5" fill="#1C1B33"></circle>
+</g>
+
+</svg>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"health":{"editor":"range","min":0,"max":100,"step":1,"default":72},"size":{"editor":"int","min":80,"max":480,"default":290},"animate":{"editor":"boolean","default":true},"$preview":{"width":290,"height":278}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { t: 0, phase: 0 };
+  }
+
+  health() {
+    return Math.max(0, Math.min(100, Number(this.props.health ?? 72)));
+  }
+
+  // 0 — стоит на месте, 1 — бежит в полную силу
+  runAmount(h) {
+    return Math.max(0, Math.min(1, (h - 40) / 35));
+  }
+
+  componentDidMount() {
+    if (this.props.animate === false) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const start = performance.now();
+    let last = start;
+    let phase = 0;
+    const loop = (now) => {
+      this._raf = requestAnimationFrame(loop);
+      if (now - last < 33) return;
+      const dt = Math.min(0.1, (now - last) / 1000);
+      last = now;
+      // чем здоровее мозг, тем чаще шаги
+      phase += dt * 2 * Math.PI * (0.5 + 1.7 * this.runAmount(this.health()));
+      this.setState({ t: (now - start) / 1000, phase: phase });
+    };
+    this._raf = requestAnimationFrame(loop);
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this._raf);
+  }
+
+  mix(a, b, k) {
+    const pa = parseInt(a.slice(1), 16);
+    const pb = parseInt(b.slice(1), 16);
+    const c = (s) => {
+      const x = (pa >> s) & 255;
+      const y = (pb >> s) & 255;
+      return Math.round(x + (y - x) * k);
+    };
+    return '#' + ((1 << 24) | (c(16) << 16) | (c(8) << 8) | c(0)).toString(16).slice(1);
+  }
+
+  // [заливка, тень, извилины] — плавно от гнилого к здоровому
+  palette(h) {
+    const rot = ['#BDB97E', '#8E8A52', '#6B6838'];
+    const mid = ['#F2B8A8', '#D88E7C', '#B06A5A'];
+    const good = ['#FF9EC2', '#E9719F', '#C24E7E'];
+    if (h >= 70) return good;
+    if (h >= 40) return mid.map((x, i) => this.mix(x, good[i], (h - 40) / 30));
+    return rot.map((x, i) => this.mix(x, mid[i], h / 40));
+  }
+
+  star(cx, cy, r) {
+    const q = r * 0.28;
+    return 'M' + cx + ' ' + (cy - r) + ' L' + (cx + q) + ' ' + (cy - q) + ' L' + (cx + r) + ' ' + cy +
+      ' L' + (cx + q) + ' ' + (cy + q) + ' L' + cx + ' ' + (cy + r) + ' L' + (cx - q) + ' ' + (cy + q) +
+      ' L' + (cx - r) + ' ' + cy + ' L' + (cx - q) + ' ' + (cy - q) + ' Z';
+  }
+
+  renderVals() {
+    const h = this.health();
+    const size = Number(this.props.size ?? 290);
+    const t = this.state.t;
+    const swing = Math.sin(this.state.phase);
+    const c01 = (v) => Math.max(0, Math.min(1, v));
+    const f = (n) => n.toFixed(1);
+
+    const run = this.runAmount(h);
+    const droop = c01((50 - h) / 50);
+    const pal = this.palette(h);
+
+    // подпрыгивание на бегу, у уставшего — только дыхание
+    const bob = run * Math.abs(swing) * 6 + (1 - run) * Math.sin(t * 1.8) * 1.2;
+    const bodyY = -bob + droop * 6;
+    const sx = 1 + droop * 0.03;
+    const sy = 1 - droop * 0.05;
+
+    // руки: угол от вертикали опускается вместе со здоровьем, на бегу — локти согнуты и качаются
+    const rad = Math.PI / 180;
+    const theta0 = 6 + 34 * c01(h / 75);
+    const bend0 = 15 + 75 * run;
+    const shoulderY = 114 + bodyY + droop * 6;
+    const arm = (side, x0, theta, bend) => {
+      const d = (a) => [side * Math.sin(a * rad), Math.cos(a * rad)];
+      const d1 = d(theta);
+      const d2 = d(theta + bend);
+      const ex = x0 + d1[0] * 30;
+      const ey = shoulderY + d1[1] * 30;
+      const hx = ex + d2[0] * 28;
+      const hy = ey + d2[1] * 28;
+      return { path: 'M' + f(x0) + ' ' + f(shoulderY) + ' Q' + f(ex) + ' ' + f(ey) + ' ' + f(hx) + ' ' + f(hy), hx: hx, hy: hy };
+    };
+    const aL = arm(-1, 34, theta0 + 10 * run * swing, bend0 + 25 * run * swing);
+    const aR = arm(1, 186, theta0 - 10 * run * swing, bend0 - 25 * run * swing);
+
+    // ноги: на бегу поочерёдно поднимаются, у грустного — колени внутрь
+    const hipY = 158 + bodyY;
+    const leg = (side, hx, fx, lift) => {
+      const fy = 212 - lift;
+      const off = 3 + lift * 0.8 - droop * 7;
+      const kx = (hx + fx) / 2 + side * off;
+      const ky = (hipY + fy) / 2;
+      return { path: 'M' + f(hx) + ' ' + f(hipY) + ' Q' + f(kx) + ' ' + f(ky) + ' ' + f(fx) + ' ' + f(fy), sx: fx + side * 5, sy: fy + 1 };
+    };
+    const lL = leg(-1, 92, 86, Math.max(0, swing) * 16 * run);
+    const lR = leg(1, 128, 134, Math.max(0, -swing) * 16 * run);
+
+    // рот: от грустной дуги через прямую линию к улыбке
+    const m = c01((h - 20) / 60);
+    const endY = 124 + 9 * (1 - m);
+    const ctrlY = endY + 14 * (2 * m - 1);
+
+    // веки: слипаются у уставшего, здоровый моргает
+    const blink = h >= 35 && (t % 3.4) < 0.14;
+    const lid = blink ? 17 : c01((60 - h) / 55) * 9;
+
+    const sweatK = (t * 0.9) % 1;
+    const swx = 182;
+    const swy = 46 + sweatK * 26 + bodyY;
+
+    // вонь: с 50 баллов появляется душок, к нулю — плотные клубы
+    const stink = c01((50 - h) / 45);
+    const dense = c01((25 - h) / 20);
+
+    // струйки поднимаются от макушки и плеч, раскачиваются и расходятся
+    const wispBase = [[44, 30], [172, 30], [108, 10], [74, 20], [146, 20], [22, 80], [196, 80]];
+    const wisps = wispBase.map((b, i) => {
+      const k = (t * 0.42 + i * 0.37) % 1;
+      const weight = c01(stink * 8 - i);
+      const x = b[0] + Math.sin(t * 1.6 + i * 1.3) * 4;
+      const y = b[1] - k * 56 + bodyY;
+      const a = 5 + k * 7;
+      return {
+        d: 'M' + f(x) + ' ' + f(y) +
+          ' C' + f(x + a) + ' ' + f(y - 6) + ' ' + f(x - a) + ' ' + f(y - 12) + ' ' + f(x) + ' ' + f(y - 18) +
+          ' C' + f(x + a) + ' ' + f(y - 24) + ' ' + f(x - a) + ' ' + f(y - 30) + ' ' + f(x) + ' ' + f(y - 34),
+        c: i % 2 ? '#7E9230' : '#9BB04A',
+        op: (Math.sin(k * Math.PI) * weight * (0.55 + 0.4 * stink)).toFixed(2)
+      };
+    });
+
+    // зелёное облако вокруг — дышит, густеет у гниющего
+    const hazeBase = [[60, 60, 40], [160, 55, 42], [110, 14, 36], [36, 132, 34], [184, 132, 36], [110, 176, 40]];
+    const haze = hazeBase.map((b, i) => ({
+      x: b[0],
+      y: f(b[1] + bodyY),
+      r: f(b[2] * (1 + 0.08 * Math.sin(t * 1.3 + i))),
+      op: (dense * 0.18 + stink * 0.05).toFixed(3)
+    }));
+
+    // клубы, которые медленно всплывают и раздуваются
+    const puffX = [30, 190, 110, 70, 150];
+    const puffs = puffX.map((x0, i) => {
+      const k = (t * 0.25 + i * 0.2) % 1;
+      return {
+        x: f(x0 + Math.sin(t + i) * 6),
+        y: f(60 - k * 84 + bodyY),
+        r: f(6 + k * 14),
+        op: (Math.sin(k * Math.PI) * dense * 0.4).toFixed(2)
+      };
+    });
+
+    // мухи: одна у вянущего, до шести у гниющего
+    const flyCount = h < 45 ? 1 + Math.round(c01((40 - h) / 30) * 5) : 0;
+    const orbits = [[110, 60, 92, 30, 2.2, 0], [110, 30, 70, 24, -2.8, 1.5], [110, 110, 112, 42, 1.7, 3],
+      [60, 18, 30, 18, 3.6, 0.7], [165, 140, 42, 28, -3.1, 2.2], [120, -14, 54, 14, 2.6, 4]];
+    const flies = orbits.map((o, i) => {
+      const a = t * o[4] + o[5];
+      const x = o[0] + o[2] * Math.cos(a) + Math.sin(t * 13 + i) * 2;
+      const y = o[1] + o[3] * Math.sin(a) + Math.cos(t * 11 + i) * 2 + bodyY;
+      return {
+        x: f(x), y: f(y),
+        wlx: f(x - 3.5), wrx: f(x + 3.5), wy: f(y - 4),
+        flap: Math.sin(t * 40 + i * 2) > 0 ? 4 : 2.5,
+        op: i < flyCount ? 1 : 0
+      };
+    });
+
+    // молнии у гения: короткие вспышки вокруг головы, каждый раз новый зигзаг
+    const electric = c01((h - 75) / 15);
+    const boltCount = h >= 75 ? Math.round(2 + electric * 5) : 0;
+    const rnd = (a, b, c) => {
+      const s = Math.sin(a * 12.9898 + b * 78.233 + c * 37.719) * 43758.5453;
+      return s - Math.floor(s);
+    };
+    const boltBase = [[56, 30, -130], [164, 30, -50], [110, 8, -90], [20, 86, -170], [200, 86, -10], [26, 150, 155], [194, 150, 25]];
+    let flashing = 0;
+    const bolts = boltBase.map((b, i) => {
+      const period = 0.9 + i * 0.23;
+      const local = t + i * 0.61;
+      const n = Math.floor(local / period);
+      const k = local - n * period;
+      if (i >= boltCount || k >= 0.18) return { d: 'M0 0', op: 0, ex: 0, ey: 0, r: 0 };
+      flashing += 1;
+      const ang = (b[2] + (rnd(n, i, 0) - 0.5) * 30) * rad;
+      const len = 34 + rnd(n, i, 1) * 16;
+      const dx = Math.cos(ang);
+      const dy = Math.sin(ang);
+      const x0 = b[0];
+      const y0 = b[1] + bodyY;
+      let d = 'M' + f(x0) + ' ' + f(y0);
+      let mx = x0, my = y0, ex = x0, ey = y0;
+      for (let s = 1; s <= 4; s++) {
+        const side = s === 4 ? 0 : (s % 2 ? 1 : -1) * (4 + rnd(n, i, s + 2) * 6);
+        ex = x0 + dx * (len * s) / 4 - dy * side;
+        ey = y0 + dy * (len * s) / 4 + dx * side;
+        d += ' L' + f(ex) + ' ' + f(ey);
+        if (s === 2) { mx = ex; my = ey; }
+      }
+      // ответвление от середины
+      const bang = ang + (rnd(n, i, 9) > 0.5 ? 0.7 : -0.7);
+      d += ' M' + f(mx) + ' ' + f(my) + ' L' + f(mx + Math.cos(bang) * 14) + ' ' + f(my + Math.sin(bang) * 14);
+      // двойная вспышка, как у настоящей молнии
+      const flicker = k < 0.05 || (k > 0.09 && k < 0.15) ? 1 : 0.35;
+      return { d: d, op: flicker.toFixed(2), ex: f(ex), ey: f(ey), r: (2 + flicker * 2).toFixed(1) };
+    });
+
+    return {
+      glowY: f(100 + bodyY),
+      glowR: flashing ? 114 : 108,
+      glowOp: ((0.1 + 0.05 * Math.sin(t * 2.5)) * electric + (flashing ? 0.14 * electric : 0)).toFixed(3),
+      b0: bolts[0], b1: bolts[1], b2: bolts[2], b3: bolts[3], b4: bolts[4], b5: bolts[5], b6: bolts[6],
+      w: size,
+      hgt: Math.round((size * 268) / 280),
+      label: 'Мозг, здоровье ' + h + ' из 100',
+      fill: pal[0],
+      shade: pal[1],
+      fold: pal[2],
+      bodyTransform: 'translate(0 ' + f(bodyY) + ') translate(110 168) scale(' + sx.toFixed(3) + ' ' + sy.toFixed(3) + ') translate(-110 -168)',
+      shadowRx: f(58 - bob * 2),
+      armL: aL.path, armR: aR.path,
+      handLx: f(aL.hx), handLy: f(aL.hy), handRx: f(aR.hx), handRy: f(aR.hy),
+      legL: lL.path, legR: lR.path,
+      shoeLx: f(lL.sx), shoeLy: f(lL.sy), shoeRx: f(lR.sx), shoeRy: f(lR.sy),
+      mouth: 'M96 ' + f(endY) + ' Q110 ' + f(ctrlY) + ' 124 ' + f(endY),
+      lid: f(lid),
+      rotOpacity: h < 60 ? Math.min(1, (60 - h) / 45) : 0,
+      cheekOpacity: c01((h - 50) / 20) * 0.55,
+      sparkleOpacity: h >= 75 ? (0.55 + 0.45 * Math.sin(t * 3)).toFixed(2) : 0,
+      star1: this.star(0, 34, 12),
+      star2: this.star(222, 28, 8),
+      star3: this.star(214, 186, 10),
+      star4: this.star(4, 184, 7),
+      sweat: 'M' + swx + ' ' + f(swy - 7) + ' Q' + (swx + 5.5) + ' ' + f(swy + 1) + ' ' + swx + ' ' + f(swy + 4.5) +
+        ' Q' + (swx - 5.5) + ' ' + f(swy + 1) + ' ' + swx + ' ' + f(swy - 7) + ' Z',
+      sweatOpacity: h >= 20 && h < 55 ? (1 - sweatK).toFixed(2) : 0,
+      w0: wisps[0], w1: wisps[1], w2: wisps[2], w3: wisps[3], w4: wisps[4], w5: wisps[5], w6: wisps[6],
+      z0: haze[0], z1: haze[1], z2: haze[2], z3: haze[3], z4: haze[4], z5: haze[5],
+      p0: puffs[0], p1: puffs[1], p2: puffs[2], p3: puffs[3], p4: puffs[4],
+      f0: flies[0], f1: flies[1], f2: flies[2], f3: flies[3], f4: flies[4], f5: flies[5]
+    };
+  }
+}
+</script>
+</body>
+</html>

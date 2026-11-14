@@ -8,6 +8,7 @@ The original inputs from the product owner. **Don't edit them.** The maintained 
 | `ROUTES.md` + `brainy-mvp.zip` | Routes/roles/rules spec + clickable HTML prototype (assets/core.js fakes the API) | Condensed in [routes-spec.md](../product/routes-spec.md). Read by section; never copy its Google Fonts/cdnjs. |
 | `BRAINY_30_GAMES_HANDOFF_RU.md` + `Brainy_30_Game_Handoff.zip` | 30 external learning games (US English), catalog, pinned sources, launcher | Condensed in [external-games.md](../product/external-games.md). Unzip outside the repo; don't run the launcher casually. |
 | `Brainy-Funnel-Export.zip` | 25-screen US parent onboarding quiz + lavender ("AppLavender") tokens, mascot SVG, OFL fonts; static site + single-file HTML | Analysed in [funnel.md](../product/funnel.md); plan in [plans/redesign.md](../plans/redesign.md). Unzip outside the repo. |
+| `claude-design/*.dc.html` | Frozen copies of the owner's Claude Design artifact (lavender child/parent apps, Brain component, stopping screens, widgets). Design-canvas source: needs a runtime to render; Google Fonts links are reference only | Spec in [design.md](../product/design.md). Port code, never load the fonts link. |
 | `Прототип Брейни.html` | Single-file clickable prototype (~1,170 lines, vanilla JS, no build step) | Open in a browser to see the UX. Port code from it using the line map below. |
 
 ## Prototype line map

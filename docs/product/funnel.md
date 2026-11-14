@@ -1,6 +1,6 @@
 # Brainy Funnel Export: analysis
 
-The source for the redesign: a 25-screen, US-English onboarding quiz for parents plus the lavender visual system ("AppLavender"). The implementation plan lives in [plans/redesign.md](../plans/redesign.md). The decisions are D-33 (reserved for the PR #1 films), D-34 and D-35 in [decisions.md](../dev/decisions.md).
+The source for the redesign: a 25-screen, US-English onboarding quiz for parents plus the lavender visual system ("AppLavender"). The implementation plan lives in [plans/redesign.md](../plans/redesign.md). **For visuals, [design.md](design.md) (the full Claude Design app) takes precedence**; the funnel's static mascot is replaced by the Brain component. The decisions are D-33 (reserved for the PR #1 films), D-34 and D-35 in [decisions.md](../dev/decisions.md).
 
 - **Source:** [ideas/Brainy-Funnel-Export.zip](../ideas/Brainy-Funnel-Export.zip). Unzip it **outside the repo** (temp dir) and serve `website/` with `python3 -m http.server`. No build is needed.
   - `website/engine.mjs`: questions, routing, profile and plan logic.
@@ -83,7 +83,7 @@ The age band gives a birth-year range for game `minAge`; signup asks for the exa
 ## Elements to take
 
 1. **Tokens and type:** the lavender canvas, white cards, violet CTA with an arrow, pills ("For parents", "Ages 6–7").
-2. **Brainy's look:** apply the pink brain with violet shoes to the parametric `@brainee/brainy`, keeping stat-driven growth, 5 stages and accessories. Reuse the scenes for celebrations and empty states.
+2. **Brainy's look:** superseded by the Brain component port in [design.md](design.md#the-brain-component-braindchtml) (D-36). Reuse the scenes for celebrations and empty states.
 3. **Step page pattern:** a top bar with Back, a progress bar and the chapter name; title, text, art, then a CTA pinned at the bottom. Focus moves to the `h1` on each step. Hash or URL steps work with browser Back. Resume and saved-state migration. Fits onboarding, setup/pairing and settings.
 4. **Answer rows:** full-width radio rows; the selected row gets the violet wash and border; Continue stays disabled until a choice is made.
 5. **Family plan:** the phrase to say, 4-step routine and "afterward, notice". Use it as:
@@ -106,4 +106,4 @@ The age band gives a birth-year range for game `minAge`; signup asks for the exa
 - **Fonts:** convert Unbounded from the 778 KB TTF to woff2 (we already ship Unbounded woff2); vendor Manrope woff2 like Onest.
 - **Style:** the cover and result use a dark card with a pink CTA while everything else is violet, and headings switch between Unbounded and Manrope. Pick one rule.
 - **Dark mode and languages:** the export is light-only and English-only. See D-34 for translations; dark mode is TBD.
-- **Missing designs:** the token file references "AppLavender" and "AppLavenderParent" child and parent app screens that were not exported. They are needed before restyling the product pages.
+- **Designs:** the full AppLavender child and parent screens are now available; see [design.md](design.md).

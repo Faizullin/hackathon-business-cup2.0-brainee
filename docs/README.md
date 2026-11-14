@@ -38,8 +38,9 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [ideas/README.md](ideas/README.md) | What the source files are + prototype line map |
 | [reports/README.md](reports/README.md) | Recording commands, artifact map and analysis of the game-store-planning reporting pipeline |
 | [product/routes-spec.md](product/routes-spec.md) | Building or changing routes, access, parent dashboard or ROUTES.md rules |
+| [product/design.md](product/design.md) | **Visual source of truth** (Claude Design lavender): tokens, motion, Brain component spec and Brainy mapping, screen patterns, game palette |
 | [product/funnel.md](product/funnel.md) | Building the parent funnel or lavender redesign: export analysis, screenshots, logic, tokens, what to take or skip |
-| [plans/redesign.md](plans/redesign.md) | Implementing the redesign: ordered tasks T-130–T-139, ground rules, open owner questions |
+| [plans/redesign.md](plans/redesign.md) | Implementing the redesign: ordered tasks T-130–T-142, ground rules, open owner questions |
 | [product/external-games.md](product/external-games.md) | Planning the 30-game pack (licences, path C, first wave) |
 | [reports/mvp.md](reports/mvp.md) | Every MVP page (child + parent): phone/iPad walkthrough videos, screenshots, JSON logs. Also [reports/learning.md](reports/learning.md) (three-game loop) |
 
@@ -51,7 +52,7 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 - **Write economy or stat logic** → `mechanics.md` → `data-model.md` §How stats change
 - **Save games or wire shared state** → `dev/sessions.md` → `product/data-model.md` → `dev/setup.md`
 - **Infra, auth or deploy** → `architecture.md` → `rules.md` §Technical requirements → `decisions.md`
-- **Redesign or parent funnel** → `plans/redesign.md` → `product/funnel.md` → `dev/ui.md`
+- **Redesign or parent funnel** → `plans/redesign.md` → `product/design.md` → `product/funnel.md` → `dev/ui.md`
 - **Demo prep** → `rules.md` §Acceptance criteria → `status.md`
 
 ## Upkeep
