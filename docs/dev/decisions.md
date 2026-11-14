@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-16 · Game catalog scales by artifacts: three paths, one contract · 2026-11-14 · accepted · extends D-10/D-11/D-12
+**Context:** games may come in large numbers, from other repos, teams and engines; the D-12 plan assumed all game source lives in this monorepo.
+**Decision:** the app consumes **built artifacts + manifests**, not source. Path A = React folders (`packages/games`), path B = in-repo engine packages (`games/*`), path C = external pinned, checksummed build artifacts imported by version. Manifests are schema-validated and fill `Game`/`GameVersion` in the DB; the bridge is versioned (host supports N and N−1); every game must pass one conformance suite before it is listed; isolation follows trust tiers. Details: [games.md](games.md#scaling-three-paths-in-one-contract-d-16).
+**Consequences:** adding games needs no app code (except path A); any engine fits behind an adapter; per-version rollback. Costs later: manifest schema, `GameVersion` table, conformance suite, artifact import (T-89 – T-91). Hackathon scope stays A + B.
+
 ## D-15 · Deploy last, on free tiers: Vercel Hobby + Turso via Drizzle; sync by polling · 2026-11-14 · accepted · supersedes D-06 and the SSE part of D-04
 **Context:** deployment isn't needed until the demo, and only free options are allowed. Vercel Hobby is free but serverless, with no persistent disk and no shared memory, so a SQLite file and an in-process SSE bus won't survive there. Drizzle already talks to libSQL, and Turso hosts libSQL on a free plan.
 **Decision:** develop **local-only** until the end. The final roadmap step (T-14) deploys `apps/web` to **Vercel Hobby** (free `<project>.vercel.app` domain, which is allowlistable in Screen Time; no paid custom domain) with the database on **Turso's free plan** through the same `drizzle-orm/libsql` driver (`DATABASE_URL=libsql://…` + `DATABASE_AUTH_TOKEN`). **Live sync uses short polling** (TanStack Query, ~3 s, version check), the same locally and on serverless. No long-lived SSE functions. Media stays in `public/` (served from our domain).

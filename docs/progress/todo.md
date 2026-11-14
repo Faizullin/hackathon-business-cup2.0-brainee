@@ -21,14 +21,14 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [ ] T-19 `pnpm games:build` + `pnpm test:assets` (port GSP `build-packages.mjs`, `verify-game-assets.mjs`); `db:seed` reads `games/*/manifest.json` into `Game`
 
 ## P2 · Core logic + Brainy · [mechanics.md](../product/mechanics.md)
-- [ ] T-20 `packages/brainy`: port `brainy(s, id, acc)` to typed SVG/React (lines 671–733)
+- [x] T-20 `packages/brainy`: port `brainy(s, id, acc)` to typed SVG/React (lines 671–733); pure `brainyModel` + `<Brainy>`, presets, `/lab/brainy`
 - [x] T-21 Star rules (+3 / +4 / +15 / 3-in-a-row +5) with tests
 - [x] T-22 Exchange ☀→★ 1:10, one-way; gifts ☀ only
 - [x] T-23 Stage + mood math (stage thresholds, +8 mood per game); mood decay rate is still a product TBD
 - [ ] T-24 Stat gain from a session (70/30 weights; keep the formula swappable)
 - [ ] T-25 Entry recommendation algorithm (3 largest gaps, least-played in 7 days)
 - [ ] T-26 Weekly goal counted by week_suns; 5-tasks-a-day limit
-- [ ] T-27 Accessory slots (one per slot; earned vs. bought)
+- [x] T-27 Accessory slots (one per slot; earned vs. bought): catalog, `equip`/`unequip`, `buyAccessory` in `core`
 - [x] T-28 Game contract: `GameResult`/`Skill` types in `core`, `GameDefinition` + lazy registry + error boundary in `games`; `pnpm check:games` (no cross-game imports) → [games.md](../dev/games.md)
 - [ ] T-29 Port GSP `bridge-core` → `packages/game-bridge` (drop PECS parts, global `Brainee`) + `engine-phaser` / `engine-gdevelop` kits + `IframeGame` and host hook in `GameHost` → [games.md](../dev/games.md#bridge-embedded-games-port-gsp-packagesbridge-core)
 
@@ -83,6 +83,9 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [ ] T-85 Port one GSP game end to end (suggest `phaser-shape-match-game`): engine kit, Russian UI, manifest, bridge events → `GameResult`, Chromium + WebKit e2e. Other candidates in [games.md](../dev/games.md#reusable-gsp-games-candidates)
 - [ ] T-87 Motion polish: `<ViewTransition>` tab/push/pop + shared elements, ★ fly-to-wallet, animated counters, Brainy idle/stage-up, `loading.tsx` Brainy loader, reduced-motion spec → [ui.md](../dev/ui.md). After the functional flow works.
 - [x] T-88 Port the local UI recording/report tooling from game-store-planning; generate phone/iPad walkthroughs with linked videos, screenshots and logs → [reports/README.md](../reports/README.md)
+- [ ] T-89 Manifest schema (zod) for all games + CI validation: id, version, engine, runtime, entry, skills, levels, bridge protocol/contract, size budget, license → [games.md](../dev/games.md#scaling-three-paths-in-one-contract-d-16)
+- [ ] T-90 Game conformance suite (Playwright, Chromium + WebKit): load, ready ≤ 10 s, one finish, zero foreign requests, size budget, no console errors; required before a game is listed
+- [ ] T-91 (Later) External game artifacts (path C): `games:import <id>@<version>` with checksum, `GameVersion` table, enable/disable/rollback
 - Additional learning games (Sounds & letters, Repeat after Brainy, Magic garden, Expedition, Error detective)
 - Fun games beyond the first one
 - Push notification on `stage_up`

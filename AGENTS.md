@@ -45,7 +45,7 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - `pnpm db:reset` — recreate the local SQLite database, push the schema and seed the demo.
 - `pnpm db:push` / `pnpm db:seed` / `pnpm db:studio` — apply the schema, add demo fixtures or inspect local data.
 - `pnpm check` — Biome lint/format checks, `check:games` (self-contained game folders), then TypeScript checks.
-- `/lab` (in `pnpm dev`) — play any registered game with level/seed and watch its events.
+- `/lab` (in `pnpm dev`) — play any registered game with level/seed and watch its events; `/lab/brainy` — Brainy presets, stat sliders, accessories.
 - `pnpm typecheck` — workspace TypeScript checks through Turborepo.
 - `pnpm format` — format source and config files with Biome.
 

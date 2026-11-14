@@ -4,6 +4,25 @@ Any engine works. Every game plugs into the app through **one contract** and one
 
 **Reference implementation:** `../game-store-planning` (our earlier project). It already has a tested any-engine bridge, engine build helpers, Phaser/GDevelop games and browser tests. **Port from it; don't redesign.** Paths below marked `GSP:`.
 
+## Scaling: three paths in, one contract (D-16)
+
+The app works with **built games, not source**. Wherever a game is made, it ends up as a static build + `manifest.json`, catalogued in the DB and run by `GameHost`.
+
+| Path | For | Source lives | Runtime | Status |
+|---|---|---|---|---|
+| **A · React** | small, tightly integrated learning games | `packages/games/src/<id>/` | `react` | ✅ odd-one-out |
+| **B · In-repo engine** | Phaser/GDevelop games we write | `games/<engine>-<name>/` workspace package | `embedded` | planned (T-29, T-19) |
+| **C · External** | other repos, teams or engines | **outside this repo**; we import a pinned, checksummed build artifact | `embedded` | later (T-91) |
+
+Rules that keep it scalable:
+- **Manifest = single source**, schema-validated in CI: id, version, engine, runtime, entry, skills, levels, bridge protocol + contract (`<id>@<n>`), size budget, license (T-89).
+- **Catalog in the DB** (`Game` + `GameVersion`), filled from manifests: adding a B/C game needs no app code; versions can be pinned, rolled back or disabled.
+- **Versioned bridge:** the host supports protocol N and N−1; games learn host capabilities in `init`.
+- **One conformance suite for every game** (T-90): loads, `ready` ≤ 10 s, exactly one `finish`, zero foreign requests, size budget, no console errors, Chromium + WebKit. A game is listed only after it passes. A new engine = a ~30-line adapter + passing the suite.
+- **Trust tiers:** our games → same-origin iframe; third-party → opaque-origin sandbox (CSP `sandbox` header) or a `games.` subdomain, with per-version host-method allowlists and zod validation.
+- **Hosting:** copy builds into `public/games/` at build time now; move to our-subdomain object storage when they outgrow it (still allowlistable).
+- **Choosing:** new + simple → A; needs an engine/heavy deps → B; another repo/team/engine → C (no submodules, no copied source).
+
 ## Runtimes
 
 | | `react` | `embedded` |

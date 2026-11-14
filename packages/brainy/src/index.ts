@@ -1,2 +1,3 @@
-// The typed SVG mascot renderer will be ported in T-20.
-export {};
+export { Brainy } from "./Brainy";
+export { type BrainyModel, brainyModel, mixColor } from "./model";
+export { BRAINY_PRESETS, type BrainyPreset } from "./presets";

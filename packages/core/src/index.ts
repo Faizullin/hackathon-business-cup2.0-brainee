@@ -1,4 +1,5 @@
 // Pure rules and shared types. No React, no I/O.
+export * from "./accessories";
 export * from "./brainy";
 export * from "./economy";
 export * from "./random";

@@ -11,6 +11,7 @@
     "e2e": "playwright test"
   },
   "dependencies": {
+    "@brainee/brainy": "workspace:*",
     "@brainee/core": "workspace:*",
     "@brainee/games": "workspace:*",
     "@brainee/ui": "workspace:*",
