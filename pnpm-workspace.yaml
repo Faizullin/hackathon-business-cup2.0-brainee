@@ -3,6 +3,10 @@ packages:
   - packages/*
   - games/*
 
+# Used by Vitest/tsx and Drizzle Kit; keep other dependency scripts blocked.
+allowBuilds:
+  esbuild: true
+
 minimumReleaseAgeExclude:
   - "@playwright/test@1.65.1"
   - playwright-core@1.65.1

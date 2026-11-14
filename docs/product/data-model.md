@@ -1,6 +1,8 @@
 # Data model and events
 
-Source: PRD §7. All stats, balances and tasks live on the server and sync between the child's device and the parent's phone. This is the spec; the real schema is `packages/db` (once it exists, the code wins and this file gets updated).
+Source: PRD §7. All stats, balances and tasks will live on the server and sync between the child's device and the parent's phone. This is the product spec; `packages/db/schema.ts` is the current implemented schema, and this file tracks its scope below.
+
+**Implemented in T-13:** `packages/db/schema.ts` defines Family (`id`, `plan`, `created_at`), Child (`id`, `family_id`, `name`, `birth_year`) and Wallet (`child_id`, `stars`, `suns`). Foreign keys support multiple children per family; wallet balances are nonnegative integers. `packages/db/src/seed.ts` owns the idempotent demo fixture. Remaining entities/fields, scenario seeds and data flows below are planned (T-50/T-51 and feature tasks); no family data is shown in the UI yet.
 
 ## Entities (MVP minimum)
 

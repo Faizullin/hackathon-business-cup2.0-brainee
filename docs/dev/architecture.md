@@ -1,6 +1,6 @@
 # Architecture
 
-> **Status: UI foundation ready (T-10 – T-12).** Workspace config, the Next.js app, the Base UI/shadcn UI package with fonts/motion setup, and an empty source-exported `core` exist. Other packages and product features are planned. When reality differs from this file, update this file. The reasoning behind each choice is in [decisions.md](decisions.md).
+> **Status: local data foundation ready (T-10 – T-13).** The workspace, web/UI foundation, empty `core`/`brainy`/`games` packages, Vitest and SQLite/Drizzle tools exist. The minimal schema covers Family/Child/Wallet; other entities and product features are planned. The reasoning behind each choice is in [decisions.md](decisions.md).
 
 **Guiding principle: local-first, zero infrastructure.** One SQLite file, media in the repo, one Node process. Clone → `pnpm dev` works with no accounts, Docker or cloud services.
 

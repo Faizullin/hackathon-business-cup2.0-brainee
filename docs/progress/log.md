@@ -4,6 +4,11 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (13)
+- Completed T-13: empty renderer/game packages, shared Vitest config, and SQLite/libSQL + Drizzle with a minimal family/child/wallet seed and local management commands.
+- Verified 18 path/persistence tests, lint/type checks, production build and repeated real `db:reset`; checked additive seed, FK/integer constraints and rollback. No UI changes.
+- Updated commands, setup and handoff. Next: T-28 contract before T-16 `/lab`; full schema/scenarios remain T-50/T-51.
+
 ## 2026-11-14 (12)
 - Completed T-88 / D-14: analyzed and ported game-store-planning's local browser/video/Markdown reporting pipeline, with pinned workspace Playwright, Russian phone/iPad captures and linked artifacts.
 - Generated `docs/reports/scaffold.md`: two MP4 walkthroughs (19 checks each), six screenshots and JSON timelines; documented commands, source links and local adaptations in the report guide.

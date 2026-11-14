@@ -13,7 +13,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [x] T-10 pnpm workspaces + Turborepo + `packages/config` (tsconfig, Biome, Tailwind), JIT internal packages
 - [x] T-11 `apps/web` Next.js 16 with `(child)`, `(parent)`, `(auth)` route groups
 - [x] T-12 `packages/ui`: fonts via `next/font`; `shadcn init` with a Base UI (`base-*`) style restyled to the tokens; motion tokens; install Motion + Lucide; root layout without visual chrome → [ui.md](../dev/ui.md)
-- [ ] T-13 Empty `core`, `brainy`, `games`, `db` packages with Vitest; `db` on SQLite (`data/dev.db`) + `db:reset`
+- [x] T-13 Empty `core`, `brainy`, `games`, `db` packages with Vitest; `db` on SQLite (`data/dev.db`) + `db:reset`
 - [ ] T-14 Deploy one container to Railway (volume for SQLite) on a custom domain → [setup.md](../dev/setup.md#deploy-demo)
 - [x] T-15 Update [setup.md](../dev/setup.md) and the AGENTS.md Commands section with the real commands (extend as app, DB and game scripts land)
 - [ ] T-16 Dev-only `/lab` route: game picker, level/seed, phone/iPad frame, event stream panel (`data-status`) → [games.md](../dev/games.md#lab)

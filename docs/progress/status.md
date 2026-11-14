@@ -20,10 +20,10 @@
 Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 
 ## Current focus
-The shared UI foundation is ready (T-12). Next: package/Vitest setup and local SQLite reset (T-13), following [architecture.md](../dev/architecture.md).
+Package tests and local SQLite tooling are ready (T-13). Next: the game contract (T-28), needed before the `/lab` host (T-16), following [architecture.md](../dev/architecture.md).
 
 ## Handoff
-- **Last session:** completed T-88 / D-14: ported the local recording/report pipeline from `../game-store-planning`, documented the analysis and run instructions in [reports/README.md](../reports/README.md), and generated [scaffold.md](../reports/scaffold.md). It links two phone/iPad MP4 walkthroughs (19 checks each), six PNG screenshots and JSON timelines. Production build, `pnpm check`, 29 report-tooling tests and 20 Chromium/WebKit scaffold checks passed; inspected phone/iPad captures and verified the MP4 codecs/dimensions. No app UI or dependencies changed.
-- **Next:** T-13 in small steps: add empty `brainy`/`games`/`db` packages and Vitest; configure SQLite/Drizzle; implement and verify `db:reset`. Then `/lab` and game pipeline, extending report scenarios as real flows land. Parent barrier/session remain T-40/T-52; game/reward transitions remain T-87.
+- **Last session:** completed T-13: empty `brainy`/`games` packages, shared Vitest setup for `core`/`brainy`/`games`/`db`, and a server-only libSQL/Drizzle package with Family/Child/Wallet, additive demo seed and push/reset/studio commands. Verified 18 DB tests, lint/type checks, production build, real default DB push/seed/repeated reset and gitignored data files. No UI changes; existing recordings remain applicable.
+- **Next:** T-28 game types/contract and registry, then T-16 `/lab`; port the bridge/build pipeline under T-29/T-19. Deployment (T-14) remains a separate step. Full schema and scenario seeds remain T-50/T-51. Parent barrier/session remain T-40/T-52; motion effects remain T-87.
 - **Blockers / open questions:** none blocking the scaffold. Product TBDs remain in [overview.md](../product/overview.md#open-questions-tbd).
-- **Version control:** T-88 tooling, docs and published media belong to one commit without co-author trailers; no push requested. Raw captures under `docs/reports/.captures/` stay ignored.
+- **Version control:** T-13 changes belong to one commit without co-author trailers; no push requested. Local database files stay ignored.

@@ -40,11 +40,14 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - `pnpm e2e` — build, then run the scaffold smoke tests in Chromium and WebKit (phone + iPad widths).
 - `pnpm report --video` — generate Markdown with phone/iPad recordings, screenshots and logs against a local server; see [docs/reports/README.md](docs/reports/README.md).
 - `pnpm test:reports` — validate the report generator, browser capture, video conversion and artifact links.
+- `pnpm test` — run workspace Vitest tests (currently the local database foundation).
+- `pnpm db:reset` — recreate the local SQLite database, push the schema and seed the demo.
+- `pnpm db:push` / `pnpm db:seed` / `pnpm db:studio` — apply the schema, add demo fixtures or inspect local data.
 - `pnpm check` — Biome lint/format checks, then workspace TypeScript checks.
 - `pnpm typecheck` — workspace TypeScript checks through Turborepo.
 - `pnpm format` — format source and config files with Biome.
 
-Database and game commands are still planned. Browser installation and all commands are in [docs/dev/setup.md](docs/dev/setup.md).
+Game commands are still planned. Database paths, browser installation and all commands are in [docs/dev/setup.md](docs/dev/setup.md).
 
 ## Conventions and tools
 
