@@ -29,28 +29,22 @@ export function CartoonPlayer({ id }: { id: string }) {
     <div className="mx-auto w-full max-w-2xl p-4">
       <Panel as="h1" title={cartoon?.title ?? ru.cartoon.title} note={ru.cartoon.placeholder}>
         {cartoon?.owned ? (
-          <>
-            {position < end ? (
-              <>
-                <Brainy stats={snapshot.progress.stats} className="mx-auto h-56 w-auto" />
-                <progress
-                  aria-label={ru.cartoon.title}
-                  value={position}
-                  max={end}
-                  className="w-full"
-                />
-                <button
-                  type="button"
-                  className={primaryButton}
-                  onClick={() => setPlaying(!playing)}
-                >
-                  {playing ? ru.cartoon.pause : position ? ru.cartoon.play : ru.cartoon.begin}
-                </button>
-              </>
-            ) : (
-              <p role="status">{ru.cartoon.end}</p>
-            )}
-          </>
+          position < end ? (
+            <>
+              <Brainy stats={snapshot.progress.stats} className="mx-auto h-56 w-auto" />
+              <progress
+                aria-label={ru.cartoon.title}
+                value={position}
+                max={end}
+                className="w-full"
+              />
+              <button type="button" className={primaryButton} onClick={() => setPlaying(!playing)}>
+                {playing ? ru.cartoon.pause : position ? ru.cartoon.play : ru.cartoon.begin}
+              </button>
+            </>
+          ) : (
+            <p role="status">{ru.cartoon.end}</p>
+          )
         ) : (
           <p>{ru.cartoon.locked}</p>
         )}

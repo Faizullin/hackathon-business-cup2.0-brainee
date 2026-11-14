@@ -94,9 +94,17 @@ describe("showcase actions", () => {
   });
 
   it("enforces five tasks a day", () => {
+    const firstTask = base.tasks[0] ?? {
+      id: "t0",
+      title: "Дело",
+      place: "real" as const,
+      skill: "X",
+      reward: 1,
+      status: "todo" as const,
+    };
     const full = {
       ...base,
-      tasks: Array.from({ length: TASKS_PER_DAY }, (_, i) => ({ ...base.tasks[0]!, id: `t${i}` })),
+      tasks: Array.from({ length: TASKS_PER_DAY }, (_, i) => ({ ...firstTask, id: `t${i}` })),
     };
     const add = { type: "task-add", title: "Ещё", place: "real", skill: "X", reward: 1 } as const;
     expect(applyShowcaseAction(input(full), add)).toEqual({ ok: false, reason: "daily-limit" });

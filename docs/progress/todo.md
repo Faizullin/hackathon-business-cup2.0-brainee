@@ -109,7 +109,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-72 Landing page (`apps/landing`), stretch goal
 - [ ] T-73 Pitch deck
 - [ ] T-74 Freeze `master`, tag the demo build
-- [ ] T-14 **Final step: deploy (free tiers only)**: Vercel Hobby project for `apps/web` (monorepo root dir, `<project>.vercel.app`); Turso free database; extend `getDatabaseConfig`/`openDatabase` for `libsql://` + `DATABASE_AUTH_TOKEN`; `db:push` + seed against Turso; run the e2e suite against the deployed URL → [D-15](../dev/decisions.md)
+- [ ] T-14 **Deploy (free tiers only)**: Turso cloud database provisioned and seeded (`libsql://brainee-demo-...`); `getDatabaseConfig`, `openDatabase`, `drizzle.config.ts` and `scripts/manage.ts` updated and tested with `DATABASE_AUTH_TOKEN`; Vercel Hobby project deployment next → [D-15](../dev/decisions.md)
 
 ## Backlog / ideas
 - [x] T-80 Define a smallest end-to-end demo slice and prioritize it ahead of optional features → [scope above](#smallest-end-to-end-demo-slice-t-80).

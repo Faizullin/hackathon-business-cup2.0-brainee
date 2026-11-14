@@ -12,13 +12,19 @@ const require = createRequire(import.meta.url);
 const packageDirectory = fileURLToPath(new URL("..", import.meta.url));
 
 export function runDrizzle(config: DatabaseConfig, command: "push" | "studio" = "push") {
-  mkdirSync(dirname(config.path), { recursive: true });
+  if (config.path) {
+    mkdirSync(dirname(config.path), { recursive: true });
+  }
   // Resolve the installed CLI; never invoke a shell or download a tool at runtime.
   const cli = join(dirname(require.resolve("drizzle-kit")), "bin.cjs");
   return (
     execFileSync(process.execPath, [cli, command, "--config", "drizzle.config.ts"], {
       cwd: packageDirectory,
-      env: { ...process.env, DATABASE_URL: config.url },
+      env: {
+        ...process.env,
+        DATABASE_URL: config.url,
+        ...(config.authToken ? { DATABASE_AUTH_TOKEN: config.authToken } : {}),
+      },
       encoding: "utf8",
       stdio: command === "studio" ? "inherit" : "pipe",
     }) ?? ""
@@ -54,6 +60,9 @@ async function assertResetTarget(path: string) {
 }
 
 export async function resetDatabase(config: DatabaseConfig) {
+  if (config.isRemote || !config.path) {
+    throw new Error("Refusing to reset a remote database automatically.");
+  }
   await assertResetTarget(config.path);
   for (const suffix of ["", "-wal", "-shm"]) {
     await rm(`${config.path}${suffix}`, { force: true });

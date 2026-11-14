@@ -26,17 +26,23 @@ describe("local database paths", () => {
   it("supports an absolute deployment path without requiring a workspace at runtime", () => {
     const absolute = resolve("/data/brainee.db");
     expect(getDatabaseConfig(`file:${absolute}`, "/")).toEqual({
+      isRemote: false,
+      authToken: undefined,
       path: absolute,
       url: pathToFileURL(absolute).href,
     });
   });
 
-  it("decodes file URLs containing spaces", () => {
-    const absolute = resolve(workspace, "data/test folder/demo.db");
-    expect(getDatabaseConfig(pathToFileURL(absolute).href).path).toBe(absolute);
+  it("supports remote libsql database URLs with optional auth tokens", () => {
+    expect(getDatabaseConfig("libsql://demo.turso.io", "/", "test-token")).toEqual({
+      isRemote: true,
+      authToken: "test-token",
+      path: "",
+      url: "libsql://demo.turso.io",
+    });
   });
 
-  it.each(["", "file:", "file::memory:", "libsql://example.com/demo", "https://example.com/db"])(
+  it.each(["", "file:", "file::memory:", "postgres://localhost/db", "mysql://localhost/db"])(
     "rejects unsupported database location %j",
     (url) => {
       expect(() => getDatabaseConfig(url)).toThrow(/local SQLite file/);

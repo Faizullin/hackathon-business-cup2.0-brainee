@@ -4,6 +4,11 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (Turso remote database deployment configuration)
+- First deployment phase for T-14: configured `packages/db` (`getDatabaseConfig`, `openDatabase`, `drizzle.config.ts`, `database-tools.ts`, `manage.ts`) to support remote libSQL/Turso URLs (`libsql://`) and `DATABASE_AUTH_TOKEN`, skipping local SQLite PRAGMAs/directories on cloud connections.
+- Provisioned cloud database `brainee-demo` on Turso in Frankfurt (`aws-eu-central-1`), pushed schema and seeded demo showcase data. Created `.env.deployed` (gitignored) with cloud credentials.
+- Workspace `pnpm check` and all 43 database unit tests pass cleanly with 0 errors. Ready for Vercel Hobby project linkage.
+
 ## 2026-11-14 (jury access and live product loop)
 - Completed T-107–T-109 and ticked T-53/T-63: isolated one-tap jury families, simple signup/setup, actual learning history/analytics, app-task rewards, earned thresholds/progress/celebrations, Snake play credit and restart-from-zero cartoon placeholders. D-29 records the minimal persistence choices; demo.md starts with the one-minute jury path.
 - `pnpm check` and 169 unit tests pass. Full browser run: 226/228; corrected lab readiness and WebKit speculative game-route fetch cancellation, then all 44 affected checks passed on the final build across both engines/sizes. WebKit screenshots reviewed. No learning runtime/catalog/adapter edits; no deployment. Fresh recordings and physical-device rehearsal are next.

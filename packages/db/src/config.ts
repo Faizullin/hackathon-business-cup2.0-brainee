@@ -13,10 +13,26 @@ function findWorkspaceRoot(cwd: string) {
   }
 }
 
-export function getDatabaseConfig(databaseUrl = process.env.DATABASE_URL, cwd = process.cwd()) {
+export function getDatabaseConfig(
+  databaseUrl = process.env.DATABASE_URL,
+  cwd = process.cwd(),
+  authToken = process.env.DATABASE_AUTH_TOKEN,
+) {
   const url = databaseUrl ?? "file:./data/dev.db";
+
+  if (url.startsWith("libsql://") || url.startsWith("https://")) {
+    return {
+      isRemote: true,
+      path: "",
+      url,
+      authToken: authToken || undefined,
+    };
+  }
+
   if (!url.startsWith("file:") || url === "file:" || url === "file::memory:") {
-    throw new Error("DATABASE_URL must point to a local SQLite file (file:...).");
+    throw new Error(
+      "DATABASE_URL must point to a local SQLite file (file:...) or remote database (libsql://...).",
+    );
   }
 
   let filePath: string;
@@ -32,7 +48,12 @@ export function getDatabaseConfig(databaseUrl = process.env.DATABASE_URL, cwd = 
     filePath = isAbsolute(path) ? resolve(path) : resolve(findWorkspaceRoot(cwd), path);
   }
 
-  return { path: filePath, url: pathToFileURL(filePath).href };
+  return {
+    isRemote: false,
+    path: filePath,
+    url: pathToFileURL(filePath).href,
+    authToken: undefined,
+  };
 }
 
 export type DatabaseConfig = ReturnType<typeof getDatabaseConfig>;
