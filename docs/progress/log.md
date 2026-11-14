@@ -4,6 +4,11 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (reports)
+- Reviewed changes since T-30 (T-34/35/54/55/80/81, D-17–D-20) and mapped the MVP acceptance criteria to remaining tasks in todo.md.
+- T-95: new `learning` report module (scenario + child-only game solvers). Re-recorded `learning` (27/27 checks per flow, 12 shots) and `scaffold` (19/19). Found T-94: the practice card can repeat the game just played.
+- Verified `pnpm check` and `pnpm test:reports`. No app code changed.
+
 ## 2026-11-14 (saved child flow)
 - T-55 child subset: cookie-authorized versioned state, TanStack Query polling, issued launches, confirmed rewards and stop. D-20 replaces the local preview; only pending finish envelopes use tab storage.
 - Verified: check/build; 86 unit tests; 112 e2e in Chromium/WebKit phone/iPad, including independent-device polling, lost-response reload/replay, newer balances, blocked storage and failed refresh. Six demo-off requests return 404 without opening a DB; WebKit screenshots reviewed. Normal pointer flows pass again (T-93); original cause unconfirmed.

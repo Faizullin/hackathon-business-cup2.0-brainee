@@ -16,6 +16,24 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 
 Other task IDs stay outside this slice. T-24/T-25 are available as pure core improvements; entry flow, tasks/gifts, leisure, advanced analytics, embedded games and motion polish wait. Deployment remains the final task (T-14).
 
+## Road to MVP (acceptance criteria → remaining tasks)
+Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). Status on 2026-11-14:
+
+| # | Criterion | State | Remaining |
+|---|---|---|---|
+| 1 | Entry screen, no close, 3 games by gap, choice logged | core ready (T-25) | T-31, T-32, T-83 age averages |
+| 2 | Post-game before → after, two next steps, stop; 3-game break + bonus | ✅ done (T-35) | T-94 |
+| 3 | Stats/stage update for child **and parent** without reload | child ✅ | T-40, T-41, rest of T-55, T-71 |
+| 4 | Accessories buy/wear/remove, shown everywhere | rules ✅ (T-27) | T-38 shop UI + saved `equipped` |
+| 5 | Science video: pause only, resume, ★ only after correct answer | — | T-37 (+ licensed media, T-84) |
+| 6 | Task «Готово» → parent confirms → ☀ + weekly goal + `resp` | — | T-26, T-44, T-50 Task entity |
+| 7 | Gifts ☀ only; exchange ☀ → ★ 1:10 | rules ✅ (T-22) | T-38 Gifts tab, T-46 |
+| 8 | 5-tasks-a-day limit | — | T-26, T-44 |
+| 9 | Ranking hidden from child, no last names | trivially true | T-43 (parent only) |
+| 10 | Own-domain only; works with Screen Time allowlist | e2e checks foreign requests | T-60, T-61, T-62 |
+
+Suggested order: parent proof (T-40/T-41/T-55) → entry + Learn recommendations (T-31/T-32) → Brainy shop + Gifts (T-38/T-46) → tasks (T-26/T-44) → Leisure + video (T-36/T-37) → PWA/allowlist (T-60–T-62) → demo (T-70/T-71/T-73) → T-14 deploy.
+
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
 - [x] T-02 Pick the stack and monorepo layout → [decisions.md](../dev/decisions.md)
@@ -107,6 +125,8 @@ Other task IDs stay outside this slice. T-24/T-25 are available as pure core imp
 - [ ] T-90 Game conformance suite (Playwright, Chromium + WebKit): load, ready ≤ 10 s, one finish, zero foreign requests, size budget, no console errors; required before a game is listed
 - [ ] T-91 (Later) External game artifacts (path C): `games:import <id>@<version>` with checksum, `GameVersion` table, enable/disable/rollback
 - [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
+- [ ] T-94 Post-game «Подтянуть навык» card should prefer a different game than the one just played (the report shows it repeating Odd one out next to its own next-level card) → [screens.md](../product/screens.md#game-screen-and-no-exit-flow)
+- [x] T-95 `learning` report module: phone/iPad recordings of the saved three-game loop, break, tabs and `/lab` → [reports/learning.md](../reports/learning.md)
 - [x] T-93 Restore complete WebKit UI verification with normal clicks: the full suite passes at phone/iPad widths; the earlier coordinate failure no longer reproduces, with its cause unconfirmed. Keep the [diagnostic repro](../dev/setup.md#webkit-pointer-diagnostics-t-93) if it recurs.
 - Additional learning games (Sounds & letters, Repeat after Brainy, Magic garden, Expedition, Error detective)
 - Fun games beyond the first one

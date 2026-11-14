@@ -17,7 +17,7 @@ headings, Russian document language, loaded fonts and horizontal overflow.
 
 ### Phone · 390 × 844
 
-**Phone: welcome, learning, analytics and 404 recovery** (flow `phone-walkthrough`): PASSED, 19 of 19 checks passed, 7.3 s, phone. Recorded Nov 14, 2026, 2:56 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/login`.
+**Phone: welcome, learning, analytics and 404 recovery** (flow `phone-walkthrough`): PASSED, 19 of 19 checks passed, 7.4 s, phone. Recorded Nov 14, 2026, 5:29 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/login`.
 
 [![Phone: welcome, learning, analytics and 404 recovery: click to play the recording](videos/scaffold/phone-walkthrough.jpg)](videos/scaffold/phone-walkthrough.mp4)
 
@@ -25,45 +25,45 @@ headings, Russian document language, loaded fonts and horizontal overflow.
 
 | Time | Source | Entry |
 | --- | --- | --- |
-| 00:00.050 | step | open /login |
-| 00:01.620 | check | The welcome screen appears |
-| 00:01.621 | check | The document language is Russian |
-| 00:01.621 | check | The screen fits without horizontal scrolling |
-| 00:01.621 | check | The two self-hosted font families load |
-| 00:01.621 | step | call checkSurface |
-| 00:01.621 | mark | Follow the welcome screen return link |
-| 00:01.640 | step | click {"by":"role","role":"link","name":"К занятиям","exact":true} |
-| 00:01.720 | check | The welcome link opens learning |
-| 00:01.721 | check | The document language is Russian |
-| 00:01.721 | check | The screen fits without horizontal scrolling |
-| 00:01.721 | check | The two self-hosted font families load |
-| 00:01.721 | step | call checkSurface |
-| 00:02.522 | step | wait 800 |
-| 00:02.522 | mark | Open the parent analytics placeholder directly |
-| 00:04.063 | step | goto /analytics |
-| 00:04.084 | check | The parent analytics placeholder appears |
-| 00:04.084 | check | The document language is Russian |
-| 00:04.084 | check | The screen fits without horizontal scrolling |
-| 00:04.084 | check | The two self-hosted font families load |
-| 00:04.084 | step | call checkSurface |
-| 00:04.886 | step | wait 800 |
-| 00:04.886 | mark | Open a missing route and return to learning |
-| 00:04.900 | network (warn) | 404 GET http://127.0.0.1:3123/missing-page |
-| 00:04.908 | console (warn) | Failed to load resource: the server responded with a status of 404 (Not Found) |
-| 00:04.914 | check | The missing route returns HTTP 404 |
-| 00:04.931 | check | The Russian missing-page screen appears |
-| 00:04.933 | check | The document language is Russian |
-| 00:04.933 | check | The screen fits without horizontal scrolling |
-| 00:04.933 | check | The two self-hosted font families load |
-| 00:05.796 | check | The 404 return link opens learning |
-| 00:05.796 | step | call recoverMissing |
-| 00:05.796 | check | The walkthrough ends on learning |
+| 00:00.051 | step | open /login |
+| 00:01.613 | check | The welcome screen appears |
+| 00:01.614 | check | The document language is Russian |
+| 00:01.614 | check | The screen fits without horizontal scrolling |
+| 00:01.614 | check | The two self-hosted font families load |
+| 00:01.614 | step | call checkSurface |
+| 00:01.614 | mark | Follow the welcome screen return link |
+| 00:01.641 | step | click {"by":"role","role":"link","name":"К занятиям","exact":true} |
+| 00:01.727 | check | The welcome link opens learning |
+| 00:01.728 | check | The document language is Russian |
+| 00:01.728 | check | The screen fits without horizontal scrolling |
+| 00:01.728 | check | The two self-hosted font families load |
+| 00:01.728 | step | call checkSurface |
+| 00:02.528 | step | wait 800 |
+| 00:02.528 | mark | Open the parent analytics placeholder directly |
+| 00:04.071 | step | goto /analytics |
+| 00:04.081 | check | The parent analytics placeholder appears |
+| 00:04.082 | check | The document language is Russian |
+| 00:04.082 | check | The screen fits without horizontal scrolling |
+| 00:04.082 | check | The two self-hosted font families load |
+| 00:04.082 | step | call checkSurface |
+| 00:04.883 | step | wait 800 |
+| 00:04.884 | mark | Open a missing route and return to learning |
+| 00:04.894 | network (warn) | 404 GET http://127.0.0.1:3123/missing-page |
+| 00:04.900 | console (warn) | Failed to load resource: the server responded with a status of 404 (Not Found) |
+| 00:04.903 | check | The missing route returns HTTP 404 |
+| 00:04.916 | check | The Russian missing-page screen appears |
+| 00:04.917 | check | The document language is Russian |
+| 00:04.917 | check | The screen fits without horizontal scrolling |
+| 00:04.917 | check | The two self-hosted font families load |
+| 00:05.813 | check | The 404 return link opens learning |
+| 00:05.813 | step | call recoverMissing |
+| 00:05.813 | check | The walkthrough ends on learning |
 
 </details>
 
 ### iPad viewport · 820 × 1180
 
-**iPad viewport: welcome, learning, analytics and 404 recovery** (flow `ipad-walkthrough`): PASSED, 19 of 19 checks passed, 7.5 s, ipad. Recorded Nov 14, 2026, 2:56 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/login`.
+**iPad viewport: welcome, learning, analytics and 404 recovery** (flow `ipad-walkthrough`): PASSED, 19 of 19 checks passed, 7.5 s, ipad. Recorded Nov 14, 2026, 5:29 p.m. (Asia/Almaty) against `http://127.0.0.1:3123/login`.
 
 [![iPad viewport: welcome, learning, analytics and 404 recovery: click to play the recording](videos/scaffold/ipad-walkthrough.jpg)](videos/scaffold/ipad-walkthrough.mp4)
 
@@ -71,39 +71,39 @@ headings, Russian document language, loaded fonts and horizontal overflow.
 
 | Time | Source | Entry |
 | --- | --- | --- |
-| 00:00.041 | step | open /login |
-| 00:01.589 | check | The welcome screen appears |
-| 00:01.590 | check | The document language is Russian |
-| 00:01.590 | check | The screen fits without horizontal scrolling |
-| 00:01.590 | check | The two self-hosted font families load |
-| 00:01.590 | step | call checkSurface |
-| 00:01.590 | mark | Follow the welcome screen return link |
-| 00:01.608 | step | click {"by":"role","role":"link","name":"К занятиям","exact":true} |
-| 00:01.691 | check | The welcome link opens learning |
-| 00:01.691 | check | The document language is Russian |
-| 00:01.691 | check | The screen fits without horizontal scrolling |
-| 00:01.691 | check | The two self-hosted font families load |
-| 00:01.691 | step | call checkSurface |
-| 00:02.493 | step | wait 800 |
-| 00:02.493 | mark | Open the parent analytics placeholder directly |
-| 00:04.045 | step | goto /analytics |
-| 00:04.068 | check | The parent analytics placeholder appears |
-| 00:04.095 | check | The document language is Russian |
-| 00:04.095 | check | The screen fits without horizontal scrolling |
-| 00:04.095 | check | The two self-hosted font families load |
-| 00:04.095 | step | call checkSurface |
-| 00:04.896 | step | wait 800 |
-| 00:04.897 | mark | Open a missing route and return to learning |
-| 00:04.903 | network (warn) | 404 GET http://127.0.0.1:3123/missing-page |
-| 00:04.907 | console (warn) | Failed to load resource: the server responded with a status of 404 (Not Found) |
-| 00:04.913 | check | The missing route returns HTTP 404 |
-| 00:04.930 | check | The Russian missing-page screen appears |
-| 00:04.931 | check | The document language is Russian |
-| 00:04.931 | check | The screen fits without horizontal scrolling |
-| 00:04.931 | check | The two self-hosted font families load |
-| 00:05.797 | check | The 404 return link opens learning |
-| 00:05.797 | step | call recoverMissing |
-| 00:05.797 | check | The walkthrough ends on learning |
+| 00:00.101 | step | open /login |
+| 00:01.657 | check | The welcome screen appears |
+| 00:01.658 | check | The document language is Russian |
+| 00:01.658 | check | The screen fits without horizontal scrolling |
+| 00:01.658 | check | The two self-hosted font families load |
+| 00:01.658 | step | call checkSurface |
+| 00:01.658 | mark | Follow the welcome screen return link |
+| 00:01.684 | step | click {"by":"role","role":"link","name":"К занятиям","exact":true} |
+| 00:01.773 | check | The welcome link opens learning |
+| 00:01.774 | check | The document language is Russian |
+| 00:01.774 | check | The screen fits without horizontal scrolling |
+| 00:01.774 | check | The two self-hosted font families load |
+| 00:01.774 | step | call checkSurface |
+| 00:02.575 | step | wait 800 |
+| 00:02.575 | mark | Open the parent analytics placeholder directly |
+| 00:04.117 | step | goto /analytics |
+| 00:04.138 | check | The parent analytics placeholder appears |
+| 00:04.139 | check | The document language is Russian |
+| 00:04.139 | check | The screen fits without horizontal scrolling |
+| 00:04.139 | check | The two self-hosted font families load |
+| 00:04.139 | step | call checkSurface |
+| 00:04.941 | step | wait 800 |
+| 00:04.941 | mark | Open a missing route and return to learning |
+| 00:04.951 | network (warn) | 404 GET http://127.0.0.1:3123/missing-page |
+| 00:04.959 | console (warn) | Failed to load resource: the server responded with a status of 404 (Not Found) |
+| 00:04.967 | check | The missing route returns HTTP 404 |
+| 00:04.985 | check | The Russian missing-page screen appears |
+| 00:04.987 | check | The document language is Russian |
+| 00:04.987 | check | The screen fits without horizontal scrolling |
+| 00:04.987 | check | The two self-hosted font families load |
+| 00:05.897 | check | The 404 return link opens learning |
+| 00:05.897 | step | call recoverMissing |
+| 00:05.897 | check | The walkthrough ends on learning |
 
 </details>
 
@@ -141,7 +141,7 @@ steps, checks, console errors, network failures and optional bridge messages.
 Expected HTTP 404 and browser console messages for the missing route are
 retained as warnings; the walkthrough checks that the response is exactly 404.
 
-Captured Nov 14, 2026, 2:56 p.m. (Asia/Almaty): 6 scenarios, ipad and phone; Russian, light theme. No failed steps, redirects, JavaScript errors, HTTP errors or unexpected failed requests. 0 known lifecycle request cancellations remain in the manifest. Source: `2772388` with working-tree changes. Imported static references are not live captures. Flows: `phone-walkthrough` PASSED (19 checks), `ipad-walkthrough` PASSED (19 checks). Timelines: [JSON log](logs/scaffold.json).
+Captured Nov 14, 2026, 5:29 p.m. (Asia/Almaty): 6 scenarios, ipad and phone; Russian, light theme. No failed steps, redirects, JavaScript errors, HTTP errors or unexpected failed requests. 0 known lifecycle request cancellations remain in the manifest. Source: `06bb2a2` with working-tree changes. Imported static references are not live captures. Flows: `phone-walkthrough` PASSED (19 checks), `ipad-walkthrough` PASSED (19 checks). Timelines: [JSON log](logs/scaffold.json).
 
 The editable [template](src/scaffold.md), [scenario](../../scripts/reports/scenarios/scaffold.json)
 and [walkthrough actions](../../scripts/reports/scenarios/scaffold.mjs) define

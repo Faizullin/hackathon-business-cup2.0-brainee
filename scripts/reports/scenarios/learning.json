@@ -1,0 +1,616 @@
+{
+  "shots": [
+    {
+      "route": "/learn",
+      "shots": [
+        {
+          "name": "learn",
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Учимся",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/game/odd-one-out?level=1&seed=42",
+      "shots": [
+        {
+          "name": "odd-one-out",
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "button",
+                  "name": "Фигура 1",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/game/continue-pattern?level=2&seed=42",
+      "shots": [
+        {
+          "name": "continue-pattern",
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "list",
+                  "name": "Узор",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/brainy",
+      "shots": [
+        {
+          "name": "brainy",
+          "fullPage": true,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Мой Брейни",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/lab",
+      "shots": [
+        {
+          "name": "lab",
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "Лаборатория игр",
+                  "exact": true
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/lab/brainy",
+      "shots": [
+        {
+          "name": "lab-brainy",
+          "fullPage": true,
+          "steps": [
+            {
+              "expect": {
+                "target": {
+                  "by": "testId",
+                  "value": "brainy-stage"
+                },
+                "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.documentElement.lang === \"ru\" && document.documentElement.scrollWidth <= window.innerWidth",
+                "message": "Russian screen fits the viewport"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "name": "phone-learning",
+      "title": "Phone: three saved games, break and child tabs",
+      "viewport": "phone",
+      "start": "/learn",
+      "steps": [
+        {
+          "expect": {
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Учимся",
+              "exact": true
+            },
+            "timeout": 20000,
+            "message": "Learn opens with saved state"
+          }
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "testId",
+              "value": "wallet-stars"
+            },
+            "message": "The Brainy dock shows the saved wallet"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "mark": "Game 1: open Continue the pattern from the Learn grid"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Продолжи узор"
+          }
+        },
+        {
+          "expect": {
+            "url": "^/game/continue-pattern",
+            "message": "The game opens fullscreen"
+          }
+        },
+        {
+          "call": "playGame"
+        },
+        {
+          "call": "showPostGame",
+          "args": {
+            "game": 1
+          }
+        },
+        {
+          "mark": "Game 2: «Что дальше?» practice card"
+        },
+        {
+          "click": {
+            "by": "testId",
+            "value": "practice-game"
+          }
+        },
+        {
+          "call": "playGame"
+        },
+        {
+          "call": "showPostGame",
+          "args": {
+            "game": 2
+          }
+        },
+        {
+          "mark": "Game 3: next level card"
+        },
+        {
+          "click": {
+            "by": "testId",
+            "value": "next-level"
+          }
+        },
+        {
+          "call": "playGame"
+        },
+        {
+          "call": "showPostGame",
+          "args": {
+            "game": 3
+          }
+        },
+        {
+          "mark": "Take the suggested break"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Сделать перерыв",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/brainy$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Мой Брейни",
+              "exact": true
+            },
+            "message": "The break ends on the Brainy tab"
+          }
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "text",
+              "value": "Спасибо за занятия! А теперь можно отдохнуть."
+            },
+            "message": "Brainy thanks the child"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "wait": 1500
+        },
+        {
+          "mark": "Visit the other tabs"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Учимся",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/learn$",
+            "target": {
+              "by": "testId",
+              "value": "wallet-stars"
+            },
+            "message": "Learn shows the updated wallet"
+          }
+        },
+        {
+          "wait": 1000
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Отдых",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/leisure$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Отдых",
+              "exact": true
+            },
+            "message": "Leisure placeholder (T-36)"
+          }
+        },
+        {
+          "wait": 800
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Подарки",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/gifts$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Подарки",
+              "exact": true
+            },
+            "message": "Gifts placeholder (T-38)"
+          }
+        },
+        {
+          "wait": 800
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Открыть Брейни",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/brainy$",
+            "message": "The dock opens the Brainy tab"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "wait": 1200
+        }
+      ]
+    },
+    {
+      "name": "ipad-learning",
+      "title": "iPad viewport: three saved games, break and child tabs",
+      "viewport": "ipad",
+      "start": "/learn",
+      "steps": [
+        {
+          "expect": {
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Учимся",
+              "exact": true
+            },
+            "timeout": 20000,
+            "message": "Learn opens with saved state"
+          }
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "testId",
+              "value": "wallet-stars"
+            },
+            "message": "The Brainy dock shows the saved wallet"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "mark": "Game 1: open Continue the pattern from the Learn grid"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Продолжи узор"
+          }
+        },
+        {
+          "expect": {
+            "url": "^/game/continue-pattern",
+            "message": "The game opens fullscreen"
+          }
+        },
+        {
+          "call": "playGame"
+        },
+        {
+          "call": "showPostGame",
+          "args": {
+            "game": 1
+          }
+        },
+        {
+          "mark": "Game 2: «Что дальше?» practice card"
+        },
+        {
+          "click": {
+            "by": "testId",
+            "value": "practice-game"
+          }
+        },
+        {
+          "call": "playGame"
+        },
+        {
+          "call": "showPostGame",
+          "args": {
+            "game": 2
+          }
+        },
+        {
+          "mark": "Game 3: next level card"
+        },
+        {
+          "click": {
+            "by": "testId",
+            "value": "next-level"
+          }
+        },
+        {
+          "call": "playGame"
+        },
+        {
+          "call": "showPostGame",
+          "args": {
+            "game": 3
+          }
+        },
+        {
+          "mark": "Take the suggested break"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "button",
+            "name": "Сделать перерыв",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/brainy$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Мой Брейни",
+              "exact": true
+            },
+            "message": "The break ends on the Brainy tab"
+          }
+        },
+        {
+          "expect": {
+            "target": {
+              "by": "text",
+              "value": "Спасибо за занятия! А теперь можно отдохнуть."
+            },
+            "message": "Brainy thanks the child"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "wait": 1500
+        },
+        {
+          "mark": "Visit the other tabs"
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Учимся",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/learn$",
+            "target": {
+              "by": "testId",
+              "value": "wallet-stars"
+            },
+            "message": "Learn shows the updated wallet"
+          }
+        },
+        {
+          "wait": 1000
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Отдых",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/leisure$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Отдых",
+              "exact": true
+            },
+            "message": "Leisure placeholder (T-36)"
+          }
+        },
+        {
+          "wait": 800
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Подарки",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/gifts$",
+            "target": {
+              "by": "role",
+              "role": "heading",
+              "name": "Подарки",
+              "exact": true
+            },
+            "message": "Gifts placeholder (T-38)"
+          }
+        },
+        {
+          "wait": 800
+        },
+        {
+          "click": {
+            "by": "role",
+            "role": "link",
+            "name": "Открыть Брейни",
+            "exact": true
+          }
+        },
+        {
+          "expect": {
+            "url": "^/brainy$",
+            "message": "The dock opens the Brainy tab"
+          }
+        },
+        {
+          "call": "checkSurface"
+        },
+        {
+          "wait": 1200
+        }
+      ]
+    }
+  ]
+}

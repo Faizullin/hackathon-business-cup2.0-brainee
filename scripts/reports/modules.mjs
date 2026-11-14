@@ -17,6 +17,15 @@ export const modules = {
     fixtures: {},
     staticAssets: {},
   },
+  learning: {
+    title: "Brainee: saved child learning loop",
+    scenario: "scripts/reports/scenarios/learning.json",
+    routePrefix: "/",
+    viewports: ["ipad", "phone"],
+    localeLabel: "Russian",
+    fixtures: {},
+    staticAssets: {},
+  },
 };
 
 export function reportModule(id) {

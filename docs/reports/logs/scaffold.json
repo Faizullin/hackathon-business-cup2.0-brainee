@@ -8,8 +8,8 @@
       "title": "Phone: welcome, learning, analytics and 404 recovery",
       "surface": "web",
       "target": "http://127.0.0.1:3123/login",
-      "startedAt": "2026-11-14T09:56:03.400Z",
-      "durationMs": 7335,
+      "startedAt": "2026-11-14T12:29:20.491Z",
+      "durationMs": 7357,
       "status": "PASSED",
       "checks": {
         "passed": 19,
@@ -21,207 +21,207 @@
       "media": {
         "video": "phone-walkthrough.mp4",
         "poster": "phone-walkthrough.jpg",
-        "bytes": 26573
+        "bytes": 49841
       },
       "screenshots": [],
       "entries": [
         {
-          "t": 50,
+          "t": 51,
           "source": "step",
           "level": "info",
           "message": "open /login"
         },
         {
-          "t": 1620,
+          "t": 1613,
           "source": "check",
           "level": "info",
           "message": "The welcome screen appears",
           "data": null
         },
         {
-          "t": 1621,
+          "t": 1614,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 1621,
+          "t": 1614,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 1621,
+          "t": 1614,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 1621,
+          "t": 1614,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 1621,
+          "t": 1614,
           "source": "mark",
           "level": "info",
           "message": "Follow the welcome screen return link"
         },
         {
-          "t": 1640,
+          "t": 1641,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"К занятиям\",\"exact\":true}"
         },
         {
-          "t": 1720,
+          "t": 1727,
           "source": "check",
           "level": "info",
           "message": "The welcome link opens learning",
           "data": null
         },
         {
-          "t": 1721,
+          "t": 1728,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 1721,
+          "t": 1728,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 1721,
+          "t": 1728,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 1721,
+          "t": 1728,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 2522,
+          "t": 2528,
           "source": "step",
           "level": "info",
           "message": "wait 800"
         },
         {
-          "t": 2522,
+          "t": 2528,
           "source": "mark",
           "level": "info",
           "message": "Open the parent analytics placeholder directly"
         },
         {
-          "t": 4063,
+          "t": 4071,
           "source": "step",
           "level": "info",
           "message": "goto /analytics"
         },
         {
-          "t": 4084,
+          "t": 4081,
           "source": "check",
           "level": "info",
           "message": "The parent analytics placeholder appears",
           "data": null
         },
         {
-          "t": 4084,
+          "t": 4082,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 4084,
+          "t": 4082,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 4084,
+          "t": 4082,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 4084,
+          "t": 4082,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 4886,
+          "t": 4883,
           "source": "step",
           "level": "info",
           "message": "wait 800"
         },
         {
-          "t": 4886,
+          "t": 4884,
           "source": "mark",
           "level": "info",
           "message": "Open a missing route and return to learning"
         },
         {
-          "t": 4900,
+          "t": 4894,
           "source": "network",
           "level": "warn",
           "message": "404 GET http://127.0.0.1:3123/missing-page"
         },
         {
-          "t": 4908,
+          "t": 4900,
           "source": "console",
           "level": "warn",
           "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
         },
         {
-          "t": 4914,
+          "t": 4903,
           "source": "check",
           "level": "info",
           "message": "The missing route returns HTTP 404"
         },
         {
-          "t": 4931,
+          "t": 4916,
           "source": "check",
           "level": "info",
           "message": "The Russian missing-page screen appears"
         },
         {
-          "t": 4933,
+          "t": 4917,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 4933,
+          "t": 4917,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 4933,
+          "t": 4917,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 5796,
+          "t": 5813,
           "source": "check",
           "level": "info",
           "message": "The 404 return link opens learning"
         },
         {
-          "t": 5796,
+          "t": 5813,
           "source": "step",
           "level": "info",
           "message": "call recoverMissing"
         },
         {
-          "t": 5796,
+          "t": 5813,
           "source": "check",
           "level": "info",
           "message": "The walkthrough ends on learning",
@@ -236,8 +236,8 @@
       "title": "iPad viewport: welcome, learning, analytics and 404 recovery",
       "surface": "web",
       "target": "http://127.0.0.1:3123/login",
-      "startedAt": "2026-11-14T09:56:10.735Z",
-      "durationMs": 7493,
+      "startedAt": "2026-11-14T12:29:27.848Z",
+      "durationMs": 7512,
       "status": "PASSED",
       "checks": {
         "passed": 19,
@@ -249,207 +249,207 @@
       "media": {
         "video": "ipad-walkthrough.mp4",
         "poster": "ipad-walkthrough.jpg",
-        "bytes": 30207
+        "bytes": 53947
       },
       "screenshots": [],
       "entries": [
         {
-          "t": 41,
+          "t": 101,
           "source": "step",
           "level": "info",
           "message": "open /login"
         },
         {
-          "t": 1589,
+          "t": 1657,
           "source": "check",
           "level": "info",
           "message": "The welcome screen appears",
           "data": null
         },
         {
-          "t": 1590,
+          "t": 1658,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 1590,
+          "t": 1658,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 1590,
+          "t": 1658,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 1590,
+          "t": 1658,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 1590,
+          "t": 1658,
           "source": "mark",
           "level": "info",
           "message": "Follow the welcome screen return link"
         },
         {
-          "t": 1608,
+          "t": 1684,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"К занятиям\",\"exact\":true}"
         },
         {
-          "t": 1691,
+          "t": 1773,
           "source": "check",
           "level": "info",
           "message": "The welcome link opens learning",
           "data": null
         },
         {
-          "t": 1691,
+          "t": 1774,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 1691,
+          "t": 1774,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 1691,
+          "t": 1774,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 1691,
+          "t": 1774,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 2493,
+          "t": 2575,
           "source": "step",
           "level": "info",
           "message": "wait 800"
         },
         {
-          "t": 2493,
+          "t": 2575,
           "source": "mark",
           "level": "info",
           "message": "Open the parent analytics placeholder directly"
         },
         {
-          "t": 4045,
+          "t": 4117,
           "source": "step",
           "level": "info",
           "message": "goto /analytics"
         },
         {
-          "t": 4068,
+          "t": 4138,
           "source": "check",
           "level": "info",
           "message": "The parent analytics placeholder appears",
           "data": null
         },
         {
-          "t": 4095,
+          "t": 4139,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 4095,
+          "t": 4139,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 4095,
+          "t": 4139,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 4095,
+          "t": 4139,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 4896,
+          "t": 4941,
           "source": "step",
           "level": "info",
           "message": "wait 800"
         },
         {
-          "t": 4897,
+          "t": 4941,
           "source": "mark",
           "level": "info",
           "message": "Open a missing route and return to learning"
         },
         {
-          "t": 4903,
+          "t": 4951,
           "source": "network",
           "level": "warn",
           "message": "404 GET http://127.0.0.1:3123/missing-page"
         },
         {
-          "t": 4907,
+          "t": 4959,
           "source": "console",
           "level": "warn",
           "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
         },
         {
-          "t": 4913,
+          "t": 4967,
           "source": "check",
           "level": "info",
           "message": "The missing route returns HTTP 404"
         },
         {
-          "t": 4930,
+          "t": 4985,
           "source": "check",
           "level": "info",
           "message": "The Russian missing-page screen appears"
         },
         {
-          "t": 4931,
+          "t": 4987,
           "source": "check",
           "level": "info",
           "message": "The document language is Russian"
         },
         {
-          "t": 4931,
+          "t": 4987,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 4931,
+          "t": 4987,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 5797,
+          "t": 5897,
           "source": "check",
           "level": "info",
           "message": "The 404 return link opens learning"
         },
         {
-          "t": 5797,
+          "t": 5897,
           "source": "step",
           "level": "info",
           "message": "call recoverMissing"
         },
         {
-          "t": 5797,
+          "t": 5897,
           "source": "check",
           "level": "info",
           "message": "The walkthrough ends on learning",

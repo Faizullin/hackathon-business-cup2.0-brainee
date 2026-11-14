@@ -1,8 +1,9 @@
 # UI reports
 
-[Starter screens and navigation](scaffold.md) contains two recorded walkthroughs,
-six screenshots and a downloadable JSON timeline. The report documents the
-current placeholders, not the planned child/parent feature set.
+| Report | Shows |
+| --- | --- |
+| [Saved child learning loop](learning.md) | Three saved games without returning to the menu, post-game screens, the three-game break bonus, the Brainy tab, child tabs and `/lab`. Two walkthroughs, 12 screenshots |
+| [Starter screens and navigation](scaffold.md) | `/login`, `/learn`, the `/analytics` placeholder and 404 recovery. Two walkthroughs, six screenshots |
 
 ## Run
 
@@ -17,10 +18,20 @@ pnpm build
 pnpm --filter @brainee/web exec next start --hostname 127.0.0.1 --port 3123
 ```
 
+For the `learning` module, the server needs the demo session, the lab and a
+freshly reset database (any local `file:` path works):
+
+```bash
+export DATABASE_URL=file:///tmp/brainee-report.db
+pnpm --filter @brainee/db db:reset
+DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web exec next start --hostname 127.0.0.1 --port 3123
+```
+
 In a second terminal, generate screenshots, walkthrough recordings and Markdown:
 
 ```bash
-pnpm report --video
+pnpm report --video                   # scaffold (default module)
+pnpm report --module learning --video # saved child learning loop
 ```
 
 The command defaults to the `scaffold` module and `http://127.0.0.1:3123`.
@@ -56,6 +67,13 @@ Without `--video`, newly captured flows explicitly say they have no recording
 and replace their previous videos. `--viewport phone|ipad|desktop|mobile` can
 override flow viewports; the generated result names the viewport actually used.
 Rebuild before recording source changes when using a production server.
+
+### Learning module
+
+Reset the database before each `learning` run: the flows play three games in
+a row on the seeded child, so earlier runs change the recorded balances. The
+walkthrough actions answer games only from what a child sees (the unique SVG,
+or trying pattern answers in order) and add no test hooks to the games.
 
 ## Output and editing
 
