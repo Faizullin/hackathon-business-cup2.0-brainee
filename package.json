@@ -12,6 +12,7 @@
     "build": "pnpm games:build && turbo run build",
     "start": "pnpm --filter @brainee/web start",
     "e2e": "pnpm build && pnpm --filter @brainee/web e2e",
+    "e2e:full": "pnpm build && pnpm --filter @brainee/web e2e:full",
     "report": "node scripts/report.mjs",
     "test:reports": "node --test scripts/reports/*.test.mjs",
     "test": "turbo run test",

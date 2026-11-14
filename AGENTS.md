@@ -40,7 +40,7 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - `pnpm demo` — **manual run**: reset the demo DB, then `pnpm dev` with `DEMO_MODE=1 BRAINEE_LAB=1` at `http://localhost:3000` (parent PIN `1234`).
 - `pnpm dev` — start the Next.js web app at `http://localhost:3000` (child/parent data need `DEMO_MODE=1`, via env or `apps/web/.env.local`).
 - `pnpm build` / `pnpm start` — build and serve the production web app.
-- `pnpm e2e` — build, then run shell, `/lab`, saved learning, polling and recovery tests in Chromium and WebKit (phone + iPad widths).
+- `pnpm e2e` — build, then the fast core browser run (WebKit iPad flows + one game per runtime, Chromium phone layout). `pnpm e2e:full` adds every game check and size; use it for game work and releases. Tiers: [setup.md](docs/dev/setup.md#e2e-matrix-tiered).
 - `pnpm report --video` — generate Markdown with phone/iPad recordings, screenshots and logs against a local server; see [docs/reports/README.md](docs/reports/README.md).
 - `pnpm test:reports` — validate the report generator, browser capture, video conversion and artifact links.
 - `pnpm test` — run workspace Vitest tests (`core` rules, game rounds, database).

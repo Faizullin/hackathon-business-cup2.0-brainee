@@ -160,12 +160,12 @@ The test server owns a temporary SQLite database. Review generated `apps/web/tes
 
 ### E2E matrix (tiered)
 
-`pnpm e2e` runs about 200 tests, not every spec on every project. Tiers are defined in `apps/web/playwright.config.ts`:
+Tiers are defined in `apps/web/playwright.config.ts`.
 
-| Project | Runs |
-|---|---|
-| `webkit-ipad` (demo device) | every spec: games, touch, films, flows |
-| `chromium-phone` | everything except game specs: product flows, API, language |
-| `chromium-ipad`, `webkit-phone` | responsive layout specs only |
+| Command | Projects | Runs |
+|---|---|---|
+| `pnpm e2e` (default, ~3 min of tests) | `webkit-ipad` | product flows, API, language, films, one game per runtime (Continue the Pattern, Tangram Tales) |
+| | `chromium-phone` | layout and main flows (`LAYOUT_SPECS`) |
+| `pnpm e2e:full` (`E2E_FULL=1`) | all four | adds the heavy game checks (`HEAVY_GAME_SPECS`: imported-game acceptance, input stress, integration, puzzle, Explore previews) on WebKit iPad, the remaining flows on Chromium phone, and layout on Chromium iPad / WebKit phone |
 
-Add a new spec to `GAME_SPECS` or `LAYOUT_SPECS` there if it belongs to a narrower tier.
+Run `pnpm e2e:full` for game work and before a release; run `pnpm e2e` for everyday changes. Put a new game spec in `HEAVY_GAME_SPECS` and a new layout spec in `LAYOUT_SPECS`.
