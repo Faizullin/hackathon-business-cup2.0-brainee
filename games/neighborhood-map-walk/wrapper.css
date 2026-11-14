@@ -1,0 +1,111 @@
+/* Brainee Host Wrapper for Unscored Exploration Games */
+:root {
+  --brainee-host-height: 48px;
+  --brainee-host-bg: #1e293b;
+  --brainee-host-text: #f8fafc;
+  --brainee-host-badge-bg: #047857;
+  --brainee-host-badge-text: #ecfdf5;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.brainee-host-bar {
+  height: var(--brainee-host-height);
+  min-height: 48px;
+  background: var(--brainee-host-bg);
+  color: var(--brainee-host-text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-sizing: border-box;
+  z-index: 10000;
+  user-select: none;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.brainee-host-exit {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  touch-action: manipulation;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+
+.brainee-host-exit:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.brainee-host-exit:active {
+  background: rgba(255, 255, 255, 0.28);
+  transform: scale(0.98);
+}
+
+.brainee-host-exit:focus-visible {
+  outline: 3px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+.brainee-host-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--brainee-host-badge-bg);
+  color: var(--brainee-host-badge-text);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+}
+
+.brainee-host-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #cbd5e1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#game,
+main#game {
+  flex: 1 1 auto;
+  position: relative;
+  width: 100%;
+  height: calc(100% - var(--brainee-host-height));
+  overflow: hidden;
+}
+
+#game .screen {
+  min-height: 100%;
+  height: 100%;
+}
+
+.magic-screen > .big-action {
+  z-index: 30;
+}

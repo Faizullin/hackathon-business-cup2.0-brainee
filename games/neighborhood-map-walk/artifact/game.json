@@ -1,0 +1,43 @@
+{
+  "id": "neighborhood-map-walk",
+  "title": "Neighborhood Explorer",
+  "category": "culture-geography",
+  "path": "games/neighborhood-map-walk/",
+  "icon": "map",
+  "entry": "index.html",
+  "age": { "min": 3, "max": 6 },
+  "status": "beta",
+  "accent": "#287bc1",
+  "shareTitle": "Neighborhood Explorer — Draw a World of Your Own",
+  "description": "Draw a home, wind a road through the grass, place favorite community landmarks, and watch a personal watercolor town come alive.",
+  "learningGoals": [
+    "Practice controlled freehand drawing and path-making",
+    "Represent familiar places with simple map symbols",
+    "Explore spatial relationships among home, routes, nature, and community places",
+    "Make and revisit an open-ended neighborhood composition"
+  ],
+  "interactionModel": "draw a home and road with one finger, choose illustrated landmarks, then tap the watercolor map to place them",
+  "feedbackModel": "warm recorded guidance, tactile sound cues, drawing-to-house magic, placement sparkles, and a living-world finale",
+  "uses": [
+    "shared/js/audio-unlock.js",
+    "shared/js/celebrate.js",
+    "shared/js/debug-harness.js",
+    "shared/js/preload.js",
+    "shared/js/sfx.js",
+    "shared/js/tap.js",
+    "shared/js/timers.js",
+    "shared/js/voice-clips.js",
+    "shared/assets/refs/voice-teacher.wav"
+  ],
+  "modes": [
+    {
+      "id": "build",
+      "title": "Build a Neighborhood",
+      "skill": "draw routes and place familiar landmarks"
+    }
+  ],
+  "license": { "code": "MIT", "assets": "CC-BY-4.0" },
+  "credits": "Kaigani; watercolor production art created with GPT Image 2 and local Qwen layered extraction; teacher narration created with Qwen voice clone and checked with Whisper. Built with Codex for QLOBE Kids.",
+  "characters": [],
+  "conceptVideo": null
+}

@@ -1,0 +1,252 @@
+{
+  "repository": "kaigani/qlobe-kids",
+  "commit": "60967634e6cc313c41a5aa8067bed9f0f616176c",
+  "files": [
+    {
+      "upstream": "games/neighborhood-map-walk/ASSETS.md",
+      "path": "ASSETS.md",
+      "gitBlob": "09bff80be7478c92bcae4d6545d469267cd9df72",
+      "sha256": "3e99a913ba18743121d34fcdf2a7890e96e3b8eee4adbd995d3171d046f7db69"
+    },
+    {
+      "upstream": "LICENSE",
+      "path": "LICENSE",
+      "gitBlob": "69b618370281183db43e6a24ccfd944a5b62a145",
+      "sha256": "f308b595b213721db303e73e6e7d00b1e57ec9bfc193842e68c9ca481fb90632"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/art/car.png",
+      "path": "assets/art/car.png",
+      "gitBlob": "1dfc5424a3d077d935192777b473e91f9b6dfa6b",
+      "sha256": "5dab66b6fb364d176c56e477fd494547193690f8187a6504b8756881d680ac1e"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/art/draw-house.jpg",
+      "path": "assets/art/draw-house.jpg",
+      "gitBlob": "5356beff76b6db48ad38f3f8eff04b250efa475e",
+      "sha256": "2bf55958e0f27e8742b40584d3c47d9aaa3f59f83dce64a221bf869379856faf"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/art/flowers.png",
+      "path": "assets/art/flowers.png",
+      "gitBlob": "11243d5da8fa7357ac07ee2ad95d7aa1b67767e1",
+      "sha256": "ba19550ec872e6d746bff99a6f3ba5cd891d6ad58e0c86d87b319fa1d3cc8cee"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/art/house.png",
+      "path": "assets/art/house.png",
+      "gitBlob": "1b999e10363ccc462a4518e25806cb75eed5a2e6",
+      "sha256": "b5a3d2d5da5013dd7719f09f691ad078fbd8db8e88dc45042f461226121f9737"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/art/library.png",
+      "path": "assets/art/library.png",
+      "gitBlob": "daf0ae36cf36ffa062c39676402e16c42a198b54",
+      "sha256": "75a0833658c5f0793684c440a99b9501955aa987ccbc4245eb95b3c7473153f8"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/art/park.png",
+      "path": "assets/art/park.png",
+      "gitBlob": "2a850cd09118ab1276cf07d87757321b705b0cee",
+      "sha256": "7e7a79e69b7a4a3323d1a3ba4a8d38f18bafccda09a734844b0e27e7d4c8ed9d"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/art/pond.png",
+      "path": "assets/art/pond.png",
+      "gitBlob": "fe88f8ac3d32ffa6a53fc205a9e254f622695fab",
+      "sha256": "44becc7f45320a3aa7a557b5e51448b2e7486a50258114f6b30bb6c3fd574459"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/art/scene.jpg",
+      "path": "assets/art/scene.jpg",
+      "gitBlob": "b903c6014c19dd5ca9a307a2e3ea284c8769be79",
+      "sha256": "29c80dcf958ad6b1191883067092e135f0daf8275be47f9876c2cfcfbfe359fd"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/art/shop.png",
+      "path": "assets/art/shop.png",
+      "gitBlob": "12c0394d73d7207e0cce83b94d74afbfb08df347",
+      "sha256": "08ebd435c537f65910cd08f5a1a9e5502fc66c063cb1648b25c4d68b29da7d0d"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/art/splash.jpg",
+      "path": "assets/art/splash.jpg",
+      "gitBlob": "2c9fecb9e0b16da4bef59e7af5dd4401b9f656c3",
+      "sha256": "ee641068b0eea4fca7555550d037ce839b5076117312f606005767351f45fcad"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/art/tree.png",
+      "path": "assets/art/tree.png",
+      "gitBlob": "330be51be683b41f12b24bb1ee64f654fa1cdd68",
+      "sha256": "08de7beb014992eb8cba70e60f9076ac52b69b2415671ed1dcc38333bd501b39"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/audio/draw-home.m4a",
+      "path": "assets/audio/draw-home.m4a",
+      "gitBlob": "4740713bc5f06c464b3ee64ffc40e1d79f49c1e8",
+      "sha256": "9bcc6a55d9f0a4b488cde1962254b11c28f0786fde51af8f08a1300728e0c20f"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/audio/draw-road.m4a",
+      "path": "assets/audio/draw-road.m4a",
+      "gitBlob": "c2fa0f41ed233b35121fbb39a0ac9552cade681b",
+      "sha256": "54b45e6ed328e99b741757b230afc882ac73642b80b9e28bfa8cd92036df0be0"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/audio/house-magic.m4a",
+      "path": "assets/audio/house-magic.m4a",
+      "gitBlob": "10092a67838067fc3a0b0ae8ca5d3b3cc8843ae4",
+      "sha256": "33aa573859e5daa015826c64f100be195dc3c2e5d9a5350586dd424350c8746c"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/audio/lines.json",
+      "path": "assets/audio/lines.json",
+      "gitBlob": "addfe264dbcb4f7975ba4ab81ee3e7ac5b7a3202",
+      "sha256": "c44cfc5103d7deabe1d41f7701337c1279ffbb50b48d47c728b1949cb3bf9947"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/audio/manifest.json",
+      "path": "assets/audio/manifest.json",
+      "gitBlob": "cb66d7ffff7b0edd05d60221b16786b2bf67b749",
+      "sha256": "6b30f865c4afe60763fe21e832af032759c49abb58fc7e694ee9c4b32330b61f"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/audio/pick-place.m4a",
+      "path": "assets/audio/pick-place.m4a",
+      "gitBlob": "846e4a60abb90beb69aa662892765887db82c6e9",
+      "sha256": "31f8c8c368227cda43622cd703b8645676a673249b09f9429c92039ae1a4ca41"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/audio/place-intro.m4a",
+      "path": "assets/audio/place-intro.m4a",
+      "gitBlob": "c6215109bc75570a01c97aff1027d5887b540932",
+      "sha256": "3f188a71b22d24c9ba98bac0e4e57c636732475f0f010cd0d54538e8977bb301"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/audio/qa.json",
+      "path": "assets/audio/qa.json",
+      "gitBlob": "edc8aa5455d0addc2a359f110550cc1f38a485a3",
+      "sha256": "bac6c4c13bae735d9993696dd596a95c2c4a213159f174007a3538022218f157"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/audio/town-alive.m4a",
+      "path": "assets/audio/town-alive.m4a",
+      "gitBlob": "37c61cc8c427b6d1adef02a57794998d0fee598c",
+      "sha256": "b82d45310040c37a1f9626b791d30087f9104415f09cd27e06da14f5a9c9779a"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/assets/og-image.jpg",
+      "path": "assets/og-image.jpg",
+      "gitBlob": "7858e11230df65853158c660cb2eb28989e34de9",
+      "sha256": "be885aa56f9f0a7efc7e242315aca5ca193b8910fc7a39877cd552c484a2cc7c"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/css/style.css",
+      "path": "css/style.css",
+      "gitBlob": "7804e871b1b524090d09c9ad269d990d1aa4d8c1",
+      "sha256": "4a4b0a24a7ee0bb046d74d69354a7998869970acaafff65aa4d330f6fc69482d"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/game-design.md",
+      "path": "game-design.md",
+      "gitBlob": "e5e974d81c1f69b331a893ee46bd5afe6e2ef104",
+      "sha256": "a6e8614fef105d48a6d6b261313c76a0b7239df740f1acfc51042ce580c4f534"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/game.json",
+      "path": "game.json",
+      "gitBlob": "2326f63b1d7e89440f502fbb0d6f96e695854828",
+      "sha256": "f429395b67e9d6a0e97443ef6c77c5f635ce722cf5c37c8cefbfb90e15a5b08a"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/index.html",
+      "path": "index.html",
+      "gitBlob": "82df2f10a43eea47717729f08705c5fac56fdf45",
+      "sha256": "5719096e8226a4fb675d6ecedda3fb4b716faa45c84aa4a259f1636d8c7d9dcd"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/js/main.js",
+      "path": "js/main.js",
+      "gitBlob": "109f790a9189b72c62fb6485a304e418b7f91012",
+      "sha256": "dc71ab3825b5a00a2961488864871c632fa285ef191cd18659f351927db787f5"
+    },
+    {
+      "upstream": "shared/css/base.css",
+      "path": "shared/css/base.css",
+      "gitBlob": "323ad246052ecc60ac9b21c43e22d22b36a42024",
+      "sha256": "adad7c353ad8ad4f99d4a25210305f3cfa1c3a537daf8480d1c229667f3cea39"
+    },
+    {
+      "upstream": "shared/js/audio-unlock.js",
+      "path": "shared/js/audio-unlock.js",
+      "gitBlob": "8574a0b0a6102122ec516d598c753402182b564e",
+      "sha256": "648dbfdc883f8f0730d4826090a3cc99099de1d9d4ba5272778979db55c9d0de"
+    },
+    {
+      "upstream": "shared/js/celebrate.js",
+      "path": "shared/js/celebrate.js",
+      "gitBlob": "b8c6f8a1ef29eff7acb67cdfef840e77522304aa",
+      "sha256": "c0b444ab34fbaf5f66ed1bf8a19b1aeea9a1e8c9c26a82a8147b336e2914e703"
+    },
+    {
+      "upstream": "shared/js/debug-harness.js",
+      "path": "shared/js/debug-harness.js",
+      "gitBlob": "d4fb5148a0e7710edd575c392e163b568a18481b",
+      "sha256": "16448064fddf145f575a0928d69ad71a92fa4b10cfe337d3967e3b9938467ea4"
+    },
+    {
+      "upstream": "shared/js/dom.js",
+      "path": "shared/js/dom.js",
+      "gitBlob": "f57a3aa6cbf925d4ea3ef92242092e84f734fe0b",
+      "sha256": "3413c5460dfe946ed29a79771edf1690f17492d0ffbb3caba593c42b275856b2"
+    },
+    {
+      "upstream": "shared/js/preload.js",
+      "path": "shared/js/preload.js",
+      "gitBlob": "39a6d1088533f4269f76f9f2340ff7cddb27935e",
+      "sha256": "84508ea987c2fa357fbeaacf602880a261c1a67b21fb29614311fd7fb6018f63"
+    },
+    {
+      "upstream": "shared/js/rng.js",
+      "path": "shared/js/rng.js",
+      "gitBlob": "2da3970400aba6b5904953675efe6dce0b9e067b",
+      "sha256": "e93a51b73e256a7a61163c1d375bd78e04198258a00fe3e314e9831225063dc6"
+    },
+    {
+      "upstream": "shared/js/sfx.js",
+      "path": "shared/js/sfx.js",
+      "gitBlob": "1d2a17d5419b62943c9df1cceae330fccfa7fad0",
+      "sha256": "54ed71f7b1697633a7a21ab92922717bda1636cd82ce1f374d8cd8f123818718"
+    },
+    {
+      "upstream": "shared/js/speech.js",
+      "path": "shared/js/speech.js",
+      "gitBlob": "a74af770dcc665f37e7afdf8b33ec1dd5548113c",
+      "sha256": "ccf99a0ec9f254f2939dd7df683ca300f4ae677e08668cf233e209870073b08b"
+    },
+    {
+      "upstream": "shared/js/tap.js",
+      "path": "shared/js/tap.js",
+      "gitBlob": "18567c4c8945d38ecf92a1a8c9121aec8027da39",
+      "sha256": "679c005b02a6f0ab30f1c815adb09a8babe143ffb10f7644a08b3f6056e545e7"
+    },
+    {
+      "upstream": "shared/js/timers.js",
+      "path": "shared/js/timers.js",
+      "gitBlob": "83fd5012ac729efd550e90ccc0961aa502ba30b5",
+      "sha256": "8fcafc8d483be1191f2c767ef33ac0df0cf6c579bae8c32b1e11662e690a12a1"
+    },
+    {
+      "upstream": "shared/js/voice-clips.js",
+      "path": "shared/js/voice-clips.js",
+      "gitBlob": "79cb3baae031ff0a12839c1b058cd2ee487b7f6c",
+      "sha256": "0d239d67ba1b1f095712d288df8c6892ade5fd85e9d4129cc138543c85d7d51e"
+    },
+    {
+      "upstream": "games/neighborhood-map-walk/tools/qa.mjs",
+      "path": "tools/qa.mjs",
+      "gitBlob": "d932b1b1cd9d0dfa99e584e9a87102cf6ede9a21",
+      "sha256": "dc5126b4a7df655684ddfcb179199ee1508fd198a02bff3a70f6e5dfd27844b7"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "neighborhood-map-walk",
+  "title": "Neighborhood Route Planner",
+  "entry": "/games/neighborhood-map-walk/index.html",
+  "minAge": 5,
+  "license": "MIT",
+  "sizeBudgetBytes": 6000000,
+  "mode": "explore"
+}
