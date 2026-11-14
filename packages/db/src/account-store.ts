@@ -1,5 +1,12 @@
 import { randomBytes, randomUUID, scryptSync, timingSafeEqual } from "node:crypto";
-import { advanceCalendar, isQuizAnswers, quizStart, type Showcase } from "@brainee/core";
+import {
+  advanceCalendar,
+  calendarKeys,
+  isQuizAnswers,
+  quizStart,
+  type Showcase,
+  signupTimeZone,
+} from "@brainee/core";
 import { eq, sql } from "drizzle-orm";
 import {
   brainyStates,
@@ -48,7 +55,7 @@ export function secretMatches(secret: string, stored: string | null) {
 type Tx = Parameters<Parameters<Database["transaction"]>[0]>[0];
 
 /** A device session for one child; `parent` also unlocks the parent pages. */
-async function issueAccess(tx: Tx, childId: string, now: Date, parent: boolean) {
+export async function issueAccess(tx: Tx, childId: string, now: Date, parent: boolean) {
   const token = randomBytes(32).toString("hex");
   const expiresAt = new Date(now.getTime() + DEMO_ACCESS_MS);
   await tx.insert(demoSessions).values({
@@ -68,6 +75,7 @@ export type SignupInput = {
   childName: string;
   birthYear: number;
   answers: unknown;
+  timeZone?: unknown;
 };
 
 function validSignup(input: Partial<SignupInput>, now: Date): input is SignupInput {
@@ -153,7 +161,14 @@ export async function signupFromQuiz(db: Database, raw: unknown, now: Date) {
     });
     await tx.insert(showcases).values({
       childId,
-      data: advanceCalendar(personalShowcase(input.childName, start), now).showcase,
+      data: {
+        ...advanceCalendar(personalShowcase(input.childName, start), now).showcase,
+        calendar: {
+          timeZone: signupTimeZone(input.timeZone),
+          ...calendarKeys(now, signupTimeZone(input.timeZone)),
+          bonusGiven: false,
+        },
+      },
     });
     const access = await issueAccess(tx, childId, now, true);
     return { ...access, child: { id: childId, name: input.childName.trim() }, start };

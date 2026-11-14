@@ -8,6 +8,7 @@ export async function POST(request: NextRequest) {
   return demoApi(request, async (db, now) => {
     const tokenHash = demoTokenHash(request.cookies.get(DEMO_COOKIE)?.value);
     const existing = tokenHash ? await findDemoAccess(db, tokenHash, now) : undefined;
+    if (existing?.revoked) throw new ApiError(419, "revoked");
     if (existing)
       return NextResponse.json({
         child: { id: existing.childId, name: existing.childName },
@@ -32,6 +33,7 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   return demoApi(request, async (db, now) => {
     const access = await findDemoAccess(db, requireDemoToken(request), now);
+    if (access?.revoked) throw new ApiError(419, "revoked");
     if (!access) throw new ApiError(401, "unauthorized");
     return NextResponse.json({
       child: { id: access.childId, name: access.childName },

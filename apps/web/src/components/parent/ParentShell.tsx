@@ -1,7 +1,7 @@
 "use client";
 
 import { navigationCounts } from "@brainee/core";
-import { ChartLine, ClipboardCheck, Gift, LogOut } from "@brainee/ui/components/icons";
+import { ChartLine, ClipboardCheck, Gift, LogOut, Settings } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -17,10 +17,13 @@ const TABS = [
   { href: "/analytics", label: t.tabs.analytics, Icon: ChartLine },
   { href: "/tasks", label: t.tabs.tasks, Icon: ClipboardCheck },
   { href: "/rewards", label: t.tabs.rewards, Icon: Gift },
+  { href: "/settings", label: t.tabs.settings, Icon: Settings },
 ];
 
 function PinGate() {
   const { unlockParent } = useLearning();
+  const [adult, setAdult] = useState(false);
+  const [answer, setAnswer] = useState("");
   const [pin, setPin] = useState("");
   const [wrong, setWrong] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -42,8 +45,45 @@ function PinGate() {
   return (
     <section className="mx-auto flex max-w-sm flex-col items-center gap-5 rounded-panel border border-border bg-card p-6 text-center">
       <h1>{t.pinTitle}</h1>
-      <p className="text-muted-foreground text-sm">{t.pinNote}</p>
-      <div aria-live="polite" className="flex gap-3" data-testid="pin-dots">
+      <p className="text-muted-foreground text-sm">{adult ? t.adultNote : t.pinNote}</p>
+      <button
+        type="button"
+        className={outlineButton}
+        onClick={() => {
+          setAdult(!adult);
+          setWrong(false);
+        }}
+      >
+        {adult ? t.usePin : t.adultTask}
+      </button>
+      {adult && (
+        <form
+          className="flex flex-col gap-3"
+          onSubmit={async (event) => {
+            event.preventDefault();
+            setBusy(true);
+            const ok = await unlockParent(answer, true);
+            setBusy(false);
+            setWrong(!ok);
+          }}
+        >
+          <label className="flex flex-col gap-2">
+            {t.adultQuestion}
+            <input
+              aria-label={t.adultAnswer}
+              inputMode="numeric"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              className="min-h-12 rounded-xl border border-border px-3"
+            />
+          </label>
+          <p className="text-muted-foreground text-sm">{t.adultHint}</p>
+          <button type="submit" disabled={busy} className={outlineButton}>
+            {t.adultSubmit}
+          </button>
+        </form>
+      )}
+      <div aria-live="polite" className={adult ? "hidden" : "flex gap-3"} data-testid="pin-dots">
         {[0, 1, 2, 3].map((i) => (
           <span
             key={i}
@@ -57,10 +97,10 @@ function PinGate() {
       </div>
       {wrong && (
         <p role="alert" className="text-coral text-sm">
-          {t.pinWrong}
+          {adult ? t.adultWrong : t.pinWrong}
         </p>
       )}
-      <div className="grid grid-cols-3 gap-3">
+      <div className={adult ? "hidden" : "grid grid-cols-3 gap-3"}>
         {["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "⌫"].map((key) =>
           key === "" ? (
             <span key="blank" />
@@ -108,7 +148,7 @@ export function ParentShell({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-20 border-border border-b bg-card/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-[1180px] items-center gap-3 px-4 pt-[max(8px,env(safe-area-inset-top))] pb-2">
           <p className="font-display font-bold text-coral text-xl">{ru.app.name}</p>
-          <nav aria-label={t.tabsLabel} className="ml-4 hidden gap-1 md:flex">
+          <nav aria-label={t.tabsLabel} className="ml-4 hidden gap-1 min-[1000px]:flex">
             {TABS.map(({ href, label }) => (
               <Link
                 key={href}
@@ -163,7 +203,7 @@ export function ParentShell({ children }: { children: ReactNode }) {
           id="main-content"
           data-mode="parent"
           tabIndex={-1}
-          className="mx-auto flex w-full max-w-[1180px] flex-col gap-5 px-4 pt-5 pb-[calc(96px+env(safe-area-inset-bottom))] md:pb-10"
+          className="mx-auto flex w-full max-w-[1180px] flex-col gap-5 px-4 pt-5 pb-[calc(96px+env(safe-area-inset-bottom))] min-[1000px]:pb-10"
         >
           <Gate>
             <ViewTransition default="page-fade">{children}</ViewTransition>
@@ -172,9 +212,9 @@ export function ParentShell({ children }: { children: ReactNode }) {
       </LearningBoundary>
       <nav
         aria-label={t.tabsLabel}
-        className="fixed inset-x-0 bottom-0 z-20 border-border border-t bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-sm md:hidden"
+        className="fixed inset-x-0 bottom-0 z-20 border-border border-t bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-sm min-[1000px]:hidden"
       >
-        <ul className="grid grid-cols-3">
+        <ul className="grid grid-cols-4">
           {TABS.map(({ href, label, Icon }) => (
             <li key={href}>
               <Link

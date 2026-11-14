@@ -32,7 +32,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 | 9 | Ranking hidden from child, no last names | ✅ parent-only, initials (T-43) |
 | 10 | Own-domain only; works with Screen Time allowlist | Automated route audit + PWA done; physical Screen Time verification remains T-62 |
 
-**Left before deployment (in order):** remaining T-103 Settings/pairing/fallback → T-104/T-105 locale and Tangram Tales → T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Quiz-first onboarding is implemented by T-101. Deployment is currently deferred.
+**Left before deployment (in order):** T-104/T-105 locale and Tangram Tales → T-62/T-84 physical iPad rehearsal using [demo.md](../demo.md) → T-87 motion polish (optional) → T-73 pitch deck → T-74 freeze/tag. Then T-14. Quiz-first onboarding is implemented by T-101. Deployment is currently deferred.
 
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
@@ -130,10 +130,11 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-100 Per-game skill weights + ability scores → body (D-23); minimum age per game, locked cards, age-aware recommendations (D-22)
 - [x] T-101 Onboarding quiz before signup (`/onboarding`), own minimal accounts, parent login, demo account, 15-min PIN, «Вернуть ребёнку» (D-24)
 - [x] T-102 ROUTES.md extras: «Требует внимания», event feed, mood decay on read, live-skill radar (D-25)
-- [ ] T-103 ROUTES.md follow-ups: tab badges, task cancel, bonus once per day + daily/weekly resets, parent Settings (child, PIN change, devices), device pairing code, adult-task gate fallback → [routes-spec.md](../product/routes-spec.md)
+- [x] T-103 ROUTES.md follow-ups: tab badges, task cancel, bonus once per day + daily/weekly resets, parent Settings (child, PIN change, devices), device pairing code, adult-task gate fallback → [routes-spec.md](../product/routes-spec.md)
   - [x] Tab badges from shared state (assigned real tasks / confirmations / undelivered gifts), hidden parent counts while locked; cancel assigned tasks with parent authorization and no rewards.
   - [x] Daily bonus shared across devices; family-local daily/weekly rollover, fresh task quota and read-only task history (D-26).
-  - [ ] Settings (including timezone selection), pairing and adult-task fallback remain.
+  - [x] Settings (child, PIN, timezone, devices/account), one-time pairing/revocation, adult-task fallback; stage celebration/feed and task empty states.
+  - [x] Onboarding polish: progress, answer reactions, story, hold/reduced-motion reveal and optional referral field.
 - [ ] T-104 English locale `en.ts` + locale switch (D-22), before English-only external games
 - [ ] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
 - [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).

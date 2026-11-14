@@ -6,13 +6,19 @@ test("quiz → signup creates a family with a quiz-based Brainy; the parent can 
   page,
   browser,
   baseURL,
-}) => {
+}, info) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/onboarding");
   for (let question = 0; question < 5; question++) {
     await expect(page.getByTestId("quiz-progress")).toHaveText(`Вопрос ${question + 1} из 5`);
     await page.getByRole("button").filter({ hasNotText: "Назад" }).nth(2).click();
   }
+  await expect(page.getByRole("heading", { name: "Скролл-монстр" })).toBeVisible();
+  await page.getByRole("button", { name: "Продолжить", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Знакомьтесь: ваш Брейни" })).toBeVisible();
+  await page.screenshot({ path: info.outputPath("onboarding-reveal.png"), animations: "disabled" });
+  await page.getByRole("button", { name: "Начать знакомство" }).click();
+  await page.getByLabel("Код приглашения (необязательно)").fill("FRIEND");
   const email = `parent-${Date.now()}-${test.info().project.name}@example.com`;
   await page.getByLabel("Имя ребёнка").fill("Мира");
   await page.getByLabel("Email").fill(email);
@@ -22,6 +28,7 @@ test("quiz → signup creates a family with a quiz-based Brainy; the parent can 
   await expect(page).toHaveURL(/\/entry$/);
   const state = await savedState(page.request);
   expect(state.child.name).toBe("Мира");
+  expect(state.showcase.calendar?.timeZone).toBeTruthy();
   // All answers = 2 → sum 10: brain 10+10+4 = 24, capped body stats ≤ 40.
   expect(state.progress.stats.brain).toBe(24);
   expect(Math.max(...Object.values(state.progress.stats))).toBeLessThanOrEqual(40);
@@ -90,4 +97,34 @@ test("login rejects unknown accounts and the demo account opens parent mode", as
   await page.getByRole("button", { name: "Вернуть ребёнку" }).click();
   await expect(page).toHaveURL(/\/entry$/);
   expect((await savedState(page.request)).parentUnlocked).toBe(false);
+});
+
+test("onboarding goes back, reacts to answers and requires a sustained hold without reduced motion", async ({
+  page,
+}, info) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/onboarding");
+  await page.getByRole("button").filter({ hasNotText: "Назад" }).nth(1).click();
+  await expect(page.getByTestId("quiz-progress")).toHaveText("Вопрос 2 из 5");
+  await page.getByRole("button", { name: "Назад", exact: true }).click();
+  await expect(page.getByTestId("quiz-progress")).toHaveText("Вопрос 1 из 5");
+  await page.screenshot({
+    path: info.outputPath("onboarding-question.png"),
+    animations: "disabled",
+  });
+  for (let i = 0; i < 5; i++)
+    await page.getByRole("button").filter({ hasNotText: "Назад" }).nth(2).click();
+  await page.getByRole("button", { name: "Продолжить", exact: true }).click();
+  const hold = page.getByRole("button", { name: "Удерживай, чтобы начать" });
+  await hold.click();
+  await expect(page.getByLabel("Имя ребёнка", { exact: true })).toHaveCount(0);
+  await hold.focus();
+  await page.keyboard.down("Space");
+  await expect(page.getByLabel("Имя ребёнка", { exact: true })).toBeVisible();
+  await page.keyboard.up("Space");
+  await page.screenshot({
+    path: info.outputPath("onboarding-signup.png"),
+    fullPage: true,
+    animations: "disabled",
+  });
 });

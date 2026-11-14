@@ -1,11 +1,13 @@
 import { randomUUID, scryptSync, timingSafeEqual } from "node:crypto";
 import {
+  addFeed,
   applyShowcaseAction,
   applySkillGains,
   applyStatGains,
   type BrainyStats,
   PARENT_ACTIONS,
   parseShowcaseAction,
+  reachedStage,
 } from "@brainee/core";
 import { eq, sql } from "drizzle-orm";
 import { brainyStates, demoSessions, families, parents, showcases, wallets } from "../schema";
@@ -117,6 +119,14 @@ export async function applyShowcase(db: Database, tokenHash: string, input: unkn
       const skills = outcome.gains.eyes
         ? applySkillGains(state.skills, { attention: outcome.gains.eyes })
         : state.skills;
+      const stage = reachedStage(stats, applyStatGains(stats, outcome.gains));
+      if (stage) {
+        addFeed(outcome.showcase, { at: now.toISOString(), kind: "stage-up", title: stage });
+        await tx
+          .update(showcases)
+          .set({ data: outcome.showcase })
+          .where(eq(showcases.childId, access.childId));
+      }
       await tx
         .update(brainyStates)
         .set({ ...applyStatGains(stats, outcome.gains), skills, updatedAt: now })

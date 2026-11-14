@@ -29,6 +29,15 @@ export {
   startGameSession,
   stopGameRun,
 } from "./learning-store";
+export {
+  createPairingCode,
+  getSettings,
+  logoutDevice,
+  redeemPairingCode,
+  SettingsError,
+  unlockWithAdultTask,
+  updateSettings,
+} from "./settings-store";
 export { demoShowcase } from "./showcase-seed";
 export {
   applyShowcase,

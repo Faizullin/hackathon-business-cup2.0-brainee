@@ -16,11 +16,11 @@ const initial: Pick<Showcase, "calendar" | "taskHistory" | "tasks" | "weekGoal">
 };
 
 it("uses family midnight and Monday, including DST and year boundaries", () => {
-  expect(calendarKeys(new Date("2026-11-15T18:59:59Z"))).toEqual({
+  expect(calendarKeys(new Date("2026-11-15T18:59:59Z"), "Asia/Almaty")).toEqual({
     day: "2026-11-15",
     week: "2026-11-09",
   });
-  expect(calendarKeys(new Date("2026-11-15T19:00:00Z"))).toEqual({
+  expect(calendarKeys(new Date("2026-11-15T19:00:00Z"), "Asia/Almaty")).toEqual({
     day: "2026-11-16",
     week: "2026-11-16",
   });

@@ -8,6 +8,7 @@ export * from "./learning";
 export * from "./onboarding";
 export * from "./random";
 export * from "./recommendations";
+export * from "./settings";
 export * from "./showcase";
 export * from "./stat-gains";
 export * from "./state";

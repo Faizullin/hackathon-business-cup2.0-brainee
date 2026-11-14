@@ -131,6 +131,7 @@ export const demoSessions = sqliteTable(
       .references(() => children.id, { onDelete: "cascade" }),
     createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
     expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+    revoked: integer("revoked", { mode: "boolean" }).notNull().default(false),
     inRow: integer("in_row").notNull().default(0),
     bonusGiven: integer("bonus_given", { mode: "boolean" }).notNull().default(false),
     // Parent PIN unlock for this device (T-40 demo barrier).
@@ -211,3 +212,17 @@ export const showcases = sqliteTable(
   },
   (table) => [check("showcase_data_valid", sql`json_valid(${table.data})`)],
 );
+
+// Short-lived, hashed one-time codes; separate from child-visible showcase JSON.
+export const pairingCodes = sqliteTable("pairing_codes", {
+  childId: text("child_id")
+    .primaryKey()
+    .references(() => children.id, { onDelete: "cascade" }),
+  codeHash: text("code_hash").notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+});
+export const pairingAttempts = sqliteTable("pairing_attempts", {
+  id: text("id").primaryKey(),
+  attempts: integer("attempts").notNull().default(0),
+  lockedUntil: integer("locked_until", { mode: "timestamp_ms" }),
+});

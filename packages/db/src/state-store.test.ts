@@ -161,7 +161,7 @@ it("parent actions need the PIN; a confirmed task pays suns and bumps the versio
 it("rolls days and weeks forward once, archives expired tasks and resets the daily quota", async () => {
   const f = await fixture();
   const before = await getStateSnapshot(f.db, f.hash, now);
-  const monday = new Date("2026-11-15T19:00:00Z");
+  const monday = new Date("2026-11-16T05:00:00Z");
   const [first, second] = await Promise.all([
     getStateSnapshot(f.db, f.hash, monday),
     getStateSnapshot(f.observer.db, f.hash, monday),
@@ -214,7 +214,7 @@ it("rolls days and weeks forward once, archives expired tasks and resets the dai
 it("expires yesterday's tasks before a direct action even without a prior state read", async () => {
   const f = await fixture();
   await getStateSnapshot(f.db, f.hash, now);
-  const tomorrow = new Date("2026-11-14T19:00:00Z");
+  const tomorrow = new Date("2026-11-15T05:00:00Z");
   await setParentUnlock(f.db, f.hash, "1234", tomorrow);
   await expect(
     applyShowcase(f.db, f.hash, { type: "task-confirm", taskId: "t2" }, tomorrow),

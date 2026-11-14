@@ -7,8 +7,8 @@ Source: [ROUTES.md](../ideas/ROUTES.md) and the clickable prototype `docs/ideas/
 |---|---|---|
 | Parent email + password, 30-day session | `/login` → `POST /api/auth/login`, scrypt hash, device cookie | ◐ own minimal login, no provider |
 | Signup with consent; onboarding child → quiz → setup | `/onboarding`: **quiz first**, then signup (child, birth year 4–10, email, password, PIN) | ◐ D-24 |
-| Child device paired by 6-digit code | device cookie from signup/login/demo | ⏳ pairing codes |
-| Parent PIN on child device, 15 min, «Вернуть ребёнку» | PIN gate, 15 min, «Вернуть ребёнку» → `/entry` | ✅ (adult-task fallback ⏳) |
+| Child device paired by 6-digit code | `/child-login` → one-time code → own revocable device cookie | ✅ D-27 |
+| Parent PIN on child device, 15 min, «Вернуть ребёнку» | PIN gate, 15 min, «Вернуть ребёнку» → `/entry` | ✅ PIN or adult arithmetic fallback |
 
 ## Route map (spec → ours)
 | Spec | Ours |
@@ -20,7 +20,7 @@ Source: [ROUTES.md](../ideas/ROUTES.md) and the clickable prototype `docs/ideas/
 | `/child/fun/:id` | ⏳ (fun games have no content yet) |
 | `/child/gifts`, `/child/brainy` | `/gifts`, `/brainy` |
 | `/parent`, `/parent/tasks`, `/parent/rewards` | `/analytics`, `/tasks`, `/rewards` |
-| `/parent/settings` | ⏳ |
+| `/parent/settings` | `/settings` (fourth parent tab) |
 
 ## Rules adopted (ROUTES.md §7, §12)
 - ✅ Stars +3/+4, 3-game bonus +5, video +15 ★ and eyes +2 once, exchange 1 ☀ → 10 ★, 5 tasks/day, task confirm → ☀ + week goal + resp +2.
@@ -38,3 +38,8 @@ Source: [ROUTES.md](../ideas/ROUTES.md) and the clickable prototype `docs/ideas/
 
 ## Not adopted
 SSE stream and Web Push (polling, D-15), subscription/payment, Google Fonts/cdnjs from the prototype.
+
+## Settings and onboarding (T-103)
+Settings groups child name/birth year/promise, old-PIN-checked PIN changes, timezone, paired devices and account/logout. Device lists show creation dates and the current device. Pairing/expiry/lock rules and storage: [D-27](../dev/decisions.md). The selected zone controls [calendar resets](mechanics.md#calendar-resets). The plan is a static demo card.
+
+Onboarding keeps the five-question `quizStart` contract: one question per screen, progress, back, answer reactions, a gentle Scroll Monster story, starting-Brainy reveal, hold-to-start (tap with reduced motion), then signup. Referral entry is optional and has no backend effect. Stage increases show a child celebration and a parent event; first load does not celebrate an existing stage.

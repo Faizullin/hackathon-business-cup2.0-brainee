@@ -74,6 +74,7 @@ export type ScienceVideo = {
   solved: boolean;
 };
 export type FeedKind =
+  | "stage-up"
   | "game"
   | "task-done"
   | "task-confirmed"
@@ -121,6 +122,7 @@ export type Analytics = {
 };
 
 export type Showcase = {
+  childPromise?: number;
   calendar?: FamilyCalendar;
   taskHistory?: ArchivedTask[];
   equipped: Equipped;

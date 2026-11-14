@@ -63,6 +63,9 @@ export function GiftsScreen() {
         </ul>
       </Panel>
       <Panel title={t.tasks}>
+        {tasks.length === 0 && (
+          <p className="text-muted-foreground text-sm">{ru.parent.tasks.empty}</p>
+        )}
         <ul className="grid gap-3 lg:grid-cols-2">
           {tasks.map((task) => (
             <li

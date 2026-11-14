@@ -41,7 +41,7 @@ export function TasksScreen() {
           <span className="font-semibold" data-testid="task-limit">
             {t.limit(tasks.length, TASKS_PER_DAY)}
           </span>
-          <Chip tone="sky">{t.promise}</Chip>
+          <Chip tone="sky">{t.promise(snapshot.showcase.childPromise ?? 3)}</Chip>
         </div>
         <Meter value={(tasks.length / TASKS_PER_DAY) * 100} tone={full ? "bg-coral" : "bg-mint"} />
         <p className="text-muted-foreground text-xs">{t.limitNote}</p>
@@ -49,7 +49,20 @@ export function TasksScreen() {
       <Notice notice={notice} />
       <div className="grid gap-5 lg:grid-cols-2">
         <Panel title={t.today}>
-          {tasks.length === 0 && <p className="text-muted-foreground text-sm">{t.empty}</p>}
+          {tasks.length === 0 && (
+            <div className="flex flex-col gap-3">
+              <p className="text-muted-foreground text-sm">{t.empty}</p>
+              <button
+                type="button"
+                className={outlineButton}
+                onClick={() =>
+                  document.getElementById("task-templates")?.scrollIntoView({ block: "center" })
+                }
+              >
+                {t.chooseTemplate}
+              </button>
+            </div>
+          )}
           <ul className="flex flex-col gap-2">
             {tasks.map((task) => (
               <li
@@ -157,7 +170,9 @@ export function TasksScreen() {
             </button>
           </form>
           <div className="flex flex-col gap-2">
-            <h3 className="font-semibold text-sm">{t.templates}</h3>
+            <h3 className="font-semibold text-sm">
+              <span id="task-templates">{t.templates}</span>
+            </h3>
             <div className="flex flex-wrap gap-2">
               {templates.map((template) => (
                 <button
@@ -191,7 +206,7 @@ export function TasksScreen() {
                 >
                   <span className="flex-1">{task.title}</span>
                   <time dateTime={task.day} className="text-muted-foreground">
-                    {task.day}
+                    {ru.date(task.day)}
                   </time>
                   <Chip>{task.status === "done" ? ru.child.taskStatus.done : t.expired}</Chip>
                 </li>

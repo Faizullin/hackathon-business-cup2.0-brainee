@@ -29,9 +29,9 @@ Fun game 10 min: 30–40★; forever: 450–600★. Cartoon: 30–60★. Accesso
 The parent sets a ☀ target due Sunday and a prize. It counts **☀ earned this week, not the current balance**, so buying a gift doesn't reduce goal progress.
 
 ### Calendar resets
-Days use the saved family timezone (MVP default: `Asia/Almaty`; timezone selection is deferred to Settings). At local midnight, all device streaks and the shared daily bonus flag reset. Yesterday's completed tasks move to history; assigned and awaiting-confirmation tasks become `expired`. They cannot earn rewards later. Today starts empty, with a fresh five-task quota. Parent history retains the latest 100 tasks.
+Days use the saved family timezone (default: `America/New_York`; Settings offers eleven zones, and signup accepts a supported browser zone). At local midnight, all device streaks and the shared daily bonus flag reset. Yesterday's completed tasks move to history; assigned and awaiting-confirmation tasks become `expired`. They cannot earn rewards later. Today starts empty, with a fresh five-task quota. Parent history retains the latest 100 tasks.
 
-On Monday at local midnight, weekly earned ☀ resets to zero; the goal target and prize stay. Wallets, stats, purchases, gift requests and solved videos are preserved. Rollover happens on reads and relevant writes, including after several idle days, without a cron job. A game finished across midnight counts in the new day; replaying an old receipt pays nothing again. Stopping or opening another device never renews the day's bonus. Persistence: [D-26](../dev/decisions.md).
+On Monday at local midnight, weekly earned ☀ resets to zero; the goal target and prize stay. Wallets, stats, purchases, gift requests and solved videos are preserved. Rollover happens on reads and relevant writes, including after several idle days, without a cron job. A game finished across midnight counts in the new day; replaying an old receipt pays nothing again. Stopping or opening another device never renews the day's bonus. Changing timezone settles the old calendar and applies the selected zone immediately; it never renews an already claimed bonus. Persistence: [D-26/D-27](../dev/decisions.md).
 
 ## Brainy
 

@@ -1,5 +1,6 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
+import { handleStageCelebration } from "./saved-state";
 
 /** Solve by the visible SVG differences, without adding answer markers to the game. */
 export async function answerOddOneOut(page: Page) {
@@ -17,6 +18,7 @@ export async function answerOddOneOut(page: Page) {
 }
 
 export async function finishOddOneOut(page: Page) {
+  await handleStageCelebration(page);
   await answerOddOneOut(page);
   await expect(page.getByTestId("post-game")).toBeVisible();
 }

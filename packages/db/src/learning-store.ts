@@ -7,6 +7,7 @@ import {
   moodNow,
   parseLearningGameResult,
   parseLearningLaunch,
+  reachedStage,
   stopForToday,
 } from "@brainee/core";
 import { and, eq, gt, sql } from "drizzle-orm";
@@ -26,7 +27,13 @@ import { demo } from "./seed";
 
 export class LearningStoreError extends Error {
   constructor(
-    public readonly code: "unauthorized" | "invalid-input" | "not-found" | "conflict" | "expired",
+    public readonly code:
+      | "revoked"
+      | "unauthorized"
+      | "invalid-input"
+      | "not-found"
+      | "conflict"
+      | "expired",
   ) {
     super(code);
   }
@@ -81,6 +88,7 @@ export async function findDemoAccess(db: Store, tokenHash: string, now: Date) {
       expiresAt: demoSessions.expiresAt,
       inRow: demoSessions.inRow,
       bonusGiven: demoSessions.bonusGiven,
+      revoked: demoSessions.revoked,
     })
     .from(demoSessions)
     .innerJoin(children, eq(children.id, demoSessions.childId))
@@ -90,7 +98,8 @@ export async function findDemoAccess(db: Store, tokenHash: string, now: Date) {
 
 export async function requireAccess(db: Store, tokenHash: string, now: Date) {
   const access = await findDemoAccess(db, tokenHash, now);
-  if (!access) throw new LearningStoreError("unauthorized");
+  if (!access || access.revoked)
+    throw new LearningStoreError(access?.revoked ? "revoked" : "unauthorized");
   return access;
 }
 
@@ -238,6 +247,8 @@ export async function finishGameSession(
       title: `${game.title} · ${result.level}`,
       amount: completion.earnedStars,
     });
+    const stage = reachedStage(completion.before.stats, completion.after.stats);
+    if (stage) addFeed(data, { at: now.toISOString(), kind: "stage-up", title: stage });
     await tx.update(showcases).set({ data }).where(eq(showcases.childId, access.childId));
     await tx
       .update(demoSessions)

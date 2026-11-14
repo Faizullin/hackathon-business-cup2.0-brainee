@@ -12,8 +12,8 @@ test("odd-one-out plays to the end in the lab and reports a valid result", async
   for (let round = 0; round < 4; round++) {
     const next = page.getByRole("button", { name: /^(Дальше|Готово)$/ });
     const cells = page.getByRole("button", { name: /^Фигура \d+$/ });
+    await expect(cells).toHaveCount(9);
     const count = await cells.count();
-    expect(count).toBe(9);
     // Tap cells in order until the odd one is found (this also exercises mistakes).
     for (let i = 0; i < count && !(await next.isVisible()); i++) {
       await cells.nth(i).click();

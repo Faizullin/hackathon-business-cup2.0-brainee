@@ -9,7 +9,16 @@ export async function savedState(request: APIRequestContext): Promise<StateSnaps
   return body.snapshot;
 }
 
+export async function handleStageCelebration(page: Page) {
+  // Shared demo progress can cross a stage in any learning test.
+  const celebration = page.getByRole("dialog", { name: "Брейни вырос!" });
+  await page.addLocatorHandler(celebration, async () => {
+    await celebration.getByRole("button", { name: "Здорово!", exact: true }).click();
+  });
+}
+
 export async function readyState(page: Page) {
+  await handleStageCelebration(page);
   await expect(page.locator('[data-mode="child"], [data-game]').first()).toBeVisible();
   return savedState(page.request);
 }

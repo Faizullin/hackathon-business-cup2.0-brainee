@@ -61,6 +61,9 @@ export function ParentLogin() {
       >
         {t.newFamily}
       </Link>
+      <Link href="/child-login" className="font-semibold text-coral">
+        {ru.pairing.child}
+      </Link>
     </form>
   );
 }

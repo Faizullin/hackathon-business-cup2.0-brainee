@@ -57,3 +57,9 @@ export function applyStatGains(stats: BrainyStats, gains: Partial<BrainyStats>):
   }
   return result;
 }
+
+/** A celebration only when a higher body stage is reached. */
+export function reachedStage(before: BrainyStats, after: BrainyStats) {
+  const next = stageOf(after);
+  return next.index > stageOf(before).index ? next.id : null;
+}

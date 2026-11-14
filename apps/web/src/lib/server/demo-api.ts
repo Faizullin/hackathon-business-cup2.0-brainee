@@ -64,6 +64,7 @@ export async function demoApi(
     response = await handle(connection.db, new Date());
   } catch (error) {
     const statuses = {
+      revoked: 419,
       unauthorized: 401,
       "invalid-input": 400,
       "not-found": 404,

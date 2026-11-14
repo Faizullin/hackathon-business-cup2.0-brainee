@@ -27,6 +27,8 @@ import {
   storePendingFinish,
 } from "@/lib/learning-api";
 
+import { StageCelebration } from "./StageCelebration";
+
 const STATE_KEY = ["child-state"] as const;
 type Context = {
   snapshot: StateSnapshot | undefined;
@@ -41,7 +43,7 @@ type Context = {
   discardPending(): void;
   /** Runs one demo action on the server, then refreshes; returns a failure reason or null. */
   act(action: ShowcaseAction): Promise<string | null>;
-  unlockParent(pin: string): Promise<boolean>;
+  unlockParent(pin: string, adult?: boolean): Promise<boolean>;
   lockParent(): Promise<void>;
 };
 
@@ -72,7 +74,9 @@ function SharedLearning({ children }: { children: ReactNode }) {
   const client = useQueryClient();
   const pathname = usePathname();
   const active =
-    /^\/(learn|leisure|gifts|brainy|game|entry|video|analytics|tasks|rewards)(\/|$)/.test(pathname);
+    /^\/(learn|leisure|gifts|brainy|game|entry|video|analytics|tasks|rewards|settings)(\/|$)/.test(
+      pathname,
+    );
   const accessReady = useRef(false);
   const [hydrated, setHydrated] = useState(false);
   const [resting, setResting] = useState(false);
@@ -121,6 +125,10 @@ function SharedLearning({ children }: { children: ReactNode }) {
     retry: false,
     refetchInterval: (query) => (query.state.data ? 3000 : false),
   });
+  useEffect(() => {
+    if (state.error && "status" in state.error && state.error.status === 419)
+      window.location.replace("/login");
+  }, [state.error]);
   const refresh = useCallback(async () => {
     await client.cancelQueries({ queryKey: STATE_KEY });
     return client.fetchQuery({
@@ -185,8 +193,8 @@ function SharedLearning({ children }: { children: ReactNode }) {
     [refresh],
   );
   const unlockParent = useCallback(
-    async (pin: string) => {
-      const { error } = await postJson("/api/parent", { pin });
+    async (pin: string, adult = false) => {
+      const { error } = await postJson("/api/parent", adult ? { answer: pin } : { pin });
       await refresh().catch(() => {});
       return error === null;
     },
@@ -220,6 +228,10 @@ function SharedLearning({ children }: { children: ReactNode }) {
       }}
     >
       {children}
+      <StageCelebration
+        snapshot={state.data}
+        enabled={/^\/(learn|leisure|gifts|brainy|game|entry|video)(\/|$)/.test(pathname)}
+      />
     </LearningContext>
   );
 }

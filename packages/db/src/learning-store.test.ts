@@ -297,7 +297,7 @@ it("shares the daily bonus across concurrent devices and allows it again after l
   );
   for (let i = 0; i < 3; i++)
     expect((await play(f.db, freshHash, later(15000 + i * 3000))).completion.bonus).toBe(0);
-  const tomorrow = new Date("2026-11-14T19:00:00Z");
+  const tomorrow = new Date("2026-11-15T05:00:00Z");
   const reset = await getStateSnapshot(f.db, f.hash, tomorrow);
   expect(reset.progress.streak).toEqual({ inRow: 0, bonusGiven: false });
   expect((await getStateSnapshot(other.db, secondHash, tomorrow)).progress.streak).toEqual(
@@ -316,19 +316,19 @@ it("counts an overnight finish in the new day without replaying yesterday's stre
     const started = await startGameSession(f.db, f.hash, launch, later(i * 3000));
     await finishGameSession(f.db, f.hash, started.sessionId, result, later(i * 3000 + 2000));
   }
-  const started = await startGameSession(f.db, f.hash, launch, new Date("2026-11-14T18:59:59Z"));
+  const started = await startGameSession(f.db, f.hash, launch, new Date("2026-11-15T04:59:59Z"));
   const saved = await finishGameSession(
     f.db,
     f.hash,
     started.sessionId,
     result,
-    new Date("2026-11-14T19:00:01Z"),
+    new Date("2026-11-15T05:00:01Z"),
   );
   expect(saved.completion).toMatchObject({
     bonus: 0,
     after: { streak: { inRow: 1, bonusGiven: false } },
   });
-  const beforeReplay = await getStateSnapshot(f.db, f.hash, new Date("2026-11-15T19:00:01Z"));
+  const beforeReplay = await getStateSnapshot(f.db, f.hash, new Date("2026-11-16T05:00:01Z"));
   expect(
     (
       await finishGameSession(
@@ -336,11 +336,11 @@ it("counts an overnight finish in the new day without replaying yesterday's stre
         f.hash,
         started.sessionId,
         result,
-        new Date("2026-11-15T19:00:02Z"),
+        new Date("2026-11-16T05:00:02Z"),
       )
     ).replayed,
   ).toBe(true);
-  expect((await getStateSnapshot(f.db, f.hash, new Date("2026-11-15T19:00:02Z"))).progress).toEqual(
+  expect((await getStateSnapshot(f.db, f.hash, new Date("2026-11-16T05:00:02Z"))).progress).toEqual(
     beforeReplay.progress,
   );
 });

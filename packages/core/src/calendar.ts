@@ -1,7 +1,7 @@
 import type { Showcase, Task } from "./showcase";
 
 // MVP family default; Settings can later persist a different IANA zone here.
-export const DEFAULT_TIME_ZONE = "Asia/Almaty";
+export const DEFAULT_TIME_ZONE = "America/New_York";
 export const TASK_HISTORY_LIMIT = 100;
 export type FamilyCalendar = { timeZone: string; day: string; week: string; bonusGiven: boolean };
 export type ArchivedTask = Omit<Task, "status"> & { day: string; status: "done" | "expired" };
