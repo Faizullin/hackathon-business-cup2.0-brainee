@@ -5,7 +5,6 @@ import { Brainy } from "@/components/Brainy";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { RecommendationCards, useRecommendations } from "@/components/child/Recommendations";
-import { FloatingLocalePill } from "@/components/LocaleSwitcher";
 import { useI18n } from "@/i18n";
 
 // T-31: shown on every entry into child mode. No close button or swipe; the choice is logged.
@@ -18,7 +17,6 @@ function Entry() {
   const first = recs[0];
   return (
     <section className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-5 p-4 sm:p-8 lg:max-w-5xl">
-      <FloatingLocalePill />
       <h1 className="text-center">{te.title}</h1>
       <div className="flex items-center gap-4 rounded-panel border border-border bg-card p-4">
         <Brainy

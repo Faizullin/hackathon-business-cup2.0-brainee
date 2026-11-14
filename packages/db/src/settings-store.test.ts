@@ -38,7 +38,7 @@ it("requires parent access, checks the old PIN and revokes a device without expo
   await updateSettings(
     f.db,
     f.hash,
-    { type: "child", child: { name: "Мира", birthYear: 2020, promise: 2 } },
+    { type: "child", child: { name: "Mira", birthYear: 2020, promise: 2 } },
     now,
   );
   await expect(
@@ -49,7 +49,7 @@ it("requires parent access, checks the old PIN and revokes a device without expo
   expect(await setParentUnlock(f.db, f.hash, "1234", now)).toBe(false);
   expect(await setParentUnlock(f.db, f.hash, "2468", now)).toBe(true);
   const data = await getSettings(f.db, f.hash, now);
-  expect(data.child).toEqual({ name: "Мира", birthYear: 2020, promise: 2 });
+  expect(data.child).toEqual({ name: "Mira", birthYear: 2020, promise: 2 });
   expect(JSON.stringify(data)).not.toContain(f.hash);
   const id = data.devices[0]?.id;
   await updateSettings(f.db, f.hash, { type: "revoke", deviceId: id }, now);

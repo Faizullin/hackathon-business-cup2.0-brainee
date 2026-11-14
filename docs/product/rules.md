@@ -18,25 +18,25 @@ At first we use built-in OS tools; a native wrapper automates this later.
 - Rankings show first name + last initial only. No photo, no exact address.
 - District ranking is shown only when the zone has > 50 children. Zones are large (a city district, not a block).
 - Child data is collected with parental consent. Before launch, a legal review per country: local data laws, GDPR, COPPA if entering the US.
-- Child voice ("Расскажи историю") is sensitive: process it on-device, or get explicit consent and keep it only briefly.
+- Child voice ("Tell a Story") is sensitive: process it on-device, or get explicit consent and keep it only briefly.
 - Leaving the child UI (to the parent dashboard, sharing, external links) goes **only through the parent barrier**. This is also an app store requirement for kids' apps.
 
 ## Product rules
 - No endless feed, autoplay or "watch next" recommendations.
-- The learning flow has an end: a break after 3 games in a row, and a «Хватит на сегодня» button.
+- The learning flow has an end: a break after 3 games in a row, and an "Enough for today" button.
 - Brainy never gets sick or dies.
 - The child never sees comparisons with other children.
-- Character analytics is an "индикатор" (indicator), not a diagnosis. Compare with the «среднее по возрасту среди пользователей» (average for that age among our users), not a «норма развития» (developmental norm).
+- Character analytics is an "indicator", not a diagnosis. Compare with the "average for that age among our users", not a "developmental norm".
 - No ADHD-prevention promises and no medical wording, in marketing or UI.
 - No third-party characters or brands. Naming meme content in the quiz is fine; using it in visuals is not.
 
 ## MVP acceptance criteria
 - [ ] Entry screen shows on every entry into child mode, can't be closed without a choice, picks 3 games by skill gap, and logs the choice.
-- [ ] After a game: Brainy before → after, two next-step options, and «Хватит на сегодня». After 3 games in a row: a break and a bonus.
+- [ ] After a game: Brainy before → after, two next-step options, and "Enough for today". After 3 games in a row: a break and a bonus.
 - [ ] Brainy's stats and stage recalculate after each game and update for both child and parent without a reload.
 - [ ] Accessories can be bought, worn and removed, one per slot, and show everywhere Brainy appears.
 - [ ] Science video: pause only, position saved on close, ★ granted only after a correct answer.
-- [ ] Task: child taps «Готово» → parent confirms → ☀ goes to the balance and the weekly goal, and `resp` grows.
+- [ ] Task: child taps "Done" → parent confirms → ☀ goes to the balance and the weekly goal, and `resp` grows.
 - [ ] Gifts cost ☀ only. Exchange only ☀ → ★ at 1 : 10.
 - [ ] The 5-tasks-a-day limit is enforced.
 - [ ] Ranking is never shown to the child and hides last names.

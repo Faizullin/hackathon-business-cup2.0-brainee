@@ -4,8 +4,8 @@
 export const FILM_SKILLS = ["attention", "reading", "logic", "memory", "speech"] as const;
 export const FILM_SPOTS = ["left", "center", "right"] as const;
 export const FILM_VOICES = ["brainy", "guest"] as const;
-/** Language of the audio; captions and questions use the same language. */
-export const FILM_LANGS = ["ru", "kk", "en"] as const;
+/** Language of the audio; captions and questions use the same language. The product is English-only. */
+export const FILM_LANGS = ["en"] as const;
 /** The prop shown a few seconds before every question. */
 export const FILM_QUESTION_PROP = "question";
 
@@ -60,8 +60,9 @@ export const FILM_LIMITS = {
 
 const ID = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const PLACEHOLDER = /\bTODO\b/i;
-const NEGATION = /(^|\s)(НЕ|не)\s/;
-const ALL_CORRECT = /все\s+(ответы|варианты)|все\s+верн|ничего\s+из/i;
+const NEGATION = /(^|\s)(not|never|don't|doesn't|isn't|aren't|can't)\s/i;
+const ALL_CORRECT =
+  /\ball\s+(of\s+the\s+)?(above|answers|options)\b|\ball\s+(are\s+)?(right|correct)\b|\bnone\s+of\b/i;
 
 const isText = (value: unknown, max: number): value is string =>
   typeof value === "string" && value.trim().length > 0 && value.length <= max;

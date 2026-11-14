@@ -12,17 +12,17 @@ const art = { bg: ["sea", "sky"], props: ["fish", "whale", "question", "star"] }
 
 const film = (patch: Partial<FilmScript> = {}): FilmScript => ({
   id: "ocean",
-  title: "Тайны океана",
-  lang: "ru",
+  title: "Ocean Secrets",
+  lang: "en",
   skill: "attention",
   duration: 150,
   audio: "/media/films/ocean.mp3",
   captions: [
-    { t: 0, end: 4, text: "Привет! Сегодня мы нырнём в океан." },
-    { t: 5, end: 9, text: "Кто самый большой житель океана?" },
-    { t: 12, end: 16, text: "Это синий кит!" },
-    { t: 60, end: 64, text: "А где живут рыбы?" },
-    { t: 66, end: 70, text: "Рыбы живут в воде." },
+    { t: 0, end: 4, text: "Hi! Today we dive into the ocean." },
+    { t: 5, end: 9, text: "Who is the biggest animal in the ocean?" },
+    { t: 12, end: 16, text: "It's the blue whale!" },
+    { t: 60, end: 64, text: "And where do fish live?" },
+    { t: 66, end: 70, text: "Fish live in water." },
   ],
   scenes: [
     { t: 0, bg: "sea", props: ["fish", "star"], brainy: "left" },
@@ -40,20 +40,20 @@ const film = (patch: Partial<FilmScript> = {}): FilmScript => ({
   questions: [
     {
       t: 9.3,
-      q: "Кто самый большой в океане?",
-      options: ["Акула", "Синий кит", "Осьминог"],
+      q: "Who is the biggest in the ocean?",
+      options: ["Shark", "Blue whale", "Octopus"],
       answer: 1,
-      hint: "Почти! Вспомни, кто больше автобуса",
-      praise: "Верно! Синий кит больше автобуса",
+      hint: "Almost! Think of who is bigger than a bus",
+      praise: "Right! A blue whale is bigger than a bus",
       replayFrom: 0,
     },
     {
       t: 64.3,
-      q: "Где живут рыбы?",
-      options: ["В воде", "На дереве", "В песке"],
+      q: "Where do fish live?",
+      options: ["In water", "In a tree", "In the sand"],
       answer: 0,
-      hint: "Подумай, где они плавают",
-      praise: "Верно! Рыбы живут в воде",
+      hint: "Think about where they swim",
+      praise: "Right! Fish live in water",
       replayFrom: 12,
     },
   ],
@@ -90,7 +90,7 @@ describe("checkFilm", () => {
     const script = film();
     script.questions[1] = {
       ...(script.questions[1] as FilmScript["questions"][0]),
-      options: ["В воде", "Все ответы верны"],
+      options: ["In water", "All answers are correct"],
       answer: 3,
     };
     const found = messages(script);
@@ -120,7 +120,7 @@ describe("film timeline", () => {
   it("finds the scene and the spoken caption", () => {
     expect(filmSceneAt(script, 0).props).toEqual(["fish", "star"]);
     expect(filmSceneAt(script, 13).brainy).toBe("right");
-    expect(filmCaptionAt(script, 6)?.text).toContain("большой");
+    expect(filmCaptionAt(script, 6)?.text).toContain("biggest");
     expect(filmCaptionAt(script, 10)).toBeUndefined();
   });
 

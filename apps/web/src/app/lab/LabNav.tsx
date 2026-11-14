@@ -5,16 +5,16 @@ import { usePathname } from "next/navigation";
 import { useI18n } from "@/i18n";
 
 export function LabNav() {
-  const { t: ru } = useI18n();
+  const { t } = useI18n();
   const LINKS = [
-    { href: "/lab", label: ru.lab.nav.games },
-    { href: "/lab/brainy", label: ru.lab.nav.brainy },
-    { href: "/lab/film", label: ru.lab.nav.film },
+    { href: "/lab", label: t.lab.nav.games },
+    { href: "/lab/brainy", label: t.lab.nav.brainy },
+    { href: "/lab/film", label: t.lab.nav.film },
   ] as const;
 
   const pathname = usePathname();
   return (
-    <nav aria-label={ru.lab.title} className="mt-4 flex gap-2">
+    <nav aria-label={t.lab.title} className="mt-4 flex gap-2">
       {LINKS.map((link) => {
         const current = pathname === link.href;
         return (

@@ -22,7 +22,7 @@ export type GameText = {
 };
 
 export type GameProps = {
-  locale?: "en" | "ru";
+  locale?: "en";
   level: number;
   /** Deterministic rounds: same seed → same game. */
   seed: number;

@@ -44,7 +44,7 @@ apps/web/
 │  ├─ (parent)/               # PIN barrier + tabs: analytics (seeded charts), tasks, rewards (D-21)
 │  ├─ (auth)/login/           # Welcome page; sessions, quiz and onboarding planned
 │  ├─ (game)/game/[id]/       # Fullscreen play (no dock/tab bar); `?level=&seed=`
-│  ├─ (game)/entry, video/[id] # Entry screen «Во что играем сейчас?» (`/` redirects here); science video player
+│  ├─ (game)/entry, video/[id] # Entry screen "What are we playing now?" (`/` redirects here); science video player
 │  ├─ lab/, lab/brainy/       # Dev-only game lab + event stream; Brainy presets (T-16, T-20)
 │  └─ api/                   # Demo access, game start/finish/stop, /api/state, /api/actions, /api/parent, /api/demo-reset
 ├─ public/media/             # Planned: own-domain media

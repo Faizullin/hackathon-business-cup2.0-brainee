@@ -9,7 +9,7 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [progress/](progress/) | Current status, backlog, session log | **Every session start** (status.md) | Whoever finishes work |
 | [product/](product/) | What we build: condensed PRD | Building a feature or checking a rule | Product owner; anyone fixing a spec gap |
 | [dev/](dev/) | How we build: stack, setup, conventions, decisions | Scaffolding, adding packages, onboarding | Whoever changes the architecture |
-| [ideas/](ideas/) | Original sources: PRD PDF, HTML prototype | Porting prototype code (line map inside) | Rarely; sources are frozen |
+| [ideas/](ideas/) | Where the removed original sources went; reference screenshots | Tracing a spec back to its source | Rarely |
 | [reports/](reports/) | Generated UI walkthroughs, videos, screenshots and logs | Reviewing current UI or recording a demo | Whoever changes a report scenario |
 
 ## Files
@@ -35,7 +35,7 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [dev/films.md](dev/films.md) | Interactive films: mp3 + JSON script format, podcast → film workflow, art rules, checks, player |
 | [dev/ui.md](dev/ui.md) | UI and motion system: Base UI components, page transitions, Motion, app shell, mobile app-feel checklist |
 | [dev/agent-tooling.md](dev/agent-tooling.md) | Which agent skills and MCP servers to use or skip, and why |
-| [ideas/README.md](ideas/README.md) | What the source files are + prototype line map |
+| [ideas/README.md](ideas/README.md) | Where the original sources live now (git history) |
 | [reports/README.md](reports/README.md) | Recording commands, artifact map and analysis of the game-store-planning reporting pipeline |
 | [product/routes-spec.md](product/routes-spec.md) | Building or changing routes, access, parent dashboard or ROUTES.md rules |
 | [product/external-games.md](product/external-games.md) | Planning the 30-game pack (licences, path C, first wave) |
@@ -45,7 +45,7 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 
 - **Turn a podcast into a film** → `dev/films.md` (whole workflow) → `packages/films/src/art.tsx` for art keys
 - **Build or port a game** → `dev/games.md` → that game's row in `screens.md` → prototype lines 901–982
-- **Build a child screen** → `screens.md` (that section) → `dev/ui.md` → `mechanics.md` if it touches stars or stats → prototype range from `ideas/README.md`
+- **Build a child screen** → `screens.md` (that section) → `dev/ui.md` → `mechanics.md` if it touches stars or stats
 - **Build parent analytics** → `screens.md` §Parent → `data-model.md`
 - **Write economy or stat logic** → `mechanics.md` → `data-model.md` §How stats change
 - **Save games or wire shared state** → `dev/sessions.md` → `product/data-model.md` → `dev/setup.md`

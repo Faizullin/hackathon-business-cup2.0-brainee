@@ -12,13 +12,13 @@ const base: Showcase = {
   equipped: {},
   owned: [],
   earned: [],
-  weekGoal: { earned: 6, target: 10, giftId: "cinema", due: "Вс" },
+  weekGoal: { earned: 6, target: 10, giftId: "cinema", due: "Sun" },
   tasks: [
     {
       id: "a",
-      title: "Убраться",
+      title: "Tidy up",
       place: "real",
-      skill: "Ответственность",
+      skill: "Responsibility",
       reward: 2,
       status: "todo",
     },
@@ -27,23 +27,23 @@ const base: Showcase = {
   recommendations: [
     {
       id: "r",
-      skill: "Внимание",
+      skill: "Attention",
       value: 41,
       average: 52,
-      part: "Глаза",
+      part: "Eyes",
       why: "",
-      items: [{ id: "i", title: "Пазл", reward: 3, duration: "20 мин" }],
+      items: [{ id: "i", title: "Puzzle", reward: 3, duration: "20 min" }],
     },
   ],
   gifts: [
-    { id: "cinema", title: "Кино", price: 10 },
-    { id: "ice", title: "Мороженое", price: 3 },
+    { id: "cinema", title: "Movie", price: 10 },
+    { id: "ice", title: "Ice cream", price: 3 },
   ],
   requests: [],
   fun: [
     {
       id: "rocket",
-      title: "Ракета",
+      title: "Rocket",
       skill: "",
       icon: "rocket",
       priceTimed: 30,
@@ -56,7 +56,7 @@ const base: Showcase = {
   science: [
     {
       id: "v",
-      title: "Океан",
+      title: "Ocean",
       minutes: 24,
       icon: "wave",
       colors: ["#000", "#111"],
@@ -96,7 +96,7 @@ describe("showcase actions", () => {
   it("enforces five tasks a day", () => {
     const firstTask = base.tasks[0] ?? {
       id: "t0",
-      title: "Дело",
+      title: "Chore",
       place: "real" as const,
       skill: "X",
       reward: 1,
@@ -106,7 +106,7 @@ describe("showcase actions", () => {
       ...base,
       tasks: Array.from({ length: TASKS_PER_DAY }, (_, i) => ({ ...firstTask, id: `t${i}` })),
     };
-    const add = { type: "task-add", title: "Ещё", place: "real", skill: "X", reward: 1 } as const;
+    const add = { type: "task-add", title: "More", place: "real", skill: "X", reward: 1 } as const;
     expect(applyShowcaseAction(input(full), add)).toEqual({ ok: false, reason: "daily-limit" });
     expect(applyShowcaseAction(input(), add).ok).toBe(true);
   });
@@ -115,7 +115,7 @@ describe("showcase actions", () => {
     const bought = applyShowcaseAction(input(), { type: "buy-gift", giftId: "ice" });
     expect(bought).toMatchObject({ ok: true, wallet: { stars: 100, suns: 2 } });
     if (bought.ok)
-      expect(bought.showcase.requests[0]).toMatchObject({ title: "Мороженое", delivered: false });
+      expect(bought.showcase.requests[0]).toMatchObject({ title: "Ice cream", delivered: false });
     expect(applyShowcaseAction(input(), { type: "buy-gift", giftId: "cinema" }).ok).toBe(false);
   });
 

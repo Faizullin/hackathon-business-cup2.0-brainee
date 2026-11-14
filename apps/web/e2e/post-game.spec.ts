@@ -22,25 +22,25 @@ test("a finish saves Brainy and the shared wallet, with a real stopping point", 
   const eyes = Math.min(100, before.progress.stats.eyes + 3);
   const gain = eyes - before.progress.stats.eyes;
   const stars = before.progress.wallet.stars + 12;
-  await expect(page.getByRole("img", { name: "До игры" })).toBeVisible();
-  await expect(page.getByRole("img", { name: "После игры" })).toBeVisible();
+  await expect(page.getByRole("img", { name: "Before game" })).toBeVisible();
+  await expect(page.getByRole("img", { name: "After game" })).toBeVisible();
   if (gain > 0) {
-    await expect(page.getByTestId("stat-gain-eyes")).toContainText(`Глаза +${gain}`);
+    await expect(page.getByTestId("stat-gain-eyes")).toContainText(`Eyes +${gain}`);
     await expect(page.getByTestId("stat-gain-eyes")).toContainText(
       `${before.progress.stats.eyes} → ${eyes}`,
     );
-  } else await expect(page.getByText("Брейни уже освоил этот навык!")).toBeVisible();
+  } else await expect(page.getByText("Brainy has already mastered this skill!")).toBeVisible();
   await expect(page.getByTestId("earned-stars")).toContainText("+12");
-  await expect(page.getByText(`Теперь у тебя ${stars} ★`)).toBeVisible();
+  await expect(page.getByText(`You now have ${stars} ★`)).toBeVisible();
   await expect(page.getByTestId("next-level")).toHaveAttribute("href", /level=2/);
   await expect(page.getByTestId("practice-game")).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath("post-game.png"), fullPage: true });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await page.getByRole("button", { name: "Хватит на сегодня" }).click();
+  await page.getByRole("button", { name: "Enough for today" }).click();
   await expect(page).toHaveURL(/\/brainy$/);
-  await expect(page.getByRole("status")).toContainText("Спасибо за занятия");
+  await expect(page.getByRole("status")).toContainText("Thank you for practicing");
   await expect(page.getByTestId("brainy-stat-eyes")).toHaveText(String(eyes));
-  await page.getByRole("navigation").getByRole("link", { name: "Учимся" }).click();
+  await page.getByRole("navigation").getByRole("link", { name: "Learn" }).click();
   await expect(page.getByTestId("wallet-stars")).toContainText(String(stars));
   await page.reload();
   await expect(page.getByTestId("wallet-stars")).toContainText(String(stars));
@@ -76,25 +76,21 @@ test("three completed games offer a break and save exactly one bonus", async ({
       await expect(page.getByTestId("post-game")).toHaveCount(0);
     }
   }
-  await expect(page.getByTestId("streak-bonus")).toHaveText("Бонус за 3 игры подряд: +5 ★");
+  await expect(page.getByTestId("streak-bonus")).toHaveText("Bonus for 3 games in a row: +5 ★");
   await expect(page.getByTestId("earned-stars")).toContainText("+17");
-  await expect(
-    page.getByText(`Теперь у тебя ${before.progress.wallet.stars + 41} ★`),
-  ).toBeVisible();
+  await expect(page.getByText(`You now have ${before.progress.wallet.stars + 41} ★`)).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath("break.png"), fullPage: true });
-  await page.getByRole("button", { name: "Сделать перерыв" }).click();
+  await page.getByRole("button", { name: "Take a break" }).click();
   await expect(page.getByTestId("brainy-stat-eyes")).toHaveText(
     // D-23 level budget: L1 +3, L2 +4, L1 +3.
     String(Math.min(100, before.progress.stats.eyes + 10)),
   );
-  await page.getByRole("navigation").getByRole("link", { name: "Учимся" }).click();
+  await page.getByRole("navigation").getByRole("link", { name: "Learn" }).click();
   await expect(page.getByTestId("wallet-stars")).toContainText(
     String(before.progress.wallet.stars + 41),
   );
-  await page.getByRole("link", { name: "с 4 лет Найди лишний Внимание", exact: true }).click();
+  await page.getByRole("link", { name: "ages 4+ Odd One Out Attention", exact: true }).click();
   await finishOddOneOut(page);
   await expect(page.getByTestId("streak-bonus")).toHaveCount(0);
-  await expect(
-    page.getByText(`Теперь у тебя ${before.progress.wallet.stars + 53} ★`),
-  ).toBeVisible();
+  await expect(page.getByText(`You now have ${before.progress.wallet.stars + 53} ★`)).toBeVisible();
 });

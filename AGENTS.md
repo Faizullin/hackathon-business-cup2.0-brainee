@@ -2,7 +2,7 @@
 
 The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.md` only import this file, so edit it here.
 
-**Project:** Брейни, a kids' learning PWA with a growing mascot and a two-currency reward economy. Summary: [README.md](README.md).
+**Project:** Brainy (Brainee), a kids' learning PWA with a growing mascot and a two-currency reward economy. Summary: [README.md](README.md).
 
 ## Session protocol
 
@@ -20,10 +20,9 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 
 ## Token rules
 
-- **Never read `docs/ideas/PRD Брейни.pdf`.** It's 24 pages of Russian, mostly images. Its content is condensed in [docs/product/](docs/product/).
-- **Never read the whole prototype HTML** (~1,170 lines). Use the line map in [docs/ideas/README.md](docs/ideas/README.md) and read only the range you need.
+- The original PRD and prototype are no longer in the tree; their content lives in [docs/product/](docs/product/) ([docs/ideas/README.md](docs/ideas/README.md) explains where).
 - Each fact lives in one doc. Link to it; don't copy it. Update the original when it changes.
-- Keep docs in English (cheaper in tokens than Russian). Quote UI strings in Russian.
+- Keep docs in English. The product UI, including games and films, is English-only (D-34).
 
 ## Hard rules (break these and the product breaks)
 

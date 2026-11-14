@@ -21,8 +21,8 @@ test("tangram: failed check, correction, four silhouettes and one saved reward",
   });
   const frame = page.getByTestId("embedded-game").contentFrame();
   await page.screenshot({ path: info.outputPath("tangram-play.png"), fullPage: false });
-  await frame.getByRole("button", { name: "Проверить", exact: true }).click();
-  await expect(frame.getByRole("status")).toContainText("Ещё остались детали");
+  await frame.getByRole("button", { name: "Check", exact: true }).click();
+  await expect(frame.getByRole("status")).toContainText("Some pieces are still missing");
   await page.screenshot({ path: info.outputPath("tangram-check.png"), fullPage: false });
   for (let round = 0; round < 4; round++) await completeTangram(page);
   await expect(page.getByTestId("post-game")).toBeVisible();
@@ -46,9 +46,9 @@ test("tangram: leaving after a failed check does not save a result", async ({ pa
   await page
     .getByTestId("embedded-game")
     .contentFrame()
-    .getByRole("button", { name: "Проверить", exact: true })
+    .getByRole("button", { name: "Check", exact: true })
     .click();
-  await page.getByRole("button", { name: /Выйти/ }).click();
+  await page.getByRole("button", { name: /Exit/ }).click();
   await expect(page).toHaveURL(/\/learn$/);
   expect((await savedState(page.request)).progress.wallet.stars).toBe(before.progress.wallet.stars);
 });
@@ -59,15 +59,15 @@ for (const level of [1, 2]) {
   }) => {
     await page.goto("/lab");
     await page
-      .getByRole("combobox", { name: "Экран", exact: true })
+      .getByRole("combobox", { name: "Screen", exact: true })
       .selectOption((page.viewportSize()?.width ?? 390) >= 768 ? "ipad" : "phone");
-    await page.getByRole("combobox", { name: "Игра", exact: true }).selectOption("tangram-tales");
-    await page.getByRole("combobox", { name: "Уровень", exact: true }).selectOption(String(level));
+    await page.getByRole("combobox", { name: "Game", exact: true }).selectOption("tangram-tales");
+    await page.getByRole("combobox", { name: "Level", exact: true }).selectOption(String(level));
     await page.getByTestId("embedded-game").scrollIntoViewIfNeeded();
     const frame = page.getByTestId("embedded-game").contentFrame();
     await expect(frame.locator(".tray-piece")).toHaveCount(level + 3);
-    await frame.getByRole("button", { name: "Проверить", exact: true }).click();
-    await frame.getByRole("button", { name: "Проверить", exact: true }).click();
+    await frame.getByRole("button", { name: "Check", exact: true }).click();
+    await frame.getByRole("button", { name: "Check", exact: true }).click();
     for (let round = 0; round < 4; round++) await completeTangram(page);
     const stream = page.getByTestId("event-stream");
     await expect(stream).toHaveAttribute("data-status", "finished");

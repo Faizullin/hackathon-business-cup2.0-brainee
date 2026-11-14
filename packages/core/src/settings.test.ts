@@ -15,7 +15,7 @@ const now = new Date("2026-11-16T04:30:00Z");
 it("validates age, promises, PIN and supported signup zones", () => {
   expect(signupTimeZone("America/Phoenix")).toBe("America/Phoenix");
   expect(signupTimeZone("Mars/Olympus")).toBe("America/New_York");
-  expect(validChildSettings({ name: "Мира", birthYear: 2020, promise: 5 }, now)).toBe(true);
+  expect(validChildSettings({ name: "Mira", birthYear: 2020, promise: 5 }, now)).toBe(true);
   for (const patch of [
     { name: " " },
     { birthYear: 2010 },
@@ -23,7 +23,7 @@ it("validates age, promises, PIN and supported signup zones", () => {
     { promise: 0 },
     { promise: 6 },
   ])
-    expect(validChildSettings({ name: "Мира", birthYear: 2020, promise: 3, ...patch }, now)).toBe(
+    expect(validChildSettings({ name: "Mira", birthYear: 2020, promise: 3, ...patch }, now)).toBe(
       false,
     );
   expect(validPin("0001")).toBe(true);

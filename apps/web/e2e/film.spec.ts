@@ -47,7 +47,7 @@ test("film: question pauses the audio, hint on a miss, praise resumes, no stars"
   await question.getByRole("button", { name: "Pink" }).click();
   await expect(question.getByRole("button", { name: "Pink" })).toBeDisabled();
   await expect(question.getByRole("alert")).toHaveText("Almost! Look up on a sunny day.");
-  await expect(question.getByRole("button", { name: "Послушать ещё раз" })).toBeVisible();
+  await expect(question.getByRole("button", { name: "Listen again" })).toBeVisible();
   await question.getByRole("button", { name: "Blue" }).click();
   await expect(question.getByRole("status")).toContainText("On a sunny day the sky is blue");
   await expect(question).toBeHidden({ timeout: 5000 });
@@ -75,7 +75,7 @@ test("film: the child's own Brainy leads it, wearing what the child bought", asy
 
 test("film studio swaps the mascot without touching the film", async ({ page }) => {
   await page.goto("/lab/film");
-  await expect(page.getByTestId("film-issues")).toContainText("Ошибок и предупреждений нет");
+  await expect(page.getByTestId("film-issues")).toContainText("No errors or warnings");
   const narrator = page.locator("[data-narrator]");
   await expect(narrator).toHaveCount(1);
   await page.getByTestId("film-narrator").selectOption("dressed");
@@ -87,6 +87,6 @@ test("film studio swaps the mascot without touching the film", async ({ page }) 
 
 test("film studio checks the shipped script", async ({ page }) => {
   await page.goto("/lab/film");
-  await expect(page.getByTestId("film-issues")).toContainText("Ошибок и предупреждений нет");
+  await expect(page.getByTestId("film-issues")).toContainText("No errors or warnings");
   await expect(page.getByRole("slider")).toBeVisible();
 });

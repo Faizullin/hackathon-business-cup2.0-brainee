@@ -1,4 +1,4 @@
-# Interactive films (podcast → «мультик»)
+# Interactive films (podcast → cartoon)
 
 A film is **an mp3 plus a JSON script**. The browser draws it, so no video is rendered. Brainy talks with the voice, scenes change with the story, and questions pause the audio until the child answers. Films are science videos: free, and the only ★ reward is the existing end-of-video quiz (+15★, eyes +2, first time only). In-film questions never grant ★. Decision: [D-33](decisions.md).
 
@@ -36,7 +36,7 @@ A film is **an mp3 plus a JSON script**. The browser draws it, so no video is re
 
 ## Workflow for a new podcast
 
-0. **Input.** Put the mp3 in `videos/audio/` (untracked; don't edit the source). Pick an `id` by meaning (`ocean`, `bees-life`). Listen to or skim the start: **the language decides the script language**, which isn't always Russian.
+0. **Input.** Put the mp3 in `videos/audio/` (untracked; don't edit the source). Pick an `id` by meaning (`ocean`, `bees-life`). Listen to or skim the start: **films are English-only**, so use English podcasts.
 1. **Transcribe → draft.**
    - With `ELEVENLABS_API_KEY` in the environment: `--engine elevenlabs --lang rus|kaz|eng`, plus `--diarize` for two voices. Never write the key to a file or print it.
    - Otherwise, use local Whisper through uv, with no system install:
@@ -46,12 +46,12 @@ A film is **an mp3 plus a JSON script**. The browser draws it, so no video is re
 2. **Keep an untouched copy of the draft** and author from it. Placing questions shortens caption `end` values, so re-running an authoring pass on an edited file moves pauses.
 3. **Fix captions.** Read all of them and fix only the text (punctuation, quotes, names, misheard words). Don't move `t`/`end` without a reason.
 4. **Questions.**
-   - Find the real questions, including rhetorical ones the host answers immediately, and any closing «мини-квиз».
+   - Find the real questions, including rhetorical ones the host answers immediately, and any closing "mini quiz".
    - Set `t` inside the silence right after the question: the speech end + 0.3 s. Whisper's `end` often includes trailing silence or runs into the answer, so measure: `LC_ALL=C ffmpeg -i <mp3> -af silencedetect=noise=-35dB:d=0.25 -f null -`. Then set that caption's `end` to the silence start. That is a measured fix, not an invented timestamp.
    - When the host answers right away, the pause still comes before the answer, so the child answers and then hears the confirmation.
    - `q` ≤ 60 chars and clear to a 5–7-year-old. Exactly 3 `options` ≤ 25 chars: one correct **from the audio**, two plausible wrong ones of similar length and form. No negations and no "all of the above". Shuffle `answer` (0–2).
    - `hint` nudges without giving the answer away. `praise` is short and states the fact.
-   - `replayFrom` is the `t` of the caption where the fact was told. It must be **before** `t`: «Послушать ещё раз» replays it, then the question appears again.
+   - `replayFrom` is the `t` of the caption where the fact was told. It must be **before** `t`: "Listen again" replays it, then the question appears again.
    - Aim for 2–4 questions per 5 minutes. If the audio has none, add 2 on key facts, in pauses between phrases.
 5. **Scenes.**
    - First scene at `t: 0`. Change scenes at the start of a phrase (that caption's `t`), every 8–15 s or on a topic change.
@@ -111,17 +111,17 @@ The film never names its host. `FilmStage` has a **narrator slot**: the player p
 
 - In the child app, `/video/<id>` passes `brainyNarrator(stats, equipped)` (`apps/web/src/components/film/narrators.tsx`), so **the child's own Brainy leads the lecture**: its look comes from their saved stats, and it wears the accessories they bought and equipped.
 - Another mascot (a guest character, a seasonal costume, a partner character) is just another `FilmNarrator`. Scripts, art and checks stay unchanged.
-- `/lab/film` has a «Маскот» selector (Brainy looks, Brainy with accessories, none) to preview the swap.
+- `/lab/film` has a mascot selector (Brainy looks, Brainy with accessories, none) to preview the swap.
 - `packages/films` does not depend on `@brainee/brainy`.
 
 The script fields `brainy` (spot) and `who: "brainy"` keep their names for compatibility; they mean "the narrator".
 
 ## Player behaviour (child)
-- Only «Пауза / Смотреть». The progress bar isn't tappable, and nothing autoplays after the end.
-- A question pauses the audio, and Brainy stands centre-stage. A wrong answer dims that option and shows `hint` + «Послушать ещё раз». The right answer shows `praise`, then the film continues after 1.8 s or on «Дальше».
-- Position is saved in whole minutes: every 10 s while the minute changes, and on «Закрыть и досмотреть позже». The film resumes from that minute; questions before it count as answered.
+- Only "Pause / Watch". The progress bar isn't tappable, and nothing autoplays after the end.
+- A question pauses the audio, and Brainy stands centre-stage. A wrong answer dims that option and shows `hint` + "Listen again". The right answer shows `praise`, then the film continues after 1.8 s or on "Next".
+- Position is saved in whole minutes: every 10 s while the minute changes, and on "Close and finish later". The film resumes from that minute; questions before it count as answered.
 - The end of the audio opens the existing final quiz.
-- Player chrome follows the app locale (`useI18n`, `child.video.film` in `ru.ts`/`en.ts`). Film content uses the script's `lang` and is marked with `lang=` for screen readers.
+- Player chrome comes from `child.video.film` in `en.ts`. Film content uses the script's `lang` and is marked with `lang=` for screen readers.
 
 ## Known limits
 - One character on stage. A `guest` voice only stops Brainy's mouth.

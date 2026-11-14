@@ -60,7 +60,7 @@ export function gameAcceptance(id: string, age: number) {
     await expect(page.getByTestId("embedded-game")).toHaveAttribute("data-ready", "true", {
       timeout: 10000,
     });
-    await page.getByRole("button", { name: /Выйти/ }).click();
+    await page.getByRole("button", { name: /Exit/ }).click();
     await expect(page).toHaveURL(/\/learn$/);
     expect(finishes).toBe(0);
     expect((await savedState(page.request)).progress.wallet.stars).toBe(

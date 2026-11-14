@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · English-only platform, input hardening and films (issues #4, #5)
+Branch `feature/english-games-and-films`: films PR #1 squash-merged with re-encoded audio (D-33); Russian removed from host, games, films, tests and docs (D-34); Rhythm/Secret Message/Mirror Grid/Tangram input hardened with new touch specs (T-113, T-115). Checks, 285 unit tests, film/manifest/asset/report checks and the full serial four-project Playwright suite run on the combined tree. Owner still records ElevenLabs voice/terms (T-124); deploy + `db:refresh-demo` after merge. No push to master, no deploy, no production DB access.
+
 ## 2026-11-15 · Merge pushed games batch into master (T-112 / T-113)
 Integrated `games@dc84a8b` (four scored imports and two unscored previews), preserved master product behavior and both conflicting ADRs (artifact ADR renumbered D-32). Completed host/catalog localization, Russian feed titles, API/Explore age gates and direct Explore state loading. Production build, checks, 172 unit tests, hashes/assets and 29 report tests pass; learning report regenerated (12 shots, two WebKit videos, 27 checks each). Owner requested immediate build/merge before the full browser matrix finished: 194 passed, six failed, four interrupted, 148 unrun; intermittent WebKit input and one Chromium locator issue remain T-113. Physical rehearsal/freeze stay open. No push, deploy, other-worktree edits or production DB changes.
 
@@ -67,7 +70,7 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ## 2026-11-14 (skills, onboarding)
 - Analysed new inputs (ROUTES.md + brainy-mvp.zip, 30-game handoff); licences checked (all permissive). D-22 locale/age, D-23 per-game weights → skills → body, D-24 quiz-before-signup + own login, D-25 reduced ROUTES.md adoption. Condensed in product/routes-spec.md and external-games.md.
-- Built T-100–T-102: weights/minAge, live skills, `/onboarding` + `/api/onboarding`, `/login` + `/api/auth/login`, «Вернуть ребёнку», «Требует внимания», event feed, mood decay.
+- Built T-100–T-102: weights/minAge, live skills, `/onboarding` + `/api/onboarding`, `/login` + `/api/auth/login`, "Back to Child", "Needs attention", event feed, mood decay.
 
 ## 2026-11-14 (presentation acceptance)
 - T-70 acceptance evidence and T-71 reset-first two-device script; T-61 all-route own-origin audit. Added accessory, video resume, child-ranking and task goal/responsibility checks.

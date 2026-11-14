@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Зеркальная сетка</title>
+  <title>Mirror Grid</title>
   <link rel="stylesheet" href="./session.css" />
   <script src="../bridge.js"></script>
   <script src="./lib/easeljs.js"></script>
@@ -11,8 +11,8 @@
 <body>
   <div id="game-app">
     <header class="game-header">
-      <div id="session-progress" class="session-progress">Узор 1 из 4</div>
-      <h1 class="game-title">Зеркальная сетка</h1>
+      <div id="session-progress" class="session-progress">Pattern 1 of 4</div>
+      <h1 class="game-title">Mirror Grid</h1>
     </header>
 
     <main class="board-area">
@@ -23,12 +23,12 @@
     </main>
 
     <footer class="game-footer">
-      <p id="session-message" role="status" class="session-message">Раскрась вторую половину как зеркальное отражение.</p>
-      <button type="button" id="check-btn" data-action="check" class="check-button">Проверить</button>
+      <p id="session-message" role="status" class="session-message">Color the other half as a mirror image.</p>
+      <button type="button" id="check-btn" data-action="check" class="check-button">Check</button>
     </footer>
 
     <section id="session-complete" class="session-complete" style="display: none;">
-      <h1>Все 4 узора готовы!</h1>
+      <h1>All 4 patterns are done!</h1>
     </section>
   </div>
 

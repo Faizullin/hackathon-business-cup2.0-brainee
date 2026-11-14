@@ -4,7 +4,7 @@
 Spec and workflow: docs/dev/films.md.
 
     uv run --python 3.12 --with faster-whisper scripts/films/make_film.py \
-        videos/audio/<file>.mp3 --id ocean --title "Тайны океана" --engine whisper
+        videos/audio/<file>.mp3 --id ocean --title "Ocean Secrets" --engine whisper
 
 Writes apps/web/public/media/films/<id>.mp3 and <id>.json (captions with timestamps,
 question stubs from phrases ending in "?", one scene). The draft is meant to fail
@@ -176,7 +176,7 @@ def main() -> None:
     parser.add_argument("--title", required=True, help="title a child reads")
     parser.add_argument("--engine", choices=["whisper", "elevenlabs"], default="whisper")
     parser.add_argument(
-        "--lang", default=None, help="whisper: ru/kk/en (default: detect); elevenlabs: rus/kaz/eng"
+        "--lang", default="en", help="audio language; films are English-only (whisper: en, elevenlabs: eng)"
     )
     parser.add_argument("--model", default="small", help="whisper model (small, medium, large-v3)")
     parser.add_argument("--diarize", action="store_true", help="elevenlabs only: two voices")
@@ -207,9 +207,9 @@ def main() -> None:
     if args.engine == "whisper":
         captions, lang = whisper_captions(audio_path, args.lang, args.model)
     else:
-        lang = args.lang or "rus"
+        lang = "eng" if args.lang == "en" else args.lang
         captions = elevenlabs_captions(audio_path, lang, args.diarize)
-    lang = {"rus": "ru", "kaz": "kk", "eng": "en"}.get(lang, lang)
+    lang = {"eng": "en"}.get(lang, lang)
 
     script = draft(args.id, args.title, lang, duration, captions)
     script_path.write_text(json.dumps(script, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

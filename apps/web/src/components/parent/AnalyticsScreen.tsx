@@ -17,7 +17,7 @@ type Kind = "growth" | "absolute";
 // D-29: saved activity metrics; illustrative historical/character radars and ranking.
 export function AnalyticsScreen() {
   const { snapshot } = useLearning();
-  const { t: i18n, locale } = useI18n();
+  const { t: i18n } = useI18n();
   const t = i18n.analytics;
   const [scope, setScope] = useState<Scope>("district");
   const [kind, setKind] = useState<Kind>("growth");
@@ -264,7 +264,7 @@ export function AnalyticsScreen() {
                   {i18n.parent.feed.kinds[item.kind]?.(item.title ?? "", item.amount ?? 0)}
                 </span>
                 <time dateTime={item.at} className="shrink-0 text-muted-foreground text-xs">
-                  {new Date(item.at).toLocaleString(locale === "ru" ? "ru-RU" : "en-US", {
+                  {new Date(item.at).toLocaleString("en-US", {
                     dateStyle: "short",
                     timeStyle: "short",
                   })}

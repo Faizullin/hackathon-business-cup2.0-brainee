@@ -2,7 +2,7 @@
 
 ## Language
 - Code, identifiers, comments, docs, commits: **English**.
-- UI text: **Russian**. Keep strings in one place per app (`apps/web/src/i18n/ru.ts`) so another language can be added later.
+- UI text: **English only** (host and games). Host strings live in `apps/web/src/i18n/en.ts`; games keep their copy in their own wrapper.
 
 ## Code
 - TypeScript `strict`; no `any` without a comment explaining why.

@@ -1,6 +1,6 @@
 import type { Showcase } from "@brainee/core";
 
-// D-21: hand-picked demo content (US English, the main audience; the RU locale maps it in apps/web/src/i18n/content.ts). Analytics are illustrative, not computed.
+// D-21: hand-picked demo content in US English (the product is English-only). Analytics are illustrative, not computed.
 export const demoShowcase: Showcase = {
   equipped: { face: "glasses" },
   owned: ["glasses"],

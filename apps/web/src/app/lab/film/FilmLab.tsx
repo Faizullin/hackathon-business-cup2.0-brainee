@@ -7,7 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FilmView } from "@/components/film/FilmView";
 import { brainyNarrator } from "@/components/film/narrators";
 import { useFilmScript } from "@/components/film/useFilmScript";
-import { ru } from "@/i18n/ru";
+import { en } from "@/i18n/en";
 
 type Local = { script: FilmScript | null; issues: FilmIssue[]; audio?: string };
 
@@ -30,7 +30,7 @@ function issuesOf(value: unknown): FilmIssue[] {
 
 // Dev-only film studio: play any shipped film with seeking, or try local mp3 + JSON drafts.
 export function FilmLab() {
-  const t = ru.lab.film;
+  const t = en.lab.film;
   const [id, setId] = useState<string>(FILM_IDS[0]);
   const shipped = useFilmScript(id);
   const [local, setLocal] = useState<Local | null>(null);
