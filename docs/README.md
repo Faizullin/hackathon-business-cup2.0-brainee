@@ -28,13 +28,14 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [dev/setup.md](dev/setup.md) | Install, run, env vars, deploy |
 | [dev/conventions.md](dev/conventions.md) | Code style, naming, testing, git |
 | [dev/games.md](dev/games.md) | Game runtimes, bridge + engine kits to port from game-store-planning, testing, reusable games |
+| [dev/ui.md](dev/ui.md) | UI and motion system: Base UI components, page transitions, Motion, app shell, mobile app-feel checklist |
 | [dev/agent-tooling.md](dev/agent-tooling.md) | Which agent skills and MCP servers to use or skip, and why |
 | [ideas/README.md](ideas/README.md) | What the source files are + prototype line map |
 
 ## Reading paths by task
 
 - **Build or port a game** → `dev/games.md` → that game's row in `screens.md` → prototype lines 901–982
-- **Build a child screen** → `screens.md` (that section) → `mechanics.md` if it touches stars or stats → prototype range from `ideas/README.md`
+- **Build a child screen** → `screens.md` (that section) → `dev/ui.md` → `mechanics.md` if it touches stars or stats → prototype range from `ideas/README.md`
 - **Build parent analytics** → `screens.md` §Parent → `data-model.md`
 - **Write economy or stat logic** → `mechanics.md` → `data-model.md` §How stats change
 - **Infra, auth or deploy** → `architecture.md` → `rules.md` §Technical requirements → `decisions.md`

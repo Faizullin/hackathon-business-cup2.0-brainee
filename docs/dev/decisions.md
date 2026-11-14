@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-13 · App-like UI: shadcn on Base UI + layered motion · 2026-11-14 · accepted · refines the styling/animation rows of D-01
+**Context:** we want a rich, animated, native-feeling mobile UI. Base UI v1 now covers what we need, including a swipeable Drawer with snap points (shadcn moved its drawer from Vaul to Base UI). `game-store-planning` already used `@base-ui/react`. The installed React 19.3.1 exports `ViewTransition`, and Next 16.4.6 documents it for the App Router.
+**Decision:** shadcn/ui with a `base-*` style for every interactive component, child and parent alike, restyled with the prototype tokens in `packages/ui`. Motion in four layers: CSS → React `<ViewTransition>` for routes and shared elements → Motion (`LazyMotion`) for physics, gestures and rewards. Layouts own the persistent chrome; the root layout has no visual chrome; game screens are fullscreen. Details: [ui.md](ui.md).
+**Consequences:** one accessible primitive set; no Vaul, Radix or extra page-transition libraries. Reduced motion must be handled explicitly for view transitions. Rewards stay calm and finite (product rules).
+
 ## D-12 · Port the game platform from `game-store-planning` · 2026-11-14 · accepted · refines D-11, supersedes the game-lab app (D-08)
 **Context:** our earlier repo `../game-store-planning` already has a tested any-engine bridge (`bridge-core`: MessageChannel handshake, zod validation, engine adapters, IIFE drop-in), engine build kits (esbuild for Phaser, `gdexporter` for GDevelop), a manifest → build → `public/` → DB seed pipeline, asset checks, and Chromium + WebKit e2e that caught real iPad-relevant bugs.
 **Decision:** port these instead of the protocol drafted in D-11. Strip the PECS-specific parts. Embedded games become workspace packages under `games/`, with shared `engine-phaser` / `engine-gdevelop` kits. GDevelop projects are committed as editable source and exported at build time. Manifests seed the `Game` table (no generated TS registry). The lab is a dev-only `/lab` route, not a separate Vite app. Dropped: the `git` import source, `adapter.js` injection, the games subdomain.

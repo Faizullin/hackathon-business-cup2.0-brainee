@@ -68,8 +68,8 @@ Each route group has its own nested layout. Parent routes currently contain a pl
 | Layer | Choice |
 |---|---|
 | Framework | Next.js 16 (latest stable at scaffold time), React, TypeScript strict |
-| Styling / UI | Tailwind CSS; shadcn/ui + Lucide for the parent dashboard; hand-built child UI |
-| Animation | Motion; Motion Primitives copied in selectively (counters, transitions) |
+| Styling / UI | Tailwind CSS 4 + **shadcn/ui on Base UI** (`@base-ui/react`) restyled with prototype tokens, for child and parent; Lucide (parent/system) + custom SVGs (child) → [ui.md](ui.md) |
+| Animation | CSS → React `<ViewTransition>` (routes, shared elements) → Motion `LazyMotion` (physics, gestures, rewards); Motion Primitives per component |
 | Charts | Recharts |
 | DB | **SQLite** via libSQL client + Drizzle ORM (`file:./data/dev.db`); `drizzle-kit push` / `studio` |
 | Auth | Demo session first (seeded family, cookie) + parent PIN; Better Auth as a stretch goal |

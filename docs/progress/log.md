@@ -4,6 +4,14 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 
 ---
 
+## 2026-11-14 (10)
+- Reviewed the T-10/T-11 scaffold: sound (exact versions, release-age guard, Biome, Tailwind 4 token mapping, same-origin + overflow + dark checks in Chromium/WebKit phone/iPad).
+- Decided the app-like UI: shadcn on Base UI (incl. swipeable Drawer) + CSS → `<ViewTransition>` → Motion (D-13); new `docs/dev/ui.md`; the research section moved out of agent-tooling.md. T-12/T-30 expanded; polish T-86 → T-87 (the ID had been removed earlier).
+
+## 2026-11-14 (9)
+- Researched animation/loading/icon options for T-12 and added optional polish T-86. Verified installed Next.js/React support native ViewTransition without a flag against bundled and current official docs.
+- Recorded recommendations in agent-tooling.md; no animation dependencies or runtime code changed.
+
 ## 2026-11-14 (8)
 - Completed T-11: Next.js app with nested route groups, Russian starter pages/404 and runnable dev/build/start scripts; started T-12's shared prototype tokens.
 - Verified production build and 16 Playwright smoke tests (Chromium + WebKit, phone + iPad widths), including same-origin requests, navigation and light/dark tokens. Updated setup and handoff.

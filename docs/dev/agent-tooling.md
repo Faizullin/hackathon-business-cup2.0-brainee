@@ -11,6 +11,7 @@ Which agent skills and tools are worth having for this project, for Claude Code 
 | **frontend-design** | ✅ Adopt, with limits | Good for polish and distinctive layouts (landing, post-game screen). **It must use the prototype tokens** (`packages/ui`) and must not invent a new visual identity. |
 | **web-design-guidelines** | 🟡 On demand | Accessibility and UX audit. Run once before the demo (T-70), not during the build. |
 | **shadcn/ui + Lucide** | ✅ Already in stack | Parent dashboard: forms, tabs, dialogs. Code is copied in, so it's own-domain safe. |
+| **vercel-react-view-transitions** (`vercel-labs/agent-skills`) | ✅ Adopt (T-87) | Patterns for React `<ViewTransition>` in Next.js App Router: shared elements, transition types. Matches [ui.md](ui.md) layer 3. |
 | **Motion Primitives** | 🟡 Selective | Copy individual components (animated number for ★ counters, text/transition effects for "before → after"). Never the whole library. |
 | **Magic UI** | 🟡 Landing only | Marketing flair suits `apps/landing`. It doesn't fit the kids' UI (busy effects, against the calm product rules). |
 | **ui-ux-pro-max** | ❌ Skip | A generic style, palette and font database. Our visual identity is already set by the prototype, so it would cause drift and burn tokens. |

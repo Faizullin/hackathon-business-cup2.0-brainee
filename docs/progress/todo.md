@@ -12,7 +12,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 ## P1 · Scaffold monorepo
 - [x] T-10 pnpm workspaces + Turborepo + `packages/config` (tsconfig, Biome, Tailwind), JIT internal packages
 - [x] T-11 `apps/web` Next.js 16 with `(child)`, `(parent)`, `(auth)` route groups
-- [ ] T-12 `packages/ui`: port tokens + fonts via `next/font` (prototype lines 7–285)
+- [ ] T-12 `packages/ui`: fonts via `next/font`; `shadcn init` with a Base UI (`base-*`) style restyled to the tokens; motion tokens; install Motion + Lucide; root layout without visual chrome → [ui.md](../dev/ui.md)
 - [ ] T-13 Empty `core`, `brainy`, `games`, `db` packages with Vitest; `db` on SQLite (`data/dev.db`) + `db:reset`
 - [ ] T-14 Deploy one container to Railway (volume for SQLite) on a custom domain → [setup.md](../dev/setup.md#deploy-demo)
 - [x] T-15 Update [setup.md](../dev/setup.md) and the AGENTS.md Commands section with the real commands (extend as app, DB and game scripts land)
@@ -34,7 +34,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [ ] T-29 Port GSP `bridge-core` → `packages/game-bridge` (drop PECS parts, global `Brainee`) + `engine-phaser` / `engine-gdevelop` kits + `IframeGame` and host hook in `GameHost` → [games.md](../dev/games.md#bridge-embedded-games-port-gsp-packagesbridge-core)
 
 ## P3 · Child flow · [screens.md#child](../product/screens.md#child)
-- [ ] T-30 Brainy dock + child tab bar
+- [ ] T-30 Child app shell: Brainy dock + 4-tab bottom bar in `(child)/layout`, fullscreen game layout, app-feel checklist → [ui.md](../dev/ui.md#app-shell-route-group-layouts-own-the-chrome)
 - [ ] T-31 Entry screen (no close, logs the choice)
 - [ ] T-32 Learn tab (recommendations + grid)
 - [ ] T-33 Game: Odd one out (2 levels × 4 rounds), tested at `/lab`
@@ -81,6 +81,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [ ] T-83 Resolve reward incentives and clarify the evidence and labels for skill scores, age averages and seeded rankings.
 - [ ] T-84 Validate the own-domain PWA and two-device sync on a real iPad early; define offline behavior and source licensed demo media.
 - [ ] T-85 Port one GSP game end to end (suggest `phaser-shape-match-game`): engine kit, Russian UI, manifest, bridge events → `GameResult`, Chromium + WebKit e2e. Other candidates in [games.md](../dev/games.md#reusable-gsp-games-candidates)
+- [ ] T-87 Motion polish: `<ViewTransition>` tab/push/pop + shared elements, ★ fly-to-wallet, animated counters, Brainy idle/stage-up, `loading.tsx` Brainy loader, reduced-motion spec → [ui.md](../dev/ui.md). After the functional flow works.
 - Additional learning games (Sounds & letters, Repeat after Brainy, Magic garden, Expedition, Error detective)
 - Fun games beyond the first one
 - Push notification on `stage_up`
