@@ -14,6 +14,7 @@ export {
   Flower2,
   Gamepad2,
   Gift,
+  Globe,
   Headphones,
   House,
   LoaderCircle,

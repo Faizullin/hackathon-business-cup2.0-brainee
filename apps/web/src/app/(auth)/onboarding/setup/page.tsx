@@ -2,11 +2,13 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { outlineButton, Panel, primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
+
 export default function Setup() {
-  const [code, setCode] = useState(""),
-    [domain, setDomain] = useState(""),
-    [error, setError] = useState(false);
+  const { t } = useI18n();
+  const [code, setCode] = useState("");
+  const [domain, setDomain] = useState("");
+  const [error, setError] = useState(false);
   const load = useCallback(async () => {
     try {
       const r = await fetch("/api/pairing", {
@@ -27,27 +29,27 @@ export default function Setup() {
   }, [load]);
   return (
     <div className="grid gap-5 lg:grid-cols-2">
-      <Panel as="h1" title={ru.setup.title} note={ru.setup.note}>
-        <p>{ru.setup.code}</p>
+      <Panel as="h1" title={t.setup.title} note={t.setup.note}>
+        <p>{t.setup.code}</p>
         <output
           className="text-center font-heading text-4xl tracking-widest"
           data-testid="setup-code"
         >
           {code}
         </output>
-        <p>{ru.setup.expires}</p>
-        {error && <p role="alert">{ru.settings.error}</p>}
+        <p>{t.setup.expires}</p>
+        {error && <p role="alert">{t.settings.error}</p>}
         <button type="button" className={outlineButton} onClick={load}>
-          {ru.setup.retry}
+          {t.setup.retry}
         </button>
       </Panel>
-      <Panel title={ru.setup.instructions}>
+      <Panel title={t.setup.instructions}>
         <ol className="list-decimal space-y-3 pl-5">
-          {ru.setup.steps.map((s) => (
+          {t.setup.steps.map((s) => (
             <li key={s}>{s}</li>
           ))}
         </ol>
-        <p>{ru.setup.domain}</p>
+        <p>{t.setup.domain}</p>
         <code className="break-all rounded-xl bg-secondary p-3">{domain}</code>
       </Panel>
       <button
@@ -59,10 +61,10 @@ export default function Setup() {
           else setError(true);
         }}
       >
-        {ru.setup.child}
+        {t.setup.child}
       </button>
       <Link href="/analytics" className={outlineButton}>
-        {ru.setup.parent}
+        {t.setup.parent}
       </Link>
     </div>
   );

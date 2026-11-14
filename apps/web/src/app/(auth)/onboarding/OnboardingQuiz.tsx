@@ -6,13 +6,14 @@ import { cn } from "@brainee/ui/lib/utils";
 import { type FormEvent, useState } from "react";
 import { outlineButton, primaryButton } from "@/components/demo/kit";
 import { HoldToStart } from "@/components/HoldToStart";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
 
-const t = ru.onboarding;
 const input = "min-h-12 w-full rounded-xl border border-border bg-background px-3 text-base";
 
 // D-24: the habit quiz comes BEFORE the account; its answers set the starting Brainy.
 export function OnboardingQuiz() {
+  const { t } = useI18n();
+  const to = t.onboarding;
   const [phase, setPhase] = useState<"quiz" | "story" | "reveal" | "signup">("quiz");
   const [reaction, setReaction] = useState(1);
   const [step, setStep] = useState(0);
@@ -54,9 +55,9 @@ export function OnboardingQuiz() {
         return;
       }
       const reply = (await response.json().catch(() => ({}))) as { error?: string };
-      setError(reply.error === "email-taken" ? t.taken : t.invalid);
+      setError(reply.error === "email-taken" ? to.taken : to.invalid);
     } catch {
-      setError(t.invalid);
+      setError(to.invalid);
     } finally {
       setBusy(false);
     }
@@ -65,7 +66,7 @@ export function OnboardingQuiz() {
   const progress = (
     <div
       role="progressbar"
-      aria-label={t.title}
+      aria-label={to.title}
       aria-valuemin={0}
       aria-valuemax={7}
       aria-valuenow={phase === "signup" ? 7 : step}
@@ -84,14 +85,14 @@ export function OnboardingQuiz() {
         {progress}
         <div className="flex flex-col items-center gap-5 rounded-panel border border-border bg-card p-6 text-center">
           <Brainy stats={preview.stats} className="h-48 w-48" />
-          <h1>{t.monster}</h1>
-          <p>{t.monsterStory}</p>
+          <h1>{to.monster}</h1>
+          <p>{to.monsterStory}</p>
           <button
             type="button"
             className={`${primaryButton} min-h-14 w-full`}
             onClick={() => setPhase("reveal")}
           >
-            {t.continue}
+            {to.continue}
           </button>
           <button
             type="button"
@@ -101,7 +102,7 @@ export function OnboardingQuiz() {
               setStep(4);
             }}
           >
-            {t.back}
+            {to.back}
           </button>
         </div>
       </section>
@@ -111,34 +112,34 @@ export function OnboardingQuiz() {
       <section className="mx-auto flex max-w-xl flex-col gap-5">
         {progress}
         <div className="flex flex-col items-center gap-4 rounded-panel border border-border bg-card p-6 text-center">
-          <h1>{t.resultTitle}</h1>
+          <h1>{to.resultTitle}</h1>
           <Brainy stats={preview.stats} className="h-56 w-auto" />
-          <p>{t.story}</p>
-          <p className="text-sm text-muted-foreground">{t.baseline}</p>
+          <p>{to.story}</p>
+          <p className="text-sm text-muted-foreground">{to.baseline}</p>
           <HoldToStart onStart={() => setPhase("signup")} />
           <button type="button" className={outlineButton} onClick={() => setPhase("story")}>
-            {t.back}
+            {to.back}
           </button>
         </div>
       </section>
     );
   if (!done) {
-    const question = t.questions[step];
+    const question = to.questions[step];
     if (!question) return null;
     return (
       <section className="mx-auto flex w-full max-w-4xl flex-col gap-5">
         {progress}
-        <h1>{t.title}</h1>
-        <p className="text-muted-foreground">{t.intro}</p>
+        <h1>{to.title}</h1>
+        <p className="text-muted-foreground">{to.intro}</p>
         <div className="flex flex-col gap-4 rounded-panel border border-border bg-card p-5">
           <p className="text-muted-foreground text-sm" data-testid="quiz-progress">
-            {t.progress(step + 1, QUIZ_QUESTIONS.length)}
+            {to.progress(step + 1, QUIZ_QUESTIONS.length)}
           </p>
           <div className="grid items-center gap-5 lg:grid-cols-2">
             <div className="flex flex-col items-center">
               <Brainy stats={preview.stats} className="h-36 w-auto lg:h-64" />
               <p aria-live="polite" className="text-muted-foreground text-sm">
-                {t.reaction[reaction]}
+                {to.reaction[reaction]}
               </p>
             </div>
             <div className="flex flex-col gap-4">
@@ -163,7 +164,7 @@ export function OnboardingQuiz() {
               onClick={() => setStep((s) => s - 1)}
               className={cn(outlineButton, "self-start")}
             >
-              {t.back}
+              {to.back}
             </button>
           )}
         </div>
@@ -176,23 +177,23 @@ export function OnboardingQuiz() {
     <section className="mx-auto grid w-full max-w-4xl gap-5 lg:grid-cols-2">
       <div className="col-span-full">{progress}</div>
       <div className="flex flex-col items-center gap-3 rounded-panel border border-border bg-card p-5 text-center">
-        <h1>{t.resultTitle}</h1>
+        <h1>{to.resultTitle}</h1>
         {start && <Brainy stats={start.stats} className="h-56 w-auto" />}
-        {stage && <p className="font-heading font-semibold text-lg">{ru.stages[stage.id]}</p>}
-        <p>{t.story}</p>
-        <p className="text-muted-foreground text-sm">{t.baseline}</p>
+        {stage && <p className="font-heading font-semibold text-lg">{t.stages[stage.id]}</p>}
+        <p>{to.story}</p>
+        <p className="text-muted-foreground text-sm">{to.baseline}</p>
       </div>
       <form
         onSubmit={submit}
         className="flex flex-col gap-3 rounded-panel border border-border bg-card p-5"
       >
-        <h2 className="font-heading font-semibold text-xl">{t.signup}</h2>
+        <h2 className="font-heading font-semibold text-xl">{to.signup}</h2>
         <label className="flex flex-col gap-1 font-medium text-sm">
-          {t.childName}
+          {to.childName}
           <input name="childName" required maxLength={40} className={input} />
         </label>
         <label className="flex flex-col gap-1 font-medium text-sm">
-          {t.birthYear}
+          {to.birthYear}
           <input
             name="birthYear"
             type="number"
@@ -204,11 +205,11 @@ export function OnboardingQuiz() {
           />
         </label>
         <label className="flex flex-col gap-1 font-medium text-sm">
-          {ru.login.email}
+          {t.login.email}
           <input name="email" type="email" required autoComplete="email" className={input} />
         </label>
         <label className="flex flex-col gap-1 font-medium text-sm">
-          {t.passwordHint}
+          {to.passwordHint}
           <input
             name="password"
             type="password"
@@ -219,7 +220,7 @@ export function OnboardingQuiz() {
           />
         </label>
         <label className="flex flex-col gap-1 font-medium text-sm">
-          {t.pin}
+          {to.pin}
           <input
             name="pin"
             inputMode="numeric"
@@ -230,12 +231,12 @@ export function OnboardingQuiz() {
           />
         </label>
         <label className="flex flex-col gap-1 font-medium text-sm">
-          {t.referral}
+          {to.referral}
           <input name="referral" maxLength={40} className={input} />
-          <span className="text-muted-foreground text-xs">{t.referralNote}</span>
+          <span className="text-muted-foreground text-xs">{to.referralNote}</span>
         </label>
         <button type="button" className={outlineButton} onClick={() => setPhase("reveal")}>
-          {t.back}
+          {to.back}
         </button>
         {error && (
           <p role="alert" className="rounded-xl bg-coral/15 p-3 text-sm">
@@ -243,7 +244,7 @@ export function OnboardingQuiz() {
           </p>
         )}
         <button type="submit" disabled={busy} className={cn(primaryButton, "min-h-12")}>
-          {t.create}
+          {to.create}
         </button>
       </form>
     </section>

@@ -1,15 +1,16 @@
 import { MotionProvider } from "@brainee/ui/motion-provider";
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
 import type { ReactNode } from "react";
 import { LearningProvider } from "@/components/child/LearningProvider";
-import { ru } from "@/i18n/ru";
+import { DEFAULT_LOCALE, I18nProvider, LOCALE_COOKIE, type Locale } from "@/i18n";
 import { onest, unbounded } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: ru.app.name, template: `%s · ${ru.app.name}` },
-  description: ru.app.description,
-  appleWebApp: { capable: true, title: ru.app.name, statusBarStyle: "default" },
+  title: { default: "Brainy", template: "%s · Brainy" },
+  description: "Learn, play, and grow together with Brainy.",
+  appleWebApp: { capable: true, title: "Brainy", statusBarStyle: "default" },
 };
 
 export const viewport: Viewport = {
@@ -22,13 +23,20 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const cookieStore = await cookies();
+  const rawLocale = cookieStore.get(LOCALE_COOKIE)?.value;
+  const initialLocale: Locale =
+    rawLocale === "ru" || rawLocale === "en" ? rawLocale : DEFAULT_LOCALE;
+
   return (
-    <html lang="ru" className={`${onest.variable} ${unbounded.variable}`}>
+    <html lang={initialLocale} className={`${onest.variable} ${unbounded.variable}`}>
       <body>
-        <MotionProvider>
-          <LearningProvider>{children}</LearningProvider>
-        </MotionProvider>
+        <I18nProvider initialLocale={initialLocale}>
+          <MotionProvider>
+            <LearningProvider>{children}</LearningProvider>
+          </MotionProvider>
+        </I18nProvider>
       </body>
     </html>
   );

@@ -106,6 +106,11 @@ export const ru = {
     timezone: "Часовой пояс",
     devices: "Устройства",
     account: "Аккаунт",
+    language: "Язык",
+    languageOptions: {
+      en: "🇬🇧 English (Default)",
+      ru: "🇷🇺 Русский",
+    },
     name: "Имя ребёнка",
     year: "Год рождения",
     promise: "Обещание ребёнка: заданий в день",

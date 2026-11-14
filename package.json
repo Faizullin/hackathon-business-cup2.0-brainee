@@ -30,8 +30,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.7",
+    "esbuild": "0.28.2",
+    "next": "16.4.6",
     "turbo": "2.11.11",
-    "typescript": "5.9.3",
-    "esbuild": "0.28.2"
+    "typescript": "5.9.3"
   }
 }

@@ -2,13 +2,16 @@
 import { TIME_ZONES } from "@brainee/core";
 import { useState } from "react";
 import { Panel, primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
+
 export default function Signup() {
-  const [error, setError] = useState(""),
-    [busy, setBusy] = useState(false);
-  const t = ru.onboarding;
+  const { t } = useI18n();
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+  const to = t.onboarding;
+  const ts = t.settings;
   return (
-    <Panel as="h1" title={ru.signup.title} note={ru.signup.note}>
+    <Panel as="h1" title={t.signup.title} note={t.signup.note}>
       <form
         className="grid gap-4 sm:grid-cols-2"
         onSubmit={async (e) => {
@@ -31,18 +34,18 @@ export default function Signup() {
             if (!r.ok) throw Error();
             window.location.assign("/onboarding/setup");
           } catch {
-            setError(t.invalid);
+            setError(to.invalid);
             setBusy(false);
           }
         }}
       >
         {(
           [
-            ["childName", t.childName, "text"],
-            ["birthYear", t.birthYear, "number"],
+            ["childName", to.childName, "text"],
+            ["birthYear", to.birthYear, "number"],
             ["email", "Email", "email"],
-            ["password", t.passwordHint, "password"],
-            ["pin", t.pin, "password"],
+            ["password", to.passwordHint, "password"],
+            ["pin", to.pin, "password"],
           ] as const
         ).map(([name, label, type]) => (
           <label key={name} className="flex flex-col gap-1">
@@ -61,23 +64,23 @@ export default function Signup() {
           </label>
         ))}
         <label>
-          {ru.settings.timezone}
+          {ts.timezone}
           <select
-            aria-label={ru.settings.timezone}
+            aria-label={ts.timezone}
             name="timeZone"
             defaultValue="America/New_York"
             className="h-12 w-full rounded-xl border border-border px-3"
           >
             {TIME_ZONES.map((z) => (
               <option key={z} value={z}>
-                {ru.settings.zones[z]}
+                {ts.zones[z]}
               </option>
             ))}
           </select>
         </label>
         {error && <p role="alert">{error}</p>}
         <button type="submit" disabled={busy} className={`${primaryButton} sm:col-span-2`}>
-          {t.create}
+          {to.create}
         </button>
       </form>
     </Panel>
