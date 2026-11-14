@@ -164,7 +164,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-130 Dropped: no dictionary refactor; new copy English-only in feature modules, existing translations untouched (D-37)
 - [ ] T-131 Lavender tokens remapped onto existing names, Manrope titles + Unbounded numerals, Lucide 2 px, motion classes, derived dark set; update ui.md (D-36)
 - [ ] T-132 **Brainy = port of the design's Brain component** (energy=mood, stage size, stat-driven parts, kid-safe effects, re-anchored accessories, rAF only on heroes) (D-36)
-- [ ] T-133 `packages/core/src/funnel.ts`: funnel logic + `funnelQuizAnswers` mapping, tested
+- [x] T-133 `packages/core/src/funnel.ts`: funnel logic + `funnelQuizAnswers` mapping, tested
 - [ ] T-134 `StepPage` + `AnswerGroup` components (two-column iPad landscape)
 - [ ] T-135 Parent funnel at `/start` → signup → setup; `/onboarding` redirects; pricing pending, no checkout
 - [ ] T-136 Family plan: `showcase.familyPlan`, parent card, phrase on the child's stopping point, off-screen task template
