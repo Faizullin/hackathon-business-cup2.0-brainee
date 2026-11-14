@@ -6,7 +6,7 @@ import {
   type GameResult,
 } from "@brainee/core";
 import { manifests } from "@brainee/game-catalog";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import {
   brainyStates,
   children,
@@ -100,6 +100,19 @@ export const demo = {
   },
 } as const;
 
+const CATALOG_COLUMNS = [
+  "title",
+  "kind",
+  "mainSkill",
+  "secondarySkill",
+  "weights",
+  "minAge",
+  "levels",
+  "roundsPerSession",
+  "runtime",
+  "runtimeUrl",
+] as const;
+
 // Fixture data only. Economy and stat calculations stay in packages/core.
 export async function seedDemo(db: Database) {
   await db.transaction(async (transaction) => {
@@ -111,7 +124,13 @@ export async function seedDemo(db: Database) {
     await transaction
       .insert(games)
       .values([...demo.games])
-      .onConflictDoNothing();
+      // The manifests own catalog content (titles, weights, runtime); `enabled` stays an operator switch.
+      .onConflictDoUpdate({
+        target: games.id,
+        set: Object.fromEntries(
+          CATALOG_COLUMNS.map((column) => [column, sql.raw(`excluded.${games[column].name}`)]),
+        ),
+      });
     await transaction.insert(gameSessions).values(demo.history).onConflictDoNothing();
     // Ten completed games over the previous six days: badge is earned; one game today earns the garden.
     for (let i = 1; i < EARNED_THRESHOLDS.explorerGames; i++) {
