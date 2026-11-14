@@ -93,3 +93,17 @@ it("Brainy's suggestion never sends a weak motor stat to a motor game", async ()
   ];
   expect(learningPracticeGame({ ...stats, arms: 0 }, games)?.id).toBe("logic");
 });
+
+it("totals actual learning stars for the family day, excluding incomplete and prior sessions", () => {
+  const a = activitySummary(
+    [
+      { ...session(0), starsEarned: 12 },
+      { ...session(0), starsEarned: 17 },
+      { ...session(1), starsEarned: 50 },
+      { ...session(0, false), starsEarned: 30 },
+    ],
+    showcase,
+    now,
+  );
+  expect(a.learningStarsToday).toBe(29);
+});

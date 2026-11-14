@@ -80,6 +80,7 @@ export async function getStateSnapshot(
       finishedAt: s.status === "completed" ? (s.finishedAt?.getTime() ?? null) : null,
       durationMs: s.durationMs,
       recommended: s.recommended,
+      starsEarned: s.starsEarned,
     }));
     const activity = activitySummary(history, row.showcase, now);
     const earned = unlockEarned(row.showcase, progress.stats, activity, now);

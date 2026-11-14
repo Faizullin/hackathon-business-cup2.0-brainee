@@ -3,17 +3,21 @@
 import { stageOf } from "@brainee/core";
 import { StarIcon, SunIcon } from "@brainee/ui/components/child-icons";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ViewTransition } from "react";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { Brainy } from "@/components/Brainy";
 import { useI18n } from "@/i18n";
+import { HeroBrainCard } from "./HeroBrainCard";
 import { useLearning } from "./LearningProvider";
 
 // Top dock on Learn / Leisure / Gifts (docs/product/screens.md#brainy-dock-every-child-screen).
 export function BrainyDock() {
   const { snapshot } = useLearning();
+  const pathname = usePathname();
   const { t } = useI18n();
   if (!snapshot) return null;
+  if (pathname === "/learn") return <HeroBrainCard dock />;
   const { stats, wallet, mood } = snapshot.progress;
   const { equipped, weekGoal } = snapshot.showcase;
   const stage = stageOf(stats);

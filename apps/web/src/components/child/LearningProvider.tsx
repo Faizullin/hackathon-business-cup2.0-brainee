@@ -76,7 +76,7 @@ function SharedLearning({ children }: { children: ReactNode }) {
   const client = useQueryClient();
   const pathname = usePathname();
   const active =
-    /^\/(learn|leisure|gifts|brainy|game|entry|video|analytics|tasks|rewards|settings|fun|cartoon|explore)(\/|$)/.test(
+    /^\/(learn|leisure|gifts|brainy|path|game|entry|video|analytics|tasks|rewards|settings|fun|cartoon|explore)(\/|$)/.test(
       pathname,
     );
   const accessReady = useRef(false);
@@ -251,7 +251,7 @@ function SharedLearning({ children }: { children: ReactNode }) {
       {children}
       <StageCelebration
         snapshot={snapshot}
-        enabled={/^\/(learn|leisure|gifts|brainy|game|entry|video|fun|cartoon)(\/|$)/.test(
+        enabled={/^\/(learn|leisure|gifts|brainy|path|game|entry|video|fun|cartoon)(\/|$)/.test(
           pathname,
         )}
       />

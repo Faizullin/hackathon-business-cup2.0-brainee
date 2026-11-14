@@ -1,32 +1,23 @@
 "use client";
-import {
-  ABILITY_BODY,
-  ACCESSORIES,
-  BODY_STATS,
-  EARNED_REWARDS,
-  learningPracticeGame,
-  rewardProgress,
-  STAGES,
-  stageOf,
-} from "@brainee/core";
+import { ABILITY_BODY, ACCESSORIES, BODY_STATS, learningPracticeGame } from "@brainee/core";
 import { allGames } from "@brainee/games";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
-import { ViewTransition } from "react";
+
 import { Brainy } from "@/components/Brainy";
 import { Meter, Notice, outlineButton, Panel, primaryButton, useAct } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
+import { HeroBrainCard } from "./HeroBrainCard";
 import { useLearning } from "./LearningProvider";
 
 // Brainy tab: big Brainy, stage path, stats, accessory shop and earned rewards (T-38).
 export function BrainyProfile() {
-  const { snapshot, resting } = useLearning();
+  const { snapshot } = useLearning();
   const { run, busy, notice } = useAct();
   const { t: i18n } = useI18n();
   if (!snapshot) return null;
   const { stats } = snapshot.progress;
-  const { equipped, owned, earned } = snapshot.showcase;
-  const stage = stageOf(stats);
+  const { equipped, owned } = snapshot.showcase;
   const t = i18n.child.brainyPage;
   const suggestion = learningPracticeGame(
     stats,
@@ -35,63 +26,25 @@ export function BrainyProfile() {
   const weakest = suggestion
     ? ABILITY_BODY[suggestion.skills.main as keyof typeof ABILITY_BODY]
     : "brain";
-  const rewards = snapshot.activity ? rewardProgress(stats, snapshot.activity) : null;
   return (
     <div className="flex flex-col gap-5 lg:grid lg:grid-cols-[minmax(0,400px)_minmax(0,1fr)] lg:items-start">
-      <section className="flex flex-col items-center gap-4 rounded-panel border border-border bg-card p-5 text-center sm:p-8 lg:sticky lg:top-[max(16px,env(safe-area-inset-top))]">
-        <h1>{t.title}</h1>
-        {resting && (
-          <p role="status" className="rounded-xl bg-mint/10 p-3">
-            {t.thanks}
-          </p>
-        )}
-        <ViewTransition name="brainy-hero">
-          <Brainy
-            stats={stats}
-            mood={snapshot.progress.mood}
-            earned={earned}
-            animate
-            equipped={equipped}
-            className="h-auto w-full max-w-[320px]"
-          />
-        </ViewTransition>
-        <p className="font-heading text-lg font-semibold">{i18n.stages[stage.id]}</p>
-        {stage.next && (
-          <p className="text-muted-foreground">
-            {i18n.child.dock.toNext(i18n.stages[stage.next], stage.pointsToNext)}
-          </p>
-        )}
+      <div className="space-y-4 lg:sticky lg:top-5">
+        <HeroBrainCard title={t.title} />
         {suggestion && (
-          <Link href={`/game/${suggestion.id}`} className={cn(primaryButton, "min-h-12 px-5")}>
+          <Link href={`/game/${suggestion.id}`} className={cn(primaryButton, "min-h-14 w-full")}>
             {t.suggest(i18n.lab.brainy.statNames[weakest])}
           </Link>
         )}
-        <ol className="grid w-full max-w-md grid-cols-5 gap-1.5 text-[10px] leading-tight sm:text-xs">
-          {STAGES.map((s, i) => (
-            <li key={s.id} className="flex flex-col gap-1">
-              <span className="h-2 overflow-hidden rounded-full bg-line">
-                <span
-                  className="block h-full bg-mint"
-                  style={{
-                    width: `${i < stage.index ? 100 : i === stage.index ? Math.round(stage.progress * 100) : 0}%`,
-                  }}
-                />
-              </span>
-              <span
-                className="[overflow-wrap:anywhere]"
-                aria-current={i === stage.index ? "step" : undefined}
-              >
-                {i18n.stages[s.id]}
-              </span>
-            </li>
-          ))}
-        </ol>
-      </section>
+      </div>
       <div className="flex min-w-0 flex-col gap-5">
         <Panel title={t.stats}>
           <dl aria-label={t.stats} className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {[...BODY_STATS, "resp" as const].map((stat) => (
-              <div key={stat} className="flex flex-col gap-1.5 rounded-xl bg-secondary p-3">
+            {[...BODY_STATS, "resp" as const].map((stat, i) => (
+              <div
+                key={stat}
+                className="flex flex-col gap-1.5 bg-card p-3 ring-1 ring-border"
+                style={{ borderRadius: i % 2 ? "8px 22px 8px 8px" : "22px 8px 8px 8px" }}
+              >
                 <div className="flex items-baseline justify-between gap-2">
                   <dt className="font-semibold">
                     {i18n.lab.brainy.statNames[stat]}{" "}
@@ -157,39 +110,6 @@ export function BrainyProfile() {
                     >
                       {t.wear}
                     </button>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </Panel>
-
-        <Panel title={t.earned}>
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {EARNED_REWARDS.map((reward) => {
-              const has = earned.includes(reward);
-              return (
-                <li
-                  key={reward}
-                  className={cn(
-                    "rounded-xl p-3 text-center text-sm font-semibold",
-                    has
-                      ? "bg-sun/20"
-                      : "border-2 border-border border-dashed text-muted-foreground",
-                  )}
-                >
-                  {t.earnedNames[reward]}
-                  {!has && (
-                    <span className="block font-normal text-xs">
-                      {rewards
-                        ? i18n.rewardProgress(
-                            reward,
-                            rewards[reward].value,
-                            rewards[reward].target,
-                            snapshot.activity?.heroStarted ?? 0,
-                          )
-                        : t.locked}
-                    </span>
                   )}
                 </li>
               );

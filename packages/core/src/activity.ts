@@ -8,6 +8,7 @@ export type ActivitySession = {
   finishedAt: number | null;
   durationMs: number | null;
   recommended: boolean;
+  starsEarned?: number | null;
 };
 const DAY = 86400000;
 export const EARNED_THRESHOLDS = {
@@ -54,6 +55,9 @@ export function activitySummary(
     .slice(0, EARNED_THRESHOLDS.heroWindow);
   const entries = showcase.entryLog.took + showcase.entryLog.other;
   return {
+    learningStarsToday: completed
+      .filter((s) => calendarKeys(new Date(s.finishedAt as number), zone).day === day)
+      .reduce((sum, s) => sum + (s.starsEarned ?? 0), 0),
     learning,
     science,
     streakDays: streak,

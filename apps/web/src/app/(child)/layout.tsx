@@ -22,7 +22,7 @@ export default function ChildLayout({ children }: { children: ReactNode }) {
           id="main-content"
           data-mode="child"
           tabIndex={-1}
-          className="mx-auto flex w-full max-w-[1180px] flex-col gap-5 pt-[max(16px,env(safe-area-inset-top))] pr-[max(16px,env(safe-area-inset-right))] pb-[calc(96px+env(safe-area-inset-bottom))] pl-[max(16px,env(safe-area-inset-left))] lg:max-w-none lg:pb-[max(24px,env(safe-area-inset-bottom))] lg:pl-[calc(120px+env(safe-area-inset-left))] xl:pr-8"
+          className="mx-auto flex w-full max-w-[1180px] flex-col gap-5 pt-[max(16px,env(safe-area-inset-top))] pr-[max(20px,env(safe-area-inset-right))] pb-[calc(132px+env(safe-area-inset-bottom))] pl-[max(20px,env(safe-area-inset-left))] lg:max-w-none lg:pb-[max(24px,env(safe-area-inset-bottom))] lg:pl-[calc(120px+env(safe-area-inset-left))] xl:pr-8"
         >
           <p
             data-testid="rotate-hint"

@@ -1,7 +1,7 @@
-import { BookOpen, Brain, Gift, Play } from "lucide-react";
+import { BookOpen, Brain, Gift, Play, Route } from "lucide-react";
 import type { ComponentProps } from "react";
 
-const ICONS = { learn: BookOpen, leisure: Play, gifts: Gift, brainy: Brain };
+const ICONS = { learn: BookOpen, leisure: Play, gifts: Gift, brainy: Brain, path: Route };
 export type ChildIconName = keyof typeof ICONS;
 export function ChildIcon({ name, ...props }: { name: ChildIconName } & ComponentProps<"svg">) {
   const Icon = ICONS[name];
