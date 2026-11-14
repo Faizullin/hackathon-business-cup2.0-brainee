@@ -2,8 +2,10 @@
 import { useReducedMotion } from "@brainee/ui/lib/reduced-motion";
 import { useEffect, useRef, useState } from "react";
 import { primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
+
 export function HoldToStart({ onStart }: { onStart(): void }) {
+  const { t } = useI18n();
   const reduced = useReducedMotion();
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [holding, setHolding] = useState(false);
@@ -56,7 +58,7 @@ export function HoldToStart({ onStart }: { onStart(): void }) {
           transition: holding ? "width 700ms linear" : "none",
         }}
       />
-      <span className="relative">{reduced ? ru.onboarding.tap : ru.onboarding.hold}</span>
+      <span className="relative">{reduced ? t.onboarding.tap : t.onboarding.hold}</span>
     </button>
   );
 }

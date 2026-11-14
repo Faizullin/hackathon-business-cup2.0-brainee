@@ -18,5 +18,5 @@
       "outputs": []
     }
   },
-  "globalPassThroughEnv": ["DEMO_MODE", "BRAINEE_LAB", "DATABASE_URL"]
+  "globalPassThroughEnv": ["DEMO_MODE", "BRAINEE_LAB", "DATABASE_URL", "DATABASE_AUTH_TOKEN"]
 }

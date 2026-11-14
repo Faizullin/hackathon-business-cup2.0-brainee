@@ -21,10 +21,7 @@ export function JuryButton() {
             if (!r.ok) throw Error();
             const data = await r.json();
             try {
-              sessionStorage.setItem(
-                "brainee-jury",
-                JSON.stringify(data.credentials),
-              );
+              sessionStorage.setItem("brainee-jury", JSON.stringify(data.credentials));
             } catch {}
             window.location.assign("/jury");
           } catch {

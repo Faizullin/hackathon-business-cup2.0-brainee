@@ -2,15 +2,17 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Panel, primaryButton } from "@/components/demo/kit";
-import { ru } from "@/i18n/ru";
+import { useI18n } from "@/i18n";
+
 export default function ChildLogin() {
+  const { t } = useI18n();
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-  const t = ru.pairing;
+  const tp = t.pairing;
   return (
     <div className="mx-auto max-w-md">
-      <Panel title={t.title} as="h1">
-        <p>{t.note}</p>
+      <Panel title={tp.title} as="h1">
+        <p>{tp.note}</p>
         <form
           className="flex flex-col gap-4"
           onSubmit={async (e) => {
@@ -28,16 +30,16 @@ export default function ChildLogin() {
                 window.location.assign("/entry");
                 return;
               }
-              setError(r.status === 429 ? t.locked : t.wrong);
+              setError(r.status === 429 ? tp.locked : tp.wrong);
             } catch {
-              setError(ru.settings.error);
+              setError(t.settings.error);
             } finally {
               setBusy(false);
             }
           }}
         >
           <label>
-            {t.code}
+            {tp.code}
             <input
               name="code"
               autoComplete="one-time-code"
@@ -50,10 +52,10 @@ export default function ChildLogin() {
           </label>
           {error && <p role="alert">{error}</p>}
           <button type="submit" disabled={busy} className={primaryButton}>
-            {t.submit}
+            {tp.submit}
           </button>
         </form>
-        <Link href="/login">{t.parent}</Link>
+        <Link href="/login">{tp.parent}</Link>
       </Panel>
     </div>
   );

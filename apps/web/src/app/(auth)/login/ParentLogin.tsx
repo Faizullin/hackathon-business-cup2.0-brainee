@@ -7,8 +7,7 @@ import { primaryButton } from "@/components/demo/kit";
 import { JuryButton } from "@/components/JuryButton";
 import { useI18n } from "@/i18n";
 
-const input =
-  "min-h-12 w-full rounded-xl border border-border bg-background px-3 text-base";
+const input = "min-h-12 w-full rounded-xl border border-border bg-background px-3 text-base";
 
 // D-24: own minimal parent login; the device then opens the family's child with parent pages unlocked.
 export function ParentLogin() {
@@ -40,13 +39,7 @@ export function ParentLogin() {
       <h2 className="font-heading font-semibold text-lg">{tl.parentLogin}</h2>
       <label className="flex flex-col gap-1 font-medium text-sm">
         {tl.email}
-        <input
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-          className={input}
-        />
+        <input name="email" type="email" required autoComplete="email" className={input} />
       </label>
       <label className="flex flex-col gap-1 font-medium text-sm">
         {tl.password}
@@ -63,11 +56,7 @@ export function ParentLogin() {
           {tl.wrong}
         </p>
       )}
-      <button
-        type="submit"
-        disabled={busy}
-        className={cn(primaryButton, "min-h-12")}
-      >
+      <button type="submit" disabled={busy} className={cn(primaryButton, "min-h-12")}>
         {tl.submit}
       </button>
       <p className="text-muted-foreground text-xs">{tl.demoHint}</p>
