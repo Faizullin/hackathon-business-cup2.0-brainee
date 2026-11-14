@@ -16,3 +16,11 @@ export const unbounded = localFont({
   style: "normal",
   display: "swap",
 });
+
+export const manrope = localFont({
+  src: "../../../../packages/ui/src/fonts/Manrope.woff2",
+  variable: "--font-manrope",
+  weight: "200 800",
+  style: "normal",
+  display: "swap",
+});

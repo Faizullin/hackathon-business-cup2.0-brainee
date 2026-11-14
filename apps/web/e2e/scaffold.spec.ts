@@ -26,7 +26,7 @@ for (const route of [
     await expect(page).toHaveURL(`${baseURL}${route.destination}`);
     await expect(page.getByRole("heading", { name: route.heading, level: 1 })).toBeVisible();
     await expect(page.locator("html")).toHaveAttribute("lang", "ru");
-    await expect(page.locator("body")).toHaveCSS("background-color", "rgb(241, 244, 250)");
+    await expect(page.locator("body")).toHaveCSS("background-color", "rgb(242, 241, 250)");
     const fonts = await page.evaluate(async () => {
       await document.fonts.ready;
       return {
@@ -35,8 +35,8 @@ for (const route of [
         loaded: Array.from(document.fonts).filter((font) => font.status === "loaded").length,
       };
     });
-    expect(fonts.body.toLowerCase()).toContain("onest");
-    expect(fonts.heading.toLowerCase()).toContain("unbounded");
+    expect(fonts.body.toLowerCase()).toContain("manrope");
+    expect(fonts.heading.toLowerCase()).toContain("manrope");
     expect(fonts.loaded).toBeGreaterThanOrEqual(2);
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
@@ -45,13 +45,13 @@ for (const route of [
     if (route.path === "/learn") {
       await page.screenshot({ path: testInfo.outputPath("learn.png"), fullPage: true });
       await page.emulateMedia({ colorScheme: "dark" });
-      await expect(page.locator("body")).toHaveCSS("background-color", "rgb(16, 18, 28)");
+      await expect(page.locator("body")).toHaveCSS("background-color", "rgb(20, 18, 38)");
     }
 
     if (route.path === "/login") {
       const link = page.getByRole("link", { name: "К занятиям" });
       await expect(link).toHaveCSS("min-height", "56px");
-      await expect(link).toHaveCSS("transition-duration", "0.12s");
+      await expect(link).toHaveCSS("transition-duration", "0.2s");
       // Safari on macOS uses Option-Tab to include links in keyboard traversal.
       const nextLinkKey =
         browserName === "webkit" && process.platform === "darwin" ? "Alt+Tab" : "Tab";

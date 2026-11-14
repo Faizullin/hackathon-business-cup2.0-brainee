@@ -1,53 +1,11 @@
+import { BookOpen, Brain, Gift, Play } from "lucide-react";
 import type { ComponentProps } from "react";
 
-// Child-facing line icons ported from the prototype ICONS (48×48 grid) + ★/☀ currency marks.
-const PATHS = {
-  learn: (
-    <>
-      <circle cx="11" cy="24" r="6" />
-      <rect x="20" y="18" width="12" height="12" rx="2" />
-      <path d="M40 17l6 13h-12z" />
-    </>
-  ),
-  leisure: (
-    <>
-      <circle cx="24" cy="24" r="16" />
-      <path d="M20 16l12 8-12 8z" />
-    </>
-  ),
-  gifts: (
-    <>
-      <rect x="7" y="18" width="34" height="23" rx="3" />
-      <path d="M5 12h38v6H5zM24 12v29" />
-      <path d="M24 12c-4-8-14-6-10 0M24 12c4-8 14-6 10 0" />
-    </>
-  ),
-  brainy: (
-    <>
-      <path d="M24 41V22" />
-      <path d="M24 27c-10 0-14-6-14-13 8 0 14 4 14 13z" />
-      <path d="M24 22c0-8 6-12 14-12 0 6-4 12-14 12z" />
-    </>
-  ),
-} as const;
-
-export type ChildIconName = keyof typeof PATHS;
-
+const ICONS = { learn: BookOpen, leisure: Play, gifts: Gift, brainy: Brain };
+export type ChildIconName = keyof typeof ICONS;
 export function ChildIcon({ name, ...props }: { name: ChildIconName } & ComponentProps<"svg">) {
-  return (
-    <svg
-      viewBox="0 0 48 48"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      {PATHS[name]}
-    </svg>
-  );
+  const Icon = ICONS[name];
+  return <Icon aria-hidden="true" {...props} strokeWidth={2} />;
 }
 
 export function StarIcon(props: ComponentProps<"svg">) {

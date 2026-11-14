@@ -1,7 +1,7 @@
 # Log
 
-## 2026-11-15 · Lavender redesign (T-133)
-Ported the funnel engine into core with answer validation, guarded navigation, saved-state migration, family plans, quiz mapping and age bands. Check and workspace tests pass; no UI connected yet. Continuing with T-131 then T-132 on master. No push or deployment.
+## 2026-11-15 · Lavender redesign (T-133, T-131)
+Ported the funnel engine into core with answer validation, guarded navigation, saved-state migration, family plans, quiz mapping and age bands. Check and workspace tests pass; no UI connected yet. Added lavender tokens, local Manrope, Lucide controls, explicit washes and reduced-motion-safe design classes. Build and affected browser matrix pass (56/56); phone/iPad screenshots reviewed. Next is T-132 on master. No push or deployment.
 
 ## 2026-11-15 · Merge pushed games batch into master (T-112 / T-113)
 Integrated `games@dc84a8b` (four scored imports and two unscored previews), preserved master product behavior and both conflicting ADRs (artifact ADR renumbered D-32). Completed host/catalog localization, Russian feed titles, API/Explore age gates and direct Explore state loading. Production build, checks, 172 unit tests, hashes/assets and 29 report tests pass; learning report regenerated (12 shots, two WebKit videos, 27 checks each). Owner requested immediate build/merge before the full browser matrix finished: 194 passed, six failed, four interrupted, 148 unrun; intermittent WebKit input and one Chromium locator issue remain T-113. Physical rehearsal/freeze stay open. No push, deploy, other-worktree edits or production DB changes.

@@ -11,3 +11,5 @@ Source: Unbounded[wght].ttf
 License: OFL-Unbounded.txt
 
 These files are bundled by next/font/local and served from our own domain.
+
+Manrope.woff2: Latin variable font from the local Brainy Funnel Export, website/assets/fonts/manrope-latin.woff2 (OFL-Manrope.txt). Onest remains the local fallback for existing Cyrillic copy.

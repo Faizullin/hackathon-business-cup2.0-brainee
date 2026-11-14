@@ -1,6 +1,6 @@
 # UI and motion system
 
-The goal is an app that **feels like a native mobile app**: a persistent tab bar, sheets you can swipe, smooth page transitions, and a living Brainy. It also has to stay calm, accessible and fast on an iPad. Visual identity comes from the prototype tokens in `packages/ui` (D-13).
+The goal is an app that **feels like a native mobile app**: a persistent tab bar, sheets you can swipe, smooth page transitions, and a living Brainy. It also has to stay calm, accessible and fast on an iPad. Visual identity follows [design.md](../product/design.md) (D-36), using the existing token names in `packages/ui`. Manrope 800 titles and UI use local fonts; Unbounded is reserved for numbers and marks. The Latin Manrope source keeps vendored Onest as the fallback for existing Cyrillic copy. Light is the reference, with a derived dark set.
 
 ## Stack: four layers, use the lightest one that works
 
@@ -11,7 +11,7 @@ The goal is an app that **feels like a native mobile app**: a persistent tab bar
 | 3. Page transitions | tab cross-fade, push/pop slide (Learn → game), shared elements (game card → game header, dock Brainy → Brainy tab) | React `<ViewTransition>` + `addTransitionType` (React 19.3; Next 16 guide in `node_modules/next/dist/docs/01-app/02-guides/view-transitions.md`) |
 | 4. Physics and gestures | Brainy idle/bounce/stage-up, ★ flying into the wallet, animated counters, drag in games, list reorder | **Motion** (`motion/react`) via `LazyMotion` + `m.*` to keep the bundle small; Motion Primitives copied per component when useful |
 
-Icons: Lucide for parent and system controls; the prototype's custom SVGs for Brainy, ★, ☀ and child tabs. Don't add Vaul, Framer-only page-transition libraries, Lottie or another icon set without a decision entry.
+Icons: Lucide at stroke 2 for system and child controls; custom SVGs only for Brainy, stars, suns and flame. Don't add Vaul, Framer-only page-transition libraries, Lottie or another icon set without a decision entry.
 
 ## App shell (route-group layouts own the chrome)
 
@@ -42,7 +42,7 @@ The former T-35 local balance/stat preview is removed. Only unacknowledged resul
 
 | Token | Value | Used for |
 |---|---|---|
-| `--dur-press` | 120 ms | button scale 0.96 on `:active` |
+| `--dur-press` | 200 ms | button scale 0.95 on `:active` |
 | `--dur-nav` | 180 ms | tab cross-fade, small slides |
 | `--dur-sheet` | 280 ms | drawer/dialog |
 | `--dur-reward` | 400–600 ms | ★ fly, stat +N, stage-up |
@@ -82,3 +82,7 @@ T-12 provides these tokens, a shared spring, CSS reduced-motion overrides and a 
 
 ## Verify
 Playwright (Chromium + WebKit, phone + iPad) for flows; the `uishot` skill or Playwright traces for visual states; reduced-motion emulation in one spec; a real iPad pass before the demo (T-84).
+
+## Lavender primitives (T-131)
+
+Cards use a one-pixel ring and 20 px corners; control, row and stage radii are 12, 16 and 28 px. Selection uses violet wash; gains use blue on gain wash; retries use peach on loss wash. The design motion classes are `lv-press`, `lv-in`, `lv-glow`, `lv-bub`, `gainA`/`gainB`, `lossA`/`lossB`, `lv-seg` and `lv-ring`. All turn off under reduced motion. Use the glow only for hero stages; reward bubbles/pop/shake are finite.

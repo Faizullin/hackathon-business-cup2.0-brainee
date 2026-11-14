@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import type { ReactNode } from "react";
 import { LearningProvider } from "@/components/child/LearningProvider";
 import { DEFAULT_LOCALE, I18nProvider, LOCALE_COOKIE, type Locale } from "@/i18n";
-import { onest, unbounded } from "./fonts";
+import { manrope, onest, unbounded } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,8 +18,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f1f4fa" },
-    { media: "(prefers-color-scheme: dark)", color: "#10121c" },
+    { media: "(prefers-color-scheme: light)", color: "#f2f1fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#141226" },
   ],
 };
 
@@ -31,7 +31,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const initialLocale: Locale = rawLocale === "ru" || rawLocale === "en" ? rawLocale : fallback;
 
   return (
-    <html lang={initialLocale} className={`${onest.variable} ${unbounded.variable}`}>
+    <html
+      lang={initialLocale}
+      className={`${manrope.variable} ${onest.variable} ${unbounded.variable}`}
+    >
       <body>
         <I18nProvider initialLocale={initialLocale}>
           <MotionProvider>

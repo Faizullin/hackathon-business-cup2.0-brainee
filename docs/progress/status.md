@@ -23,7 +23,7 @@ Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 **Lavender redesign and parent funnel** per [plans/redesign.md](../plans/redesign.md) (T-131–T-142, D-35/D-36/D-37; visuals from [product/design.md](../product/design.md)), after the PR #1 films integration (issue #5). Games continue separately (issue #4). The jury-ready MVP stays working throughout: see [demo.md](../demo.md).
 
 ## Handoff
-- Lavender redesign started on master. T-133 is complete: pure funnel routing, validation, v2/v3 migration, profiles/plans, quiz adapter and explicit-year age bands. Existing quizStart is unchanged; checkout remains disabled.
-- Verification: pnpm check and pnpm test pass. Six new core tests cover all answer mappings, malformed state, deep links, migration, profiles and age ranges. No UI uses the new module yet, so no affected browser surface in this task.
-- Next: T-131 tokens/fonts, then T-132 Brain component, following plans/redesign.md in order. Remaining redesign tasks and the final serial e2e/report recordings are pending.
-- No push, deployment or production data access. Game internals and existing translations remain untouched.
+- Lavender redesign on master: T-133 core funnel rules and T-131 shared lavender tokens/fonts/icons/motion are complete. Existing quizStart and translations are unchanged. Manrope is local, with local Onest fallback for existing Cyrillic copy.
+- Verification: pnpm check, pnpm test and production build pass. T-131 affected Playwright matrix: 56/56 across Chromium/WebKit, phone/iPad. Reviewed Learn screenshots in all four projects; no horizontal overflow. In-app Browser unavailable; screenshots came from Playwright.
+- Next: T-132 Brain component, then remaining tasks in plans/redesign.md order. Final full serial e2e and T-139 recordings remain pending.
+- No push, deployment or production data access. Game internals remain untouched.
