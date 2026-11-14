@@ -11,7 +11,8 @@ docs/reports/.captures/
 *.tsbuildinfo
 next-env.d.ts
 
-# Local data and secrets
+# Local data, secrets and personal notes
+.local/
 data/
 *.db
 *.db-shm

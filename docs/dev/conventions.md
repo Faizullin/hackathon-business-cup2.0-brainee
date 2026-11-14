@@ -25,11 +25,10 @@
 - Before a demo, run the [acceptance criteria](../product/rules.md#mvp-acceptance-criteria).
 
 ## Git
-- Branches: `feat/<task-id>-short-name`, `fix/...`, `docs/...`.
+- **Single branch: `master`.** Commit directly to it; don't create feature branches (locally or on GitHub).
 - Commits: Conventional Commits (`feat(core): add star rules [T-21]`), with the task ID from [todo.md](../progress/todo.md).
 - Keep `master` deployable.
-- Commit completed work without `Co-authored-by` trailers. Push only when explicitly requested.
-- End the chat handoff with a brief completion note and the next small tasks.
+- Personal commit/push and chat-handoff preferences: `.local/notes.md` (gitignored), if present.
 
 ## Docs
 Upkeep rules: [docs/README.md](../README.md#upkeep). Agent skills: [agent-tooling.md](agent-tooling.md).

@@ -10,6 +10,7 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 1. Read [docs/progress/status.md](docs/progress/status.md): current phase, focus and handoff note.
 2. Find your task in [docs/progress/todo.md](docs/progress/todo.md).
 3. Open only the docs that task needs. Use the "Read when" column in [docs/README.md](docs/README.md).
+4. If a gitignored `.local/` folder exists, read `.local/README.md`: personal preferences and notes. Never commit it or copy its contents into tracked files.
 
 **At the end** (or before you run out of context):
 1. Tick finished items in `todo.md` and add any new items you found.
@@ -52,6 +53,6 @@ Embedded-game commands (`games:build`, `test:assets`) are still planned (T-19). 
 
 ## Conventions and tools
 
-- [docs/dev/conventions.md](docs/dev/conventions.md). Commit finished work without co-author trailers; push only when the user asks. Finish chat updates with brief next tasks.
+- [docs/dev/conventions.md](docs/dev/conventions.md). **One branch only: `master`** (no feature branches). Personal workflow preferences live in `.local/`.
 - Skills to use or skip: [docs/dev/agent-tooling.md](docs/dev/agent-tooling.md). UI work follows [docs/dev/ui.md](docs/dev/ui.md): Base UI components via shadcn, prototype tokens, and the lightest motion layer that works; don't invent a new visual style.
 - After UI changes: render the page, check phone and iPad widths, run the Playwright spec.

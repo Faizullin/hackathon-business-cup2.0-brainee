@@ -88,18 +88,18 @@ simultaneous writers.
 
 Inspected the sibling checkout `../game-store-planning` at
 `13f8eff476b1bfe45ce0f3b2d3646b17613ab52b`. Its
-[report guide](https://github.com/Faizullin/pecs-game-store/blob/13f8eff476b1bfe45ce0f3b2d3646b17613ab52b/docs/reports/README.md)
-and [Shape Match report](https://github.com/Faizullin/pecs-game-store/blob/13f8eff476b1bfe45ce0f3b2d3646b17613ab52b/docs/reports/shape-match.md)
+`docs/reports/README.md`
+and `docs/reports/shape-match.md`
 demonstrate a useful separation: fresh per-route screenshots plus continuous,
 checked app sessions, assembled into a committed Markdown report.
 
 | Existing part | Reused here |
 | --- | --- |
-| [report.mjs](https://github.com/Faizullin/pecs-game-store/blob/13f8eff476b1bfe45ce0f3b2d3646b17613ab52b/scripts/report.mjs) | CLI, module selection, fixture resolution, progress, lock, saved-capture rendering |
-| [web.mjs](https://github.com/Faizullin/pecs-game-store/blob/13f8eff476b1bfe45ce0f3b2d3646b17613ab52b/scripts/reports/web.mjs) | Playwright screenshots, interaction DSL, continuous flows, optional bridge logging, HTML/PDF raw reports |
-| [timeline.mjs](https://github.com/Faizullin/pecs-game-store/blob/13f8eff476b1bfe45ce0f3b2d3646b17613ab52b/scripts/reports/timeline.mjs) | Timed entries; PASSED requires checks, CAPTURED means no checks, errors mean FAILED |
-| [media.mjs](https://github.com/Faizullin/pecs-game-store/blob/13f8eff476b1bfe45ce0f3b2d3646b17613ab52b/scripts/reports/media.mjs) | Playwright WebM → H.264 MP4 with fast-start metadata, even dimensions and JPEG poster |
-| [generate.mjs](https://github.com/Faizullin/pecs-game-store/blob/13f8eff476b1bfe45ce0f3b2d3646b17613ab52b/scripts/reports/generate.mjs) | Template expansion, capture/asset validation, clickable video posters, JSON timelines and scoped cleanup |
+| `scripts/report.mjs` | CLI, module selection, fixture resolution, progress, lock, saved-capture rendering |
+| `scripts/reports/web.mjs` | Playwright screenshots, interaction DSL, continuous flows, optional bridge logging, HTML/PDF raw reports |
+| `scripts/reports/timeline.mjs` | Timed entries; PASSED requires checks, CAPTURED means no checks, errors mean FAILED |
+| `scripts/reports/media.mjs` | Playwright WebM → H.264 MP4 with fast-start metadata, even dimensions and JPEG poster |
+| `scripts/reports/generate.mjs` | Template expansion, capture/asset validation, clickable video posters, JSON timelines and scoped cleanup |
 | `core.test.mjs`, `web.test.mjs` | Generator failure/containment tests and real-browser fixture captures, checked flows and video conversion |
 
 The local port resolves `apps/web`'s pinned `@playwright/test` instead of using

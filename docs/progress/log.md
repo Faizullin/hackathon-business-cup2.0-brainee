@@ -26,7 +26,7 @@ Append-only, **newest first**. One entry per session, 2–5 lines. Reference tas
 ## 2026-11-14 (11)
 - Completed T-12 per D-13: Base UI/shadcn shared components, local Onest/Unbounded WOFF2, Motion/Lucide setup, motion tokens and route-owned chrome.
 - Verified build and 20 Chromium/WebKit checks at phone/iPad widths, including fonts, keyboard links and reduced motion; inspected screenshots. Confirmed shadcn resolves shared package paths.
-- Recorded the requested commit/no-coauthor and brief next-task handoff preferences. Next: T-13 package tests, SQLite and `db:reset`.
+- Recorded workflow preferences (now in `.local/`). Next: T-13 package tests, SQLite and `db:reset`.
 
 ## 2026-11-14 (10)
 - Reviewed the T-10/T-11 scaffold: sound (exact versions, release-age guard, Biome, Tailwind 4 token mapping, same-origin + overflow + dark checks in Chromium/WebKit phone/iPad).
