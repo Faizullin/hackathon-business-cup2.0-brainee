@@ -23,7 +23,8 @@ Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 **Lavender redesign and parent funnel** per [plans/redesign.md](../plans/redesign.md) (T-131–T-142, D-35/D-36/D-37; visuals from [product/design.md](../product/design.md)), after the PR #1 films integration (issue #5). Games continue separately (issue #4). The jury-ready MVP stays working throughout: see [demo.md](../demo.md).
 
 ## Handoff
-- Lavender redesign on master: T-133 core funnel, T-131 shared visual system and T-132 Brain component port are complete. Brainy uses mood for energy, body stats for geometry, real stages for size/lightning, re-anchored accessories and earned flags. Kid mode is default; animated heroes share one demand-driven 30 fps ticker, paused for reduced motion, hidden documents and off-screen instances.
+- Lavender redesign on master: T-133 core funnel, T-131 shared visual system and T-132 Brain component port and T-134 step/answer primitives are complete. Brainy uses mood for energy, body stats for geometry, real stages for size/lightning, re-anchored accessories and earned flags. Kid mode is default; animated heroes share one demand-driven 30 fps ticker, paused for reduced motion, hidden documents and off-screen instances.
 - Verification: check, workspace tests and production build pass. T-131 browser matrix 56/56; T-132 corrected matrix 60/60 across Chromium/WebKit phone/iPad. Initial T-132 run exposed stale Eyes/idle-class test selectors; fixed and rerun. Four reference states and screenshots reviewed in all projects.
-- Next: T-134 shared step/answer components, then T-140, T-141 and funnel/product tasks in plans/redesign.md order. Final full serial e2e and T-139 recordings remain pending.
+- T-134: Base UI radio rows, focus-managed step pages, pinned actions and two-column iPad art. Check/test/build and four browser/viewport cases pass; reviewed screenshots and fixed native progress styling.
+- Next: T-140, T-141 and funnel/product tasks in plans/redesign.md order. Final full serial e2e and T-139 recordings remain pending.
 - No push, deployment or production data access. Game internals and existing translations remain untouched.
