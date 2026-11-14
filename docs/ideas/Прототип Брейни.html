@@ -1,0 +1,1172 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Прототип Брейни</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap">
+<style>
+/* Layout: one app shell with a Child/Parent switch; Brainy sits in a dock on top of every child screen and opens the parent cabinet. */
+:root{
+  --bg:#F1F4FA; --surface:#FFFFFF; --surface-2:#E8EDF7; --ink:#1B1F3B; --muted:#5D6485; --line:#D8DEEC;
+  --coral:#EE5A4A; --sun:#F2AE12; --orange:#E5731A; --mint:#139E80; --sky:#3C68EE;
+  --font-d:'Unbounded','Arial Black',system-ui,sans-serif;
+  --font-b:'Onest',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --r:18px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#10121C; --surface:#191C2A; --surface-2:#222638; --ink:#ECEFF8; --muted:#9AA1BF; --line:#2C3147;
+  --coral:#FF7868; --sun:#FFC845; --orange:#FF9A45; --mint:#3BCDA9; --sky:#7A97FF; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#10121C; --surface:#191C2A; --surface-2:#222638; --ink:#ECEFF8; --muted:#9AA1BF; --line:#2C3147;
+  --coral:#FF7868; --sun:#FFC845; --orange:#FF9A45; --mint:#3BCDA9; --sky:#7A97FF; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:15px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 56px}
+h1,h2,h3{font-family:var(--font-d);font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(22px,3vw,30px)}
+h2{font-size:19px}
+h3{font-size:15px}
+p{margin:0}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--sky);outline-offset:2px;border-radius:8px}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.num{font-variant-numeric:tabular-nums}
+
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding-block:6px 14px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-d);font-weight:700;font-size:20px;text-decoration:none;color:var(--ink)}
+.brand svg{width:34px;height:34px}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:999px;padding:4px}
+.seg button{border:0;background:transparent;padding:7px 16px;border-radius:999px;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(20,25,60,.12)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}
+.tabs a{padding:7px 14px;border-radius:10px;text-decoration:none;color:var(--muted);font-weight:600}
+.tabs a:hover{background:var(--surface-2);color:var(--ink)}
+.tabs a.on{color:var(--ink);background:var(--surface)}
+.proto{margin-left:auto;font-size:12px;color:var(--muted);border:1px dashed var(--line);padding:4px 10px;border-radius:999px}
+
+.view{display:flex;flex-direction:column;gap:26px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.between{justify-content:space-between}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;min-width:0}
+.sechead{display:flex;flex-direction:column;gap:2px;margin-bottom:12px}
+
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-weight:600;font-size:14px;white-space:nowrap}
+.pill.star{background:color-mix(in srgb,var(--sun) 22%,var(--surface));font-family:var(--font-d);font-size:15px}
+.pill.sunp{background:color-mix(in srgb,var(--orange) 18%,var(--surface));font-family:var(--font-d);font-size:15px}
+.star{width:18px;height:18px;fill:var(--sun);flex:none}
+.sunic{width:18px;height:18px;flex:none;color:var(--orange)}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.chip.coral{background:color-mix(in srgb,var(--coral) 16%,var(--surface));color:var(--coral)}
+.chip.sky{background:color-mix(in srgb,var(--sky) 15%,var(--surface));color:var(--sky)}
+.chip.mint{background:color-mix(in srgb,var(--mint) 16%,var(--surface));color:var(--mint)}
+.chip.sun{background:color-mix(in srgb,var(--sun) 22%,var(--surface));color:color-mix(in srgb,var(--sun) 55%,var(--ink))}
+.chip.orange{background:color-mix(in srgb,var(--orange) 16%,var(--surface));color:var(--orange)}
+
+.btn{border:0;border-radius:12px;padding:9px 16px;font-weight:600;background:var(--ink);color:var(--surface);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{opacity:.9}
+.btn.ghost{background:var(--surface-2);color:var(--ink)}
+.btn.coral{background:var(--coral);color:#fff}
+.btn.sm{padding:6px 11px;font-size:13px;border-radius:10px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.link{border:0;background:none;color:var(--muted);text-decoration:underline;font-size:13px;padding:6px}
+
+.bar{height:10px;border-radius:5px;background:var(--surface-2);overflow:hidden}
+.bar span{display:block;height:100%;border-radius:5px;background:var(--coral);transition:width .4s}
+
+/* Brainy dock on child screens */
+.dock{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;background:radial-gradient(circle at 8% 50%,color-mix(in srgb,var(--coral) 16%,var(--surface)) 0,var(--surface) 45%);border:1px solid var(--line);border-radius:24px;padding:14px 20px 14px 14px;margin-bottom:24px}
+.dock-brainy{border:0;background:none;padding:0;width:136px}
+.dock-brainy svg{width:136px;height:auto;display:block}
+.dock-info{display:flex;flex-direction:column;gap:8px;min-width:0}
+.dname{font-family:var(--font-d);font-size:20px}
+.mood{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;max-width:380px}
+.mood .bar span{background:var(--mint)}
+.dock-wallet{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.goal{width:220px;display:flex;flex-direction:column;gap:4px}
+.goal .bar span{background:var(--orange)}
+
+/* entry overlay */
+.overlay{position:fixed;inset:0;background:var(--bg);z-index:30;overflow:auto;padding-top:calc(24px + env(safe-area-inset-top,0px));padding-bottom:calc(24px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.ov-inner{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+.ov-brainy{width:150px}
+.bigcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;width:100%}
+.bigcard{display:flex;flex-direction:column;gap:12px;text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:24px;padding:16px;transition:transform .15s,border-color .15s}
+.bigcard:hover{transform:translateY(-3px);border-color:var(--sky)}
+.bigcard .art{aspect-ratio:4/3}
+.bigcard h2{font-size:21px}
+.why{font-size:13px;font-weight:600;color:var(--coral)}
+.bigcard.first{border-color:color-mix(in srgb,var(--sky) 60%,var(--line))}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.gcard{display:flex;flex-direction:column;gap:10px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;color:inherit;text-decoration:none;transition:transform .15s}
+button.gcard:hover,a.gcard:hover{transform:translateY(-2px)}
+.art{display:grid;place-items:center;border-radius:14px;aspect-ratio:16/10;max-width:100%}
+.art svg{width:44%;height:auto;max-width:72px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.t-coral{background:color-mix(in srgb,var(--coral) 17%,var(--surface));color:var(--coral)}
+.t-sky{background:color-mix(in srgb,var(--sky) 15%,var(--surface));color:var(--sky)}
+.t-mint{background:color-mix(in srgb,var(--mint) 16%,var(--surface));color:var(--mint)}
+.t-sun{background:color-mix(in srgb,var(--sun) 22%,var(--surface));color:color-mix(in srgb,var(--sun) 70%,var(--ink))}
+.t-orange{background:color-mix(in srgb,var(--orange) 16%,var(--surface));color:var(--orange)}
+.gcard .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.reward{display:inline-flex;align-items:center;gap:3px;font-weight:700;font-size:13px;white-space:nowrap}
+.reward .star,.reward .sunic{width:14px;height:14px}
+.state{font-size:12px;font-weight:600}
+.buy{display:flex;gap:6px;flex-wrap:wrap}
+.locked .art{filter:grayscale(.55);opacity:.75}
+.ok-t{color:var(--mint)}
+.free{background:color-mix(in srgb,var(--mint) 9%,var(--surface))}
+
+/* game */
+.gamebar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.dots{display:flex;gap:6px}
+.dots i{width:28px;height:8px;border-radius:4px;background:var(--surface-2)}
+.dots i.done{background:var(--mint)}
+.dots i.cur{background:var(--sky)}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:clamp(18px,4vw,36px);display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
+.seq{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.tile{width:clamp(50px,10vw,80px);aspect-ratio:1;border-radius:16px;background:var(--surface-2);display:grid;place-items:center}
+.tile svg{width:70%;height:70%}
+.tile.q{border:3px dashed var(--sky);background:transparent;font-family:var(--font-d);font-size:28px;color:var(--sky)}
+.opts{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.opt{width:clamp(72px,14vw,104px);aspect-ratio:1;border-radius:20px;border:3px solid var(--line);background:var(--surface);display:grid;place-items:center}
+.opt:hover{border-color:var(--sky)}
+.opt svg{width:66%;height:66%}
+.oddgrid{display:grid;gap:10px;width:min(100%,420px)}
+.oddgrid .opt{width:100%}
+.opt.ok{border-color:var(--mint);background:color-mix(in srgb,var(--mint) 12%,var(--surface))}
+.opt.no{border-color:var(--coral);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{min-height:44px;font-weight:600;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.next{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;width:100%;max-width:760px}
+.nextcard{display:flex;gap:14px;align-items:center;text-align:left;border:2px solid var(--line);background:var(--surface);border-radius:20px;padding:16px}
+.nextcard:hover{border-color:var(--sky)}
+.nextcard .art{width:72px;flex:none;aspect-ratio:1}
+.nextcard .art svg{width:60%}
+.grow{display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap}
+.grow svg.brainy{width:140px;height:auto}
+.plus{font-family:var(--font-d);color:var(--mint);font-size:18px}
+.breakbox{background:color-mix(in srgb,var(--sun) 18%,var(--surface));border-radius:16px;padding:12px 16px;font-weight:600}
+
+/* brainy page */
+.brainy-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:20px;align-items:start}
+.brainy-stage{background:radial-gradient(circle at 50% 42%,color-mix(in srgb,var(--coral) 15%,var(--surface)) 0,var(--surface) 62%);border:1px solid var(--line);border-radius:24px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.brainy-stage svg.brainy{width:min(100%,360px);height:auto}
+.bubble{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px;font-weight:500;max-width:360px;text-align:center;position:relative}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-8px;width:14px;height:14px;background:var(--surface);border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:translateX(-50%) rotate(45deg)}
+.stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;width:100%}
+.stages div{display:flex;flex-direction:column;gap:5px;align-items:center;font-size:11px;font-weight:600;color:var(--muted);text-align:center}
+.stages i{display:block;width:100%;height:8px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.stages i b{display:block;height:100%;background:var(--coral)}
+.stages div.on{color:var(--ink)}
+.stats{display:flex;flex-direction:column;gap:14px}
+.stat{display:grid;grid-template-columns:90px 1fr 34px;gap:10px;align-items:center}
+.stat b{font-weight:600}
+.stat .src{grid-column:2/4;margin-top:-8px}
+.accgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.acc{border:1px solid var(--line);border-radius:16px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.acc svg.brainy{width:84px;height:auto}
+.acc.on{border-color:var(--coral);background:color-mix(in srgb,var(--coral) 7%,var(--surface))}
+.earned{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.earned div{border:1px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.earned div.off{opacity:.55;border-style:dashed}
+details.demo{width:100%;max-width:380px;border-top:1px dashed var(--line);padding-top:10px}
+details.demo summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--muted)}
+.scen{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px}
+.scen button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-weight:600;font-size:13px;color:var(--muted)}
+.scen button[aria-pressed="true"]{border-color:var(--ink);color:var(--ink)}
+.slider input{width:100%;accent-color:var(--coral)}
+
+/* player */
+.modal{position:fixed;inset:0;z-index:40;background:rgba(10,12,25,.72);display:grid;place-items:center;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-top:calc(16px + env(safe-area-inset-top,0px));padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.player{width:min(100%,760px);background:var(--surface);border-radius:24px;overflow:hidden;border:1px solid var(--line)}
+.screen{aspect-ratio:16/9;max-width:100%;display:grid;place-items:center;position:relative;color:#fff;background:linear-gradient(135deg,#123C69,#1E7A8C)}
+.screen svg{width:22%;fill:none;stroke:#fff;stroke-width:2.5;opacity:.85}
+.screen .paused{position:absolute;inset:auto 16px 14px auto;background:rgba(0,0,0,.45);padding:4px 10px;border-radius:8px;font-size:13px;font-weight:600}
+.screen.play svg{animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+.pctrl{padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.ptrack{height:8px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.ptrack span{display:block;height:100%;background:var(--sky)}
+.quiz{display:flex;flex-direction:column;gap:10px}
+.quiz .opts{justify-content:flex-start}
+.quiz button.ans{border:2px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 14px;font-weight:600}
+.quiz button.ans:hover{border-color:var(--sky)}
+
+/* parent */
+.hero{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center;background:radial-gradient(circle at 12% 50%,color-mix(in srgb,var(--coral) 16%,var(--surface)) 0,var(--surface) 50%);border:1px solid var(--line);border-radius:24px;padding:18px 22px}
+.hero .big svg{width:190px;height:auto;display:block}
+.hero .info{display:flex;flex-direction:column;gap:10px;min-width:0}
+.hero .was{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.hero .was svg{width:96px;height:auto}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.kpi .v{font-family:var(--font-d);font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.delta{font-weight:600;font-size:13px;color:var(--mint)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.chart{width:100%;height:auto;display:block}
+.chart text{fill:var(--muted);font-family:var(--font-b);font-size:12px}
+.chart .lab{fill:var(--ink);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.insight{display:flex;gap:12px;align-items:flex-start;background:color-mix(in srgb,var(--coral) 9%,var(--surface));border:1px solid color-mix(in srgb,var(--coral) 28%,var(--line));border-radius:var(--r);padding:16px 18px}
+.insight a{color:var(--coral);font-weight:600}
+.lbtabs{display:flex;gap:6px;flex-wrap:wrap}
+.lbtabs button{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:5px 11px;font-weight:600;font-size:13px;color:var(--muted)}
+.lbtabs button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+td{padding:9px 6px;border-bottom:1px solid var(--line)}
+tr.me td{background:color-mix(in srgb,var(--sky) 11%,var(--surface));font-weight:700}
+td.r{text-align:right}
+.share{border-radius:22px;padding:20px;background:linear-gradient(160deg,color-mix(in srgb,var(--coral) 22%,var(--surface)),color-mix(in srgb,var(--sun) 20%,var(--surface)));display:flex;flex-direction:column;gap:10px;max-width:320px;border:1px solid var(--line)}
+.share svg.brainy{width:130px;height:auto;align-self:center}
+.share .lines{display:flex;flex-direction:column;gap:4px;font-weight:600}
+
+/* tasks & rewards */
+.tasks-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr) minmax(0,1.1fr);gap:16px;align-items:start}
+form{display:flex;flex-direction:column;gap:12px}
+label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:13px}
+input,select{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:9px 11px;font-weight:400;font-size:15px;width:100%}
+.tpl{display:flex;flex-wrap:wrap;gap:6px}
+.tpl button{border:1px dashed var(--line);background:transparent;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--muted)}
+.tlist{display:flex;flex-direction:column;gap:10px}
+.task{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:start;border:1px solid var(--line);border-radius:14px;padding:12px}
+.task .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;grid-row:span 2}
+.task .ic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.task .foot{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.task.done{opacity:.7}
+.task.new{animation:pop .5s}
+@keyframes pop{0%{transform:scale(.96);background:color-mix(in srgb,var(--mint) 15%,var(--surface))}100%{transform:none}}
+.recs{display:flex;flex-direction:column;gap:12px}
+.rec{border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.gauge{display:flex;align-items:center;gap:8px;font-size:13px}
+.gauge .bar{flex:1;position:relative;overflow:visible}
+.gauge .bar em{position:absolute;top:-4px;width:2px;height:18px;background:var(--ink);border-radius:1px}
+.rtask{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--bg);border-radius:12px;padding:10px 12px}
+.limit{height:8px;border-radius:4px;background:var(--surface-2);overflow:hidden;margin-top:6px}
+.limit span{display:block;height:100%;background:var(--sky)}
+.rule{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:color-mix(in srgb,var(--orange) 9%,var(--surface));border:1px solid color-mix(in srgb,var(--orange) 30%,var(--line));border-radius:var(--r);padding:14px 18px;font-weight:500}
+.goalbig{display:flex;flex-direction:column;gap:12px;background:linear-gradient(150deg,color-mix(in srgb,var(--orange) 18%,var(--surface)),var(--surface));border:1px solid var(--line);border-radius:24px;padding:20px}
+.goalbig .bar{height:16px;border-radius:8px}
+.goalbig .bar span{background:var(--orange);border-radius:8px}
+.gift{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.list{display:flex;flex-direction:column;gap:8px}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--surface);padding:11px 18px;border-radius:14px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;max-width:calc(100% - 32px);text-align:center;z-index:60}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+@media (max-width:980px){
+  .tasks-layout{grid-template-columns:1fr 1fr}
+  .tasks-layout .recpanel{grid-column:1/-1}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .three{grid-template-columns:1fr 1fr}
+  .hero{grid-template-columns:auto minmax(0,1fr)}
+  .hero .was{display:none}
+}
+@media (max-width:760px){
+  .brainy-layout,.two,.tasks-layout,.three,.next{grid-template-columns:1fr}
+  .bigcards{grid-template-columns:1fr}
+  .dock{grid-template-columns:auto minmax(0,1fr)}
+  .dock-wallet{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center}
+  .proto{margin-left:0}
+  .accgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:480px){
+  .kpis{grid-template-columns:1fr 1fr} .kpi .v{font-size:21px}
+  .hero{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .dock-brainy,.dock-brainy svg{width:100px}
+  .goal{width:100%}
+}
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#learn" aria-label="Брейни, на главную">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="13" cy="15" r="9" fill="#FF8FA3"/><circle cx="27" cy="15" r="9" fill="#FF8FA3"/><ellipse cx="20" cy="22" rx="15" ry="12" fill="#FF8FA3"/><path d="M20 8v12M11 18q3-3 6 0M23 18q3-3 6 0" stroke="#E2607A" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="15" cy="24" r="3" fill="#fff"/><circle cx="25" cy="24" r="3" fill="#fff"/><circle cx="15.5" cy="24.5" r="1.4" fill="#2B2350"/><circle cx="25.5" cy="24.5" r="1.4" fill="#2B2350"/></svg>
+      Брейни
+    </a>
+    <div class="seg" role="group" aria-label="Режим">
+      <button id="m-child" aria-pressed="true">Ребёнок</button>
+      <button id="m-parent" aria-pressed="false">Родитель</button>
+    </div>
+    <nav class="tabs" id="tabs-child" aria-label="Экраны ребёнка">
+      <a href="#learn" data-v="learn">Учимся</a>
+      <a href="#leisure" data-v="leisure">Отдых</a>
+      <a href="#gifts" data-v="gifts">Подарки</a>
+      <a href="#brainy" data-v="brainy">Брейни</a>
+    </nav>
+    <nav class="tabs" id="tabs-parent" aria-label="Экраны родителя" hidden>
+      <a href="#parent" data-v="parent">Аналитика</a>
+      <a href="#tasks" data-v="tasks">Задания</a>
+      <a href="#rewards" data-v="rewards">Подарки и цель</a>
+    </nav>
+    <span class="proto">Прототип · данные примерные</span>
+  </header>
+
+  <!-- Brainy dock: on every child screen -->
+  <div class="dock" id="dock">
+    <button class="dock-brainy" id="dock-brainy" aria-label="Открыть Брейни"></button>
+    <div class="dock-info">
+      <div class="row" style="gap:8px"><span class="dname">Брейни</span><span class="chip coral" id="dock-stage"></span></div>
+      <div class="mood"><span class="small muted">Самочувствие</span><div class="bar"><span id="dock-mood"></span></div><span class="small num" id="dock-mood-t"></span></div>
+      <span class="small muted" id="dock-next"></span>
+    </div>
+    <div class="dock-wallet">
+      <div class="row" style="gap:8px">
+        <span class="pill star" title="Звёзды: за развивающие игры"><svg class="star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg><span class="num" data-w="stars"></span></span>
+        <span class="pill sunp" title="Солнышки: за дела в реальной жизни"><svg class="sunic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="currentColor"/><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></g></svg><span class="num" data-w="suns"></span></span>
+      </div>
+      <a class="goal small" href="#gifts" style="color:inherit;text-decoration:none"><span>Цель недели: <b class="num" data-w="goal"></b></span><div class="bar"><span data-w="goalbar"></span></div></a>
+    </div>
+  </div>
+
+  <!-- ============ CHILD: LEARN ============ -->
+  <section class="view" id="v-learn">
+    <div class="sechead"><h1>Учимся</h1><p class="muted">Здесь зарабатываются звёзды. Сверху игры для навыков, которые сейчас проседают.</p></div>
+    <div>
+      <div class="sechead"><h2>Брейни советует</h2></div>
+      <div class="grid" id="rec-grid"></div>
+    </div>
+    <div>
+      <div class="sechead"><h2>Все развивающие игры</h2></div>
+      <div class="grid" id="dev-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ CHILD: LEISURE ============ -->
+  <section class="view" id="v-leisure" hidden>
+    <div class="sechead"><h1>Отдых</h1><p class="muted">Трать звёзды, которые заработал в учёбе. Научпоп бесплатный, но смотрится только целиком.</p></div>
+    <div>
+      <div class="sechead"><h2>Магазин игр</h2><p class="muted small">Открывай на 10 минут или навсегда</p></div>
+      <div class="grid" id="shop-grid"></div>
+    </div>
+    <div>
+      <div class="sechead"><h2>Мультфильмы и сказки</h2><p class="muted small">После серии нет ленты «смотреть дальше»</p></div>
+      <div class="grid" id="media-grid"></div>
+    </div>
+    <div>
+      <div class="sechead"><h2>Научпоп</h2><p class="muted small">Бесплатно. Можно только поставить на паузу: без перемотки и переключения. В конце вопрос и +15 звёзд</p></div>
+      <div class="grid" id="sci-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ CHILD: GIFTS ============ -->
+  <section class="view" id="v-gifts" hidden>
+    <div class="sechead"><h1>Подарки от мамы</h1><p class="muted">Солнышки даются за дела в реальной жизни. На них покупаются настоящие подарки.</p></div>
+    <div class="goalbig">
+      <div class="row between"><h2>Цель недели</h2><span class="chip orange">до воскресенья</span></div>
+      <p style="font-size:17px">Собери <b class="num" data-w="target"></b> солнышек и получи: <b data-w="prize"></b></p>
+      <div class="bar"><span data-w="goalbar"></span></div>
+      <p class="small muted">Собрано на этой неделе: <b class="num" data-w="week"></b></p>
+    </div>
+    <div class="two">
+      <div class="panel">
+        <div class="sechead"><h2>Магазин подарков</h2><p class="muted small">Подарки покупаются только за солнышки</p></div>
+        <div class="list" id="c-gifts"></div>
+      </div>
+      <div class="panel">
+        <div class="sechead"><h2>Задания от мамы</h2><p class="muted small">Сделал — нажми «Готово», мама подтвердит</p></div>
+        <div class="tlist" id="c-tasks"></div>
+        <div class="row between" style="margin-top:16px;border-top:1px solid var(--line);padding-top:14px">
+          <span class="small muted">Обмен: 1 солнышко = 10 звёзд. Звёзды в солнышки не меняются</span>
+          <button class="btn sm ghost" id="exchange">Обменять 1 ☀ на 10 ★</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHILD: GAME ============ -->
+  <section class="view" id="v-game" hidden>
+    <div class="gamebar">
+      <div class="row">
+        <div>
+          <h2 id="g-title"></h2>
+          <div class="row small" style="gap:6px" id="g-chips"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="dots" id="dots" aria-label="Прогресс"></div>
+        <span class="pill star"><svg class="star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg>+<span class="num" id="earned">0</span></span>
+      </div>
+    </div>
+    <div class="stage" id="stage"></div>
+    <p class="muted small" style="text-align:center">Ошибся и исправил — получаешь +4 звезды вместо +3. После игры сразу предлагается следующий шаг, без выхода в меню.</p>
+  </section>
+
+  <!-- ============ CHILD: BRAINY ============ -->
+  <section class="view" id="v-brainy" hidden>
+    <div class="sechead"><h1>Мой Брейни</h1><p class="muted">Скролл-монстр заколдовал Брейни. Каждая развивающая игра его расколдовывает.</p></div>
+    <div class="brainy-layout">
+      <div class="brainy-stage">
+        <div class="bubble" id="bubble"></div>
+        <div id="brainy-big"></div>
+        <div style="width:100%;max-width:420px">
+          <div class="row between small" style="margin-bottom:6px"><b id="b-stage"></b><span class="muted" id="b-next"></span></div>
+          <div class="stages" id="b-stages"></div>
+        </div>
+        <details class="demo">
+          <summary>Демо для команды: как Брейни меняется</summary>
+          <div class="scen" role="group" aria-label="Сценарий">
+            <button data-scen="start">После квиза</button>
+            <button data-scen="now" aria-pressed="true">Сейчас</button>
+            <button data-scen="fun">Только развлечения</button>
+          </div>
+          <div class="slider" style="margin-top:10px">
+            <label for="weeks" class="small muted">Неделя на платформе: <span id="weeks-v" class="num">8</span> из 8</label>
+            <input type="range" id="weeks" min="0" max="8" value="8">
+          </div>
+        </details>
+      </div>
+      <div class="panel" style="display:flex;flex-direction:column;gap:22px">
+        <div>
+          <div class="sechead"><h2>Наряди Брейни</h2><p class="muted small">Аксессуары за звёзды</p></div>
+          <div class="accgrid" id="accgrid"></div>
+        </div>
+        <div>
+          <div class="sechead"><h2>Что качает Брейни</h2><p class="muted small">Каждая часть тела связана с навыками</p></div>
+          <div class="stats" id="stats"></div>
+        </div>
+        <div>
+          <div class="sechead"><h2>Заслуженные награды</h2><p class="muted small">Их нельзя купить, только заработать характером</p></div>
+          <div class="earned">
+            <div><b>Рюкзак капитана</b><span class="muted small">Ответственность · получен</span></div>
+            <div><b>Значок исследователя</b><span class="muted small">Машина обучения · получен</span></div>
+            <div><b>Свой сад</b><span class="muted small">Долгая игра · урожай через 3 дня</span></div>
+            <div class="off"><b>Плащ героя</b><span class="muted small">Делай сложное · откроется на 50</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARENT: ANALYTICS ============ -->
+  <section class="view" id="v-parent" hidden>
+    <div class="hero">
+      <div class="big" id="p-brainy"></div>
+      <div class="info">
+        <div class="row" style="gap:8px"><h1>Амир, 6 лет</h1><span class="chip coral" id="p-stage"></span></div>
+        <p class="muted">8 недель на платформе. Брейни прошёл путь «Сонный → <span id="p-stage2"></span>»</p>
+        <div class="stages" id="p-stages"></div>
+        <div class="mood" style="max-width:none"><span class="small muted">Самочувствие</span><div class="bar"><span id="p-mood"></span></div><span class="small num" id="p-mood-t"></span></div>
+      </div>
+      <div class="was"><div id="p-was"></div><span class="small muted">После квиза<br>в сентябре</span></div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><span class="muted small">Средняя сессия концентрации</span><span class="v">14 мин</span><span class="delta">+5 мин за месяц</span></div>
+      <div class="kpi"><span class="muted small">Серия дней подряд</span><span class="v">12</span><span class="delta">рекорд</span></div>
+      <div class="kpi"><span class="muted small">Солнышки за неделю</span><span class="v num" id="p-suns"></span><span class="delta" id="p-suns-d"></span></div>
+      <div class="kpi"><span class="muted small">Выбирает рекомендации Брейни</span><span class="v">70%</span><span class="delta">+15 п.п. за месяц</span></div>
+    </div>
+
+    <div class="insight">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="color:var(--coral);flex:none;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg>
+      <p>Сильнее всего выросла <b>логика</b> (+18 за месяц). Отстаёт <b>внимание</b>: 41 при среднем 52 по возрасту. Брейни уже чаще предлагает игры на внимание. <a href="#tasks">Задания в реальной жизни, которые помогут</a></p>
+    </div>
+
+    <div class="two">
+      <div class="panel">
+        <div class="sechead"><h2>Умения</h2><p class="muted small">Шесть навыков, которые проверяют при поступлении</p></div>
+        <svg class="chart" id="radar6" viewBox="0 0 420 340" role="img" aria-label="Радар шести умений"></svg>
+        <div class="legend"><span><i style="background:var(--coral)"></i>Сейчас</span><span><i style="background:var(--sky);opacity:.6"></i>Месяц назад</span><span><i style="border:2px dashed var(--muted)"></i>Среднее по возрасту</span></div>
+      </div>
+      <div class="panel">
+        <div class="sechead"><h2>Характер</h2><p class="muted small">Пять привычек. Индикатор по игровому поведению, а не тест</p></div>
+        <svg class="chart" id="radar5" viewBox="0 0 420 340" role="img" aria-label="Радар пяти навыков характера"></svg>
+        <div class="legend"><span><i style="background:var(--mint)"></i>Сейчас</span><span><i style="background:var(--sky);opacity:.6"></i>Месяц назад</span></div>
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="panel">
+        <div class="sechead"><h2>Время за неделю</h2><p class="muted small">Минуты в день: учёба, отдых и научпоп</p></div>
+        <svg class="chart" id="week" viewBox="0 0 440 230" role="img" aria-label="Минуты по дням недели"></svg>
+        <div class="legend"><span><i style="background:var(--coral)"></i>Развивающие игры</span><span><i style="background:var(--mint)"></i>Научпоп</span><span><i style="background:var(--sun)"></i>Развлечения</span></div>
+      </div>
+      <div class="panel">
+        <div class="sechead"><h2>Делай сложное</h2><p class="muted small">Как часто на входе выбирает игру на слабый навык, а не «другие игры»</p></div>
+        <svg class="chart" id="fork-chart" viewBox="0 0 440 230" role="img" aria-label="Доля выборов рекомендованной игры по неделям"></svg>
+        <p class="small muted">Доведено до конца: 23 из 26 рекомендованных игр за месяц.</p>
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="panel">
+        <div class="row between" style="margin-bottom:12px">
+          <div><h2>Рейтинг</h2><p class="muted small">Лига «6 лет» · сезон «Ноябрь», до конца 16 дней</p></div>
+          <div class="lbtabs" id="lb-mode" role="group" aria-label="Тип рейтинга"><button data-m="growth" aria-pressed="true">По росту</button><button data-m="abs" aria-pressed="false">Абсолютный</button></div>
+        </div>
+        <div class="lbtabs" id="lb-scope" role="group" aria-label="Территория" style="margin-bottom:10px"><button data-s="rayon" aria-pressed="true">Район</button><button data-s="city" aria-pressed="false">Город</button><button data-s="country" aria-pressed="false">Страна</button></div>
+        <p id="lb-sum" style="font-weight:600;margin-bottom:6px"></p>
+        <div style="overflow-x:auto"><table id="lb-table"></table></div>
+        <p class="small muted" style="margin-top:10px">Другим родителям видно только имя и первая буква фамилии. Рейтинг района показывается, когда в нём больше 50 детей.</p>
+      </div>
+      <div class="panel" style="display:flex;flex-direction:column;gap:14px">
+        <div><h2>Итоги месяца для сторис</h2><p class="muted small">Карточка со встроенным реферальным кодом</p></div>
+        <div class="share">
+          <span class="chip" style="align-self:flex-start;background:var(--surface)">Итоги ноября</span>
+          <div id="share-brainy"></div>
+          <div class="lines"><span>Амир и Брейни</span><span id="share-stage"></span><span>12 дней подряд без пропусков</span><span>Логика +18 за месяц</span></div>
+          <span class="small muted">Попробуй тоже: код AMIR24 даёт месяц бесплатно</span>
+        </div>
+        <button class="btn" id="share-btn" style="align-self:flex-start">Поделиться</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARENT: TASKS ============ -->
+  <section class="view" id="v-tasks" hidden>
+    <div class="row between">
+      <div><h1>Задания для Амира</h1><p class="muted">Дела в реальной жизни дают солнышки, задания в приложении — звёзды.</p></div>
+      <div style="min-width:200px">
+        <span class="small muted">Заданий на сегодня: <b class="num" id="lim-v"></b> из 5</span>
+        <div class="limit"><span id="lim-bar"></span></div>
+      </div>
+    </div>
+    <div class="tasks-layout">
+      <div class="panel">
+        <h2 style="margin-bottom:12px">Новое задание</h2>
+        <form id="tform">
+          <label for="t-title">Что сделать<input id="t-title" required placeholder="Например: полить цветы"></label>
+          <label for="t-kind">Где<select id="t-kind"><option value="real">В реальной жизни · солнышки</option><option value="app">В приложении · звёзды</option></select></label>
+          <label for="t-skill">Какой навык качает<select id="t-skill"><option>Ответственность</option><option>Внимание</option><option>Чтение</option><option>Речь</option><option>Память</option><option>Логика</option><option>Моторика</option><option>Делай сложное</option></select></label>
+          <label for="t-reward"><span id="t-reward-l">Награда, солнышек</span><input id="t-reward" type="number" min="1" max="50" value="2"></label>
+          <button class="btn coral" type="submit">Назначить</button>
+        </form>
+        <div style="margin-top:16px">
+          <p class="small muted" style="font-weight:600;margin-bottom:6px">Шаблоны для 6 лет</p>
+          <div class="tpl" id="tpl">
+            <button type="button" data-t="Убраться в комнате" data-s="Ответственность" data-r="2">Убраться</button>
+            <button type="button" data-t="Поиграть на улице 30 минут" data-s="Моторика" data-r="1">Улица</button>
+            <button type="button" data-t="Прочитать книжку" data-s="Чтение" data-r="3">Книжка</button>
+            <button type="button" data-t="Сделать домашку самостоятельно" data-s="Ответственность" data-r="2">Домашка сам</button>
+            <button type="button" data-t="Получить пятёрку в школе" data-s="Делай сложное" data-r="3">Пятёрка</button>
+          </div>
+          <p class="small muted" style="margin-top:8px">Совет: награда за усилие («сделал сам») обычно работает лучше, чем за оценку.</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="row between" style="margin-bottom:12px"><h2>Сегодня</h2><span class="chip sky">Обещание Амира: 3 задания</span></div>
+        <div class="tlist" id="tlist"></div>
+      </div>
+      <div class="panel recpanel">
+        <div class="sechead"><h2>Рекомендации</h2><p class="muted small">По статам Брейни: что подтянуть в реальной жизни</p></div>
+        <div class="recs" id="recs"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARENT: REWARDS ============ -->
+  <section class="view" id="v-rewards" hidden>
+    <div class="sechead"><h1>Подарки и цель недели</h1><p class="muted">Ваш магазин наград для Амира в реальной жизни.</p></div>
+    <div class="rule">
+      <svg class="sunic" viewBox="0 0 24 24" style="width:22px;height:22px"><circle cx="12" cy="12" r="5" fill="currentColor"/><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></g></svg>
+      <span>1 солнышко = 10 звёзд. Обмен только из солнышек в звёзды. Подарки покупаются только за солнышки, поэтому их нельзя «нафармить» играми.</span>
+    </div>
+    <div class="three">
+      <div class="panel">
+        <div class="sechead"><h2>Цель недели</h2></div>
+        <form id="gform">
+          <label for="g-target">Собрать солнышек до воскресенья<input id="g-target" type="number" min="1" max="50" value="10"></label>
+          <label for="g-prize">Подарок за цель<select id="g-prize"></select></label>
+          <button class="btn" type="submit">Сохранить цель</button>
+        </form>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:6px">
+          <span class="small muted">Прогресс: <b class="num" data-w="goal"></b></span>
+          <div class="bar" style="height:12px"><span data-w="goalbar" style="background:var(--orange)"></span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="sechead"><h2>Магазин подарков</h2></div>
+        <div class="list" id="p-gifts"></div>
+        <form id="giftform" style="margin-top:14px;border-top:1px solid var(--line);padding-top:14px">
+          <label for="gf-name">Новый подарок<input id="gf-name" required placeholder="Например: поход в зоопарк"></label>
+          <label for="gf-price">Цена, солнышек<input id="gf-price" type="number" min="1" max="100" value="5"></label>
+          <button class="btn coral" type="submit">Добавить</button>
+        </form>
+      </div>
+      <div class="panel">
+        <div class="sechead"><h2>Запросы от Амира</h2><p class="muted small">Амир купил подарок. Вручите его и отметьте</p></div>
+        <div class="list" id="p-reqs"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- entry screen: every child entry -->
+<div class="overlay" id="entry" hidden>
+  <div class="ov-inner">
+    <div class="ov-brainy" id="ov-brainy"></div>
+    <div class="bubble" id="ov-bubble"></div>
+    <h1 style="font-size:clamp(26px,4vw,40px)">Во что играем сейчас?</h1>
+    <p class="muted">Брейни подобрал игры для навыков, которые сейчас проседают.</p>
+    <div class="bigcards" id="ov-cards"></div>
+    <button class="link" id="ov-skip">Нет, хочу посмотреть другие игры</button>
+  </div>
+</div>
+
+<!-- popsci player -->
+<div class="modal" id="player" hidden role="dialog" aria-modal="true" aria-label="Научпоп">
+  <div class="player">
+    <div class="screen" id="pl-screen"></div>
+    <div class="pctrl" id="pl-ctrl"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const STAR='<svg class="star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg>';
+const SUN='<svg class="sunic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="currentColor"/><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></g></svg>';
+const ICONS={
+  pattern:'<circle cx="11" cy="24" r="6"/><rect x="20" y="18" width="12" height="12" rx="2"/><path d="M40 17l6 13h-12z"/>',
+  eye:'<circle cx="21" cy="21" r="11"/><path d="M29 29l10 10"/>',
+  letters:'<path d="M6 37l8-25 8 25M9 29h10"/><path d="M28 22c2-3 11-3 11 3v12M39 30c-3-2-11-2-11 3s8 5 11 1"/>',
+  memory:'<rect x="7" y="9" width="15" height="20" rx="3"/><rect x="26" y="19" width="15" height="20" rx="3"/><path d="M14 16v6M33 26v6"/>',
+  speech:'<path d="M8 11h32v21H22l-8 7v-7H8z"/><path d="M16 21h16"/>',
+  sprout:'<path d="M24 41V22"/><path d="M24 27c-10 0-14-6-14-13 8 0 14 4 14 13z"/><path d="M24 22c0-8 6-12 14-12 0 6-4 12-14 12z"/>',
+  compass:'<circle cx="24" cy="24" r="16"/><path d="M31 17l-4 11-10 3 4-11z"/>',
+  detective:'<path d="M9 12l10 10M19 12L9 22"/><path d="M22 32l6 6 13-15"/>',
+  snake:'<path d="M7 35h14a6 6 0 0 0 0-12h-6a6 6 0 0 1 0-12h20"/><circle cx="39" cy="11" r="1.5"/>',
+  rocket:'<path d="M24 5c8 6 10 17 6 27H18C14 22 16 11 24 5z"/><path d="M18 32l-6 8M30 32l6 8M24 34v8"/><circle cx="24" cy="18" r="3"/>',
+  drum:'<ellipse cx="24" cy="19" rx="14" ry="5"/><path d="M10 19v13c0 3 6 5 14 5s14-2 14-5V19"/><path d="M13 6l9 10M35 6l-9 10"/>',
+  target:'<circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="8"/><circle cx="24" cy="24" r="1.5"/>',
+  maze:'<rect x="7" y="7" width="34" height="34" rx="4"/><path d="M16 7v17h9M33 15v26M16 33h9"/>',
+  play:'<circle cx="24" cy="24" r="16"/><path d="M20 16l12 8-12 8z"/>',
+  phones:'<path d="M9 31v-7a15 15 0 0 1 30 0v7"/><rect x="7" y="29" width="8" height="12" rx="2"/><rect x="33" y="29" width="8" height="12" rx="2"/>',
+  wave:'<path d="M4 30c5-6 10-6 15 0s10 6 15 0 10-6 15 0"/><path d="M4 38c5-6 10-6 15 0s10 6 15 0 10-6 15 0"/><circle cx="34" cy="14" r="5"/>',
+  bee:'<ellipse cx="24" cy="28" rx="10" ry="13"/><path d="M14 24h20M14 31h20"/><path d="M18 16c-6-8-14-4-12 2M30 16c6-8 14-4 12 2"/>',
+  planet:'<circle cx="24" cy="24" r="12"/><ellipse cx="24" cy="24" rx="21" ry="7" transform="rotate(-20 24 24)"/>',
+  dino:'<path d="M8 38v-8c0-8 6-12 14-12h6l4-8 8 2-2 8h-4v6c0 6-4 12-10 12"/><path d="M14 38v4M26 38v4"/>',
+  gift:'<rect x="7" y="18" width="34" height="23" rx="3"/><path d="M5 12h38v6H5zM24 12v29"/><path d="M24 12c-4-8-14-6-10 0M24 12c4-8 14-6 10 0"/>',
+  tablet:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M11 18h2"/>',
+  home:'<path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-5h4v5"/>'
+};
+const icon=(k,vb)=>'<svg viewBox="'+(vb||'0 0 48 48')+'" aria-hidden="true">'+ICONS[k]+'</svg>';
+const toastEl=$('toast');let tt;
+function toast(m){toastEl.textContent=m;toastEl.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove('on'),2800)}
+
+/* ================= STATE ================= */
+const S={stars:340,suns:6,week:6,goal:{target:10,prize:'Поход в кино'},mood:72,inRow:0,
+  acc:{head:null,face:'glasses',neck:null},owned:['glasses'],bonusGiven:false};
+const START={brain:18,eyes:16,mouth:14,arms:14,legs:18,resp:10};
+const NOW={brain:66,eyes:41,mouth:55,arms:70,legs:64,resp:80};
+const FUN={brain:12,eyes:32,mouth:34,arms:96,legs:88,resp:20};
+const STAGES=[['Сонный',0],['Проснувшийся',25],['Бодрый',40],['Умник',55],['Гений',70]];
+const avg=s=>(s.brain+s.eyes+s.mouth+s.arms+s.legs)/5;
+function stageInfo(s){const m=avg(s);let i=0;STAGES.forEach((x,k)=>{if(m>=x[1])i=k});
+  const next=STAGES[i+1];return {i,name:STAGES[i][0],m,next:next?next[0]:null,left:next?Math.ceil(next[1]-m):0,
+  prog:next?(m-STAGES[i][1])/(next[1]-STAGES[i][1]):1}}
+function stagesHTML(s){const st=stageInfo(s);return STAGES.map((x,k)=>'<div class="'+(k===st.i?'on':'')+'"><i><b style="width:'+(k<st.i?100:k===st.i?Math.round(st.prog*100):0)+'%"></b></i>'+x[0]+'</div>').join('')}
+
+/* ================= BRAINY SVG ================= */
+const clamp=v=>Math.max(0,Math.min(1,v));
+function hex(h){return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16))}
+function mix(a,b,t){const A=hex(a),B=hex(b);return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('')}
+function brainy(s,id,acc){
+  acc=acc||{};
+  const cx=120,cy=124,rx=58+s.brain*.28,ry=rx*.8;
+  const mood=avg(s)/100,t=clamp((mood-.22)/.5);
+  const F=mix('#A7BC8C','#FF8FA3',t),D=mix('#7A9064','#E05C77',t),P='#2B2350';
+  let o='';
+  const ly=cy+ry*.74,len=22+s.legs*.3;
+  [-1,1].forEach(d=>{const x=cx+d*rx*.32;o+='<path d="M'+x+' '+ly+' L'+(x+d*3)+' '+(ly+len)+'" stroke="'+D+'" stroke-width="'+(8+s.legs*.05)+'" stroke-linecap="round"/><ellipse cx="'+(x+d*8)+'" cy="'+(ly+len+4)+'" rx="14" ry="7" fill="'+P+'"/>'});
+  const sy=cy+ry*.15,aw=6+s.arms*.14;
+  [-1,1].forEach(d=>{
+    const sx=cx+d*rx*.9,ex=cx+d*(rx+20),ey=sy+20,hx=cx+d*(rx+30),hy=sy+34-s.arms*.5;
+    o+='<path d="M'+sx+' '+sy+' Q'+ex+' '+(ey+8)+' '+hx+' '+hy+'" stroke="'+D+'" stroke-width="'+aw+'" fill="none" stroke-linecap="round"/>';
+    if(s.arms>55)o+='<circle cx="'+(ex-d*2)+'" cy="'+(ey-2)+'" r="'+((s.arms-40)*.2)+'" fill="'+D+'"/>';
+    o+='<circle cx="'+hx+'" cy="'+hy+'" r="'+(7+s.arms*.03)+'" fill="'+F+'" stroke="'+D+'" stroke-width="3"/>';
+  });
+  if(s.resp>=70)o+='<rect x="'+(cx+rx*.55)+'" y="'+(cy-ry*.2)+'" width="'+(rx*.5)+'" height="'+(ry*.85)+'" rx="10" fill="#3C68EE"/><rect x="'+(cx+rx*.62)+'" y="'+(cy+ry*.15)+'" width="'+(rx*.34)+'" height="'+(ry*.25)+'" rx="5" fill="#7A97FF"/>';
+  [[-.55,-.55,.52],[0,-.78,.52],[.55,-.55,.52],[-.86,0,.46],[.86,0,.46],[-.5,.45,.5],[.5,.45,.5]].forEach(b=>o+='<circle cx="'+(cx+b[0]*rx)+'" cy="'+(cy+b[1]*ry)+'" r="'+(b[2]*ry)+'" fill="'+F+'"/>');
+  o+='<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+rx+'" ry="'+ry+'" fill="'+F+'"/>';
+  const fs='stroke="'+D+'" stroke-width="3" fill="none" stroke-linecap="round" opacity=".6"';
+  o+='<path d="M'+cx+' '+(cy-ry*1.22)+' Q'+(cx-7)+' '+(cy-ry*.8)+' '+cx+' '+(cy-ry*.38)+'" '+fs+'/>';
+  [-1,1].forEach(d=>{
+    o+='<path d="M'+(cx+d*rx*.22)+' '+(cy-ry*.8)+' q'+(d*rx*.14)+' '+(-ry*.16)+' '+(d*rx*.28)+' 0 t'+(d*rx*.28)+' 0" '+fs+'/>';
+    o+='<path d="M'+(cx+d*rx*.5)+' '+(cy-ry*.38)+' q'+(d*rx*.12)+' '+(-ry*.14)+' '+(d*rx*.24)+' 0" '+fs+'/>';
+  });
+  const ey=cy+ry*.08,er=13+s.brain*.03,lid=(1-s.eyes/100)*2*er*.82,eyes=[];
+  [-1,1].forEach((d,i)=>{
+    const ex=cx+d*rx*.36,cid=id+'e'+i;eyes.push(ex);
+    o+='<clipPath id="'+cid+'"><circle cx="'+ex+'" cy="'+ey+'" r="'+er+'"/></clipPath>';
+    o+='<g clip-path="url(#'+cid+')"><circle cx="'+ex+'" cy="'+ey+'" r="'+er+'" fill="#fff"/><circle cx="'+(ex+2)+'" cy="'+(ey+3)+'" r="'+(er*.45)+'" fill="'+P+'"/><circle cx="'+(ex+4)+'" cy="'+ey+'" r="'+(er*.14)+'" fill="#fff"/>';
+    o+='<rect x="'+(ex-er)+'" y="'+(ey-er)+'" width="'+(er*2)+'" height="'+lid+'" fill="'+F+'"/></g>';
+    if(lid>2)o+='<path d="M'+(ex-er*.9)+' '+(ey-er+lid)+' L'+(ex+er*.9)+' '+(ey-er+lid)+'" stroke="'+D+'" stroke-width="3" stroke-linecap="round"/>';
+    if(s.eyes<45)o+='<path d="M'+(ex-er*.7)+' '+(ey+er+4)+' q'+(er*.7)+' 6 '+(er*1.4)+' 0" stroke="#6B5A88" stroke-width="2.5" fill="none" opacity=".5"/>';
+    if(t>.6)o+='<ellipse cx="'+(ex+d*er*.4)+'" cy="'+(ey+er+12)+'" rx="8" ry="5" fill="#FF5E7E" opacity=".35"/>';
+  });
+  if(acc.face==='glasses'){
+    const gr=er+5;o+='<g fill="rgba(190,225,255,.22)" stroke="'+P+'" stroke-width="4">'+eyes.map(x=>'<circle cx="'+x+'" cy="'+ey+'" r="'+gr+'"/>').join('')+'</g><path d="M'+(eyes[0]+gr)+' '+ey+' Q'+cx+' '+(ey-8)+' '+(eyes[1]-gr)+' '+ey+'" stroke="'+P+'" stroke-width="4" fill="none"/>';
+  }
+  const my=cy+ry*.55,mw=14+s.mouth*.1,cv=(s.mouth-45)*.38;
+  o+='<path d="M'+(cx-mw)+' '+my+' Q'+cx+' '+(my+cv)+' '+(cx+mw)+' '+my+'" stroke="'+P+'" stroke-width="4" fill="none" stroke-linecap="round"/>';
+  if(acc.neck==='bowtie'){const by=cy+ry*.93;o+='<path d="M'+cx+' '+by+' l-20 -11 v22z M'+cx+' '+by+' l20 -11 v22z" fill="#EE5A4A"/><circle cx="'+cx+'" cy="'+by+'" r="6" fill="#C2402F"/>'}
+  if(acc.neck==='scarf'){const sy2=cy+ry*.78;o+='<rect x="'+(cx-rx*.72)+'" y="'+sy2+'" width="'+(rx*1.44)+'" height="15" rx="7" fill="#139E80"/><rect x="'+(cx+rx*.25)+'" y="'+(sy2+8)+'" width="14" height="34" rx="5" fill="#0F7F67"/><path d="M'+(cx-rx*.5)+' '+(sy2+2)+'v11M'+(cx-rx*.2)+' '+(sy2+2)+'v11M'+(cx+rx*.1)+' '+(sy2+2)+'v11" stroke="#FFC845" stroke-width="3"/>'}
+  if(acc.head==='cowboy'){
+    o+='<path d="M'+(cx-rx*.48)+' '+(cy-ry*1.1)+' C'+(cx-rx*.52)+' '+(cy-ry*1.78)+' '+(cx-rx*.15)+' '+(cy-ry*1.62)+' '+cx+' '+(cy-ry*1.5)+' C'+(cx+rx*.15)+' '+(cy-ry*1.62)+' '+(cx+rx*.52)+' '+(cy-ry*1.78)+' '+(cx+rx*.48)+' '+(cy-ry*1.1)+'Z" fill="#B5763D"/>';
+    o+='<rect x="'+(cx-rx*.48)+'" y="'+(cy-ry*1.24)+'" width="'+(rx*.96)+'" height="'+(ry*.12)+'" fill="#5A3418"/>';
+    o+='<path d="M'+(cx-rx*1.08)+' '+(cy-ry*1.22)+' Q'+cx+' '+(cy-ry*.82)+' '+(cx+rx*1.08)+' '+(cy-ry*1.22)+' Q'+cx+' '+(cy-ry*1.0)+' '+(cx-rx*1.08)+' '+(cy-ry*1.22)+'Z" fill="#9A6233"/>';
+  }
+  if(acc.head==='cap'){
+    o+='<path d="M'+(cx-rx*.66)+' '+(cy-ry*1.0)+' Q'+cx+' '+(cy-ry*1.8)+' '+(cx+rx*.66)+' '+(cy-ry*1.0)+'Z" fill="#3C68EE"/><ellipse cx="'+(cx+rx*.6)+'" cy="'+(cy-ry*1.0)+'" rx="'+(rx*.42)+'" ry="'+(ry*.09)+'" fill="#2A4FC4"/><circle cx="'+cx+'" cy="'+(cy-ry*1.4)+'" r="5" fill="#2A4FC4"/>';
+  }
+  if(acc.head==='phones'){
+    o+='<path d="M'+(cx-rx*.98)+' '+(cy-ry*.1)+' Q'+cx+' '+(cy-ry*2.05)+' '+(cx+rx*.98)+' '+(cy-ry*.1)+'" stroke="'+P+'" stroke-width="8" fill="none" stroke-linecap="round"/>';
+    [-1,1].forEach(d=>o+='<rect x="'+(cx+d*rx*.98-11)+'" y="'+(cy-ry*.3)+'" width="22" height="34" rx="9" fill="#EE5A4A"/>');
+  }
+  if(mood<.38)[[-1,-.9,-18],[1,-1.05,14],[1.05,.3,-10]].forEach(p=>{const x=cx+p[0]*(rx+18),y=cy+p[1]*ry;o+='<g transform="rotate('+p[2]+' '+x+' '+y+')" opacity=".8"><rect x="'+(x-9)+'" y="'+(y-15)+'" width="18" height="30" rx="4" fill="#fff" stroke="'+D+'" stroke-width="2"/><path d="M'+(x-3)+' '+(y-5)+' l7 5 -7 5z" fill="'+D+'"/></g>'});
+  if(s.eyes<35)o+='<text x="'+(cx+rx*.7)+'" y="'+(cy-ry*1.1)+'" font-family="Unbounded,Arial" font-weight="700" font-size="18" fill="#6B5A88">z z</text>';
+  if(s.brain>72&&!acc.head)o+='<path d="M'+(cx-rx*1.05)+' '+(cy-ry*1.05)+' l4 9 9 4 -9 4 -4 9 -4-9 -9-4 9-4z" fill="#FFC845"/>';
+  return '<svg class="brainy" viewBox="-12 -22 264 300" role="img" aria-label="Брейни">'+o+'</svg>';
+}
+
+/* ================= COMMON REFRESH ================= */
+let bigState=null;
+function refresh(){
+  const st=stageInfo(NOW);
+  document.querySelectorAll('[data-w]').forEach(el=>{
+    const k=el.dataset.w;
+    if(k==='stars')el.textContent=S.stars;
+    else if(k==='suns')el.textContent=S.suns;
+    else if(k==='goal')el.textContent=Math.min(S.week,S.goal.target)+' / '+S.goal.target+' ☀';
+    else if(k==='goalbar')el.style.width=Math.min(100,S.week/S.goal.target*100)+'%';
+    else if(k==='target')el.textContent=S.goal.target;
+    else if(k==='prize')el.textContent=S.goal.prize;
+    else if(k==='week')el.textContent=S.week+' ☀';
+  });
+  $('dock-brainy').innerHTML=brainy(NOW,'dock',S.acc);
+  $('dock-stage').textContent=st.name;
+  $('dock-mood').style.width=S.mood+'%';$('dock-mood-t').textContent=S.mood+'%';
+  $('dock-next').textContent=st.next?'До стадии «'+st.next+'» осталось '+st.left+' очк.':'Высшая стадия!';
+  // parent hero
+  $('p-brainy').innerHTML=brainy(NOW,'ph',S.acc);
+  $('p-was').innerHTML=brainy(START,'pw');
+  $('p-stage').textContent=st.name;$('p-stage2').textContent=st.name;
+  $('p-stages').innerHTML=stagesHTML(NOW);
+  $('p-mood').style.width=S.mood+'%';$('p-mood-t').textContent=S.mood+'%';
+  $('p-suns').textContent=S.week+' / '+S.goal.target;
+  $('p-suns-d').textContent=S.week>=S.goal.target?'цель выполнена':'ещё '+(S.goal.target-S.week)+' до цели';
+  $('share-brainy').innerHTML=brainy(NOW,'sh',S.acc);
+  $('share-stage').textContent='Брейни теперь «'+st.name+'»';
+  drawBrainyPage(bigState||NOW);
+  drawAcc();
+}
+
+/* ================= ENTRY SCREEN ================= */
+function recList(){
+  return [
+    {g:'odd',n:'Найди лишний',sk:'Внимание',v:Math.round(NOW.eyes),avg:52,ic:'eye',t:'sky',r:'до 14'},
+    {g:null,n:'Звуки и буквы',sk:'Чтение',v:48,avg:55,ic:'letters',t:'sun',r:'до 14'},
+    {g:null,n:'Повтори за Брейни',sk:'Память',v:55,avg:56,ic:'memory',t:'mint',r:'до 12'}
+  ].sort((a,b)=>(a.v-a.avg)-(b.v-b.avg));
+}
+function openEntry(){
+  const r=recList();
+  $('ov-brainy').innerHTML=brainy(NOW,'ov',S.acc);
+  $('ov-bubble').textContent='Мне нужно подкачать «'+r[0].sk.toLowerCase()+'». Поможешь?';
+  $('ov-cards').innerHTML=r.map((x,i)=>'<button class="bigcard'+(i===0?' first':'')+'" data-rg="'+(x.g||'')+'" data-n="'+x.n+'">'+
+    '<div class="art t-'+x.t+'">'+icon(x.ic)+'</div>'+
+    '<span class="why">'+(i===0?'Важнее всего сейчас · ':'')+x.sk+' '+x.v+' при среднем '+x.avg+'</span>'+
+    '<h2>'+x.n+'</h2><div class="row between"><span class="reward">'+STAR+x.r+'</span><span class="btn sm coral">Играть</span></div></button>').join('');
+  $('entry').hidden=false;document.body.style.overflow='hidden';
+}
+function closeEntry(){$('entry').hidden=true;document.body.style.overflow=''}
+$('ov-cards').addEventListener('click',e=>{
+  const b=e.target.closest('[data-n]');if(!b)return;
+  if(!b.dataset.rg){toast('В прототипе играбельны «Найди лишний» и «Продолжи узор»');return}
+  closeEntry();startGame(b.dataset.rg,1);location.hash='#game';
+});
+$('ov-skip').addEventListener('click',()=>{closeEntry();location.hash='#learn';toast('Хорошо. Брейни запомнил выбор')});
+
+/* ================= CATALOGS ================= */
+const dev=[
+  {g:'odd',n:'Найди лишний',sk:'Внимание',ic:'eye',t:'sky',r:'до 14'},
+  {g:'pattern',n:'Продолжи узор',sk:'Логика',ic:'pattern',t:'coral',r:'до 16'},
+  {n:'Звуки и буквы',sk:'Чтение',ic:'letters',t:'sun',r:'до 14'},
+  {n:'Повтори за Брейни',sk:'Память',ic:'memory',t:'mint',r:'до 12'},
+  {n:'Расскажи историю',sk:'Речь',ic:'speech',t:'coral',r:'до 15'},
+  {n:'Волшебный сад',sk:'Долгая игра',ic:'sprout',t:'mint',r:'до 10 в день'},
+  {n:'Экспедиция',sk:'Машина обучения',ic:'compass',t:'sky',r:'до 18'},
+  {n:'Детектив ошибок',sk:'Учусь на ошибках',ic:'detective',t:'sun',r:'до 14'}
+];
+function devCard(g,why){
+  return '<button class="gcard" data-dg="'+(g.g||'')+'"><div class="art t-'+g.t+'">'+icon(g.ic)+'</div><h3>'+g.n+'</h3>'+
+    (why?'<span class="why">'+why+'</span>':'')+
+    '<div class="meta"><span class="chip">'+g.sk+'</span><span class="reward">'+STAR+g.r+'</span></div></button>';
+}
+function renderLearn(){
+  const r=recList();
+  $('rec-grid').innerHTML=r.map(x=>devCard(dev.find(d=>d.n===x.n),x.sk+' '+x.v+' · среднее '+x.avg)).join('');
+  $('dev-grid').innerHTML=dev.map(g=>devCard(g)).join('');
+}
+$('v-learn').addEventListener('click',e=>{
+  const b=e.target.closest('[data-dg]');if(!b)return;
+  if(!b.dataset.dg){toast('В прототипе играбельны «Найди лишний» и «Продолжи узор»');return}
+  startGame(b.dataset.dg,1);location.hash='#game';
+});
+
+const shop=[
+  {n:'Змейка',sk:'Пространственное мышление',ic:'snake',t:'mint',st:'forever'},
+  {n:'Ракета-раннер',sk:'Скорость реакции',ic:'rocket',t:'coral',st:'timer',m:6},
+  {n:'Ритм-барабаны',sk:'Чувство ритма',ic:'drum',t:'sun',st:'locked',pt:30,pf:450},
+  {n:'Катапульта',sk:'Меткость',ic:'target',t:'sky',st:'locked',pt:30,pf:500},
+  {n:'Лабиринт-гонки',sk:'Ловкость рук',ic:'maze',t:'coral',st:'locked',pt:40,pf:600}
+];
+const media=[
+  {n:'Как устроен вулкан',d:'Мультфильм · 22 мин',ic:'play',t:'coral',p:50},
+  {n:'Путешествие капельки',d:'Мультфильм · 18 мин',ic:'play',t:'sky',p:40},
+  {n:'Сказка о смелом ёжике',d:'Аудиосказка · 15 мин',ic:'phones',t:'sun',p:30}
+];
+const SCI=[
+  {n:'Тайны океана',d:24,ic:'wave',t:'sky',bg:'linear-gradient(135deg,#0E3A66,#1A86A8)',q:'Кто самый большой житель океана?',o:['Синий кит','Акула','Осьминог'],a:0,pos:9},
+  {n:'Как живут пчёлы',d:20,ic:'bee',t:'sun',bg:'linear-gradient(135deg,#6B4A0B,#C98A14)',q:'Что пчёлы делают из нектара?',o:['Воск','Мёд','Сахар'],a:1,pos:0},
+  {n:'Путешествие к Марсу',d:26,ic:'planet',t:'coral',bg:'linear-gradient(135deg,#3B1416,#A8402E)',q:'Какого цвета Марс?',o:['Синего','Зелёного','Красного'],a:2,pos:0},
+  {n:'Последние дни динозавров',d:22,ic:'dino',t:'mint',bg:'linear-gradient(135deg,#123B2C,#2E7D5B)',q:'Что, по главной версии учёных, упало на Землю?',o:['Астероид','Луна','Ледяная гора'],a:0,pos:0}
+];
+function renderLeisure(){
+  $('shop-grid').innerHTML=shop.map((g,i)=>{
+    let st;
+    if(g.st==='forever')st='<span class="state ok-t">Открыта навсегда</span><button class="btn sm ghost" data-playshop="'+i+'">Играть</button>';
+    else if(g.st==='timer')st='<span class="state ok-t">Осталось '+g.m+' мин</span><button class="btn sm ghost" data-playshop="'+i+'">Играть</button>';
+    else st='<div class="buy"><button class="btn sm" data-buy="'+i+'" data-k="t">10 мин · '+g.pt+'★</button><button class="btn sm ghost" data-buy="'+i+'" data-k="f">Навсегда · '+g.pf+'★</button></div>';
+    return '<div class="gcard'+(g.st==='locked'?' locked':'')+'"><div class="art t-'+g.t+'">'+icon(g.ic)+'</div><h3>'+g.n+'</h3><span class="chip" style="align-self:flex-start">'+g.sk+'</span><div class="meta">'+st+'</div></div>';
+  }).join('');
+  $('media-grid').innerHTML=media.map((g,i)=>'<div class="gcard'+(g.open?'':' locked')+'"><div class="art t-'+g.t+'">'+icon(g.ic)+'</div><h3>'+g.n+'</h3><span class="muted small">'+g.d+'</span><div class="meta">'+
+    (g.open?'<span class="state ok-t">Открыто</span>':'<button class="btn sm" data-media="'+i+'">Открыть · '+g.p+'★</button>')+'</div></div>').join('');
+  $('sci-grid').innerHTML=SCI.map((g,i)=>'<div class="gcard free"><div class="art t-'+g.t+'">'+icon(g.ic)+'</div><h3>'+g.n+'</h3><span class="muted small">'+g.d+' мин · бесплатно</span>'+
+    (g.pos>0&&!g.done?'<div class="bar" style="height:6px"><span style="width:'+(g.pos/g.d*100)+'%;background:var(--sky)"></span></div>':'')+
+    '<div class="meta">'+(g.done?'<span class="state ok-t">Досмотрено · +15★ получено</span>':'<button class="btn sm" data-sci="'+i+'">'+(g.pos>0?'Продолжить с '+g.pos+' мин':'Смотреть')+'</button>')+'</div></div>').join('');
+}
+$('v-leisure').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.playshop!==undefined){toast('Запуск «'+shop[b.dataset.playshop].n+'». Таймер идёт');return}
+  if(b.dataset.buy!==undefined){
+    const g=shop[b.dataset.buy],cost=b.dataset.k==='t'?g.pt:g.pf;
+    if(S.stars<cost){toast('Не хватает '+(cost-S.stars)+' звёзд. Загляни в «Учимся»');return}
+    S.stars-=cost;if(b.dataset.k==='t'){g.st='timer';g.m=10}else g.st='forever';
+    renderLeisure();refresh();toast('«'+g.n+'» открыта. −'+cost+' звёзд');return;
+  }
+  if(b.dataset.media!==undefined){
+    const g=media[b.dataset.media];
+    if(S.stars<g.p){toast('Не хватает '+(g.p-S.stars)+' звёзд');return}
+    S.stars-=g.p;g.open=true;renderLeisure();refresh();toast('«'+g.n+'» открыт');return;
+  }
+  if(b.dataset.sci!==undefined)openPlayer(+b.dataset.sci);
+});
+
+/* ================= POPSCI PLAYER ================= */
+let pl=null,plTimer=null;
+function openPlayer(i){pl={i,playing:true};$('player').hidden=false;document.body.style.overflow='hidden';drawPlayer();tick()}
+function tick(){clearInterval(plTimer);plTimer=setInterval(()=>{
+  if(!pl||!pl.playing)return;const g=SCI[pl.i];g.pos=Math.min(g.d,g.pos+1);
+  if(g.pos>=g.d){pl.playing=false;pl.quiz=true;clearInterval(plTimer)}drawPlayer();
+},1000)}
+const fmt=m=>String(m).padStart(2,'0')+':00';
+function drawPlayer(){
+  const g=SCI[pl.i];const scr=$('pl-screen');
+  scr.style.background=g.bg;scr.className='screen'+(pl.playing?' play':'');
+  scr.innerHTML=icon(g.ic)+(pl.playing||pl.quiz?'':'<span class="paused">Пауза</span>');
+  if(pl.quiz){
+    $('pl-ctrl').innerHTML='<h2>Фильм досмотрен!</h2><div class="quiz"><p style="font-weight:600">'+g.q+'</p><div class="opts">'+
+      g.o.map((x,k)=>'<button class="ans" data-ans="'+k+'">'+x+'</button>').join('')+'</div><p class="small muted" id="q-fb">Ответь на вопрос и получи 15 звёзд</p></div>';
+    return;
+  }
+  $('pl-ctrl').innerHTML='<div class="row between"><h3>'+g.n+'</h3><span class="small muted num">'+fmt(g.pos)+' / '+fmt(g.d)+'</span></div>'+
+    '<div class="ptrack" aria-label="Прогресс, перемотки нет"><span style="width:'+(g.pos/g.d*100)+'%"></span></div>'+
+    '<div class="row between"><button class="btn" id="pl-pause">'+(pl.playing?'Пауза':'Продолжить')+'</button>'+
+    '<button class="link" id="pl-close">Закрыть и досмотреть позже</button></div>'+
+    '<p class="small muted">Перемотки и переключения нет. Демо: 1 секунда = 1 минута фильма.</p>';
+}
+$('pl-ctrl').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b||!pl)return;
+  if(b.id==='pl-pause'){pl.playing=!pl.playing;drawPlayer();return}
+  if(b.id==='pl-close'){clearInterval(plTimer);$('player').hidden=true;document.body.style.overflow='';const g=SCI[pl.i];pl=null;renderLeisure();toast('Продолжишь с '+g.pos+' минуты');return}
+  if(b.dataset.ans!==undefined){
+    const g=SCI[pl.i];
+    if(+b.dataset.ans===g.a){g.done=true;S.stars+=15;NOW.eyes=Math.min(100,NOW.eyes+2);$('player').hidden=true;document.body.style.overflow='';pl=null;renderLeisure();renderLearn();refresh();toast('Верно! +15 звёзд, глаза Брейни +2')}
+    else{b.disabled=true;$('q-fb').textContent='Почти! Попробуй другой ответ'}
+  }
+});
+
+/* ================= GAMES ================= */
+const COL={coral:'var(--coral)',sky:'var(--sky)',sun:'var(--sun)',mint:'var(--mint)'};
+function shape(it){
+  const s=it[0],c=it[1],k=it[2]||1,st='style="fill:'+COL[c]+'"';let inner;
+  if(s==='circle')inner='<circle cx="50" cy="50" r="'+(40*k)+'" '+st+'/>';
+  else if(s==='square'){const w=76*k;inner='<rect x="'+(50-w/2)+'" y="'+(50-w/2)+'" width="'+w+'" height="'+w+'" rx="12" '+st+'/>'}
+  else{const h=40*k;inner='<polygon points="50,'+(50-h)+' '+(50+h)+','+(50+h*.8)+' '+(50-h)+','+(50+h*.8)+'" '+st+'/>'}
+  return '<svg viewBox="0 0 100 100" aria-hidden="true">'+inner+'</svg>';
+}
+const GAMES={
+  pattern:{n:'Продолжи узор',chips:['coral|Логика · основной','sky|Внимание · доп.'],ic:'pattern',t:'coral',gain:{brain:2},gainT:'Мозг +2',type:'seq',
+    L:{1:[
+      {seq:[['circle','coral'],['square','sky'],['circle','coral'],['square','sky']],opts:[['circle','coral'],['square','sky'],['tri','sun']],ans:0},
+      {seq:[['tri','mint'],['tri','mint'],['circle','coral'],['tri','mint'],['tri','mint']],opts:[['tri','mint'],['circle','coral'],['square','sky']],ans:1},
+      {seq:[['circle','sky',.5],['circle','sky',.75],['circle','sky',1],['circle','sky',.5],['circle','sky',.75]],opts:[['circle','sky',.5],['circle','sky',1],['circle','sky',.75]],ans:1},
+      {seq:[['square','coral'],['square','sun'],['square','mint'],['square','coral'],['square','sun']],opts:[['square','coral'],['square','sky'],['square','mint']],ans:2}],
+     2:[
+      {seq:[['circle','coral'],['circle','coral'],['square','sky'],['circle','coral'],['circle','coral'],['square','sky'],['circle','coral']],opts:[['square','sky'],['circle','coral'],['tri','sun']],ans:1},
+      {seq:[['tri','mint',.5],['tri','mint',.75],['tri','mint',1],['square','sun',.5],['square','sun',.75]],opts:[['tri','mint',1],['square','sun',.5],['square','sun',1]],ans:2},
+      {seq:[['circle','coral'],['circle','sky'],['circle','sky'],['circle','coral'],['circle','sky'],['circle','sky'],['circle','coral']],opts:[['circle','coral'],['circle','sky'],['square','sky']],ans:1},
+      {seq:[['square','coral'],['tri','coral'],['circle','coral'],['square','sky'],['tri','sky']],opts:[['circle','coral'],['square','sky'],['circle','sky']],ans:2}]}},
+  odd:{n:'Найди лишний',chips:['sky|Внимание · основной'],ic:'eye',t:'sky',gain:{eyes:3},gainT:'Глаза +3',type:'odd',
+    L:{1:[[['circle','sky'],['circle','coral'],4,9],[['square','mint'],['tri','mint'],7,9],[['tri','sun'],['tri','sky'],1,9],[['circle','coral'],['square','coral'],6,9]],
+       2:[[['circle','sky',1],['circle','sky',.78],9,12],[['square','coral',1],['square','coral',.8],2,12],[['circle','mint'],['circle','sky'],5,12],[['tri','sun',1],['tri','sun',.78],11,12]]}}
+};
+let G=null; // {id,level,round,earned,missed,locked}
+function startGame(id,level){G={id,level:Math.min(level,2),shown:level,round:0,earned:0,missed:false,locked:false};drawGameHead();drawRound()}
+function rounds(){return GAMES[G.id].L[G.level]}
+function drawGameHead(){
+  const g=GAMES[G.id];
+  $('g-title').textContent=g.n+' · уровень '+G.shown;
+  $('g-chips').innerHTML=g.chips.map(c=>{const p=c.split('|');return '<span class="chip '+p[0]+'">'+p[1]+'</span>'}).join('');
+}
+function drawDots(){const R=rounds();$('dots').innerHTML=R.map((r,i)=>'<i class="'+(i<G.round?'done':i===G.round?'cur':'')+'"></i>').join('');$('earned').textContent=G.earned}
+function drawRound(){
+  G.locked=false;G.missed=false;drawDots();
+  const g=GAMES[G.id],r=rounds()[G.round],total=rounds().length;
+  let body;
+  if(g.type==='seq'){
+    body='<h2>Что будет дальше?</h2><div class="seq">'+r.seq.map(s=>'<div class="tile">'+shape(s)+'</div>').join('')+'<div class="tile q">?</div></div>'+
+      '<div class="opts">'+r.opts.map((o,i)=>'<button class="opt" data-o="'+i+'" aria-label="Вариант '+(i+1)+'">'+shape(o)+'</button>').join('')+'</div>';
+  }else{
+    const n=r[3],cols=n===9?3:4;let cells='';
+    for(let i=0;i<n;i++)cells+='<button class="opt" data-o="'+i+'" aria-label="Фигура '+(i+1)+'">'+shape(i===r[2]?r[1]:r[0])+'</button>';
+    body='<h2>Найди фигуру, которая отличается</h2><div class="oddgrid" style="grid-template-columns:repeat('+cols+',minmax(0,1fr))">'+cells+'</div>';
+  }
+  $('stage').innerHTML='<p class="muted">Раунд '+(G.round+1)+' из '+total+'</p>'+body+'<div class="feedback" id="fb"></div>';
+}
+$('stage').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b||!G)return;
+  if(b.dataset.next!==undefined){G.round++;if(G.round<rounds().length)drawRound();else finish();return}
+  if(b.dataset.go){const p=b.dataset.go.split(':');startGame(p[0],+p[1]);return}
+  if(b.dataset.stop!==undefined){S.inRow=0;location.hash='#brainy';toast('Брейни отдыхает и говорит спасибо!');return}
+  if(b.dataset.o===undefined||G.locked)return;
+  const g=GAMES[G.id],r=rounds()[G.round],ans=g.type==='seq'?r.ans:r[2],fb=$('fb');
+  if(+b.dataset.o===ans){
+    G.locked=true;b.classList.add('ok');const add=G.missed?4:3;G.earned+=add;drawDots();
+    fb.innerHTML='<span>'+(G.missed?'Звезда за исправление! ':'Верно! ')+'+'+add+' ★</span><button class="btn sm" data-next>'+(G.round<rounds().length-1?'Дальше':'Готово')+'</button>';
+  }else{G.missed=true;b.classList.remove('no');void b.offsetWidth;b.classList.add('no');fb.textContent='Почти! Присмотрись и попробуй ещё раз'}
+});
+function finish(){
+  const g=GAMES[G.id];G.round=rounds().length;drawDots();
+  const before=JSON.parse(JSON.stringify(NOW));
+  for(const k in g.gain)NOW[k]=Math.min(100,NOW[k]+g.gain[k]);
+  S.stars+=G.earned;S.mood=Math.min(100,S.mood+8);S.inRow++;
+  let bonus='';
+  if(S.inRow>=3&&!S.bonusGiven){S.bonusGiven=true;S.stars+=5;bonus='<div class="breakbox">'+S.inRow+' игры подряд! Бонус +5 звёзд. Брейни советует сделать перерыв: глазам и голове нужен отдых.</div>'}
+  const other=G.id==='odd'?'pattern':'odd',og=GAMES[other];
+  const otherWhy=other==='odd'?'Внимание проседает · важнее всего':'Логика · для разнообразия';
+  $('stage').innerHTML=
+    '<h2>Игра пройдена!</h2>'+
+    '<div class="grow"><div>'+brainy(before,'gb',S.acc)+'</div><span class="plus">→</span><div>'+brainy(NOW,'ga',S.acc)+'</div></div>'+
+    '<p><span class="pill star">'+STAR+'+'+G.earned+' звёзд</span> <span class="chip mint" style="font-size:13px">'+g.gainT+'</span></p>'+bonus+
+    '<h3>Что дальше?</h3>'+
+    '<div class="next">'+
+      '<button class="nextcard" data-go="'+other+':1"><div class="art t-'+og.t+'">'+icon(og.ic)+'</div><div><b>'+og.n+'</b><br><span class="why">'+otherWhy+'</span></div></button>'+
+      '<button class="nextcard" data-go="'+G.id+':'+(G.shown+1)+'"><div class="art t-'+g.t+'">'+icon(g.ic)+'</div><div><b>'+g.n+' · уровень '+(G.shown+1)+'</b><br><span class="muted small">Посложнее</span></div></button>'+
+    '</div>'+
+    '<button class="'+(S.inRow>=3?'btn':'link')+'" data-stop>'+(S.inRow>=3?'Сделать перерыв':'Хватит на сегодня')+'</button>';
+  refresh();renderLearn();
+}
+
+/* ================= BRAINY PAGE ================= */
+const PARTS=[['brain','Мозг','Логика, память'],['eyes','Глаза','Внимание и концентрация'],['mouth','Рот','Речь и чтение'],['arms','Руки','Моторика, ловкость'],['legs','Ноги','Реакция, координация']];
+const ACC=[
+  {id:'cowboy',n:'Ковбойская шляпа',slot:'head',p:120},{id:'cap',n:'Кепка',slot:'head',p:60},{id:'phones',n:'Наушники',slot:'head',p:90},
+  {id:'glasses',n:'Очки',slot:'face',p:80},{id:'bowtie',n:'Бабочка',slot:'neck',p:50},{id:'scarf',n:'Шарф',slot:'neck',p:70}
+];
+function drawBrainyPage(s){
+  const accNow=(s===NOW)?S.acc:{};
+  $('brainy-big').innerHTML=brainy(s,'big',accNow);
+  $('stats').innerHTML=PARTS.map(p=>'<div class="stat"><b>'+p[1]+'</b><div class="bar"><span style="width:'+Math.round(s[p[0]])+'%"></span></div><span class="num">'+Math.round(s[p[0]])+'</span><span class="src muted small">'+p[2]+'</span></div>').join('');
+  const st=stageInfo(s);
+  $('b-stage').textContent='Стадия: '+st.name;
+  $('b-next').textContent=st.next?'до «'+st.next+'» '+st.left+' очк.':'высшая стадия';
+  $('b-stages').innerHTML=stagesHTML(s);
+  const weakest=PARTS.slice().sort((a,b)=>s[a[0]]-s[b[0]])[0][0];
+  const lines={brain:'Мне бы подкачать мозги! Сыграем в «Продолжи узор»?',eyes:'Глаза слипаются… Сыграем в «Найди лишний»?',mouth:'Хочу красиво говорить. Сыграем в «Расскажи историю»?',arms:'Руки слабоваты. Давай в «Лабиринт-гонки»!',legs:'Ноги затекли! Побегаем в «Ракете-раннере»?'};
+  $('bubble').textContent=(s.arms>90&&s.brain<20)?'Смотри, какие мышцы! Только думать стало трудно… Подкачаем мозги?':lines[weakest];
+}
+function drawAcc(){
+  $('accgrid').innerHTML=ACC.map(a=>{
+    const own=S.owned.includes(a.id),on=S.acc[a.slot]===a.id,prev={};prev[a.slot]=a.id;
+    return '<div class="acc'+(on?' on':'')+'">'+brainy(NOW,'acc'+a.id,prev)+'<b class="small">'+a.n+'</b>'+
+      (own?'<button class="btn sm '+(on?'ghost':'')+'" data-acc="'+a.id+'">'+(on?'Снять':'Надеть')+'</button>':'<button class="btn sm coral" data-acc="'+a.id+'">'+a.p+' ★</button>')+'</div>';
+  }).join('');
+}
+$('accgrid').addEventListener('click',e=>{
+  const b=e.target.closest('[data-acc]');if(!b)return;const a=ACC.find(x=>x.id===b.dataset.acc);
+  if(!S.owned.includes(a.id)){
+    if(S.stars<a.p){toast('Не хватает '+(a.p-S.stars)+' звёзд');return}
+    S.stars-=a.p;S.owned.push(a.id);S.acc[a.slot]=a.id;toast('«'+a.n+'» куплена и надета!');
+  }else{S.acc[a.slot]=S.acc[a.slot]===a.id?null:a.id}
+  bigState=null;setScen('now');weeks.value=8;$('weeks-v').textContent=8;refresh();
+});
+const weeks=$('weeks');
+function setScen(k){document.querySelectorAll('[data-scen]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.scen===k))}
+weeks.addEventListener('input',()=>{$('weeks-v').textContent=weeks.value;setScen(null);const t=weeks.value/8;const r={};for(const k in START)r[k]=START[k]+(NOW[k]-START[k])*t;bigState=(t===1)?null:r;drawBrainyPage(bigState||NOW)});
+document.querySelectorAll('[data-scen]').forEach(b=>b.addEventListener('click',()=>{
+  const k=b.dataset.scen;setScen(k);weeks.value=k==='start'?0:8;$('weeks-v').textContent=weeks.value;
+  bigState=k==='start'?START:k==='fun'?FUN:null;drawBrainyPage(bigState||NOW);
+}));
+$('dock-brainy').addEventListener('click',()=>location.hash='#brainy');
+
+/* ================= TASKS (shared) ================= */
+const LIMIT=5;
+let tasks=[
+  {t:'15 минут логических игр',k:'app',s:15,sk:'Логика',st:'done'},
+  {t:'Убраться в комнате',k:'real',s:2,sk:'Ответственность',st:'check'},
+  {t:'Прочитать книжку перед сном',k:'real',s:3,sk:'Чтение',st:'todo'},
+  {t:'Поиграть на улице 30 минут',k:'real',s:1,sk:'Моторика',st:'todo'}
+];
+const cur=x=>x.k==='real'?SUN:STAR;
+let recs=[
+  {sk:'Внимание',v:41,avg:52,part:'Глаза Брейни',why:'Чаще всего бросает задания на внимание через 4–5 минут.',items:[{t:'Собрать пазл из 60 деталей вместе с вами',s:3,d:'20 мин'},{t:'Игра «Замри» на прогулке',s:1,d:'10 мин'}]},
+  {sk:'Делай сложное',v:35,avg:47,part:'Плащ героя',why:'На входе выбирает «другие игры» в 30% случаев.',items:[{t:'Слепить из пластилина фигурку, которую ещё не пробовал',s:2,d:'25 мин'}]},
+  {sk:'Чтение',v:48,avg:55,part:'Рот Брейни',why:'Растёт медленнее среднего: +8 за месяц при +12 у сверстников.',items:[{t:'Прочитать 5 вывесок по дороге домой',s:1,d:'10 мин'}]}
+];
+const STATUS={done:['mint','Выполнено'],check:['sun','Ждёт подтверждения'],todo:['','Назначено']};
+function taskHTML(x,i,side,isNew){
+  const s=STATUS[x.st];let act='';
+  if(side==='p'&&x.st==='check')act='<button class="btn sm" data-ok="'+i+'">Подтвердить</button>';
+  if(side==='c'&&x.st==='todo')act=x.k==='real'?'<button class="btn sm coral" data-did="'+i+'">Готово!</button>':'<span class="small muted">Засчитается само</span>';
+  return '<div class="task '+(x.st==='done'?'done ':'')+(isNew?'new':'')+'"><div class="ic '+(x.k==='app'?'t-sky':'t-orange')+'">'+icon(x.k==='app'?'tablet':'home','0 0 24 24')+'</div>'+
+    '<b>'+x.t+'</b><div class="foot"><span class="chip">'+x.sk+'</span><span class="reward">'+cur(x)+x.s+'</span><span class="chip '+s[0]+'">'+s[1]+'</span>'+act+'</div></div>';
+}
+function drawTasks(newIdx){
+  $('tlist').innerHTML=tasks.map((x,i)=>taskHTML(x,i,'p',i===newIdx)).join('');
+  $('c-tasks').innerHTML=tasks.map((x,i)=>taskHTML(x,i,'c')).join('');
+  $('lim-v').textContent=tasks.length;$('lim-bar').style.width=(tasks.length/LIMIT*100)+'%';
+}
+function drawRecs(){
+  const el=$('recs');
+  if(!recs.length){el.innerHTML='<p class="muted">Все рекомендации назначены. Новые появятся, когда обновятся статы Брейни.</p>';return}
+  el.innerHTML=recs.map((r,ri)=>'<div class="rec"><div class="row between"><b>'+r.sk+'</b><span class="chip coral">'+r.part+'</span></div>'+
+    '<div class="gauge"><span class="num" style="font-weight:700">'+r.v+'</span><div class="bar"><span style="width:'+r.v+'%"></span><em style="left:'+r.avg+'%"></em></div><span class="muted num">ср. '+r.avg+'</span></div>'+
+    '<p class="small muted">'+r.why+'</p>'+
+    r.items.map((it,ii)=>'<div class="rtask"><div><b style="font-size:14px">'+it.t+'</b><div class="small muted">'+it.d+' · '+it.s+' ☀</div></div><button class="btn sm coral" data-rec="'+ri+'-'+ii+'">Назначить</button></div>').join('')+'</div>').join('');
+}
+function addTask(x){if(tasks.length>=LIMIT){toast('Лимит 5 заданий в день, чтобы платформа не превращалась в контроль');return false}tasks.push(x);drawTasks(tasks.length-1);return true}
+function confirmTask(i){
+  const x=tasks[i];x.st='done';
+  if(x.k==='real'){S.suns+=x.s;const was=S.week;S.week+=x.s;NOW.resp=Math.min(100,NOW.resp+2);
+    if(was<S.goal.target&&S.week>=S.goal.target)setTimeout(()=>toast('Цель недели выполнена! Подарок: '+S.goal.prize),1500)}
+  else S.stars+=x.s;
+  drawTasks();refresh();
+  toast('Подтверждено: +'+x.s+(x.k==='real'?' ☀':' ★')+' и +Ответственность у Брейни');
+}
+$('tlist').addEventListener('click',e=>{const b=e.target.closest('[data-ok]');if(b)confirmTask(+b.dataset.ok)});
+$('c-tasks').addEventListener('click',e=>{const b=e.target.closest('[data-did]');if(!b)return;tasks[b.dataset.did].st='check';drawTasks();toast('Мама получит уведомление и подтвердит')});
+$('recs').addEventListener('click',e=>{
+  const b=e.target.closest('[data-rec]');if(!b)return;
+  const p=b.dataset.rec.split('-').map(Number),r=recs[p[0]],it=r.items[p[1]];
+  if(!addTask({t:it.t,k:'real',s:it.s,sk:r.sk,st:'todo'}))return;
+  r.items.splice(p[1],1);if(!r.items.length)recs.splice(p[0],1);drawRecs();toast('Задание назначено. Амир увидит его в «Подарках»');
+});
+const tKind=$('t-kind'),tRew=$('t-reward');
+tKind.addEventListener('change',()=>{const real=tKind.value==='real';$('t-reward-l').textContent=real?'Награда, солнышек':'Награда, звёзд';tRew.value=real?2:15});
+$('tform').addEventListener('submit',e=>{
+  e.preventDefault();const t=$('t-title').value.trim();if(!t)return;
+  if(addTask({t,k:tKind.value,s:+tRew.value||1,sk:$('t-skill').value,st:'todo'})){$('t-title').value='';toast('Задание назначено')}
+});
+$('tpl').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  tKind.value='real';$('t-reward-l').textContent='Награда, солнышек';
+  $('t-title').value=b.dataset.t;$('t-skill').value=b.dataset.s;tRew.value=b.dataset.r;$('t-title').focus();
+});
+
+/* ================= GIFTS & GOAL ================= */
+let gifts=[{n:'Поход в кино',p:10},{n:'Мороженое',p:3},{n:'Набор наклеек',p:2},{n:'Выбрать мультик на вечер',p:4},{n:'Парк аттракционов',p:15}];
+let reqs=[{n:'Набор наклеек',when:'вчера',st:'pending'}];
+function drawGifts(){
+  $('c-gifts').innerHTML=gifts.map((g,i)=>'<div class="gift"><div class="row" style="gap:10px"><span class="t-orange" style="width:38px;height:38px;border-radius:10px;display:grid;place-items:center"><svg viewBox="0 0 48 48" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">'+ICONS.gift+'</svg></span><div><b>'+g.n+'</b>'+(g.n===S.goal.prize?'<div class="small" style="color:var(--orange);font-weight:600">Приз за цель недели</div>':'')+'</div></div>'+
+    '<button class="btn sm'+(S.suns>=g.p?' coral':'')+'" data-gift="'+i+'"'+(S.suns>=g.p?'':' disabled')+'>'+g.p+' ☀</button></div>').join('');
+  $('p-gifts').innerHTML=gifts.map((g,i)=>'<div class="gift"><span><b>'+g.n+'</b> <span class="muted small">· '+g.p+' ☀</span></span><button class="btn sm ghost" data-del="'+i+'">Убрать</button></div>').join('');
+  $('g-prize').innerHTML=gifts.map(g=>'<option'+(g.n===S.goal.prize?' selected':'')+'>'+g.n+'</option>').join('');
+  $('p-reqs').innerHTML=reqs.length?reqs.map((r,i)=>'<div class="gift"><span><b>'+r.n+'</b><br><span class="small muted">'+r.when+'</span></span>'+(r.st==='pending'?'<button class="btn sm" data-give="'+i+'">Вручено</button>':'<span class="chip mint">Вручено</span>')+'</div>').join(''):'<p class="muted small">Пока запросов нет.</p>';
+}
+$('c-gifts').addEventListener('click',e=>{
+  const b=e.target.closest('[data-gift]');if(!b)return;const g=gifts[b.dataset.gift];
+  if(S.suns<g.p)return;S.suns-=g.p;reqs.unshift({n:g.n,when:'только что',st:'pending'});drawGifts();refresh();toast('Ура! Мама получит запрос и вручит «'+g.n+'»');
+});
+$('exchange').addEventListener('click',()=>{if(S.suns<1){toast('Нет солнышек для обмена');return}S.suns--;S.stars+=10;drawGifts();refresh();toast('1 солнышко обменяно на 10 звёзд')});
+$('p-gifts').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(!b)return;const g=gifts.splice(+b.dataset.del,1)[0];if(g.n===S.goal.prize&&gifts[0])S.goal.prize=gifts[0].n;drawGifts();refresh();toast('Подарок убран')});
+$('p-reqs').addEventListener('click',e=>{const b=e.target.closest('[data-give]');if(!b)return;reqs[b.dataset.give].st='done';drawGifts();toast('Отмечено как вручено')});
+$('giftform').addEventListener('submit',e=>{e.preventDefault();const n=$('gf-name').value.trim();if(!n)return;gifts.push({n,p:+$('gf-price').value||1});$('gf-name').value='';drawGifts();toast('Подарок добавлен. Амир увидит его в своём магазине')});
+$('gform').addEventListener('submit',e=>{e.preventDefault();S.goal.target=Math.max(1,+$('g-target').value||10);S.goal.prize=$('g-prize').value;drawGifts();refresh();toast('Цель недели сохранена')});
+
+/* ================= PARENT CHARTS ================= */
+function radar(svg,labels,series,avgv){
+  const cx=210,cy=170,R=112,n=labels.length,pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/n;return [cx+Math.cos(a)*R*v/100,cy+Math.sin(a)*R*v/100]};
+  let o='';
+  [25,50,75,100].forEach(l=>{o+='<polygon points="'+labels.map((_,i)=>pt(i,l).join(',')).join(' ')+'" fill="none" style="stroke:var(--line)"/>'});
+  labels.forEach((_,i)=>{const p=pt(i,100);o+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" style="stroke:var(--line)"/>'});
+  if(avgv)o+='<polygon points="'+avgv.map((v,i)=>pt(i,v).join(',')).join(' ')+'" fill="none" style="stroke:var(--muted)" stroke-width="1.5" stroke-dasharray="5 4"/>';
+  series.forEach(s=>{o+='<polygon points="'+s.v.map((v,i)=>pt(i,v).join(',')).join(' ')+'" style="fill:'+s.c+';stroke:'+s.c+'" fill-opacity="'+s.fo+'" stroke-width="2.5" stroke-linejoin="round"/>'});
+  const last=series[series.length-1];
+  last.v.forEach((v,i)=>{const p=pt(i,v);o+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4" style="fill:'+last.c+'"/>'});
+  labels.forEach((l,i)=>{const a=-Math.PI/2+i*2*Math.PI/n,x=cx+Math.cos(a)*(R+18),y=cy+Math.sin(a)*(R+18)+4,anc=Math.abs(Math.cos(a))<.2?'middle':Math.cos(a)>0?'start':'end';
+    o+='<text x="'+x+'" y="'+(y-6)+'" text-anchor="'+anc+'" class="lab">'+l+'</text><text x="'+x+'" y="'+(y+9)+'" text-anchor="'+anc+'">'+last.v[i]+'</text>'});
+  svg.innerHTML=o;
+}
+radar($('radar6'),['Речь','Чтение','Логика','Внимание','Память','Моторика'],[{v:[50,40,60,30,52,58],c:'var(--sky)',fo:.12},{v:[62,48,78,41,55,70],c:'var(--coral)',fo:.22}],[55,55,58,52,56,60]);
+radar($('radar5'),['Долгая игра','Машина обучения','Делай сложное','Учусь на ошибках','Ответственность'],[{v:[50,60,25,52,66],c:'var(--sky)',fo:.12},{v:[58,72,35,64,80],c:'var(--mint)',fo:.22}]);
+function bars(svg,cats,stacks,max,ticks,f){
+  const L=38,T=12,W=440-L-10,H=230-T-30,bw=W/cats.length;let o='';
+  ticks.forEach(t=>{const y=T+H-H*t/max;o+='<line x1="'+L+'" x2="'+(L+W)+'" y1="'+y+'" y2="'+y+'" style="stroke:var(--line)"/><text x="'+(L-8)+'" y="'+(y+4)+'" text-anchor="end">'+f(t)+'</text>'});
+  cats.forEach((c,i)=>{let base=T+H;const x=L+i*bw+bw*.22,w=bw*.56;
+    stacks.forEach((s,si)=>{const h=H*s.v[i]/max;base-=h;o+='<rect x="'+x+'" y="'+base+'" width="'+w+'" height="'+Math.max(h-(si<stacks.length-1?2:0),0)+'" rx="4" style="fill:'+s.c+'"/>'});
+    o+='<text x="'+(x+w/2)+'" y="'+(T+H+18)+'" text-anchor="middle">'+c+'</text>';
+    if(stacks.length===1)o+='<text x="'+(x+w/2)+'" y="'+(base-6)+'" text-anchor="middle" class="lab">'+f(stacks[0].v[i])+'</text>'});
+  svg.innerHTML=o;
+}
+bars($('week'),['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],[{v:[25,30,18,35,28,40,32],c:'var(--coral)'},{v:[10,0,12,0,15,24,20],c:'var(--mint)'},{v:[12,18,8,16,12,20,16],c:'var(--sun)'}],100,[0,25,50,75,100],v=>v);
+bars($('fork-chart'),['1 нед','2','3','4','5','6','7','8'],[{v:[40,45,48,52,55,60,66,70],c:'var(--mint)'}],100,[0,50,100],v=>v+'%');
+
+const LB={
+  rayon:{growth:{s:'3-е место по росту из 312 детей района · топ-1%',rows:[[1,'Сафия Н.','+64%'],[2,'Тимур С.','+51%'],[3,'Амир Б.','+43%',1],[4,'Алия К.','+39%'],[5,'Ерасыл М.','+35%']]},abs:{s:'14-е место из 312 · топ-5% района',rows:[[12,'Алия К.','2 140'],[13,'Тимур С.','2 105'],[14,'Амир Б.','2 090',1],[15,'Милана Ж.','2 050'],[16,'Даниял О.','2 010']]}},
+  city:{growth:{s:'41-е место по росту из 4 820 · топ-1%',rows:[[39,'Аружан Т.','+45%'],[40,'Мирас К.','+44%'],[41,'Амир Б.','+43%',1],[42,'Айлин Р.','+43%'],[43,'Нурали С.','+42%']]},abs:{s:'187-е место из 4 820 · топ-4%',rows:[[185,'Дана Е.','2 101'],[186,'Арсен Г.','2 095'],[187,'Амир Б.','2 090',1],[188,'Камила У.','2 088'],[189,'Ильяс Б.','2 080']]}},
+  country:{growth:{s:'266-е место по росту из 38 150 · топ-1%',rows:[[264,'Томирис А.','+43%'],[265,'Алан Ж.','+43%'],[266,'Амир Б.','+43%',1],[267,'Асель Д.','+42%'],[268,'Бексултан Н.','+42%']]},abs:{s:'1 204-е место из 38 150 · топ-4%',rows:[[1202,'Жансая О.','2 092'],[1203,'Ринат Л.','2 091'],[1204,'Амир Б.','2 090',1],[1205,'Ая М.','2 089'],[1206,'Олжас Т.','2 087']]}}
+};
+let lbS='rayon',lbM='growth';
+function drawLB(){const d=LB[lbS][lbM];$('lb-sum').textContent=d.s;
+  $('lb-table').innerHTML=d.rows.map(r=>'<tr class="'+(r[3]?'me':'')+'"><td style="width:60px" class="num">'+r[0].toLocaleString('ru-RU')+'</td><td>'+r[1]+'</td><td class="r num">'+r[2]+(lbM==='abs'?' ★':'')+'</td></tr>').join('')}
+function group(id,attr,cb){const g=$(id);g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));cb(b.dataset[attr])})}
+group('lb-scope','s',v=>{lbS=v;drawLB()});group('lb-mode','m',v=>{lbM=v;drawLB()});drawLB();
+$('share-btn').addEventListener('click',()=>toast('Карточка готова для сторис. В продукте откроется меню «Поделиться»'));
+
+/* ================= ROUTER ================= */
+const VIEWS=['learn','leisure','gifts','brainy','game','parent','tasks','rewards'];
+const PARENT=['parent','tasks','rewards'];
+function route(){
+  let v=(location.hash||'').slice(1);if(v==='games')v='learn';if(!VIEWS.includes(v))v='learn';
+  VIEWS.forEach(x=>$('v-'+x).hidden=x!==v);
+  const parent=PARENT.includes(v);
+  $('m-child').setAttribute('aria-pressed',!parent);$('m-parent').setAttribute('aria-pressed',parent);
+  $('tabs-child').hidden=parent;$('tabs-parent').hidden=!parent;
+  $('dock').hidden=parent||v==='game'||v==='brainy';
+  document.querySelectorAll('.tabs a').forEach(a=>a.classList.toggle('on',a.dataset.v===v));
+  if(v==='game'&&!G)startGame('odd',1);
+  if(v==='gifts')drawGifts();
+  window.scrollTo(0,0);
+}
+$('m-child').addEventListener('click',()=>{location.hash='#learn';openEntry()});
+$('m-parent').addEventListener('click',()=>{closeEntry();location.hash='#parent'});
+window.addEventListener('hashchange',route);
+
+renderLearn();renderLeisure();drawTasks();drawRecs();drawGifts();refresh();route();
+if(!PARENT.includes((location.hash||'').slice(1)))openEntry();
+})();
+</script>
+
+</body></html>

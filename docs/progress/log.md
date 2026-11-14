@@ -1,0 +1,28 @@
+# Log
+
+Append-only, **newest first**. One entry per session, 2–5 lines. Reference task IDs.
+
+---
+
+## 2026-11-14 (6)
+- Analyzed `../game-store-planning`: a tested any-engine bridge, engine kits, build pipeline and WebKit e2e already exist. Decided to port them instead of our drafted protocol (D-12).
+- Removed from the plan: the `apps/game-lab` app (→ `/lab`), the `git` import source + `adapter.js`, the generated registry, the subdomain task T-86. Updated T-16, T-19, T-29, T-85.
+
+## 2026-11-14 (5)
+- Games now support any engine: React runtime + embedded runtime (same-origin iframe + `game-bridge` postMessage SDK); sources workspace / export / git with pinned SHA and `adapter.js` (D-11, T-19, T-29, T-85, T-86).
+
+## 2026-11-14 (4)
+- Compared game packaging (folders vs. per-game packages vs. iframes); chose self-contained folders + lazy registry, with promotion and iframe-adapter triggers (D-10, T-28, T-85).
+
+## 2026-11-14 (3)
+- Reviewed the product, planned stack and roadmap; identified follow-ups for demo scope, data integrity, security, scoring and device validation (T-80 – T-84).
+
+## 2026-11-14 (2)
+- Switched to local-first: SQLite/libSQL + Drizzle, `public/media`, single Railway container, demo session (D-05 – D-07).
+- Added the game contract, `apps/game-lab` and `pnpm gen:game` → `docs/dev/games.md` (D-08); new tasks T-16 – T-18 and T-28.
+- Reviewed agent skills and MCP servers → `docs/dev/agent-tooling.md` (D-09).
+
+## 2026-11-14
+- Analyzed the PRD (24 pp) and HTML prototype (T-01). No code exists yet.
+- Picked the stack: pnpm + Turborepo, Next.js, Drizzle + Postgres, Better Auth, SSE (T-02, D-01 – D-04).
+- Created the docs: README (summary + links), AGENTS.md (canonical) with CLAUDE.md and GEMINI.md importing it, `docs/product` (condensed PRD), `docs/dev`, `docs/progress`, and the prototype line map (T-03 – T-05).
