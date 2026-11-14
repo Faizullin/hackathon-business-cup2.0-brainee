@@ -215,3 +215,29 @@ it("counts only assigned real tasks, pending confirmations and undelivered gifts
     parentRewards: 0,
   });
 });
+
+it("validates a parent-only family plan without changing rewards or stats", () => {
+  const answers = {
+    goal: "ending",
+    age: "6-7",
+    duration: "one",
+    content: "kids",
+    finish: "switch",
+    handoff: "bargain",
+    reading: "together",
+    attempt: "timer",
+    moment: "afternoon",
+  };
+  expect(PARENT_ACTIONS.has("family-plan")).toBe(true);
+  const result = applyShowcaseAction(input(), { type: "family-plan", answers });
+  expect(result).toMatchObject({
+    ok: true,
+    showcase: { familyPlan: answers },
+    wallet: input().wallet,
+    gains: {},
+  });
+  expect(input().showcase.familyPlan).toBeUndefined();
+  expect(
+    applyShowcaseAction(input(), { type: "family-plan", answers: { ...answers, age: "outside" } }),
+  ).toEqual({ ok: false, reason: "invalid-input" });
+});

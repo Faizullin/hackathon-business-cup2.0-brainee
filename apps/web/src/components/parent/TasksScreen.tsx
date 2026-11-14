@@ -1,6 +1,6 @@
 "use client";
 
-import { TASKS_PER_DAY, type TaskPlace } from "@brainee/core";
+import { familyTaskTemplate, planFor, TASKS_PER_DAY, type TaskPlace } from "@brainee/core";
 import { cn } from "@brainee/ui/lib/utils";
 import { type FormEvent, useState } from "react";
 import { useLearning } from "@/components/child/LearningProvider";
@@ -13,6 +13,7 @@ import {
   primaryButton,
   useAct,
 } from "@/components/demo/kit";
+import { familyPlanCopy } from "@/components/family-plan/copy";
 import { useI18n } from "@/i18n";
 
 const input = "min-h-11 w-full rounded-xl border border-border bg-background px-3 text-base";
@@ -30,6 +31,9 @@ export function TasksScreen() {
   if (!snapshot) return null;
   const { tasks, templates, recommendations, taskHistory = [] } = snapshot.showcase;
   const full = tasks.length >= TASKS_PER_DAY;
+  const familyTask = snapshot.showcase.familyPlan
+    ? familyTaskTemplate(snapshot.showcase.familyPlan)
+    : null;
   const submit = async (event: FormEvent) => {
     event.preventDefault();
     if (await run({ type: "task-add", title, place, skill, reward })) setTitle("");
@@ -113,6 +117,31 @@ export function TasksScreen() {
           </ul>
         </Panel>
         <Panel title={t.form}>
+          {familyTask && (
+            <aside
+              data-testid="family-task-template"
+              className="space-y-2 rounded-panel bg-highlight-wash p-4"
+            >
+              <h3 className="font-semibold">{familyPlanCopy.template}</h3>
+              <p className="text-sm">
+                {snapshot.showcase.familyPlan &&
+                  planFor(snapshot.showcase.familyPlan)?.steps[3]?.body}
+              </p>
+              <p className="text-sm text-muted-foreground">{familyPlanCopy.templateNote}</p>
+              <button
+                type="button"
+                className={outlineButton}
+                onClick={() => {
+                  setTitle(familyTask.title);
+                  setPlace(familyTask.place);
+                  setSkill(familyTask.skill);
+                  setReward(familyTask.reward);
+                }}
+              >
+                {familyPlanCopy.useTemplate}
+              </button>
+            </aside>
+          )}
           <form onSubmit={submit} className="flex flex-col gap-3">
             <label className="flex flex-col gap-1 text-sm font-medium">
               {t.what}

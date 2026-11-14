@@ -197,6 +197,7 @@ export async function signupFromQuiz(
       childId,
       data: {
         ...advanceCalendar(personalShowcase(input.childName, start), now).showcase,
+        ...(isFunnelAnswers(input.funnel) ? { familyPlan: input.funnel } : {}),
         calendar: {
           timeZone: signupTimeZone(input.timeZone),
           ...calendarKeys(now, signupTimeZone(input.timeZone)),

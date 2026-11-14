@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · T-136 family plan
+Saved validated funnel answers as showcase JSON, added the parent plan/edit/export card, stopping phrase and opt-in real-task template. Check/test/build pass; 24 existing and four final family-plan browser cases pass. Phone/iPad plan, task and stopping screenshots reviewed. The initial four failures were an English-test/Russian-helper mismatch, now fixed.
+
 ## 2026-11-15 · T-135 parent funnel
 Added the 25-step parent flow, early age gate, local resume/migration, browser Back, isolated tours, pending pricing and validated funnel signup into setup. Retired the child quiz. Check/test/build pass; 32 browser cases plus 20 final layout cases pass on both engines/sizes; screenshots reviewed. Corrected the stale jury discovery assertion to Path.
 

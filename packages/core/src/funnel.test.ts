@@ -138,3 +138,25 @@ describe("funnel rules", () => {
     expect(() => funnelBirthYears("4-5", Number.NaN)).toThrow(RangeError);
   });
 });
+
+it("suggests an off-screen task without issuing a reward", async () => {
+  const { familyTaskTemplate } = await import("./funnel");
+  const valid = {
+    goal: "ending",
+    age: "6-7",
+    duration: "one",
+    content: "kids",
+    finish: "switch",
+    handoff: "bargain",
+    reading: "together",
+    attempt: "timer",
+    moment: "afternoon",
+  };
+  expect(familyTaskTemplate(valid)).toEqual({
+    title: "Share a picture book after putting the screen away",
+    place: "real",
+    skill: "Reading",
+    reward: 1,
+  });
+  expect(familyTaskTemplate({})).toBeNull();
+});

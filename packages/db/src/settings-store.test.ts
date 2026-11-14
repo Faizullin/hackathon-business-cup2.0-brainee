@@ -167,5 +167,6 @@ it("validates funnel answers and the exact age before converting the quiz start"
   const access = await signupFromQuiz(f.db, input, now);
   const state = await getStateSnapshot(f.db, demoTokenHash(access.token) as string, now);
   expect(state.progress.stats).toEqual(quizStart(funnelQuizAnswers(funnel)).stats);
+  expect(state.showcase.familyPlan).toEqual(funnel);
   expect(state.progress.wallet).toEqual({ stars: 50, suns: 0 });
 });

@@ -10,6 +10,7 @@ import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
 import { StopLearningButton } from "@/components/child/StopLearningButton";
+import { StoppingPhrase } from "@/components/family-plan/StoppingPhrase";
 import { RewardFlight } from "@/components/RewardFlight";
 import { useI18n } from "@/i18n";
 
@@ -115,6 +116,7 @@ export function PostGameScreen({
           className="flex flex-col items-center gap-3 lg:col-start-2 rounded-panel border border-mint bg-mint/10 p-4 text-center"
         >
           <h2 className="font-heading font-semibold">{t.breakTitle}</h2>
+          <StoppingPhrase />
           {completion.bonus > 0 && <p data-testid="streak-bonus">{t.bonus(completion.bonus)}</p>}
           <StopLearningButton href="/brainy" variant="default">
             {t.breakAction}
@@ -153,7 +155,10 @@ export function PostGameScreen({
           </Link>
         </div>
       </section>
-      <StopLearningButton href="/brainy">{t.enough}</StopLearningButton>
+      <div className="flex flex-col gap-3">
+        <StoppingPhrase />
+        <StopLearningButton href="/brainy">{t.enough}</StopLearningButton>
+      </div>
     </section>
   );
 }

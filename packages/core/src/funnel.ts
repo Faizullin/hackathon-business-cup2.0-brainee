@@ -604,3 +604,21 @@ export function funnelBirthYears(
   const band = Object.hasOwn(bands, age) ? bands[age] : undefined;
   return band ? { min: currentYear - band[1], max: currentYear - band[0] } : null;
 }
+
+/** A suggested real task only; adding and approving it still use the ordinary task rules. */
+export function familyTaskTemplate(answers: FunnelDraft) {
+  if (!isFunnelAnswers(answers)) return null;
+  const titles: Record<string, string> = {
+    alone: "Read a page after putting the screen away",
+    both: "Choose a page to read together after screen time",
+    together: "Share a picture book after putting the screen away",
+    early: "Look at a picture book together after screen time",
+    rare: "Choose a book to explore together after screen time",
+  };
+  return {
+    title: titles[answers.reading] as string,
+    skill: "Reading",
+    reward: 1,
+    place: "real" as const,
+  };
+}

@@ -9,6 +9,7 @@ import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
 import { childDesignCopy } from "@/components/child/redesign-copy";
 import { Chip, Meter, outlineButton, Panel, primaryButton } from "@/components/demo/kit";
+import { FamilyPlanCard } from "@/components/family-plan/FamilyPlanCard";
 import { useI18n } from "@/i18n";
 import { Bars, Legend, Radar } from "./charts";
 
@@ -82,6 +83,7 @@ export function AnalyticsScreen() {
         <Chip tone="sun">{t.demoNote}</Chip>
       </div>
 
+      <FamilyPlanCard />
       {attention.length > 0 && (
         <section
           data-testid="needs-attention"

@@ -13,6 +13,7 @@ import {
 } from "./accessories";
 import type { ArchivedTask, FamilyCalendar } from "./calendar";
 import { buyGift, exchangeSuns } from "./economy";
+import { type FunnelAnswers, isFunnelAnswers } from "./funnel";
 import type { Ability, Wallet } from "./types";
 
 export const TASKS_PER_DAY = 5;
@@ -127,6 +128,7 @@ export type Analytics = {
 };
 
 export type Showcase = {
+  familyPlan?: FunnelAnswers;
   childPromise?: number;
   calendar?: FamilyCalendar;
   taskHistory?: ArchivedTask[];
@@ -161,6 +163,7 @@ export type ShowcaseAction =
   | { type: "video-answer"; id: string; answer: number }
   | { type: "entry-choice"; took: boolean }
   // Parent-only actions:
+  | { type: "family-plan"; answers: FunnelAnswers }
   | { type: "task-confirm"; taskId: string }
   | { type: "task-cancel"; taskId: string }
   | {
@@ -177,6 +180,7 @@ export type ShowcaseAction =
   | { type: "goal-set"; target: number; giftId: string };
 
 export const PARENT_ACTIONS = new Set<ShowcaseAction["type"]>([
+  "family-plan",
   "task-confirm",
   "task-cancel",
   "task-add",
@@ -213,6 +217,10 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
   const ok = (next: Wallet = wallet, gains: { eyes?: number; resp?: number } = {}) =>
     ({ ok: true, showcase: s, wallet: next, gains }) as const;
   switch (action.type) {
+    case "family-plan":
+      if (!isFunnelAnswers(action.answers)) return fail("invalid-input");
+      s.familyPlan = structuredClone(action.answers);
+      return ok();
     case "buy-accessory": {
       const result = buyAccessory(wallet, s.owned, action.id);
       if (!result.ok) return fail(result.reason);
