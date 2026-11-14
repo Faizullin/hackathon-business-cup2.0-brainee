@@ -2,6 +2,20 @@
 
 Task IDs are stable; reference them in commits and in the log. Tick `[x]` when done, and add `(@who)` while working on something. Specs are linked, not copied.
 
+## Smallest end-to-end demo slice (T-80)
+**Proof:** the child opens Learn, finishes a game, sees ★ and Brainy change, then the parent sees the same saved result on another device without reloading. Use one seeded family and two React games; no onboarding or shopping is needed.
+
+**Exact task scope:**
+- Completed foundations: T-10, T-11, T-12, T-13, T-15, T-16, T-20, T-21, T-23, T-28, T-30, T-33.
+- Child flow: T-34 (second game) and T-35 (before/after, next choices, stop and three-game break).
+- Shared data: T-50 (Parent/BrainyState/Game/GameSession + existing wallet slice), T-51 (one deterministic demo scenario), T-52 (seeded family session), T-54 (finish → core → atomic DB write), T-81 (validate and deduplicate finishes), T-55 (versioned state polling on both devices).
+- Parent proof: T-40 (PIN barrier) and T-41 (Brainy, balance and latest completed game).
+- Verification/demo: T-70 (this slice's Playwright checks) and T-71 (two-device walkthrough).
+
+**Done when:** one finish updates balance/stats once, retrying it pays nothing twice, both devices converge through polling, and the third game offers a break with exactly one bonus. Refresh restores server state. This session builds the client preview; it does not satisfy the saved/two-device part yet. Slice-only work does not complete broader tasks such as all T-41 analytics or all T-50 entities.
+
+Other task IDs stay outside this slice. T-24/T-25 can follow as pure core improvements; entry flow, tasks/gifts, leisure, advanced analytics, embedded games and motion polish wait. Deployment remains the final task (T-14).
+
 ## P0 · Docs & planning
 - [x] T-01 Analyze the PRD and prototype
 - [x] T-02 Pick the stack and monorepo layout → [decisions.md](../dev/decisions.md)
@@ -75,7 +89,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - [ ] T-14 **Final step: deploy (free tiers only)**: Vercel Hobby project for `apps/web` (monorepo root dir, `<project>.vercel.app`); Turso free database; extend `getDatabaseConfig`/`openDatabase` for `libsql://` + `DATABASE_AUTH_TOKEN`; `db:push` + seed against Turso; run the e2e suite against the deployed URL → [D-15](../dev/decisions.md)
 
 ## Backlog / ideas
-- [ ] T-80 Define a smallest end-to-end demo slice and prioritize it ahead of optional features.
+- [x] T-80 Define a smallest end-to-end demo slice and prioritize it ahead of optional features → [scope above](#smallest-end-to-end-demo-slice-t-80).
 - [ ] T-81 Specify server-side result validation, idempotency and atomic wallet/task updates.
 - [ ] T-82 Define demo versus production boundaries for sessions, parent PIN, child data and backups.
 - [ ] T-83 Resolve reward incentives and clarify the evidence and labels for skill scores, age averages and seeded rankings.
