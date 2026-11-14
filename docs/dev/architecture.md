@@ -1,6 +1,6 @@
 # Architecture
 
-> **Status: foundation scaffolded (T-10).** pnpm workspaces, Turborepo, shared config and an empty source-exported `core` package exist. The rest of this layout is planned. When reality differs from this file, update this file. The reasoning behind each choice is in [decisions.md](decisions.md).
+> **Status: app scaffolded (T-10/T-11).** Workspace config, the Next.js app, prototype tokens in `ui`, and an empty source-exported `core` exist. Other packages and product features are planned. When reality differs from this file, update this file. The reasoning behind each choice is in [decisions.md](decisions.md).
 
 **Guiding principle: local-first, zero infrastructure.** One SQLite file, media in the repo, one Node process. Clone → `pnpm dev` works with no accounts, Docker or cloud services.
 
@@ -34,14 +34,19 @@ Dependency direction (no cycles): `core` ← `brainy`, `games`, `db` ← `ui` �
 ### `apps/web` routes
 One app, so child and parent share the session, the domain and a live Brainy.
 ```
-app/
-├─ (child)/      learn, leisure, gifts, brainy, game/[id], entry
-├─ (parent)/     analytics, tasks, rewards   ← behind the parent-barrier middleware
-├─ (auth)/       demo login, quiz, onboarding
-├─ lab/          dev-only game lab + event stream panel
-├─ api/          route handlers + /api/stream (SSE)
-└─ public/media/ seed videos, images, game assets (served from our domain)
+apps/web/
+├─ src/app/
+│  ├─ layout.tsx, page.tsx    # Shared root shell; / redirects to /learn
+│  ├─ (child)/learn/          # Starter page; other child routes planned
+│  ├─ (parent)/analytics/     # Starter page; barrier, data and other parent routes planned
+│  ├─ (auth)/login/           # Welcome page; sessions, quiz and onboarding planned
+│  ├─ lab/                   # Planned: dev-only game lab + event stream
+│  └─ api/                   # Planned: route handlers + /api/stream (SSE)
+├─ public/media/             # Planned: own-domain media
+└─ e2e/                      # Scaffold smoke tests (Chromium + WebKit)
 ```
+
+Each route group has its own nested layout. Parent routes currently contain a placeholder only, with no family data or actions; the parent barrier (T-40) and session handling (T-52) must land before either is added. `/lab` remains T-16.
 
 ## Package responsibilities
 

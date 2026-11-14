@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Token values will live in packages/ui (T-12), using the prototype as the source. */
+/* Token values live in packages/ui, using the prototype as the source. */
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);

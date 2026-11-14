@@ -11,7 +11,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 
 ## P1 · Scaffold monorepo
 - [x] T-10 pnpm workspaces + Turborepo + `packages/config` (tsconfig, Biome, Tailwind), JIT internal packages
-- [ ] T-11 `apps/web` Next.js 16 with `(child)`, `(parent)`, `(auth)` route groups
+- [x] T-11 `apps/web` Next.js 16 with `(child)`, `(parent)`, `(auth)` route groups
 - [ ] T-12 `packages/ui`: port tokens + fonts via `next/font` (prototype lines 7–285)
 - [ ] T-13 Empty `core`, `brainy`, `games`, `db` packages with Vitest; `db` on SQLite (`data/dev.db`) + `db:reset`
 - [ ] T-14 Deploy one container to Railway (volume for SQLite) on a custom domain → [setup.md](../dev/setup.md#deploy-demo)

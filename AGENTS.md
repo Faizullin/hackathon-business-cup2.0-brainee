@@ -35,11 +35,14 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 ## Commands
 
 - `pnpm install` — install the workspace using the pinned package manager and lockfile.
+- `pnpm dev` — start the Next.js web app at `http://localhost:3000`.
+- `pnpm build` / `pnpm start` — build and serve the production web app.
+- `pnpm e2e` — build, then run the scaffold smoke tests in Chromium and WebKit (phone + iPad widths).
 - `pnpm check` — Biome lint/format checks, then workspace TypeScript checks.
 - `pnpm typecheck` — workspace TypeScript checks through Turborepo.
 - `pnpm format` — format source and config files with Biome.
 
-The web app, database and game commands are still planned. See [docs/dev/setup.md](docs/dev/setup.md).
+Database and game commands are still planned. Browser installation and all commands are in [docs/dev/setup.md](docs/dev/setup.md).
 
 ## Conventions and tools
 

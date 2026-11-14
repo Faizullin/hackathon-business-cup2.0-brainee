@@ -1,6 +1,6 @@
 # Setup
 
-> **Status: foundation scaffolded (T-10).** The install and checks below work now. The web app, DB and game commands are planned and listed separately.
+> **Status: app scaffolded (T-10/T-11).** Install, development server, production build and browser smoke tests work. Database and game commands are planned and listed separately.
 
 ## Prerequisites
 - Node.js >= 22.13; `.nvmrc` selects Node 22.
@@ -10,37 +10,47 @@
 ## First run
 ```bash
 pnpm install
-pnpm check
+pnpm dev
 ```
 
 Available commands:
 
 | Command | Does |
 |---|---|
+| `pnpm dev` | Start the Next.js app at `http://localhost:3000` |
+| `pnpm build` | Build the production app through Turborepo |
+| `pnpm start` | Serve the built app at `http://localhost:3000` |
+| `pnpm e2e` | Build, then run Playwright against a production server on :3100 |
 | `pnpm check` | Biome lint + format checks, then workspace TypeScript checks |
 | `pnpm typecheck` | Run each package's `typecheck` through Turborepo |
 | `pnpm format` | Format source and config files; Markdown and frozen prototype sources are excluded |
 
-The web app does not exist yet, so there is no development server or runnable UI at this step.
+No environment variables or database are needed for the starter screens. `/` redirects to `/learn`; `/analytics` and `/login` exercise the parent and auth route groups. These are placeholders; sessions and the parent PIN are not implemented yet, and no family data is exposed.
+
+## Browser smoke tests
+Install browser binaries once, then run the spec:
+```bash
+pnpm --filter @brainee/web exec playwright install chromium webkit
+pnpm e2e
+```
+The suite checks routing, return links, Russian metadata/content, light/dark tokens, overflow, console errors and own-domain requests at 390px and 820px in both engines. It saves `/learn` screenshots in `apps/web/test-results/` (gitignored). WebKit emulation does not replace the real-device Screen Time check (T-62).
 
 ## Shared config and internal packages
-`packages/config` exports strict TypeScript presets (`base.json`, `react.json`, `nextjs.json`), the shared Biome config, and a Tailwind v4 CSS entry. The CSS maps utility names to the prototype's variables; token values and fonts belong in `packages/ui` (T-12). The Next.js app will add Tailwind's bundler integration in T-11/T-12.
+`packages/config` exports strict TypeScript presets (`base.json`, `react.json`, `nextjs.json`), the shared Biome config, and a Tailwind v4 CSS entry. The app uses the Tailwind PostCSS plugin; utility names map to the prototype variables in `packages/ui/src/tokens.css`. Fonts currently use local fallbacks; `next/font` integration and shared components remain T-12.
 
-Internal packages use the `@brainee/*` scope and `workspace:*` references. `@brainee/core` is the first empty example: its package exports point directly at `src/index.ts`, with no `dist/` or build script. Its TypeScript config extends `@brainee/config/tsconfig/base.json`. Future apps must transpile these source exports with their bundler.
+Internal packages use the `@brainee/*` scope and `workspace:*` references. `@brainee/core` is the first empty example: its package exports point directly at `src/index.ts`, with no `dist/` or build script. Its TypeScript config extends `@brainee/config/tsconfig/base.json`. The web app configures workspace packages in `transpilePackages`.
 
-Workspace globs already include `apps/*`, `packages/*` and `games/*`. Apps and embedded-game packages will be added in their own tasks; the updated `/lab` and bridge design is in [games.md](games.md).
+Workspace globs include `apps/*`, `packages/*` and `games/*`. Embedded-game packages will be added in their own tasks; the `/lab` and bridge design is in [games.md](games.md).
 
-## Application first run (planned, T-11 – T-13)
+## Database first run (planned, T-13)
 ```bash
 cp apps/web/.env.example apps/web/.env.local   # defaults work as-is
 pnpm db:reset       # create data/dev.db, push schema, seed the demo family
-pnpm dev            # web on http://localhost:3000
 ```
 
 ## Scripts (planned, via Turborepo)
 | Command | Does |
 |---|---|
-| `pnpm dev` | Run web (+ landing) in watch mode; game lab at `/lab` |
 | `pnpm gen:game` | Scaffold a new game (react or embedded) + register it |
 | `pnpm games:build` | Build `bridge.js` + every embedded game, replace `public/games/<id>/` ([games.md](games.md)) |
 | `pnpm test:assets` | Check every built game's referenced files exist |
@@ -48,9 +58,9 @@ pnpm dev            # web on http://localhost:3000
 | `pnpm db:seed` | Seed the demo family + scenarios "после квиза / сейчас / только развлечения" |
 | `pnpm db:reset` | Delete the DB file → push → seed (use freely; data is disposable) |
 | `pnpm db:studio` | Drizzle Studio: browse and edit local data |
-| `pnpm test` / `pnpm e2e` | Vitest / Playwright (Chromium + WebKit; run `games:build` first) |
+| `pnpm test` | Vitest unit tests (T-13); extend `pnpm e2e` with game tests after `games:build` exists |
 
-> Next.js 16 `next dev` writes a "This is NOT the Next.js you know" rules block into an `AGENTS.md` (seen in game-store-planning). Commit it, and read the docs it points to (`node_modules/next/dist/docs/`) before using Next APIs.
+Next.js ships version-matched docs at `apps/web/node_modules/next/dist/docs/`; read the relevant pages before using Next APIs. `next typegen` runs before TypeScript checks, so a clean checkout needs no previous build. `next-env.d.ts` and `.next/` are generated and ignored. If Next adds agent instructions, retain them alongside the project instructions.
 
 ## Environment variables (planned)
 | Var | Default | Notes |

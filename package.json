@@ -7,6 +7,10 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "pnpm --filter @brainee/web start",
+    "e2e": "pnpm build && pnpm --filter @brainee/web e2e",
     "check": "biome check . && pnpm typecheck",
     "format": "biome format --write .",
     "typecheck": "turbo run typecheck"

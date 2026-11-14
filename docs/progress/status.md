@@ -20,10 +20,10 @@
 Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 
 ## Current focus
-Workspace foundation is ready (T-10). Next: scaffold `apps/web` with the planned Next.js route groups (T-11), following [architecture.md](../dev/architecture.md).
+The Next.js app scaffold is ready (T-11). Next: finish `packages/ui` and self-hosted fonts (T-12), following [architecture.md](../dev/architecture.md).
 
 ## Handoff
-- **Last session:** completed T-10 and T-15: pinned pnpm workspace + lockfile, Turborepo tasks, shared TypeScript/Biome/Tailwind config, and an empty `@brainee/core` package exporting TS source. Preserved the updated game plan (D-12). Install and lint/type checks pass.
-- **Next:** T-11 → T-12 → finish T-13 (the `core` source stub exists; the remaining packages, Vitest and SQLite do not). Then implement `/lab` and port the game pipeline as planned.
+- **Last session:** completed T-11: Next.js 16.4.6 + React 19.3.1, nested child/parent/auth layouts, starter `/learn`, `/analytics`, `/login`, root redirect and Russian 404. Added the Tailwind PostCSS integration and prototype tokens in `packages/ui`; fonts/components remain T-12. Production build and all 16 Playwright checks pass in Chromium + WebKit at phone/iPad widths; inspected WebKit screenshots. In-app browser unavailable; used the Playwright suite for rendering checks.
+- **Next:** finish T-12 → finish T-13 (the `core` source stub exists; `brainy`, `games`, `db`, Vitest and SQLite do not). Then implement `/lab` and port the game pipeline as planned. Parent auth/barrier is still pending T-40/T-52; keep family data/actions out of the placeholder until then.
 - **Blockers / open questions:** none blocking the scaffold. Product TBDs remain in [overview.md](../product/overview.md#open-questions-tbd).
-- **Not committed:** scaffold files and this session's README, AGENTS and progress/setup/architecture changes. No commit or push was requested.
+- **Not committed:** this session's app, UI tokens, dependency/script changes and documentation. No commit or push was requested.

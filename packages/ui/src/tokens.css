@@ -1,0 +1,50 @@
+/* Prototype tokens. Fonts will be self-hosted via next/font in T-12. */
+:root {
+  color-scheme: light;
+  --bg: #f1f4fa;
+  --surface: #ffffff;
+  --surface-2: #e8edf7;
+  --ink: #1b1f3b;
+  --muted: #5d6485;
+  --line: #d8deec;
+  --coral: #ee5a4a;
+  --sun: #f2ae12;
+  --orange: #e5731a;
+  --mint: #139e80;
+  --sky: #3c68ee;
+  --font-d: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --font-b: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --r: 18px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #10121c;
+    --surface: #191c2a;
+    --surface-2: #222638;
+    --ink: #eceff8;
+    --muted: #9aa1bf;
+    --line: #2c3147;
+    --coral: #ff7868;
+    --sun: #ffc845;
+    --orange: #ff9a45;
+    --mint: #3bcda9;
+    --sky: #7a97ff;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #10121c;
+  --surface: #191c2a;
+  --surface-2: #222638;
+  --ink: #eceff8;
+  --muted: #9aa1bf;
+  --line: #2c3147;
+  --coral: #ff7868;
+  --sun: #ffc845;
+  --orange: #ff9a45;
+  --mint: #3bcda9;
+  --sky: #7a97ff;
+}

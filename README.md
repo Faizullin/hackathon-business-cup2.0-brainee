@@ -6,7 +6,7 @@ A web platform (PWA) for kids aged 4–10. The parent sets it up as the **only t
 - **Market:** CIS, Russian UI. Parents pay, kids use it.
 - **Context:** Business Cup 2.0 hackathon project.
 
-> **Status:** workspace foundation scaffolded (T-10); the Next.js app is next (T-11). See [progress/status.md](docs/progress/status.md).
+> **Status:** workspace + Next.js app scaffolded (T-10/T-11). Run `pnpm install && pnpm dev` for the starter screens. Shared UI/fonts are next (T-12). See [progress/status.md](docs/progress/status.md).
 
 ## Documentation
 

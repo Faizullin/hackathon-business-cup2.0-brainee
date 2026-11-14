@@ -3,4 +3,9 @@ packages:
   - packages/*
   - games/*
 
+minimumReleaseAgeExclude:
+  - "@playwright/test@1.65.1"
+  - playwright-core@1.65.1
+  - playwright@1.65.1
+
 saveExact: true
