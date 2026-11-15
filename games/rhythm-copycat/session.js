@@ -12,7 +12,7 @@ const session = {
   hadMistake: false,
   finished: false,
   started: performance.now(),
-  soundEnabled: false,
+  soundEnabled: true,
 };
 
 function mulberry32(seed) {
@@ -281,6 +281,14 @@ function checkSequence() {
     }, 1200);
   }
 }
+
+// Sound is on by default; browsers only allow audio after a gesture,
+// so unlock the AudioContext on the child's first touch or key press.
+const unlockOnGesture = () => {
+  if (session.soundEnabled) perc.unlock();
+};
+window.addEventListener("pointerdown", unlockOnGesture, { capture: true, once: true });
+window.addEventListener("keydown", unlockOnGesture, { capture: true, once: true });
 
 // Sound toggle
 if (soundBtn) {
