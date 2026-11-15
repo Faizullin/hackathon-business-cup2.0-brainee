@@ -190,6 +190,9 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-91 Remote iframe games on R2 (D-42): `pnpm games:publish` (folder/ZIP, SHA-256, immutable versions, enable/disable/rollback), same-origin `/g/<id>/<version>/` proxy with opaque `allow-scripts` sandbox, live catalog merged into Learn/Explore without a redeploy → [games.md](../dev/games.md#remote-games-r2)
 - [x] T-159 iPad surface scale (tablet type, rhythm, 48/56 px controls) and shared `GameCardMedia` 4:3 thumbnails with fallback → [ui.md](../dev/ui.md)
 
+- [x] T-160 First entry and sessions: no shared demo family without BRAINEE_SHARED_DEMO (D-43), logout → /login, saved generated logins, loading/error states, icon-only controls, shared player header
+- [x] T-161 Deployed game publishing (`--target deployed`: R2 + production games table) and isolated per-game tests (`pnpm test:game`, `pnpm test:games`)
+
 ## After the hackathon
 - [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
 - [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).

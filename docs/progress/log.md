@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · Merge F/F2 and G/G2; push and deploy
+Merged first-entry/session fixes (D-43, saved logins, loading states, icon controls, shared player header) and deployed publishing with isolated per-game tests (Tangram tap fix). No conflicts; check, 379 unit tests, build and test:games 20/20 pass. Pushed master; Vercel deploys from it. No schema change, so no production DB migration.
+
 ## 2026-11-15 · Merge: remote games on R2 and iPad UI (T-91, T-159)
 Session A verified master (full serial 211/211, fast 98/98). Merged Session C (remote iframe games on R2, D-42) and Session D (iPad surface scale, `GameCardMedia`) locally with no textual conflicts; checked that D's cards consume C's live catalog thumbnails and fixed one stale spec assertion for `/g/` paths. Check, 367 unit tests, build, fast e2e 100/100 and focused remote/card/layout specs 9/9 pass; reports re-recorded. No push, deploy or cloud DB access.
 
