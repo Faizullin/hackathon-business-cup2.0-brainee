@@ -24,7 +24,7 @@ Behaviour questions come first; Brainy is named only on the result screen. Four 
 | 6 | `child` | form | Optional first name (fallback "your kid"), age chips 4–5 / 6–7 / 8–10 / Other. **Other** opens the exit screen (email "Notify me", no offer; the email is kept only in this browser) |
 | 7–8 | `guilt`, `limits` | 1–5 scale | Statement card with the scale directly under it |
 | 9 | `attempt` | multi | "Nothing yet" is exclusive |
-| 10 | `analyze` | loader ~4 s | Quote block is a `[Real quote from a parent interview]` placeholder; never invent testimonials |
+| 10 | `analyze` | loader ~4 s | Progress rows only; no testimonial block (never invent testimonials) |
 | 11 | `reveal` | spread | The brain at the final score, `NN / 100`, three signal bars (Focus, Reading, Calm endings) with a typical-for-age marker. "A playful indicator, not a medical assessment" |
 | 12 | `ontime` | spread | "You're right on time", feed illustration, stat **14×** with its source (Common Sense Census, 2025) |
 | 13 | `goal` | multi | What the parent wants in 4 weeks |

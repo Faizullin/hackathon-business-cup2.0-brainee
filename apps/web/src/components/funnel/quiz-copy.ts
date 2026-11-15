@@ -147,8 +147,6 @@ export const quizCopy = {
   analyze: {
     title: (n: string) => `Checking ${n}’s answers`,
     rows: ["Screen habits", "Focus", "Reading", "Calm endings"],
-    quote: "[Real quote from a parent interview]",
-    quoteBy: "Parent of a 6-year-old",
   },
   reveal: {
     kicker: "Brain check result",

@@ -297,14 +297,12 @@ export function ScaleScreen({
 export function LoaderScreen({
   title,
   rows,
-  quote,
   ask,
   onAnswer,
   onDone,
 }: {
   title: string;
   rows: readonly string[];
-  quote?: boolean;
   ask?: string;
   onAnswer?: (yes: boolean) => void;
   onDone: () => void;
@@ -358,12 +356,6 @@ export function LoaderScreen({
           );
         })}
       </div>
-      {quote && (
-        <div className="quote">
-          {c.analyze.quote}
-          <small>{c.analyze.quoteBy}</small>
-        </div>
-      )}
       {ask && (
         <dialog
           ref={dialog}

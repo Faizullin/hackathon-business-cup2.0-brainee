@@ -976,22 +976,9 @@
     background: var(--violet);
     border-radius: inherit;
   }
-  .quote {
-    width: min(100%, 520px);
-    margin-inline: auto;
-    border-radius: var(--radius-row);
-    background: var(--violet-wash);
-    padding: 14px 16px;
-    font-weight: 700;
-    font-size: 15px;
-  }
-  .quote small {
-    display: block;
-    color: var(--ink-soft);
-    font-weight: 600;
-    margin-top: 4px;
-  }
   dialog.ask {
+    inset: 0;
+    margin: auto;
     width: min(420px, calc(100% - 32px));
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
