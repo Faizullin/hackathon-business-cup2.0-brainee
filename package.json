@@ -15,7 +15,7 @@
     "e2e:full": "pnpm build && pnpm --filter @brainee/web e2e:full",
     "report": "node scripts/report.mjs",
     "test:reports": "node --test scripts/reports/*.test.mjs",
-    "test": "pnpm games:discover && turbo run test",
+    "test": "pnpm games:discover && turbo run test && pnpm test:remote-games",
     "db:push": "pnpm --filter @brainee/db db:push",
     "db:prepare": "pnpm --filter @brainee/db db:prepare",
     "db:seed": "pnpm --filter @brainee/db db:seed",
@@ -32,11 +32,14 @@
     "check:palette": "node scripts/check-game-palette.mjs",
     "check:films": "pnpm --filter @brainee/films test",
     "games:discover": "node scripts/discover-games.mjs",
-    "postinstall": "node scripts/discover-games.mjs"
+    "postinstall": "node scripts/discover-games.mjs",
+    "games:publish": "node scripts/publish-games.mjs",
+    "test:remote-games": "node --test scripts/publish-games.test.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.7",
     "esbuild": "0.28.2",
+    "fflate": "0.8.3",
     "next": "16.4.6",
     "turbo": "2.11.11",
     "typescript": "5.9.3"

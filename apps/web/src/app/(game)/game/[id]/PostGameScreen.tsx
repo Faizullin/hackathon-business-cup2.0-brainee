@@ -1,7 +1,7 @@
 "use client";
 
 import { type LearningCompletion, practiceGame } from "@brainee/core";
-import { allGames, type GameDefinition } from "@brainee/games";
+import { type GameDefinition, useCatalog } from "@brainee/games";
 import { StarIcon } from "@brainee/ui/components/child-icons";
 import { ArrowRight } from "@brainee/ui/components/icons";
 import Link from "next/link";
@@ -26,6 +26,7 @@ export function PostGameScreen({
   seed: number;
   completion: LearningCompletion;
 }) {
+  const { games: allGames } = useCatalog();
   const rewardRef = useRef<HTMLParagraphElement>(null);
   const walletRef = useRef<HTMLParagraphElement>(null);
   const { snapshot } = useLearning();

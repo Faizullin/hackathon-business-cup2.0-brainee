@@ -1,10 +1,11 @@
 "use client";
-import { previews } from "@brainee/game-catalog";
+import { useCatalog } from "@brainee/games";
 import Link from "next/link";
 import { GameThumbnail } from "@/components/child/GameThumbnail";
 import { useLearning } from "@/components/child/LearningProvider";
 import { useI18n } from "@/i18n";
 export default function ExplorePage() {
+  const { previews } = useCatalog();
   const { t } = useI18n();
   const { snapshot } = useLearning();
   const age = snapshot ? new Date().getFullYear() - snapshot.child.birthYear : 0;

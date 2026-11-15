@@ -364,3 +364,64 @@ it("enforces catalog minimum ages on direct session launches", async () => {
     startGameSession(f.db, f.hash, { ...launch, gameId: "reflection" }, now),
   ).resolves.toMatchObject({ gameId: "reflection" });
 });
+
+it("lazily syncs scored remote games, rewards through core, and rejects disabled or unscored launches", async () => {
+  const { manifests } = await import("@brainee/game-catalog");
+  const { remoteCatalogSchema } = await import("@brainee/game-catalog/remote");
+  const { syncRemoteGames } = await import("./remote-games");
+  const f = await fixture();
+  const id = "remote-scored-test";
+  const manifest = {
+    ...manifests[0],
+    source: "remote",
+    scored: true,
+    runtime: "embedded",
+    id,
+    version: "1.0.0",
+    entry: `/g/${id}/1.0.0/index.html`,
+    thumbnail: `/g/${id}/1.0.0/thumbnail.svg`,
+    bridge: { protocol: 2, contract: `${id}@1` },
+    minAge: 4,
+  };
+  const rows = remoteCatalogSchema.parse([
+    {
+      id,
+      version: "1.0.0",
+      enabled: true,
+      driver: "fs",
+      key: `games/${id}/1.0.0`,
+      manifest,
+      sha256: { "index.html": "a".repeat(64), "thumbnail.svg": "b".repeat(64) },
+    },
+  ]);
+  await syncRemoteGames(f.db, rows);
+  const issued = await startGameSession(f.db, f.hash, { ...launch, gameId: id }, now);
+  const finish = {
+    ...result,
+    gameId: id,
+    rounds: rows[0]?.manifest.scored ? rows[0].manifest.roundsPerSession : 4,
+  };
+  const reply = await finishGameSession(f.db, f.hash, issued.sessionId, finish, later(1000));
+  expect(reply.completion.earnedStars).toBeGreaterThan(0);
+  expect(
+    (await finishGameSession(f.db, f.hash, issued.sessionId, finish, later(2000))).replayed,
+  ).toBe(true);
+  const pendingRemote = await startGameSession(
+    f.db,
+    f.hash,
+    { ...launch, gameId: id },
+    later(2500),
+  );
+  for (const row of rows) row.enabled = false;
+  await syncRemoteGames(f.db, rows);
+  await expect(
+    finishGameSession(f.db, f.hash, pendingRemote.sessionId, finish, later(3500)),
+  ).rejects.toThrow();
+  expect(
+    (await finishGameSession(f.db, f.hash, issued.sessionId, finish, later(4000))).replayed,
+  ).toBe(true);
+  await expect(startGameSession(f.db, f.hash, { ...launch, gameId: id }, now)).rejects.toThrow();
+  await expect(
+    startGameSession(f.db, f.hash, { ...launch, gameId: "phaser-shape-match" }, now),
+  ).rejects.toThrow();
+});

@@ -1,7 +1,7 @@
 "use client";
 
 import { type Ability, type AbilityScores, recommendGames } from "@brainee/core";
-import { allGames } from "@brainee/games";
+import { useCatalog } from "@brainee/games";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { useMemo } from "react";
@@ -12,6 +12,7 @@ import { useLearning } from "./LearningProvider";
 
 /** T-25 on seeded skill scores and illustrative age averages (T-83 keeps real norms open). */
 export function useRecommendations() {
+  const { games: allGames } = useCatalog();
   const { snapshot } = useLearning();
   return useMemo(() => {
     if (!snapshot) return [];
@@ -43,7 +44,7 @@ export function useRecommendations() {
       })
       .sort((a, b) => a.gap - b.gap);
     return [...recs, ...extra].slice(0, 3);
-  }, [snapshot]);
+  }, [snapshot, allGames]);
 }
 
 export function RecommendationCards({

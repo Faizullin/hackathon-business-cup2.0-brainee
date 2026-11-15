@@ -2,8 +2,9 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
+import { sql } from "drizzle-orm";
 import { expect, it, onTestFinished } from "vitest";
-import { brainyStates, children, demoSessions, showcases, wallets } from "../schema";
+import { brainyStates, children, demoSessions, gameSessions, showcases, wallets } from "../schema";
 import { resetDatabase } from "../scripts/database-tools";
 import { openDatabase } from "./client";
 import { getDatabaseConfig } from "./config";
@@ -26,6 +27,12 @@ async function fixture() {
   await resetDatabase(config);
   const connection = await openDatabase(config);
   const observer = await openDatabase(config);
+  // Keep live seed history on this fixture's fixed clock, including across midnight.
+  const historyShift = now.getTime() - demo.history.finishedAt.getTime() - 86400000;
+  await connection.db.update(gameSessions).set({
+    startedAt: sql`${gameSessions.startedAt} + ${historyShift}`,
+    finishedAt: sql`${gameSessions.finishedAt} + ${historyShift}`,
+  });
   onTestFinished(async () => {
     connection.client.close();
     observer.client.close();
@@ -52,7 +59,7 @@ it("returns only the authenticated child's public snapshot and seeded history", 
       id: demo.history.id,
       gameId: "odd-one-out",
       starsEarned: 12,
-      finishedAt: demo.history.finishedAt.toISOString(),
+      finishedAt: new Date(now.getTime() - 86400000).toISOString(),
     },
   });
   expect(Object.keys(snapshot).sort()).toEqual([

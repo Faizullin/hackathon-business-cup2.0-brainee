@@ -1,6 +1,6 @@
 "use client";
 
-import { allGames } from "@brainee/games";
+import { useCatalog } from "@brainee/games";
 import Link from "next/link";
 import { useI18n } from "@/i18n";
 import { GameThumbnail } from "./GameThumbnail";
@@ -8,6 +8,7 @@ import { useLearning } from "./LearningProvider";
 
 /** D-22: every game shows its minimum age; games above the child's age stay locked. */
 export function GameGrid() {
+  const { games: allGames } = useCatalog();
   const { snapshot } = useLearning();
   const { t } = useI18n();
   const age = snapshot ? new Date().getFullYear() - snapshot.child.birthYear : 10;
