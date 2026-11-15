@@ -10,9 +10,13 @@ export function StopLearningButton({
   href,
   children,
   variant = "secondary",
+  label,
+  className,
 }: {
   href: "/brainy" | "/learn";
   children: ReactNode;
+  label?: string;
+  className?: string;
   variant?: "default" | "secondary" | "ghost";
 }) {
   const { stop } = useLearning();
@@ -38,8 +42,16 @@ export function StopLearningButton({
   }
   return (
     <span className="flex flex-col gap-2">
-      <Button variant={variant} size="child" disabled={busy} onClick={() => void leave()}>
-        {busy ? t.child.sync.wait : children}
+      <Button
+        variant={variant}
+        size="child"
+        disabled={busy}
+        aria-busy={busy}
+        aria-label={label}
+        className={className}
+        onClick={() => void leave()}
+      >
+        {busy && !label ? t.child.sync.wait : children}
       </Button>
       {error && (
         <span role="alert" className="text-sm">

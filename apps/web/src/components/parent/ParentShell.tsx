@@ -1,7 +1,14 @@
 "use client";
 
 import { navigationCounts } from "@brainee/core";
-import { ChartLine, ClipboardCheck, Gift, LogOut, Settings } from "@brainee/ui/components/icons";
+import {
+  ArrowLeft,
+  ChartLine,
+  ClipboardCheck,
+  Gift,
+  LogOut,
+  Settings,
+} from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,6 +19,7 @@ import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton } from "@/components/demo/kit";
 import { NavigationBadge } from "@/components/demo/NavigationBadge";
+import { iconControl } from "@/components/game/PlayerHeader";
 import { useI18n } from "@/i18n";
 import { AuthActionError, useAuthAction } from "@/lib/use-auth-action";
 
@@ -188,13 +196,14 @@ export function ParentShell({ children }: { children: ReactNode }) {
               // ROUTES.md §3.3: hand the device back — locks parent mode, child re-enters via /entry.
               <button
                 type="button"
-                className={outlineButton}
+                className={`${outlineButton} ${iconControl}`}
+                aria-label={tp.returnToChild}
                 onClick={async () => {
                   await lockParent();
                   window.location.assign("/entry");
                 }}
               >
-                {tp.returnToChild}
+                <ArrowLeft aria-hidden="true" className="size-5" />
               </button>
             ) : (
               <Link href="/entry" className={outlineButton}>

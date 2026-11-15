@@ -447,9 +447,9 @@ export function Funnel() {
             onClick={() => back && go(back)}
             disabled={!back}
             data-testid="funnel-back"
+            aria-label={c.back}
           >
             <Icon name="arrow" />
-            {c.back}
           </button>
           <div className="segs" data-testid="funnel-progress">
             {c.sections.map((label, i) => {
