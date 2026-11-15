@@ -13,7 +13,7 @@ Which agent skills and tools are worth having for this project, for Claude Code 
 | **shadcn/ui + Lucide** | ✅ Already in stack | Parent dashboard: forms, tabs, dialogs. Code is copied in, so it's own-domain safe. |
 | **vercel-react-view-transitions** (`vercel-labs/agent-skills`) | ✅ Adopt (T-87) | Patterns for React `<ViewTransition>` in Next.js App Router: shared elements, transition types. Matches [ui.md](ui.md) layer 3. |
 | **Motion Primitives** | 🟡 Selective | Copy individual components (animated number for ★ counters, text/transition effects for "before → after"). Never the whole library. |
-| **Magic UI** | 🟡 Landing only | Marketing flair suits `apps/landing`. It doesn't fit the kids' UI (busy effects, against the calm product rules). |
+| **Magic UI** | ⛔ Skip | No landing page is planned; marketing flair has no surface. It doesn't fit the kids' UI (busy effects, against the calm product rules). |
 | **ui-ux-pro-max** | ❌ Skip | A generic style, palette and font database. Our visual identity is already set by the prototype, so it would cause drift and burn tokens. |
 | **vercel-composition-patterns** | ❌ Skip | Advanced component API design. Overkill for a hackathon `ui` package. |
 

@@ -61,7 +61,7 @@ export function ParentLogin() {
       </button>
       <p className="text-muted-foreground text-xs">{tl.demoHint}</p>
       <Link
-        href="/onboarding"
+        href="/start"
         className="font-semibold text-accent text-sm underline-offset-4 hover:underline"
       >
         {tl.newFamily}

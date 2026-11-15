@@ -21,7 +21,7 @@ app/(child)/layout.tsx      # Learn / Leisure / Brainy hub / Path / Gifts; match
 app/(child)/(docked)/      # compact dark Energy summary; Learn keeps an iPad two-column layout
 app/(game)/game/[id]/       # fullscreen sibling group: no dock or tab bar
 app/(parent)/layout.tsx     # Analytics / Tasks / Gifts & goal / Settings; bottom tabs on phone, top tabs on iPad
-app/(auth)/layout.tsx       # auth shell; /start uses StepPage's phone/iPad layouts
+app/(auth)/layout.tsx       # auth shell; /start is the Brain Check funnel ((funnel) group)
 ```
 - Shared navigation and the compact Energy summary live in layouts. The full dark hero belongs to the Brainy tab; Path owns the weekly bars, stage list and discoveries.
 - A nested game layout cannot remove its parent layout's chrome; T-30 uses the sibling `(game)` group for fullscreen play.
@@ -105,7 +105,7 @@ The host uses `--game-*` tokens and the matching `GAME_PALETTE` from `packages/u
 
 ## Parent funnel and family plan
 
-`StepPage` owns progress, focused headings, Back and the bottom Continue action. Phone screens stack the art and answers; iPad uses art on the left and content on the right. `AnswerGroup` provides single-choice controls. The 25-step `/start` flow, early age gate, resume, review mode and signup contract are documented in [funnel.md](../product/funnel.md). New text belongs in feature-local English copy modules. Existing `useI18n()` calls read the English dictionary; there are no locale controls, locale cookie or language fallback (D-34).
+The Brain Check funnel (`components/funnel`, [funnel.md](../product/funnel.md)) owns its own progress, Back and Continue. `AnswerGroup` provides single-choice controls. The 19-screen `/start` flow, age exit, resume, review mode (`?tour=1`) and one-tap start are documented in [funnel.md](../product/funnel.md). New text belongs in feature-local English copy modules. Existing `useI18n()` calls read the English dictionary; there are no locale controls, locale cookie or language fallback (D-34).
 
 The funnel's shape match and five-stage growth slider are previews: they create no game session or reward. A completed, validated funnel is required for signup, which converts the age band to an allowed exact birth year and ends at `/onboarding/setup`. `/onboarding` redirects to `/start`. Pricing remains pending with no checkout.
 

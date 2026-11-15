@@ -154,7 +154,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-108 History-based recommendations, automatic app tasks, live activity analytics and earned rewards with progress/celebrations/feed (D-29).
 - [x] T-109 Playable Snake with saved active-time credit/top-ups/forever (D-29); the cartoon placeholder was removed in T-116.
 
-- [x] T-113 Serial input stabilization and full browser verification: Rhythm (tracked timers, touch spec), Secret Message (no preview race, touch spec), Mirror Grid (persistent buttons, stationary hit areas, double-tap guard), Tangram (double-tap guard); full serial suite on all four projects → [batch handoff](../games/batches/2026-11-15-english-input.md)
+- [x] T-113 Serial input stabilization and full browser verification: Rhythm (tracked timers, touch spec), Secret Message (no preview race, touch spec), Mirror Grid (persistent buttons, stationary hit areas, double-tap guard), Tangram (double-tap guard); full serial suite on all four projects
 
 - [x] T-115 English-only in-game copy for every imported game and preview; Russian removed from host, games, films, tests and docs (D-34)
 
@@ -164,7 +164,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-131 Lavender tokens remapped onto existing names, Manrope titles + Unbounded numerals, Lucide 2 px, motion classes, derived dark set; update ui.md (D-36)
 - [x] T-132 **Brainy = port of the design's Brain component** (energy=mood, stage size, stat-driven parts, kid-safe effects, re-anchored accessories, rAF only on heroes) (D-36)
 - [x] T-133 `packages/core/src/funnel.ts`: funnel logic + `funnelQuizAnswers` mapping, tested
-- [x] T-134 `StepPage` + `AnswerGroup` components (two-column iPad landscape)
+- [x] T-134 `StepPage` + `AnswerGroup` components (two-column iPad landscape); `StepPage` was removed with the old funnel
 - [x] Redesign review corrections: accent roles, compact Energy summaries, skill/discovery icons, greeting, parent targets and host progress; 92 browser checks and 22 phone/iPad screenshots reviewed
 - [x] T-135 Parent funnel at `/start` → signup → setup; `/onboarding` redirects; pricing pending, no checkout
 - [x] T-136 Family plan: `showcase.familyPlan`, parent card, phrase on the child's stopping point, off-screen task template
@@ -187,10 +187,10 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 
 ## Hackathon submission
 - [x] T-154 Submission cleanup: judge-facing README, `docs/ideas` removed from the tree (mapped in docs/README.md § Original sources), architecture/setup/AGENTS match the deployed build, first `pnpm dev` prepares missing games and DB (`db:prepare`), `pnpm check` green again
+- [x] T-91 Remote iframe games on R2 (D-42): `pnpm games:publish` (folder/ZIP, SHA-256, immutable versions, enable/disable/rollback), same-origin `/g/<id>/<version>/` proxy with opaque `allow-scripts` sandbox, live catalog merged into Learn/Explore without a redeploy → [games.md](../dev/games.md#remote-games-r2)
+- [x] T-159 iPad surface scale (tablet type, rhythm, 48/56 px controls) and shared `GameCardMedia` 4:3 thumbnails with fallback → [ui.md](../dev/ui.md)
 
 ## After the hackathon
-- [ ] T-72 Landing page (`apps/landing`), stretch goal
-- [ ] T-91 (Later) External game artifacts (path C): `games:import <id>@<version>` with checksum, `GameVersion` table, enable/disable/rollback
 - [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
 - [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).
 - [ ] T-97 Showcase follow-ups after the pitch: real Task/Gift/Request tables, computed analytics, playable fun games and cartoons, presenter "Reset demo" button (endpoint exists)

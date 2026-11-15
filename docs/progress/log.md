@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · Merge: remote games on R2 and iPad UI (T-91, T-159)
+Session A verified master (full serial 211/211, fast 98/98). Merged Session C (remote iframe games on R2, D-42) and Session D (iPad surface scale, `GameCardMedia`) locally with no textual conflicts; checked that D's cards consume C's live catalog thumbnails and fixed one stale spec assertion for `/g/` paths. Check, 367 unit tests, build, fast e2e 100/100 and focused remote/card/layout specs 9/9 pass; reports re-recorded. No push, deploy or cloud DB access.
+
 ## 2026-11-15 · Hackathon submission cleanup (T-154)
 Pulled PRs #9–#12. The MVP report scenario still targeted the retired funnel; it now walks the 19-screen Brain Check funnel (`?tour=1`, stops on the offer) and both reports were re-recorded (MVP 22/22, learning 27/27 per device). `pnpm check` was red on `game-catalog` Node types; fixed. A clean-start probe showed that a schema-only DB has no game catalog and a missing DB breaks every API, so `pnpm dev` now builds missing games and seeds a missing local DB. Removed `docs/ideas` (history map in docs/README.md), rewrote the README for judges and refreshed architecture/setup/AGENTS for the deployed build. Closed the hackathon backlog (future work moved to "After the hackathon") and moved presentation notes (pitch, jury script) out of the tree. Merged into `master` locally; no push, deploy or production data access.
 

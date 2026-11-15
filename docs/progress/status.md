@@ -20,10 +20,10 @@
 Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 
 ## Current focus
-Hackathon submission build on `master`: PRs #9–#12 plus the submission cleanup (T-154). The demo runs at `https://brainee.vercel.app`. Remaining work is listed under "After the hackathon" in [todo.md](todo.md).
+Hackathon submission build on `master`, now with remote iframe games on R2 (D-42) and the iPad surface scale with shared game card media. The demo runs at `https://brainee.vercel.app` (not yet redeployed with these changes). Next: authentication and onboarding fixes, then redeploy.
 
 ## Handoff
-- **Merged locally into `master` (not pushed):** re-recorded reports with the Brain Check funnel walk (MVP 22/22, learning 27/27 per device); `game-catalog` Node types so `pnpm check` passes; first `pnpm dev` builds missing games and creates and seeds a missing local DB (`db:prepare`); `docs/ideas` removed (map in [docs/README.md](../README.md#original-sources)); judge-facing README; architecture, setup and AGENTS describe the deployed build; presentation notes (pitch, jury script) moved out of the tree.
-- **Verified:** `pnpm check`, 362 unit tests, production build, report tooling tests, first-run preparation on a fresh DB path.
-- **Next:** push `master` when the owner asks; post-hackathon items in [todo.md](todo.md#after-the-hackathon).
-- **Env notes:** Windows CRLF working files: run `pnpm exec biome check --write <specific files>` only. `next dev` writes `apps/web/AGENTS.md`: delete it.
+- **Merged locally into `master` (not pushed):** `feature/r2-remote-games` (T-91: `pnpm games:publish`, fs/R2 drivers under the `brainy/` prefix, same-origin `/g/<id>/<version>/` proxy, opaque `allow-scripts` sandbox, live catalog in Learn/Explore) and `feature/ipad-ui-thumbnails` (T-159: tablet type and rhythm, 48/56 px controls, `GameCardMedia`). Merges had no textual conflicts; the only integration fix was the game-cards spec accepting versioned `/g/` thumbnails.
+- **Verified on the merged tree:** `pnpm check`, 367 unit tests + 2 publisher tests, production build, fast `pnpm e2e` 100/100, focused remote-game + game-cards + layout specs 9/9 (remote sample published with the local fs driver). Full serial suite 211/211 ran before the merge (T-139). Reports re-recorded after the merge.
+- **Next:** auth/onboarding fixes (anonymous visitors join the shared demo family; credentials kept only in sessionStorage; incomplete loading states; Jury entry too prominent); then owner adds the R2 variables to Vercel and redeploys; physical iPad check (T-62).
+- **Env notes:** remote-game spec skips unless the sample is published (`node scripts/prepare-remote-sample.mjs && pnpm games:publish .local/remote-shape-match --driver fs`). Windows CRLF: `pnpm exec biome check --write <specific files>` only. `next dev` writes `apps/web/AGENTS.md`: delete it.

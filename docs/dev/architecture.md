@@ -42,7 +42,7 @@ apps/web/src/app/
 ├─ (child)/brainy, path      # Brainy tab (accessory shop, stats); weekly path, stages, discoveries
 ├─ (game)/                   # Fullscreen: entry, game/[id], explore/[id], fun/[id], video/[id] (films)
 ├─ (parent)/                 # PIN barrier + tabs: analytics, tasks, rewards, settings
-├─ lab/                      # Game lab, Brainy presets, film and step harnesses (dev or BRAINEE_LAB=1)
+├─ lab/                      # Game lab, Brainy presets and film harness (dev or BRAINEE_LAB=1)
 └─ api/                      # auth, jury, onboarding(/start), device, pairing, sessions, state, actions, parent, settings, fun, demo-*
 ```
 

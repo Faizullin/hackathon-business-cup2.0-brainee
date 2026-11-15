@@ -55,7 +55,7 @@ The container already exists in `ExplorePlayer.tsx`, using the shared bridge for
 
 ### First wave delivered from GSP (#8, 2026-11-15)
 
-At the owner's direction the first Explore wave came from our earlier project (GSP) rather than this archive: Shape Pairs, Color Boxes and Sticker Scene. Auto-discovery, thumbnails and the declarative Explore metadata (items 1–2 below) are implemented; the four archive family adapters and the remaining 24 titles are still open. Details: [batch handoff](../games/batches/2026-11-15-autodiscovery-thumbnails-wave1.md).
+At the owner's direction the first Explore wave came from our earlier project (GSP) rather than this archive: Shape Pairs, Color Boxes and Sticker Scene. Auto-discovery, thumbnails and the declarative Explore metadata (items 1–2 below) are implemented; the four archive family adapters and the remaining 24 titles are still open.
 
 ### Proposed next implementation, not yet implemented
 

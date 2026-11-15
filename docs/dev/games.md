@@ -192,7 +192,7 @@ New game checklist (only its folder):
 - Previews add `explore`: `family` (`phaser` | `qlobe` | `sugarizer` | `h5p` | `blockly`), `viewport` (`responsive`, or `contain` with `aspectRatio` like `"4 / 3"`), `orientation`, `audio`, `readiness` (`bridge`, or `load` for games without the bridge).
 - E2E: add the spec name to `HEAVY_GAME_SPECS`/`GAME_SPECS` in `apps/web/playwright.config.ts`.
 
-GSP Phaser games (Shape Pairs, Color Boxes, Sticker Scene) share `packages/engine-phaser`, which carries GSP `phaser-core`'s helpers as `@brainee/engine-phaser/<module>`. Batch details: [docs/games/batches/2026-11-15-autodiscovery-thumbnails-wave1.md](../games/batches/2026-11-15-autodiscovery-thumbnails-wave1.md).
+GSP Phaser games (Shape Pairs, Color Boxes, Sticker Scene) share `packages/engine-phaser`, which carries GSP `phaser-core`'s helpers as `@brainee/engine-phaser/<module>`.
 
 ## Lavender palette (T-141)
 
