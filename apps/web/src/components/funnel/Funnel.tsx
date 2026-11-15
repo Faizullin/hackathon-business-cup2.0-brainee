@@ -354,7 +354,6 @@ export function Funnel() {
             key="analyze"
             title={c.analyze.title(names.kid)}
             rows={c.analyze.rows}
-            quote
             onDone={() => navigate("reveal", true)}
           />
         );
