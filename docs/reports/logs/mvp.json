@@ -5,14 +5,14 @@
       "app": "hackathon-business-cup2.0-brainee",
       "module": "mvp",
       "flow": "phone-mvp",
-      "title": "Phone: parent preview, entry, leisure, video quiz, gifts, Brainy, Path, parent",
+      "title": "Phone: parent preview, entry, leisure, gifts, Brainy, Path, parent",
       "surface": "web",
       "target": "http://127.0.0.1:3123/login",
-      "startedAt": "2026-11-14T21:03:27.396Z",
-      "durationMs": 61062,
+      "startedAt": "2026-11-15T03:09:28.398Z",
+      "durationMs": 68741,
       "status": "PASSED",
       "checks": {
-        "passed": 30,
+        "passed": 22,
         "failed": 0
       },
       "errors": 0,
@@ -21,589 +21,7 @@
       "media": {
         "video": "phone-mvp.mp4",
         "poster": "phone-mvp.jpg",
-        "bytes": 743302
-      },
-      "screenshots": [],
-      "entries": [
-        {
-          "t": 349,
-          "source": "step",
-          "level": "info",
-          "message": "open /login"
-        },
-        {
-          "t": 1952,
-          "source": "check",
-          "level": "info",
-          "message": "Demo content reset to the seed"
-        },
-        {
-          "t": 1952,
-          "source": "step",
-          "level": "info",
-          "message": "call resetDemo"
-        },
-        {
-          "t": 1952,
-          "source": "mark",
-          "level": "info",
-          "message": "Parent preview: cover and real growth stages"
-        },
-        {
-          "t": 3507,
-          "source": "step",
-          "level": "info",
-          "message": "goto /start?tour=1#cover"
-        },
-        {
-          "t": 3528,
-          "source": "check",
-          "level": "info",
-          "message": "{\"by\":\"role\",\"role\":\"heading\",\"name\":\"Give screen time a happy ending.\",\"exact\":true} visible",
-          "data": null
-        },
-        {
-          "t": 3530,
-          "source": "check",
-          "level": "info",
-          "message": "The document language is English"
-        },
-        {
-          "t": 3530,
-          "source": "check",
-          "level": "info",
-          "message": "The screen fits without horizontal scrolling"
-        },
-        {
-          "t": 3530,
-          "source": "check",
-          "level": "info",
-          "message": "The two self-hosted font families load"
-        },
-        {
-          "t": 3530,
-          "source": "step",
-          "level": "info",
-          "message": "call checkSurface"
-        },
-        {
-          "t": 4732,
-          "source": "step",
-          "level": "info",
-          "message": "wait 1200"
-        },
-        {
-          "t": 4779,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Meet Brainy\",\"exact\":true}"
-        },
-        {
-          "t": 4781,
-          "source": "check",
-          "level": "info",
-          "message": "{\"by\":\"role\",\"role\":\"heading\",\"name\":\"Meet Brainy.\",\"exact\":true} visible",
-          "data": null
-        },
-        {
-          "t": 4825,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Continue\",\"exact\":true}"
-        },
-        {
-          "t": 4827,
-          "source": "check",
-          "level": "info",
-          "message": "{\"by\":\"testId\",\"value\":\"funnel-growth\"} visible",
-          "data": null
-        },
-        {
-          "t": 4847,
-          "source": "check",
-          "level": "info",
-          "message": "The funnel preview reaches the real Genius stage"
-        },
-        {
-          "t": 5747,
-          "source": "step",
-          "level": "info",
-          "message": "call previewGrowth"
-        },
-        {
-          "t": 5748,
-          "source": "check",
-          "level": "info",
-          "message": "The document language is English"
-        },
-        {
-          "t": 5748,
-          "source": "check",
-          "level": "info",
-          "message": "The screen fits without horizontal scrolling"
-        },
-        {
-          "t": 5748,
-          "source": "check",
-          "level": "info",
-          "message": "The two self-hosted font families load"
-        },
-        {
-          "t": 5749,
-          "source": "step",
-          "level": "info",
-          "message": "call checkSurface"
-        },
-        {
-          "t": 7297,
-          "source": "step",
-          "level": "info",
-          "message": "goto /entry"
-        },
-        {
-          "t": 7316,
-          "source": "check",
-          "level": "info",
-          "message": "Opening the app shows the entry screen",
-          "data": null
-        },
-        {
-          "t": 9117,
-          "source": "step",
-          "level": "info",
-          "message": "wait 1800"
-        },
-        {
-          "t": 9117,
-          "source": "mark",
-          "level": "info",
-          "message": "Child: other games → Learn"
-        },
-        {
-          "t": 9158,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"No, I want to see other games\",\"exact\":true}"
-        },
-        {
-          "t": 9235,
-          "source": "check",
-          "level": "info",
-          "message": "Learn shows Brainy's advice and the grid",
-          "data": null
-        },
-        {
-          "t": 10437,
-          "source": "step",
-          "level": "info",
-          "message": "wait 1200"
-        },
-        {
-          "t": 10437,
-          "source": "mark",
-          "level": "info",
-          "message": "Leisure: shop, cartoons, science"
-        },
-        {
-          "t": 10479,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Leisure\",\"exact\":true}"
-        },
-        {
-          "t": 10523,
-          "source": "check",
-          "level": "info",
-          "message": "Leisure shows the ★ shop",
-          "data": null
-        },
-        {
-          "t": 10527,
-          "source": "step",
-          "level": "info",
-          "message": "scroll window by 0,700"
-        },
-        {
-          "t": 11329,
-          "source": "step",
-          "level": "info",
-          "message": "wait 800"
-        },
-        {
-          "t": 11333,
-          "source": "step",
-          "level": "info",
-          "message": "scroll window by 0,900"
-        },
-        {
-          "t": 12135,
-          "source": "step",
-          "level": "info",
-          "message": "wait 800"
-        },
-        {
-          "t": 12135,
-          "source": "mark",
-          "level": "info",
-          "message": "Science video: pause-only player and quiz"
-        },
-        {
-          "t": 12172,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"How Bees Live\"}"
-        },
-        {
-          "t": 12961,
-          "source": "check",
-          "level": "info",
-          "message": "The player has only play/pause",
-          "data": null
-        },
-        {
-          "t": 12991,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Watch\",\"exact\":true}"
-        },
-        {
-          "t": 33379,
-          "source": "check",
-          "level": "info",
-          "message": "The quiz appears after the last minute",
-          "data": null
-        },
-        {
-          "t": 33404,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Wax\",\"exact\":true}"
-        },
-        {
-          "t": 33416,
-          "source": "network",
-          "level": "warn",
-          "message": "409 POST http://127.0.0.1:3123/api/actions"
-        },
-        {
-          "t": 33416,
-          "source": "console",
-          "level": "warn",
-          "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
-        },
-        {
-          "t": 34305,
-          "source": "step",
-          "level": "info",
-          "message": "wait 900"
-        },
-        {
-          "t": 34320,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Honey\",\"exact\":true}"
-        },
-        {
-          "t": 34345,
-          "source": "check",
-          "level": "info",
-          "message": "Correct answer pays +15★ once",
-          "data": null
-        },
-        {
-          "t": 35546,
-          "source": "step",
-          "level": "info",
-          "message": "wait 1200"
-        },
-        {
-          "t": 35578,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Back to Leisure\",\"exact\":true}"
-        },
-        {
-          "t": 35578,
-          "source": "mark",
-          "level": "info",
-          "message": "Gifts: goal, shop, tasks, exchange"
-        },
-        {
-          "t": 36395,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Gifts\",\"exact\":true}"
-        },
-        {
-          "t": 36438,
-          "source": "check",
-          "level": "info",
-          "message": "Gifts shows the weekly goal and tasks",
-          "data": null
-        },
-        {
-          "t": 36442,
-          "source": "step",
-          "level": "info",
-          "message": "scroll window by 0,600"
-        },
-        {
-          "t": 37200,
-          "source": "check",
-          "level": "info",
-          "message": "Child marks a real-life task done → waits for the parent"
-        },
-        {
-          "t": 37200,
-          "source": "step",
-          "level": "info",
-          "message": "call childTaskDone"
-        },
-        {
-          "t": 37238,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"1 ☀ for 10 ★\",\"exact\":true}"
-        },
-        {
-          "t": 38240,
-          "source": "step",
-          "level": "info",
-          "message": "wait 1000"
-        },
-        {
-          "t": 38240,
-          "source": "mark",
-          "level": "info",
-          "message": "Brainy: accessory shop"
-        },
-        {
-          "t": 38279,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"css\",\"value\":\"nav a[href=\\\"/brainy\\\"]\"}"
-        },
-        {
-          "t": 38316,
-          "source": "check",
-          "level": "info",
-          "message": "Brainy tab shows stats and the shop",
-          "data": null
-        },
-        {
-          "t": 39105,
-          "source": "check",
-          "level": "info",
-          "message": "Bought accessory is worn (one per slot)"
-        },
-        {
-          "t": 40007,
-          "source": "step",
-          "level": "info",
-          "message": "call buyCheapestAccessory"
-        },
-        {
-          "t": 41207,
-          "source": "step",
-          "level": "info",
-          "message": "wait 1200"
-        },
-        {
-          "t": 41207,
-          "source": "mark",
-          "level": "info",
-          "message": "Path: weekly learning, growth stages and discoveries"
-        },
-        {
-          "t": 41266,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Path\",\"exact\":true}"
-        },
-        {
-          "t": 41298,
-          "source": "check",
-          "level": "info",
-          "message": "Path shows the stage journey and discoveries",
-          "data": null
-        },
-        {
-          "t": 41299,
-          "source": "check",
-          "level": "info",
-          "message": "The document language is English"
-        },
-        {
-          "t": 41299,
-          "source": "check",
-          "level": "info",
-          "message": "The screen fits without horizontal scrolling"
-        },
-        {
-          "t": 41299,
-          "source": "check",
-          "level": "info",
-          "message": "The two self-hosted font families load"
-        },
-        {
-          "t": 41299,
-          "source": "step",
-          "level": "info",
-          "message": "call checkSurface"
-        },
-        {
-          "t": 44319,
-          "source": "step",
-          "level": "info",
-          "message": "call scrollPage"
-        },
-        {
-          "t": 44319,
-          "source": "mark",
-          "level": "info",
-          "message": "Parent: PIN, analytics, confirm the child's task"
-        },
-        {
-          "t": 45899,
-          "source": "step",
-          "level": "info",
-          "message": "goto /analytics"
-        },
-        {
-          "t": 45920,
-          "source": "check",
-          "level": "info",
-          "message": "Parent mode is behind a PIN",
-          "data": null
-        },
-        {
-          "t": 45938,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 1\",\"exact\":true}"
-        },
-        {
-          "t": 45972,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 2\",\"exact\":true}"
-        },
-        {
-          "t": 46004,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 3\",\"exact\":true}"
-        },
-        {
-          "t": 46042,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 4\",\"exact\":true}"
-        },
-        {
-          "t": 46119,
-          "source": "check",
-          "level": "info",
-          "message": "Analytics: radars, bars, ranking",
-          "data": null
-        },
-        {
-          "t": 47121,
-          "source": "step",
-          "level": "info",
-          "message": "wait 1000"
-        },
-        {
-          "t": 50145,
-          "source": "step",
-          "level": "info",
-          "message": "call scrollPage"
-        },
-        {
-          "t": 50173,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"City\",\"exact\":true}"
-        },
-        {
-          "t": 50974,
-          "source": "step",
-          "level": "info",
-          "message": "wait 800"
-        },
-        {
-          "t": 50988,
-          "source": "step",
-          "level": "info",
-          "message": "call openParentTab"
-        },
-        {
-          "t": 51093,
-          "source": "check",
-          "level": "info",
-          "message": "Tasks: Today list with confirmations",
-          "data": null
-        },
-        {
-          "t": 52035,
-          "source": "check",
-          "level": "info",
-          "message": "Parent confirms → ☀ and weekly goal grow"
-        },
-        {
-          "t": 52936,
-          "source": "step",
-          "level": "info",
-          "message": "call confirmTask"
-        },
-        {
-          "t": 55967,
-          "source": "step",
-          "level": "info",
-          "message": "call scrollPage"
-        },
-        {
-          "t": 55987,
-          "source": "step",
-          "level": "info",
-          "message": "call openParentTab"
-        },
-        {
-          "t": 56023,
-          "source": "check",
-          "level": "info",
-          "message": "Gifts & goal: requests and shop",
-          "data": null
-        },
-        {
-          "t": 59054,
-          "source": "step",
-          "level": "info",
-          "message": "call scrollPage"
-        }
-      ]
-    },
-    {
-      "app": "hackathon-business-cup2.0-brainee",
-      "module": "mvp",
-      "flow": "ipad-mvp",
-      "title": "iPad viewport: parent preview, entry, leisure, video quiz, gifts, Brainy, Path, parent",
-      "surface": "web",
-      "target": "http://127.0.0.1:3123/login",
-      "startedAt": "2026-11-14T21:04:28.460Z",
-      "durationMs": 61175,
-      "status": "PASSED",
-      "checks": {
-        "passed": 30,
-        "failed": 0
-      },
-      "errors": 0,
-      "note": null,
-      "viewport": "ipad",
-      "media": {
-        "video": "ipad-mvp.mp4",
-        "poster": "ipad-mvp.jpg",
-        "bytes": 988267
+        "bytes": 1172171
       },
       "screenshots": [],
       "entries": [
@@ -614,551 +32,845 @@
           "message": "open /login"
         },
         {
-          "t": 1979,
+          "t": 1945,
           "source": "check",
           "level": "info",
           "message": "Demo content reset to the seed"
         },
         {
-          "t": 1979,
+          "t": 1945,
           "source": "step",
           "level": "info",
           "message": "call resetDemo"
         },
         {
-          "t": 1979,
+          "t": 1945,
           "source": "mark",
           "level": "info",
-          "message": "Parent preview: cover and real growth stages"
+          "message": "Parent Brain Check funnel: habits, brain meter, result, plan and offer"
         },
         {
-          "t": 3527,
-          "source": "step",
-          "level": "info",
-          "message": "goto /start?tour=1#cover"
-        },
-        {
-          "t": 3543,
+          "t": 9856,
           "source": "check",
           "level": "info",
-          "message": "{\"by\":\"role\",\"role\":\"heading\",\"name\":\"Give screen time a happy ending.\",\"exact\":true} visible",
-          "data": null
+          "message": "The brain meter drops as the parent answers the habit questions"
         },
         {
-          "t": 3544,
+          "t": 33389,
+          "source": "check",
+          "level": "info",
+          "message": "Funnel ends on the offer: display-only prices, no payment (D-41)"
+        },
+        {
+          "t": 37603,
+          "source": "step",
+          "level": "info",
+          "message": "call walkFunnel"
+        },
+        {
+          "t": 37605,
           "source": "check",
           "level": "info",
           "message": "The document language is English"
         },
         {
-          "t": 3544,
+          "t": 37605,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 3544,
+          "t": 37605,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 3544,
+          "t": 37605,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 4745,
-          "source": "step",
-          "level": "info",
-          "message": "wait 1200"
-        },
-        {
-          "t": 4780,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Meet Brainy\",\"exact\":true}"
-        },
-        {
-          "t": 4781,
-          "source": "check",
-          "level": "info",
-          "message": "{\"by\":\"role\",\"role\":\"heading\",\"name\":\"Meet Brainy.\",\"exact\":true} visible",
-          "data": null
-        },
-        {
-          "t": 4829,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Continue\",\"exact\":true}"
-        },
-        {
-          "t": 4831,
-          "source": "check",
-          "level": "info",
-          "message": "{\"by\":\"testId\",\"value\":\"funnel-growth\"} visible",
-          "data": null
-        },
-        {
-          "t": 4839,
-          "source": "check",
-          "level": "info",
-          "message": "The funnel preview reaches the real Genius stage"
-        },
-        {
-          "t": 5740,
-          "source": "step",
-          "level": "info",
-          "message": "call previewGrowth"
-        },
-        {
-          "t": 5741,
-          "source": "check",
-          "level": "info",
-          "message": "The document language is English"
-        },
-        {
-          "t": 5741,
-          "source": "check",
-          "level": "info",
-          "message": "The screen fits without horizontal scrolling"
-        },
-        {
-          "t": 5741,
-          "source": "check",
-          "level": "info",
-          "message": "The two self-hosted font families load"
-        },
-        {
-          "t": 5741,
-          "source": "step",
-          "level": "info",
-          "message": "call checkSurface"
-        },
-        {
-          "t": 7292,
+          "t": 39166,
           "source": "step",
           "level": "info",
           "message": "goto /entry"
         },
         {
-          "t": 7305,
+          "t": 39185,
           "source": "check",
           "level": "info",
           "message": "Opening the app shows the entry screen",
           "data": null
         },
         {
-          "t": 9107,
+          "t": 40986,
           "source": "step",
           "level": "info",
           "message": "wait 1800"
         },
         {
-          "t": 9107,
+          "t": 40986,
           "source": "mark",
           "level": "info",
           "message": "Child: other games → Learn"
         },
         {
-          "t": 9149,
+          "t": 41034,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"No, I want to see other games\",\"exact\":true}"
         },
         {
-          "t": 9182,
+          "t": 41068,
           "source": "check",
           "level": "info",
           "message": "Learn shows Brainy's advice and the grid",
           "data": null
         },
         {
-          "t": 10384,
+          "t": 42269,
           "source": "step",
           "level": "info",
           "message": "wait 1200"
         },
         {
-          "t": 10384,
+          "t": 42269,
           "source": "mark",
           "level": "info",
-          "message": "Leisure: shop, cartoons, science"
+          "message": "Leisure: fun-game shop and films"
         },
         {
-          "t": 10423,
+          "t": 42303,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Leisure\",\"exact\":true}"
         },
         {
-          "t": 10451,
+          "t": 42337,
           "source": "check",
           "level": "info",
           "message": "Leisure shows the ★ shop",
           "data": null
         },
         {
-          "t": 10452,
+          "t": 42340,
           "source": "step",
           "level": "info",
           "message": "scroll window by 0,700"
         },
         {
-          "t": 11254,
+          "t": 43142,
           "source": "step",
           "level": "info",
           "message": "wait 800"
         },
         {
-          "t": 11255,
+          "t": 43146,
           "source": "step",
           "level": "info",
           "message": "scroll window by 0,900"
         },
         {
-          "t": 12056,
+          "t": 43947,
           "source": "step",
           "level": "info",
           "message": "wait 800"
         },
         {
-          "t": 12056,
-          "source": "mark",
-          "level": "info",
-          "message": "Science video: pause-only player and quiz"
-        },
-        {
-          "t": 12090,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"How Bees Live\"}"
-        },
-        {
-          "t": 12875,
-          "source": "check",
-          "level": "info",
-          "message": "The player has only play/pause",
-          "data": null
-        },
-        {
-          "t": 12897,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Watch\",\"exact\":true}"
-        },
-        {
-          "t": 33325,
-          "source": "check",
-          "level": "info",
-          "message": "The quiz appears after the last minute",
-          "data": null
-        },
-        {
-          "t": 33356,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Wax\",\"exact\":true}"
-        },
-        {
-          "t": 33361,
-          "source": "network",
-          "level": "warn",
-          "message": "409 POST http://127.0.0.1:3123/api/actions"
-        },
-        {
-          "t": 33362,
-          "source": "console",
-          "level": "warn",
-          "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
-        },
-        {
-          "t": 34257,
-          "source": "step",
-          "level": "info",
-          "message": "wait 900"
-        },
-        {
-          "t": 34277,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Honey\",\"exact\":true}"
-        },
-        {
-          "t": 34301,
-          "source": "check",
-          "level": "info",
-          "message": "Correct answer pays +15★ once",
-          "data": null
-        },
-        {
-          "t": 35503,
-          "source": "step",
-          "level": "info",
-          "message": "wait 1200"
-        },
-        {
-          "t": 35525,
-          "source": "step",
-          "level": "info",
-          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Back to Leisure\",\"exact\":true}"
-        },
-        {
-          "t": 35525,
+          "t": 43947,
           "source": "mark",
           "level": "info",
           "message": "Gifts: goal, shop, tasks, exchange"
         },
         {
-          "t": 36356,
+          "t": 43988,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Gifts\",\"exact\":true}"
         },
         {
-          "t": 36386,
+          "t": 44022,
           "source": "check",
           "level": "info",
           "message": "Gifts shows the weekly goal and tasks",
           "data": null
         },
         {
-          "t": 36389,
+          "t": 44024,
           "source": "step",
           "level": "info",
           "message": "scroll window by 0,600"
         },
         {
-          "t": 37100,
+          "t": 44777,
           "source": "check",
           "level": "info",
           "message": "Child marks a real-life task done → waits for the parent"
         },
         {
-          "t": 37100,
+          "t": 44777,
           "source": "step",
           "level": "info",
           "message": "call childTaskDone"
         },
         {
-          "t": 37139,
+          "t": 44801,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"1 ☀ for 10 ★\",\"exact\":true}"
         },
         {
-          "t": 38141,
+          "t": 45803,
           "source": "step",
           "level": "info",
           "message": "wait 1000"
         },
         {
-          "t": 38141,
+          "t": 45803,
           "source": "mark",
           "level": "info",
           "message": "Brainy: accessory shop"
         },
         {
-          "t": 38176,
+          "t": 45861,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"css\",\"value\":\"nav a[href=\\\"/brainy\\\"]\"}"
         },
         {
-          "t": 38201,
+          "t": 45888,
           "source": "check",
           "level": "info",
           "message": "Brainy tab shows stats and the shop",
           "data": null
         },
         {
-          "t": 38992,
+          "t": 46684,
           "source": "check",
           "level": "info",
           "message": "Bought accessory is worn (one per slot)"
         },
         {
-          "t": 39893,
+          "t": 47586,
           "source": "step",
           "level": "info",
           "message": "call buyCheapestAccessory"
         },
         {
-          "t": 41095,
+          "t": 48788,
           "source": "step",
           "level": "info",
           "message": "wait 1200"
         },
         {
-          "t": 41095,
+          "t": 48788,
           "source": "mark",
           "level": "info",
           "message": "Path: weekly learning, growth stages and discoveries"
         },
         {
-          "t": 41124,
+          "t": 48819,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Path\",\"exact\":true}"
         },
         {
-          "t": 41148,
+          "t": 48846,
           "source": "check",
           "level": "info",
           "message": "Path shows the stage journey and discoveries",
           "data": null
         },
         {
-          "t": 41149,
+          "t": 48847,
           "source": "check",
           "level": "info",
           "message": "The document language is English"
         },
         {
-          "t": 41149,
+          "t": 48847,
           "source": "check",
           "level": "info",
           "message": "The screen fits without horizontal scrolling"
         },
         {
-          "t": 41149,
+          "t": 48847,
           "source": "check",
           "level": "info",
           "message": "The two self-hosted font families load"
         },
         {
-          "t": 41149,
+          "t": 48847,
           "source": "step",
           "level": "info",
           "message": "call checkSurface"
         },
         {
-          "t": 44161,
+          "t": 51873,
           "source": "step",
           "level": "info",
           "message": "call scrollPage"
         },
         {
-          "t": 44161,
+          "t": 51873,
           "source": "mark",
           "level": "info",
           "message": "Parent: PIN, analytics, confirm the child's task"
         },
         {
-          "t": 45750,
+          "t": 53453,
           "source": "step",
           "level": "info",
           "message": "goto /analytics"
         },
         {
-          "t": 45777,
+          "t": 53478,
           "source": "check",
           "level": "info",
           "message": "Parent mode is behind a PIN",
           "data": null
         },
         {
-          "t": 45807,
+          "t": 53502,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 1\",\"exact\":true}"
         },
         {
-          "t": 45850,
+          "t": 53546,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 2\",\"exact\":true}"
         },
         {
-          "t": 45899,
+          "t": 53591,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 3\",\"exact\":true}"
         },
         {
-          "t": 45923,
+          "t": 53618,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 4\",\"exact\":true}"
         },
         {
-          "t": 45999,
+          "t": 53695,
           "source": "check",
           "level": "info",
           "message": "Analytics: radars, bars, ranking",
           "data": null
         },
         {
-          "t": 47000,
+          "t": 54697,
           "source": "step",
           "level": "info",
           "message": "wait 1000"
         },
         {
-          "t": 50012,
+          "t": 57717,
           "source": "step",
           "level": "info",
           "message": "call scrollPage"
         },
         {
-          "t": 50042,
+          "t": 57755,
           "source": "step",
           "level": "info",
           "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"City\",\"exact\":true}"
         },
         {
-          "t": 50843,
+          "t": 58556,
           "source": "step",
           "level": "info",
           "message": "wait 800"
         },
         {
-          "t": 50855,
+          "t": 58574,
           "source": "step",
           "level": "info",
           "message": "call openParentTab"
         },
         {
-          "t": 50959,
+          "t": 58679,
           "source": "check",
           "level": "info",
           "message": "Tasks: Today list with confirmations",
           "data": null
         },
         {
-          "t": 51244,
+          "t": 59612,
           "source": "check",
           "level": "info",
           "message": "Parent confirms → ☀ and weekly goal grow"
         },
         {
-          "t": 52146,
+          "t": 60513,
           "source": "step",
           "level": "info",
           "message": "call confirmTask"
         },
         {
-          "t": 55171,
+          "t": 63550,
           "source": "step",
           "level": "info",
           "message": "call scrollPage"
         },
         {
-          "t": 55189,
+          "t": 63607,
           "source": "step",
           "level": "info",
           "message": "call openParentTab"
         },
         {
-          "t": 55217,
+          "t": 63635,
           "source": "check",
           "level": "info",
           "message": "Gifts & goal: requests and shop",
           "data": null
         },
         {
-          "t": 58238,
+          "t": 66660,
+          "source": "step",
+          "level": "info",
+          "message": "call scrollPage"
+        }
+      ]
+    },
+    {
+      "app": "hackathon-business-cup2.0-brainee",
+      "module": "mvp",
+      "flow": "ipad-mvp",
+      "title": "iPad viewport: parent preview, entry, leisure, gifts, Brainy, Path, parent",
+      "surface": "web",
+      "target": "http://127.0.0.1:3123/login",
+      "startedAt": "2026-11-15T03:11:51.069Z",
+      "durationMs": 68826,
+      "status": "PASSED",
+      "checks": {
+        "passed": 22,
+        "failed": 0
+      },
+      "errors": 0,
+      "note": null,
+      "viewport": "ipad",
+      "media": {
+        "video": "ipad-mvp.mp4",
+        "poster": "ipad-mvp.jpg",
+        "bytes": 1436359
+      },
+      "screenshots": [],
+      "entries": [
+        {
+          "t": 336,
+          "source": "step",
+          "level": "info",
+          "message": "open /login"
+        },
+        {
+          "t": 1960,
+          "source": "check",
+          "level": "info",
+          "message": "Demo content reset to the seed"
+        },
+        {
+          "t": 1960,
+          "source": "step",
+          "level": "info",
+          "message": "call resetDemo"
+        },
+        {
+          "t": 1960,
+          "source": "mark",
+          "level": "info",
+          "message": "Parent Brain Check funnel: habits, brain meter, result, plan and offer"
+        },
+        {
+          "t": 9861,
+          "source": "check",
+          "level": "info",
+          "message": "The brain meter drops as the parent answers the habit questions"
+        },
+        {
+          "t": 33377,
+          "source": "check",
+          "level": "info",
+          "message": "Funnel ends on the offer: display-only prices, no payment (D-41)"
+        },
+        {
+          "t": 37596,
+          "source": "step",
+          "level": "info",
+          "message": "call walkFunnel"
+        },
+        {
+          "t": 37598,
+          "source": "check",
+          "level": "info",
+          "message": "The document language is English"
+        },
+        {
+          "t": 37598,
+          "source": "check",
+          "level": "info",
+          "message": "The screen fits without horizontal scrolling"
+        },
+        {
+          "t": 37598,
+          "source": "check",
+          "level": "info",
+          "message": "The two self-hosted font families load"
+        },
+        {
+          "t": 37598,
+          "source": "step",
+          "level": "info",
+          "message": "call checkSurface"
+        },
+        {
+          "t": 39149,
+          "source": "step",
+          "level": "info",
+          "message": "goto /entry"
+        },
+        {
+          "t": 39170,
+          "source": "check",
+          "level": "info",
+          "message": "Opening the app shows the entry screen",
+          "data": null
+        },
+        {
+          "t": 40972,
+          "source": "step",
+          "level": "info",
+          "message": "wait 1800"
+        },
+        {
+          "t": 40972,
+          "source": "mark",
+          "level": "info",
+          "message": "Child: other games → Learn"
+        },
+        {
+          "t": 41017,
+          "source": "step",
+          "level": "info",
+          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"No, I want to see other games\",\"exact\":true}"
+        },
+        {
+          "t": 41055,
+          "source": "check",
+          "level": "info",
+          "message": "Learn shows Brainy's advice and the grid",
+          "data": null
+        },
+        {
+          "t": 42256,
+          "source": "step",
+          "level": "info",
+          "message": "wait 1200"
+        },
+        {
+          "t": 42256,
+          "source": "mark",
+          "level": "info",
+          "message": "Leisure: fun-game shop and films"
+        },
+        {
+          "t": 42300,
+          "source": "step",
+          "level": "info",
+          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Leisure\",\"exact\":true}"
+        },
+        {
+          "t": 42333,
+          "source": "check",
+          "level": "info",
+          "message": "Leisure shows the ★ shop",
+          "data": null
+        },
+        {
+          "t": 42335,
+          "source": "step",
+          "level": "info",
+          "message": "scroll window by 0,700"
+        },
+        {
+          "t": 43136,
+          "source": "step",
+          "level": "info",
+          "message": "wait 800"
+        },
+        {
+          "t": 43137,
+          "source": "step",
+          "level": "info",
+          "message": "scroll window by 0,900"
+        },
+        {
+          "t": 43939,
+          "source": "step",
+          "level": "info",
+          "message": "wait 800"
+        },
+        {
+          "t": 43939,
+          "source": "mark",
+          "level": "info",
+          "message": "Gifts: goal, shop, tasks, exchange"
+        },
+        {
+          "t": 43964,
+          "source": "step",
+          "level": "info",
+          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Gifts\",\"exact\":true}"
+        },
+        {
+          "t": 43998,
+          "source": "check",
+          "level": "info",
+          "message": "Gifts shows the weekly goal and tasks",
+          "data": null
+        },
+        {
+          "t": 43999,
+          "source": "step",
+          "level": "info",
+          "message": "scroll window by 0,600"
+        },
+        {
+          "t": 44689,
+          "source": "check",
+          "level": "info",
+          "message": "Child marks a real-life task done → waits for the parent"
+        },
+        {
+          "t": 44689,
+          "source": "step",
+          "level": "info",
+          "message": "call childTaskDone"
+        },
+        {
+          "t": 44714,
+          "source": "step",
+          "level": "info",
+          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"1 ☀ for 10 ★\",\"exact\":true}"
+        },
+        {
+          "t": 45716,
+          "source": "step",
+          "level": "info",
+          "message": "wait 1000"
+        },
+        {
+          "t": 45716,
+          "source": "mark",
+          "level": "info",
+          "message": "Brainy: accessory shop"
+        },
+        {
+          "t": 45765,
+          "source": "step",
+          "level": "info",
+          "message": "click {\"by\":\"css\",\"value\":\"nav a[href=\\\"/brainy\\\"]\"}"
+        },
+        {
+          "t": 45804,
+          "source": "check",
+          "level": "info",
+          "message": "Brainy tab shows stats and the shop",
+          "data": null
+        },
+        {
+          "t": 46591,
+          "source": "check",
+          "level": "info",
+          "message": "Bought accessory is worn (one per slot)"
+        },
+        {
+          "t": 47494,
+          "source": "step",
+          "level": "info",
+          "message": "call buyCheapestAccessory"
+        },
+        {
+          "t": 48696,
+          "source": "step",
+          "level": "info",
+          "message": "wait 1200"
+        },
+        {
+          "t": 48696,
+          "source": "mark",
+          "level": "info",
+          "message": "Path: weekly learning, growth stages and discoveries"
+        },
+        {
+          "t": 48740,
+          "source": "step",
+          "level": "info",
+          "message": "click {\"by\":\"role\",\"role\":\"link\",\"name\":\"Path\",\"exact\":true}"
+        },
+        {
+          "t": 48767,
+          "source": "check",
+          "level": "info",
+          "message": "Path shows the stage journey and discoveries",
+          "data": null
+        },
+        {
+          "t": 48768,
+          "source": "check",
+          "level": "info",
+          "message": "The document language is English"
+        },
+        {
+          "t": 48768,
+          "source": "check",
+          "level": "info",
+          "message": "The screen fits without horizontal scrolling"
+        },
+        {
+          "t": 48768,
+          "source": "check",
+          "level": "info",
+          "message": "The two self-hosted font families load"
+        },
+        {
+          "t": 48768,
+          "source": "step",
+          "level": "info",
+          "message": "call checkSurface"
+        },
+        {
+          "t": 51788,
+          "source": "step",
+          "level": "info",
+          "message": "call scrollPage"
+        },
+        {
+          "t": 51788,
+          "source": "mark",
+          "level": "info",
+          "message": "Parent: PIN, analytics, confirm the child's task"
+        },
+        {
+          "t": 53347,
+          "source": "step",
+          "level": "info",
+          "message": "goto /analytics"
+        },
+        {
+          "t": 53371,
+          "source": "check",
+          "level": "info",
+          "message": "Parent mode is behind a PIN",
+          "data": null
+        },
+        {
+          "t": 53405,
+          "source": "step",
+          "level": "info",
+          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 1\",\"exact\":true}"
+        },
+        {
+          "t": 53432,
+          "source": "step",
+          "level": "info",
+          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 2\",\"exact\":true}"
+        },
+        {
+          "t": 53465,
+          "source": "step",
+          "level": "info",
+          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 3\",\"exact\":true}"
+        },
+        {
+          "t": 53499,
+          "source": "step",
+          "level": "info",
+          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"Digit 4\",\"exact\":true}"
+        },
+        {
+          "t": 53577,
+          "source": "check",
+          "level": "info",
+          "message": "Analytics: radars, bars, ranking",
+          "data": null
+        },
+        {
+          "t": 54578,
+          "source": "step",
+          "level": "info",
+          "message": "wait 1000"
+        },
+        {
+          "t": 57594,
+          "source": "step",
+          "level": "info",
+          "message": "call scrollPage"
+        },
+        {
+          "t": 57632,
+          "source": "step",
+          "level": "info",
+          "message": "click {\"by\":\"role\",\"role\":\"button\",\"name\":\"City\",\"exact\":true}"
+        },
+        {
+          "t": 58434,
+          "source": "step",
+          "level": "info",
+          "message": "wait 800"
+        },
+        {
+          "t": 58465,
+          "source": "step",
+          "level": "info",
+          "message": "call openParentTab"
+        },
+        {
+          "t": 58571,
+          "source": "check",
+          "level": "info",
+          "message": "Tasks: Today list with confirmations",
+          "data": null
+        },
+        {
+          "t": 58836,
+          "source": "check",
+          "level": "info",
+          "message": "Parent confirms → ☀ and weekly goal grow"
+        },
+        {
+          "t": 59738,
+          "source": "step",
+          "level": "info",
+          "message": "call confirmTask"
+        },
+        {
+          "t": 62788,
+          "source": "step",
+          "level": "info",
+          "message": "call scrollPage"
+        },
+        {
+          "t": 62796,
+          "source": "step",
+          "level": "info",
+          "message": "call openParentTab"
+        },
+        {
+          "t": 62824,
+          "source": "check",
+          "level": "info",
+          "message": "Gifts & goal: requests and shop",
+          "data": null
+        },
+        {
+          "t": 65836,
           "source": "step",
           "level": "info",
           "message": "call scrollPage"

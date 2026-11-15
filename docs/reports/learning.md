@@ -22,7 +22,7 @@ Catalog titles and host loading/error messages follow the English/Russian switch
 
 ### Phone · 390 × 844
 
-**Phone: three saved games, break and child tabs** (flow `phone-learning`): PASSED, 27 of 27 checks passed, 45.4 s, phone. Recorded Nov 14, 2026, 4:06 p.m. (America/New_York) against `http://127.0.0.1:3123/learn`.
+**Phone: three saved games, break and child tabs** (flow `phone-learning`): PASSED, 27 of 27 checks passed, 43.4 s, phone. Recorded Nov 14, 2026, 10:15 p.m. (America/New_York) against `http://127.0.0.1:3123/learn`.
 
 [![Phone: three saved games, break and child tabs: click to play the recording](videos/learning/phone-learning.jpg)](videos/learning/phone-learning.mp4)
 
@@ -30,71 +30,71 @@ Catalog titles and host loading/error messages follow the English/Russian switch
 
 | Time | Source | Entry |
 | --- | --- | --- |
-| 00:00.343 | step | open /learn |
-| 00:01.924 | check | Learn opens with saved state |
-| 00:01.926 | check | The compact Energy card shows the saved wallet |
-| 00:01.928 | check | The document language is English |
-| 00:01.928 | check | The screen fits without horizontal scrolling |
-| 00:01.928 | check | The two self-hosted font families load |
-| 00:01.928 | step | call checkSurface |
-| 00:03.128 | step | wait 1200 |
-| 00:03.128 | mark | Game 1: open Continue the pattern from the Learn grid |
-| 00:03.181 | step | click {"by":"role","role":"link","name":"ages 5+ Continue the Pattern Logic","exact":true} |
-| 00:03.283 | check | The game opens fullscreen |
-| 00:03.580 | mark | Play Continue the pattern |
-| 00:15.825 | check | Four rounds played (4 corrected) |
-| 00:15.825 | step | call playGame |
-| 00:16.627 | check | Game 1: «Game completed!» shows stars and Brainy before → after |
-| 00:16.627 | check | No break suggestion before the third game |
-| 00:19.335 | step | call showPostGame |
-| 00:19.335 | mark | Game 2: next game practice card |
-| 00:20.897 | step | goto /game/odd-one-out |
-| 00:20.929 | mark | Play Odd one out |
-| 00:25.807 | check | Four rounds played |
-| 00:25.807 | step | call playGame |
-| 00:26.549 | check | Game 2: «Game completed!» shows stars and Brainy before → after |
-| 00:26.550 | check | No break suggestion before the third game |
-| 00:29.257 | step | call showPostGame |
-| 00:29.257 | mark | Game 3: next level card |
-| 00:29.298 | step | click {"by":"testId","value":"next-level"} |
-| 00:29.378 | mark | Play Odd one out |
-| 00:34.162 | check | Four rounds played |
-| 00:34.162 | step | call playGame |
-| 00:34.893 | check | Game 3: «Game completed!» shows stars and Brainy before → after |
-| 00:34.895 | check | The third game adds today's +5 ★ break bonus |
-| 00:37.603 | step | call showPostGame |
-| 00:37.603 | mark | Take the suggested break |
-| 00:37.642 | step | click {"by":"role","role":"button","name":"Take a break","exact":true} |
-| 00:37.720 | check | The break ends on the Brainy tab |
-| 00:37.723 | check | Brainy thanks the child |
-| 00:37.723 | check | The document language is English |
-| 00:37.723 | check | The screen fits without horizontal scrolling |
-| 00:37.723 | check | The two self-hosted font families load |
-| 00:37.723 | step | call checkSurface |
-| 00:39.225 | step | wait 1500 |
-| 00:39.225 | mark | Visit the other tabs |
-| 00:39.272 | step | click {"by":"role","role":"link","name":"Learn","exact":true} |
-| 00:39.376 | check | Learn shows the updated wallet |
-| 00:40.377 | step | wait 1000 |
-| 00:40.421 | step | click {"by":"role","role":"link","name":"Leisure","exact":true} |
-| 00:40.455 | check | Leisure shows the saved shop and entertainment choices |
-| 00:41.256 | step | wait 800 |
-| 00:41.311 | step | click {"by":"role","role":"link","name":"Gifts","exact":true} |
-| 00:41.359 | check | Gifts shows the saved goal, shop and tasks |
-| 00:42.160 | step | wait 800 |
-| 00:42.187 | step | click {"by":"role","role":"link","name":"Open Brainy","exact":true} |
-| 00:42.289 | check | The compact Energy card opens the Brainy tab |
-| 00:42.290 | check | The document language is English |
-| 00:42.290 | check | The screen fits without horizontal scrolling |
-| 00:42.290 | check | The two self-hosted font families load |
-| 00:42.290 | step | call checkSurface |
-| 00:43.490 | step | wait 1200 |
+| 00:00.333 | step | open /learn |
+| 00:01.918 | check | Learn opens with saved state |
+| 00:01.920 | check | The compact Energy card shows the saved wallet |
+| 00:01.921 | check | The document language is English |
+| 00:01.921 | check | The screen fits without horizontal scrolling |
+| 00:01.921 | check | The two self-hosted font families load |
+| 00:01.921 | step | call checkSurface |
+| 00:03.123 | step | wait 1200 |
+| 00:03.123 | mark | Game 1: open Continue the pattern from the Learn grid |
+| 00:03.180 | step | click {"by":"role","role":"link","name":"ages 5+ Continue the Pattern Logic","exact":true} |
+| 00:03.280 | check | The game opens fullscreen |
+| 00:03.569 | mark | Play Continue the pattern |
+| 00:14.019 | check | Four rounds played (3 corrected) |
+| 00:14.019 | step | call playGame |
+| 00:14.817 | check | Game 1: «Game completed!» shows stars and Brainy before → after |
+| 00:14.818 | check | No break suggestion before the third game |
+| 00:17.523 | step | call showPostGame |
+| 00:17.523 | mark | Game 2: next game practice card |
+| 00:19.083 | step | goto /game/odd-one-out |
+| 00:19.114 | mark | Play Odd one out |
+| 00:23.969 | check | Four rounds played |
+| 00:23.969 | step | call playGame |
+| 00:24.716 | check | Game 2: «Game completed!» shows stars and Brainy before → after |
+| 00:24.717 | check | No break suggestion before the third game |
+| 00:27.423 | step | call showPostGame |
+| 00:27.424 | mark | Game 3: next level card |
+| 00:27.452 | step | click {"by":"testId","value":"next-level"} |
+| 00:27.530 | mark | Play Odd one out |
+| 00:32.351 | check | Four rounds played |
+| 00:32.351 | step | call playGame |
+| 00:33.083 | check | Game 3: «Game completed!» shows stars and Brainy before → after |
+| 00:33.097 | check | The third game adds today's +5 ★ break bonus |
+| 00:35.805 | step | call showPostGame |
+| 00:35.805 | mark | Take the suggested break |
+| 00:35.865 | step | click {"by":"role","role":"button","name":"Take a break","exact":true} |
+| 00:35.903 | check | The break ends on the Brainy tab |
+| 00:35.913 | check | Brainy thanks the child |
+| 00:35.915 | check | The document language is English |
+| 00:35.915 | check | The screen fits without horizontal scrolling |
+| 00:35.915 | check | The two self-hosted font families load |
+| 00:35.915 | step | call checkSurface |
+| 00:37.417 | step | wait 1500 |
+| 00:37.417 | mark | Visit the other tabs |
+| 00:37.451 | step | click {"by":"role","role":"link","name":"Learn","exact":true} |
+| 00:37.557 | check | Learn shows the updated wallet |
+| 00:38.557 | step | wait 1000 |
+| 00:38.604 | step | click {"by":"role","role":"link","name":"Leisure","exact":true} |
+| 00:38.633 | check | Leisure shows the saved shop and entertainment choices |
+| 00:39.435 | step | wait 800 |
+| 00:39.474 | step | click {"by":"role","role":"link","name":"Gifts","exact":true} |
+| 00:39.502 | check | Gifts shows the saved goal, shop and tasks |
+| 00:40.303 | step | wait 800 |
+| 00:40.331 | step | click {"by":"role","role":"link","name":"Open Brainy","exact":true} |
+| 00:40.433 | check | The compact Energy card opens the Brainy tab |
+| 00:40.434 | check | The document language is English |
+| 00:40.434 | check | The screen fits without horizontal scrolling |
+| 00:40.434 | check | The two self-hosted font families load |
+| 00:40.434 | step | call checkSurface |
+| 00:41.634 | step | wait 1200 |
 
 </details>
 
 ### iPad viewport · 1180 × 820 landscape
 
-**iPad viewport: three saved games, break and child tabs** (flow `ipad-learning`): PASSED, 27 of 27 checks passed, 43.8 s, ipad. Recorded Nov 14, 2026, 4:07 p.m. (America/New_York) against `http://127.0.0.1:3123/learn`.
+**iPad viewport: three saved games, break and child tabs** (flow `ipad-learning`): PASSED, 27 of 27 checks passed, 41.9 s, ipad. Recorded Nov 14, 2026, 10:15 p.m. (America/New_York) against `http://127.0.0.1:3123/learn`.
 
 [![iPad viewport: three saved games, break and child tabs: click to play the recording](videos/learning/ipad-learning.jpg)](videos/learning/ipad-learning.mp4)
 
@@ -102,65 +102,65 @@ Catalog titles and host loading/error messages follow the English/Russian switch
 
 | Time | Source | Entry |
 | --- | --- | --- |
-| 00:00.340 | step | open /learn |
-| 00:01.916 | check | Learn opens with saved state |
-| 00:01.918 | check | The compact Energy card shows the saved wallet |
-| 00:01.918 | check | The document language is English |
-| 00:01.918 | check | The screen fits without horizontal scrolling |
-| 00:01.918 | check | The two self-hosted font families load |
-| 00:01.918 | step | call checkSurface |
-| 00:03.119 | step | wait 1200 |
-| 00:03.119 | mark | Game 1: open Continue the pattern from the Learn grid |
-| 00:03.159 | step | click {"by":"role","role":"link","name":"ages 5+ Continue the Pattern Logic","exact":true} |
-| 00:03.260 | check | The game opens fullscreen |
-| 00:03.542 | mark | Play Continue the pattern |
-| 00:13.846 | check | Four rounds played (3 corrected) |
-| 00:13.846 | step | call playGame |
-| 00:14.576 | check | Game 1: «Game completed!» shows stars and Brainy before → after |
-| 00:14.577 | check | No break suggestion before the third game |
-| 00:17.283 | step | call showPostGame |
-| 00:17.283 | mark | Game 2: next game practice card |
-| 00:18.848 | step | goto /game/odd-one-out |
-| 00:18.861 | mark | Play Odd one out |
-| 00:23.676 | check | Four rounds played |
-| 00:23.676 | step | call playGame |
-| 00:24.416 | check | Game 2: «Game completed!» shows stars and Brainy before → after |
-| 00:24.416 | check | No break suggestion before the third game |
-| 00:27.123 | step | call showPostGame |
-| 00:27.123 | mark | Game 3: next level card |
-| 00:27.170 | step | click {"by":"testId","value":"next-level"} |
-| 00:27.248 | mark | Play Odd one out |
-| 00:32.080 | check | Four rounds played |
-| 00:32.080 | step | call playGame |
-| 00:32.821 | check | Game 3: «Game completed!» shows stars and Brainy before → after |
-| 00:32.839 | check | Today's bonus is already claimed; the break still appears |
-| 00:35.542 | step | call showPostGame |
-| 00:35.542 | mark | Take the suggested break |
-| 00:35.591 | step | click {"by":"role","role":"button","name":"Take a break","exact":true} |
-| 00:35.669 | check | The break ends on the Brainy tab |
-| 00:35.674 | check | Brainy thanks the child |
-| 00:35.675 | check | The document language is English |
-| 00:35.675 | check | The screen fits without horizontal scrolling |
-| 00:35.675 | check | The two self-hosted font families load |
-| 00:35.675 | step | call checkSurface |
-| 00:37.176 | step | wait 1500 |
-| 00:37.176 | mark | Visit the other tabs |
-| 00:37.222 | step | click {"by":"role","role":"link","name":"Learn","exact":true} |
-| 00:37.325 | check | Learn shows the updated wallet |
-| 00:38.326 | step | wait 1000 |
-| 00:38.355 | step | click {"by":"role","role":"link","name":"Leisure","exact":true} |
-| 00:38.380 | check | Leisure shows the saved shop and entertainment choices |
-| 00:39.181 | step | wait 800 |
-| 00:39.220 | step | click {"by":"role","role":"link","name":"Gifts","exact":true} |
-| 00:39.255 | check | Gifts shows the saved goal, shop and tasks |
-| 00:40.055 | step | wait 800 |
-| 00:40.088 | step | click {"by":"role","role":"link","name":"Open Brainy","exact":true} |
-| 00:40.188 | check | The compact Energy card opens the Brainy tab |
-| 00:40.189 | check | The document language is English |
-| 00:40.189 | check | The screen fits without horizontal scrolling |
-| 00:40.189 | check | The two self-hosted font families load |
-| 00:40.189 | step | call checkSurface |
-| 00:41.390 | step | wait 1200 |
+| 00:00.290 | step | open /learn |
+| 00:01.866 | check | Learn opens with saved state |
+| 00:01.868 | check | The compact Energy card shows the saved wallet |
+| 00:01.868 | check | The document language is English |
+| 00:01.868 | check | The screen fits without horizontal scrolling |
+| 00:01.868 | check | The two self-hosted font families load |
+| 00:01.868 | step | call checkSurface |
+| 00:03.070 | step | wait 1200 |
+| 00:03.070 | mark | Game 1: open Continue the pattern from the Learn grid |
+| 00:03.120 | step | click {"by":"role","role":"link","name":"ages 5+ Continue the Pattern Logic","exact":true} |
+| 00:03.222 | check | The game opens fullscreen |
+| 00:03.507 | mark | Play Continue the pattern |
+| 00:11.980 | check | Four rounds played (2 corrected) |
+| 00:11.980 | step | call playGame |
+| 00:12.726 | check | Game 1: «Game completed!» shows stars and Brainy before → after |
+| 00:12.726 | check | No break suggestion before the third game |
+| 00:15.442 | step | call showPostGame |
+| 00:15.442 | mark | Game 2: next game practice card |
+| 00:17.001 | step | goto /game/odd-one-out |
+| 00:17.019 | mark | Play Odd one out |
+| 00:21.830 | check | Four rounds played |
+| 00:21.830 | step | call playGame |
+| 00:22.558 | check | Game 2: «Game completed!» shows stars and Brainy before → after |
+| 00:22.559 | check | No break suggestion before the third game |
+| 00:25.266 | step | call showPostGame |
+| 00:25.266 | mark | Game 3: next level card |
+| 00:25.321 | step | click {"by":"testId","value":"next-level"} |
+| 00:25.401 | mark | Play Odd one out |
+| 00:30.221 | check | Four rounds played |
+| 00:30.221 | step | call playGame |
+| 00:30.951 | check | Game 3: «Game completed!» shows stars and Brainy before → after |
+| 00:30.969 | check | Today's bonus is already claimed; the break still appears |
+| 00:33.675 | step | call showPostGame |
+| 00:33.675 | mark | Take the suggested break |
+| 00:33.735 | step | click {"by":"role","role":"button","name":"Take a break","exact":true} |
+| 00:33.815 | check | The break ends on the Brainy tab |
+| 00:33.817 | check | Brainy thanks the child |
+| 00:33.818 | check | The document language is English |
+| 00:33.818 | check | The screen fits without horizontal scrolling |
+| 00:33.818 | check | The two self-hosted font families load |
+| 00:33.818 | step | call checkSurface |
+| 00:35.318 | step | wait 1500 |
+| 00:35.318 | mark | Visit the other tabs |
+| 00:35.344 | step | click {"by":"role","role":"link","name":"Learn","exact":true} |
+| 00:35.451 | check | Learn shows the updated wallet |
+| 00:36.452 | step | wait 1000 |
+| 00:36.477 | step | click {"by":"role","role":"link","name":"Leisure","exact":true} |
+| 00:36.513 | check | Leisure shows the saved shop and entertainment choices |
+| 00:37.314 | step | wait 800 |
+| 00:37.357 | step | click {"by":"role","role":"link","name":"Gifts","exact":true} |
+| 00:37.382 | check | Gifts shows the saved goal, shop and tasks |
+| 00:38.184 | step | wait 800 |
+| 00:38.225 | step | click {"by":"role","role":"link","name":"Open Brainy","exact":true} |
+| 00:38.326 | check | The compact Energy card opens the Brainy tab |
+| 00:38.328 | check | The document language is English |
+| 00:38.328 | check | The screen fits without horizontal scrolling |
+| 00:38.328 | check | The two self-hosted font families load |
+| 00:38.328 | step | call checkSurface |
+| 00:39.530 | step | wait 1200 |
 
 </details>
 
@@ -213,7 +213,7 @@ and WebKit; this is not a real-device or Screen Time test.
 
 [Download the flow timelines (JSON)](logs/learning.json).
 
-Captured Nov 14, 2026, 4:06 p.m. (America/New_York): 12 scenarios, ipad and phone; English, light theme. No failed steps, redirects, JavaScript errors, HTTP errors or unexpected failed requests. 0 known lifecycle request cancellations remain in the manifest. Source: `feac05b`. Imported static references are not live captures. Flows: `phone-learning` PASSED (27 checks), `ipad-learning` PASSED (27 checks). Timelines: [JSON log](logs/learning.json).
+Captured Nov 14, 2026, 10:15 p.m. (America/New_York): 12 scenarios, ipad and phone; English, light theme. No failed steps, redirects, JavaScript errors, HTTP errors or unexpected failed requests. 0 known lifecycle request cancellations remain in the manifest. Source: `ca3c1d2` with working-tree changes. Imported static references are not live captures. Flows: `phone-learning` PASSED (27 checks), `ipad-learning` PASSED (27 checks). Timelines: [JSON log](logs/learning.json).
 
 The editable [template](src/learning.md), [scenario](../../scripts/reports/scenarios/learning.json)
 and [walkthrough actions](../../scripts/reports/scenarios/learning.mjs) define

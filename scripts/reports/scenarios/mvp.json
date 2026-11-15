@@ -1,21 +1,25 @@
 {
   "shots": [
     {
-      "route": "/start?tour=1#cover",
+      "route": "/start?tour=1#duration",
       "shots": [
         {
-          "name": "start-cover",
+          "name": "start-quiz",
           "fullPage": true,
           "steps": [
             {
               "expect": {
                 "target": {
-                  "by": "role",
-                  "role": "heading",
-                  "name": "Give screen time a happy ending.",
-                  "exact": true
+                  "by": "testId",
+                  "value": "brain-panel"
                 },
                 "timeout": 20000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"duration\"",
+                "timeout": 25000
               }
             },
             {
@@ -29,37 +33,170 @@
       ]
     },
     {
-      "route": "/start?tour=1#growth",
+      "route": "/start?tour=1",
       "shots": [
         {
-          "name": "start-growth",
+          "name": "start-reveal",
           "fullPage": true,
           "steps": [
             {
               "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"duration\"",
+                "timeout": 25000
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"duration\"",
+                "timeout": 25000
+              }
+            },
+            {
+              "click": {
+                "by": "css",
+                "value": "[data-value=\"120-240\"]"
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"content\"",
+                "timeout": 25000
+              }
+            },
+            {
+              "click": {
+                "by": "css",
+                "value": "[data-value=\"shorts\"]"
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"finish\"",
+                "timeout": 25000
+              }
+            },
+            {
+              "click": {
+                "by": "css",
+                "value": "[data-value=\"switch\"]"
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"handoff\"",
+                "timeout": 25000
+              }
+            },
+            {
+              "click": {
+                "by": "css",
+                "value": "[data-value=\"more\"]"
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"reading\"",
+                "timeout": 25000
+              }
+            },
+            {
+              "click": {
+                "by": "css",
+                "value": "[data-value=\"rare\"]"
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"child\"",
+                "timeout": 25000
+              }
+            },
+            {
+              "fill": {
                 "target": {
-                  "by": "testId",
-                  "value": "funnel-growth"
+                  "by": "label",
+                  "value": "Child’s first name (optional)"
+                },
+                "value": "Leo"
+              }
+            },
+            {
+              "click": {
+                "by": "css",
+                "value": "[data-age=\"6-7\"]"
+              }
+            },
+            {
+              "click": {
+                "by": "role",
+                "role": "button",
+                "name": "Continue",
+                "exact": true
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"guilt\"",
+                "timeout": 25000
+              }
+            },
+            {
+              "click": {
+                "by": "css",
+                "value": "[data-n=\"4\"]"
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"limits\"",
+                "timeout": 25000
+              }
+            },
+            {
+              "click": {
+                "by": "css",
+                "value": "[data-n=\"5\"]"
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"attempt\"",
+                "timeout": 25000
+              }
+            },
+            {
+              "click": {
+                "by": "css",
+                "value": "[data-value=\"limits\"]"
+              }
+            },
+            {
+              "click": {
+                "by": "role",
+                "role": "button",
+                "name": "Continue",
+                "exact": true
+              }
+            },
+            {
+              "expect": {
+                "eval": "document.querySelector('[data-testid=\"parent-funnel\"]')?.dataset.step === \"reveal\"",
+                "timeout": 25000
+              }
+            },
+            {
+              "expect": {
+                "target": {
+                  "by": "role",
+                  "role": "heading",
+                  "name": "This is Leo’s Brainy today",
+                  "exact": true
                 },
                 "timeout": 20000
               }
             },
             {
-              "press": {
-                "target": {
-                  "by": "role",
-                  "role": "slider",
-                  "name": "Explore Brainy's stages",
-                  "exact": true
-                },
-                "key": "End"
-              }
-            },
-            {
-              "expect": {
-                "eval": "document.querySelector('[data-testid=\"funnel-growth\"]')?.dataset.stage === \"genius\"",
-                "message": "Growth preview reaches the real Genius stage"
-              }
+              "wait": 1500
             },
             {
               "expect": {
@@ -409,66 +546,10 @@
           "call": "resetDemo"
         },
         {
-          "mark": "Parent preview: cover and real growth stages"
+          "mark": "Parent Brain Check funnel: habits, brain meter, result, plan and offer"
         },
         {
-          "goto": "/start?tour=1#cover"
-        },
-        {
-          "expect": {
-            "target": {
-              "by": "role",
-              "role": "heading",
-              "name": "Give screen time a happy ending.",
-              "exact": true
-            },
-            "timeout": 20000
-          }
-        },
-        {
-          "call": "checkSurface"
-        },
-        {
-          "wait": 1200
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "button",
-            "name": "Meet Brainy",
-            "exact": true
-          }
-        },
-        {
-          "expect": {
-            "target": {
-              "by": "role",
-              "role": "heading",
-              "name": "Meet Brainy.",
-              "exact": true
-            },
-            "timeout": 20000
-          }
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "button",
-            "name": "Continue",
-            "exact": true
-          }
-        },
-        {
-          "expect": {
-            "target": {
-              "by": "testId",
-              "value": "funnel-growth"
-            },
-            "timeout": 20000
-          }
-        },
-        {
-          "call": "previewGrowth"
+          "call": "walkFunnel"
         },
         {
           "call": "checkSurface"
@@ -789,66 +870,10 @@
           "call": "resetDemo"
         },
         {
-          "mark": "Parent preview: cover and real growth stages"
+          "mark": "Parent Brain Check funnel: habits, brain meter, result, plan and offer"
         },
         {
-          "goto": "/start?tour=1#cover"
-        },
-        {
-          "expect": {
-            "target": {
-              "by": "role",
-              "role": "heading",
-              "name": "Give screen time a happy ending.",
-              "exact": true
-            },
-            "timeout": 20000
-          }
-        },
-        {
-          "call": "checkSurface"
-        },
-        {
-          "wait": 1200
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "button",
-            "name": "Meet Brainy",
-            "exact": true
-          }
-        },
-        {
-          "expect": {
-            "target": {
-              "by": "role",
-              "role": "heading",
-              "name": "Meet Brainy.",
-              "exact": true
-            },
-            "timeout": 20000
-          }
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "button",
-            "name": "Continue",
-            "exact": true
-          }
-        },
-        {
-          "expect": {
-            "target": {
-              "by": "testId",
-              "value": "funnel-growth"
-            },
-            "timeout": 20000
-          }
-        },
-        {
-          "call": "previewGrowth"
+          "call": "walkFunnel"
         },
         {
           "call": "checkSurface"

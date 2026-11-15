@@ -32,7 +32,7 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 **Decision:** new features and UI text remain English only in feature-local copy modules. Write English copy for the product instead of translating the design files' placeholder text. D-34 governs the whole platform; the former exception preserving Russian translations and locale controls no longer applies.
 
 ## D-36 · Claude Design lavender system and the Brain component · 2026-11-15 · accepted · extends D-35, supersedes D-13 visual identity
-**Context:** the owner's Claude Design artifact (frozen copies in `docs/ideas/claude-design/`) shows the full lavender child and parent apps and a live Brain mascot. It shares tokens with the funnel export.
+**Context:** the owner's Claude Design artifact (frozen copies in git history at `ca3c1d2:docs/ideas/claude-design/`) shows the full lavender child and parent apps and a live Brain mascot. It shares tokens with the funnel export.
 **Decision:**
 - **Visual source of truth:** [product/design.md](../product/design.md).
 - **Tokens:** remap onto the existing names for a fast re-skin. Manrope for UI and titles, Unbounded only for numbers. Lucide icons at 2 px. Gains are blue (`#2847C7` on `#E3E9FF`) and losses peach (`#9A3B12` on `#FDE6D8`), not green/red.
@@ -99,7 +99,7 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 **Consequences:** no cron, new service or schema migration. Undated demo/legacy data is dated on first use without erasing it; an existing paid session flag is retained conservatively. New families are dated at signup. Demo content reset clears task history but preserves calendar/bonus; use a full DB reset for a new bonus rehearsal. Mechanics: [calendar resets](../product/mechanics.md#calendar-resets).
 
 ## D-25 · ROUTES.md is the product spec, reduced for our stack · 2026-11-14 · accepted · extends D-15, D-16, D-21
-**Context:** new inputs in `docs/ideas/`: `ROUTES.md` + `brainy-mvp.zip` (routes, roles, rules, events, clickable prototype) and a 30-game handoff for external learning games. Summary: [routes-spec.md](../product/routes-spec.md), [external-games.md](../product/external-games.md).
+**Context:** new inputs in `docs/ideas/` (now in git history at `b1a3c68`): `ROUTES.md` + `brainy-mvp.zip` (routes, roles, rules, events, clickable prototype) and a 30-game handoff for external learning games. Summary: [routes-spec.md](../product/routes-spec.md), [external-games.md](../product/external-games.md).
 **Decision:** adopt ROUTES.md behaviour with reductions: polling stays (no SSE, no Web Push; "Needs attention", badges and an event feed instead); our current paths stay (mapping in routes-spec); events live as a capped feed in the showcase; mood decay and resets are computed on read (no cron); the prototype's Google Fonts/cdnjs are never copied. External games: all source licences are permissive (QLOBE-kids MIT, Sugarizer Apache-2.0, H5P MIT, h5p-standalone MIT, Blockly Games Apache-2.0); they come in as path C artifacts after T-29, starting with Tangram Tales. Ranking stays fake/seeded; privacy work and the science-video media question wait.
 **Consequences:** product work follows routes-spec; the 30-game pack is a later catalog source, not an MVP blocker.
 

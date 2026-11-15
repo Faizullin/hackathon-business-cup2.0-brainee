@@ -37,7 +37,7 @@ app/(auth)/layout.tsx       # auth shell; /start uses StepPage's phone/iPad layo
 
 `GamePlayer` waits for a server-issued launch before mounting `GameHost`. The post-game screen shows the immutable before/after receipt and actual capped gains, while its balance comes from current shared state. It offers an available game for the weakest trained body part (`practiceGame`), plus the next level (or a new level-one run after the last level). This fallback needs no age norms. The separate entry algorithm is [T-25](../product/screens.md#entry).
 
-The former T-35 local balance/stat preview is removed. Only unacknowledged results use per-tab storage; no local awards are migrated into the server. Stopping waits for the server before navigating and showing Brainy's thank-you. Parent and child surfaces use the same saved snapshot with independent access controls; see the [two-device demonstration](../demo.md).
+The former T-35 local balance/stat preview is removed. Only unacknowledged results use per-tab storage; no local awards are migrated into the server. Stopping waits for the server before navigating and showing Brainy's thank-you. Parent and child surfaces use the same saved snapshot with independent access controls.
 
 ## Motion tokens (put in `packages/ui`)
 

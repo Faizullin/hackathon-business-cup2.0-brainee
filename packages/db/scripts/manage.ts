@@ -1,12 +1,21 @@
+import { existsSync } from "node:fs";
 import { getDatabaseConfig } from "../src/config";
 import { resetDatabase, runDrizzle, seedDatabase } from "./database-tools";
 
 try {
   const command = process.argv[2];
-  if (!["push", "seed", "refresh-demo", "reset", "studio"].includes(command ?? "")) {
-    throw new Error("Usage: manage.ts <push|seed|refresh-demo|reset|studio>");
+  if (!["prepare", "push", "seed", "refresh-demo", "reset", "studio"].includes(command ?? "")) {
+    throw new Error("Usage: manage.ts <prepare|push|seed|refresh-demo|reset|studio>");
   }
   const config = getDatabaseConfig();
+  // First run on a fresh clone: create and seed a missing local file; never touch existing data.
+  if (command === "prepare") {
+    if (config.isRemote || !config.path || existsSync(config.path)) {
+      console.log(`Database ready: ${config.path || "remote"}`);
+      process.exit(0);
+    }
+    console.log((await resetDatabase(config)).trim());
+  }
   if (command === "reset") console.log((await resetDatabase(config)).trim());
   if (command === "push") console.log(runDrizzle(config).trim());
   if (command === "seed") await seedDatabase(config);

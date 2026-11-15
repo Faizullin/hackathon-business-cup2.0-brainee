@@ -7,7 +7,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "pnpm games:discover && turbo run dev",
+    "dev": "node scripts/prepare-dev.mjs && turbo run dev",
     "demo": "pnpm games:build && pnpm db:reset && DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web dev",
     "build": "pnpm games:build && turbo run build",
     "start": "pnpm --filter @brainee/web start",
@@ -17,6 +17,7 @@
     "test:reports": "node --test scripts/reports/*.test.mjs",
     "test": "pnpm games:discover && turbo run test",
     "db:push": "pnpm --filter @brainee/db db:push",
+    "db:prepare": "pnpm --filter @brainee/db db:prepare",
     "db:seed": "pnpm --filter @brainee/db db:seed",
     "db:reset": "pnpm --filter @brainee/db db:reset",
     "db:refresh-demo": "pnpm --filter @brainee/db db:refresh-demo",

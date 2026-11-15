@@ -35,7 +35,7 @@ On Monday at local midnight, weekly earned ☀ resets to zero; the goal target a
 
 ## Brainy
 
-A brain with eyes, mouth, arms and legs. Its look is computed from stats, so progress shows without numbers: motivation for the child, proof for the parent. In the MVP it's an SVG drawn from formulas, as in the prototype's `brainy(stats, id, accessories)` (see [ideas/README.md](../ideas/README.md)).
+A brain with eyes, mouth, arms and legs. Its look is computed from stats, so progress shows without numbers: motivation for the child, proof for the parent. In the MVP it's an SVG drawn from formulas, as in the prototype's `brainy(stats, id, accessories)` (see [original sources](../README.md#original-sources)).
 
 ### Stats → body parts (each 0–100)
 | Part | Stat | Trained by | Visual change |

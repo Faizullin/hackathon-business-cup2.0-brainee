@@ -1,6 +1,6 @@
 # External learning games (30-game handoff, condensed)
 
-Source: the 30-game handoff (`.md` + `.zip`, in git history at `b1a3c68` under `docs/ideas/`; see [ideas/README.md](../ideas/README.md)) (catalog, pinned sources, `launch_games.py`, H5P starter content). Decision: [D-25](../dev/decisions.md); locale/age: D-22.
+Source: the 30-game handoff (`.md` + `.zip`, in git history at `b1a3c68` under `docs/ideas/`; see [original sources](../README.md#original-sources)) (catalog, pinned sources, `launch_games.py`, H5P starter content). Decision: [D-25](../dev/decisions.md); locale/age: D-22.
 
 - **Audience in the handoff:** US English, Grade 1–3 (15 games for 6–7, 15 for ~8). English is now allowed (D-30 and the game-expansion instruction); preserve source English when it avoids unnecessary rewriting.
 - **Sources and licences (checked on GitHub):** QLOBE-kids 15 games (MIT), Sugarizer 11 (Apache-2.0), H5P Drag Text / Sort Paragraphs / Dictation 3 (MIT, player h5p-standalone MIT), Blockly Games maze 1 (Apache-2.0). Bundled media can carry its own terms: keep each game's LICENSE/CREDITS.

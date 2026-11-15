@@ -32,7 +32,7 @@ Finishing opens the saved before/after receipt, actual gains and next choices. A
 
 Leisure separates the ★ game shop and the free interactive films; only content that exists is listed (D-39). The play-time explainer states that purchased minutes count during active play; timed passes show their remaining minutes, while permanent unlocks stay available.
 
-Science playback supports pause and saved position, with no seek control or video switching. Registered interactive films combine local audio with drawn scenes and questions that pause playback. The child's own Brainy fills the narrator slot, including equipped accessories and a talk-driven mouth. Playback starts only after Play; in-film questions grant no rewards. Completion leads to the existing final quiz before the server grants any reward. See [films.md](../dev/films.md). Entertainment endings reuse the calm dark stopping card and the family's phrase. Current media and catalog boundaries are in [demo.md](../demo.md).
+Science playback supports pause and saved position, with no seek control or video switching. Registered interactive films combine local audio with drawn scenes and questions that pause playback. The child's own Brainy fills the narrator slot, including equipped accessories and a talk-driven mouth. Playback starts only after Play; in-film questions grant no rewards. Completion leads to the existing final quiz before the server grants any reward. See [films.md](../dev/films.md). Entertainment endings reuse the calm dark stopping card and the family's phrase.
 
 ### Gifts
 
