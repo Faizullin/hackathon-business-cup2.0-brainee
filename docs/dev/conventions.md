@@ -25,8 +25,8 @@
 - Before a demo, run the [acceptance criteria](../product/rules.md#mvp-acceptance-criteria).
 
 ## Git
-- **Single branch: `master`.** Commit directly to it; don't create feature branches (locally or on GitHub).
-- Commits: Conventional Commits (`feat(core): add star rules [T-21]`), with the task ID from [todo.md](../progress/todo.md).
+- **Workflow:** feature branch → pull request into `master` (`feature/<name>`). Don't push to `master` directly and don't merge your own PR; the team reviews it.
+- Commits: Conventional Commits (`feat(core): add star rules [T-21]`), with the task ID from [todo.md](../progress/todo.md). No `Co-Authored-By` trailers and no tool-attribution lines in commits or PR descriptions.
 - Keep `master` deployable.
 - Personal commit/push and chat-handoff preferences: `.local/notes.md` (gitignored), if present.
 

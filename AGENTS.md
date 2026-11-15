@@ -58,6 +58,6 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 
 ## Conventions and tools
 
-- [docs/dev/conventions.md](docs/dev/conventions.md). **One branch only: `master`** (no feature branches). Personal workflow preferences live in `.local/`.
+- [docs/dev/conventions.md](docs/dev/conventions.md). **Workflow: feature branch → PR into `master`**, Conventional Commits with task IDs. Personal workflow preferences live in `.local/`.
 - Skills to use or skip: [docs/dev/agent-tooling.md](docs/dev/agent-tooling.md). UI work follows [docs/dev/ui.md](docs/dev/ui.md): Base UI components via shadcn, prototype tokens, and the lightest motion layer that works; don't invent a new visual style.
 - After UI changes: render the page, check phone and iPad widths, run the Playwright spec.
