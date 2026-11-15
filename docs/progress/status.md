@@ -24,7 +24,9 @@ The lavender redesign now includes published D-33 films, D-34 English-only platf
 
 ## Handoff
 **Branch `feature/brain-check-funnel` (T-149 to T-153, PR into master; spec: the task prompt; mockup: `docs/ideas/brain-check-funnel-mockup.html`).**
-- **Phase A done:** core rules in `packages/core/src/funnel-quiz.ts` (screens, drains, `funnelHealth`, body stats, signals, old-plan adapter `toFamilyPlan`, display-only plans, honest-timer helpers, `parseStartRequest`) with tests; `/` is a server gate (`/entry` or `/start`); jury logic extracted to `lib/jury.ts`. Old route/profile/week code removed from `funnel.ts`; `/signup` reads the adapted draft.
-- **Funnel UI is a stub** (`components/funnel/Funnel.tsx`) until Phase B.
-- **Env note:** the Windows checkout has CRLF working files. Run `pnpm exec biome check --write <my files>` only; a repo-wide `pnpm check` reports CRLF noise on untouched files. Install with `corepack pnpm install`.
-- **Next:** Phase B funnel UI (brain panel, 19 screens, jury header button, progress, `?reset=1`, existing-family card); C offer and `POST /api/onboarding/start`; D Hero Cape and unlock; E tests, docs, PR.
+- **Phase A done:** core rules in `packages/core/src/funnel-quiz.ts` with tests; `/` server gate; jury logic in `lib/jury.ts`.
+- **Phase B done:** `/start` moved to the `(funnel)` route group (no AppFrame). UI in `apps/web/src/components/funnel/`: `Funnel.tsx` (controller: hash steps, localStorage resume, `?tour=1`, `?reset=1`, existing-family card, Jury entry header button), `screens.tsx` (all 19 screens + exit + honest Starter timer hook), `BrainPanel.tsx` (brain meter, `effects="full"` only here), `funnel.css` (mockup CSS nested under `.bc`), `quiz-copy.ts` (English copy). Checked by hand at 1280x650 and 390x844: no scroll on desktop, no horizontal overflow on phone.
+- **Offer CTA already calls `POST /api/onboarding/start` (not built yet: Phase C).** It sends `{funnel, childName, email, plan, starterPack}` and stores returned `credentials` in sessionStorage `brainee-family-login`, then goes to `/entry`.
+- **Old Playwright specs (onboarding, funnel-moments, jury, family-plan, own-origin) still target the old funnel; Phase E rewrites them.**
+- **Env note:** Windows checkout has CRLF working files. Run `pnpm exec biome check --write <my files>` only. Install with `corepack pnpm install`; nested `pnpm` calls need a `pnpm` on PATH (`db:reset` fails otherwise; run `tsx scripts/manage.ts reset` in packages/db). `next dev` generates `apps/web/AGENTS.md`: delete it, never commit it.
+- **Next:** C: `POST /api/onboarding/start` + `signupFromQuiz` `startMood`/gift/plan storage + Your login card; D: Hero Cape and unlock moment; E: tests, docs, PR.
