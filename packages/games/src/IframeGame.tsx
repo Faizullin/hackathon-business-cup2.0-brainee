@@ -2,6 +2,7 @@
 
 import { BRIDGE_PROTOCOL, createId, HostBridge } from "@brainee/game-bridge";
 import { validateLearningEvent } from "@brainee/game-bridge/learning";
+import { gameSandbox } from "@brainee/game-catalog/remote";
 import { useEffect, useRef, useState } from "react";
 import type { GameDefinition, GameProps } from "./kit";
 
@@ -113,7 +114,7 @@ export function IframeGame(props: Props) {
       data-testid="embedded-game"
       data-ready={ready}
       src={`${game.runtimeUrl}?level=${level}&seed=${seed}`}
-      sandbox="allow-scripts allow-same-origin"
+      sandbox={gameSandbox(game.source)}
       className="w-full flex-1 border-0"
       style={{ minHeight: "min(600px, calc(100dvh - 100px))" }}
     />

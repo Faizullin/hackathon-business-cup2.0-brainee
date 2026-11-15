@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./remote": "./src/remote.ts",
+    "./storage": "./src/storage.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

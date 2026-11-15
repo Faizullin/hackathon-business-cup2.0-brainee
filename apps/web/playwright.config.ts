@@ -11,10 +11,10 @@ const databasePath = join(tmpdir(), `brainee-e2e-${randomUUID()}.db`);
 const FULL = process.env.E2E_FULL === "1";
 // Heavy, already-stable game checks (acceptance, stress, integration): full mode only.
 const HEAVY_GAME_SPECS =
-  /(games-integration|picture-puzzle|reflection|rhythm-copycat|secret-message-copy|magnet-explorer|neighborhood-map-walk|phaser-previews)[\w-]*\.spec\.ts$/;
+  /(remote-game|games-integration|picture-puzzle|reflection|rhythm-copycat|secret-message-copy|magnet-explorer|neighborhood-map-walk|phaser-previews)[\w-]*\.spec\.ts$/;
 // Every game-related spec, for the projects that skip games entirely.
 const GAME_SPECS =
-  /(games-integration|picture-puzzle|tangram|reflection|rhythm-copycat|secret-message-copy|magnet-explorer|neighborhood-map-walk|phaser-previews|pattern|film)[\w-]*\.spec\.ts$/;
+  /(remote-game|games-integration|picture-puzzle|tangram|reflection|rhythm-copycat|secret-message-copy|magnet-explorer|neighborhood-map-walk|phaser-previews|pattern|film)[\w-]*\.spec\.ts$/;
 const LAYOUT_SPECS =
   /(child-shell|pwa-layout|mvp-pages|scaffold|onboarding|parent-patterns|funnel-moments|post-game|game-cards)\.spec\.ts$/;
 
@@ -55,7 +55,13 @@ export default defineConfig({
       ]
     : [
         // Core: product flows, API, language, films and one game per runtime (React + embedded).
-        { name: "webkit-ipad", use: webkitIpad, testIgnore: HEAVY_GAME_SPECS },
+        {
+          name: "webkit-ipad",
+          use: webkitIpad,
+          testIgnore: process.argv.some((arg) => arg.includes("remote-game"))
+            ? undefined
+            : HEAVY_GAME_SPECS,
+        },
         // Second engine at phone width: layout and the main flows only.
         { name: "chromium-phone", use: chromiumPhone, testMatch: LAYOUT_SPECS },
       ],

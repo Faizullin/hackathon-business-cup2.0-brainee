@@ -56,10 +56,9 @@ export function readPendingFinish(): PendingFinish | null {
       return null;
     const game = getGame(issued.gameId);
     if (
-      !game ||
       !Number.isSafeInteger(issued.level) ||
       issued.level < 1 ||
-      issued.level > game.levels ||
+      issued.level > (game?.levels ?? Number.MAX_SAFE_INTEGER) ||
       !Number.isSafeInteger(issued.seed) ||
       issued.seed < 0 ||
       issued.seed > 0xffffffff ||
@@ -69,9 +68,9 @@ export function readPendingFinish(): PendingFinish | null {
       return null;
     // Structural check only; the API checks its catalog and ownership before rewarding.
     const result = parseLearningGameResult(value.result, {
-      id: game.id,
-      levels: game.levels,
-      roundsPerSession: game.roundsPerSession,
+      id: issued.gameId,
+      levels: game?.levels ?? issued.level,
+      roundsPerSession: game?.roundsPerSession ?? value.result.rounds,
     });
     if (!result || result.level !== issued.level) return null;
     return {

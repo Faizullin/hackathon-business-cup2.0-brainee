@@ -86,3 +86,9 @@ Child routes use their own shell (tab bar; dock via the nested `(docked)` group)
 | Deploy | **Done (T-14):** Vercel Hobby (free) + Turso free libSQL via the same Drizzle driver; `DEMO_MODE=1` |
 
 Own-domain constraint: [rules.md](../product/rules.md#technical-requirements). Agent tooling (skills, MCP): [agent-tooling.md](agent-tooling.md).
+
+## Remote catalog and artifact delivery (D-42)
+
+Built-in manifests remain generated at build time. `game-catalog/remote` validates remote manifests/version records; `game-catalog/storage` is server-only and implements filesystem and S3 SigV4 R2 storage. Records contain driver + key + SHA-256 files, never foreign client URLs. The operator publisher writes immutable versions followed by the mutable catalog (single publisher).
+
+`/api/games` merges the cached remote catalog with built-ins; client lists/recommendations poll it. `/g/<id>/<version>/<path>` validates the catalog membership and checksum, supplies MIME/immutable headers and an opaque-origin CSP sandbox. Only this route reads artifact bytes from R2. Server pages resolve enabled versions dynamically. Remote session start/finish lazily synchronize scored database rows before existing server/core validation; unscored Explore stays outside learning storage and analytics. Built-in launches do not depend on storage availability. See [games.md](games.md#remote-games-r2) for author and cache/revocation limits.

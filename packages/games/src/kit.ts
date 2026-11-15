@@ -33,6 +33,7 @@ export type GameProps = {
 };
 
 export type GameMeta = {
+  source?: "builtin" | "remote";
   id: string;
   version: string;
   kind: GameKind;

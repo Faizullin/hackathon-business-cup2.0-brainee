@@ -32,6 +32,7 @@ export {
   stopGameRun,
 } from "./learning-store";
 export { updateFunPlay } from "./leisure-store";
+export { syncRemoteGames } from "./remote-games";
 export {
   createPairingCode,
   getSettings,

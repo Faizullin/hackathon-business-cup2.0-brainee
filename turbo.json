@@ -31,6 +31,18 @@
       "outputs": []
     }
   },
-  "globalPassThroughEnv": ["DEMO_MODE", "BRAINEE_LAB", "DATABASE_URL", "DATABASE_AUTH_TOKEN"],
+  "globalPassThroughEnv": [
+    "DEMO_MODE",
+    "BRAINEE_LAB",
+    "DATABASE_URL",
+    "DATABASE_AUTH_TOKEN",
+    "REMOTE_GAMES_DRIVER",
+    "REMOTE_GAMES_DIR",
+    "R2_ACCOUNT_ID",
+    "R2_ACCESS_KEY_ID",
+    "R2_SECRET_ACCESS_KEY",
+    "R2_BUCKET",
+    "R2_ENDPOINT"
+  ],
   "globalEnv": ["BRAINEE_NEXT_DIR"]
 }

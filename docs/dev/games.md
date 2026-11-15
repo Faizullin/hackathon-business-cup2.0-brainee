@@ -12,15 +12,15 @@ The app works with **built games, not source**. Wherever a game is made, it ends
 |---|---|---|---|---|
 | **A · React** | small, tightly integrated learning games | `packages/games/src/<id>/` | `react` | ✅ odd-one-out, continue-pattern |
 | **B · In-repo engine** | Phaser/GDevelop games we write | `games/<engine>-<name>/` workspace package | `embedded` | ✅ Picture Puzzle |
-| **C · External** | other repos, teams or engines | **outside this repo**; we import a pinned, checksummed build artifact | `embedded` | later (T-91) |
+| **C · External** | other repos, teams or engines | **outside this repo**; we import a pinned, checksummed build artifact | `embedded` | ✅ pinned imports and remote R2 versions (D-42) |
 
 Rules that keep it scalable:
 - **Manifest = single source**, schema-validated by `pnpm check`: id, version, engine, runtime, entry, skills, levels, bridge protocol + contract (`<id>@<n>`), size budget, license (T-89).
-- **Catalog in the DB** (`Game` + `GameVersion`), filled from manifests: adding a B/C game needs no app code; versions can be pinned, rolled back or disabled.
+- **Catalog:** scored `Game` rows come from manifests; remote version history lives in the storage catalog (D-42), with enable/disable/rollback. Built-ins use generated registration.
 - **Versioned bridge:** the host supports protocol N and N−1; games learn host capabilities in `init`.
 - **One conformance suite for every game** (T-90): loads, `ready` ≤ 10 s, exactly one `finish`, zero foreign requests, size budget, no console errors, Chromium + WebKit. A game is listed only after it passes. A new engine = a ~30-line adapter + passing the suite.
 - **Trust tiers:** our games → same-origin iframe; third-party → opaque-origin sandbox (CSP `sandbox` header) or a `games.` subdomain, with per-version host-method allowlists and zod validation.
-- **Hosting:** copy builds into `public/games/` at build time now; move to our-subdomain object storage when they outgrow it (still allowlistable).
+- **Hosting:** built-ins copy into `public/games/` at build time; remote artifacts use R2 behind same-origin `/g/` (D-42).
 - **Choosing:** new + simple → A; needs an engine/heavy deps → B; another repo/team/engine → C (no submodules, no copied source).
 
 ## Runtimes
@@ -106,7 +106,7 @@ Lessons GSP's browser tests surfaced, which apply to us because the iPad runs We
 A dev-only `/lab` route in `apps/web` (no separate app; React and embedded games, `BRAINEE_LAB=1` enables it in production builds): game picker (validated manifest registry), level/seed, phone/iPad frame, and the **event stream panel** (bridge status + live events), which e2e reads too. Embedded-game developers can also use standalone mode inside their engine.
 
 ## Isolation
-Our own games: `sandbox="allow-scripts allow-same-origin"`. This isolates lifecycle; it is not a security boundary, so only audited code goes in. The bridge doesn't need same-origin. If we ever accept untrusted builds, serve them with GSP's `Content-Security-Policy: sandbox allow-scripts …` + `Access-Control-Allow-Origin: *` headers (GSP `src/app/game-builds/[...path]/route.ts`): an opaque origin that can still load its own files.
+Our own games: `sandbox="allow-scripts allow-same-origin"`. This isolates lifecycle; it is not a security boundary, so only audited code goes in. The bridge doesn't need same-origin. Remote builds now use the D-42 `/g/` handler with GSP's `Content-Security-Policy: sandbox allow-scripts …` + `Access-Control-Allow-Origin: *` headers (GSP `src/app/game-builds/[...path]/route.ts`): an opaque origin that can still load its own files.
 
 ## Reusable GSP games (candidates)
 
@@ -127,7 +127,7 @@ Odd one out and Continue the pattern → `react` runtime. Catalog: [screens.md](
 
 - `packages/game-bridge` ports GSP's `bridge-core` transport, endpoints, repeat-hello handshake, DOM/GDevelop adapters and tests. The drop-in script exposes `window.Brainee`; PECS, speech, card/progress host methods and analytics outbox are removed. Protocol 2 supports protocol 1 (legacy `id` normalizes to `eventId`). Every incoming message is capped at 64 KiB and 50 messages/s; the last 1,000 event IDs are deduplicated. Contract event payloads use zod. Nonce + the private transferred MessageChannel bind the connection to the iframe; these audited same-origin builds are not a security boundary.
 - `packages/engine-phaser` ports the GSP Phaser adapter, `BridgedScene`, responsive factory and esbuild helper. Scenes send `ready` only after assets and launch config are loaded. `IframeGame` waits at most 10 seconds for ready, renders an error and removes the frame on failure; unmount closes the bridge and removes the iframe's timers/audio/renderer. A finish must agree with the observed rounds and issued game/level before the existing LearningProvider submits it. Lab launches use an ephemeral ID and never save rewards.
-- Every React folder and engine game has `manifest.json`. `packages/game-catalog` validates and exports the registered manifests; DB seed and embedded registry consume them. `pnpm check` validates manifests, entry paths, weights and React source budgets; `pnpm test:assets` additionally checks embedded output budgets, HTML/CSS references, pictures and bridge build. React budgets are source bytes in this light slice; embedded budgets are uncompressed artifact bytes. Version-history/rollback (`GameVersion`) and automatic path-C imports remain future work.
+- Every React folder and engine game has `manifest.json`. `packages/game-catalog` validates and exports the registered manifests; DB seed and embedded registry consume them. `pnpm check` validates manifests, entry paths, weights and React source budgets; `pnpm test:assets` additionally checks embedded output budgets, HTML/CSS references, pictures and bridge build. React budgets are source bytes in this light slice; embedded budgets are uncompressed artifact bytes. Remote version history and rollback are now handled by the D-42 storage catalog rather than a `GameVersion` database table.
 - `games/picture-puzzle` is path B. Phaser 4 and the Rex jigsaw cutter are bundled locally, with Kenney CC0 pictures and preserved licences. **One session = four successful piece placements**, not four pictures. Each rejected placement increments mistakes; a successfully placed piece with one or more prior rejections increments corrections once. Picture changes reset per-piece attempts, retain the issued level and continue the four-placement counter. At four, input stops and exactly one `GameResult` is emitted. Partial play never finishes. Seed selects the starting picture; no family calendar/timezone dependency. Five levels retain GSP's short-side `<700px` cap at 3×4 pieces. The host's English chrome surrounds language-light canvas controls; no remote speech/font is used.
 - `pnpm games:build` replaces the public embedded-game directories and emits `public/games/bridge.js`; `pnpm build` runs it first. Generated artifacts stay ignored. Use `pnpm games:build` before `pnpm dev` on a fresh checkout. `pnpm db:push && pnpm db:seed` adds runtime columns/catalog to existing local data; `pnpm demo` starts from a full reset.
 - The per-game specs plus the shared `imported-game-acceptance` / `explore-acceptance` helpers, `games-integration.spec.ts` and `own-origin.spec.ts` cover ready, real input, exactly one finish, rewards, receipt replay and foreign requests. Heavy game specs run only in `pnpm e2e:full` on WebKit iPad (see [setup.md](setup.md#e2e-matrix-tiered)); the former loop-all `game-conformance.spec.ts` was removed as a duplicate.
@@ -197,3 +197,40 @@ GSP Phaser games (Shape Pairs, Color Boxes, Sticker Scene) share `packages/engin
 ## Lavender palette (T-141)
 
 Host chrome uses `--game-*` aliases from `@brainee/ui/styles.css`. Canvas consumers can import `GAME_PALETTE` from `@brainee/ui/lib/game-palette`; `pnpm check:palette` prevents drift from the light UI reference. CSS aliases follow the derived dark theme. Pair colors with shapes or words for correct/retry feedback. Pinned game artwork stays unchanged; this redesign does not modify game internals.
+
+## Remote games (R2)
+
+D-42 implements path C without committing game artifacts or rebuilding the host. GSP's driver-id/key model and folder/ZIP publishing flow are ported; its PECS API is not used. The publisher is an operator CLI, not an unauthenticated upload endpoint. Run only one publisher against a catalog at a time. Keep the catalog and old version objects for rollback; do not delete historical records manually.
+
+A build folder (or ZIP with no enclosing directory) contains `manifest.json`, `index.html`, a thumbnail, scripts, assets and LICENSE/CREDITS. All runtime references must be relative, with no external fonts, API, analytics or CDN. Use simple ASCII filenames: letters, digits, underscore, dot and hyphen. No symlinks, absolute paths or traversal. HTML/CSS/SVG references are checked for missing and foreign assets; dynamic JavaScript assets still need browser conformance. The CSP blocks external requests, frames, forms and workers. Scripts must be separate files (no inline scripts/eval); inline styles are allowed for engine layouts. SVG thumbnails use the existing small self-contained 4:3 policy; PNG/WebP thumbnails have signature and 256 KiB size checks. Authors must verify raster dimensions and appearance at phone/iPad widths.
+
+An unscored manifest uses the existing preview schema plus `source: "remote"`, `scored: false`, and a semantic `version`. Its `entry` is `/g/<id>/<version>/index.html`, and `thumbnail` names an SVG, PNG or WebP file under the same version prefix (for example `/g/<id>/<version>/thumbnail.webp`). Include `mode: "explore"`, title, minAge, license, sizeBudgetBytes and `explore` (family, viewport, orientation, audio, readiness; contained viewports also need aspectRatio). Scored builds use the learning manifest schema with `source: "remote"`, `scored: true`, `runtime: "embedded"`, skills/weights, levels, roundsPerSession and bridge contract `<id>@1`. Scoring metadata stays constant across versions of a game id; use a new id for changed rules. Built-in ids are reserved.
+
+For a drop-in bridge, copy the locally built `apps/web/public/games/bridge.js` into the build and load `<script src="bridge.js" data-contract="your-id@1"></script>`. It sends ready after document load. Engines that load assets asynchronously should connect and send ready only after their scene is usable. Protocols 2 and 1 use the existing repeat-hello, nonce and private MessageChannel; the host accepts an opaque sender origin (`null`) only through its iframe window check. Scored games report genuine round events and one GameResult, never rewards. Explore accepts lifecycle only: no sessions, analytics, wallet writes or fabricated completion.
+
+Remote frames have **only `allow-scripts`**, enforced again by the response CSP even when opened directly. `localStorage`, IndexedDB, cookies and parent DOM access are unavailable; catch storage errors or use in-memory state. Module scripts/fetch/images load through credential-free CORS on the same version prefix. No service workers, popups, camera/microphone or form submission. Built-in sandbox permissions are unchanged.
+
+```sh
+pnpm games:publish /path/to/build --driver fs
+pnpm games:publish /path/to/build.zip --version 1.2.0 --driver r2
+pnpm games:publish my-game --disable --driver r2
+pnpm games:publish my-game --enable --driver r2
+pnpm games:publish my-game --rollback 1.1.0 --driver r2
+```
+
+The CLI computes each file's SHA-256, uploads immutable files, then replaces `catalog.json`. Matching reruns are idempotent; changed bytes under an existing version fail. `--version` updates the manifest's versioned URLs. Disabled versions stay stored. Rollback enables only the selected version; enable chooses the currently enabled version or the last published one. ZIPs are limited to 32 MiB compressed and all builds to 64 MiB unpacked plus their manifest budget.
+
+The server caches the remote catalog for ~60 seconds, merging enabled scored games into Learn/entry and unscored games into Explore. Open lists poll every 60 seconds, so a list may take roughly two intervals to converge; direct launches and session authorization consult the server cache. Lazy database sync runs before remote starts/finishes, without publishing scripts needing database credentials. Existing core age, result, replay and reward checks apply. Version objects have one-year immutable caching; disable cannot erase files already cached by a browser. An existing scored receipt can still be replayed without awarding twice.
+
+Local standalone proof (no game files enter git):
+
+```sh
+node scripts/prepare-remote-sample.mjs
+pnpm games:publish .local/remote-shape-match --driver fs
+# Optional, with authorized server credentials in .env.r2:
+pnpm games:publish .local/remote-shape-match --driver r2
+pnpm build
+BRAINEE_E2E_PORT=3301 pnpm --filter @brainee/web exec playwright test remote-game --project=webkit-ipad
+```
+
+The preparation script copies GSP's `public/builds/phaser-shape-match-game` into ignored local storage, changes exactly one bridge tag from `game-store` to `brainee`, adds the manifest/thumbnail/credits and preserves gameplay. Select Shape Match (Remote) at `/lab`, or open it from `/explore`. The focused heavy spec verifies readiness, canvas input, opaque storage/parent restrictions, unchanged wallet/skills and zero foreign requests at iPad/phone widths. It can run alone without `e2e:full`; it skips when the external sample has not been published. `node --test scripts/publish-games.test.mjs` checks publishing; catalog/storage and scored DB behavior have workspace unit tests.

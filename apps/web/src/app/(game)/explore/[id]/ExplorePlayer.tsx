@@ -1,6 +1,7 @@
 "use client";
 import { createId, HostBridge } from "@brainee/game-bridge";
 import type { Preview } from "@brainee/game-catalog";
+import { gameSandbox } from "@brainee/game-catalog/remote";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -27,7 +28,9 @@ export function ExplorePlayer({ game }: { game: Preview }) {
   );
 }
 
-function AvailablePreview({ game }: { game: Preview }) {
+export function AvailablePreview({ game, onReady }: { game: Preview; onReady?(): void }) {
+  const readyCallback = useRef(onReady);
+  readyCallback.current = onReady;
   const frame = useRef<HTMLIFrameElement>(null);
   const [status, setStatus] = useState("loading");
   const router = useRouter();
@@ -45,7 +48,7 @@ function AvailablePreview({ game }: { game: Preview }) {
     }, 10000);
     const bridge = new HostBridge({
       frame: () => frame.current?.contentWindow,
-      context: { sessionId: createId(), gameId: game.id, version: "0.1.0", locale },
+      context: { sessionId: createId(), gameId: game.id, version: game.version, locale },
       config: { mode: "explore", protocols: [2, 1] },
       acceptHello: (hello) => hello.contract === `${game.id}@1`,
       validateEvent: () => null,
@@ -54,6 +57,7 @@ function AvailablePreview({ game }: { game: Preview }) {
         if (phase === "ready") {
           clearTimeout(timer);
           ready.current = true;
+          readyCallback.current?.();
           setStatus("ready");
         }
         if (phase === "error") {
@@ -65,7 +69,7 @@ function AvailablePreview({ game }: { game: Preview }) {
     });
     function exit(event: MessageEvent) {
       if (
-        event.origin === location.origin &&
+        event.origin === (game.source === "remote" ? "null" : location.origin) &&
         event.source === frame.current?.contentWindow &&
         event.data?.type === "brainee:exit" &&
         event.data?.gameId === game.id
@@ -80,7 +84,7 @@ function AvailablePreview({ game }: { game: Preview }) {
       bridge.close();
       window.removeEventListener("message", exit);
     };
-  }, [game.id, locale, router]);
+  }, [game.id, game.version, game.source, locale, router]);
   // Games without a bridge handshake are ready once their document has loaded.
   const loaded = () => {
     if (meta.readiness !== "load") return;
@@ -124,7 +128,7 @@ function AvailablePreview({ game }: { game: Preview }) {
             data-testid="explore-frame"
             data-ready={status === "ready"}
             onLoad={loaded}
-            sandbox="allow-scripts allow-same-origin"
+            sandbox={gameSandbox(game.source)}
             allow="camera 'none'; microphone 'none'; autoplay 'none'"
             className={contain ? "border-0" : "w-full self-stretch border-0"}
             style={

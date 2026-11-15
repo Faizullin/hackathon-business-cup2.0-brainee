@@ -7,7 +7,7 @@ import {
   learningPracticeGame,
   SHOP_ACCESSORIES,
 } from "@brainee/core";
-import { allGames } from "@brainee/games";
+import { useCatalog } from "@brainee/games";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 
@@ -19,6 +19,7 @@ import { useLearning } from "./LearningProvider";
 
 // Brainy tab: big Brainy, stage path, stats, accessory shop and earned rewards (T-38).
 export function BrainyProfile() {
+  const { games: allGames } = useCatalog();
   const { snapshot } = useLearning();
   const { run, busy, notice } = useAct();
   const { t: i18n } = useI18n();

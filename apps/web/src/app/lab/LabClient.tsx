@@ -1,9 +1,10 @@
 "use client";
 
 import { type GameResult, type RoundEvent, roundStars, sessionStars } from "@brainee/core";
-import { allGames, clampLevel, GameHost } from "@brainee/games";
+import { clampLevel, GameHost, useCatalog } from "@brainee/games";
 import { Button } from "@brainee/ui/components/button";
 import { useId, useState } from "react";
+import { AvailablePreview } from "@/app/(game)/explore/[id]/ExplorePlayer";
 import { useI18n } from "@/i18n";
 
 type Status = "running" | "finished" | "error";
@@ -20,6 +21,7 @@ const fieldClass =
   "min-h-12 rounded-xl border border-border bg-card px-3 text-foreground focus-visible:outline-3 focus-visible:outline-ring";
 
 export function LabClient() {
+  const { games: allGames, previews } = useCatalog();
   const { t, locale } = useI18n();
   const ids = { game: useId(), level: useId(), seed: useId(), frame: useId() };
   const [gameId, setGameId] = useState(allGames[0]?.id ?? "");
@@ -31,6 +33,7 @@ export function LabClient() {
   const [connected, setConnected] = useState(false);
   const [events, setEvents] = useState<LabEvent[]>([]);
 
+  const preview = previews.find((g) => g.id === gameId);
   const game = allGames.find((g) => g.id === gameId) ?? allGames[0];
   if (!game) return null;
   const safeLevel = clampLevel(level, game.levels);
@@ -58,10 +61,10 @@ export function LabClient() {
             <select
               id={ids.game}
               className={fieldClass}
-              value={game.id}
+              value={preview?.id ?? game.id}
               onChange={(e) => restart(() => setGameId(e.target.value))}
             >
-              {allGames.map((g) => (
+              {[...allGames, ...previews].map((g) => (
                 <option key={g.id} value={g.id}>
                   {g.title}
                 </option>
@@ -123,34 +126,47 @@ export function LabClient() {
         <div
           className={`mx-auto w-full ${FRAMES[frame]} rounded-panel border border-border bg-background`}
         >
-          <GameHost
-            locale={locale}
-            onReady={() => {
-              setConnected(true);
-              setEvents((list) => [...list, { type: "ready" }]);
-            }}
-            text={t.games}
-            key={`${game.id}-${safeLevel}-${seed}-${run}`}
-            game={game}
-            level={safeLevel}
-            seed={seed}
-            onRound={(event) => setEvents((list) => [...list, { type: "round", event }])}
-            onFinish={(result) => {
-              setEvents((list) => [...list, { type: "finish", result }]);
-              setStatus("finished");
-            }}
-            onError={(error) => {
-              setEvents((list) => [...list, { type: "error", message: error.message }]);
-              setStatus("error");
-            }}
-          />
+          {preview ? (
+            <AvailablePreview
+              key={`${preview.id}-${run}`}
+              game={preview}
+              onReady={() => {
+                setConnected(true);
+                setEvents((list) => [...list, { type: "ready" }]);
+              }}
+            />
+          ) : (
+            <GameHost
+              locale={locale}
+              onReady={() => {
+                setConnected(true);
+                setEvents((list) => [...list, { type: "ready" }]);
+              }}
+              text={t.games}
+              key={`${game.id}-${safeLevel}-${seed}-${run}`}
+              game={game}
+              level={safeLevel}
+              seed={seed}
+              onRound={(event) => setEvents((list) => [...list, { type: "round", event }])}
+              onFinish={(result) => {
+                setEvents((list) => [...list, { type: "finish", result }]);
+                setStatus("finished");
+              }}
+              onError={(error) => {
+                setEvents((list) => [...list, { type: "error", message: error.message }]);
+                setStatus("error");
+              }}
+            />
+          )}
         </div>
       </section>
 
       <aside
         data-testid="event-stream"
         data-status={
-          game.runtime === "embedded" && connected && status === "running" ? "connected" : status
+          (preview || game.runtime === "embedded") && connected && status === "running"
+            ? "connected"
+            : status
         }
         className="flex flex-col gap-3 rounded-panel border border-border bg-card p-4"
       >

@@ -6,7 +6,7 @@ import {
   type RoundEvent,
   roundStars,
 } from "@brainee/core";
-import { clampLevel, GameHost, getGame } from "@brainee/games";
+import { clampLevel, type GameDefinition, GameHost, getGame } from "@brainee/games";
 import { Button } from "@brainee/ui/components/button";
 import { StarIcon } from "@brainee/ui/components/child-icons";
 import { ArrowLeft } from "@brainee/ui/components/icons";
@@ -25,7 +25,12 @@ import {
 import { hostCopy } from "./host-copy";
 import { PostGameScreen } from "./PostGameScreen";
 
-type Props = { gameId: string; level: number; seed?: number };
+type Props = {
+  gameId: string;
+  level: number;
+  seed?: number;
+  remoteGame?: Extract<GameDefinition, { runtime: "embedded" }>;
+};
 type Phase = "starting" | "start-error" | "playing" | "saving" | "save-error";
 
 export function GamePlayer(props: Props) {
@@ -37,8 +42,14 @@ export function GamePlayer(props: Props) {
   );
 }
 
-function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onStartRetry(): void }) {
-  const game = getGame(gameId);
+function ActiveGamePlayer({
+  gameId,
+  level,
+  seed,
+  remoteGame,
+  onStartRetry,
+}: Props & { onStartRetry(): void }) {
+  const game = getGame(gameId) ?? remoteGame;
   const { pending, start, finish, discardPending } = useLearning();
   const [initialPending] = useState(pending);
   const [phase, setPhase] = useState<Phase>(initialPending ? "saving" : "starting");

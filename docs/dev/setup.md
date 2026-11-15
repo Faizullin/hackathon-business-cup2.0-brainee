@@ -171,3 +171,11 @@ Tiers are defined in `apps/web/playwright.config.ts`.
 | `pnpm e2e:full` (`E2E_FULL=1`) | all four | adds the heavy game checks (`HEAVY_GAME_SPECS`: imported-game acceptance, input stress, integration, puzzle, Explore previews) on WebKit iPad, the remaining flows on Chromium phone, and layout on Chromium iPad / WebKit phone |
 
 Run `pnpm e2e:full` for game work and before a release; run `pnpm e2e` for everyday changes. Put a new game spec in `HEAVY_GAME_SPECS` and a new layout spec in `LAYOUT_SPECS`.
+
+## Remote game storage (D-42)
+
+Use `REMOTE_GAMES_DRIVER=fs` (default) locally, with optional absolute `REMOTE_GAMES_DIR`; the default is the workspace's ignored `data/remote-games/`. Use `REMOTE_GAMES_DRIVER=r2` on Vercel. Never use filesystem storage for published serverless builds.
+
+The publishing CLI loads the root gitignored `.env.r2`. Required R2 values: `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`. Optional `R2_ENDPOINT` overrides the HTTPS S3 endpoint (default `https://<account>.r2.cloudflarestorage.com`, region `auto`). Set these as server environment variables in Vercel. For local Next, supply them in the process environment or ignored `apps/web/.env.local`; the runtime does not load root `.env.r2` automatically. Never prefix credentials with `NEXT_PUBLIC_`, commit them, or copy a public R2 domain into a manifest. R2 access is signed server-side and the client uses `/g/` only.
+
+Publishing needs bucket object read/write permission. The application needs only read permission; use a separate read-only credential for deployment where possible. No cloud database script is involved. See [the author guide](games.md#remote-games-r2) for publication, rollback and isolated verification. Initial deployment of this host feature and its environment variables is required once; subsequent games need neither a commit nor deployment.

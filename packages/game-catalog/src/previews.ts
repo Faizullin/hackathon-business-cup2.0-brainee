@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { discoveredPreviews } from "./discovered.generated";
+import { remoteThumbnailPath } from "./thumbnail";
 
 const thumbnailUrl = (id: string) => `/games/${id}/thumbnail.svg`;
 
@@ -30,6 +31,12 @@ export const exploreMetaSchema = z
 
 export const previewSchema = z
   .object({
+    source: z.enum(["builtin", "remote"]).default("builtin"),
+    scored: z.literal(false).default(false),
+    version: z
+      .string()
+      .regex(/^\d+\.\d+\.\d+$/)
+      .default("0.1.0"),
     id: z.string().regex(/^[a-z0-9-]+$/),
     title: z.string().min(1),
     mode: z.literal("explore"),
@@ -41,8 +48,19 @@ export const previewSchema = z
     explore: exploreMetaSchema,
   })
   .strict()
-  .refine((p) => p.entry === `/games/${p.id}/index.html`, "Preview must load from own origin")
-  .refine((p) => p.thumbnail === thumbnailUrl(p.id), "Thumbnail must be the game's own svg");
+  .refine(
+    (p) =>
+      p.entry ===
+      (p.source === "remote" ? `/g/${p.id}/${p.version}/index.html` : `/games/${p.id}/index.html`),
+    "Preview must load from own origin",
+  )
+  .refine(
+    (p) =>
+      p.source === "remote"
+        ? Boolean(remoteThumbnailPath(p.id, p.version, p.thumbnail))
+        : p.thumbnail === thumbnailUrl(p.id),
+    "Thumbnail must belong to this game version",
+  );
 
 export type Preview = z.infer<typeof previewSchema>;
 

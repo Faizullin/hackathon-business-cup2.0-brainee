@@ -7,3 +7,5 @@ export {
   type GameText,
 } from "./kit";
 export { allGames, getGame, reactGames } from "./registry";
+
+export { useCatalog } from "./useCatalog";

@@ -9,7 +9,7 @@ import {
   parentWeekReport,
   type StateSnapshot,
 } from "@brainee/core";
-import { allGames } from "@brainee/games";
+import { useCatalog } from "@brainee/games";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
@@ -27,6 +27,7 @@ export function ParentToday({
   snapshot: StateSnapshot;
   attention: Attention[];
 }) {
+  const { games: allGames } = useCatalog();
   const { t } = useI18n();
   const [dismissed, setDismissed] = useState<string[]>([]);
   const { progress, showcase, latestGame, activity, child } = snapshot;

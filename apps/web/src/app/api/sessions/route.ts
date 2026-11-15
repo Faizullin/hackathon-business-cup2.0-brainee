@@ -1,6 +1,8 @@
-import { finishGameSession } from "@brainee/db";
+import { finishGameSession, syncRemoteGames } from "@brainee/db";
+import { manifests } from "@brainee/game-catalog";
 import { type NextRequest, NextResponse } from "next/server";
 import { ApiError, demoApi, readDemoJson, requireDemoToken } from "@/lib/server/demo-api";
+import { remoteCatalog } from "@/lib/server/remote-games";
 
 export const runtime = "nodejs";
 
@@ -21,6 +23,10 @@ export async function POST(request: NextRequest) {
       )
     )
       throw new ApiError(400, "invalid-input");
+    const result = input.result;
+    const id =
+      result && typeof result === "object" && "gameId" in result ? result.gameId : undefined;
+    if (!manifests.some((g) => g.id === id)) await syncRemoteGames(db, await remoteCatalog());
     return NextResponse.json(
       await finishGameSession(db, tokenHash, input.sessionId, input.result, now),
     );
