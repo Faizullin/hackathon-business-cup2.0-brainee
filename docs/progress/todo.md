@@ -39,7 +39,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-02 Pick the stack and monorepo layout → [decisions.md](../dev/decisions.md)
 - [x] T-03 Condense the PRD into `docs/product/`
 - [x] T-04 Set up agent docs (AGENTS/CLAUDE/GEMINI) and progress tracking
-- [x] T-05 Map prototype functions to line numbers → [ideas/README.md](../ideas/README.md)
+- [x] T-05 Map prototype functions to line numbers → [original sources](../README.md#original-sources)
 
 ## P1 · Scaffold monorepo
 - [x] T-10 pnpm workspaces + Turborepo + `packages/config` (tsconfig, Biome, Tailwind), JIT internal packages

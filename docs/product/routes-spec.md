@@ -1,6 +1,6 @@
 # Routes spec (condensed)
 
-Source: `ROUTES.md` and the clickable prototype `brainy-mvp.zip` (frozen inputs, now in git history; see [ideas/README.md](../ideas/README.md)). Decisions: [D-24](../dev/decisions.md), [D-25](../dev/decisions.md). Status: ✅ built · ◐ reduced · ⏳ later.
+Source: `ROUTES.md` and the clickable prototype `brainy-mvp.zip` (frozen inputs, now in git history; see [original sources](../README.md#original-sources)). Decisions: [D-24](../dev/decisions.md), [D-25](../dev/decisions.md). Status: ✅ built · ◐ reduced · ⏳ later.
 
 ## Roles and access
 | Spec | Ours | Status |

@@ -20,7 +20,7 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 
 ## Token rules
 
-- The original PRD and prototype are no longer in the tree; their content lives in [docs/product/](docs/product/) ([docs/ideas/README.md](docs/ideas/README.md) explains where).
+- The original PRD and prototype are no longer in the tree; their content lives in [docs/product/](docs/product/) ([docs/README.md § Original sources](docs/README.md#original-sources) explains where).
 - Each fact lives in one doc. Link to it; don't copy it. Update the original when it changes.
 - Keep docs in English. The product UI, including games and films, is English-only (D-34).
 

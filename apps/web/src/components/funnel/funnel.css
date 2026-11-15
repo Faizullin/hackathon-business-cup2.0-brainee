@@ -1,5 +1,5 @@
 /* Brain Check funnel (D-40). Everything is nested under .bc so nothing leaks into the app.
-   Ported from docs/ideas/brain-check-funnel-mockup.html; fonts come from our own origin. */
+   Ported from the Brain Check mockup (git history: ca3c1d2:docs/ideas/brain-check-funnel-mockup.html); fonts come from our own origin. */
 .bc {
   --canvas: #f2f1fa;
   --card: #fff;

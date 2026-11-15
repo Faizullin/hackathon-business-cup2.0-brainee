@@ -1,6 +1,6 @@
 # Product overview
 
-Source: PRD §1–2, §9 (Nov 14 2026; original in git history, see [ideas/README.md](../ideas/README.md)). Condensed; this file is the one we keep current.
+Source: PRD §1–2, §9 (Nov 14 2026; original in git history, see [original sources](../README.md#original-sources)). Condensed; this file is the one we keep current.
 
 ## Problem
 Gen Alpha kids grew up on YouTube Kids and short videos. Endless feeds and low-quality AI content train them for fast stimulation, so long-form attention suffers. Parental controls limit time, not content quality.

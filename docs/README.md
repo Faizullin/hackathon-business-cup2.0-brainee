@@ -10,7 +10,6 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [product/](product/) | What we build: condensed PRD | Building a feature or checking a rule | Product owner; anyone fixing a spec gap |
 | [dev/](dev/) | How we build: stack, setup, conventions, decisions | Scaffolding, adding packages, onboarding | Whoever changes the architecture |
 | [plans/](plans/) | Ordered implementation plans for larger efforts | Starting a planned effort (e.g. the redesign) | Whoever plans or finishes the effort |
-| [ideas/](ideas/) | Frozen funnel/design sources, reference screenshots and pointers to removed originals | Tracing a design or product specification to its source | Rarely; sources are frozen |
 | [reports/](reports/) | Generated UI walkthroughs, videos, screenshots and logs | Reviewing current UI or recording a demo | Whoever changes a report scenario |
 
 ## Files
@@ -36,7 +35,6 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [dev/films.md](dev/films.md) | Interactive films: mp3 + JSON script format, podcast → film workflow, art rules, checks, player |
 | [dev/ui.md](dev/ui.md) | UI and motion system: Base UI components, page transitions, Motion, app shell, mobile app-feel checklist |
 | [dev/agent-tooling.md](dev/agent-tooling.md) | Which agent skills and MCP servers to use or skip, and why |
-| [ideas/README.md](ideas/README.md) | Where the original sources live now (git history) |
 | [reports/README.md](reports/README.md) | Recording commands, artifact map and analysis of the game-store-planning reporting pipeline |
 | [product/routes-spec.md](product/routes-spec.md) | Building or changing routes, access, parent dashboard or ROUTES.md rules |
 | [product/design.md](product/design.md) | **Visual source of truth** (Claude Design lavender): tokens, motion, Brain component spec and Brainy mapping, screen patterns, game palette |
@@ -56,6 +54,21 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 - **Infra, auth or deploy** → `architecture.md` → `rules.md` §Technical requirements → `decisions.md`
 - **Redesign or parent funnel** → `plans/redesign.md` → `product/design.md` → `product/funnel.md` → `dev/ui.md`
 - **Demo prep** → `rules.md` §Acceptance criteria → `status.md`
+
+## Original sources
+
+Frozen inputs are kept out of the tree and read from git history (`git show <commit>:<path>`). This repository's maintained specifications replace them.
+
+| Source | In git history | Maintained in |
+|---|---|---|
+| PRD (24-page PDF), single-file clickable prototype | `b1a3c68:docs/ideas/` | [product/](product/); prototype ported into `packages/brainy`, `packages/games`, `packages/core`, `apps/web` |
+| `ROUTES.md` + `brainy-mvp.zip` (routes, roles, rules, clickable MVP) | `b1a3c68:docs/ideas/` | [product/routes-spec.md](product/routes-spec.md) |
+| 30-game handoff (catalog, pinned sources, launcher) | `b1a3c68:docs/ideas/` | [product/external-games.md](product/external-games.md) |
+| Claude Design lavender files (`claude-design/*.dc.html`) | `ca3c1d2:docs/ideas/claude-design/` | [product/design.md](product/design.md) |
+| Parent funnel export (`Brainy-Funnel-Export.zip`), onboarding screenshots (`111–333.png`) | `ca3c1d2:docs/ideas/` | [product/funnel.md](product/funnel.md) |
+| Brain Check funnel mockup (`brain-check-funnel-mockup.html`) | `ca3c1d2:docs/ideas/` | [product/funnel.md](product/funnel.md) |
+
+These sources contain Russian placeholder copy and third-party font links; never ship or translate them (D-34).
 
 ## Upkeep
 

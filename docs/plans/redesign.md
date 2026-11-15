@@ -63,7 +63,7 @@ Remap the **existing token names** in `packages/ui/src/tokens.css` / `styles.css
 
 **Design refs:** `Brain.dc.html` lines 16–151 (SVG layers in paint order: shadow, glow, haze, limbs, shoes, hands, body shade/fill, folds, rot spots, cheeks, eyes, lids, mouth, sparkles, bolts, sweat, wisps, puffs, flies), 161–168 (health clamp, run amount), 170–190 (rAF loop at ~30 fps with reduced-motion guard), 203–211 (palette stops), 220–411 (posture: bob, droop, arms, legs, mouth, blink, sweat, effects); `BrainStates.dc.html` (4 reference states and their captions); `AppLavender.dc.html` lines 57–58 (hero use, 188 px circle, size 200), 230–231 (78 px mini in lists), 284–285 (hub, 68 px circle on `#FFF4F8`). With `effects="kid"`, skip lines 22–29 (haze), 60–63 (rot spots) and 102–149 (stink wisps, puffs, flies); keep the sweat drop (line 100).
 
-Port `docs/ideas/claude-design/Brain.dc.html` into `packages/brainy`, following [design.md § The Brain component](../product/design.md#the-brain-component-braindchtml).
+Port `docs/ideas/claude-design/Brain.dc.html` (git history at `ca3c1d2`) into `packages/brainy`, following [design.md § The Brain component](../product/design.md#the-brain-component-braindchtml).
 - **Model:** pure geometry, palette mixing, posture and effect amounts in `model.ts`, unit-tested. The SVG lives in `Brainy.tsx`.
 - **Animation:** a small rAF hook at about 30 fps. It's off under reduced motion, pauses when `document.hidden` or off-screen, and only hero instances animate (`animate` prop).
 - **Inputs:** follow the mapping table there:

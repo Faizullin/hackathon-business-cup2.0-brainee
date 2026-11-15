@@ -1,5 +1,5 @@
 // D-24: the habit quiz runs BEFORE the account exists and sets the starting Brainy.
-// Formula from the MVP prototype (docs/ideas/brainy-mvp.zip, onboarding/quiz.html);
+// Formula from the MVP prototype (git history: b1a3c68:docs/ideas/brainy-mvp.zip, onboarding/quiz.html);
 // a methodologist replaces it later. Starting body stats are capped at 40 (Brainy starts sleepy/awake).
 import type { SkillScores } from "./stat-gains";
 import type { BrainyStats } from "./types";
