@@ -14,7 +14,8 @@ test("jury joins in one tap; families stay isolated; game ten completes an app t
     if (url.protocol.startsWith("http") && url.origin !== baseURL) foreign.push(request.url());
   });
   await page.goto("/");
-  await page.getByRole("button", { name: "Join as Jury" }).click();
+  await expect(page).toHaveURL(/\/start#duration$/);
+  await page.getByTestId("jury-entry").click();
   await expect(page).toHaveURL(/\/jury$/);
   await expect(page.getByTestId("jury-pin")).toHaveText(/^\d{4}$/);
   const a = await savedState(page.request);
@@ -82,20 +83,24 @@ test("funnel signup keeps setup pairing on the same family", async ({
   await page.goto("/start");
   await page.evaluate(() =>
     localStorage.setItem(
-      "brainy.us-parent-quiz.v2",
+      "brainy.brain-check.v1",
       JSON.stringify({
-        version: 4,
-        screen: "result",
+        version: 1,
+        screen: "offer",
         answers: {
-          goal: "ending",
-          age: "6-7",
-          handoff: "bargain",
-          content: "kids",
+          duration: "60-120",
+          content: "ytk",
           finish: "switch",
-          reading: "together",
-          duration: "one",
-          attempt: "timer",
-          moment: "afternoon",
+          handoff: "more",
+          reading: "week",
+          age: "6-7",
+          name: "Leah",
+          guilt: 3,
+          limits: 3,
+          attempt: ["limits"],
+          goal: ["finish"],
+          minutes: "15",
+          gift: "ice",
         },
       }),
     ),

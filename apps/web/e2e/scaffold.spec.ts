@@ -1,7 +1,6 @@
 import { expect, test } from "@playwright/test";
 
 for (const route of [
-  { path: "/", destination: "/", heading: "Welcome to Brainy" },
   { path: "/learn", destination: "/learn", heading: "Learn" },
   { path: "/analytics", destination: "/analytics", heading: "Parent login" },
   { path: "/login", destination: "/login", heading: "Welcome to Brainy" },
