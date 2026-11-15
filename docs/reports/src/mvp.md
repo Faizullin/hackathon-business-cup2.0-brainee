@@ -8,12 +8,13 @@ radars and ranking remain labelled demo data. Demo parent PIN: `1234`.
 
 ## Recordings
 
-Each walkthrough previews the parent funnel's cover and five real growth stages,
-then opens the app on “What shall we play?”, goes to Learn,
-browses Leisure, watches a science video to the end (1 s = 1 min) and answers
-its quiz (a wrong answer fades, the right one pays +15 ★ once), marks a task
-done and exchanges ☀ → ★ in Gifts, buys an accessory on the Brainy tab,
-and visits Path for weekly learning, stages and discoveries.
+Each walkthrough first answers the parent Brain Check funnel (`/start?tour=1`):
+the brain meter drops with each habit answer, the result shows the child's Brainy
+today, the plan builder picks minutes and a gift, and the run stops on the offer
+(display-only prices, no payment) without creating a family. It then opens the
+app on “What are we playing now?”, goes to Learn, browses Leisure's fun-game shop
+and films, marks a task done and exchanges ☀ → ★ in Gifts, buys an accessory on
+the Brainy tab, and visits Path for weekly learning, stages and discoveries.
 Then it enters parent mode with the PIN, scrolls Analytics, confirms the
 child's task in Tasks and opens Gifts & goal.
 
@@ -25,22 +26,23 @@ child's task in Tasks and opens Gifts & goal.
 
 {{flow:ipad-mvp}}
 
-## Parent funnel preview
+## Parent Brain Check funnel
 
-The review session is separate from normal saved answers. These preview stages
-create no game session or reward; signup and plan persistence are separate flows.
+The `?tour=1` review run lives in session storage and never touches saved answers;
+it creates no family, game session or reward. One-tap start and the Starter Pack
+moment are covered by `apps/web/e2e/brain-check.spec.ts`. Spec: [funnel.md](../product/funnel.md).
 
-### Cover
+### First question · brain meter at 80 / 100
 
-{{compare:iPad (1180 × 820 landscape)=start-cover@ipad|Phone (390 × 844)=start-cover@phone}}
+{{compare:iPad (1180 × 820 landscape)=start-quiz@ipad|Phone (390 × 844)=start-quiz@phone}}
 
-### Growth slider · Genius preview
+### Result · the child's Brainy today
 
-{{compare:iPad (1180 × 820 landscape)=start-growth@ipad|Phone (390 × 844)=start-growth@phone}}
+{{compare:iPad (1180 × 820 landscape)=start-reveal@ipad|Phone (390 × 844)=start-reveal@phone}}
 
 ## Child screens
 
-### Entry “What shall we play?”
+### Entry “What are we playing now?”
 
 {{compare:iPad (1180 × 820 landscape)=entry@ipad|Phone (390 × 844)=entry@phone}}
 
@@ -51,10 +53,6 @@ create no game session or reward; signup and plan persistence are separate flows
 ### Leisure
 
 {{compare:iPad (1180 × 820 landscape)=leisure@ipad|Phone (390 × 844)=leisure@phone}}
-
-### Science video player
-
-{{compare:iPad (1180 × 820 landscape)=video@ipad|Phone (390 × 844)=video@phone}}
 
 ### Gifts
 
