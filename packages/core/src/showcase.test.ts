@@ -240,3 +240,34 @@ it("validates a parent-only family plan without changing rewards or stats", () =
     applyShowcaseAction(input(), { type: "family-plan", answers: { ...answers, age: "outside" } }),
   ).toEqual({ ok: false, reason: "invalid-input" });
 });
+
+describe("Starter Pack", () => {
+  it("grants the cape worn, queues the unlock moment once and never sells it", async () => {
+    const { grantStarterPack } = await import("./showcase");
+    const s = structuredClone(base);
+    grantStarterPack(s);
+    expect(s.owned).toContain("cape");
+    expect(s.equipped.back).toBe("cape");
+    expect(s.starterPack).toBe("pending");
+    const wallet = { stars: 150, suns: 0 };
+    const seen = applyShowcaseAction(
+      { showcase: s, wallet, now: new Date(), id: "x" },
+      { type: "starter-seen" },
+    );
+    expect(seen.ok && seen.showcase.starterPack).toBe("claimed");
+    if (!seen.ok) return;
+    expect(
+      applyShowcaseAction(
+        { showcase: seen.showcase, wallet, now: new Date(), id: "y" },
+        { type: "starter-seen" },
+      ),
+    ).toEqual({ ok: false, reason: "not-pending" });
+    expect(
+      applyShowcaseAction(
+        { showcase: base, wallet, now: new Date(), id: "z" },
+        { type: "buy-accessory", id: "cape" },
+      ),
+    ).toEqual({ ok: false, reason: "exclusive" });
+    expect(parseShowcaseAction({ type: "starter-seen" })).not.toBeNull();
+  });
+});

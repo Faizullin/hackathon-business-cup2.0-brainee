@@ -1,5 +1,5 @@
 "use client";
-import { ABILITY_BODY, ACCESSORIES, BODY_STATS, learningPracticeGame } from "@brainee/core";
+import { ABILITY_BODY, BODY_STATS, learningPracticeGame, SHOP_ACCESSORIES } from "@brainee/core";
 import { allGames } from "@brainee/games";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
@@ -65,7 +65,7 @@ export function BrainyProfile() {
         <Panel title={t.shop} note={`★ ${snapshot.progress.wallet.stars}`}>
           <Notice notice={notice} />
           <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {ACCESSORIES.map((item) => {
+            {SHOP_ACCESSORIES.map((item) => {
               const has = owned.includes(item.id);
               const worn = equipped[item.slot] === item.id;
               return (

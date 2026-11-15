@@ -126,8 +126,19 @@ export type Analytics = {
   recap: { month: string; achievements: string[]; referral: string };
 };
 
+/** What the parent chose in the sales funnel. Display only: no payment exists (D-41). */
+export type StartPlan = {
+  plan: "annual" | "monthly";
+  gift: string;
+  minutes: number;
+  earn?: boolean;
+  contactEmail?: string;
+};
 export type Showcase = {
   familyPlan?: FunnelAnswers;
+  startPlan?: StartPlan;
+  /** "pending" until the child has seen the unlock moment on the first visit, then "claimed". */
+  starterPack?: "pending" | "claimed";
   childPromise?: number;
   calendar?: FamilyCalendar;
   taskHistory?: ArchivedTask[];
@@ -159,6 +170,7 @@ export type ShowcaseAction =
   | { type: "video-position"; id: string; position: number }
   | { type: "video-answer"; id: string; answer: number }
   | { type: "entry-choice"; took: boolean }
+  | { type: "starter-seen" }
   // Parent-only actions:
   | { type: "family-plan"; answers: FunnelAnswers }
   | { type: "task-confirm"; taskId: string }
@@ -231,6 +243,10 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       });
       return ok(result.wallet);
     }
+    case "starter-seen":
+      if (s.starterPack !== "pending") return fail("not-pending");
+      s.starterPack = "claimed";
+      return ok();
     case "equip":
       if (!s.owned.includes(action.id)) return fail("not-owned");
       s.equipped = equip(s.equipped, action.id);
@@ -391,6 +407,7 @@ const ACTION_TYPES = new Set([
   "video-position",
   "video-answer",
   "entry-choice",
+  "starter-seen",
   ...PARENT_ACTIONS,
 ]);
 
@@ -418,4 +435,11 @@ export function navigationCounts(showcase: Pick<Showcase, "tasks" | "requests">)
     parentTasks: showcase.tasks.filter((task) => task.status === "check").length,
     parentRewards: showcase.requests.filter((request) => !request.delivered).length,
   };
+}
+
+/** Starter Pack grant (D-41): the exclusive cape is owned and worn, and the unlock moment is queued. */
+export function grantStarterPack(showcase: Showcase) {
+  showcase.owned = [...new Set<AccessoryId>([...showcase.owned, "cape"])];
+  showcase.equipped = equip(showcase.equipped, "cape");
+  showcase.starterPack = "pending";
 }

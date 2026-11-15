@@ -23,3 +23,24 @@ describe("accessories", () => {
     });
   });
 });
+
+describe("Hero Cape (Starter Pack)", () => {
+  it("lives in its own back slot and never replaces other items", async () => {
+    const { SLOTS } = await import("./accessories");
+    expect(SLOTS).toContain("back");
+    const worn = equip(equip({}, "cap"), "cape");
+    expect(worn).toEqual({ head: "cap", back: "cape" });
+    expect(equip(worn, "cowboy")).toEqual({ head: "cowboy", back: "cape" });
+    expect(unequip(worn, "back")).toEqual({ head: "cap" });
+  });
+  it("is exclusive: it cannot be bought and the shop never lists it", async () => {
+    const { SHOP_ACCESSORIES, isExclusive } = await import("./accessories");
+    expect(isExclusive("cape")).toBe(true);
+    expect(SHOP_ACCESSORIES.some((a) => a.id === "cape")).toBe(false);
+    expect(SHOP_ACCESSORIES).toHaveLength(6);
+    expect(buyAccessory({ stars: 999, suns: 0 }, [], "cape")).toEqual({
+      ok: false,
+      reason: "exclusive",
+    });
+  });
+});
