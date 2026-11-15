@@ -12,7 +12,10 @@ async function expectThumbnails(page: Page, minimum: number) {
       .poll(() => image.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth))
       .toBeGreaterThan(0);
     const src = await image.getAttribute("src");
-    expect(src).toMatch(/^\/games\/[a-z0-9-]+\/thumbnail\.svg$/);
+    // Built-in games ship /games/<id>/thumbnail.svg; remote games (D-42) a versioned /g/ path.
+    expect(src).toMatch(
+      /^(\/games\/[a-z0-9-]+\/thumbnail\.svg|\/g\/[a-z0-9-]+\/[0-9A-Za-z.+-]+\/[\w.-]+\.(svg|png|webp))$/,
+    );
     const box = await image.boundingBox();
     // 4:3 and large enough to recognize the mechanic (≥ 96 px wide on phone and iPad).
     expect(box?.width).toBeGreaterThanOrEqual(96);
