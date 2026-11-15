@@ -1,22 +1,21 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Panel, primaryButton } from "@/components/demo/kit";
+import { FamilyLoginCard } from "@/components/parent/FamilyLoginCard";
 import { useI18n } from "@/i18n";
 
 export default function JuryPage() {
   const { t } = useI18n();
-  const [credentials, setCredentials] = useState<Record<string, string> | null>(null);
   useEffect(() => {
-    void fetch("/api/settings").then(async (r) => {
-      if (!r.ok || !(await r.json()).jury) {
-        window.location.replace("/login");
-        return;
-      }
-      try {
-        setCredentials(JSON.parse(sessionStorage.getItem("brainee-jury") ?? "null"));
-      } catch {}
-    });
+    void fetch("/api/settings")
+      .then(async (r) => {
+        if (!r.ok || !(await r.json()).jury) {
+          window.location.replace("/login");
+          return;
+        }
+      })
+      .catch(() => window.location.replace("/login"));
   }, []);
   return (
     <div className="flex flex-col gap-5">
@@ -35,22 +34,7 @@ export default function JuryPage() {
           ))}
         </ol>
       </Panel>
-      <Panel title={t.jury.credentials}>
-        {credentials ? (
-          <dl>
-            {(["email", "password", "pin"] as const).map((k) => (
-              <div key={k} className="flex flex-wrap gap-3">
-                <dt>{t.jury[k]}</dt>
-                <dd className="break-all font-mono" data-testid={`jury-${k}`}>
-                  {credentials[k]}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        ) : (
-          <p>{t.jury.missing}</p>
-        )}
-      </Panel>
+      <FamilyLoginCard prefix="jury" title={t.jury.credentials} />
     </div>
   );
 }

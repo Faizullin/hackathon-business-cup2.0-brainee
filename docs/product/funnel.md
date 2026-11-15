@@ -10,7 +10,7 @@ Code: rules in [`packages/core/src/funnel-quiz.ts`](../../packages/core/src/funn
 - `/start` on a device that already has a family shows one card, "Your Brainy is ready" with **Open Brainy** and a secondary **Start over** (clears the funnel storage only).
 - `?reset=1` clears the funnel storage and the Starter Pack timer and shows the quiz even on a device with a family, so the quiz can be shown repeatedly. `?tour=1` keeps the review run in session storage and never touches the saved answers.
 - `/onboarding` redirects to `/start`. `/signup` stays in the code (it reads the adapted funnel draft) but is not on the main path.
-- Every screen, including the offer, has a **Jury entry** pill in the header (`POST /api/jury`, then `/jury`); the footer has "I already have an account" (`/login`).
+- Every screen, including the offer, has a quiet **Jury entry** text shortcut ("Short on time? Skip to a demo family") in the header (`POST /api/jury`, then `/jury`); the footer has "I already have an account" (`/login`).
 - Hash steps (`#duration` …), browser Back and localStorage resume work; deep links cannot skip unanswered screens (`reachable`).
 
 ## Screens
@@ -70,7 +70,7 @@ Desktop fits a 16:9 window without scrolling (verified at 1280×650, 1366×680, 
 - the Brainy starts at the funnel health as its **mood** (clamped to `MOOD_FLOOR`…100), so the child sees the kid-safe version of what the parent saw;
 - `families.plan` stays `"demo"` (it is the family-type marker, not the subscription). The chosen plan, gift, minutes per day and the "earn screen time" answer are stored in `showcase.startPlan` for display; the gift becomes the weekly goal reward;
 - the funnel answers are adapted to the saved single-choice shape (`toFamilyPlan`: goal to the first mapped old goal, attempt to the first mapped old attempt, moment `flex`) and stored as `showcase.familyPlan`, so the Family plan card, the stopping phrase and the reading task keep working;
-- the access cookie is set exactly like signup (parent unlocked for the normal 15 minutes) and the generated credentials come back; the funnel keeps them in `sessionStorage` (`brainee-family-login`) and parent Settings shows a "Your login" card with login, password and PIN 1234.
+- the access cookie is set exactly like signup (parent unlocked for the normal 15 minutes) and the generated credentials come back; the funnel keeps them in demo-only `localStorage` (`brainee-family-login`) until **I saved it** is pressed. `/entry`, `/jury` and parent Settings show a compact "Your login" card with Copy and acknowledgment; logout confirms and shows any unsaved generated login first.
 
 ## Hero Cape and the Starter Pack moment
 

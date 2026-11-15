@@ -18,7 +18,10 @@ import {
 } from "@brainee/core";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { authCopy } from "@/components/auth/copy";
+import { saveFamilyLogin } from "@/lib/family-login";
 import { enterJury } from "@/lib/jury";
+import { requireAuthResponse, useAuthAction } from "@/lib/use-auth-action";
 import { BrainPanel, FunnelBrain } from "./BrainPanel";
 import { Icon } from "./Icon";
 import { quizCopy as c } from "./quiz-copy";
@@ -73,10 +76,11 @@ export function Funnel() {
   const [screen, setScreen] = useState<Screen>("duration");
   const [draft, setDraftState] = useState<QuizDraft>({});
   const [delta, setDelta] = useState(0);
-  const [busy, setBusy] = useState(false);
-  const [startError, setStartError] = useState(false);
-  const [juryBusy, setJuryBusy] = useState(false);
-  const [juryError, setJuryError] = useState(false);
+  const action = useAuthAction();
+  const busy = action.pending;
+  const startError = !!action.error;
+  const juryBusy = action.pending;
+  const juryError = !!action.error;
   const current = useRef<QuizDraft>({});
   const pending = useRef<ReturnType<typeof setTimeout> | null>(null);
   const deltaTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -179,11 +183,8 @@ export function Funnel() {
     later(() => advance(from), drop ? 750 : 300);
   };
 
-  const startPlan = async () => {
-    if (busy) return;
-    setBusy(true);
-    setStartError(false);
-    try {
+  const startPlan = () =>
+    action.run(async () => {
       const d = current.current;
       const r = await fetch("/api/onboarding/start", {
         method: "POST",
@@ -196,27 +197,12 @@ export function Funnel() {
           starterPack: !clock.expired,
         }),
       });
-      if (!r.ok) throw new Error("start-failed");
+      requireAuthResponse(r);
       const data = await r.json();
-      try {
-        sessionStorage.setItem("brainee-family-login", JSON.stringify(data.credentials));
-      } catch {}
+      saveFamilyLogin(data.credentials, data.child.id);
       window.location.assign("/entry");
-    } catch {
-      setStartError(true);
-      setBusy(false);
-    }
-  };
-  const jury = async () => {
-    setJuryBusy(true);
-    setJuryError(false);
-    try {
-      await enterJury();
-    } catch {
-      setJuryError(true);
-      setJuryBusy(false);
-    }
-  };
+    });
+  const jury = () => action.run(enterJury);
 
   const header = (
     <>
@@ -230,12 +216,12 @@ export function Funnel() {
           type="button"
           className="jury"
           disabled={juryBusy}
+          aria-busy={juryBusy}
+          aria-label={juryBusy ? authCopy.creating : c.jury}
           onClick={jury}
           data-testid="jury-entry"
         >
-          <Icon name="scale" />
-          {c.jury}
-          <small>{c.juryNote}</small>
+          {juryBusy ? authCopy.creating : c.juryNote}
         </button>
       </header>
       {juryError && (
@@ -461,9 +447,9 @@ export function Funnel() {
             onClick={() => back && go(back)}
             disabled={!back}
             data-testid="funnel-back"
+            aria-label={c.back}
           >
             <Icon name="arrow" />
-            {c.back}
           </button>
           <div className="segs" data-testid="funnel-progress">
             {c.sections.map((label, i) => {

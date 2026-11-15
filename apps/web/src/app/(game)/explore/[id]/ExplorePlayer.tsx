@@ -2,11 +2,13 @@
 import { createId, HostBridge } from "@brainee/game-bridge";
 import type { Preview } from "@brainee/game-catalog";
 import { gameSandbox } from "@brainee/game-catalog/remote";
+import { ArrowLeft } from "@brainee/ui/components/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
+import { iconControl, PlayerHeader, playerSurface } from "@/components/game/PlayerHeader";
 import { useI18n } from "@/i18n";
 
 // Separate from LearningProvider: no issued session and no round/finish callbacks.
@@ -34,7 +36,7 @@ export function AvailablePreview({ game, onReady }: { game: Preview; onReady?():
   const frame = useRef<HTMLIFrameElement>(null);
   const [status, setStatus] = useState("loading");
   const router = useRouter();
-  const { locale } = useI18n();
+  const { locale, t } = useI18n();
   const meta = game.explore;
   const ready = useRef(false);
   useEffect(() => {
@@ -93,14 +95,20 @@ export function AvailablePreview({ game, onReady }: { game: Preview; onReady?():
   };
   const contain = meta.viewport === "contain" && meta.aspectRatio;
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-2">
-      <header className="flex items-center justify-between gap-3 px-4">
-        <Link href="/explore" className="min-h-12 py-3">
-          ← Exit
-        </Link>
-        <h1 className="text-lg">{game.title}</h1>
-        <span className="text-sm">{meta.audio ? "No stars · sound" : "No stars"}</span>
-      </header>
+    <div className={playerSurface}>
+      <PlayerHeader
+        title={game.title}
+        exit={
+          <Link href="/explore" className={iconControl} aria-label={t.child.game.exit}>
+            <ArrowLeft className="size-5" aria-hidden="true" />
+          </Link>
+        }
+        status={
+          <span className="text-muted-foreground text-sm">
+            {meta.audio ? "No stars · sound" : "No stars"}
+          </span>
+        }
+      />
       {meta.orientation !== "any" && (
         <p
           data-testid="orientation-hint"

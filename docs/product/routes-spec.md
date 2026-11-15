@@ -15,7 +15,7 @@ Source: `ROUTES.md` and the clickable prototype `brainy-mvp.zip` (frozen inputs,
 |---|---|
 | `/` role choice | `/` is a gate: a device with a family opens `/entry`, any other opens `/start`. The role picker (parent login, child login, jury) is `/login` |
 | `/auth/signup`, `/onboarding/*` | `/start` (the Brain Check funnel, [funnel.md](funnel.md); one-tap `POST /api/onboarding/start`); `/onboarding` redirects to it; `/signup` (neutral/legacy) and `/onboarding/setup` stay |
-| Jury preview | `/jury` after demo-only `POST /api/jury` |
+| Jury preview | Quiet shortcut on every funnel screen and below the login form → isolated prepared family via demo-only `POST /api/jury` → `/jury` with save-login card |
 | `/child/start`, `/child/learn`, `/child/play/:id` | `/entry`, `/learn`, `/game/[id]` |
 | `/child/leisure`, `/child/watch/:id` | `/leisure`, `/video/[id]` (registered films only; others 404, D-39) |
 | `/child/fun/:id` | `/fun/snake` (playable React game) |
@@ -48,3 +48,5 @@ Settings groups child name/birth year/promise, old-PIN-checked PIN changes, time
 Onboarding keeps the five-question `quizStart` contract: one question per screen, progress, back, answer reactions, a gentle Scroll Monster story, starting-Brainy reveal, hold-to-start (tap with reduced motion), then signup. Referral entry is optional and has no backend effect. Stage increases show a child celebration and a parent event; first load does not celebrate an existing stage.
 
 Both signup paths lead to `/onboarding/setup`: a one-time pairing code, current-domain Screen Time instructions, and child-device/parent choices. `/signup` skips the quiz using neutral answers. Jury entry is demo-only and creates an independent family with reusable credentials; Settings offers a parent-authorized content reset. Details: D-29.
+
+First entry follows `/` → `/start` → quiz → result → plan → offer → one-tap Start → `/entry` (Starter Pack and save-login card) → recommended game. Logout confirms and goes to `/login`; a valid session there offers **Continue as <child>**. Anonymous child routes return to `/start` via `/`, never to the seeded family unless shared local-demo access is explicitly enabled (D-43).

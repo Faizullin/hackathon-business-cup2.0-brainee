@@ -33,6 +33,7 @@
   },
   "globalPassThroughEnv": [
     "DEMO_MODE",
+    "BRAINEE_SHARED_DEMO",
     "BRAINEE_LAB",
     "DATABASE_URL",
     "DATABASE_AUTH_TOKEN",

@@ -1,17 +1,27 @@
 "use client";
 
 import { navigationCounts } from "@brainee/core";
-import { ChartLine, ClipboardCheck, Gift, LogOut, Settings } from "@brainee/ui/components/icons";
+import {
+  ArrowLeft,
+  ChartLine,
+  ClipboardCheck,
+  Gift,
+  LogOut,
+  Settings,
+} from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type ReactNode, useState, ViewTransition } from "react";
+import { authCopy } from "@/components/auth/copy";
 import { BrandMark } from "@/components/BrandMark";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton } from "@/components/demo/kit";
 import { NavigationBadge } from "@/components/demo/NavigationBadge";
+import { iconControl } from "@/components/game/PlayerHeader";
 import { useI18n } from "@/i18n";
+import { AuthActionError, useAuthAction } from "@/lib/use-auth-action";
 
 function PinGate() {
   const { unlockParent } = useLearning();
@@ -21,16 +31,17 @@ function PinGate() {
   const [answer, setAnswer] = useState("");
   const [pin, setPin] = useState("");
   const [wrong, setWrong] = useState(false);
-  const [busy, setBusy] = useState(false);
+  const { pending: busy, error, run } = useAuthAction();
   const press = async (digit: string) => {
     if (busy) return;
     const next = (pin + digit).slice(0, 4);
     setPin(next);
     setWrong(false);
     if (next.length === 4) {
-      setBusy(true);
-      const ok = await unlockParent(next);
-      setBusy(false);
+      const ok = await run(async () => {
+        if (!(await unlockParent(next))) throw new AuthActionError("wrong");
+        return true;
+      });
       if (!ok) {
         setWrong(true);
         setPin("");
@@ -44,6 +55,7 @@ function PinGate() {
       <button
         type="button"
         className={outlineButton}
+        disabled={busy}
         onClick={() => {
           setAdult(!adult);
           setWrong(false);
@@ -56,9 +68,10 @@ function PinGate() {
           className="flex flex-col gap-3"
           onSubmit={async (event) => {
             event.preventDefault();
-            setBusy(true);
-            const ok = await unlockParent(answer, true);
-            setBusy(false);
+            const ok = await run(async () => {
+              if (!(await unlockParent(answer, true))) throw new AuthActionError("wrong");
+              return true;
+            });
             setWrong(!ok);
           }}
         >
@@ -73,8 +86,8 @@ function PinGate() {
             />
           </label>
           <p className="text-muted-foreground text-sm">{tp.adultHint}</p>
-          <button type="submit" disabled={busy} className={outlineButton}>
-            {tp.adultSubmit}
+          <button type="submit" disabled={busy} aria-busy={busy} className={outlineButton}>
+            {busy ? authCopy.checking : tp.adultSubmit}
           </button>
         </form>
       )}
@@ -90,9 +103,14 @@ function PinGate() {
           />
         ))}
       </div>
+      {busy && <p role="status">{authCopy.checking}</p>}
       {wrong && (
         <p role="alert" className="text-coral text-sm">
-          {adult ? tp.adultWrong : tp.pinWrong}
+          {error && error !== "wrong"
+            ? authCopy.errors[error]
+            : adult
+              ? tp.adultWrong
+              : tp.pinWrong}
         </p>
       )}
       <div className={adult ? "hidden" : "grid grid-cols-3 gap-3"}>
@@ -103,6 +121,8 @@ function PinGate() {
             <button
               key={key}
               type="button"
+              disabled={busy}
+              aria-busy={busy}
               aria-label={key === "⌫" ? tp.pinErase : tp.pinDigit(key)}
               onClick={() => (key === "⌫" ? setPin((p) => p.slice(0, -1)) : press(key))}
               className="size-16 rounded-2xl bg-secondary font-heading font-semibold text-xl transition-transform duration-(--dur-press) active:scale-90"
@@ -176,13 +196,14 @@ export function ParentShell({ children }: { children: ReactNode }) {
               // ROUTES.md §3.3: hand the device back — locks parent mode, child re-enters via /entry.
               <button
                 type="button"
-                className={outlineButton}
+                className={`${outlineButton} ${iconControl}`}
+                aria-label={tp.returnToChild}
                 onClick={async () => {
                   await lockParent();
                   window.location.assign("/entry");
                 }}
               >
-                {tp.returnToChild}
+                <ArrowLeft aria-hidden="true" className="size-5" />
               </button>
             ) : (
               <Link href="/entry" className={outlineButton}>

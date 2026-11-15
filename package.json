@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "node scripts/prepare-dev.mjs && turbo run dev",
-    "demo": "pnpm games:build && pnpm db:reset && DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web dev",
+    "demo": "pnpm games:build && pnpm db:reset && DEMO_MODE=1 BRAINEE_SHARED_DEMO=1 BRAINEE_LAB=1 pnpm --filter @brainee/web dev",
     "build": "pnpm games:build && turbo run build",
     "start": "pnpm --filter @brainee/web start",
     "e2e": "pnpm build && pnpm --filter @brainee/web e2e",

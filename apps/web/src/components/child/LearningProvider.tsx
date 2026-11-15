@@ -27,6 +27,8 @@ import {
   storePendingFinish,
 } from "@/lib/learning-api";
 
+import { AuthActionError } from "@/lib/use-auth-action";
+
 import { StageCelebration } from "./StageCelebration";
 
 const STATE_KEY = ["child-state"] as const;
@@ -127,8 +129,10 @@ function SharedLearning({ children }: { children: ReactNode }) {
   });
   const snapshot = state.data;
   useEffect(() => {
-    if (state.error && "status" in state.error && state.error.status === 419)
-      window.location.replace("/login");
+    if (state.error && "status" in state.error) {
+      if (state.error.status === 419) window.location.replace("/login");
+      if (state.error.status === 401) window.location.replace("/");
+    }
   }, [state.error]);
   const refresh = useCallback(async () => {
     await client.cancelQueries({ queryKey: STATE_KEY });
@@ -200,7 +204,9 @@ function SharedLearning({ children }: { children: ReactNode }) {
   );
   const unlockParent = useCallback(
     async (pin: string, adult = false) => {
-      const { error } = await postJson("/api/parent", adult ? { answer: pin } : { pin });
+      const { error, status } = await postJson("/api/parent", adult ? { answer: pin } : { pin });
+      if (status >= 500) throw new AuthActionError("unavailable");
+      if (status === 400) throw new AuthActionError("invalid");
       await refresh().catch(() => {});
       return error === null;
     },

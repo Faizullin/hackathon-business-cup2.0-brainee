@@ -6,6 +6,11 @@ export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
   return demoApi(request, async (db, now) => {
     const created = await createJuryFamily(db, now);
-    return withAccessCookie(request, { credentials: created.credentials }, created, 201);
+    return withAccessCookie(
+      request,
+      { credentials: created.credentials, child: created.child },
+      created,
+      201,
+    );
   });
 }

@@ -15,6 +15,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { StopLearningButton } from "@/components/child/StopLearningButton";
+import { iconControl, PlayerHeader, playerSurface } from "@/components/game/PlayerHeader";
 import { useI18n } from "@/i18n";
 import {
   canRetryFinish,
@@ -173,25 +174,26 @@ function ActiveGamePlayer({
     );
   }
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-3 bg-(--game-surface) p-3 lg:max-w-5xl lg:p-5">
-      <header className="flex items-center gap-3 rounded-stage bg-(--game-tile) px-3 py-2 ring-1 ring-(--game-tile-ring)">
-        <StopLearningButton href="/learn" variant="ghost">
-          <ArrowLeft className="size-5" aria-hidden="true" />
-          {t.exit}
-        </StopLearningButton>
-        <div className="min-w-0 flex-1">
-          <h1 className="!text-lg leading-tight">{game.title}</h1>
-          <p className="text-muted-foreground text-sm">{t.level(issued.level)}</p>
-        </div>
-        <p
-          role="status"
-          className="flex items-center gap-1 font-semibold"
-          aria-label={t.starsEarned(events.reduce((sum, event) => sum + roundStars(event), 0))}
-        >
-          <StarIcon className="size-5" />
-          {events.reduce((sum, event) => sum + roundStars(event), 0)}
-        </p>
-      </header>
+    <div className={playerSurface}>
+      <PlayerHeader
+        title={game.title}
+        subtitle={t.level(issued.level)}
+        exit={
+          <StopLearningButton href="/learn" variant="ghost" label={t.exit} className={iconControl}>
+            <ArrowLeft className="size-5" aria-hidden="true" />
+          </StopLearningButton>
+        }
+        status={
+          <p
+            role="status"
+            className="flex items-center gap-1 font-semibold"
+            aria-label={t.starsEarned(events.reduce((sum, event) => sum + roundStars(event), 0))}
+          >
+            <StarIcon className="size-5" />
+            {events.reduce((sum, event) => sum + roundStars(event), 0)}
+          </p>
+        }
+      />
       {events.length > 0 && (
         <p
           role="status"

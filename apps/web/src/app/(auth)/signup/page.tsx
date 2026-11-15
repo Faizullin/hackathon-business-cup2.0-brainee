@@ -8,19 +8,19 @@ import {
   toFamilyPlan,
 } from "@brainee/core";
 import { useEffect, useState } from "react";
+import { authCopy } from "@/components/auth/copy";
 import { Panel, primaryButton } from "@/components/demo/kit";
 import { funnelCopy as c } from "@/components/funnel/copy";
-
 import { loadFunnel } from "@/components/funnel/storage";
 import { useI18n } from "@/i18n";
+import { requireAuthResponse, useAuthAction } from "@/lib/use-auth-action";
 
 // Hackathon demo: every family uses PIN 1234 unless the parent changes it in Settings.
 const DEMO_PIN_HINT = { pin: "1234" } as const;
 
 export default function Signup() {
   const { t } = useI18n();
-  const [error, setError] = useState("");
-  const [busy, setBusy] = useState(false);
+  const { pending: busy, error, run } = useAuthAction();
   const [funnel, setFunnel] = useState<FunnelAnswers | null>(null);
   useEffect(() => {
     const saved = loadFunnel();
@@ -39,9 +39,8 @@ export default function Signup() {
         className="grid gap-4 sm:grid-cols-2"
         onSubmit={async (e) => {
           e.preventDefault();
-          setBusy(true);
           const f = new FormData(e.currentTarget);
-          try {
+          await run(async () => {
             const r = await fetch("/api/onboarding", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -55,12 +54,9 @@ export default function Signup() {
                 timeZone: f.get("timeZone"),
               }),
             });
-            if (!r.ok) throw Error();
+            requireAuthResponse(r);
             window.location.assign("/onboarding/setup");
-          } catch {
-            setError(to.invalid);
-            setBusy(false);
-          }
+          });
         }}
       >
         {(
@@ -103,9 +99,14 @@ export default function Signup() {
             ))}
           </select>
         </label>
-        {error && <p role="alert">{error}</p>}
-        <button type="submit" disabled={busy} className={`${primaryButton} sm:col-span-2`}>
-          {to.create}
+        {error && <p role="alert">{authCopy.errors[error]}</p>}
+        <button
+          type="submit"
+          disabled={busy}
+          aria-busy={busy}
+          className={`${primaryButton} sm:col-span-2`}
+        >
+          {busy ? authCopy.creating : to.create}
         </button>
       </form>
     </Panel>

@@ -13,6 +13,7 @@ import { outlineButton, primaryButton } from "@/components/demo/kit";
 import { FilmView } from "@/components/film/FilmView";
 import { brainyNarrator } from "@/components/film/narrators";
 import { useFilmScript } from "@/components/film/useFilmScript";
+import { iconControl } from "@/components/game/PlayerHeader";
 import { useI18n } from "@/i18n";
 
 const SAVE_EVERY_SECONDS = 10; // ROUTES.md §5: save position every 10 s and on close
@@ -73,9 +74,13 @@ function CloseButton({ onClose }: { onClose: () => void }) {
   const { t } = useI18n();
   return (
     <div className="flex items-center gap-3">
-      <button type="button" onClick={onClose} className={outlineButton}>
+      <button
+        type="button"
+        onClick={onClose}
+        className={`${outlineButton} ${iconControl}`}
+        aria-label={t.child.video.close}
+      >
         <ArrowLeft aria-hidden="true" className="size-4" />
-        {t.child.video.close}
       </button>
     </div>
   );

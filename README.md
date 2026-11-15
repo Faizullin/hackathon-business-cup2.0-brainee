@@ -4,7 +4,7 @@
 
 Business Cup 2.0 hackathon project · US-first, English-only.
 
-**Try it:** [brainee.vercel.app](https://brainee.vercel.app). Tap **Jury entry** to get your own demo family in one tap (no form; parent PIN `1234`).
+**Try it:** [brainee.vercel.app](https://brainee.vercel.app). Start with the **Brain Check**: quiz → result → plan → Start → Starter Pack → first game. Short on time? The subtle **Jury entry** shortcut creates your own prepared demo family in one tap (parent PIN `1234`).
 
 | Brain Check result | Child: Learn | Parent: Analytics |
 |---|---|---|
