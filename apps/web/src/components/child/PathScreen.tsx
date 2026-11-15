@@ -14,10 +14,10 @@ export function PathScreen() {
   const max = Math.max(1, ...week);
   const rewards = snapshot.activity ? rewardProgress(stats, snapshot.activity) : null;
   return (
-    <div className="lv-in space-y-5">
+    <div className="lv-in flex flex-col ui-stack">
       <h1>{copy.pathTitle}</h1>
-      <div className="grid gap-5 lg:grid-cols-2 lg:items-start">
-        <div className="space-y-5">
+      <div className="grid ui-stack lg:grid-cols-2 lg:items-start">
+        <div className="flex flex-col ui-stack">
           <section className="rounded-stage bg-[#1C1B33] p-5 text-white">
             <h2 className="font-heading text-lg">{copy.week}</h2>
             <p className="mt-2 text-[#CFCDE6]">

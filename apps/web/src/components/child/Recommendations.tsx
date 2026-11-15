@@ -57,7 +57,7 @@ export function RecommendationCards({
   const { t } = useI18n();
   const te = t.child.entry;
   return (
-    <ul className={cn("grid gap-3", big ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-3")}>
+    <ul className="ui-grid grid sm:grid-cols-3">
       {recs.map((rec, index) => {
         const skill = t.skills[rec.skill];
         return (
@@ -68,27 +68,23 @@ export function RecommendationCards({
               onClick={() => onChoose?.(rec.game.id)}
               data-testid="recommended-game"
               className={cn(
-                "flex h-full gap-3 rounded-panel ring-1 bg-card p-4 transition-transform duration-(--dur-press) active:scale-[0.97]",
+                "ui-game-card ring-1 transition-transform duration-(--dur-press) active:scale-[0.97]",
                 // Compact Learn cards are a row on phones so two recommendations fit above the grid.
-                big ? "min-h-40 flex-col p-5" : "items-center sm:flex-col sm:items-stretch",
+                big ? "min-h-40" : "flex-row items-center sm:flex-col sm:items-stretch",
                 index === 0 ? "ring-highlight ring-2" : "ring-border",
               )}
             >
               <GameThumbnail
                 src={rec.game.thumbnail}
                 skill={rec.skill}
-                className={cn(!big && "w-28 shrink-0 sm:w-full", big && "order-1")}
+                className={cn(!big && "w-28 shrink-0 sm:w-full")}
               />
-              <span className={cn("flex min-w-0 flex-col gap-1", big && "contents")}>
-                {index === 0 && (
-                  <span className={cn(big && "order-0")}>
-                    <Chip tone="highlight">{te.top}</Chip>
-                  </span>
-                )}
-                <span className={cn("font-semibold", big && "order-2 text-lg")}>
-                  {rec.game.title}
+              <span className="flex min-w-0 flex-col gap-1">
+                <span className={cn(index !== 0 && "hidden sm:block", "sm:min-h-8")}>
+                  {index === 0 && <Chip tone="highlight">{te.top}</Chip>}
                 </span>
-                <span className={cn("text-muted-foreground text-sm", big && "order-3")}>
+                <span className={cn("font-semibold", big && "text-lg")}>{rec.game.title}</span>
+                <span className="text-muted-foreground text-sm">
                   {te.reason(skill, rec.score, rec.ageAverage)}
                 </span>
               </span>

@@ -142,7 +142,7 @@ export function ParentShell({ children }: { children: ReactNode }) {
         ? (counts?.parentRewards ?? 0)
         : 0;
   return (
-    <div className="min-h-dvh overscroll-none">
+    <div className="ui-surface min-h-dvh overscroll-none">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-30 focus:rounded-xl focus:bg-surface focus:px-4 focus:py-3"
@@ -207,7 +207,7 @@ export function ParentShell({ children }: { children: ReactNode }) {
           id="main-content"
           data-mode="parent"
           tabIndex={-1}
-          className="mx-auto flex w-full max-w-[1180px] flex-col gap-5 px-4 pt-5 pb-[calc(96px+env(safe-area-inset-bottom))] min-[1000px]:pb-10"
+          className="mx-auto flex w-full max-w-[1180px] flex-col ui-stack px-(--ui-page-padding) pt-(--ui-page-padding) pb-[calc(96px+env(safe-area-inset-bottom))] min-[1000px]:pb-10"
         >
           <Gate>
             <ViewTransition default="page-fade">{children}</ViewTransition>

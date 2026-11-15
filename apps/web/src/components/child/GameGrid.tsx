@@ -12,17 +12,19 @@ export function GameGrid() {
   const { t } = useI18n();
   const age = snapshot ? new Date().getFullYear() - snapshot.child.birthYear : 10;
   return (
-    <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+    <ul className="ui-grid grid grid-cols-2">
       {allGames.map((game, index) => {
         const skill = t.skills[game.skills.main as keyof typeof t.skills] ?? game.skills.main;
         const locked = age < game.minAge;
         const body = (
           <>
-            <span className="relative">
-              <GameThumbnail src={game.thumbnail} skill={game.skills.main} locked={locked} />
-              <span className="absolute top-1.5 right-1.5 rounded-full bg-card/90 px-2 py-0.5 font-medium text-xs">
-                {locked ? t.learn.lockedAge(game.minAge) : t.learn.fromAge(game.minAge)}
-              </span>
+            <span>
+              <GameThumbnail
+                src={game.thumbnail}
+                skill={game.skills.main}
+                locked={locked}
+                ageLabel={locked ? t.learn.lockedAge(game.minAge) : t.learn.fromAge(game.minAge)}
+              />
             </span>
             <span>
               <span className="block font-semibold">{game.title}</span>
@@ -30,14 +32,13 @@ export function GameGrid() {
             </span>
           </>
         );
-        const card =
-          "flex min-h-32 flex-col justify-between gap-3 rounded-panel ring-1 ring-border bg-card p-3";
+        const card = "ui-game-card";
         return (
           <li
             key={game.id}
             className={
-              index === allGames.length - 1
-                ? `${allGames.length % 2 === 1 ? "col-span-2 w-[calc(50%-6px)] justify-self-center" : ""} sm:col-span-1 sm:w-auto sm:justify-self-stretch ${allGames.length % 3 === 1 ? "sm:col-start-2" : ""}`
+              index === allGames.length - 1 && allGames.length % 2 === 1
+                ? "col-span-2 w-[calc((100%-var(--ui-card-gap))/2)] justify-self-center"
                 : undefined
             }
           >

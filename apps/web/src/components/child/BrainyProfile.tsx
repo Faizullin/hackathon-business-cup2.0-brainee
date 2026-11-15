@@ -35,7 +35,7 @@ export function BrainyProfile() {
     ? ABILITY_BODY[suggestion.skills.main as keyof typeof ABILITY_BODY]
     : "brain";
   return (
-    <div className="flex flex-col gap-5 lg:grid lg:grid-cols-[minmax(0,400px)_minmax(0,1fr)] lg:items-start">
+    <div className="flex flex-col ui-stack lg:grid lg:grid-cols-[minmax(0,400px)_minmax(0,1fr)] lg:items-start">
       <div className="space-y-4 lg:sticky lg:top-5">
         <HeroBrainCard title={t.title} />
         {suggestion && (

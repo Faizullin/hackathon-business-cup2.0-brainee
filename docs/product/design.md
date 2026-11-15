@@ -36,7 +36,7 @@
 | radii | control 10–12, quest row 16, card 20–22, **hero/stage 28**, tab bar top 28, pill 999 | zone cards: one 22 px corner and three 8 px corners |
 | shadow | hero `0 24px 40px -24px rgba(28,27,51,.55)`; tab bar `0 -10px 30px -14px rgba(28,27,51,.22)`; hub `0 16px 30px -12px rgba(90,63,224,.55)` | |
 | type | **Manrope 500–800** for UI and **titles (800, −0.02em)**; **Unbounded 500/700 only for numbers**, scores, badge marks and the wordmark | titles 26–28, section 18/800, body 15, meta 12–13, tab label 11/800 |
-| controls | primary 46 px (radius 14); quest rows ≥ 60 px; grade-like tiles 76 px; tab targets ≥ 54 px | child surfaces keep ≥ 56 px |
+| controls | primary 46 px (radius 14); quest rows ≥ 60 px; grade-like tiles 76 px; tab targets ≥ 54 px | parent targets ≥ 48 px; child surfaces keep ≥ 56 px |
 | icons | 24 px stroke icons, `stroke-width: 2`, round caps and joins | **Lucide at 2 px** matches; custom only for Brainy, ★, ☀, flame |
 
 ## Motion (all off under `prefers-reduced-motion`)
@@ -182,5 +182,6 @@ The redesign only provides the palette; game folders are out of scope for it.
 - **Animation:** one shared rAF ticker for all animated Brainy instances (not one per instance). Throttle to ~30 fps, stop when `document.hidden`, when off-screen (IntersectionObserver) or under reduced motion. Static instances compute one frame with `t = 0`.
 - **Colour roles:** primary actions violet; progress bars violet / `#8C76FF`; positive feedback blue on blue wash; negative feedback peach on peach wash; the top stage and Brainy highlights pink. Avoid green and red.
 - **Typography:** Manrope 800 titles (26–28 px, −0.02em), 18/800 section headers with a muted count on the right, 15/700 row titles, 12–13/600 meta. Unbounded only for numbers (score, stars, badge marks).
+- **Tablet scale:** at 768 px, body/title/section text is 17/32/22 px, with 28 px page rhythm and 24 px card padding. Phone remains 15/26/18 px. Shared implementation tokens and media behavior live in [ui.md](../dev/ui.md#responsive-surface-scale-and-game-media).
 - **Layout:** phone content padding 20 px; card gaps 8–16 px. Cards are white with a 1 px `#E6E4F2` ring (box-shadow), not borders. The dark hero card uses `#1C1B33` with `#CFCDE6` / `#A3A1C6` text. iPad landscape: hero card in the left column, lists on the right, with the rail replacing the bottom bar.
 - **Accessibility:** tab bar buttons use `aria-current="page"`; the hub's `aria-label` describes Brainy's state; meters and rings are `aria-hidden` with the value given as text; touch targets are ≥ 56 px on child surfaces.

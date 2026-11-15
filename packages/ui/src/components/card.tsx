@@ -11,7 +11,7 @@ function Card({
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card flex flex-col gap-(--card-spacing) rounded-panel ring-1 ring-border bg-card py-(--card-spacing) text-card-foreground [--card-spacing:--spacing(5)] sm:[--card-spacing:--spacing(8)] data-[size=sm]:[--card-spacing:--spacing(4)]",
+        "group/card flex flex-col gap-(--card-spacing) rounded-panel ring-1 ring-border bg-card py-(--card-spacing) text-card-foreground [--card-spacing:var(--ui-card-padding)] data-[size=sm]:[--card-spacing:--spacing(4)]",
         className,
       )}
       {...props}

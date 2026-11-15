@@ -18,24 +18,16 @@ export default function ExplorePage() {
       >
         Back to learning
       </Link>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="ui-grid grid sm:grid-cols-2">
         {previews.map((game) =>
           age < game.minAge ? (
-            <div
-              key={game.id}
-              aria-disabled="true"
-              className="flex flex-col gap-3 rounded-panel border border-border bg-card p-4 text-muted-foreground"
-            >
+            <div key={game.id} aria-disabled="true" className="ui-game-card text-muted-foreground">
               <GameThumbnail src={game.thumbnail} locked />
               <h2>{game.title}</h2>
               <p>{t.learn.lockedAge(game.minAge)}</p>
             </div>
           ) : (
-            <Link
-              key={game.id}
-              href={`/explore/${game.id}`}
-              className="flex flex-col gap-3 rounded-panel border border-border bg-card p-4"
-            >
+            <Link key={game.id} href={`/explore/${game.id}`} className="ui-game-card">
               <GameThumbnail src={game.thumbnail} />
               <h2>{game.title}</h2>
               <p>{game.minAge}+ · Free play · no stars</p>

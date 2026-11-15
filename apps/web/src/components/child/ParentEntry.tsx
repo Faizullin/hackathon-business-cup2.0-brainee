@@ -15,9 +15,9 @@ export function ParentEntry() {
         prefetch={false}
         aria-label={`${PARENT_ENTRY_COPY.label}. ${PARENT_ENTRY_COPY.hint}`}
         data-testid="parent-entry"
-        className={cn(outlineButton, "min-h-9 rounded-full px-3 text-muted-foreground text-xs")}
+        className={cn(outlineButton, "rounded-full px-3 text-muted-foreground text-xs")}
       >
-        <Lock aria-hidden="true" className="size-3.5" />
+        <Lock aria-hidden="true" className="size-5" />
         {PARENT_ENTRY_COPY.label}
       </Link>
     </div>

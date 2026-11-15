@@ -24,7 +24,7 @@ export function Panel({
   return (
     <section
       className={cn(
-        "flex min-w-0 flex-col gap-3 rounded-panel ring-1 ring-border bg-card p-4 sm:p-5",
+        "flex min-w-0 flex-col ui-panel rounded-panel ring-1 ring-border bg-card",
         className,
       )}
     >
@@ -136,6 +136,6 @@ export function Notice({ notice }: { notice: { text: string; ok: boolean } | nul
 }
 
 export const smallButton =
-  "inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl px-3.5 text-sm font-semibold transition-transform duration-(--dur-press) active:scale-95 disabled:opacity-50 disabled:pointer-events-none";
+  "ui-control inline-flex items-center justify-center gap-1.5 rounded-xl px-3.5 text-sm font-semibold transition-transform duration-(--dur-press) active:scale-95 disabled:opacity-50 disabled:pointer-events-none";
 export const primaryButton = `${smallButton} bg-primary text-primary-foreground`;
 export const outlineButton = `${smallButton} ring-1 ring-border bg-card`;
