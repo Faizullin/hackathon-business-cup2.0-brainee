@@ -42,3 +42,26 @@ test("Learn, Entry and Explore cards render game thumbnails; locked ones are dim
   await expectThumbnails(page, 5);
   await page.screenshot({ path: info.outputPath("explore-cards.png"), fullPage: true });
 });
+
+test("failed thumbnail requests keep the card geometry and a usable title", async ({ page }) => {
+  await page.route("**/games/*/thumbnail.svg", (route) => route.abort());
+  await page.goto("/learn");
+  const card = page.locator('a[href="/game/odd-one-out"]').first();
+  await expect(card).toContainText("Odd One Out");
+  await card.scrollIntoViewIfNeeded();
+  const fallback = card.getByTestId("game-thumbnail-fallback");
+  await expect(fallback).toBeVisible();
+  const before = await fallback.boundingBox();
+  expect(Math.abs((before?.width ?? 0) / (before?.height ?? 1) - 4 / 3)).toBeLessThan(0.05);
+  await page.unroute("**/games/*/thumbnail.svg");
+  await page.reload();
+  const image = card.getByTestId("game-thumbnail");
+  await image.scrollIntoViewIfNeeded();
+  await expect
+    .poll(() => image.evaluate((img: HTMLImageElement) => img.naturalWidth))
+    .toBeGreaterThan(0);
+  const after = await image.boundingBox();
+  expect(after?.width).toBe(before?.width);
+  expect(after?.height).toBe(before?.height);
+  await expect(image).toHaveCSS("object-fit", "cover");
+});

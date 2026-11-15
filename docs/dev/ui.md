@@ -29,6 +29,16 @@ app/(auth)/layout.tsx       # auth shell; /start uses StepPage's phone/iPad layo
 - The entry screen is a full-screen choice with a dark Brainy card and recommendation speech card. Its explicit alternative opens Learn; it has no dismiss gesture.
 - Bottom sheets (accessory preview, gift confirm, parent "new task") use Base UI Drawer with snap points.
 
+## Responsive surface scale and game media
+
+`packages/ui/src/tokens.css` owns the `--ui-*` surface scale. Opt in with `ui-surface` at child, parent, Entry and post-game shells; game boards keep their own typography. Phone body/title/section sizes are 15/26/18 px; at 768 px they become 17/32/22 px. Tablet metadata is 13 px and secondary text 15 px. `ui-stack`, `ui-grid` and `ui-panel` use shared page gaps (20 → 28 px), card gaps (12 → 20 px) and padding (16 → 24 px). Page padding is 20 → 28 px. Preserve the lavender radii: controls 12, media 16 → 18, cards 20, heroes 28 px.
+
+`ui-control` uses 48 px parent targets and inherits 56 px on child surfaces. Shared button icons grow from 20 to 24 px. Landscape keeps the child rail and summary column; portrait keeps bottom navigation. The learning catalog uses two generous columns, with its last odd card centered. Recommendations use three columns on tablets; phone recommendations remain horizontal. Leisure uses two tablet columns so film titles and actions have room.
+
+`GameCardMedia` in `packages/ui` is the shared 4:3 image frame. The app's `GameThumbnail` adds the skill badge; Learn, Recommendations, Entry and Explore all use it. It accepts root-relative SVG, WebP and PNG paths, including versioned `/g/<id>/<version>/thumbnail.webp` paths, with no catalog or host dependency. Explicit 400×300 image dimensions, an aspect-ratio frame, `object-cover`, lazy loading and async decoding reserve the geometry. Failed or non-local sources show a lavender Brainy fallback; lock and age overlays remain visible. Images are decorative because the surrounding card supplies the accessible game title. Keep descriptions and age text outside the image available to assistive technology.
+
+The parent funnel consumes the same scale and stacks below 1001 px. It can grow vertically rather than clipping answers or offers to the viewport. Reduced-motion rules still apply.
+
 ## Saved learning state (T-55)
 
 <a id="temporary-learning-preview-t-35"></a>

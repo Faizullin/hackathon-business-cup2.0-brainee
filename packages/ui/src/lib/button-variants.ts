@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 // Links share styles while retaining anchor semantics instead of button semantics.
 export const buttonVariants = cva(
-  "inline-flex shrink-0 touch-manipulation select-none items-center justify-center gap-2 rounded-xl border border-transparent bg-clip-padding px-4 py-3 text-sm font-semibold outline-none transition-[transform,background-color,color,opacity] duration-(--dur-press) ease-(--ease-press) focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ring active:scale-95 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0",
+  "inline-flex shrink-0 touch-manipulation select-none items-center justify-center gap-2 rounded-xl border border-transparent bg-clip-padding px-4 py-3 text-sm font-semibold outline-none transition-[transform,background-color,color,opacity] duration-(--dur-press) ease-(--ease-press) focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ring active:scale-95 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-(--ui-icon) [&_svg]:shrink-0",
   {
     variants: {
       variant: {

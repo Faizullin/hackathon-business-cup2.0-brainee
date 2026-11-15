@@ -81,3 +81,31 @@
   --loss-wash: #482d28;
   --highlight-wash: #402b43;
 }
+
+/* Surface rhythm: opt in at app shells so game boards keep their own scale. */
+:root {
+  --ui-body: 15px;
+  --ui-title: 26px;
+  --ui-section: 18px;
+  --ui-page-gap: 20px;
+  --ui-card-gap: 12px;
+  --ui-card-padding: 16px;
+  --ui-page-padding: 20px;
+  --ui-control: 48px;
+  --ui-child-control: 56px;
+  --ui-icon: 20px;
+  --ui-media-radius: 16px;
+}
+@media (min-width: 768px) {
+  :root {
+    --ui-body: 17px;
+    --ui-title: 32px;
+    --ui-section: 22px;
+    --ui-page-gap: 28px;
+    --ui-card-gap: 20px;
+    --ui-card-padding: 24px;
+    --ui-page-padding: 28px;
+    --ui-icon: 24px;
+    --ui-media-radius: 18px;
+  }
+}

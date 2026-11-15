@@ -24,20 +24,20 @@ export function LearnContent() {
               timeZone: snapshot?.showcase.calendar?.timeZone,
             }).format(new Date())}
           </p>
-          <h2 className="font-heading text-2xl">{copy.greeting(snapshot?.child.name)}</h2>
+          <h2 className="ui-title font-heading">{copy.greeting(snapshot?.child.name)}</h2>
         </div>
         <span className="flex items-center gap-1.5 rounded-full bg-highlight-wash px-3 py-2 text-xs font-bold">
           <Flame aria-hidden="true" className="size-5 text-sun" />
           {copy.streak(snapshot?.activity?.streakDays ?? 0)}
         </span>
       </header>
-      <section aria-labelledby="advice" className="flex flex-col gap-3">
+      <section aria-labelledby="advice" className="ui-grid flex flex-col">
         <h2 id="advice" className="font-heading font-semibold text-lg">
           {t.child.advice}
         </h2>
         <RecommendationCards />
       </section>
-      <section aria-labelledby="all-games" className="flex flex-col gap-3">
+      <section aria-labelledby="all-games" className="ui-grid flex flex-col">
         <h2 id="all-games" className="font-heading font-semibold text-lg">
           {t.learn.allGames}
         </h2>
@@ -45,7 +45,7 @@ export function LearnContent() {
       </section>
       <Link
         href="/explore"
-        className="rounded-xl border border-border p-4 text-sm text-muted-foreground"
+        className="ui-control rounded-xl border border-border p-4 text-sm text-muted-foreground"
       >
         Explore · free play, no stars →
       </Link>

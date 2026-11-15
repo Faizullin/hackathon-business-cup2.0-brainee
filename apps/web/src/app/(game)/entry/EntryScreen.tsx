@@ -18,7 +18,10 @@ function Entry() {
   const te = t.child.entry;
   const first = recs[0];
   return (
-    <section className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-5 p-4 sm:p-8 lg:max-w-5xl">
+    <section
+      data-mode="child"
+      className="ui-surface ui-stack mx-auto flex w-full max-w-5xl flex-1 flex-col p-(--ui-page-padding)"
+    >
       {pack && (
         <StarterUnlock snapshot={snapshot} onSeen={() => void act({ type: "starter-seen" })} />
       )}
@@ -43,7 +46,7 @@ function Entry() {
       <Link
         href="/learn"
         onClick={() => void act({ type: "entry-choice", took: false })}
-        className="mt-auto self-center p-3 text-muted-foreground text-sm underline-offset-4 hover:underline"
+        className="ui-control mt-auto inline-flex items-center self-center p-3 text-muted-foreground text-sm underline-offset-4 hover:underline"
       >
         {te.other}
       </Link>

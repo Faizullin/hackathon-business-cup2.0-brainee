@@ -47,3 +47,52 @@
 .lucide {
   stroke-width: 2;
 }
+
+@layer components {
+  .ui-surface {
+    font-size: var(--ui-body);
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-lg: var(--ui-section);
+  }
+  .ui-surface h1,
+  .ui-title {
+    font-size: var(--ui-title);
+  }
+  .ui-stack {
+    gap: var(--ui-page-gap);
+  }
+  .ui-panel {
+    padding: var(--ui-card-padding);
+    gap: var(--ui-card-gap);
+  }
+  .ui-grid {
+    gap: var(--ui-card-gap);
+  }
+  .ui-control {
+    min-height: var(--ui-control);
+    min-width: var(--ui-control);
+  }
+  .ui-surface[data-mode="child"],
+  .ui-surface [data-mode="child"] {
+    --ui-control: var(--ui-child-control);
+  }
+  .ui-game-card {
+    display: flex;
+    height: 100%;
+    min-width: 0;
+    flex-direction: column;
+    gap: var(--ui-card-gap);
+    padding: var(--ui-card-padding);
+    border-radius: var(--r);
+    background: var(--surface);
+    box-shadow: 0 0 0 1px var(--line);
+    overflow-wrap: anywhere;
+  }
+  @media (min-width: 768px) {
+    .ui-surface {
+      --text-xs: 0.8125rem;
+      --text-sm: 0.9375rem;
+    }
+  }
+}

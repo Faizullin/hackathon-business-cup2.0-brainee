@@ -40,11 +40,12 @@ export function PostGameScreen({
     ) ?? practiceGame(completion.after.stats, allGames);
   const nextLevel = level < game.levels ? level + 1 : 1;
   const card =
-    "flex min-h-28 flex-col justify-center gap-2 rounded-panel border border-border bg-card p-4 text-left transition-transform duration-(--dur-press) active:scale-[0.97]";
+    "flex min-h-28 flex-col justify-center ui-panel rounded-panel ring-1 ring-border bg-card text-left transition-transform duration-(--dur-press) active:scale-[0.97]";
   return (
     <section
       data-testid="post-game"
-      className="mx-auto grid w-full max-w-6xl gap-5 p-4 pb-8 sm:p-6 lg:grid-cols-2 lg:items-start"
+      data-mode="child"
+      className="ui-surface ui-stack mx-auto grid w-full max-w-6xl p-(--ui-page-padding) pb-8 lg:grid-cols-2 lg:items-start"
     >
       <div className="text-center lg:col-span-2">
         <p className="text-muted-foreground">{game.title}</p>
