@@ -52,7 +52,6 @@ const base: Showcase = {
       until: null,
     },
   ],
-  cartoons: [],
   science: [
     {
       id: "v",

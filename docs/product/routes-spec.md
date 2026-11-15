@@ -17,9 +17,9 @@ Source: `ROUTES.md` and the clickable prototype `brainy-mvp.zip` (frozen inputs,
 | `/auth/signup`, `/onboarding/*` | `/signup` (neutral), `/onboarding` (quiz), then `/onboarding/setup` |
 | Jury preview | `/jury` after demo-only `POST /api/jury` |
 | `/child/start`, `/child/learn`, `/child/play/:id` | `/entry`, `/learn`, `/game/[id]` |
-| `/child/leisure`, `/child/watch/:id` | `/leisure`, `/video/[id]` |
+| `/child/leisure`, `/child/watch/:id` | `/leisure`, `/video/[id]` (registered films only; others 404, D-39) |
 | `/child/fun/:id` | `/fun/snake` (playable React game) |
-| Bought cartoon | `/cartoon/[id]` (explicit-play placeholder) |
+| Bought cartoon | ⏳ later (no media, D-39) |
 | `/child/gifts`, `/child/brainy` | `/gifts`, `/brainy` |
 | `/parent`, `/parent/tasks`, `/parent/rewards` | `/analytics`, `/tasks`, `/rewards` |
 | `/parent/settings` | `/settings` (fourth parent tab) |
@@ -31,7 +31,7 @@ Source: `ROUTES.md` and the clickable prototype `brainy-mvp.zip` (frozen inputs,
 - ✅ Stage never drops (stats only grow).
 - ✅ Leaving mid-game pays nothing (no finish without all rounds).
 - ✅ Daily bonus shared across devices, local-midnight task/streak reset and Monday goal-progress reset; read-only parent task history → [calendar resets](mechanics.md#calendar-resets).
-- ✅ Saved active-play credit for Snake, repeat ten-minute top-ups, forever unlock; cartoon starts at zero.
+- ✅ Saved active-play credit for Snake, repeat ten-minute top-ups, forever unlock.
 - ✅ App tasks auto-complete on learning finish; earned rewards show progress, celebrate and enter the parent feed.
 
 ## Parent dashboard additions

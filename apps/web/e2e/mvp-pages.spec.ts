@@ -53,28 +53,20 @@ test("child: accessory shop, gifts, exchange and a task waiting for the parent",
     .toBe(before.progress.wallet.suns - 1);
 });
 
-test("leisure and science video: pause-only player, quiz pays once after the end", async ({
-  page,
-}) => {
+test("leisure lists only real content: Snake and the interactive films", async ({ page }) => {
   await page.goto("/leisure");
   await expect(page.getByRole("heading", { name: "Games for stars" })).toBeVisible();
-  await expect(page.getByText("Resume at 9 min")).toBeVisible();
-  await page.getByRole("link", { name: /How Bees Live/ }).click();
-  await expect(page).toHaveURL(/\/video\/bees$/);
-  await expect(page.getByRole("slider")).toHaveCount(0);
-  const before = await savedState(page.request);
-  await page.clock.install();
-  await page.getByRole("button", { name: "Watch", exact: true }).click();
-  await page.clock.runFor(21_000);
-  const quiz = page.getByTestId("video-quiz");
-  await expect(quiz).toBeVisible();
-  await quiz.getByRole("button", { name: "Wax" }).click();
-  await expect(quiz.getByRole("button", { name: "Wax" })).toBeDisabled();
-  await quiz.getByRole("button", { name: "Honey" }).click();
-  await expect(quiz.getByText("Correct! +15★ and Eyes +2")).toBeVisible();
-  await expect
-    .poll(async () => (await savedState(page.request)).progress.wallet.stars)
-    .toBe(before.progress.wallet.stars + 15);
+  await expect(page.getByRole("listitem").filter({ hasText: "Snake" })).toBeVisible();
+  await expect(page.getByText(/Rocket Runner|Rhythm Drums|Catapult|Maze Racers/)).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Cartoons and stories" })).toHaveCount(0);
+  const films = page.locator('a[href^="/video/"]');
+  await expect(films).toHaveCount(3);
+  for (const id of ["sky-blue", "rain", "sun-goes"])
+    await expect(page.locator(`a[href="/video/${id}"]`)).toBeVisible();
+  for (const path of ["/video/bees", "/cartoon/volcano"]) {
+    await page.goto(path);
+    await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
+  }
 });
 
 test("parent: PIN barrier, analytics, confirming a task and syncing to the child", async ({
@@ -154,28 +146,6 @@ test("worn accessories follow Brainy to the dock and both post-game portraits", 
   await expect(page.getByTestId("post-game").locator(`[data-acc="${accessory}"]`)).toHaveCount(2);
 });
 
-test("closing a paused science video restores its saved position without paying stars", async ({
-  page,
-}) => {
-  await page.goto("/video/bees");
-  const progress = page.getByRole("progressbar");
-  await expect(progress).toHaveAttribute("aria-valuenow", "0");
-  const before = await savedState(page.request);
-  await page.clock.install();
-  await page.getByRole("button", { name: "Watch", exact: true }).click();
-  await page.clock.runFor(3000);
-  await page.getByRole("button", { name: "Pause", exact: true }).click();
-  const position = await progress.getAttribute("aria-valuenow");
-  expect(Number(position)).toBeGreaterThan(0);
-  await page.clock.runFor(2000);
-  await expect(progress).toHaveAttribute("aria-valuenow", String(position));
-  await page.getByRole("button", { name: "Close and finish later" }).click();
-  await expect(page).toHaveURL(/\/leisure$/);
-  await page.goto("/video/bees");
-  await expect(progress).toHaveAttribute("aria-valuenow", String(position));
-  expect((await savedState(page.request)).progress.wallet.stars).toBe(before.progress.wallet.stars);
-});
-
 test("rankings never appear on child routes, even after parent access", async ({
   page,
   baseURL,
@@ -190,7 +160,7 @@ test("rankings never appear on child routes, even after parent access", async ({
     "/brainy",
     "/gifts",
     "/leisure",
-    "/video/bees",
+    "/video/rain",
     "/game/odd-one-out",
     "/game/continue-pattern",
   ]) {

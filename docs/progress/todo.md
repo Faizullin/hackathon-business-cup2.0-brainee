@@ -25,7 +25,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 | 2 | Post-game before → after, two next steps, stop; 3-game break + bonus | ✅ (T-35, T-94) |
 | 3 | Stats/stage update for child **and parent** without reload | ✅ polling on both (T-55; e2e two-device check) |
 | 4 | Accessories buy/wear/remove, shown everywhere | ✅ (T-38) |
-| 5 | Science video: pause only, resume, ★ only after correct answer | ✅ demo player, no real media (T-37, T-84) |
+| 5 | Science video: pause only, resume, ★ only after correct answer | ✅ interactive films only; placeholder player removed (T-120, T-116) |
 | 6 | Task "Done" → parent confirms → ☀ + weekly goal + `resp` | ✅ (T-44) |
 | 7 | Gifts ☀ only; exchange ☀ → ★ 1:10 | ✅ (T-38, T-46) |
 | 8 | 5-tasks-a-day limit | ✅ (T-26/T-44) |
@@ -71,8 +71,8 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-33 Game: Odd one out (2 levels × 4 rounds, seeded), tested at `/lab` and in the child flow
 - [x] T-34 Game: Continue the pattern (2 levels × 4 seeded rounds); both games share `kit/Shape`
 - [x] T-35 Post-game screen: before → after, stat chip, "What's next?", stop, third-game break +5★; now uses [saved learning state](../dev/ui.md#saved-learning-state-t-55)
-- [x] T-36 Leisure tab: shop (10 min / forever), cartoons, science videos (fun games/cartoons have no content yet)
-- [x] T-37 Science video player `/video/[id]` (pause only, resume, quiz; animated placeholder, no media)
+- [x] T-36 Leisure tab: shop (10 min / forever) and films; placeholder cartoons/videos/fun titles removed in T-116 (D-39)
+- [x] T-37 Science video player `/video/[id]` (pause only, resume, quiz); the animated placeholder player was removed in T-116
 - [x] T-38 Gifts tab + Brainy tab (accessory shop, stats, earned rewards)
 
 ## P4 · Parent flow · [screens.md#parent](../product/screens.md#parent)
@@ -157,7 +157,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 
 - [x] T-107 One-tap isolated jury families, root role chooser, neutral simple signup and post-signup device setup (D-29).
 - [x] T-108 History-based recommendations, automatic app tasks, live activity analytics and earned rewards with progress/celebrations/feed (D-29).
-- [x] T-109 Playable Snake with saved active-time credit/top-ups/forever and restart-from-zero cartoon placeholder (D-29).
+- [x] T-109 Playable Snake with saved active-time credit/top-ups/forever (D-29); the cartoon placeholder was removed in T-116.
 
 - [x] T-113 Serial input stabilization and full browser verification: Rhythm (tracked timers, touch spec), Secret Message (no preview race, touch spec), Mirror Grid (persistent buttons, stationary hit areas, double-tap guard), Tangram (double-tap guard); full serial suite on all four projects → [batch handoff](../games/batches/2026-11-15-english-input.md)
 - [ ] T-114 Remaining external game waves; see external-games.md.
@@ -186,4 +186,5 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-145 Game auto-discovery from each folder; required 4:3 SVG thumbnails rendered on every game card (#8, D-38)
 - [x] T-146 First Explore wave from GSP: Shape Pairs, Color Boxes, Sticker Scene; declarative Explore metadata in `ExplorePlayer` (#8)
 - [ ] T-147 QLOBE/Sugarizer/H5P/Blockly family adapters and the remaining 24 archive titles as Explore batches (T-144 scope; GSP wave done)
+- [x] T-116 Sound on by default in Rhythm Copycat and Secret Message Lab (Secret Message gained synthesized cues); removed placeholder cartoons, science videos without films and unplayable fun titles; catalog sync drops removed items from saved families (D-39).
 - [ ] T-148 Decide which Explore previews (incl. the GSP wave) earn real `GameResult` hooks and promotion to scored

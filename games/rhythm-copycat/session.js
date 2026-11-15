@@ -39,7 +39,7 @@ const session = {
   hadMistake: false,
   finished: false,
   started: performance.now(),
-  soundEnabled: false,
+  soundEnabled: true,
 };
 
 function mulberry32(seed) {
@@ -118,7 +118,7 @@ function applyStaticText() {
   const replayText = replayBtn?.querySelector("span");
   if (replayText) replayText.textContent = t.replay;
   if (kikiImg) kikiImg.alt = t.kiki;
-  if (soundBtn) soundBtn.textContent = t.soundOff;
+  if (soundBtn) soundBtn.textContent = session.soundEnabled ? t.soundOn : t.soundOff;
 }
 
 let currentPattern = patterns[0];
@@ -320,6 +320,19 @@ function checkSequence() {
     playDemo();
   }, 1100);
 }
+
+// Sound is on by default; browsers only allow audio after a gesture,
+// so unlock the AudioContext on the child's first touch or key press.
+function unlockOnGesture() {
+  if (!session.soundEnabled) return;
+  try {
+    perc.unlock();
+  } catch {
+    // Sound stays a no-op when audio cannot start.
+  }
+}
+window.addEventListener("pointerdown", unlockOnGesture, { capture: true, once: true });
+window.addEventListener("keydown", unlockOnGesture, { capture: true, once: true });
 
 soundBtn?.addEventListener("click", () => {
   session.soundEnabled = !session.soundEnabled;

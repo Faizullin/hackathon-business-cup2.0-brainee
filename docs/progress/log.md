@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · Sound on by default; placeholder content removed (T-116, PR #10)
+Branch `minor_features/placeholders_sound`, merged with master (#6–#9). Rhythm Copycat and Secret Message Lab start with sound on and unlock audio on the first gesture; Secret Message's silent toggle now plays synthesized cues. Removed cartoons, the placeholder video player and non-film science entries, and unplayable fun titles; films and Snake stay. Catalog sync now also drops removed items (D-39). `pnpm check`, 340 unit tests, build, and the affected Playwright specs (mvp-pages/own-origin/jury/film/state-sync, and Rhythm/Secret Message on webkit-ipad) pass; the full e2e matrix was not run.
+
 ## 2026-11-15 · #8 game auto-discovery, thumbnails and the GSP Explore wave
 Games now register from their own folders (generated, gitignored registry; D-38); shared scripts list no ids. All 12 games have 4:3 SVG thumbnails rendered on Learn, Recommendations, Entry and Explore cards (locked at 50 %). At the owner's direction the first Explore wave came from GSP: Shape Pairs, Color Boxes, Sticker Scene (English only, unscored), with declarative Explore metadata in `ExplorePlayer`. Check, 339 unit tests, build, assets pass; full e2e 214/215 with the one stale assertion fixed and its spec re-run 6/6. Handoff: docs/games/batches/2026-11-15-autodiscovery-thumbnails-wave1.md.
 

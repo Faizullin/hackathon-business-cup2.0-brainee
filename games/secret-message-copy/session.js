@@ -37,7 +37,7 @@ const session = {
   finished: false,
   started: performance.now(),
   hintUsed: false,
-  soundEnabled: false,
+  soundEnabled: true,
 };
 
 function mulberry32(seed) {
@@ -91,9 +91,68 @@ const peekBtn = document.querySelector("[data-action='peek']");
 const soundBtn = document.querySelector("[data-action='toggle-sound']");
 const owlImg = document.getElementById("play-owl");
 
+// Short synthesized cues (no files, no language). Audio is optional feedback:
+// a failing or suspended AudioContext must never block input.
+let audioCtx = null;
+
+function unlockAudio() {
+  try {
+    if (!audioCtx) {
+      const Ctor = window.AudioContext || window.webkitAudioContext;
+      if (!Ctor) return;
+      audioCtx = new Ctor();
+    }
+    if (audioCtx.state === "suspended") audioCtx.resume().catch(() => {});
+  } catch {
+    audioCtx = null;
+  }
+}
+
+function tone(freq, start, duration, peak = 0.18, type = "triangle") {
+  const t0 = audioCtx.currentTime + start;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, t0);
+  gain.gain.setValueAtTime(0.0001, t0);
+  gain.gain.exponentialRampToValueAtTime(peak, t0 + 0.02);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+  osc.connect(gain).connect(audioCtx.destination);
+  osc.start(t0);
+  osc.stop(t0 + duration + 0.02);
+}
+
+function chord(freqs, gap, duration) {
+  freqs.forEach((f, i) => {
+    tone(f, i * gap, duration);
+  });
+}
+
+const CUES = {
+  stamp: () => tone(660, 0, 0.12, 0.12, "sine"),
+  correct: () => chord([523, 659, 784], 0.09, 0.3),
+  wrong: () => tone(220, 0, 0.35, 0.14, "sine"),
+  finish: () => chord([523, 659, 784, 1047], 0.12, 0.45),
+};
+
+function playCue(name) {
+  if (!session.soundEnabled) return;
+  unlockAudio();
+  try {
+    if (audioCtx) CUES[name]();
+  } catch {
+    // Ignore audio failures.
+  }
+}
+
+window.addEventListener("pointerdown", () => session.soundEnabled && unlockAudio(), {
+  capture: true,
+  once: true,
+});
+
 function applyStaticText() {
   document.title = t.title;
-  if (soundBtn) soundBtn.textContent = t.soundOff;
+  if (soundBtn) soundBtn.textContent = session.soundEnabled ? t.soundOn : t.soundOff;
   if (peekBtn) peekBtn.textContent = t.peek;
   if (clearBtn) clearBtn.textContent = t.clear;
   if (checkBtn) checkBtn.textContent = t.check;
@@ -195,6 +254,7 @@ function handleStampSelect(symbolId) {
   if (currentSelected.length >= currentPattern.length) return;
 
   currentSelected.push(symbolId);
+  playCue("stamp");
   renderCopySlots(currentPattern.length, currentSelected);
 }
 
@@ -278,6 +338,7 @@ function checkRound() {
     session.mistakes++;
     session.hadMistake = true;
     bridge.track("round", { correct: false, afterMistake: false });
+    playCue("wrong");
 
     // Visual feedback on wrong slots
     const slots = copySequenceEl?.querySelectorAll(".copy-slot");
@@ -304,6 +365,7 @@ function checkRound() {
     session.finished = true;
     clearTimeout(peekTimer);
     setPhase("done");
+    playCue("finish");
     if (messageEl) messageEl.textContent = t.doneStatus;
     if (gameRoot) {
       const completeEl = document.createElement("div");
@@ -326,6 +388,7 @@ function checkRound() {
     return;
   }
 
+  playCue("correct");
   if (messageEl) messageEl.textContent = t.correct;
   later(() => startRound(session.rounds), 1100);
 }
@@ -343,6 +406,7 @@ peekBtn?.addEventListener("click", handlePeek);
 
 soundBtn?.addEventListener("click", () => {
   session.soundEnabled = !session.soundEnabled;
+  if (session.soundEnabled) unlockAudio();
   soundBtn.classList.toggle("is-active", session.soundEnabled);
   soundBtn.textContent = session.soundEnabled ? t.soundOn : t.soundOff;
 });

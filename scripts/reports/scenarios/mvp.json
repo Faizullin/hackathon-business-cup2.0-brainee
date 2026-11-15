@@ -156,34 +156,6 @@
       ]
     },
     {
-      "route": "/video/ocean",
-      "shots": [
-        {
-          "name": "video",
-          "fullPage": false,
-          "steps": [
-            {
-              "expect": {
-                "target": {
-                  "by": "role",
-                  "role": "button",
-                  "name": "Watch",
-                  "exact": true
-                },
-                "timeout": 20000
-              }
-            },
-            {
-              "expect": {
-                "eval": "document.documentElement.lang === \"en\" && document.documentElement.scrollWidth <= window.innerWidth",
-                "message": "English screen fits the viewport"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
       "route": "/gifts",
       "shots": [
         {
@@ -429,7 +401,7 @@
   "flows": [
     {
       "name": "phone-mvp",
-      "title": "Phone: parent preview, entry, leisure, video quiz, gifts, Brainy, Path, parent",
+      "title": "Phone: parent preview, entry, leisure, gifts, Brainy, Path, parent",
       "viewport": "phone",
       "start": "/login",
       "steps": [
@@ -547,7 +519,7 @@
           "wait": 1200
         },
         {
-          "mark": "Leisure: shop, cartoons, science"
+          "mark": "Leisure: fun-game shop and films"
         },
         {
           "click": {
@@ -584,85 +556,6 @@
         },
         {
           "wait": 800
-        },
-        {
-          "mark": "Science video: pause-only player and quiz"
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "link",
-            "name": "How Bees Live"
-          }
-        },
-        {
-          "expect": {
-            "url": "^/video/bees$",
-            "target": {
-              "by": "role",
-              "role": "button",
-              "name": "Watch",
-              "exact": true
-            },
-            "message": "The player has only play/pause"
-          }
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "button",
-            "name": "Watch",
-            "exact": true
-          }
-        },
-        {
-          "expect": {
-            "target": {
-              "by": "testId",
-              "value": "video-quiz"
-            },
-            "timeout": 30000,
-            "message": "The quiz appears after the last minute"
-          }
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "button",
-            "name": "Wax",
-            "exact": true
-          }
-        },
-        {
-          "wait": 900
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "button",
-            "name": "Honey",
-            "exact": true
-          }
-        },
-        {
-          "expect": {
-            "target": {
-              "by": "text",
-              "value": "Correct! +15★ and Eyes +2"
-            },
-            "message": "Correct answer pays +15★ once"
-          }
-        },
-        {
-          "wait": 1200
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "link",
-            "name": "Back to Leisure",
-            "exact": true
-          }
         },
         {
           "mark": "Gifts: goal, shop, tasks, exchange"
@@ -888,7 +781,7 @@
     },
     {
       "name": "ipad-mvp",
-      "title": "iPad viewport: parent preview, entry, leisure, video quiz, gifts, Brainy, Path, parent",
+      "title": "iPad viewport: parent preview, entry, leisure, gifts, Brainy, Path, parent",
       "viewport": "ipad",
       "start": "/login",
       "steps": [
@@ -1006,7 +899,7 @@
           "wait": 1200
         },
         {
-          "mark": "Leisure: shop, cartoons, science"
+          "mark": "Leisure: fun-game shop and films"
         },
         {
           "click": {
@@ -1043,85 +936,6 @@
         },
         {
           "wait": 800
-        },
-        {
-          "mark": "Science video: pause-only player and quiz"
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "link",
-            "name": "How Bees Live"
-          }
-        },
-        {
-          "expect": {
-            "url": "^/video/bees$",
-            "target": {
-              "by": "role",
-              "role": "button",
-              "name": "Watch",
-              "exact": true
-            },
-            "message": "The player has only play/pause"
-          }
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "button",
-            "name": "Watch",
-            "exact": true
-          }
-        },
-        {
-          "expect": {
-            "target": {
-              "by": "testId",
-              "value": "video-quiz"
-            },
-            "timeout": 30000,
-            "message": "The quiz appears after the last minute"
-          }
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "button",
-            "name": "Wax",
-            "exact": true
-          }
-        },
-        {
-          "wait": 900
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "button",
-            "name": "Honey",
-            "exact": true
-          }
-        },
-        {
-          "expect": {
-            "target": {
-              "by": "text",
-              "value": "Correct! +15★ and Eyes +2"
-            },
-            "message": "Correct answer pays +15★ once"
-          }
-        },
-        {
-          "wait": 1200
-        },
-        {
-          "click": {
-            "by": "role",
-            "role": "link",
-            "name": "Back to Leisure",
-            "exact": true
-          }
         },
         {
           "mark": "Gifts: goal, shop, tasks, exchange"

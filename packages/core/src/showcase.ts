@@ -63,7 +63,6 @@ export type FunGame = {
   remainingSeconds?: number;
   play?: { id: string; device: string; at: string; sequence: number };
 };
-export type Cartoon = { id: string; title: string; detail: string; price: number; owned: boolean };
 export type ScienceVideo = {
   id: string;
   title: string;
@@ -142,7 +141,6 @@ export type Showcase = {
   gifts: Gift[];
   requests: GiftRequest[];
   fun: FunGame[];
-  cartoons: Cartoon[];
   science: ScienceVideo[];
   ageAverages: Record<Ability, number>;
   entryLog: { took: number; other: number };
@@ -158,7 +156,6 @@ export type ShowcaseAction =
   | { type: "buy-gift"; giftId: string }
   | { type: "task-done"; taskId: string }
   | { type: "unlock-fun"; gameId: string; mode: "timed" | "forever" }
-  | { type: "buy-cartoon"; id: string }
   | { type: "video-position"; id: string; position: number }
   | { type: "video-answer"; id: string; answer: number }
   | { type: "entry-choice"; took: boolean }
@@ -349,13 +346,6 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       addFeed(s, { at, kind: "fun", title: game.title, amount: price });
       return ok({ ...wallet, stars: wallet.stars - price });
     }
-    case "buy-cartoon": {
-      const cartoon = s.cartoons.find((c) => c.id === action.id);
-      if (!cartoon || cartoon.owned) return fail("not-found");
-      if (wallet.stars < cartoon.price) return fail("not-enough-stars");
-      cartoon.owned = true;
-      return ok({ ...wallet, stars: wallet.stars - cartoon.price });
-    }
     case "video-position": {
       const video = s.science.find((v) => v.id === action.id);
       if (!video || !Number.isInteger(action.position) || action.position < 0)
@@ -398,7 +388,6 @@ const ACTION_TYPES = new Set([
   "buy-gift",
   "task-done",
   "unlock-fun",
-  "buy-cartoon",
   "video-position",
   "video-answer",
   "entry-choice",

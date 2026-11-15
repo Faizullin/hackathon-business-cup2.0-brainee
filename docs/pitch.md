@@ -43,7 +43,7 @@ Aim for about 18 seconds per slide. Rehearse at roughly 125 words per minute; pa
 “The lavender interface keeps the same five destinations on phone and iPad. The whole product is English only. Resources load from our domain, motion respects reduced-motion settings, and physical iPad verification remains a required rehearsal.”
 
 **8 · 2:06–2:24**
-“This is a working presentation MVP, not a claim of validated learning improvement. Saved games, tasks and activity totals are real. Historical charts and ranking are labelled demo data. Funnel puzzles and growth sliders are previews. Interactive films use local podcast audio and drawn scenes; some other media remains placeholder content. Pricing is pending with no checkout.”
+“This is a working presentation MVP, not a claim of validated learning improvement. Saved games, tasks and activity totals are real. Historical charts and ranking are labelled demo data. Funnel puzzles and growth sliders are previews. Interactive films use local podcast audio and drawn scenes; nothing without real content is shown. Pricing is pending with no checkout.”
 
 **9 · 2:24–2:42**
 “Our next step is a small, consented family pilot. We want to learn whether children understand the choices, whether rewards support voluntary return, and whether parents can set up the product easily. We have no traction or clinical results to claim.”

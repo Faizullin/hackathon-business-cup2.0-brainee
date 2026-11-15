@@ -142,10 +142,7 @@ test("funnel signup keeps setup pairing on the same family", async ({
   expect((await savedState(page.request)).parentUnlocked).toBe(false);
 });
 
-test("fun-game credit counts active play only; cartoon restarts and offers no next item", async ({
-  page,
-  baseURL,
-}, info) => {
+test("fun-game credit counts active play only", async ({ page, baseURL }, info) => {
   await newFamily(page.request, baseURL as string);
   const headers = { origin: baseURL as string };
   expect(
@@ -176,29 +173,4 @@ test("fun-game credit counts active play only; cartoon restarts and offers no ne
   expect(
     (await savedState(page.request)).showcase.fun.find((g) => g.id === "snake")?.remainingSeconds,
   ).toBe(left);
-  // Jury wallet lets the same player buy a cartoon for the playback check.
-  await page.request.post("/api/jury", { headers });
-  const state = await savedState(page.request),
-    cartoon = state.showcase.cartoons[0];
-  if (!cartoon) throw Error();
-  if (!cartoon.owned)
-    expect(
-      (
-        await page.request.post("/api/actions", {
-          headers,
-          data: { type: "buy-cartoon", id: cartoon.id },
-        })
-      ).ok(),
-    ).toBe(true);
-  await page.goto(`/cartoon/${cartoon.id}`);
-  await expect(page.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
-  await page.getByRole("button", { name: "Watch", exact: true }).click();
-  await expect(page.getByRole("progressbar")).not.toHaveAttribute("aria-valuenow", "0");
-  await page.reload();
-  await expect(page.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
-  await page.getByRole("button", { name: "Watch", exact: true }).click();
-  await expect(page.getByText("Episode ended", { exact: true })).toBeVisible({
-    timeout: 15000,
-  });
-  await expect(page.getByRole("link")).toHaveCount(2);
 });

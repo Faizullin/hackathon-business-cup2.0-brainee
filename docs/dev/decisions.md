@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-39 · Ship only content that exists · 2026-11-15 · accepted · narrows D-21/D-29/D-33
+**Context:** Leisure showed cartoons with a 12-second illustration player, four science videos with an animated timer player and four fun titles without a game. Only Snake and the three D-33 films have real content.
+**Decision:** list only real content. Remove the cartoon cards, `/cartoon/[id]`, `CartoonPlayer`, the `cartoons` showcase field and `buy-cartoon`. Keep science entries only for registered films; `/video/[id]` renders not-found for any other id, and the placeholder `DemoPlayer` is gone. Seed only Snake among fun games. `syncCatalog` now makes saved `science`/`fun` lists match the catalog (adds new items, drops removed ones, keeps progress), so existing families lose the placeholders on their next read.
+**Consequences:** fun stars buy Snake time only; a family's progress or ownership of removed placeholder items is discarded. The «video» feed kind and final-quiz rules stay for films. Paid cartoons return only with real own-origin media and a new entry.
+
 ## D-38 · Games register from their own folders (generated registry) · 2026-11-15 · accepted · supersedes D-12's "no generated TS registry"
 **Context:** build, checks and the catalog each listed game ids by hand (#8). Next (Turbopack), esbuild and Vitest share no glob-import feature, so a runtime-only scan cannot feed the client catalog.
 **Decision:** `scripts/discover-games.mjs` derives the game list from each folder's `manifest.json`/`preview.json` and writes gitignored `*.generated.ts` modules (postinstall and every dev/test/typecheck/build/check entry point). Each embedded folder exports `buildGame()` (and optional `checkAssets()`). Manifests require a same-origin `thumbnail`; previews carry declarative `explore` metadata read by `ExplorePlayer`. GSP Phaser games use `engine-phaser` as their shared family adapter.

@@ -25,7 +25,7 @@ On the parent phone create a jury family, open Settings and generate a child pai
 | 5 | Open Brainy; buy and wear an accessory | Observe Brainy | The worn item follows the mascot |
 | 6 | Buy Snake time in Leisure; play, pause and reopen | Observe saved balance | Purchased minutes count only during play; another purchase adds time |
 
-Science playback resumes position and pays ★ only after the final correct answer. Registered interactive films use local podcast audio, drawn scenes and pauses for questions; those in-film questions award nothing. Playback requires Play, with no next-film prompt. Bought cartoon placeholders restart from zero on each visit, with no watch-next. Snake is playable; other fun titles remain catalog previews. See [films.md](dev/films.md) for the film catalog and content review. For the shared seeded family, login is `mom@example.com` / `demo1234`, PIN `1234`; its existing backpack/badge are valid, and a game today completes the garden streak.
+Science playback resumes position and pays ★ only after the final correct answer. Registered interactive films use local podcast audio, drawn scenes and pauses for questions; those in-film questions award nothing. Playback requires Play, with no next-film prompt. Leisure lists only real content: Snake and the three films; placeholder cartoons, science videos without media and unplayable fun titles are removed (D-39). See [films.md](dev/films.md) for the film catalog and content review. For the shared seeded family, login is `mom@example.com` / `demo1234`, PIN `1234`; its existing backpack/badge are valid, and a game today completes the garden streak.
 
 ## Lavender and parent-plan walkthrough
 
@@ -60,7 +60,7 @@ The whole product is English only, including games, films and the funnel. Review
 | Child has no rankings | Route loop in `mvp-pages.spec.ts`, including after PIN access; parent seeded ranking uses initials |
 | Own-domain resources | `own-origin.spec.ts` covers all page routes, both games, all four videos, lab and install assets; physical Screen Time verification remains T-62 |
 
-Visual review covers phone and landscape iPad layouts, readable labels, overflow, native controls and the existing reduced-motion checks. This is presentation acceptance, with the catalog, placeholder-media and physical-device boundaries above; it is not a production accessibility or privacy certification.
+Visual review covers phone and landscape iPad layouts, readable labels, overflow, native controls and the existing reduced-motion checks. This is presentation acceptance, with the catalog and physical-device boundaries above; it is not a production accessibility or privacy certification.
 
 ## Physical iPad rehearsal (T-62 / T-84 — owner checklist)
 Use **https://brainee.vercel.app** on an iPad in landscape as the child and a phone as the parent. Use the same canonical domain on both devices; cookies on the alternate deployment hostname are separate.
