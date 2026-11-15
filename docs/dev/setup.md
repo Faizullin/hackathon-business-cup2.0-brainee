@@ -1,6 +1,6 @@
 # Setup
 
-> **Status: saved child learning flow and polling ready.** Install, server/build, Vitest, database tools and browser tests work. The bridge and Picture Puzzle build locally.
+> **Status: presentation build complete and deployed.** Install, first-run preparation, build, Vitest, database tools, browser tests and report recordings work.
 
 ## Prerequisites
 - Node.js >= 22.13; `.nvmrc` selects Node 22.
@@ -8,19 +8,20 @@
 - Nothing else: no Docker, no database server, no cloud accounts.
 
 ## First run
-Fastest manual run: `pnpm demo` (resets `data/dev.db`, then starts the dev server with `DEMO_MODE=1 BRAINEE_LAB=1`). Otherwise enable demo access using the [database setup](#local-database-and-tests) (`DEMO_MODE=1` in `apps/web/.env.local`, or `DEMO_MODE=1 pnpm dev`; `turbo.json` passes `DEMO_MODE`, `BRAINEE_LAB` and `DATABASE_URL` through). Without it every child/parent screen shows "Could not load Brainy". Then:
 ```bash
 pnpm install
-pnpm db:reset
-pnpm games:build
-pnpm dev
+pnpm demo        # build games, reset data/dev.db with the demo seed, dev server with DEMO_MODE=1 BRAINEE_LAB=1
 ```
+Open `http://localhost:3000` (parent PIN `1234`). For a plain `pnpm dev`, copy `apps/web/.env.example` to `apps/web/.env.local` (it sets `DEMO_MODE=1`; `turbo.json` passes `DEMO_MODE`, `BRAINEE_LAB` and `DATABASE_URL` through). `pnpm dev` builds the games if `apps/web/public/games` is missing and creates and seeds the database if its local file is missing; it never changes an existing file. It warns when `DEMO_MODE` is off, because every child/parent screen then shows "Could not load Brainy".
+
+The game catalog lives only in the seed: a database created with `db:push` alone can sign families up but has no playable games. Use `db:reset`, `db:seed` or the automatic first-run path.
 
 Available commands:
 
 | Command | Does |
 |---|---|
-| `pnpm dev` | Start the Next.js app at `http://localhost:3000` |
+| `pnpm dev` | Prepare missing games/database, then start the Next.js app at `http://localhost:3000` |
+| `pnpm db:prepare` | Create and seed the local SQLite file only if it is missing (no-op for existing files and remote URLs) |
 | `pnpm build` | Build the production app through Turborepo |
 | `pnpm start` | Serve the built app at `http://localhost:3000` |
 | `pnpm e2e` | Build, then run Playwright against a production server on :3100 |
@@ -37,7 +38,7 @@ Available commands:
 | `pnpm typecheck` | Run each package's `typecheck` through Turborepo |
 | `pnpm format` | Format source and config files; Markdown and frozen prototype sources are excluded |
 
-Before opening child screens, set `DEMO_MODE=1` in `apps/web/.env.local` ([database setup below](#local-database-and-tests)). `/` redirects to the entry screen `/entry`; child and parent screens require saved state and show a retry screen if unavailable. Parent pages (`/analytics`, `/tasks`, `/rewards`) need PIN `1234`. **`/lab`** is an independent game harness ([games.md](games.md#lab)): on in `pnpm dev`, 404 in production unless `BRAINEE_LAB=1` (the e2e server sets it). Parent access/view remains a follow-up.
+Before opening child screens, set `DEMO_MODE=1` in `apps/web/.env.local` ([database setup below](#local-database-and-tests)). `/` opens `/entry` on a device with a family session and the Brain Check funnel `/start` otherwise; child and parent screens require saved state and show a retry screen if unavailable. Parent pages (`/analytics`, `/tasks`, `/rewards`) need PIN `1234`. **`/lab`** is an independent game harness ([games.md](games.md#lab)): on in `pnpm dev`, 404 in production unless `BRAINEE_LAB=1` (the e2e server sets it).
 
 pnpm permits the esbuild install script required by tsx/Drizzle Kit and Vitest's toolchain. Other dependency build scripts remain subject to pnpm's approval settings.
 
@@ -122,7 +123,7 @@ Next.js ships version-matched docs at `apps/web/node_modules/next/dist/docs/`; r
 | `BRAINEE_LAB` | unset | `1` enables `/lab` in a production build (always on in `next dev`) |
 
 ## Deploy
-Not now. Deploying is the final roadmap step (T-14): Vercel Hobby + Turso free plan via Drizzle ([D-15](decisions.md)). Until then, everything runs locally.
+Deployed (T-14): Vercel Hobby + Turso free plan via Drizzle ([D-15](decisions.md)) at `https://brainee.vercel.app`, with `DEMO_MODE=1`. Vercel runs `pnpm build` (`vercel.json`); the cloud variables are `DATABASE_URL` (`libsql://…`), `DATABASE_AUTH_TOKEN`, `DEMO_MODE` and, only while judging, `BRAINEE_LAB`. Keep them in Vercel and a gitignored `.env.deployed`; never commit them. After a catalog or seed change, run `pnpm db:refresh-demo` with those variables (it replaces only the shared demo family). `db:reset` refuses remote databases.
 
 ## Testing on a real device
 1. Before deploying: run `pnpm build && pnpm --filter @brainee/web exec next start --hostname 0.0.0.0` and open `http://<mac-ip>:3000` on an iPad on the same Wi-Fi (layout, touch, WebKit).
