@@ -4,9 +4,9 @@ Implemented: the T-50/T-51 connected-demo subset, T-52's cookie session, T-54, T
 
 ## Access
 
-Opt in with `DEMO_MODE=1` after preparing the database ([setup](setup.md#local-database-and-tests)). Without it, every endpoint below returns 404 before opening a database. This is public access to one seeded demo child, not production authentication. No client-supplied child/family ID selects an identity.
+Opt in with `DEMO_MODE=1` after preparing the database ([setup](setup.md#local-database-and-tests)). Without it, every endpoint below returns 404 before opening a database. The MVP supports isolated families; this is not production authentication. Anonymous shared-family creation additionally requires `BRAINEE_SHARED_DEMO=1` (D-43), enabled only for manual demo, Playwright fixtures and report recording. Leave it unset in production. No client-supplied child/family ID selects an identity.
 
-`POST /api/demo-session` creates a random 256-bit opaque cookie, `brainee_demo`: HttpOnly, SameSite=Lax, path `/`, Secure on HTTPS, expiring after seven days. Only its SHA-256 hash is stored. An existing valid cookie is reused, preserving its device run; the daily bonus belongs to the child. Expired or malformed cookies cannot authorize writes. Responses expose no token, parent email or PIN hash. Connections are opened and closed per request; nothing depends on shared process memory.
+With that shared-demo opt-in, `POST /api/demo-session` creates a random 256-bit opaque cookie, `brainee_demo`: HttpOnly, SameSite=Lax, path `/`, Secure on HTTPS, expiring after seven days. Only its SHA-256 hash is stored. Without the flag an anonymous POST returns 401. An existing valid cookie is reused regardless of the flag, preserving its device run; the daily bonus belongs to the child. Expired or malformed cookies cannot authorize writes. Responses expose no token, parent email or PIN hash. Connections are opened and closed per request; nothing depends on shared process memory.
 
 All responses use `Cache-Control: no-store`. POSTs require an Origin matching the HTTP host and protocol (including the port). Start/finish bodies require JSON and are limited to 4 KiB, including streamed bodies without Content-Length. Errors contain an English machine code; future UI messages belong in `i18n/en.ts`.
 
@@ -48,3 +48,7 @@ Most browser tests write the same seeded child, so Playwright uses one worker an
 ## Remaining boundaries
 
 The child cookie alone must not authorize parent actions. T-50/T-51 still include other entities and scenario switching; saved task actions currently use the showcase (D-21). Demo/production sessions, cleanup/retention, backups and stronger play evidence remain T-82. Local driver/tool compatibility is recorded in [D-19](decisions.md); no deployment work is included.
+
+## Generated logins and return (Session F)
+
+One-tap Start and Jury save the generated login, password and PIN in localStorage on the creating device until **I saved it** removes them. This plaintext storage is demo-only. The compact card appears on `/entry`, `/jury`, parent Settings and the logout confirmation; Copy supports saving it elsewhere. The entry card matches the saved child, and Settings matches the parent login, so another family does not see an older card. Logout confirms first and returns to `/login`; a valid session there offers **Continue as <child>** alongside the normal form. Anonymous child pages return through `/` to `/start`.

@@ -105,6 +105,7 @@ export async function requireAccess(db: Store, tokenHash: string, now: Date) {
 }
 
 export async function createDemoAccess(db: Database, now: Date) {
+  if (process.env.BRAINEE_SHARED_DEMO !== "1") throw new LearningStoreError("unauthorized");
   const child = await db
     .select({ id: children.id, name: children.name, familyId: children.familyId })
     .from(children)

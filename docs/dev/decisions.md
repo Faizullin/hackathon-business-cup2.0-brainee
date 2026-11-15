@@ -230,3 +230,7 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 **Context:** hackathon speed, several surfaces (PWA, landing, games) sharing the Brainy renderer and the rules.
 **Decision:** pnpm workspaces + Turborepo. Next.js handles both UI and API, so server code also runs on our own domain. ~~Postgres, Vercel, R2~~.
 **Consequences:** shared types end to end. Firebase, Clerk and client-side Supabase are ruled out because of the allowlist.
+
+## D-43 · Shared demo access is an explicit local opt-in (2026-11-15)
+
+`DEMO_MODE=1` enables the MVP endpoints; it does not grant anonymous access to the seeded family. Creating shared access through `POST /api/demo-session` additionally requires `BRAINEE_SHARED_DEMO=1`. Existing valid family sessions are reused without the flag. Keep it unset in production; enable it only for `pnpm demo`, browser fixtures and report recording. Anonymous child entry returns to `/` → `/start`; Start and Jury each create an independent family. No new auth infrastructure.

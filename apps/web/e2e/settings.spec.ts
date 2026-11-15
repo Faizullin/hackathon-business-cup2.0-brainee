@@ -86,6 +86,7 @@ test("settings save child, PIN, zone; pair and revoke a child device; adult gate
   await page.getByRole("button", { name: "Open dashboard" }).click();
   await expect(page.getByLabel("Child's name", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Log out", exact: true }).last().click();
+  await page.getByRole("button", { name: "Confirm log out" }).click();
   await expect(page).toHaveURL(/\/login$/);
 });
 

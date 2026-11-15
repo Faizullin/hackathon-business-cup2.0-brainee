@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { eq } from "drizzle-orm";
-import { expect, it, onTestFinished } from "vitest";
+import { expect, it, onTestFinished, vi } from "vitest";
 import { brainyStates, children, demoSessions, families, gameSessions, wallets } from "../schema";
 import { resetDatabase } from "../scripts/database-tools";
 import { openDatabase } from "./client";
@@ -424,4 +424,17 @@ it("lazily syncs scored remote games, rewards through core, and rejects disabled
   await expect(
     startGameSession(f.db, f.hash, { ...launch, gameId: "phaser-shape-match" }, now),
   ).rejects.toThrow();
+});
+
+it("requires explicit shared-demo opt-in before creating shared family access", async () => {
+  const f = await fixture();
+  vi.stubEnv("BRAINEE_SHARED_DEMO", undefined);
+  onTestFinished(() => {
+    vi.unstubAllEnvs();
+  });
+  await expect(createDemoAccess(f.db, now)).rejects.toMatchObject({ code: "unauthorized" });
+  vi.stubEnv("BRAINEE_SHARED_DEMO", "0");
+  await expect(createDemoAccess(f.db, now)).rejects.toMatchObject({ code: "unauthorized" });
+  vi.stubEnv("BRAINEE_SHARED_DEMO", "1");
+  expect((await createDemoAccess(f.db, now)).child.id).toBe("demo-child");
 });

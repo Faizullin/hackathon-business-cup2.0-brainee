@@ -26,7 +26,7 @@ freshly reset database (any local `file:` path works):
 ```bash
 export DATABASE_URL=file:///tmp/brainee-report.db
 pnpm --filter @brainee/db db:reset
-DEMO_MODE=1 BRAINEE_LAB=1 pnpm --filter @brainee/web exec next start --hostname 127.0.0.1 --port 3123
+DEMO_MODE=1 BRAINEE_SHARED_DEMO=1 BRAINEE_LAB=1 pnpm --filter @brainee/web exec next start --hostname 127.0.0.1 --port 3123
 ```
 
 In a second terminal, generate screenshots, walkthrough recordings and Markdown:

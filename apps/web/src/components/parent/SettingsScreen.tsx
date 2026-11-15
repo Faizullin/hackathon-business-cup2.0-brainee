@@ -1,12 +1,15 @@
 "use client";
 import { TIME_ZONES } from "@brainee/core";
+import { Dialog } from "@brainee/ui/components/dialog";
 import { ClipboardCheck, Lock, Settings, Tablet } from "@brainee/ui/components/icons";
 import { type FormEvent, useCallback, useEffect, useState } from "react";
+import { authCopy } from "@/components/auth/copy";
 import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton, Panel, primaryButton } from "@/components/demo/kit";
 import { FamilyLoginCard } from "@/components/parent/FamilyLoginCard";
 import { useI18n } from "@/i18n";
+import { requireAuthResponse, useAuthAction } from "@/lib/use-auth-action";
 
 const input = "min-h-12 w-full rounded-row border border-border bg-surface-2 px-3 text-base";
 type Data = {
@@ -22,24 +25,26 @@ export function SettingsScreen() {
   const ts = t.settings;
   const [data, setData] = useState<Data | null>(null);
   const [notice, setNotice] = useState("");
-  const [busy, setBusy] = useState(false);
+  const action = useAuthAction();
+  const busy = action.pending;
+  const [confirmLogout, setConfirmLogout] = useState(false);
   const [code, setCode] = useState<{ code: string; expiresAt: string } | null>(null);
-  const load = useCallback(async () => {
-    try {
-      const r = await fetch("/api/settings", { cache: "no-store" });
-      if (!r.ok) throw new Error();
-      setData(await r.json());
-    } catch {
-      setNotice(ts.error);
-    }
-  }, [ts.error]);
+  const loading = useAuthAction();
+  const load = useCallback(
+    () =>
+      loading.run(async () => {
+        const r = await fetch("/api/settings", { cache: "no-store" });
+        requireAuthResponse(r);
+        setData(await r.json());
+      }),
+    [loading.run],
+  );
   useEffect(() => {
     void load();
   }, [load]);
-  const run = async (body: unknown, path = "/api/settings") => {
-    setBusy(true);
-    setNotice("");
-    try {
+  const run = (body: unknown, path = "/api/settings") =>
+    action.run(async () => {
+      setNotice("");
       const r = await fetch(path, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -55,19 +60,19 @@ export function SettingsScreen() {
       await load();
       setNotice(ts.saved);
       return true;
-    } catch {
-      setNotice(ts.error);
-      return false;
-    } finally {
-      setBusy(false);
-    }
-  };
+    });
   if (!data || !snapshot)
     return (
       <Panel>
-        <p role="status">{notice || ts.loading}</p>
-        <button type="button" className={outlineButton} onClick={load}>
-          {ts.retry}
+        <p role="status">{loading.error ? authCopy.errors[loading.error] : ts.loading}</p>
+        <button
+          type="button"
+          className={outlineButton}
+          disabled={loading.pending}
+          aria-busy={loading.pending}
+          onClick={load}
+        >
+          {loading.pending ? authCopy.working : ts.retry}
         </button>
       </Panel>
     );
@@ -93,9 +98,9 @@ export function SettingsScreen() {
           <p className="text-muted-foreground">{ts.intro}</p>
         </div>
       </div>
-      {notice && (
+      {(notice || action.error) && (
         <p role="status" className="rounded-xl bg-secondary p-3">
-          {notice}
+          {action.error ? authCopy.errors[action.error] : notice}
         </p>
       )}
       <div className="grid gap-5 min-[1000px]:grid-cols-2">
@@ -143,8 +148,8 @@ export function SettingsScreen() {
                 defaultValue={data.child.promise}
               />
             </label>
-            <button type="submit" disabled={busy} className={primaryButton}>
-              {ts.save}
+            <button type="submit" disabled={busy} aria-busy={busy} className={primaryButton}>
+              {busy ? authCopy.working : ts.save}
             </button>
           </form>
         </Panel>
@@ -190,8 +195,8 @@ export function SettingsScreen() {
                 required
               />
             </label>
-            <button type="submit" disabled={busy} className={primaryButton}>
-              {ts.changePin}
+            <button type="submit" disabled={busy} aria-busy={busy} className={primaryButton}>
+              {busy ? authCopy.working : ts.changePin}
             </button>
           </form>
         </Panel>
@@ -235,8 +240,8 @@ export function SettingsScreen() {
               </select>
             </label>
             <p className="text-muted-foreground text-sm">{ts.zoneNote}</p>
-            <button type="submit" disabled={busy} className={primaryButton}>
-              {ts.save}
+            <button type="submit" disabled={busy} aria-busy={busy} className={primaryButton}>
+              {busy ? authCopy.working : ts.save}
             </button>
           </form>
         </Panel>
@@ -249,10 +254,11 @@ export function SettingsScreen() {
           <button
             type="button"
             disabled={busy}
+            aria-busy={busy}
             className={outlineButton}
             onClick={() => run({ type: "create" }, "/api/pairing")}
           >
-            {ts.newCode}
+            {busy ? authCopy.working : ts.newCode}
           </button>
           {code && (
             <output
@@ -276,40 +282,37 @@ export function SettingsScreen() {
                 <button
                   type="button"
                   disabled={busy}
+                  aria-busy={busy}
                   className={outlineButton}
                   onClick={async () => {
                     if ((await run({ type: "revoke", deviceId: d.id })) && d.current)
                       window.location.assign("/login");
                   }}
                 >
-                  {ts.revoke}
+                  {busy ? authCopy.working : ts.revoke}
                 </button>
               </li>
             ))}
           </ul>
         </Panel>
-        <FamilyLoginCard />
+        <FamilyLoginCard email={data.email} />
         <Panel title={ts.account}>
           {data.jury && (
             <button
               type="button"
               className={outlineButton}
               disabled={busy}
-              onClick={async () => {
-                setBusy(true);
-                try {
-                  const r = await fetch("/api/demo-reset", { method: "POST" });
-                  if (!r.ok) throw Error();
+              aria-busy={busy}
+              onClick={() =>
+                action.run(async () => {
+                  setNotice("");
+                  requireAuthResponse(await fetch("/api/demo-reset", { method: "POST" }));
                   await refresh();
                   setNotice(ts.saved);
-                } catch {
-                  setNotice(ts.error);
-                } finally {
-                  setBusy(false);
-                }
-              }}
+                })
+              }
             >
-              {t.jury.reset}
+              {busy ? authCopy.working : t.jury.reset}
             </button>
           )}
           <p className="break-all">{data.email}</p>
@@ -320,21 +323,40 @@ export function SettingsScreen() {
           <button
             type="button"
             disabled={busy}
+            aria-busy={busy}
             className={outlineButton}
-            onClick={async () => {
-              setBusy(true);
-              try {
-                const r = await fetch("/api/auth/logout", { method: "POST" });
-                if (!r.ok) throw new Error();
-                window.location.assign("/login");
-              } catch {
-                setNotice(ts.error);
-                setBusy(false);
-              }
-            }}
+            onClick={() => setConfirmLogout(true)}
           >
-            {ts.logout}
+            {busy ? authCopy.working : ts.logout}
           </button>
+          <Dialog.Root open={confirmLogout} onOpenChange={setConfirmLogout}>
+            <Dialog.Portal>
+              <Dialog.Backdrop className="fixed inset-0 z-40 bg-black/30" />
+              <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 flex max-h-[90dvh] w-[min(92vw,520px)] -translate-x-1/2 -translate-y-1/2 flex-col gap-4 overflow-auto rounded-panel bg-card p-5">
+                <Dialog.Title className="font-heading text-xl">{authCopy.logoutTitle}</Dialog.Title>
+                <Dialog.Description>{authCopy.logoutNote}</Dialog.Description>
+                <FamilyLoginCard email={data.email} />
+                {action.error && <p role="alert">{authCopy.errors[action.error]}</p>}
+                <button
+                  type="button"
+                  disabled={busy}
+                  aria-busy={busy}
+                  className={primaryButton}
+                  onClick={() =>
+                    action.run(async () => {
+                      requireAuthResponse(await fetch("/api/auth/logout", { method: "POST" }));
+                      window.location.assign("/login");
+                    })
+                  }
+                >
+                  {busy ? authCopy.working : authCopy.confirmLogout}
+                </button>
+                <Dialog.Close className={outlineButton} disabled={busy}>
+                  {authCopy.cancel}
+                </Dialog.Close>
+              </Dialog.Popup>
+            </Dialog.Portal>
+          </Dialog.Root>
         </Panel>
       </div>
     </>

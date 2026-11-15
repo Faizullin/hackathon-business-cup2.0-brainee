@@ -173,7 +173,7 @@ test("a background read failure preserves confirmed state and recovers", async (
   ).toHaveCount(0);
 });
 
-test("expired access asks for a reload without silently replacing an issued session", async ({
+test("expired access returns to the funnel; an unauthorized launch never mounts a game", async ({
   page,
 }, testInfo) => {
   let accessRequests = 0;
@@ -182,20 +182,11 @@ test("expired access asks for a reload without silently replacing an issued sess
   });
   await page.goto("/learn");
   await readyState(page);
-  await page.route("**/api/state*", (route) =>
-    route.fulfill({
-      status: 401,
-      contentType: "application/json",
-      body: '{"error":"unauthorized"}',
-    }),
-  );
-  await expect(page.getByText("Reopen the session to refresh Brainy.")).toBeVisible({
-    timeout: 10_000,
-  });
+  // Expiry means the server gate also sees no valid session.
+  await page.context().clearCookies();
+  await expect(page).toHaveURL(/\/start#duration$/, { timeout: 10_000 });
   expect(accessRequests).toBe(1);
-  await page.unroute("**/api/state*");
-  await page.getByRole("button", { name: "Reopen" }).focus();
-  await page.keyboard.press("Enter");
+  await page.goto("/learn");
   await readyState(page);
   expect(accessRequests).toBe(2);
 

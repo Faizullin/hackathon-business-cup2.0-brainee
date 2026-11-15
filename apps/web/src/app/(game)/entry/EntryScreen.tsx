@@ -6,6 +6,7 @@ import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { RecommendationCards, useRecommendations } from "@/components/child/Recommendations";
 import { StarterUnlock } from "@/components/child/StarterUnlock";
+import { FamilyLoginCard } from "@/components/parent/FamilyLoginCard";
 import { useI18n } from "@/i18n";
 
 // T-31: shown on every entry into child mode. No close button or swipe; the choice is logged.
@@ -25,6 +26,7 @@ function Entry() {
       {pack && (
         <StarterUnlock snapshot={snapshot} onSeen={() => void act({ type: "starter-seen" })} />
       )}
+      {!pack && <FamilyLoginCard childId={snapshot.child.id} />}
       <h1 className="text-center">{te.title}</h1>
       <div className="flex items-center gap-4 rounded-stage bg-[#1c1b33] p-5 text-white shadow-xl shadow-[#1c1b33]/15">
         <Brainy

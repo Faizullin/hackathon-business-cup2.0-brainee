@@ -773,6 +773,7 @@ export function OfferScreen({
           type="button"
           className="primary"
           disabled={busy}
+          aria-busy={busy}
           onClick={onStart}
           data-testid="start-plan"
         >

@@ -73,6 +73,7 @@ export default defineConfig({
       NEXT_TELEMETRY_DISABLED: "1",
       BRAINEE_LAB: "1",
       DEMO_MODE: "1",
+      BRAINEE_SHARED_DEMO: process.env.BRAINEE_SHARED_DEMO ?? "1",
       DATABASE_URL: pathToFileURL(databasePath).href,
     },
   },

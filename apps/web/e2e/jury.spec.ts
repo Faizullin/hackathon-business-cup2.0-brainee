@@ -18,6 +18,9 @@ test("jury joins in one tap; families stay isolated; game ten completes an app t
   await page.getByTestId("jury-entry").click();
   await expect(page).toHaveURL(/\/jury$/);
   await expect(page.getByTestId("jury-pin")).toHaveText(/^\d{4}$/);
+  await expect(
+    page.getByRole("heading", { name: "Save login credentials for another device" }),
+  ).toBeVisible();
   const a = await savedState(page.request);
   expect(a.activity?.completed).toBe(9);
   const other = await browser.newContext({ baseURL });
