@@ -10,7 +10,6 @@ import {
   readRemoteCatalog,
   type StorageDriver,
   sha256,
-  storageDriver,
 } from "../packages/game-catalog/src/storage";
 import { remoteThumbnailPath } from "../packages/game-catalog/src/thumbnail";
 
@@ -106,10 +105,18 @@ export function validateBuild(files: Record<string, Uint8Array>, version?: strin
 }
 export async function publish(
   input: string,
-  options: { version?: string; disable?: boolean; enable?: boolean; rollback?: string },
+  options: {
+    version?: string;
+    disable?: boolean;
+    enable?: boolean;
+    rollback?: string;
+    dryRun?: boolean;
+  },
   driver: StorageDriver,
 ) {
   const catalog = await readRemoteCatalog(driver);
+  const keys: string[] = [];
+  let id = input;
   if (options.disable || options.enable || options.rollback) {
     const versions = catalog.filter((r) => r.id === input);
     const chosen = options.rollback
@@ -120,6 +127,7 @@ export async function publish(
   } else {
     const files = await loadBuild(input);
     const manifest = validateBuild(files, options.version);
+    id = manifest.id;
     const key = `games/${manifest.id}/${manifest.version}`;
     const hashes = Object.fromEntries(
       Object.entries(files)
@@ -145,36 +153,15 @@ export async function publish(
     for (const [path, bytes] of Object.entries(files)) {
       const stored = await driver.get(`${key}/${path}`);
       if (stored && sha256(stored) !== sha256(bytes)) throw new Error("Immutable object conflict");
-      if (!stored) await driver.put(`${key}/${path}`, bytes);
+      if (!stored) {
+        keys.push(`${key}/${path}`);
+        if (!options.dryRun) await driver.put(`${key}/${path}`, bytes);
+      }
     }
   }
   const validated = remoteCatalogSchema.parse(catalog);
-  await driver.put("catalog.json", Buffer.from(JSON.stringify(validated, null, 2)));
-}
-export async function main(args: string[]) {
-  const input = args.shift();
-  if (!input)
-    throw new Error(
-      "Usage: games:publish <folder|zip|id> [--version x] [--driver fs|r2] [--disable|--enable|--rollback version]",
-    );
-  const options: { version?: string; disable?: boolean; enable?: boolean; rollback?: string } = {};
-  let driver: string | undefined;
-  while (args.length) {
-    const flag = args.shift();
-    if (
-      ["--version", "--rollback", "--driver"].includes(flag ?? "") &&
-      (!args[0] || args[0].startsWith("--"))
-    )
-      throw new Error(`Missing value for ${flag}`);
-    if (flag === "--disable") options.disable = true;
-    else if (flag === "--enable") options.enable = true;
-    else if (flag === "--version") options.version = args.shift();
-    else if (flag === "--rollback") options.rollback = args.shift();
-    else if (flag === "--driver") driver = args.shift();
-    else throw new Error(`Unknown option ${flag}`);
-  }
-  if ([options.disable, options.enable, options.rollback].filter(Boolean).length > 1)
-    throw new Error("Choose one catalog action");
-  await publish(input, options, storageDriver(driver));
-  console.log("Remote catalog updated.");
+  keys.push("catalog.json");
+  if (!options.dryRun)
+    await driver.put("catalog.json", Buffer.from(JSON.stringify(validated, null, 2)));
+  return { id, keys, rows: validated.filter((row) => row.id === id) };
 }

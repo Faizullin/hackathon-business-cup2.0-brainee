@@ -34,7 +34,9 @@
     "games:discover": "node scripts/discover-games.mjs",
     "postinstall": "node scripts/discover-games.mjs",
     "games:publish": "node scripts/publish-games.mjs",
-    "test:remote-games": "node --test scripts/publish-games.test.mjs"
+    "test:remote-games": "node --test scripts/publish-games.test.mjs",
+    "test:game": "node scripts/test-game.mjs",
+    "test:games": "node scripts/test-game.mjs --all"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.7",
