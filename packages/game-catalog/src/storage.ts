@@ -61,10 +61,19 @@ export function signedHeaders(
     Authorization: `AWS4-HMAC-SHA256 Credential=${access}/${scope}, SignedHeaders=${names}, Signature=${signature}`,
   };
 }
-export function storageDriver(id = process.env.REMOTE_GAMES_DRIVER ?? "fs"): StorageDriver {
+/** Hard namespace boundary: never write another project's bucket objects. */
+export function r2ObjectKey(key: string) {
+  if (!safePath(key) || (key !== "catalog.json" && !key.startsWith("games/")))
+    throw new Error("Invalid Brainy storage key");
+  return `brainy/${key}`;
+}
+export function storageDriver(
+  id = process.env.REMOTE_GAMES_DRIVER ?? "fs",
+  env: NodeJS.ProcessEnv = process.env,
+): StorageDriver {
   if (id === "fs")
     return fsDriver(
-      process.env.REMOTE_GAMES_DIR ??
+      env.REMOTE_GAMES_DIR ??
         resolve(
           process.cwd(),
           process.cwd().endsWith("apps/web") ? "../../data/remote-games" : "data/remote-games",
@@ -75,15 +84,17 @@ export function storageDriver(id = process.env.REMOTE_GAMES_DRIVER ?? "fs"): Sto
     R2_ACCOUNT_ID: account,
     R2_ACCESS_KEY_ID: access,
     R2_SECRET_ACCESS_KEY: secret,
-    R2_BUCKET: bucket,
-  } = process.env;
+    R2_BUCKET: primaryBucket,
+  } = env;
+  const bucket = primaryBucket ?? env.R2_BUCKET_NAME;
   if (!account || !access || !secret || !bucket) throw new Error("Missing server R2 configuration");
   const credentials = { bucket, access, secret };
-  const endpoint = process.env.R2_ENDPOINT ?? `https://${account}.r2.cloudflarestorage.com`;
+  const endpoint =
+    env.R2_ENDPOINT ?? env.R2_ENDPOINT_URL ?? `https://${account}.r2.cloudflarestorage.com`;
   async function request(method: string, key: string, bytes: Uint8Array = new Uint8Array()) {
     if (!safePath(key) || !/^[a-zA-Z0-9._-]+$/.test(credentials.bucket))
       throw new Error("Invalid storage key/bucket");
-    const url = new URL(`${endpoint}/${bucket}/${key}`);
+    const url = new URL(`${endpoint.replace(/\/$/, "")}/${bucket}/${r2ObjectKey(key)}`);
     if (url.protocol !== "https:" || url.username || url.password || url.search)
       throw new Error("Invalid R2 endpoint");
     const response = await fetch(url, {

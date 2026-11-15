@@ -211,26 +211,44 @@ For a drop-in bridge, copy the locally built `apps/web/public/games/bridge.js` i
 Remote frames have **only `allow-scripts`**, enforced again by the response CSP even when opened directly. `localStorage`, IndexedDB, cookies and parent DOM access are unavailable; catch storage errors or use in-memory state. Module scripts/fetch/images load through credential-free CORS on the same version prefix. No service workers, popups, camera/microphone or form submission. Built-in sandbox permissions are unchanged.
 
 ```sh
-pnpm games:publish /path/to/build --driver fs
-pnpm games:publish /path/to/build.zip --version 1.2.0 --driver r2
-pnpm games:publish my-game --disable --driver r2
-pnpm games:publish my-game --enable --driver r2
-pnpm games:publish my-game --rollback 1.1.0 --driver r2
+pnpm games:publish /path/to/build --target local
+pnpm games:publish /path/to/build.zip --version 1.2.0 --target deployed --yes
+pnpm games:publish my-game --disable --target deployed --yes
+pnpm games:publish my-game --enable --target deployed --yes
+pnpm games:publish my-game --rollback 1.1.0 --target deployed --yes
 ```
 
-The CLI computes each file's SHA-256, uploads immutable files, then replaces `catalog.json`. Matching reruns are idempotent; changed bytes under an existing version fail. `--version` updates the manifest's versioned URLs. Disabled versions stay stored. Rollback enables only the selected version; enable chooses the currently enabled version or the last published one. ZIPs are limited to 32 MiB compressed and all builds to 64 MiB unpacked plus their manifest budget.
+The default target is `local`: filesystem artifacts and the local SQLite DB (prepare it with `pnpm db:prepare` first). The `deployed` target requires `--yes` and reads the main checkout’s ignored `.local/secrets.env.r2` and `.env.deployed`, even from a worktree. Override files with `--r2-env <path>` and `--db-env <path>`. Add `--dry-run` to validate and print planned object keys and DB operations without writes or a DB connection. R2 keys are restricted to `brainy/catalog.json` and `brainy/games/...`; filesystem keys stay unprefixed.
 
-The server caches the remote catalog for ~60 seconds, merging enabled scored games into Learn/entry and unscored games into Explore. Open lists poll every 60 seconds, so a list may take roughly two intervals to converge; direct launches and session authorization consult the server cache. Lazy database sync runs before remote starts/finishes, without publishing scripts needing database credentials. Existing core age, result, replay and reward checks apply. Version objects have one-year immutable caching; disable cannot erase files already cached by a browser. An existing scored receipt can still be replayed without awarding twice.
+The CLI computes each file's SHA-256, uploads immutable files, then replaces `catalog.json` and calls the existing remote-game sync for only the affected game. Scored games are upserted; disable/enable/rollback synchronize `enabled`. Explore never creates a scored row. No migrations, seeds, families, wallets or sessions are touched. If DB synchronization fails after uploading, rerun the same command to repair it. Matching reruns are idempotent; changed bytes under an existing version fail. `--version` updates the manifest's versioned URLs. Disabled versions stay stored. Rollback enables only the selected version; enable chooses the currently enabled version or the last published one. ZIPs are limited to 32 MiB compressed and all builds to 64 MiB unpacked plus their manifest budget.
+
+The server caches the remote catalog for ~60 seconds, merging enabled scored games into Learn/entry and unscored games into Explore. Open lists poll every 60 seconds, so a list may take roughly two intervals to converge; direct launches and session authorization consult the server cache. Lazy database sync before remote starts/finishes remains a fallback. Existing core age, result, replay and reward checks apply. Version objects have one-year immutable caching; disable cannot erase files already cached by a browser. An existing scored receipt can still be replayed without awarding twice.
 
 Local standalone proof (no game files enter git):
 
 ```sh
 node scripts/prepare-remote-sample.mjs
-pnpm games:publish .local/remote-shape-match --driver fs
-# Optional, with authorized server credentials in .env.r2:
-pnpm games:publish .local/remote-shape-match --driver r2
+pnpm games:publish .local/remote-shape-match --target local
+# Review the deployed plan using authorized server credentials:
+pnpm games:publish .local/remote-shape-match --target deployed --yes --dry-run
+# Publish only when ready:
+pnpm games:publish .local/remote-shape-match --target deployed --yes
 pnpm build
 BRAINEE_E2E_PORT=3301 pnpm --filter @brainee/web exec playwright test remote-game --project=webkit-ipad
 ```
 
 The preparation script copies GSP's `public/builds/phaser-shape-match-game` into ignored local storage, changes exactly one bridge tag from `game-store` to `brainee`, adds the manifest/thumbnail/credits and preserves gameplay. Select Shape Match (Remote) at `/lab`, or open it from `/explore`. The focused heavy spec verifies readiness, canvas input, opaque storage/parent restrictions, unchanged wallet/skills and zero foreign requests at iPad/phone widths. It can run alone without `e2e:full`; it skips when the external sample has not been published. `node --test scripts/publish-games.test.mjs` checks publishing; catalog/storage and scored DB behavior have workspace unit tests.
+
+
+## Fast per-game tests
+
+```sh
+pnpm test:game picture-puzzle
+pnpm test:games
+pnpm test:game --dir /path/to/remote-build
+pnpm test:game --dir /path/to/remote-build --spec /path/to/game.spec.ts
+```
+
+These commands use `playwright.games.config.ts`, a random loopback static server and the real HostBridge; they start neither Next.js nor a database. A single id builds only that embedded game plus the bridge. `test:games` builds all embedded games and runs their adjacent `game.spec.ts` files in parallel on WebKit iPad and Chromium phone. WebKit uses one worker for reliable input/timers. Reports and per-test timings go to `apps/web/test-results/games/`. The full application suites remain separate.
+
+Each built-in spec checks ready, real interactions, console errors and foreign requests. Scored sessions complete all four seeded rounds and validate exactly one GameResult. Playwright clock advancement skips demonstration/feedback delays while retaining real input. Explore checks that the host forwards no scoring events. The generic `--dir` check validates the build, readiness, opaque sandbox and network/errors; it cannot infer an unknown game's winning interactions. Chromium's specific diagnostic for blocked automatic focus in an opaque remote frame is allowed; game exceptions and other console errors fail. Supply an authored `--spec` using `apps/web/e2e-games/fixture.ts` for that coverage (place TypeScript specs in an ESM package).

@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, type FrameLocator, type Page, test } from "@playwright/test";
 import { newFamily } from "./new-family";
 import { savedState } from "./saved-state";
 export function exploreAcceptance(id: string) {
@@ -27,40 +27,7 @@ export function exploreAcceptance(id: string) {
     await expect(frame.getByTestId("host-badge")).toContainText("no stars");
     await expect(iframe).toHaveAttribute("allow", /microphone 'none'/);
     await page.screenshot({ path: info.outputPath(`${id}-start.png`), fullPage: true });
-    if (id === "magnet-explorer") {
-      await frame.locator('[data-mode="test-lab"]').click({ delay: 60 });
-      await expect(frame.locator(".test-pedestal")).toBeVisible();
-      const target = await frame.locator(".test-object").boundingBox();
-      if (!target) throw new Error("Missing test object");
-      await frame.locator(".magnet-tool").hover();
-      await page.mouse.down();
-      await page.mouse.move(target.x + target.width / 2, target.y + target.height / 2, {
-        steps: 8,
-      });
-      await page.mouse.up();
-    } else {
-      await frame.locator('[data-target="start"]').click({ delay: 60 });
-      const house = frame.locator("#house-canvas");
-      await expect(house).toBeVisible();
-      const box = await house.boundingBox();
-      if (!box) throw new Error("Missing drawing canvas");
-      await page.mouse.move(box.x + box.width * 0.3, box.y + box.height * 0.3);
-      await page.mouse.down();
-      await page.mouse.move(box.x + box.width * 0.6, box.y + box.height * 0.5, { steps: 8 });
-      await page.mouse.up();
-      await frame.locator('[data-target="house-done"]').click({ delay: 60 });
-      await frame.locator('[data-target="magic-next"]').click({ delay: 60 });
-      const road = frame.locator("#road-canvas");
-      await expect(road).toBeVisible();
-      const rb = await road.boundingBox();
-      if (!rb) throw new Error("Missing road canvas");
-      await page.mouse.move(rb.x + rb.width * 0.2, rb.y + rb.height * 0.3);
-      await page.mouse.down();
-      await page.mouse.move(rb.x + rb.width * 0.7, rb.y + rb.height * 0.7, { steps: 8 });
-      await page.mouse.up();
-      await frame.locator('[data-target="road-done"]').click({ delay: 60 });
-      await frame.locator('.place-choice[data-place="tree"]').click({ delay: 60 });
-    }
+    await playExplore(page, id, frame);
     await page.screenshot({ path: info.outputPath(`${id}-play.png`), fullPage: true });
     await frame.getByTestId("host-exit-button").click({ delay: 60 });
     await expect(page).toHaveURL(/\/explore$/);
@@ -73,4 +40,41 @@ export function exploreAcceptance(id: string) {
     expect(foreign).toEqual([]);
     expect(errors).toEqual([]);
   });
+}
+
+export async function playExplore(page: Page, id: string, frame: FrameLocator) {
+  if (id === "magnet-explorer") {
+    await frame.locator('[data-mode="test-lab"]').click({ delay: 60 });
+    await expect(frame.locator(".test-pedestal")).toBeVisible();
+    const target = await frame.locator(".test-object").boundingBox();
+    if (!target) throw new Error("Missing test object");
+    await frame.locator(".magnet-tool").hover();
+    await page.mouse.down();
+    await page.mouse.move(target.x + target.width / 2, target.y + target.height / 2, {
+      steps: 8,
+    });
+    await page.mouse.up();
+  } else {
+    await frame.locator('[data-target="start"]').click({ delay: 60 });
+    const house = frame.locator("#house-canvas");
+    await expect(house).toBeVisible();
+    const box = await house.boundingBox();
+    if (!box) throw new Error("Missing drawing canvas");
+    await page.mouse.move(box.x + box.width * 0.3, box.y + box.height * 0.3);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width * 0.6, box.y + box.height * 0.5, { steps: 8 });
+    await page.mouse.up();
+    await frame.locator('[data-target="house-done"]').click({ delay: 60 });
+    await frame.locator('[data-target="magic-next"]').click({ delay: 60 });
+    const road = frame.locator("#road-canvas");
+    await expect(road).toBeVisible();
+    const rb = await road.boundingBox();
+    if (!rb) throw new Error("Missing road canvas");
+    await page.mouse.move(rb.x + rb.width * 0.2, rb.y + rb.height * 0.3);
+    await page.mouse.down();
+    await page.mouse.move(rb.x + rb.width * 0.7, rb.y + rb.height * 0.7, { steps: 8 });
+    await page.mouse.up();
+    await frame.locator('[data-target="road-done"]').click({ delay: 60 });
+    await frame.locator('.place-choice[data-place="tree"]').click({ delay: 60 });
+  }
 }

@@ -6,7 +6,11 @@ import { pathToFileURL } from "node:url";
 import { build } from "esbuild";
 import { writeGeneratedModules } from "./discover-games.mjs";
 
-const games = writeGeneratedModules();
+const discovered = writeGeneratedModules();
+const ids = process.argv.slice(2);
+for (const id of ids)
+  if (!discovered.some((game) => game.id === id)) throw new Error(`Unknown game: ${id}`);
+const games = ids.length ? discovered.filter((game) => ids.includes(game.id)) : discovered;
 const destination = resolve("apps/web/public/games");
 mkdirSync(destination, { recursive: true });
 await build({

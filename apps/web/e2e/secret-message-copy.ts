@@ -36,6 +36,7 @@ export async function playSecretMessageInput(
   pattern: string[],
   makeMistake = false,
   roundIndex?: number,
+  advanceInput?: () => Promise<void>,
 ) {
   const text = SECRET_TEXT;
   if (typeof roundIndex === "number")
@@ -59,6 +60,7 @@ export async function playSecretMessageInput(
 
   for (const [i, sym] of sequence.entries()) {
     await frame.locator(`.stamp-button[data-symbol="${sym}"]`).click({ delay: 60 });
+    if (advanceInput) await advanceInput();
     // Every stamp must land exactly once.
     await expect(frame.locator(".copy-slot.is-filled")).toHaveCount(i + 1);
   }

@@ -45,6 +45,7 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - `pnpm e2e` — build, then the fast core browser run (WebKit iPad flows + one game per runtime, Chromium phone layout). `pnpm e2e:full` adds every game check and size; use it for game work and releases. Tiers: [setup.md](docs/dev/setup.md#e2e-matrix-tiered).
 - `pnpm report --video` — generate Markdown with phone/iPad recordings, screenshots and logs against a local server; see [docs/reports/README.md](docs/reports/README.md).
 - `pnpm test:reports` — validate the report generator, browser capture, video conversion and artifact links.
+- `pnpm test:game <id>` / `pnpm test:games` — isolated embedded game checks on iPad/phone, without Next or DB; `--dir <folder>` checks a remote build.
 - `pnpm test` — run workspace Vitest tests (`core` rules, game rounds, database).
 - `pnpm db:reset` — recreate the local SQLite database, push the schema and seed the demo.
 - `pnpm db:push` / `pnpm db:seed` / `pnpm db:studio` — apply the schema, add demo fixtures or inspect local data.
@@ -54,7 +55,7 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - `pnpm typecheck` — workspace TypeScript checks through Turborepo.
 - `pnpm format` — format source and config files with Biome.
 
-`pnpm games:publish <folder|zip|id> --driver fs|r2` publishes or manages remote versions (D-42; [author guide](docs/dev/games.md#remote-games-r2)).
+`pnpm games:publish <folder|zip|id> --target local|deployed` publishes or manages remote versions (D-42; [author guide](docs/dev/games.md#remote-games-r2)).
 
 `pnpm games:build` bundles same-origin embedded games (games register from their own folders via `pnpm games:discover`); `pnpm test:assets` validates their builds. Database paths, browser installation and all commands are in [docs/dev/setup.md](docs/dev/setup.md).
 
