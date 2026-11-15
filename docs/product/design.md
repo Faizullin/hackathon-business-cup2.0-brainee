@@ -97,7 +97,7 @@ Keep the public API (`<Brainy stats equipped label className />`) so existing pa
 | backpack, cape, badge, garden | earned rewards / `resp ≥ 70` (existing flags) |
 | hat, glasses, phones, bowtie, scarf | `equipped`, re-anchored to the new head (top ≈ y 12), eyes (y 104) and neck (≈ y 160) |
 
-**Kid-safe effects (default `effects="kid"`):** no stink, haze, flies or rot spots for 4–10-year-olds ("Brainy never dies"). Low energy shows the sleepy, droopy, sweaty and peach-palette versions only. `effects="full"` is kept for a possible owner-approved "brainrot" mode and is not used in the child app.
+**Kid-safe effects (default `effects="kid"`):** no stink, haze, flies or rot spots for 4–10-year-olds ("Brainy never dies"). Low energy shows the sleepy, droopy, sweaty and peach-palette versions only. `effects="full"` (rot, stink, flies) is used **only in the parent funnel at `/start`** as a marketing device (D-40, [funnel.md](funnel.md#the-brain-meter-d-40)); no child or parent app surface uses it.
 
 **Performance:** only hero instances animate (`animate`). Shop thumbnails, list rows and the tab hub render static or at a lower rate, and pause when hidden (`document.hidden`) or off-screen.
 
@@ -122,7 +122,7 @@ Keep the public API (`<Brainy stats equipped label className />`) so existing pa
 
 - **School features:** grades, homework, the AI homework check, teacher and director screens, class league, TikTok blocking.
 - **Kid rankings:** "League" is a ranking, and the product rule forbids kids seeing rankings.
-- **Gross-out states:** rot, flies and stink in the child app.
+- **Gross-out states:** rot, flies and stink in the child app (allowed only in the parent funnel, D-40).
 - **Third-party resources:** Google Fonts links; we vendor everything.
 - **Lock screen / widgets:** later.
 

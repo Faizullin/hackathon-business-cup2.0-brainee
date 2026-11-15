@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · Brain Check funnel replaces /start (T-149 to T-153, branch feature/brain-check-funnel)
+New 19-screen sales quiz with a live brain meter (health = mood, `effects="full"` only in the funnel, D-40), result as the child's Brainy, solution, plan builder and an offer with real prices and no payment (D-41). `/` gates to `/entry` or `/start`; Jury entry is in every funnel header; `POST /api/onboarding/start` creates the family in one tap with the funnel mood, plan and gift and an optional Starter Pack (exclusive Hero Cape in the new `back` slot, +100 ★, one-time unlock moment). Old route, profile and week code removed; the saved family plan keeps working through an adapter. Core, db and brainy tests added; Playwright updated and a new brain-check spec added. Notify-me on the age exit stores the email only in the browser.
+
 ## 2026-11-15 · Sound on by default; placeholder content removed (T-116, PR #10)
 Branch `minor_features/placeholders_sound`, merged with master (#6–#9). Rhythm Copycat and Secret Message Lab start with sound on and unlock audio on the first gesture; Secret Message's silent toggle now plays synthesized cues. Removed cartoons, the placeholder video player and non-film science entries, and unplayable fun titles; films and Snake stay. Catalog sync now also drops removed items (D-39). `pnpm check`, 340 unit tests, build, and the affected Playwright specs (mvp-pages/own-origin/jury/film/state-sync, and Rhythm/Secret Message on webkit-ipad) pass; the full e2e matrix was not run.
 

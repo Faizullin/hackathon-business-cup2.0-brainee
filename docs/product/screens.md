@@ -68,8 +68,6 @@ Lavender fields and icon blocks retain profile, PIN, child-device pairing, revoc
 
 ## Parent start and setup
 
-`/start` is the 25-step parent funnel. It introduces Brainy and a small finish, asks the early age-range question, and derives a starting profile and family plan. Children outside ages 4–10 get a friendly exit. The shape-match moment and real-stage growth slider are funnel-local previews, with no saved game session or reward.
+`/start` is the Brain Check funnel: a 19-screen sales quiz (habits, child, results, plan) with a live brain meter, ending on an offer with real prices and no payment (D-40, D-41). Its first question is about the child's screen time and Brainy is named only on the result screen. Children outside ages 4–10 get a friendly exit. Full spec: [funnel.md](funnel.md).
 
-Browser storage supports resume and answer review. `?tour=1` uses separate session storage for review, and `?angle=ending|learning|offline` changes the cover. Hash navigation and browser Back respect prerequisite answers. New funnel text is held in feature-local English copy.
-
-The final offer says **Pricing pending** and has no checkout. Signup requires a completed, validated funnel, checks the exact birth year against the chosen age band, and applies the existing `quizStart` rules before `/onboarding/setup`. `/onboarding` redirects to `/start`. Setup provides pairing and own-domain Screen Time instructions. The separate one-tap jury entry remains available from the welcome page and login.
+Browser storage supports resume; `?tour=1` uses session storage for review and `?reset=1` clears the quiz and the Starter Pack timer. Hash navigation and browser Back respect prerequisite answers. Every screen has a **Jury entry** button. The offer's button creates the family in one tap (`POST /api/onboarding/start`) and opens `/entry`, where the Starter Pack unlock moment plays once. `/onboarding` redirects to `/start`; the legacy `/signup` form and `/onboarding/setup` pairing remain.

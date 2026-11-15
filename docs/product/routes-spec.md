@@ -13,8 +13,8 @@ Source: `ROUTES.md` and the clickable prototype `brainy-mvp.zip` (frozen inputs,
 ## Route map (spec → ours)
 | Spec | Ours |
 |---|---|
-| `/` role choice | `/`: parent, paired child and one-tap jury choices |
-| `/auth/signup`, `/onboarding/*` | `/signup` (neutral), `/onboarding` (quiz), then `/onboarding/setup` |
+| `/` role choice | `/` is a gate: a device with a family opens `/entry`, any other opens `/start`. The role picker (parent login, child login, jury) is `/login` |
+| `/auth/signup`, `/onboarding/*` | `/start` (the Brain Check funnel, [funnel.md](funnel.md); one-tap `POST /api/onboarding/start`); `/onboarding` redirects to it; `/signup` (neutral/legacy) and `/onboarding/setup` stay |
 | Jury preview | `/jury` after demo-only `POST /api/jury` |
 | `/child/start`, `/child/learn`, `/child/play/:id` | `/entry`, `/learn`, `/game/[id]` |
 | `/child/leisure`, `/child/watch/:id` | `/leisure`, `/video/[id]` (registered films only; others 404, D-39) |

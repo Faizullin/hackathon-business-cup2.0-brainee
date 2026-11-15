@@ -188,8 +188,8 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-147 QLOBE/Sugarizer/H5P/Blockly family adapters and the remaining 24 archive titles as Explore batches (T-144 scope; GSP wave done)
 - [x] T-116 Sound on by default in Rhythm Copycat and Secret Message Lab (Secret Message gained synthesized cues); removed placeholder cartoons, science videos without films and unplayable fun titles; catalog sync drops removed items from saved families (D-39).
 - [ ] T-148 Decide which Explore previews (incl. the GSP wave) earn real `GameResult` hooks and promotion to scored
-- [ ] T-149 Brain Check funnel: replace `/start` with the 19-screen sales quiz and live brain meter (D-40) → [funnel.md](../product/funnel.md)
-- [ ] T-150 First-run routing: `/` gates to `/entry` or `/start`; jury entry on every funnel screen; `?reset=1`
-- [ ] T-151 No-form plan start: offer with display-only prices (D-41) and `POST /api/onboarding/start` creating the family in one tap
-- [ ] T-152 Hero Cape (slot `back`, exclusive) and the Starter Pack unlock moment
-- [ ] T-153 Funnel unit and Playwright coverage, docs and PR
+- [x] T-149 Brain Check funnel: replace `/start` with the 19-screen sales quiz and live brain meter (D-40) → [funnel.md](../product/funnel.md)
+- [x] T-150 First-run routing: `/` gates to `/entry` or `/start`; jury entry on every funnel screen; `?reset=1`
+- [x] T-151 No-form plan start: offer with display-only prices (D-41) and `POST /api/onboarding/start` creating the family in one tap
+- [x] T-152 Hero Cape (slot `back`, exclusive) and the Starter Pack unlock moment
+- [x] T-153 Funnel unit and Playwright coverage, docs and PR

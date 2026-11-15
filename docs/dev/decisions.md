@@ -6,6 +6,18 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-41 · The offer shows real prices but takes no payment · 2026-11-15 · accepted · extends D-35, narrows "no checkout"
+**Context:** the sales funnel ends on an offer and the team wants the real price points ($14.99 a month, $79.99 a year) and a one-tap start that opens the app. No payment provider, billing backend or third-party analytics exists.
+**Decision:** the offer shows the two prices from constants (`MONTHLY`, `ANNUAL` in `funnel-quiz.ts`; `commercialPlans()` is display-only) and a plan choice that is stored on the family (`showcase.startPlan`) for display. It takes no card, PIN, email or password and no money; the CTA calls `POST /api/onboarding/start`, which creates a normal `"demo"` family with generated credentials. The 15-minute Starter Pack timer is stored in the browser and never resets; on expiry the pack is not granted and prices do not change. The Starter Pack is the exclusive `cape` accessory (slot `back`, never sold) plus 100 ★.
+**Consequences:** real billing still needs its own decision entry. `families.plan` keeps meaning "demo or jury". The funnel sends no events to any service and everything loads from our own origin. The start endpoint is demo-mode only, like `/api/onboarding`.
+
+## D-40 · Full brain-rot effects are allowed in the parent funnel only · 2026-11-15 · accepted · narrows D-36's "no rot, stink or flies"
+**Context:** the sales quiz needs the parent to see the child's brain deteriorate with every answer; that is the marketing device. The child app must stay kid-safe ("Brainy never dies").
+**Decision:** `<Brainy effects="full">` (rot spots, stink, flies) is allowed **only inside `/start`**, driven by the funnel health score (= mood, start 80, minus per-answer drains). Every child and parent app surface keeps `effects="kid"`; an e2e test fails if a child route renders `data-effects="full"`. The app starts the saved Brainy at the funnel health as its mood (clamped to `MOOD_FLOOR`), always shown in the kid-safe version.
+**Consequences:** copy around the effect stays non-medical and blames the feed, not the parent or the child. Kids never see rankings or the rot look.
+
+---
+
 ## D-39 · Ship only content that exists · 2026-11-15 · accepted · narrows D-21/D-29/D-33
 **Context:** Leisure showed cartoons with a 12-second illustration player, four science videos with an animated timer player and four fun titles without a game. Only Snake and the three D-33 films have real content.
 **Decision:** list only real content. Remove the cartoon cards, `/cartoon/[id]`, `CartoonPlayer`, the `cartoons` showcase field and `buy-cartoon`. Keep science entries only for registered films; `/video/[id]` renders not-found for any other id, and the placeholder `DemoPlayer` is gone. Seed only Snake among fun games. `syncCatalog` now makes saved `science`/`fun` lists match the catalog (adds new items, drops removed ones, keeps progress), so existing families lose the placeholders on their next read.

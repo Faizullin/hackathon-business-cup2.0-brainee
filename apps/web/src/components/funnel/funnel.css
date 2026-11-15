@@ -329,12 +329,6 @@
     color: var(--card);
     border-color: var(--ink);
   }
-  @keyframes bc-rise {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-  }
   .head {
     text-align: center;
   }
@@ -1395,5 +1389,12 @@
       animation: none !important;
       transition: none !important;
     }
+  }
+}
+
+@keyframes bc-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
 }
