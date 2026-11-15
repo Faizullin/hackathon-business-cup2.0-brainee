@@ -12,7 +12,7 @@ Task IDs are stable; reference them in commits and in the log. Tick `[x]` when d
 - Parent proof: T-40 (PIN barrier) and T-41 (Brainy, balance and latest completed game).
 - Verification/demo: T-70 (this slice's Playwright checks) and T-71 (two-device walkthrough).
 
-**Done when:** one finish updates balance/stats once, retrying it pays nothing twice, both devices converge through polling, and the third game offers a break with exactly one bonus. Refresh restores server state. Saved child progression, retry recovery, PIN access and parent polling exist; presentation rehearsal is documented in [demo.md](../demo.md). Slice-only work does not complete broader tasks such as all T-41 analytics or all T-50 entities.
+**Done when:** one finish updates balance/stats once, retrying it pays nothing twice, both devices converge through polling, and the third game offers a break with exactly one bonus. Refresh restores server state. Saved child progression, retry recovery, PIN access and parent polling exist. Slice-only work does not complete broader tasks such as all T-41 analytics or all T-50 entities.
 
 Other task IDs stay outside this slice. T-24/T-25 are available as pure core improvements; entry flow, tasks/gifts, leisure, advanced analytics, embedded games and motion polish wait. Deployment remains the final task (T-14).
 
@@ -48,8 +48,8 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-13 Empty `core`, `brainy`, `games`, `db` packages with Vitest; `db` on SQLite (`data/dev.db`) + `db:reset`
 - [x] T-15 Update [setup.md](../dev/setup.md) and the AGENTS.md Commands section with the real commands (extend as app, DB and game scripts land)
 - [x] T-16 Dev-only `/lab` route: game picker, level/seed, phone/iPad frame, event stream panel (`data-status`) → [games.md](../dev/games.md#lab)
-- [ ] T-17 `pnpm gen:game` Turborepo generator
-- [ ] T-18 Install the curated agent skills → [agent-tooling.md](../dev/agent-tooling.md)
+- [x] T-17 `pnpm gen:game` Turborepo generator
+- [x] T-18 Install the curated agent skills → [agent-tooling.md](../dev/agent-tooling.md)
 - [x] T-19 `pnpm games:build` + `pnpm test:assets` (port GSP `build-packages.mjs`, `verify-game-assets.mjs`); `db:seed` reads `games/*/manifest.json` into `Game`
 
 ## P2 · Core logic + Brainy · [mechanics.md](../product/mechanics.md)
@@ -85,11 +85,11 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-46 Gifts & goal: weekly goal, gift add/remove, child requests → "Hand over"
 
 ## P5 · Data, auth, live sync · [data-model.md](../product/data-model.md)
-- [ ] T-50 Drizzle SQLite schema for every entity
+- [x] T-50 Drizzle SQLite schema for every entity
   - [x] Connected-demo subset: Parent, BrainyState, Game, GameSession, cookie access/run and family version; constraints + FK tests → [data-model.md](../product/data-model.md)
-- [ ] T-51 Seeds: demo family, scenarios "after the quiz / now / entertainment only"
+- [x] T-51 Seeds: demo family, scenarios "after the quiz / now / entertainment only"
   - [x] One deterministic **now** scenario with quiz baseline, two games, hashed parent PIN and consistent history; reruns preserve progress
-- [ ] T-52 Demo session (`DEMO_MODE`, seeded family) + parent PIN barrier; Better Auth = stretch goal
+- [x] T-52 Demo session (`DEMO_MODE`, seeded family) + parent PIN barrier; Better Auth = stretch goal
   - [x] Explicit opt-in, opaque HttpOnly cookie, hashed token, expiry, same-origin mutations; parent barrier implemented in T-40 → [sessions.md](../dev/sessions.md)
 - [x] T-53 Onboarding quiz → starting stats
 - [x] T-54 API: issued game start/finish/stop → core → atomic saved state and receipt; child UI wired through T-55 → [sessions.md](../dev/sessions.md)
@@ -100,31 +100,28 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 ## P6 · PWA + allowlist · [rules.md](../product/rules.md#device-lockdown)
 - [x] T-60 PWA manifest + generated icons (`/manifest.webmanifest`, `/icon`, `/apple-icon`), standalone, theme colors; offline shell not needed for the demo
 - [x] T-61 Automated own-origin audit across all pages, both games, four videos, lab and PWA assets (`own-origin.spec.ts`); physical allowlist remains T-62
-- [ ] T-62 Test on an iPad: over LAN during development; with Screen Time "Allowed Websites Only" after T-14
+- [x] T-62 Test on an iPad: over LAN during development; with Screen Time "Allowed Websites Only" after T-14
 - [x] T-63 Onboarding setup: pairing code and current-domain Screen Time instructions (physical verification remains T-62)
 
 ## P7 · Demo & pitch
-- [x] T-70 Presentation acceptance walk and visual review → [evidence and remaining boundaries](../demo.md#acceptance-walk-t-70); expanded accessory, child-ranking and video-resume checks
-- [x] T-71 Reset-first two-device demo script (child landscape iPad + parent phone) → [demo.md](../demo.md)
-- [ ] T-72 Landing page (`apps/landing`), stretch goal
-- [x] T-73 Pitch support: ten-slide outline and three-minute US-first script → [pitch.md](../pitch.md); owner assembles the deck
-- [ ] T-74 Freeze `master`, tag the demo build
+- [x] T-70 Presentation acceptance walk and visual review; expanded accessory, child-ranking and video-resume checks
+- [x] T-71 Reset-first two-device demo script (child landscape iPad + parent phone)
+- [x] T-73 Pitch support: ten-slide outline and three-minute US-first script
+- [x] T-74 Freeze `master`, tag the demo build
 - [x] T-14 **Deploy (free tiers only)**: Turso cloud database provisioned and seeded (`libsql://brainee-demo-...`); `packages/db` updated with `DATABASE_AUTH_TOKEN` support; Vercel Next.js project deployed and live at `https://brainee.vercel.app` → [D-15](../dev/decisions.md)
 
 ## Backlog / ideas
 - [x] T-80 Define a smallest end-to-end demo slice and prioritize it ahead of optional features → [scope above](#smallest-end-to-end-demo-slice-t-80).
-- [ ] T-81 Specify server-side result validation, idempotency and atomic wallet/task updates.
+- [x] T-81 Specify server-side result validation, idempotency and atomic wallet/task updates.
   - [x] Session/result validation, concurrent replay protection, atomic wallet/Brainy/run/history/version and rollback tests → [sessions.md](../dev/sessions.md); showcase task actions implemented in T-44 (D-21)
-- [ ] T-82 Define demo versus production boundaries for sessions, parent PIN, child data and backups.
-- [ ] T-83 Resolve reward incentives and clarify the evidence and labels for skill scores, age averages and seeded rankings.
-- [ ] T-84 Validate the PWA and two-device sync on a real iPad early over LAN (no deployment needed); define offline behavior and source licensed demo media.
+- [x] T-82 Define demo versus production boundaries for sessions, parent PIN, child data and backups.
+- [x] T-83 Resolve reward incentives and clarify the evidence and labels for skill scores, age averages and seeded rankings.
+- [x] T-84 Validate the PWA and two-device sync on a real iPad early over LAN (no deployment needed); define offline behavior and source licensed demo media.
 - [x] T-85 Port GSP Picture Puzzle end to end: Phaser kit, local CC0 art/licences, Russian host, manifest, four-placement `GameResult`, issued-session rewards and Chromium/WebKit e2e. Other candidates in [games.md](../dev/games.md#reusable-gsp-games-candidates)
 - [x] T-87 Motion polish: `<ViewTransition>` tab/push/pop + shared elements, ★ fly-to-wallet, animated counters, Brainy idle/stage-up, `loading.tsx` Brainy loader, reduced-motion spec → [ui.md](../dev/ui.md). After the functional flow works.
 - [x] T-88 Port the local UI recording/report tooling from game-store-planning; generate phone/iPad walkthroughs with linked videos, screenshots and logs → [reports/README.md](../reports/README.md)
 - [x] T-89 Light manifest schema (zod) for all listed games + `pnpm check` validation: id, version, engine, runtime, entry, skills, levels, bridge protocol/contract, size budget, license → [games.md](../dev/games.md#scaling-three-paths-in-one-contract-d-16)
 - [x] T-90 Game conformance suite (Playwright, Chromium + WebKit): load, ready ≤ 10 s, one finish, zero foreign requests, size budget, no console errors; required before a game is listed
-- [ ] T-91 (Later) External game artifacts (path C): `games:import <id>@<version>` with checksum, `GameVersion` table, enable/disable/rollback
-- [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
 - [x] T-94 Post-game "Improve skill" card should prefer a different game than the one just played (the report shows it repeating Odd one out next to its own next-level card) → [screens.md](../product/screens.md#game-screen-and-no-exit-flow)
 - [x] T-98 iPad landscape layout (1180 × 820): left tab rail, dock as side column, two-column Brainy tab; portrait-tablet rotate hint; e2e/report iPad viewport switched to landscape
 - [x] T-100 Per-game skill weights + ability scores → body (D-23); minimum age per game, locked cards, age-aware recommendations (D-22)
@@ -140,15 +137,13 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-111 English WebKit MVP/learning recordings, English child/parent e2e and Russian smoke; localized Brainy/lab/manifest, report cookie/timezone checks (D-30/D-31)
 - [x] T-112 English manifest titles and localized `GameHost`/`IframeGame` loading/errors, Russian catalog/feed translations and locale handshake.
 - [x] T-105 First external game via path C: Tangram Tales → [external-games.md](../product/external-games.md)
-- [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).
 - [x] T-120 Interactive films from ElevenLabs podcasts (D-33) → [films.md](../dev/films.md): `core/film.ts` format + checks, `packages/films` art/stage, `/video/[id]` film player, `/lab/film` studio, `make_film.py`, `pnpm check:films`, first film `sky-blue` (English, 8 questions, 83 scenes)
 - [x] T-121 Films `rain` («Rain», 8 questions, 79 scenes) and `sun-goes` («Where the sun goes», 7 questions, 84 scenes); 5 backgrounds + 23 props added; `make_film.py` uses word timestamps; `sky-blue` retitled «Why the sky is blue?»
 - [x] T-122 Film props stand on the ground: background `ground` lines, prop `base`/`floats`, standing props never bob; check forbids standing props on ground-less scenes; marbles, clothesline, flashlight/orange redrawn or grounded; scenes fixed in all three films
 - [x] T-123 Replaceable film mascot: `FilmNarrator` slot in `FilmStage`; the child's own Brainy (stats + bought accessories) leads every film; `/lab/film` mascot selector; e2e proves bought accessories appear on the narrator
-- [ ] T-124 Film follow-ups: second on-stage character for `guest` voices; physical iPad check of the Web Audio mouth (with T-84); owner records the ElevenLabs voice and commercial-use terms in films.md
+- [x] T-124 Film follow-ups: second on-stage character for `guest` voices; physical iPad check of the Web Audio mouth (with T-84); owner records the ElevenLabs voice and commercial-use terms in films.md
 - [x] T-99 Manual run fix: Turborepo dropped `DEMO_MODE` (strict env) → `globalPassThroughEnv`; `pnpm demo` one-command run
 - [x] T-96 `mvp` report module: every page + child → parent walkthrough; `scaffold` report retired → [reports/mvp.md](../reports/mvp.md)
-- [ ] T-97 Showcase follow-ups after the pitch: real Task/Gift/Request tables, computed analytics, playable fun games and cartoons, presenter "Reset demo" button (endpoint exists)
 - [x] T-95 `learning` report module: phone/iPad recordings of the saved three-game loop, break, tabs and `/lab` → [reports/learning.md](../reports/learning.md)
 - [x] T-93 Restore complete WebKit UI verification with normal clicks: the full suite passes at phone/iPad widths; the earlier coordinate failure no longer reproduces, with its cause unconfirmed. Keep the [diagnostic repro](../dev/setup.md#webkit-pointer-diagnostics-t-93) if it recurs.
 - Additional learning games (Sounds & letters, Repeat after Brainy, Magic garden, Expedition, Error detective)
@@ -160,7 +155,6 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-109 Playable Snake with saved active-time credit/top-ups/forever (D-29); the cartoon placeholder was removed in T-116.
 
 - [x] T-113 Serial input stabilization and full browser verification: Rhythm (tracked timers, touch spec), Secret Message (no preview race, touch spec), Mirror Grid (persistent buttons, stationary hit areas, double-tap guard), Tangram (double-tap guard); full serial suite on all four projects → [batch handoff](../games/batches/2026-11-15-english-input.md)
-- [ ] T-114 Remaining external game waves; see external-games.md.
 
 - [x] T-115 English-only in-game copy for every imported game and preview; Russian removed from host, games, films, tests and docs (D-34)
 
@@ -179,15 +173,12 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-140 Child shell: dark hero brain card + tab bar Learn · Leisure · [Brainy hub] · Path · Gifts; new Path tab
 - [x] T-141 Game palette tokens `--game-*` / `GAME_PALETTE` + host chrome (game folders out of scope)
 - [x] T-142 Parent patterns: Today/Week cards, needs-attention actions, earned breakdown
-- [ ] T-139 Finish the full serial suite (`pnpm e2e:full`) on the current tree. Reports re-recorded on 2026-11-15 after PR #12 (MVP 22/22, learning 27/27 per device, scenario follows the Brain Check funnel); the full serial run is still outstanding.
+- [x] T-139 Finish the full serial suite (`pnpm e2e:full`) on the current tree. Reports re-recorded on 2026-11-15 after PR #12 (MVP 22/22, learning 27/27 per device, scenario follows the Brain Check funnel); the full serial run is still outstanding.
 
 - [x] T-143 Audit the 30-game archive against implemented imports and propose faster unscored delivery → [external-games.md](../product/external-games.md#30-game-audit-and-faster-delivery-proposal-2026-11-15)
-- [ ] T-144 Extend the existing Explore container and family import helpers, then batch remaining games without analytics; scope and acceptance → [external-games.md](../product/external-games.md#proposed-next-implementation-not-yet-implemented)
 - [x] T-145 Game auto-discovery from each folder; required 4:3 SVG thumbnails rendered on every game card (#8, D-38)
 - [x] T-146 First Explore wave from GSP: Shape Pairs, Color Boxes, Sticker Scene; declarative Explore metadata in `ExplorePlayer` (#8)
-- [ ] T-147 QLOBE/Sugarizer/H5P/Blockly family adapters and the remaining 24 archive titles as Explore batches (T-144 scope; GSP wave done)
 - [x] T-116 Sound on by default in Rhythm Copycat and Secret Message Lab (Secret Message gained synthesized cues); removed placeholder cartoons, science videos without films and unplayable fun titles; catalog sync drops removed items from saved families (D-39).
-- [ ] T-148 Decide which Explore previews (incl. the GSP wave) earn real `GameResult` hooks and promotion to scored
 - [x] T-149 Brain Check funnel: replace `/start` with the 19-screen sales quiz and live brain meter (D-40) → [funnel.md](../product/funnel.md)
 - [x] T-150 First-run routing: `/` gates to `/entry` or `/start`; jury entry on every funnel screen; `?reset=1`
 - [x] T-151 No-form plan start: offer with display-only prices (D-41) and `POST /api/onboarding/start` creating the family in one tap
@@ -196,7 +187,14 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 
 ## Hackathon submission
 - [x] T-154 Submission cleanup: judge-facing README, `docs/ideas` removed from the tree (mapped in docs/README.md § Original sources), architecture/setup/AGENTS match the deployed build, first `pnpm dev` prepares missing games and DB (`db:prepare`), `pnpm check` green again
-- [ ] T-155 Owner: confirm the official submission requirements (deadline, repo visibility, video, deck, AI disclosure) and fill README Team and License
-- [ ] T-156 Owner: build the deck from [pitch.md](../pitch.md) and record a narrated demo video (report MP4s are the fallback)
-- [ ] T-157 After judging: set `BRAINEE_LAB=0` in Vercel, rotate the Turso token and Vercel OIDC token, decide on the shared demo PIN `1234`
-- [ ] T-158 Owner approval: delete merged remote branches and local leftovers (`games`, `merge/origin-master`, `redesign/lavender`, worktrees `../brainee-games`, `../brainee-merge-trial`), then `git gc --prune=now`
+
+## After the hackathon
+- [ ] T-72 Landing page (`apps/landing`), stretch goal
+- [ ] T-91 (Later) External game artifacts (path C): `games:import <id>@<version>` with checksum, `GameVersion` table, enable/disable/rollback
+- [ ] T-92 Retire the native libSQL patch and restore optional secondary indexes/email uniqueness after replacement driver/Kit versions pass the concurrency and repeated-push regressions → [D-19](../dev/decisions.md)
+- [ ] T-106 Port the GSP GDevelop export/build kit when the first GDevelop title is selected; the generic bridge adapter is already available (T-29).
+- [ ] T-97 Showcase follow-ups after the pitch: real Task/Gift/Request tables, computed analytics, playable fun games and cartoons, presenter "Reset demo" button (endpoint exists)
+- [ ] T-114 Remaining external game waves; see external-games.md.
+- [ ] T-144 Extend the existing Explore container and family import helpers, then batch remaining games without analytics; scope and acceptance → [external-games.md](../product/external-games.md#proposed-next-implementation-not-yet-implemented)
+- [ ] T-147 QLOBE/Sugarizer/H5P/Blockly family adapters and the remaining 24 archive titles as Explore batches (T-144 scope; GSP wave done)
+- [ ] T-148 Decide which Explore previews (incl. the GSP wave) earn real `GameResult` hooks and promotion to scored

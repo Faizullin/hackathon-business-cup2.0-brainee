@@ -169,7 +169,7 @@ Restyle `RewardsScreen` with the earned-breakdown card (★/☀ base + earned �
 
 ### T-139 · Docs and recordings
 
-- Update [ui.md](../dev/ui.md), [screens.md](../product/screens.md), [demo.md](../demo.md) and [pitch.md](../pitch.md).
+- Update [ui.md](../dev/ui.md) and [screens.md](../product/screens.md).
 - Re-record `pnpm report --video` for mvp + learning only after T-135–T-138.
 - Run a full serial `pnpm e2e` before handing off.
 

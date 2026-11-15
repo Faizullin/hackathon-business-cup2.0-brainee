@@ -4,7 +4,7 @@
 
 Business Cup 2.0 hackathon project · US-first, English-only.
 
-**Try it:** [brainee.vercel.app](https://brainee.vercel.app). Tap **Jury entry** to get your own demo family in one tap (no form; parent PIN `1234`). The one-minute jury path is in [docs/demo.md](docs/demo.md).
+**Try it:** [brainee.vercel.app](https://brainee.vercel.app). Tap **Jury entry** to get your own demo family in one tap (no form; parent PIN `1234`).
 
 | Brain Check result | Child: Learn | Parent: Analytics |
 |---|---|---|
@@ -24,7 +24,7 @@ Short videos and endless feeds train children for constant stimulation. Parental
 - **Parent cabinet** (PIN): Today/Week analytics from saved sessions, tasks to confirm, gifts and a weekly goal, the family plan and device pairing. Live sync between devices by polling.
 - **Product rules**: no feeds, autoplay or "watch next"; children never see rankings; Brainy never dies; no medical claims. Everything loads from our own domain so the app works under iOS Screen Time "Allowed Websites Only".
 
-What is live and what is illustrative is labelled in the app: saved actions and activity analytics are real; historical radars and the ranking are demo data ([pitch notes](docs/pitch.md)).
+What is live and what is illustrative is labelled in the app: saved actions and activity analytics are real; historical radars and the ranking are demo data.
 
 ## Run it locally
 
@@ -46,7 +46,6 @@ TypeScript monorepo (pnpm + Turborepo) with one Next.js 16 app. Game and economy
 | [docs/product/overview.md](docs/product/overview.md) | Problem, roles, scope |
 | [docs/dev/architecture.md](docs/dev/architecture.md) | Stack, repo layout, data flow |
 | [docs/dev/decisions.md](docs/dev/decisions.md) | Why we chose what we chose (ADR log) |
-| [docs/pitch.md](docs/pitch.md) · [docs/demo.md](docs/demo.md) | Pitch outline and jury/two-device demo script |
 | [docs/progress/status.md](docs/progress/status.md) | Current status and what's next |
 | [docs/README.md](docs/README.md) | All docs |
 
