@@ -33,5 +33,5 @@ export function exploreFun(game: PreviewLike): FunGame {
   };
 }
 
-/** Fun games that ship with the code: Snake and every built-in Explore preview. */
-export const builtInFun = (): FunGame[] => [structuredClone(SNAKE), ...previews.map(exploreFun)];
+/** Fun games that ship with the code: every built-in Explore preview, then Snake last. */
+export const builtInFun = (): FunGame[] => [...previews.map(exploreFun), structuredClone(SNAKE)];

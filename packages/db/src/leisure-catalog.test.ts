@@ -6,7 +6,7 @@ afterEach(() => setRemotePreviews([]));
 
 it("sells Snake and every built-in Explore game for ★", () => {
   const { fun } = leisureCatalog();
-  expect(fun[0]?.id).toBe("snake");
+  expect(fun.at(-1)?.id).toBe("snake");
   for (const game of previews)
     expect(fun.find((g) => g.id === game.id)).toMatchObject({
       kind: "explore",
