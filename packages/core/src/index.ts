@@ -7,6 +7,7 @@ export * from "./catalog-sync";
 export * from "./economy";
 export * from "./film";
 export * from "./funnel";
+export * from "./funnel-quiz";
 export * from "./game-validation";
 export * from "./learning";
 export * from "./leisure";

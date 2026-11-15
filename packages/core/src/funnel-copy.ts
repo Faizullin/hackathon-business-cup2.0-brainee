@@ -120,25 +120,6 @@ export const ATTEMPT: FunnelQuestion = {
     ["new", "We’re still figuring it out"],
   ]),
 };
-export const coverAngles = {
-  default: {
-    title: "Give screen time a happy ending.",
-    body: "Help your child learn, play, and put the screen down. Build a routine for your family.",
-  },
-  ending: {
-    title: "Make the last turn easier.",
-    body: "Give your child a finish they can see and something to look forward to afterward.",
-  },
-  learning: {
-    title: "What if screen time started with a puzzle?",
-    body: "See how a little learning can earn the fun your child already loves.",
-  },
-  offline: {
-    title: "Give your child a reason to look up.",
-    body: "Build a screen-time routine with something to look forward to off-screen.",
-  },
-};
-
 export const goals: Record<
   string,
   { title: string; focus: string; intro: string; feature: string; benefit: string }
@@ -235,32 +216,6 @@ export const ageNotes: Record<string, string> = {
   "8-10": "Invite them to suggest the stopping point and agree on it together.",
 };
 
-export const contentInsight: Record<string, [string, string]> = {
-  clips: [
-    "Short clips keep the next choice open.",
-    "One clip can end while the feed keeps going. For your first session, pick something your child can finish, like finding the last matching pair.",
-  ],
-  kids: [
-    "Pick the video before pressing play.",
-    "Choose one video together and agree that its ending is the stopping point. In Brainy, another video won’t start on its own.",
-  ],
-  shows: [
-    "The credits can do some of the work.",
-    "Your child already has a visible ending. Decide together what comes after the credits before the episode starts.",
-  ],
-  games: [
-    "A round gives you a place to pause.",
-    "“When this puzzle is finished” gives your child something they can see. Try agreeing on the last round together before starting.",
-  ],
-  other: [
-    "Let the activity supply the ending.",
-    "The next time you choose a game or story, name the last move or last page together. That gives both of you the same cue.",
-  ],
-  none: [
-    "Keep it for the next time a screen comes out.",
-    "There’s no need to add screen time. On a day you already allow it, choose one activity together and decide where it ends.",
-  ],
-};
 export const moments: Record<string, string> = {
   afternoon: "After school or daycare",
   dinner: "While dinner is cooking",
@@ -289,57 +244,6 @@ export const previousCue: Record<string, string> = {
   away: "Choose where the device will rest and let your child put it there at the end.",
   choice: "Set the next activity out before play, so your child can see what comes next.",
   new: "For the first try, sit together and name the last turn before you start.",
-};
-export const profiles = {
-  occasional: {
-    title: "An occasional screen turn",
-    why: "Screens come up infrequently in your routine.",
-    lever: "Keep this plan for the next time you would already offer a screen.",
-  },
-  lastTurn: {
-    title: "The last turn is the hard part",
-    lever: "Try agreeing on one visible ending before play begins. Stay nearby when it arrives.",
-  },
-  smallFinish: {
-    title: "A small finish comes first",
-    why: "You said your child often switches away from a ten-minute cartoon.",
-    lever:
-      "Start with one small, complete activity. Finding one pair gives you a finish you can point to together.",
-  },
-  familiar: {
-    title: "Build on the ending that already works",
-    lever:
-      "Keep that familiar cue. Use the change you want to make when choosing the first activity.",
-  },
-  together: {
-    title: "Try one screen turn together",
-    why: "Your answers leave room for more than one pattern.",
-    lever: "Watch one familiar session together. Notice what holds their interest and how it ends.",
-  },
-};
-export const profileReasons = {
-  hard: "You said putting the device away can be upsetting.",
-  bargain: "You said your child usually asks for more time.",
-  easy: "You said your child usually puts the device down easily.",
-  reminder: "You said one reminder usually does it.",
-};
-export const weekEstimates: Record<string, string> = {
-  little: "Under 3½ hours",
-  half: "3½ to under 7 hours",
-  one: "7 to under 14 hours",
-  two: "14 hours or more",
-};
-export const weekCopy = {
-  estimateBody:
-    "That’s the weekly estimate if all seven days look like the day you described. Pick just one screen turn to try a different ending.",
-  none: {
-    title: "Keep screen time occasional.",
-    body: "You said most days already have no recreational screen time. Save the routine for a day you would offer it anyway.",
-  },
-  varies: {
-    title: "One turn is enough to start.",
-    body: "Your weeks vary. Pick the next screen turn you already allow and try the routine then.",
-  },
 };
 export const familyTaskTitles: Record<string, string> = {
   alone: "Read a page after putting the screen away",
