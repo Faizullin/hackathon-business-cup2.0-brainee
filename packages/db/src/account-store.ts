@@ -125,13 +125,6 @@ function personalShowcase(childName: string, start: ReturnType<typeof quizStart>
     until: null,
     remainingSeconds: 0,
   }));
-  showcase.cartoons = showcase.cartoons.map((c) => ({ ...c, owned: false }));
-  showcase.science = showcase.science.map((v) => ({
-    ...v,
-    solved: false,
-    position: 0,
-    completedAt: undefined,
-  }));
   return showcase;
 }
 

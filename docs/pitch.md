@@ -1,6 +1,6 @@
 # Brainy — US-first hackathon pitch
 
-A ten-slide outline and a three-minute script. The owner builds the deck. Product evidence: [demo walkthrough](demo.md), [mechanics](product/mechanics.md), [current status](progress/status.md). Demonstrate on a fresh jury family. Use real screenshots; label illustrative charts and accelerated placeholder media.
+A ten-slide outline and a three-minute script. The owner builds the deck. Product evidence: [demo walkthrough](demo.md), [mechanics](product/mechanics.md), [current status](progress/status.md). Demonstrate on a fresh jury family. Use real screenshots; label illustrative charts.
 
 ## Slide outline
 
@@ -43,7 +43,7 @@ Aim for about 18 seconds per slide. Rehearse at roughly 125 words per minute; pa
 “English is the default, with a Russian switch. Resources load from our own domain so the product can be tested with a restricted website allowlist. Motion is brief and respects reduced-motion settings. Physical iPad verification is still a required rehearsal.”
 
 **8 · 2:06–2:24**
-“This is a working presentation MVP, not a claim of validated learning improvement. Saved games, tasks, purchases and activity totals are real. Historical radars and ranking are labelled demo data. Video media is placeholder content, and payments are not implemented.”
+“This is a working presentation MVP, not a claim of validated learning improvement. Saved games, tasks, purchases and activity totals are real. Historical radars and ranking are labelled demo data. Cartoons and science videos are not in this build, and payments are not implemented.”
 
 **9 · 2:24–2:42**
 “Our next step is a small, consented family pilot. We want to learn whether children understand the choices, whether rewards support voluntary return, and whether parents can set up the product easily. We have no traction or clinical results to claim.”

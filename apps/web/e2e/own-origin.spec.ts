@@ -27,14 +27,9 @@ test("every route and its resources stay on our origin", async ({ page, context,
     "/signup",
     "/onboarding/setup",
     "/fun/snake",
-    "/cartoon/volcano",
     "/login",
     "/game/odd-one-out",
     "/game/continue-pattern",
-    "/video/bees",
-    "/video/ocean",
-    "/video/mars",
-    "/video/dinos",
     "/lab",
     "/lab/brainy",
     "/not-found",
@@ -43,7 +38,6 @@ test("every route and its resources stay on our origin", async ({ page, context,
     await expect(page.locator("h1").first()).toBeVisible();
     await page.evaluate(() => document.fonts.ready);
     if (path.startsWith("/game/")) await expect(page.locator("[data-game]")).toBeVisible();
-    if (path.startsWith("/video/")) await expect(page.getByRole("progressbar")).toBeVisible();
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
       path,

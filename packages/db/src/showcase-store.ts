@@ -140,7 +140,7 @@ export async function applyShowcase(db: Database, tokenHash: string, input: unkn
   });
 }
 
-/** Demo only: restore the seeded showcase (tasks, gifts, videos) for a fresh presentation. */
+/** Demo only: restore the seeded showcase (tasks, gifts, leisure) for a fresh presentation. */
 export async function resetShowcase(db: Database, tokenHash: string, now: Date) {
   await writeTransaction(db, async (tx) => {
     const access = await requireAccess(tx, tokenHash, now);

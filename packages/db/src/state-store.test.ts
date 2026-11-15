@@ -181,7 +181,6 @@ it("rolls days and weeks forward once, archives expired tasks and resets the dai
     "expired",
   ]);
   expect(first.showcase.weekGoal).toEqual({ ...before.showcase.weekGoal, earned: 0 });
-  expect(first.showcase.science).toEqual(before.showcase.science);
   expect(first.showcase.owned).toEqual(before.showcase.owned);
   expect(first.showcase.requests).toEqual(before.showcase.requests);
   await setParentUnlock(f.db, f.hash, "1234", monday);

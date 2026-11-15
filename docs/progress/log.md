@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · Sound on by default; placeholder content removed (T-116)
+Branch `minor_features/placeholders_sound` (at the owner's request, despite the master-only convention). Rhythm Copycat and Secret Message Lab start with sound on and unlock audio on the first gesture; Secret Message's previously silent toggle now plays synthesized cues. Removed cartoon/science cards, pages, actions and seed, plus unplayable fun titles (D-33). 171 unit tests, production build, assets/check:games, and 28 targeted Playwright tests (Chromium+WebKit phone, plus the two games' Chromium specs) pass. Found tracked build folders that break repo-wide Biome (T-117).
+
 ## 2026-11-15 · Merge pushed games batch into master (T-112 / T-113)
 Integrated `games@dc84a8b` (four scored imports and two unscored previews), preserved master product behavior and both conflicting ADRs (artifact ADR renumbered D-32). Completed host/catalog localization, Russian feed titles, API/Explore age gates and direct Explore state loading. Production build, checks, 172 unit tests, hashes/assets and 29 report tests pass; learning report regenerated (12 shots, two WebKit videos, 27 checks each). Owner requested immediate build/merge before the full browser matrix finished: 194 passed, six failed, four interrupted, 148 unrun; intermittent WebKit input and one Chromium locator issue remain T-113. Physical rehearsal/freeze stay open. No push, deploy, other-worktree edits or production DB changes.
 

@@ -17,8 +17,6 @@ import type { Ability, Wallet } from "./types";
 
 export const TASKS_PER_DAY = 5;
 export const FUN_PRICES = { timedMinutes: 10 } as const;
-export const VIDEO_QUIZ_STARS = 15;
-export const VIDEO_QUIZ_EYES = 2;
 export const TASK_RESP_GAIN = 2;
 
 export type TaskPlace = "real" | "app";
@@ -62,20 +60,6 @@ export type FunGame = {
   remainingSeconds?: number;
   play?: { id: string; device: string; at: string; sequence: number };
 };
-export type Cartoon = { id: string; title: string; detail: string; price: number; owned: boolean };
-export type ScienceVideo = {
-  id: string;
-  title: string;
-  minutes: number;
-  icon: string;
-  colors: [string, string];
-  question: string;
-  options: string[];
-  answer: number;
-  position: number;
-  solved: boolean;
-  completedAt?: string;
-};
 export type FeedKind =
   | "app-task"
   | "earned"
@@ -86,7 +70,7 @@ export type FeedKind =
   | "gift-bought"
   | "gift-delivered"
   | "accessory"
-  | "video"
+  | "video" // legacy history entries from removed science videos
   | "exchange"
   | "fun";
 /** Parent event feed (ROUTES.md §6): structured, rendered with i18n strings. */
@@ -120,7 +104,7 @@ export type Analytics = {
   };
   skills: { labels: string[]; now: number[]; monthAgo: number[]; average: number[] };
   character: { labels: string[]; now: number[]; monthAgo: number[] };
-  week: { days: string[]; learning: number[]; science: number[]; fun: number[] };
+  week: { days: string[]; learning: number[]; fun: number[] };
   hardThing: { weeks: string[]; share: number[]; finished: number; recommended: number };
   ranking: Record<"district" | "city" | "country", Record<"growth" | "absolute", RankTable>>;
   recap: { month: string; achievements: string[]; referral: string };
@@ -140,8 +124,6 @@ export type Showcase = {
   gifts: Gift[];
   requests: GiftRequest[];
   fun: FunGame[];
-  cartoons: Cartoon[];
-  science: ScienceVideo[];
   ageAverages: Record<Ability, number>;
   entryLog: { took: number; other: number };
   feed: FeedItem[];
@@ -156,9 +138,6 @@ export type ShowcaseAction =
   | { type: "buy-gift"; giftId: string }
   | { type: "task-done"; taskId: string }
   | { type: "unlock-fun"; gameId: string; mode: "timed" | "forever" }
-  | { type: "buy-cartoon"; id: string }
-  | { type: "video-position"; id: string; position: number }
-  | { type: "video-answer"; id: string; answer: number }
   | { type: "entry-choice"; took: boolean }
   // Parent-only actions:
   | { type: "task-confirm"; taskId: string }
@@ -341,31 +320,6 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       addFeed(s, { at, kind: "fun", title: game.title, amount: price });
       return ok({ ...wallet, stars: wallet.stars - price });
     }
-    case "buy-cartoon": {
-      const cartoon = s.cartoons.find((c) => c.id === action.id);
-      if (!cartoon || cartoon.owned) return fail("not-found");
-      if (wallet.stars < cartoon.price) return fail("not-enough-stars");
-      cartoon.owned = true;
-      return ok({ ...wallet, stars: wallet.stars - cartoon.price });
-    }
-    case "video-position": {
-      const video = s.science.find((v) => v.id === action.id);
-      if (!video || !Number.isInteger(action.position) || action.position < 0)
-        return fail("invalid-input");
-      video.position = Math.min(action.position, video.minutes);
-      return ok();
-    }
-    case "video-answer": {
-      const video = s.science.find((v) => v.id === action.id);
-      if (!video || video.position < video.minutes) return fail("not-finished");
-      if (action.answer !== video.answer) return fail("wrong-answer");
-      if (video.solved) return ok();
-      video.solved = true;
-      video.completedAt = at;
-      video.position = 0;
-      addFeed(s, { at, kind: "video", title: video.title, amount: VIDEO_QUIZ_STARS });
-      return ok({ ...wallet, stars: wallet.stars + VIDEO_QUIZ_STARS }, { eyes: VIDEO_QUIZ_EYES });
-    }
     case "entry-choice":
       if (action.took) s.entryLog.took += 1;
       else s.entryLog.other += 1;
@@ -390,9 +344,6 @@ const ACTION_TYPES = new Set([
   "buy-gift",
   "task-done",
   "unlock-fun",
-  "buy-cartoon",
-  "video-position",
-  "video-answer",
   "entry-choice",
   ...PARENT_ACTIONS,
 ]);

@@ -25,7 +25,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 | 2 | Post-game before → after, two next steps, stop; 3-game break + bonus | ✅ (T-35, T-94) |
 | 3 | Stats/stage update for child **and parent** without reload | ✅ polling on both (T-55; e2e two-device check) |
 | 4 | Accessories buy/wear/remove, shown everywhere | ✅ (T-38) |
-| 5 | Science video: pause only, resume, ★ only after correct answer | ✅ demo player, no real media (T-37, T-84) |
+| 5 | Science video: pause only, resume, ★ only after correct answer | ⏳ placeholder player removed until real media exists (D-33) |
 | 6 | Task «Готово» → parent confirms → ☀ + weekly goal + `resp` | ✅ (T-44) |
 | 7 | Gifts ☀ only; exchange ☀ → ★ 1:10 | ✅ (T-38, T-46) |
 | 8 | 5-tasks-a-day limit | ✅ (T-26/T-44) |
@@ -71,8 +71,8 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-33 Game: Odd one out (2 levels × 4 rounds, seeded), tested at `/lab` and in the child flow
 - [x] T-34 Game: Continue the pattern (2 levels × 4 seeded rounds); both games share `kit/Shape`
 - [x] T-35 Post-game screen: before → after, stat chip, "Что дальше?", stop, third-game break +5★; now uses [saved learning state](../dev/ui.md#saved-learning-state-t-55)
-- [x] T-36 Leisure tab: shop (10 min / forever), cartoons, science videos (fun games/cartoons have no content yet)
-- [x] T-37 Science video player `/video/[id]` (pause only, resume, quiz; animated placeholder, no media)
+- [x] T-36 Leisure tab: shop (10 min / forever); placeholder cartoons/science/unplayable fun titles removed (T-116, D-33)
+- [x] T-37 Science video player `/video/[id]` (removed with its placeholder content in T-116)
 - [x] T-38 Gifts tab + Brainy tab (accessory shop, stats, earned rewards)
 
 ## P4 · Parent flow · [screens.md#parent](../product/screens.md#parent)
@@ -157,4 +157,6 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [ ] T-113 Finish serial WebKit input stabilization and complete browser verification after master integration: Tangram acceptance, Rhythm Copycat, Secret Message Lab, Mirror Grid; Neighborhood and Magnet previews.
 - [ ] T-114 Remaining external game waves; see external-games.md.
 
-- [ ] T-115 Translate imported scored-game instructions and controls into English while retaining Russian; host/catalog localization is complete in T-112.
+- [ ] T-115 Translate imported scored-game instructions and controls into English while retaining Russian; host/catalog localization is complete in T-112. Includes the Rhythm/Secret Message «Звук: вкл/выкл» session toggles.
+- [x] T-116 Sound on by default in Rhythm Copycat and Secret Message Lab (Secret Message gained synthesized cues); removed placeholder cartoons, science videos, their routes/actions and unplayable fun titles (D-33).
+- [ ] T-117 Untrack the committed build outputs `apps/web/.next-combined/` and `apps/web/.next-films/` (gitignore them): repo-wide `biome check .`/`pnpm format` scan and rewrite them, so `pnpm check` fails.

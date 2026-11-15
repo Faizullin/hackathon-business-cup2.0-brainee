@@ -1,52 +1,30 @@
 "use client";
 
 import { funMinutesLeft } from "@brainee/core";
-import {
-  Bone,
-  Clapperboard,
-  Crosshair,
-  Drum,
-  Fish,
-  Flower2,
-  Headphones,
-  Orbit,
-  Play,
-  Rocket,
-  Route,
-  Worm,
-} from "@brainee/ui/components/icons";
+import { Play, Worm } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import {
-  Chip,
-  Notice,
-  outlineButton,
-  Panel,
-  primaryButton,
-  smallButton,
-  useAct,
-} from "@/components/demo/kit";
+import { Chip, Notice, outlineButton, Panel, primaryButton, useAct } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";
 
-const FUN_ICONS = { snake: Worm, rocket: Rocket, drum: Drum, target: Crosshair, maze: Route };
-export const SCIENCE_ICONS = { wave: Fish, bee: Flower2, planet: Orbit, dino: Bone };
+const FUN_ICONS = { snake: Worm };
+/** Only fun games with a real player are listed; catalog entries without content stay hidden. */
+const PLAYABLE_FUN = new Set(["snake"]);
 
-// Leisure tab (T-36): fun-game shop for ★, cartoons for ★, free science videos.
+// Leisure tab (T-36): shop of playable fun games for ★.
 export function LeisureScreen() {
   const { snapshot } = useLearning();
   const { run, busy, notice } = useAct();
   const { t: i18n } = useI18n();
   const t = i18n.child.leisure;
   const [now, setNow] = useState(() => new Date());
-  const [soon, setSoon] = useState<string | null>(null);
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 15_000);
     return () => clearInterval(timer);
   }, []);
   if (!snapshot) return null;
-  const { fun, cartoons, science } = snapshot.showcase;
+  const fun = snapshot.showcase.fun.filter((game) => PLAYABLE_FUN.has(game.id));
   const stars = snapshot.progress.wallet.stars;
   return (
     <>
@@ -76,11 +54,7 @@ export function LeisureScreen() {
                     <button
                       type="button"
                       className={cn(primaryButton, "ml-auto")}
-                      onClick={() =>
-                        game.id === "snake"
-                          ? window.location.assign(`/fun/${game.id}`)
-                          : setSoon(game.id)
-                      }
+                      onClick={() => window.location.assign(`/fun/${game.id}`)}
                     >
                       {t.play}
                     </button>
@@ -108,11 +82,6 @@ export function LeisureScreen() {
                         </button>
                       </>
                     )}
-                    {soon === game.id && (
-                      <p role="status" className="w-full text-muted-foreground text-xs">
-                        {t.soon}
-                      </p>
-                    )}
                   </div>
                 ) : (
                   <div className="flex flex-wrap gap-2">
@@ -134,73 +103,6 @@ export function LeisureScreen() {
                     </button>
                   </div>
                 )}
-              </li>
-            );
-          })}
-        </ul>
-      </Panel>
-      <Panel title={t.cartoons} note={t.noNext}>
-        <ul className="grid gap-3 sm:grid-cols-3">
-          {cartoons.map((cartoon) => (
-            <li
-              key={cartoon.id}
-              className="flex flex-col gap-2 rounded-xl border border-border p-3"
-            >
-              <span className="grid aspect-video place-items-center rounded-lg bg-coral/15">
-                {/^(Audio|Аудио)/.test(cartoon.detail) ? (
-                  <Headphones aria-hidden="true" className="size-8 text-coral" />
-                ) : (
-                  <Clapperboard aria-hidden="true" className="size-8 text-coral" />
-                )}
-              </span>
-              <span className="font-semibold">{cartoon.title}</span>
-              <span className="text-muted-foreground text-xs">{cartoon.detail}</span>
-              {cartoon.owned ? (
-                <Link href={`/cartoon/${cartoon.id}`} className={primaryButton}>
-                  {t.watch}
-                </Link>
-              ) : (
-                <button
-                  type="button"
-                  disabled={busy || stars < cartoon.price}
-                  className={outlineButton}
-                  onClick={() => run({ type: "buy-cartoon", id: cartoon.id })}
-                >
-                  {t.buy(cartoon.price)}
-                </button>
-              )}
-            </li>
-          ))}
-        </ul>
-      </Panel>
-      <Panel title={t.science} note={t.scienceNote}>
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {science.map((video) => {
-            const Icon = SCIENCE_ICONS[video.icon as keyof typeof SCIENCE_ICONS] ?? Play;
-            return (
-              <li key={video.id}>
-                <Link
-                  href={`/video/${video.id}`}
-                  className="flex items-center gap-3 rounded-xl p-3 text-white transition-transform duration-(--dur-press) active:scale-[0.98]"
-                  style={{
-                    background: `linear-gradient(135deg, ${video.colors[0]}, ${video.colors[1]})`,
-                  }}
-                >
-                  <Icon aria-hidden="true" className="size-10 shrink-0" />
-                  <span className="min-w-0 flex-1">
-                    <span className="block font-semibold">{video.title}</span>
-                    <span className="text-sm opacity-90">
-                      {video.solved
-                        ? t.solved
-                        : video.position > 0
-                          ? t.resume(video.position)
-                          : t.minutes(video.minutes)}
-                    </span>
-                  </span>
-                  <span className={cn(smallButton, "bg-white/20")}>
-                    <Play aria-hidden="true" className="size-4" />
-                  </span>
-                </Link>
               </li>
             );
           })}

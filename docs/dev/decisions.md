@@ -6,6 +6,11 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 
 ---
 
+## D-33 · Ship only content that exists · 2026-11-15 · accepted · narrows D-21/D-29
+**Context:** Leisure showed cartoons, science videos and four fun titles with no real media or player; they read as unfinished in the presentation.
+**Decision:** list only playable content. Remove the cartoon and science-video cards, the `/cartoon/[id]` and `/video/[id]` pages, their showcase fields and core actions (`buy-cartoon`, `video-*`), and the seeded non-Snake fun titles. The Leisure UI also filters fun games to those with a player, so older saved showcases stay clean. The «video» feed kind stays only to render existing history.
+**Consequences:** stars come from learning games and in-app tasks only; Leisure is the Snake shop. Weekly analytics drop the science series. Bring media back as a new decision with real, own-origin files.
+
 ## D-32 · Pinned path-C artifacts and per-game session adapters · 2026-11-14 · accepted · extends D-16, D-28
 **Context:** the 30-game handoff pins external games with different controls, progress stores and completion semantics; a launcher smoke test alone cannot validate Brainee rewards.
 **Decision:** keep selected original static files and LICENSE under `games/<id>/artifact/`, with repository commit, original paths, Git blob SHA-1 and SHA-256 in `sources.lock.json`. Check hashes in `pnpm check`; normal builds fetch nothing. A reviewed build transform creates the local served copy and adds the game-specific protocol-2 session adapter. The first adapter is Tangram's guided DOM engine: four completed silhouettes, Check-based mistakes, one correction per previously mistaken silhouette, native select/place and automatic orientation. Remove free/debug/audio/storage paths from served code. Other engines require their own reviewed adapters; do not infer round completion from page loads or generic button clicks.

@@ -17,27 +17,27 @@ Source: [ROUTES.md](../ideas/ROUTES.md) and the clickable prototype `docs/ideas/
 | `/auth/signup`, `/onboarding/*` | `/signup` (neutral), `/onboarding` (quiz), then `/onboarding/setup` |
 | Jury preview | `/jury` after demo-only `POST /api/jury` |
 | `/child/start`, `/child/learn`, `/child/play/:id` | `/entry`, `/learn`, `/game/[id]` |
-| `/child/leisure`, `/child/watch/:id` | `/leisure`, `/video/[id]` |
+| `/child/leisure`, `/child/watch/:id` | `/leisure`; watch route ⏳ later (no media, D-33) |
 | `/child/fun/:id` | `/fun/snake` (playable React game) |
-| Bought cartoon | `/cartoon/[id]` (explicit-play placeholder) |
+| Bought cartoon | ⏳ later (no media, D-33) |
 | `/child/gifts`, `/child/brainy` | `/gifts`, `/brainy` |
 | `/parent`, `/parent/tasks`, `/parent/rewards` | `/analytics`, `/tasks`, `/rewards` |
 | `/parent/settings` | `/settings` (fourth parent tab) |
 
 ## Rules adopted (ROUTES.md §7, §12)
-- ✅ Stars +3/+4, 3-game bonus +5, video +15 ★ and eyes +2 once, exchange 1 ☀ → 10 ★, 5 tasks/day, task confirm → ☀ + week goal + resp +2.
+- ✅ Stars +3/+4, 3-game bonus +5, exchange 1 ☀ → 10 ★, 5 tasks/day, task confirm → ☀ + week goal + resp +2.
 - ✅ Mood −5 per idle day, floor 30 (computed on read, `moodNow`).
 - ✅ Parent may cancel only assigned (`todo`) tasks; cancellation deletes the task without changing wallet, goal or stats. Pending confirmations and completed tasks stay protected.
 - ✅ Stage never drops (stats only grow).
 - ✅ Leaving mid-game pays nothing (no finish without all rounds).
 - ✅ Daily bonus shared across devices, local-midnight task/streak reset and Monday goal-progress reset; read-only parent task history → [calendar resets](mechanics.md#calendar-resets).
-- ✅ Saved active-play credit for Snake, repeat ten-minute top-ups, forever unlock; cartoon starts at zero.
+- ✅ Saved active-play credit for Snake, repeat ten-minute top-ups, forever unlock.
 - ✅ App tasks auto-complete on learning finish; earned rewards show progress, celebrate and enter the parent feed.
 
 ## Parent dashboard additions
 - ✅ «Требует внимания» (tasks to confirm, gifts to deliver, empty day) and an 8-item event feed (`showcase.feed`, D-25).
 - ✅ Tab badges: child Gifts counts assigned real-life tasks; parent Tasks counts pending confirmations and Rewards counts undelivered requests. Counts poll with shared state and are hidden while parent access is locked.
-- ✅ Learning/science minutes, streak, weekly suns, advice rate and recommended start/finish counts use saved activity. Historical/character radars and ranking stay labelled demo. Fun minutes are not yet included in analytics.
+- ✅ Learning minutes, streak, weekly suns, advice rate and recommended start/finish counts use saved activity. Historical/character radars and ranking stay labelled demo. Fun minutes are not yet included in analytics.
 
 ## Not adopted
 SSE stream and Web Push (polling, D-15), subscription/payment, Google Fonts/cdnjs from the prototype.

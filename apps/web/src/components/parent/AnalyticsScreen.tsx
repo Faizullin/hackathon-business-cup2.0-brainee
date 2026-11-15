@@ -41,7 +41,6 @@ export function AnalyticsScreen() {
         week: {
           ...seeded.week,
           learning: live.learning,
-          science: live.science,
           fun: [0, 0, 0, 0, 0, 0, 0],
         },
         hardThing: {
@@ -225,7 +224,6 @@ export function AnalyticsScreen() {
             categories={a.week.days}
             stacks={[
               { values: a.week.learning, color: "coral" },
-              { values: a.week.science, color: "mint" },
               { values: a.week.fun, color: "sun" },
             ]}
             max={100}
@@ -233,7 +231,6 @@ export function AnalyticsScreen() {
           <Legend
             items={[
               { label: t.learning, color: "coral" },
-              { label: t.science, color: "mint" },
               { label: t.fun, color: "sun" },
             ]}
           />

@@ -38,12 +38,12 @@ apps/web/
 ├─ src/app/
 │  ├─ layout.tsx, page.tsx    # Fonts/providers only; / redirects to /learn
 │  ├─ (child)/layout.tsx      # Child shell: content + persistent 4-tab bottom bar (T-30)
-│  ├─ (child)/(docked)/       # Brainy dock layout: learn (advice + grid), leisure (shop/cartoons/science), gifts (goal/shop/tasks/exchange)
+│  ├─ (child)/(docked)/       # Brainy dock layout: learn (advice + grid), leisure (playable fun-game shop), gifts (goal/shop/tasks/exchange)
 │  ├─ (child)/brainy/         # Brainy tab (no dock): big Brainy, stage path, stats, accessory shop, rewards
 │  ├─ (parent)/               # PIN barrier + tabs: analytics (seeded charts), tasks, rewards (D-21)
 │  ├─ (auth)/login/           # Welcome page; sessions, quiz and onboarding planned
 │  ├─ (game)/game/[id]/       # Fullscreen play (no dock/tab bar); `?level=&seed=`
-│  ├─ (game)/entry, video/[id] # Entry screen «Во что играем сейчас?» (`/` redirects here); science video player
+│  ├─ (game)/entry            # Entry screen «Во что играем сейчас?» (`/` redirects here)
 │  ├─ lab/, lab/brainy/       # Dev-only game lab + event stream; Brainy presets (T-16, T-20)
 │  └─ api/                   # Demo access, game start/finish/stop, /api/state, /api/actions, /api/parent, /api/demo-reset
 ├─ public/media/             # Planned: own-domain media

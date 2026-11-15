@@ -52,21 +52,6 @@ const base: Showcase = {
       until: null,
     },
   ],
-  cartoons: [],
-  science: [
-    {
-      id: "v",
-      title: "Океан",
-      minutes: 24,
-      icon: "wave",
-      colors: ["#000", "#111"],
-      question: "?",
-      options: ["a", "b", "c"],
-      answer: 0,
-      position: 0,
-      solved: false,
-    },
-  ],
   ageAverages: { speech: 50, reading: 50, logic: 50, attention: 50, memory: 50, motor: 50 },
   entryLog: { took: 0, other: 0 },
   feed: [],
@@ -127,27 +112,6 @@ describe("showcase actions", () => {
       showcase: { equipped: { head: "cap" } },
     });
     expect(applyShowcaseAction(input(), { type: "equip", id: "cap" }).ok).toBe(false);
-  });
-
-  it("video stars only after the end and a correct answer, once", () => {
-    expect(applyShowcaseAction(input(), { type: "video-answer", id: "v", answer: 0 }).ok).toBe(
-      false,
-    );
-    const watched = applyShowcaseAction(input(), { type: "video-position", id: "v", position: 99 });
-    if (!watched.ok) throw new Error();
-    expect(watched.showcase.science[0]?.position).toBe(24);
-    expect(
-      applyShowcaseAction(input(watched.showcase), { type: "video-answer", id: "v", answer: 1 }),
-    ).toEqual({
-      ok: false,
-      reason: "wrong-answer",
-    });
-    const right = applyShowcaseAction(input(watched.showcase), {
-      type: "video-answer",
-      id: "v",
-      answer: 0,
-    });
-    expect(right).toMatchObject({ ok: true, wallet: { stars: 115 }, gains: { eyes: 2 } });
   });
 
   it("timed fun unlock lasts ten minutes", () => {

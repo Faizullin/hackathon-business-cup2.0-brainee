@@ -35,18 +35,12 @@ export function activitySummary(
     streak++;
     cursor -= DAY;
   }
-  const learning = Array<number>(7).fill(0),
-    science = Array<number>(7).fill(0);
+  const learning = Array<number>(7).fill(0);
   const index = (at: number) =>
     Math.round((Date.parse(calendarKeys(new Date(at), zone).day) - Date.parse(week)) / DAY);
   for (const s of completed) {
     const i = index(s.finishedAt as number);
     if (i >= 0 && i < 7) learning[i] = (learning[i] ?? 0) + (s.durationMs ?? 0) / 60000;
-  }
-  for (const v of showcase.science) {
-    if (!v.completedAt) continue;
-    const i = index(Date.parse(v.completedAt));
-    if (i >= 0 && i < 7) science[i] = (science[i] ?? 0) + v.minutes;
   }
   const recommended = sessions.filter((s) => s.recommended);
   const lastRecommended = [...recommended]
@@ -55,7 +49,6 @@ export function activitySummary(
   const entries = showcase.entryLog.took + showcase.entryLog.other;
   return {
     learning,
-    science,
     streakDays: streak,
     completed: completed.length,
     focusMinutes: completed.length

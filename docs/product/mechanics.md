@@ -81,7 +81,7 @@ Worse habits make a sleepier starting Brainy. Prototype start: brain 18, eyes 16
 How games move these numbers: [data-model.md](data-model.md#how-stats-change).
 
 ## Leisure play credit
-Ten-minute purchases add 600 seconds of saved credit. Only active foreground Snake play consumes credit; pause, background and closed screens do not. Forever ownership removes the time limit. Server checks and persistence are described in D-29. Cartoon placeholders start from the beginning on every visit and require an explicit play action.
+Ten-minute purchases add 600 seconds of saved credit. Only active foreground Snake play consumes credit; pause, background and closed screens do not. Forever ownership removes the time limit. Server checks and persistence are described in D-29. Cartoons and science videos are not built yet (D-33).
 
 ## Live activity
-Completed sessions provide learning minutes by family-local day, current learning streak and recommendation completion counts. Science completions contribute their catalog duration once. Entry choices provide the advice rate; current weekly goals provide suns versus target. Radar history, character radar and ranking remain labelled demo data. A learning finish completes all assigned in-app tasks and grants their stars once; real-life tasks still need parent confirmation.
+Completed sessions provide learning minutes by family-local day, current learning streak and recommendation completion counts. Entry choices provide the advice rate; current weekly goals provide suns versus target. Radar history, character radar and ranking remain labelled demo data. A learning finish completes all assigned in-app tasks and grants their stars once; real-life tasks still need parent confirmation.

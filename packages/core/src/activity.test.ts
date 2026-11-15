@@ -14,7 +14,6 @@ const now = new Date("2026-11-16T12:00:00Z");
 const showcase = {
   calendar: { timeZone: "America/New_York" },
   entryLog: { took: 3, other: 1 },
-  science: [],
   tasks: [],
   earned: [],
   feed: [],
@@ -28,13 +27,9 @@ const session = (i: number, finished = true, recommended = true): ActivitySessio
   recommended,
 });
 it("uses local Monday, actual durations, advice entries and a current day streak", () => {
-  const data = {
-    ...showcase,
-    science: [{ minutes: 20, completedAt: now.toISOString() }],
-  } as Showcase;
+  const data = showcase;
   const a = activitySummary([session(0), session(1), session(2)], data, now);
   expect(a.learning).toEqual([2, 0, 0, 0, 0, 0, 0]);
-  expect(a.science).toEqual([20, 0, 0, 0, 0, 0, 0]);
   expect(a.streakDays).toBe(3);
   expect(a.takesRecommendation).toBe(75);
   expect(a.focusMinutes).toBe(2);

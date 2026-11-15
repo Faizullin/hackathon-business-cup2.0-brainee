@@ -25,7 +25,7 @@ On the parent phone create a jury family, open Settings and generate a child pai
 | 5 | Open Brainy; buy and wear an accessory | Observe Brainy | The worn item follows the mascot |
 | 6 | Buy Snake time in Leisure; play, pause and reopen | Observe saved balance | Purchased minutes count only during play; another purchase adds time |
 
-Science placeholders resume position and pay ★ only after the correct answer. Bought cartoons require Play and restart from zero on each visit, with no watch-next. Snake is playable; other fun titles remain catalog previews. Real media is deferred. For the shared seeded family, login is `mom@example.com` / `demo1234`, PIN `1234`; its existing backpack/badge are valid, and a game today completes the garden streak.
+Leisure lists only playable content: Snake. Placeholder cartoons, science videos and unplayable fun titles were removed (D-33). For the shared seeded family, login is `mom@example.com` / `demo1234`, PIN `1234`; its existing backpack/badge are valid, and a game today completes the garden streak.
 
 ## Rehearsal checklist
 
@@ -48,9 +48,9 @@ Science placeholders resume position and pay ★ only after the correct answer. 
 | Gift currency and one-way exchange | Core showcase/economy tests; saved exchange UI check; gift requests appear in the MVP recording |
 | Five-task limit | Core showcase test enforces the boundary; parent form reflects the limit |
 | Child has no rankings | Route loop in `mvp-pages.spec.ts`, including after PIN access; parent seeded ranking uses initials |
-| Own-domain resources | `own-origin.spec.ts` covers all page routes, both games, all four videos, lab and install assets; physical Screen Time verification remains T-62 |
+| Own-domain resources | `own-origin.spec.ts` covers all page routes, both games, lab and install assets; physical Screen Time verification remains T-62 |
 
-Visual review covers phone and landscape iPad layouts, readable labels, overflow, native controls and the existing reduced-motion checks. This is presentation acceptance, with the catalog, placeholder-media and physical-device boundaries above; it is not a production accessibility or privacy certification.
+Visual review covers phone and landscape iPad layouts, readable labels, overflow, native controls and the existing reduced-motion checks. This is presentation acceptance, with the catalog and physical-device boundaries above; it is not a production accessibility or privacy certification.
 
 ## Physical iPad rehearsal (T-62 / T-84 — owner checklist)
 Use **https://brainee.vercel.app** on an iPad in landscape as the child and a phone as the parent. Use the same canonical domain on both devices; cookies on the alternate deployment hostname are separate.
