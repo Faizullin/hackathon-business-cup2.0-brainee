@@ -601,7 +601,7 @@ export const en = {
         resp: "Responsibility",
       },
       accessories: "Accessories",
-      slots: { head: "Head", face: "Face", neck: "Neck" },
+      slots: { head: "Head", face: "Face", neck: "Neck", back: "Back" },
       none: "No accessory",
     },
   },
@@ -619,6 +619,7 @@ export const en = {
     glasses: "Glasses",
     bowtie: "Bowtie",
     scarf: "Scarf",
+    cape: "Hero Cape",
   },
   notFound: {
     title: "Page not found",

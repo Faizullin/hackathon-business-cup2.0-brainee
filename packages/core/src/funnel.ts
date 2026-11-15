@@ -1,9 +1,8 @@
-// Ported from the local Brainy Funnel Export. Pure rules; no storage, network or rewards.
+// Saved family-plan rules (single-choice answer shape). The sales quiz adapts into it: funnel-quiz.ts.
 import {
   ATTEMPT,
   ageNotes,
   bookNotes,
-  contentInsight,
   cues,
   FUNNEL_QUESTIONS,
   familyTaskTitles,
@@ -16,15 +15,11 @@ import {
   MOMENT,
   moments,
   previousCue,
-  profileReasons,
-  profiles,
   timeNotes,
-  weekCopy,
-  weekEstimates,
 } from "./funnel-copy";
 import type { QuizAnswers } from "./onboarding";
 
-export { ATTEMPT, coverAngles, FUNNEL_QUESTIONS, MOMENT, previousCue } from "./funnel-copy";
+export { ATTEMPT, FUNNEL_QUESTIONS, MOMENT, previousCue } from "./funnel-copy";
 
 export type FunnelQuestionId =
   | "goal"
@@ -46,36 +41,6 @@ export interface FunnelQuestion {
   options: { value: string; label: string }[];
 }
 
-export const STORAGE_KEY = "brainy.us-parent-quiz.v2";
-export const VERSION = 4;
-
-export const ROUTE = [
-  "cover",
-  "welcome",
-  "growth",
-  "feed",
-  "match",
-  "reward",
-  "personalize",
-  "goal",
-  "age",
-  "handoff",
-  "content",
-  "finish",
-  "reading",
-  "pause",
-  "duration",
-  "profile",
-  "week",
-  "attempt",
-  "method",
-  "parent",
-  "example",
-  "benefits",
-  "moment",
-  "result",
-  "offer",
-];
 export const question = (id: string) =>
   id === MOMENT.id
     ? MOMENT
@@ -86,110 +51,6 @@ export const choiceLabel = (id: string, val: unknown) =>
   id === "attempt" && val === "unspecified"
     ? funnelCopy.notPreviouslyAsked
     : question(id)?.options.find((o) => o.value === val)?.label;
-export const complete = (answers: FunnelDraft) =>
-  FUNNEL_QUESTIONS.every((q) => choiceLabel(q.id, answers?.[q.id])) && answers.age !== "outside";
-export function reachable(target: string, answers: FunnelDraft) {
-  if (answers.age === "outside" && ["outside", "age"].includes(target)) return target;
-  if (!ROUTE.includes(target)) return "cover";
-  for (const step of ROUTE.slice(0, ROUTE.indexOf(target))) {
-    if (step === "age" && answers.age === "outside") return "outside";
-    if (question(step) && !choiceLabel(step, answers[step as FunnelQuestionId])) return step;
-  }
-  return target;
-}
-export function entryFor(answers: FunnelDraft, bookmark?: string) {
-  if (answers.age === "outside") return "age";
-  if (
-    complete(answers) &&
-    choiceLabel("moment", answers.moment) &&
-    choiceLabel("attempt", answers.attempt)
-  )
-    return "result";
-  if (bookmark && ROUTE.includes(bookmark) && bookmark !== "cover")
-    return reachable(bookmark, answers);
-  return (
-    ROUTE.find((step) => question(step) && !choiceLabel(step, answers[step as FunnelQuestionId])) ||
-    "welcome"
-  );
-}
-export function restoreFunnel(raw: string | null) {
-  const blank = { screen: "cover", answers: {}, resumeAt: "welcome" };
-  try {
-    const state = JSON.parse(raw ?? "null");
-    if (
-      ![2, 3, VERSION].includes(state?.version) ||
-      !state.answers ||
-      typeof state.answers !== "object" ||
-      Array.isArray(state.answers)
-    )
-      return blank;
-    const answers: FunnelDraft = {};
-    for (const q of [...FUNNEL_QUESTIONS, ATTEMPT, MOMENT]) {
-      if (choiceLabel(q.id, state.answers[q.id])) answers[q.id] = state.answers[q.id];
-    }
-    const bookmark = state.screen === "cover" ? state.resumeAt : state.screen;
-    if (state.version < 4) {
-      if (
-        complete(answers) &&
-        (answers.moment ||
-          (state.version === 2 && ["offer", "method", "result"].includes(bookmark)))
-      ) {
-        answers.moment ||= "flex";
-        answers.attempt = "unspecified";
-      }
-      if (!complete(answers)) {
-        const firstMissing = ROUTE.find(
-          (step) => question(step) && !choiceLabel(step, answers[step as FunnelQuestionId]),
-        );
-        return {
-          screen: reachable(typeof state.screen === "string" ? state.screen : "cover", answers),
-          answers,
-          resumeAt: answers.age === "outside" ? "age" : firstMissing || "welcome",
-        };
-      }
-    }
-    const screen = reachable(typeof state.screen === "string" ? state.screen : "cover", answers);
-    return { screen, answers, resumeAt: entryFor(answers, bookmark) };
-  } catch {
-    return blank;
-  }
-}
-
-export function pauseFor(answers: FunnelDraft) {
-  const [title, body] = contentInsight[answers.content ?? "other"] ??
-    contentInsight.other ?? ["", ""];
-  return { title, body };
-}
-
-export function profileFor(answers: FunnelDraft) {
-  if (!isFunnelBaseAnswers(answers)) return null;
-  const { handoff, finish, content } = answers;
-  if (content === "none" || answers.duration === "none") return { ...profiles.occasional };
-  if (handoff === "hard" || handoff === "bargain")
-    return {
-      title: profiles.lastTurn.title,
-      why: handoff === "hard" ? profileReasons.hard : profileReasons.bargain,
-      lever: profiles.lastTurn.lever,
-    };
-  if (finish === "switch") return { ...profiles.smallFinish };
-  if (handoff === "easy" || handoff === "reminder")
-    return {
-      title: profiles.familiar.title,
-      why: handoff === "easy" ? profileReasons.easy : profileReasons.reminder,
-      lever: profiles.familiar.lever,
-    };
-  return { ...profiles.together };
-}
-
-export function weekFor(duration: string) {
-  if (weekEstimates[duration])
-    return {
-      title: weekEstimates[duration],
-      body: weekCopy.estimateBody,
-    };
-  return duration === "none" ? { ...weekCopy.none } : { ...weekCopy.varies };
-}
-
 export function planFor(answers: FunnelDraft) {
   if (!isFunnelBaseAnswers(answers)) return null;
   const goal = goals[answers.goal];
@@ -243,11 +104,6 @@ export function planText(answers: FunnelDraft) {
     "",
     ...plan.steps.map((s, i) => funnelCopy.planStep(i + 1, s.label, s.title, s.body)),
   ].join("\n");
-}
-
-/** Billing is deliberately pending. No configuration can enable checkout. */
-export function commercialPlans(_config?: unknown): readonly never[] {
-  return [];
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -315,7 +171,3 @@ export function familyTaskTemplate(answers: FunnelDraft) {
     place: "real" as const,
   };
 }
-
-/** A preview question, with no session or reward side effects. */
-export const FUNNEL_SHAPES = ["circle", "diamond", "triangle"] as const;
-export const isFunnelMatch = (shape: string) => shape === "diamond";

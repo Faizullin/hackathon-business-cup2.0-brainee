@@ -5,6 +5,7 @@ import { Brainy } from "@/components/Brainy";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
 import { RecommendationCards, useRecommendations } from "@/components/child/Recommendations";
+import { StarterUnlock } from "@/components/child/StarterUnlock";
 import { useI18n } from "@/i18n";
 
 // T-31: shown on every entry into child mode. No close button or swipe; the choice is logged.
@@ -13,10 +14,14 @@ function Entry() {
   const recs = useRecommendations();
   const { t } = useI18n();
   if (!snapshot) return null;
+  const pack = snapshot.showcase.starterPack === "pending";
   const te = t.child.entry;
   const first = recs[0];
   return (
     <section className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-5 p-4 sm:p-8 lg:max-w-5xl">
+      {pack && (
+        <StarterUnlock snapshot={snapshot} onSeen={() => void act({ type: "starter-seen" })} />
+      )}
       <h1 className="text-center">{te.title}</h1>
       <div className="flex items-center gap-4 rounded-stage bg-[#1c1b33] p-5 text-white shadow-xl shadow-[#1c1b33]/15">
         <Brainy

@@ -1,5 +1,12 @@
 "use client";
-import { ABILITY_BODY, ACCESSORIES, BODY_STATS, learningPracticeGame } from "@brainee/core";
+import {
+  ABILITY_BODY,
+  ACCESSORIES,
+  BODY_STATS,
+  isExclusive,
+  learningPracticeGame,
+  SHOP_ACCESSORIES,
+} from "@brainee/core";
 import { allGames } from "@brainee/games";
 import { cn } from "@brainee/ui/lib/utils";
 import Link from "next/link";
@@ -18,6 +25,7 @@ export function BrainyProfile() {
   if (!snapshot) return null;
   const { stats } = snapshot.progress;
   const { equipped, owned } = snapshot.showcase;
+  const wardrobe = ACCESSORIES.filter((a) => isExclusive(a.id) && owned.includes(a.id));
   const t = i18n.child.brainyPage;
   const suggestion = learningPracticeGame(
     stats,
@@ -65,7 +73,7 @@ export function BrainyProfile() {
         <Panel title={t.shop} note={`★ ${snapshot.progress.wallet.stars}`}>
           <Notice notice={notice} />
           <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {ACCESSORIES.map((item) => {
+            {SHOP_ACCESSORIES.map((item) => {
               const has = owned.includes(item.id);
               const worn = equipped[item.slot] === item.id;
               return (
@@ -115,6 +123,55 @@ export function BrainyProfile() {
               );
             })}
           </ul>
+          {wardrobe.length > 0 && (
+            <ul
+              className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3"
+              data-testid="wardrobe-exclusive"
+            >
+              {wardrobe.map((item) => {
+                const worn = equipped[item.slot] === item.id;
+                return (
+                  <li
+                    key={item.id}
+                    className={cn(
+                      "flex flex-col items-center gap-2 rounded-panel bg-card p-3 text-center ring-1 ring-border",
+                      worn && "bg-violet-wash ring-2 ring-mint",
+                    )}
+                  >
+                    <span className="rounded-full bg-gradient-to-br from-[#ffd35a] to-[#ffae1a] px-3 py-0.5 font-extrabold text-[#1c1b33] text-xs uppercase tracking-wide">
+                      Exclusive · Starter Pack
+                    </span>
+                    <Brainy
+                      stats={stats}
+                      equipped={{ ...equipped, [item.slot]: item.id }}
+                      label=""
+                      className="h-24 w-auto"
+                    />
+                    <span className="font-semibold text-sm">{i18n.accessories[item.id]}</span>
+                    {worn ? (
+                      <button
+                        type="button"
+                        disabled={busy}
+                        className={outlineButton}
+                        onClick={() => run({ type: "unequip", slot: item.slot })}
+                      >
+                        {t.remove}
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        disabled={busy}
+                        className={outlineButton}
+                        onClick={() => run({ type: "equip", id: item.id })}
+                      >
+                        {t.wear}
+                      </button>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </Panel>
       </div>
     </div>

@@ -1,5 +1,12 @@
 "use client";
-import { type FunnelAnswers, funnelBirthYears, isFunnelAnswers, TIME_ZONES } from "@brainee/core";
+import {
+  type FunnelAnswers,
+  funnelBirthYears,
+  isFunnelAnswers,
+  reachable,
+  TIME_ZONES,
+  toFamilyPlan,
+} from "@brainee/core";
 import { useEffect, useState } from "react";
 import { Panel, primaryButton } from "@/components/demo/kit";
 import { funnelCopy as c } from "@/components/funnel/copy";
@@ -17,7 +24,8 @@ export default function Signup() {
   const [funnel, setFunnel] = useState<FunnelAnswers | null>(null);
   useEffect(() => {
     const saved = loadFunnel();
-    if (isFunnelAnswers(saved.answers)) setFunnel(saved.answers);
+    const plan = toFamilyPlan(saved.draft);
+    if (reachable("analyze", saved.draft) === "analyze" && isFunnelAnswers(plan)) setFunnel(plan);
     else window.location.replace(`/start${window.location.search}`);
   }, []);
   const years = funnel ? funnelBirthYears(funnel.age, new Date().getUTCFullYear()) : null;

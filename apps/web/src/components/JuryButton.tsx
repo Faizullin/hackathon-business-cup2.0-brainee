@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { primaryButton } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
+import { enterJury } from "@/lib/jury";
 
 export function JuryButton() {
   const { t } = useI18n();
@@ -17,13 +18,7 @@ export function JuryButton() {
           setBusy(true);
           setError(false);
           try {
-            const r = await fetch("/api/jury", { method: "POST" });
-            if (!r.ok) throw Error();
-            const data = await r.json();
-            try {
-              sessionStorage.setItem("brainee-jury", JSON.stringify(data.credentials));
-            } catch {}
-            window.location.assign("/jury");
+            await enterJury();
           } catch {
             setError(true);
             setBusy(false);

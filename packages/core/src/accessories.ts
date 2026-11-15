@@ -1,7 +1,7 @@
 // Brainy accessories. Spec: docs/product/mechanics.md#accessories.
 import type { Wallet } from "./types";
 
-export const SLOTS = ["head", "face", "neck"] as const;
+export const SLOTS = ["head", "face", "neck", "back"] as const;
 export type Slot = (typeof SLOTS)[number];
 
 /** Bought with ★, cosmetic. Earned items (backpack, badge, garden, cape) are never sold. */
@@ -12,9 +12,20 @@ export const ACCESSORIES = [
   { id: "glasses", slot: "face", priceStars: 80 },
   { id: "bowtie", slot: "neck", priceStars: 50 },
   { id: "scarf", slot: "neck", priceStars: 70 },
-] as const satisfies readonly { id: string; slot: Slot; priceStars: number }[];
+  // Starter Pack only (D-41): never sold, so it has no price and the shop skips it.
+  { id: "cape", slot: "back", priceStars: 0, exclusive: true },
+] as const satisfies readonly {
+  id: string;
+  slot: Slot;
+  priceStars: number;
+  exclusive?: boolean;
+}[];
 
 export type AccessoryId = (typeof ACCESSORIES)[number]["id"];
+/** What the shop lists: exclusive items are granted, never bought. */
+export const SHOP_ACCESSORIES = ACCESSORIES.filter((a) => !("exclusive" in a));
+export const isExclusive = (id: AccessoryId) =>
+  ACCESSORIES.some((a) => a.id === id && "exclusive" in a);
 export type Equipped = Partial<Record<Slot, AccessoryId>>;
 
 export const EARNED_REWARDS = [
@@ -43,7 +54,7 @@ export function unequip(equipped: Equipped, slot: Slot): Equipped {
 
 export type Purchase =
   | { ok: true; wallet: Wallet; owned: AccessoryId[] }
-  | { ok: false; reason: "already-owned" | "not-enough-stars" };
+  | { ok: false; reason: "already-owned" | "not-enough-stars" | "exclusive" };
 
 export function buyAccessory(
   wallet: Wallet,
@@ -51,6 +62,7 @@ export function buyAccessory(
   id: AccessoryId,
 ): Purchase {
   if (owned.includes(id)) return { ok: false, reason: "already-owned" };
+  if (isExclusive(id)) return { ok: false, reason: "exclusive" };
   const { priceStars } = accessory(id);
   if (wallet.stars < priceStars) return { ok: false, reason: "not-enough-stars" };
   return {

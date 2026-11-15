@@ -6,6 +6,7 @@ import {
   funnelQuizAnswers,
   isFunnelAnswers,
   isQuizAnswers,
+  MOOD_FLOOR,
   quizStart,
   type Showcase,
   signupTimeZone,
@@ -82,6 +83,8 @@ export type SignupInput = {
   answers: unknown;
   funnel?: unknown;
   timeZone?: unknown;
+  /** Starting mood of the Brainy (the funnel's health score), clamped to MOOD_FLOOR…100. */
+  startMood?: unknown;
 };
 
 function validSignup(input: Partial<SignupInput>, now: Date): input is SignupInput {
@@ -140,11 +143,15 @@ function personalShowcase(childName: string, start: ReturnType<typeof quizStart>
   return showcase;
 }
 
+/** Trusted server-side additions to a new family, applied in the same transaction. */
+export type SignupExtras = { bonusStars?: number; configure?: (showcase: Showcase) => void };
+
 export async function signupFromQuiz(
   db: Database,
   raw: unknown,
   now: Date,
   plan: "demo" | "jury" = "demo",
+  extras: SignupExtras = {},
 ) {
   const input = { ...(raw ?? {}) } as Partial<SignupInput>;
   if (input.funnel !== undefined) {
@@ -162,6 +169,9 @@ export async function signupFromQuiz(
   if (!validSignup(input, now)) throw new AccountError("invalid-input");
   const email = input.email.trim().toLowerCase();
   const start = quizStart(input.answers as never);
+  const startMood = Number.isFinite(input.startMood)
+    ? Math.max(MOOD_FLOOR, Math.min(100, Math.round(input.startMood as number)))
+    : 60;
   return writeTransaction(db, async (tx) => {
     const taken = await tx
       .select({ id: parents.id })
@@ -185,27 +195,28 @@ export async function signupFromQuiz(
       name: input.childName.trim(),
       birthYear: input.birthYear,
     });
-    await tx.insert(wallets).values({ childId, stars: STARTER_STARS, suns: 0 });
+    await tx
+      .insert(wallets)
+      .values({ childId, stars: STARTER_STARS + (extras.bonusStars ?? 0), suns: 0 });
     await tx.insert(brainyStates).values({
       childId,
       ...start.stats,
       skills: start.skills,
-      mood: 60,
+      mood: startMood,
       startSnapshot: start.stats,
       updatedAt: now,
     });
-    await tx.insert(showcases).values({
-      childId,
-      data: {
-        ...advanceCalendar(personalShowcase(input.childName, start), now).showcase,
-        ...(isFunnelAnswers(input.funnel) ? { familyPlan: input.funnel } : {}),
-        calendar: {
-          timeZone: signupTimeZone(input.timeZone),
-          ...calendarKeys(now, signupTimeZone(input.timeZone)),
-          bonusGiven: false,
-        },
+    const data: Showcase = {
+      ...advanceCalendar(personalShowcase(input.childName, start), now).showcase,
+      ...(isFunnelAnswers(input.funnel) ? { familyPlan: input.funnel } : {}),
+      calendar: {
+        timeZone: signupTimeZone(input.timeZone),
+        ...calendarKeys(now, signupTimeZone(input.timeZone)),
+        bonusGiven: false,
       },
-    });
+    };
+    extras.configure?.(data);
+    await tx.insert(showcases).values({ childId, data });
     const access = await issueAccess(tx, childId, now, true);
     return { ...access, child: { id: childId, name: input.childName.trim() }, start };
   });

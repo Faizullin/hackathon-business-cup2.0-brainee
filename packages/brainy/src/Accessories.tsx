@@ -1,5 +1,63 @@
 import type { Equipped } from "@brainee/core";
+import { useId } from "react";
 import { INK } from "./model";
+
+const clasp = (cx: number, cy: number, r: number) => {
+  const q = r * 0.4;
+  return `M${cx} ${cy - r}L${cx + q} ${cy - q}L${cx + r} ${cy}L${cx + q} ${cy + q}L${cx} ${cy + r}L${cx - q} ${cy + q}L${cx - r} ${cy}L${cx - q} ${cy - q}Z`;
+};
+
+/** Slot `back`: drawn BEHIND the body so the silhouette changes. Sways with the frame ticker `t`. */
+export function BackAccessories({ equipped, t = 0 }: { equipped: Equipped; t?: number }) {
+  const id = useId();
+  if (equipped.back !== "cape") return null;
+  const sway = Math.sin(t * 2 * Math.PI * 0.55) * 7;
+  const flick = Math.sin(t * 2 * Math.PI * 0.55 + 1.2) * 4;
+  return (
+    <g data-acc="cape" data-part="hero-cape">
+      <defs>
+        <linearGradient id={`${id}-cape`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#5A3FE0" />
+          <stop offset="1" stopColor="#8C76FF" />
+        </linearGradient>
+      </defs>
+      <path
+        d={`M70 124C50 152 14 180 ${2 + sway} 222Q${44 + sway * 0.5} 208 ${72 + sway * 0.5} 215Q${92 + flick} 222 110 212Q${128 + flick} 222 ${148 + sway * 0.5} 215Q${176 + sway * 0.5} 208 ${218 + sway} 222C206 180 170 152 150 124Z`}
+        fill={`url(#${id}-cape)`}
+        stroke={INK}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <path
+        d={`M${2 + sway} 222Q${44 + sway * 0.5} 208 ${72 + sway * 0.5} 215Q${92 + flick} 222 110 212Q${128 + flick} 222 ${148 + sway * 0.5} 215Q${176 + sway * 0.5} 208 ${218 + sway} 222L${208 + sway} 200Q${176 + sway * 0.5} 190 ${148 + sway * 0.5} 197Q${128 + flick} 204 110 194Q${92 + flick} 204 ${72 + sway * 0.5} 197Q${44 + sway * 0.5} 190 ${12 + sway} 200Z`}
+        fill="#FF9EC2"
+      />
+    </g>
+  );
+}
+
+/** The star clasp sits on the neck in front of the body. */
+export function CapeClasp({ equipped }: { equipped: Equipped }) {
+  if (equipped.back !== "cape") return null;
+  return (
+    <g data-acc="cape-clasp">
+      <path
+        d="M80 150Q110 164 140 150"
+        fill="none"
+        stroke="#FFAE1A"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <path
+        d={clasp(110, 160, 9)}
+        fill="#FFAE1A"
+        stroke={INK}
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+    </g>
+  );
+}
 /** Cosmetic slots follow the new head, eye and neck anchors and move with the body. */
 export function Accessories({ equipped }: { equipped: Equipped }) {
   return (
@@ -46,5 +104,16 @@ export function Accessories({ equipped }: { equipped: Equipped }) {
         </g>
       )}
     </>
+  );
+}
+
+/** The cape on its own, for the Starter Pack unlock animation. Same drawing as on Brainy. */
+export function HeroCapeArt({ className }: { className?: string }) {
+  const equipped = { back: "cape" } as const;
+  return (
+    <svg viewBox="0 20 220 210" className={className} aria-hidden="true">
+      <BackAccessories equipped={equipped} />
+      <CapeClasp equipped={equipped} />
+    </svg>
   );
 }

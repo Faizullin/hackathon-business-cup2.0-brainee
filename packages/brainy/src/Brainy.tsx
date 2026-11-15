@@ -1,7 +1,7 @@
 "use client";
 import type { BrainyStats, Equipped } from "@brainee/core";
 import { useRef } from "react";
-import { Accessories } from "./Accessories";
+import { Accessories, BackAccessories, CapeClasp } from "./Accessories";
 import { type BrainyEffects, brainyModel, INK } from "./model";
 import { useFrame } from "./use-frame";
 export type BrainyProps = {
@@ -63,6 +63,8 @@ export function Brainy({
             <circle cx={m.z5.x} cy={m.z5.y} r={m.z5.r} opacity={m.z5.op}></circle>
           </g>
         )}
+
+        <BackAccessories equipped={equipped} t={t} />
 
         <g
           fill="none"
@@ -166,6 +168,7 @@ export function Brainy({
           ) : (
             <path d={m.mouth} fill="none" stroke={INK} strokeWidth="5" strokeLinecap="round" />
           )}
+          <CapeClasp equipped={equipped} />
           <Accessories equipped={equipped} />
           {m.flags.sleepyZ && (
             <text

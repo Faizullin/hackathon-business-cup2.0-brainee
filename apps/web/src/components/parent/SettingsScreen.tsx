@@ -5,6 +5,7 @@ import { type FormEvent, useCallback, useEffect, useState } from "react";
 import { Brainy } from "@/components/Brainy";
 import { useLearning } from "@/components/child/LearningProvider";
 import { outlineButton, Panel, primaryButton } from "@/components/demo/kit";
+import { FamilyLoginCard } from "@/components/parent/FamilyLoginCard";
 import { useI18n } from "@/i18n";
 
 const input = "min-h-12 w-full rounded-row border border-border bg-surface-2 px-3 text-base";
@@ -287,6 +288,7 @@ export function SettingsScreen() {
             ))}
           </ul>
         </Panel>
+        <FamilyLoginCard />
         <Panel title={ts.account}>
           {data.jury && (
             <button

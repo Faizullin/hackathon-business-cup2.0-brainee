@@ -40,7 +40,7 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [reports/README.md](reports/README.md) | Recording commands, artifact map and analysis of the game-store-planning reporting pipeline |
 | [product/routes-spec.md](product/routes-spec.md) | Building or changing routes, access, parent dashboard or ROUTES.md rules |
 | [product/design.md](product/design.md) | **Visual source of truth** (Claude Design lavender): tokens, motion, Brain component spec and Brainy mapping, screen patterns, game palette |
-| [product/funnel.md](product/funnel.md) | Building the parent funnel or lavender redesign: export analysis, screenshots, logic, tokens, what to take or skip |
+| [product/funnel.md](product/funnel.md) | Building or testing the parent funnel (Brain Check sales quiz at `/start`): screens, brain meter, offer, one-tap start, Starter Pack |
 | [plans/redesign.md](plans/redesign.md) | Implementing the redesign: ordered tasks T-130–T-142, ground rules, open owner questions |
 | [product/external-games.md](product/external-games.md) | Planning the 30-game pack (licences, path C, first wave) |
 | [reports/mvp.md](reports/mvp.md) | Every MVP page (child + parent): phone/iPad walkthrough videos, screenshots, JSON logs. Also [reports/learning.md](reports/learning.md) (three-game loop) |

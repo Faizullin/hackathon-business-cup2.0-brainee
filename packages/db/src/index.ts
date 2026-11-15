@@ -19,6 +19,7 @@ export {
 } from "./account-store";
 export { type Database, openDatabase } from "./client";
 export { type DatabaseConfig, getDatabaseConfig } from "./config";
+export { createFunnelFamily, FALLBACK_CHILD_NAME } from "./funnel-store";
 export { createJuryFamily } from "./jury-store";
 export {
   createDemoAccess,

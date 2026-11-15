@@ -1,22 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
   ATTEMPT,
-  commercialPlans,
-  entryFor,
   FUNNEL_QUESTIONS,
   type FunnelAnswers,
   funnelBirthYears,
   funnelQuizAnswers,
   isFunnelAnswers,
   MOMENT,
-  pauseFor,
   planFor,
   planText,
-  profileFor,
-  ROUTE,
-  reachable,
-  restoreFunnel,
-  weekFor,
 } from "./funnel";
 import { quizStart } from "./onboarding";
 
@@ -72,49 +64,7 @@ describe("funnel rules", () => {
     }
     expect(() => funnelQuizAnswers({ ...answers, age: "outside" })).toThrow(RangeError);
   });
-  it("guards deep links and asks age immediately after goal", () => {
-    expect(ROUTE[ROUTE.indexOf("goal") + 1]).toBe("age");
-    expect(reachable("offer", {})).toBe("goal");
-    expect(reachable("result", { goal: "ending" })).toBe("age");
-    expect(reachable("result", { ...answers, age: "outside" })).toBe("outside");
-    expect(reachable("unknown", answers)).toBe("cover");
-    expect(entryFor(answers)).toBe("result");
-    expect(entryFor({ goal: "ending" }, "offer")).toBe("age");
-  });
-  it("restores v2/v3/v4 and discards malformed values without trusting bookmarks", () => {
-    for (const version of [2, 3, 4]) {
-      expect(restoreFunnel(JSON.stringify({ version, answers, screen: "result" })).resumeAt).toBe(
-        "result",
-      );
-    }
-    const { attempt: _, moment: __, ...legacy } = answers;
-    const migrated = restoreFunnel(
-      JSON.stringify({ version: 2, answers: legacy, screen: "offer" }),
-    );
-    expect(migrated.answers).toMatchObject({ attempt: "unspecified", moment: "flex" });
-    expect(isFunnelAnswers(migrated.answers)).toBe(true);
-    for (const raw of [null, "{", "null", "[]", '{"version":1}', '{"version":4,"answers":[]}'])
-      expect(restoreFunnel(raw).screen).toBe("cover");
-    expect(
-      restoreFunnel(
-        JSON.stringify({
-          version: 4,
-          screen: "result",
-          answers: { goal: "bad", age: "6-7", extra: true },
-        }),
-      ).answers,
-    ).toEqual({ age: "6-7" });
-  });
-  it("produces all five profiles and a useful downloadable four-step plan", () => {
-    const variants = [
-      answers,
-      { ...answers, content: "none" },
-      { ...answers, handoff: "varies" },
-      { ...answers, handoff: "easy", finish: "usually" },
-      { ...answers, handoff: "varies", finish: "usually" },
-    ];
-    expect(new Set(variants.map((a) => profileFor(a)?.title)).size).toBe(5);
-    expect(profileFor({})).toBeNull();
+  it("builds a useful downloadable four-step plan for every answer", () => {
     expect(planFor({})).toBeNull();
     expect(planText({})).toBe("");
     for (const q of FUNNEL_QUESTIONS)
@@ -124,11 +74,6 @@ describe("funnel rules", () => {
         expect(planText(a)).not.toMatch(/undefined|null/);
         expect(planText(a)).toContain(planFor(a)?.cue);
       }
-    expect(pauseFor(answers).title).toContain("video");
-    expect(weekFor("one").title).toBe("7 to under 14 hours");
-    expect(weekFor("none").title).toContain("occasional");
-    expect(weekFor("varies").title).toContain("One turn");
-    expect(commercialPlans({ plans: [{ checkoutUrl: "https://example.com" }] })).toEqual([]);
   });
   it("uses explicit calendar years for age bands and rejects unsupported ages", () => {
     expect(funnelBirthYears("4-5", 2026)).toEqual({ min: 2021, max: 2022 });
@@ -159,12 +104,4 @@ it("suggests an off-screen task without issuing a reward", async () => {
     reward: 1,
   });
   expect(familyTaskTemplate({})).toBeNull();
-});
-
-it("keeps demo matching and stage previews pure and aligned with the real stages", async () => {
-  const { FUNNEL_SHAPES, isFunnelMatch } = await import("./funnel");
-  const { STAGES, stageOf, stagePreviewStats } = await import("./brainy");
-  expect(FUNNEL_SHAPES.filter(isFunnelMatch)).toEqual(["diamond"]);
-  expect(isFunnelMatch("unknown")).toBe(false);
-  for (const stage of STAGES) expect(stageOf(stagePreviewStats(stage.id)).id).toBe(stage.id);
 });

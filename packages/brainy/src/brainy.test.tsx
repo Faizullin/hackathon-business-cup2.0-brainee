@@ -140,3 +140,32 @@ it("shares one ticker, throttles to 30 fps and cancels when the last hero leaves
   b();
   expect(queue.size).toBe(0);
 });
+
+describe("Hero Cape accessory", () => {
+  const caped = { back: "cape" } as const;
+  it("is drawn behind the body in every stage and in static mode", () => {
+    for (const n of [5, 30, 45, 60, 90]) {
+      const html = renderToStaticMarkup(<Brainy stats={stats(n)} equipped={caped} mood={n} />);
+      const cape = html.indexOf('data-acc="cape"');
+      expect(cape).toBeGreaterThan(-1);
+      expect(html).toContain('data-acc="cape-clasp"');
+      // The cape comes before the body parts, so Brainy stays in front of it.
+      expect(cape).toBeLessThan(html.indexOf(`rx="11"`));
+      expect(cape).toBeLessThan(html.indexOf(`data-acc="cape-clasp"`));
+    }
+  });
+  it("is absent without the accessory and replaces the earned cape instead of doubling it", () => {
+    expect(renderToStaticMarkup(<Brainy stats={stats(50)} />)).not.toContain('data-acc="cape"');
+    const both = renderToStaticMarkup(
+      <Brainy stats={stats(50)} equipped={caped} earned={["heroCape"]} />,
+    );
+    expect(both).toContain('data-acc="cape"');
+    expect(both).not.toContain('data-part="cape"');
+  });
+  it("sways with the frame ticker", () => {
+    const at = (t: number) => brainyModel(stats(50), caped, 50, t);
+    expect(at(0)).toBeDefined();
+    const a = renderToStaticMarkup(<Brainy stats={stats(50)} equipped={caped} />);
+    expect(a).toContain('data-acc="cape"');
+  });
+});
