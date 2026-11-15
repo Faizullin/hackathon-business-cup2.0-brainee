@@ -13,13 +13,8 @@ export function buildGame(destination) {
   cpSync(`${root}/manifest.json`, `${destination}/manifest.json`);
   let source = readFileSync(`${root}/artifact/js/main.js`, "utf8");
   source = source.replaceAll("../../../shared/", "../shared/");
-  source = source.replace(
-    "import { onTap } from '../shared/js/tap.js';",
-    `function onTap(element, action) {
-    element.addEventListener('click', action);
-    return () => element.removeEventListener('click', action);
-  }`,
-  );
+  // Keep upstream onTap: pointerup commits a press, with keyboard click fallback.
+  // Click-only input can lose a completed WebKit press under load.
   source = source.replace(/^import .* (?:sfx|voice) from .*;\n/gm, "");
   source = source.replace(/^import .*(?:freeform-board|debug-harness|audio-unlock).*;\n/gm, "");
   source = source.slice(0, source.indexOf("function completeGuided()"));
@@ -70,6 +65,7 @@ export function buildGame(destination) {
     `function wireGuidedPieces() {
     document.querySelectorAll('.tray-piece').forEach((button) => {
       disposers.push(onTap(button, () => {
+        if (mount.dataset.turn !== 'play') return;
         state.selectedPiece = button.dataset.piece;
         renderGuided();
       }));
@@ -81,7 +77,7 @@ export function buildGame(destination) {
   replaceFunction(
     "handleAction",
     `function handleAction(action, value, event) {
-    if (session.finished || state.screen !== 'guided') return false;
+    if (session.finished || state.screen !== 'guided' || mount.dataset.turn !== 'play') return false;
     if (action === 'check') return checkRound();
     if (action === 'slot' && state.selectedPiece) return attemptPlace(state.selectedPiece, null, value);
     return false;

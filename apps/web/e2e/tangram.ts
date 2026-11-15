@@ -8,15 +8,14 @@ export async function completeTangram(page: Page, advanceFeedback?: () => Promis
   await expect(frame.getByRole("button", { name: "Check", exact: true })).toBeVisible();
   // A solved picture is shown briefly before the next one loads.
   await expect(frame.locator("#game")).toHaveAttribute("data-turn", "play");
+  await expect(frame.locator("#game")).toHaveAttribute("aria-busy", "false");
   while ((await frame.locator(".tray-piece").count()) > 0) {
     const piece = frame.locator(".tray-piece").first();
     const before = await frame.locator(".tray-piece").count();
     await piece.click({ delay: 60 });
-    if (advanceFeedback) await advanceFeedback();
     await expect(piece).toHaveClass(/is-selected/);
     // Equal-size triangles are interchangeable; choose the topmost eligible target.
     await frame.locator(".slot.selected-family").last().click({ delay: 60 });
-    if (advanceFeedback) await advanceFeedback();
     await expect(frame.locator(".tray-piece")).toHaveCount(before - 1);
   }
   const progress = await frame.locator(".session-progress").textContent();

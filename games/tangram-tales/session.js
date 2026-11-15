@@ -15,10 +15,12 @@ const session = {
 rng = mulberry32(Number(bridge.config?.seed) || 42);
 const sequence = shuffle(config.tales, rng).slice(0, 4);
 // A solved picture stays on screen briefly; Check is ignored meanwhile, so a double tap cannot
-// grade the next, still empty picture. `data-turn` (play | feedback | done) exposes this state.
+// grade the next, still empty picture. `data-turn` (loading | play | feedback | done) exposes this state.
 const FEEDBACK_MS = 700;
 let feedbackTimer = 0;
-mount.dataset.turn = "play";
+mount.dataset.turn = "loading";
+mount.setAttribute("aria-busy", "true");
+mount.innerHTML = '<p role="status">Getting the puzzle ready…</p>';
 function checkRound() {
   if (session.finished || mount.dataset.turn !== "play") return;
   if (Object.keys(state.placements).length !== 7) {
@@ -50,11 +52,13 @@ function checkRound() {
   } else {
     session.message = "You did it! Build the next picture.";
     mount.dataset.turn = "feedback";
+    mount.inert = true;
     const status = mount.querySelector('[role="status"]');
     if (status) status.textContent = session.message;
     feedbackTimer = setTimeout(async () => {
       if (session.finished) return;
       await startTale(sequence[session.rounds].id);
+      mount.inert = false;
       mount.dataset.turn = "play";
     }, FEEDBACK_MS);
   }
@@ -70,4 +74,6 @@ window.addEventListener(
   { once: true },
 );
 await startTale(sequence[0].id);
+mount.setAttribute("aria-busy", "false");
+mount.dataset.turn = "play";
 bridge.lifecycle("ready");
