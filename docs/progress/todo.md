@@ -179,7 +179,7 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-140 Child shell: dark hero brain card + tab bar Learn · Leisure · [Brainy hub] · Path · Gifts; new Path tab
 - [x] T-141 Game palette tokens `--game-*` / `GAME_PALETTE` + host chrome (game folders out of scope)
 - [x] T-142 Parent patterns: Today/Week cards, needs-attention actions, earned breakdown
-- [ ] T-139 Finish the combined lavender/films full serial suite and re-record reports; merge checks and 76 focused browser cases pass, but the owner-shortened full run is incomplete and earlier reports predate the merged tree.
+- [ ] T-139 Finish the full serial suite (`pnpm e2e:full`) on the current tree. Reports re-recorded on 2026-11-15 after PR #12 (MVP 22/22, learning 27/27 per device, scenario follows the Brain Check funnel); the full serial run is still outstanding.
 
 - [x] T-143 Audit the 30-game archive against implemented imports and propose faster unscored delivery → [external-games.md](../product/external-games.md#30-game-audit-and-faster-delivery-proposal-2026-11-15)
 - [ ] T-144 Extend the existing Explore container and family import helpers, then batch remaining games without analytics; scope and acceptance → [external-games.md](../product/external-games.md#proposed-next-implementation-not-yet-implemented)
@@ -193,3 +193,10 @@ Criteria live in [rules.md](../product/rules.md#mvp-acceptance-criteria). The MV
 - [x] T-151 No-form plan start: offer with display-only prices (D-41) and `POST /api/onboarding/start` creating the family in one tap
 - [x] T-152 Hero Cape (slot `back`, exclusive) and the Starter Pack unlock moment
 - [x] T-153 Funnel unit and Playwright coverage, docs and PR
+
+## Hackathon submission
+- [x] T-154 Submission cleanup: judge-facing README, `docs/ideas` removed from the tree (mapped in docs/README.md § Original sources), architecture/setup/AGENTS match the deployed build, first `pnpm dev` prepares missing games and DB (`db:prepare`), `pnpm check` green again
+- [ ] T-155 Owner: confirm the official submission requirements (deadline, repo visibility, video, deck, AI disclosure) and fill README Team and License
+- [ ] T-156 Owner: build the deck from [pitch.md](../pitch.md) and record a narrated demo video (report MP4s are the fallback)
+- [ ] T-157 After judging: set `BRAINEE_LAB=0` in Vercel, rotate the Turso token and Vercel OIDC token, decide on the shared demo PIN `1234`
+- [ ] T-158 Owner approval: delete merged remote branches and local leftovers (`games`, `merge/origin-master`, `redesign/lavender`, worktrees `../brainee-games`, `../brainee-merge-trial`), then `git gc --prune=now`

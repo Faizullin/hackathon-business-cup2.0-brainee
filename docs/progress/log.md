@@ -1,5 +1,8 @@
 # Log
 
+## 2026-11-15 · Hackathon submission cleanup (T-154, branch chore/hackathon-submission)
+Pulled PRs #9–#12. The MVP report scenario still targeted the retired funnel; it now walks the 19-screen Brain Check funnel (`?tour=1`, stops on the offer) and both reports were re-recorded (MVP 22/22, learning 27/27 per device). `pnpm check` was red on `game-catalog` Node types; fixed. A clean-start probe showed that a schema-only DB has no game catalog and a missing DB breaks every API, so `pnpm dev` now builds missing games and seeds a missing local DB. Removed `docs/ideas` (history map in docs/README.md), rewrote the README for judges and refreshed architecture/setup/AGENTS for the deployed build. No push, deploy or production data access.
+
 ## 2026-11-15 · Brain Check funnel replaces /start (T-149 to T-153, branch feature/brain-check-funnel)
 New 19-screen sales quiz with a live brain meter (health = mood, `effects="full"` only in the funnel, D-40), result as the child's Brainy, solution, plan builder and an offer with real prices and no payment (D-41). `/` gates to `/entry` or `/start`; Jury entry is in every funnel header; `POST /api/onboarding/start` creates the family in one tap with the funnel mood, plan and gift and an optional Starter Pack (exclusive Hero Cape in the new `back` slot, +100 ★, one-time unlock moment). Old route, profile and week code removed; the saved family plan keeps working through an adapter. Core, db and brainy tests added; Playwright updated and a new brain-check spec added. Notify-me on the age exit stores the email only in the browser.
 
