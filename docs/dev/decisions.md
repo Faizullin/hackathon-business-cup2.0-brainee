@@ -7,6 +7,10 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 ---
 
 
+## D-43 · Shared demo access is an explicit local opt-in (2026-11-15)
+
+`DEMO_MODE=1` enables the MVP endpoints; it does not grant anonymous access to the seeded family. Creating shared access through `POST /api/demo-session` additionally requires `BRAINEE_SHARED_DEMO=1`. Existing valid family sessions are reused without the flag. Keep it unset in production; enable it only for `pnpm demo`, browser fixtures and report recording. Anonymous child entry returns to `/` → `/start`; Start and Jury each create an independent family. No new auth infrastructure.
+
 ## D-42 · Remote games on R2 · 2026-11-15 · accepted · extends D-15, D-32, D-38
 **Decision:** remote iframe builds use Cloudflare R2 through a small server-only S3 SigV4 driver; filesystem storage under `data/remote-games/` is the local/test equivalent. Built-in games and media stay in the repository. Versions store driver ids and keys, never remote browser URLs, following GSP's build-storage boundary. An immutable `games/<id>/<version>/` tree plus a mutable validated catalog enables publishing, disable and rollback without deploying the app. One operator publishes at a time (catalog updates are not a concurrent multi-writer API).
 **Isolation:** browsers load only `/g/<id>/<version>/...` through our Next handler. Both iframe and response CSP enforce `sandbox allow-scripts`; games cannot use app cookies/storage or external network services. Versioned responses are immutable and checked against catalog SHA-256. Disable removes discovery/launch and blocks subsequent scored finishes after the ~60-second catalog cache refresh; already cached static assets cannot be recalled. No payment or analytics service is added.
@@ -230,7 +234,3 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 **Context:** hackathon speed, several surfaces (PWA, landing, games) sharing the Brainy renderer and the rules.
 **Decision:** pnpm workspaces + Turborepo. Next.js handles both UI and API, so server code also runs on our own domain. ~~Postgres, Vercel, R2~~.
 **Consequences:** shared types end to end. Firebase, Clerk and client-side Supabase are ruled out because of the allowlist.
-
-## D-43 · Shared demo access is an explicit local opt-in (2026-11-15)
-
-`DEMO_MODE=1` enables the MVP endpoints; it does not grant anonymous access to the seeded family. Creating shared access through `POST /api/demo-session` additionally requires `BRAINEE_SHARED_DEMO=1`. Existing valid family sessions are reused without the flag. Keep it unset in production; enable it only for `pnpm demo`, browser fixtures and report recording. Anonymous child entry returns to `/` → `/start`; Start and Jury each create an independent family. No new auth infrastructure.
