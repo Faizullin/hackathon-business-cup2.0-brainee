@@ -102,7 +102,9 @@ export function brainyModel(
   const ctrlY = endY + 14 * (2 * smile - 1);
 
   const blink = h >= 35 && t > 0 && t % 3.4 < 0.14;
-  const lid = blink ? 17 : Math.max(c01((60 - h) / 55) * 9, stats.eyes < 35 ? 7 : 0);
+  // The first growth stage reads as sleepy even at full energy, so the stage name matches the face.
+  const sleepy = stats.eyes < 35 || stageOf(stats).id === "sleepy";
+  const lid = blink ? 17 : Math.max(c01((60 - h) / 55) * 9, sleepy ? 7 : 0);
 
   const sweatK = (t * 0.9) % 1;
   const swx = 182;
@@ -270,7 +272,7 @@ export function brainyModel(
     limbWidth: 5 + clamp(stats.arms) * 0.025,
     handRadius: 5.5 + clamp(stats.arms) * 0.02,
     flags: {
-      sleepyZ: stats.eyes < 35,
+      sleepyZ: sleepy,
       backpack: stats.resp >= 70 || earned.includes("captainBackpack"),
       cape: earned.includes("heroCape") && !equipped.back,
       badge: earned.includes("explorerBadge"),
