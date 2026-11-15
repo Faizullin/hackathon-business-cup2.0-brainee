@@ -1,7 +1,14 @@
 import "server-only";
 
-import { type Database, demoTokenHash, LearningStoreError, openDatabase } from "@brainee/db";
+import {
+  type Database,
+  demoTokenHash,
+  LearningStoreError,
+  openDatabase,
+  setRemotePreviews,
+} from "@brainee/db";
 import { type NextRequest, NextResponse } from "next/server";
+import { runtimeCatalog } from "./remote-games";
 
 export const DEMO_COOKIE = "brainee_demo";
 export class ApiError extends Error {
@@ -60,6 +67,8 @@ export async function demoApi(
     origin.host = request.headers.get("host") ?? origin.host;
     if (request.method !== "GET" && request.headers.get("origin") !== origin.origin)
       throw new ApiError(403, "origin-not-allowed");
+    // Remote Explore games join the ★ shop (cached ~60 s; an unreachable catalog lists none).
+    setRemotePreviews((await runtimeCatalog()).previews.filter((g) => g.source === "remote"));
     connection = await openDatabase();
     response = await handle(connection.db, new Date());
   } catch (error) {

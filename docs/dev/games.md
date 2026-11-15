@@ -163,7 +163,7 @@ launch routes and DB seed. New imports have three levels and four completed task
 Tangram 6+ (logic .7 / motor .3), Mirror Grid 7+ (logic .7 / attention .3),
 Rhythm 5+ and Secret Message 6+ (memory .7 / attention .3). The session API checks
 minimum age as well as enabled status; catalog cards and Explore direct launches respect age locks.
-Explore participates in shared state loading but never issues a learning session or grants rewards.
+Explore games are sold for ★ in Leisure (D-44) and play at `/fun/<id>` inside the fun timer; they still never issue a learning session, report results or grant rewards. `/explore/<id>` stays as a direct harness route for `/lab` and tests.
 
 The platform is English-only (D-34): catalog titles, host loading/error text and every game's
 in-game copy are English, and the bridge handshake carries `locale: "en"`. Explore previews keep

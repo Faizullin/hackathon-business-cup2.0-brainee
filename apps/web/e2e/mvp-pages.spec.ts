@@ -53,12 +53,19 @@ test("child: accessory shop, gifts, exchange and a task waiting for the parent",
     .toBe(before.progress.wallet.suns - 1);
 });
 
-test("leisure lists only real content: Snake and the interactive films", async ({ page }) => {
+test("leisure sells Snake and Explore games for stars; free films are on Learn", async ({
+  page,
+}) => {
   await page.goto("/leisure");
   await expect(page.getByRole("heading", { name: "Games for stars" })).toBeVisible();
-  await expect(page.getByRole("listitem").filter({ hasText: "Snake" })).toBeVisible();
+  await expect(page.getByTestId("fun-game-snake")).toBeVisible();
+  await expect(page.getByTestId("fun-game-shape-pairs")).toContainText("10 min · 20★");
   await expect(page.getByText(/Rocket Runner|Rhythm Drums|Catapult|Maze Racers/)).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Cartoons and stories" })).toHaveCount(0);
+  await expect(page.locator('a[href^="/video/"]')).toHaveCount(0);
+  await page.goto("/explore");
+  await expect(page).toHaveURL(/\/leisure$/);
+  await page.goto("/learn");
   const films = page.locator('a[href^="/video/"]');
   await expect(films).toHaveCount(3);
   for (const id of ["sky-blue", "rain", "sun-goes"])
@@ -67,6 +74,25 @@ test("leisure lists only real content: Snake and the interactive films", async (
     await page.goto(path);
     await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
   }
+});
+
+test("an Explore game bought for stars plays in its sandbox while time counts", async ({
+  page,
+}) => {
+  const before = await savedState(page.request);
+  await page.goto("/leisure");
+  const card = page.getByTestId("fun-game-shape-pairs");
+  await card.getByRole("button", { name: "10 min · 20★" }).click();
+  await expect
+    .poll(async () => (await savedState(page.request)).progress.wallet.stars)
+    .toBe(before.progress.wallet.stars - 20);
+  await card.getByRole("button", { name: "Play" }).click();
+  await expect(page).toHaveURL(/\/fun\/shape-pairs$/);
+  await expect(page.getByTestId("fun-time")).toContainText("10:00");
+  await page.getByRole("button", { name: "Play" }).click();
+  const frame = page.getByTestId("explore-frame");
+  await expect(frame).toHaveAttribute("data-ready", "true", { timeout: 15000 });
+  await expect(page.getByTestId("fun-time")).not.toContainText("10:00", { timeout: 5000 });
 });
 
 test("parent: PIN barrier, analytics, confirming a task and syncing to the child", async ({

@@ -62,6 +62,10 @@ export type FunGame = {
   until: string | null;
   remainingSeconds?: number;
   play?: { id: string; device: string; at: string; sequence: number };
+  /** An Explore game (built-in or remote, D-42) sold for ★ like Snake; played in its iframe. */
+  kind?: "explore";
+  thumbnail?: string;
+  minAge?: number;
 };
 export type ScienceVideo = {
   id: string;

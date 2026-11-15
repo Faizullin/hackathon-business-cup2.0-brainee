@@ -23,7 +23,7 @@ async function expectThumbnails(page: Page, minimum: number) {
   }
 }
 
-test("Learn, Entry and Explore cards render game thumbnails; locked ones are dimmed", async ({
+test("Learn, Entry and Leisure cards render game thumbnails; locked ones are dimmed", async ({
   page,
   baseURL,
 }, info) => {
@@ -41,9 +41,9 @@ test("Learn, Entry and Explore cards render game thumbnails; locked ones are dim
   await expectThumbnails(page, 1);
   await page.screenshot({ path: info.outputPath("entry-cards.png"), fullPage: true });
 
-  await page.goto("/explore");
+  await page.goto("/leisure");
   await expectThumbnails(page, 5);
-  await page.screenshot({ path: info.outputPath("explore-cards.png"), fullPage: true });
+  await page.screenshot({ path: info.outputPath("leisure-cards.png"), fullPage: true });
 });
 
 test("failed thumbnail requests keep the card geometry and a usable title", async ({ page }) => {

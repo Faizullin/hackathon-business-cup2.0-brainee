@@ -31,6 +31,7 @@ export {
   startGameSession,
   stopGameRun,
 } from "./learning-store";
+export { EXPLORE_PRICES, exploreFun, leisureCatalog, setRemotePreviews } from "./leisure-catalog";
 export { updateFunPlay } from "./leisure-store";
 export { syncRemoteGames } from "./remote-games";
 export {

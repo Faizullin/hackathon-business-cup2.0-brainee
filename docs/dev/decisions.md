@@ -7,6 +7,12 @@ Format: `## D-NN · Title · YYYY-MM-DD · status` → Context / Decision / Cons
 ---
 
 
+## D-44 · Explore games are sold for ★; science films live on Learn · 2026-11-15 · accepted · narrows D-39, D-42
+
+**Context:** Explore previews were free play beside the ★ shop, so entertainment games had two different economies, and the free science films sat in Leisure next to paid games.
+**Decision:** every Explore game (built-in previews and remote R2 previews) joins each family's fun list through the existing catalog sync and is bought with the existing `unlock-fun` action: 20★ for 10 minutes or 200★ forever (Snake keeps 30/500). Play runs at `/fun/<id>` with the shared play-time timer; the game itself stays unscored and sandboxed. `/explore` redirects to Leisure. A paid remote game stays listed while its catalog is unreachable. Science films move to Learn.
+**Consequences:** one entertainment economy; adding or rolling back a remote game changes the shop without a deploy. Prices are fixed in `packages/db/src/leisure-catalog.ts`.
+
 ## D-43 · Shared demo access is an explicit local opt-in (2026-11-15)
 
 `DEMO_MODE=1` enables the MVP endpoints; it does not grant anonymous access to the seeded family. Creating shared access through `POST /api/demo-session` additionally requires `BRAINEE_SHARED_DEMO=1`. Existing valid family sessions are reused without the flag. Keep it unset in production; enable it only for `pnpm demo`, browser fixtures and report recording. Anonymous child entry returns to `/` → `/start`; Start and Jury each create an independent family. No new auth infrastructure.

@@ -1,4 +1,5 @@
 import type { Showcase } from "@brainee/core";
+import { builtInFun } from "./fun-catalog";
 
 // D-21: hand-picked demo content in US English (the product is English-only). Analytics are illustrative, not computed.
 export const demoShowcase: Showcase = {
@@ -114,18 +115,7 @@ export const demoShowcase: Showcase = {
       delivered: true,
     },
   ],
-  fun: [
-    {
-      id: "snake",
-      title: "Snake",
-      skill: "Spatial thinking",
-      icon: "snake",
-      priceTimed: 30,
-      priceForever: 500,
-      forever: true,
-      until: null,
-    },
-  ],
+  fun: builtInFun(),
   science: [
     {
       // Interactive films: apps/web/public/media/films/<id>.{mp3,json} (docs/dev/films.md).

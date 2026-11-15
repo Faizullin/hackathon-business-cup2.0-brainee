@@ -21,7 +21,7 @@ export async function updateFunPlay(db: Database, token: string, raw: unknown, n
       .get();
     const data = row?.data,
       game = data?.fun.find((g) => g.id === input.gameId);
-    if (!data || !game || game.id !== "snake") throw new LearningStoreError("not-found");
+    if (!data || !game) throw new LearningStoreError("not-found");
     const device = createHash("sha256").update(`fun:${token}`).digest("hex");
     if (input.type === "start") {
       if (!game.forever && (game.remainingSeconds ?? 0) <= 0)

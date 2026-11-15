@@ -2,7 +2,7 @@ import { advanceCalendar, syncCatalog } from "@brainee/core";
 import { and, eq, sql } from "drizzle-orm";
 import { demoSessions, families, showcases } from "../schema";
 import type { Database } from "./client";
-import { demoShowcase } from "./showcase-seed";
+import { leisureCatalog } from "./leisure-catalog";
 
 /** Called inside the same transaction as the read/action, before consuming daily state. */
 export async function refreshCalendar(
@@ -13,8 +13,8 @@ export async function refreshCalendar(
   const row = await tx.select().from(showcases).where(eq(showcases.childId, access.childId)).get();
   if (!row) throw new Error("Missing child showcase");
   const result = advanceCalendar(row.data, now);
-  // Catalog changes (new films, removed placeholders) reach this family on the next read.
-  const synced = syncCatalog(result.showcase, demoShowcase);
+  // Catalog changes (new films, Explore games for ★, removed placeholders) reach this family on the next read.
+  const synced = syncCatalog(result.showcase, leisureCatalog());
   if (synced.changed) {
     result.showcase = synced.showcase;
     result.changed = true;

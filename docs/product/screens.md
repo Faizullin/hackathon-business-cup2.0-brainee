@@ -6,7 +6,7 @@ The lavender visual source is [design.md](design.md), with implementation patter
 
 Phone navigation and the landscape iPad rail have the same five destinations: **Learn · Leisure · Brainy · Path · Gifts**. Brainy is the raised central hub on phone. Full-screen games and players use their own chrome.
 
-Learn, Leisure, Gifts and Explore share a compact dark Brainy summary: Energy, stage, progress toward the next stage, saved ★/☀ wallet and a labelled weekly-goal link. The zero-earned state says “Play to earn ★”; positive learning rewards show today's actual amount. Energy is the existing mood value, while growth is derived from stats. Brainy never dies, and low Energy is sleepy and kid-safe.
+Learn, Leisure and Gifts share a compact dark Brainy summary: Energy, stage, progress toward the next stage, saved ★/☀ wallet and a labelled weekly-goal link. The zero-earned state says “Play to earn ★”; positive learning rewards show today's actual amount. Energy is the existing mood value, while growth is derived from stats. Brainy never dies, and low Energy is sleepy and kid-safe.
 
 The Brainy tab keeps the full hero and training action. Its skill cards use the asymmetric zone-card shape. The six-accessory shop supports previews, buying, wearing and removing, with one item per slot. Earned discoveries and the stage journey live on Path.
 
@@ -30,7 +30,7 @@ Finishing opens the saved before/after receipt, actual gains and next choices. A
 
 ### Leisure and players
 
-Leisure separates the ★ game shop and the free interactive films; only content that exists is listed (D-39). The play-time explainer states that purchased minutes count during active play; timed passes show their remaining minutes, while permanent unlocks stay available.
+Leisure is the ★ shop "Games for stars": Snake and every Explore game (built-in and remote, D-42), each 10 minutes or forever, with thumbnails and age locks (D-44). The free interactive science films are on Learn, below the game grid. Only content that exists is listed (D-39); `/explore` redirects to Leisure. The play-time explainer states that purchased minutes count during active play; timed passes show their remaining minutes, while permanent unlocks stay available.
 
 Science playback supports pause and saved position, with no seek control or video switching. Registered interactive films combine local audio with drawn scenes and questions that pause playback. The child's own Brainy fills the narrator slot, including equipped accessories and a talk-driven mouth. Playback starts only after Play; in-film questions grant no rewards. Completion leads to the existing final quiz before the server grants any reward. See [films.md](../dev/films.md). Entertainment endings reuse the calm dark stopping card and the family's phrase.
 

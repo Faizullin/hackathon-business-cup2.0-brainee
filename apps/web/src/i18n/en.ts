@@ -197,7 +197,7 @@ export const en = {
     },
     leisure: {
       title: "Leisure",
-      description: "Stars from 'Learn' can be spent here. Educational science is free.",
+      description: "Spend the stars you earn in Learn on games. Science films are free in Learn.",
       shop: "Games for stars",
       timed: (minutes: number, price: number) => `${minutes} min · ${price}★`,
       forever: (price: number) => `Forever · ${price}★`,

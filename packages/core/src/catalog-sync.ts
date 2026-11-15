@@ -1,6 +1,17 @@
 import type { Showcase } from "./showcase";
 
 type CatalogKey = "science" | "fun";
+type FunLike = { id: string; kind?: string; forever?: boolean; remainingSeconds?: number };
+const EXPLORE_FACTS = ["title", "thumbnail", "minAge", "priceTimed", "priceForever"] as const;
+const pick = (item: object, keys: readonly string[]) =>
+  Object.fromEntries(
+    keys.filter((k) => k in item).map((k) => [k, (item as Record<string, unknown>)[k]]),
+  );
+const sameFacts = (a: object, b: object) =>
+  EXPLORE_FACTS.every(
+    (k) => (a as Record<string, unknown>)[k] === (b as Record<string, unknown>)[k],
+  );
+const isOwned = (item: FunLike) => !!item.forever || (item.remainingSeconds ?? 0) > 0;
 const CATALOG_KEYS: readonly CatalogKey[] = ["science", "fun"];
 
 /**
@@ -19,7 +30,21 @@ export function syncCatalog<T extends Pick<Showcase, CatalogKey>>(
     const saved = showcase[key] as { id: string }[];
     const items = catalog[key] as { id: string }[];
     const byId = new Map(saved.map((item) => [item.id, item]));
-    const merged = items.map((item) => byId.get(item.id) ?? structuredClone(item));
+    const merged = items.map((item) => {
+      const own = byId.get(item.id);
+      if (!own) return structuredClone(item);
+      // Catalog facts (title, price, art) follow the catalog; progress and ownership stay.
+      return key === "fun" && (item as { kind?: string }).kind === "explore"
+        ? sameFacts(own, item)
+          ? own
+          : { ...own, ...pick(item, EXPLORE_FACTS) }
+        : own;
+    });
+    // A paid Explore game survives a moment when its remote catalog is unreachable.
+    if (key === "fun")
+      for (const item of saved as FunLike[])
+        if (item.kind === "explore" && isOwned(item) && !items.some((i) => i.id === item.id))
+          merged.push(item);
     const same =
       merged.length === saved.length && merged.every((item, index) => item === saved[index]);
     if (same) continue;

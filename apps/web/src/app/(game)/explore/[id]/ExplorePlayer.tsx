@@ -5,6 +5,7 @@ import { gameSandbox } from "@brainee/game-catalog/remote";
 import { ArrowLeft } from "@brainee/ui/components/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { LearningBoundary } from "@/components/child/LearningBoundary";
 import { useLearning } from "@/components/child/LearningProvider";
@@ -30,7 +31,18 @@ export function ExplorePlayer({ game }: { game: Preview }) {
   );
 }
 
-export function AvailablePreview({ game, onReady }: { game: Preview; onReady?(): void }) {
+export function AvailablePreview({
+  game,
+  onReady,
+  exitHref = "/explore",
+  status: statusNote,
+}: {
+  game: Preview;
+  onReady?(): void;
+  /** Where Exit (and the game's own exit message) leads; the ★ shop passes /leisure. */
+  exitHref?: string;
+  status?: React.ReactNode;
+}) {
   const readyCallback = useRef(onReady);
   readyCallback.current = onReady;
   const frame = useRef<HTMLIFrameElement>(null);
@@ -76,7 +88,7 @@ export function AvailablePreview({ game, onReady }: { game: Preview; onReady?():
         event.data?.type === "brainee:exit" &&
         event.data?.gameId === game.id
       )
-        router.push("/explore");
+        router.push(exitHref);
     }
     window.addEventListener("message", exit);
     bridge.start();
@@ -86,7 +98,7 @@ export function AvailablePreview({ game, onReady }: { game: Preview; onReady?():
       bridge.close();
       window.removeEventListener("message", exit);
     };
-  }, [game.id, game.version, game.source, locale, router]);
+  }, [game.id, game.version, game.source, locale, router, exitHref]);
   // Games without a bridge handshake are ready once their document has loaded.
   const loaded = () => {
     if (meta.readiness !== "load") return;
@@ -99,14 +111,16 @@ export function AvailablePreview({ game, onReady }: { game: Preview; onReady?():
       <PlayerHeader
         title={game.title}
         exit={
-          <Link href="/explore" className={iconControl} aria-label={t.child.game.exit}>
+          <Link href={exitHref} className={iconControl} aria-label={t.child.game.exit}>
             <ArrowLeft className="size-5" aria-hidden="true" />
           </Link>
         }
         status={
-          <span className="text-muted-foreground text-sm">
-            {meta.audio ? "No stars · sound" : "No stars"}
-          </span>
+          statusNote ?? (
+            <span className="text-muted-foreground text-sm">
+              {meta.audio ? "No stars · sound" : "No stars"}
+            </span>
+          )
         }
       />
       {meta.orientation !== "any" && (

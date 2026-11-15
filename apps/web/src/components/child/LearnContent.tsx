@@ -2,6 +2,7 @@
 
 import { Flame } from "@brainee/ui/components/icons";
 import Link from "next/link";
+import { FilmList } from "@/components/child/FilmList";
 import { GameGrid } from "@/components/child/GameGrid";
 import { RecommendationCards } from "@/components/child/Recommendations";
 import { useI18n } from "@/i18n";
@@ -43,11 +44,12 @@ export function LearnContent() {
         </h2>
         <GameGrid />
       </section>
+      <FilmList />
       <Link
-        href="/explore"
+        href="/leisure"
         className="ui-control rounded-xl border border-border p-4 text-sm text-muted-foreground"
       >
-        Explore · free play, no stars →
+        More games for ★ in Leisure →
       </Link>
     </>
   );

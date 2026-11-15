@@ -12,8 +12,8 @@ Each walkthrough first answers the parent Brain Check funnel (`/start?tour=1`):
 the brain meter drops with each habit answer, the result shows the child's Brainy
 today, the plan builder picks minutes and a gift, and the run stops on the offer
 (display-only prices, no payment) without creating a family. It then opens the
-app on “What are we playing now?”, goes to Learn, browses Leisure's fun-game shop
-and films, marks a task done and exchanges ☀ → ★ in Gifts, buys an accessory on
+app on “What are we playing now?”, goes to Learn (games and free science films),
+browses Leisure's games for stars (Snake and Explore games), marks a task done and exchanges ☀ → ★ in Gifts, buys an accessory on
 the Brainy tab, and visits Path for weekly learning, stages and discoveries.
 Then it enters parent mode with the PIN, scrolls Analytics, confirms the
 child's task in Tasks and opens Gifts & goal.

@@ -82,12 +82,14 @@ test("new catalog titles show; locked learning and Explore routes cannot launch"
     });
     expect(response.status()).toBe(400);
   }
-  await page.goto("/explore");
-  // A four-year-old: age-locked previews have no launch link; 4+ previews stay open.
-  for (const preview of previews)
-    await expect(page.locator(`a[href="/explore/${preview.id}"]`)).toHaveCount(
+  await page.goto("/leisure");
+  // A four-year-old: age-locked Explore games in the ★ shop have no buy buttons; 4+ ones do.
+  for (const preview of previews) {
+    const card = page.getByTestId(`fun-game-${preview.id}`);
+    await expect(card.getByRole("button", { name: /10 min/ })).toHaveCount(
       preview.minAge > 4 ? 0 : 1,
     );
+  }
   await page.goto("/explore/magnet-explorer");
   await expect(page.getByTestId("explore-frame")).toHaveCount(0);
   await expect(page.getByText(/Unlocks at age 6/)).toBeVisible();
