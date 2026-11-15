@@ -194,7 +194,8 @@ export function BrainyLab() {
               <option value="">{t.none}</option>
               {ACCESSORIES.filter((a) => a.slot === slot).map((a) => (
                 <option key={a.id} value={a.id}>
-                  {i18n.accessories[a.id]} · {a.priceStars} ★
+                  {i18n.accessories[a.id]} ·{" "}
+                  {"exclusive" in a ? "Starter Pack" : `${a.priceStars} ★`}
                 </option>
               ))}
             </select>

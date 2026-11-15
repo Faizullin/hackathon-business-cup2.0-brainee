@@ -38,7 +38,7 @@ function star(cx: number, cy: number, r: number) {
 export type BrainyEffects = "kid" | "full";
 export function brainyModel(
   stats: BrainyStats,
-  _equipped: Equipped = {},
+  equipped: Equipped = {},
   mood = 72,
   t = 0,
   effects: BrainyEffects = "kid",
@@ -272,7 +272,7 @@ export function brainyModel(
     flags: {
       sleepyZ: stats.eyes < 35,
       backpack: stats.resp >= 70 || earned.includes("captainBackpack"),
-      cape: earned.includes("heroCape"),
+      cape: earned.includes("heroCape") && !equipped.back,
       badge: earned.includes("explorerBadge"),
       garden: earned.includes("ownGarden"),
     },
