@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-  <title>Секретное послание</title>
+  <title>Secret Message Lab</title>
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./session.css" />
   <script src="../bridge.js"></script>
@@ -11,35 +11,35 @@
 <body>
   <main id="game" class="secret-app" data-phase="play-moon-memory">
     <div class="session-hud">
-      <div class="session-progress">Послание 1 из 4</div>
-      <button class="session-sound-btn is-active" type="button" data-action="toggle-sound">Звук: вкл</button>
+      <div class="session-progress">Message 1 of 4</div>
+      <button class="session-sound-btn is-active" type="button" data-action="toggle-sound">Sound: on</button>
     </div>
 
     <section id="screen-play" class="game-screen play-screen">
       <img class="scene-backdrop" src="./assets/art/backdrop-desk.webp" alt="" aria-hidden="true" />
 
       <div id="play-stage" class="play-stage">
-        <img class="paper-sheet" src="./assets/art/paper-sheet.webp" alt="Лист секретного сообщения" />
+        <img class="paper-sheet" src="./assets/art/paper-sheet.webp" alt="Secret message sheet" />
 
         <div id="memory-board" class="memory-board">
-          <section id="memory-sequence" class="memory-sequence" aria-label="Секретные знаки для запоминания"></section>
+          <section id="memory-sequence" class="memory-sequence" aria-label="Secret signs to remember"></section>
           <div id="memory-cover" class="memory-cover" aria-hidden="true">
             <img src="./assets/art/envelope-moon.webp" alt="" />
           </div>
-          <section id="memory-copy" class="copy-sequence" aria-label="Восстановленное сообщение"></section>
+          <section id="memory-copy" class="copy-sequence" aria-label="Rebuilt message"></section>
         </div>
 
-        <section id="stamp-dock" class="stamp-dock" aria-label="Штампы с символами"></section>
+        <section id="stamp-dock" class="stamp-dock" aria-label="Sign stamps"></section>
 
-        <img id="play-owl" class="play-owl" src="./assets/art/owl-neutral.webp" alt="Сова-почтальон" />
+        <img id="play-owl" class="play-owl" src="./assets/art/owl-neutral.webp" alt="Owl courier" />
       </div>
 
       <footer class="session-footer">
-        <p class="session-message" role="status">Запомни секретное послание!</p>
+        <p class="session-message" role="status">Remember the secret message!</p>
         <div class="session-actions">
-          <button class="session-btn session-btn-peek" type="button" data-action="peek" hidden>Подсмотреть</button>
-          <button class="session-btn session-btn-clear" type="button" data-action="clear">Очистить</button>
-          <button class="session-btn session-btn-check" type="button" data-action="check">Проверить</button>
+          <button class="session-btn session-btn-peek" type="button" data-action="peek" hidden>Peek</button>
+          <button class="session-btn session-btn-clear" type="button" data-action="clear">Clear</button>
+          <button class="session-btn session-btn-check" type="button" data-action="check">Check</button>
         </div>
       </footer>
     </section>

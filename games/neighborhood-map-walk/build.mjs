@@ -75,12 +75,12 @@ export async function buildGame(destination) {
   // Inject host bar before <main id="game">
   const hostBar = `
   <header class="brainee-host-bar" data-testid="host-bar" role="banner">
-    <button type="button" class="brainee-host-exit" data-testid="host-exit-button" aria-label="Выйти из свободной игры">
+    <button type="button" class="brainee-host-exit" data-testid="host-exit-button" aria-label="Exit free play">
       <span aria-hidden="true">‹</span>
-      <span>Выход</span>
+      <span>Exit</span>
     </button>
     <div class="brainee-host-badge" data-testid="host-badge">
-      Свободная игра · без звёзд
+      Free play · no stars
     </div>
     <div class="brainee-host-title" data-testid="host-title">
       Neighborhood Route Planner

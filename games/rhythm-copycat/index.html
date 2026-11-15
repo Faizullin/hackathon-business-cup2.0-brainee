@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-  <title>Ритм-повторялка</title>
+  <title>Rhythm Copycat</title>
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./session.css" />
   <script src="../bridge.js"></script>
@@ -11,8 +11,8 @@
 <body>
   <main id="game">
     <div class="session-hud">
-      <div class="session-progress">Ритм 1 из 4</div>
-      <button class="session-sound-btn is-active" type="button" data-action="toggle-sound">Звук: вкл</button>
+      <div class="session-progress">Rhythm 1 of 4</div>
+      <button class="session-sound-btn is-active" type="button" data-action="toggle-sound">Sound: on</button>
     </div>
 
     <section class="rc-screen rc-play" data-screen="play">
@@ -21,27 +21,27 @@
       <div class="rc-board">
         <header class="rc-plaque">
           <img src="./assets/ui/plaque.webp" alt="" draggable="false" />
-          <p data-prompt aria-live="polite">Слушай и смотри!</p>
+          <p data-prompt aria-live="polite">Listen and watch!</p>
         </header>
 
-        <p class="session-message" role="status">Внимательно запоминай последовательность</p>
+        <p class="session-message" role="status">Remember the sequence carefully</p>
 
-        <fieldset class="rc-pads" aria-label="Площадки ритма">
-          <button class="rc-pad" type="button" data-pad="clap" aria-label="Хлопок (Clap)">
+        <fieldset class="rc-pads" aria-label="Rhythm pads">
+          <button class="rc-pad" type="button" data-pad="clap" aria-label="Clap">
             <img src="./assets/pads/clap.webp" alt="" draggable="false" />
-            <span class="rc-pad-label" style="--label-color:#4f8fd8">Хлоп</span>
+            <span class="rc-pad-label" style="--label-color:#4f8fd8">Clap</span>
           </button>
-          <button class="rc-pad" type="button" data-pad="stomp" aria-label="Топот (Stomp)">
+          <button class="rc-pad" type="button" data-pad="stomp" aria-label="Stomp">
             <img src="./assets/pads/stomp.webp" alt="" draggable="false" />
-            <span class="rc-pad-label" style="--label-color:#6cb232">Топ</span>
+            <span class="rc-pad-label" style="--label-color:#6cb232">Stomp</span>
           </button>
-          <button class="rc-pad" type="button" data-pad="tap" aria-label="Стук (Tap)">
+          <button class="rc-pad" type="button" data-pad="tap" aria-label="Tap">
             <img src="./assets/pads/tap.webp" alt="" draggable="false" />
-            <span class="rc-pad-label" style="--label-color:#e88a2d">Тук</span>
+            <span class="rc-pad-label" style="--label-color:#e88a2d">Tap</span>
           </button>
-          <button class="rc-pad" type="button" data-pad="shake" aria-label="Шейк (Shake)">
+          <button class="rc-pad" type="button" data-pad="shake" aria-label="Shake">
             <img src="./assets/pads/shake.webp" alt="" draggable="false" />
-            <span class="rc-pad-label" style="--label-color:#e8543f">Шейк</span>
+            <span class="rc-pad-label" style="--label-color:#e8543f">Shake</span>
           </button>
         </fieldset>
 
@@ -51,15 +51,15 @@
         </div>
 
         <div class="rc-listen-row">
-          <button class="rc-pill rc-listen" type="button" data-action="listen" aria-label="Повторить показ ритма">
+          <button class="rc-pill rc-listen" type="button" data-action="listen" aria-label="Replay the rhythm">
             <img src="./assets/ui/button.webp" alt="" draggable="false" />
-            <span>ЕЩЁ РАЗ</span>
+            <span>AGAIN</span>
           </button>
         </div>
       </div>
 
       <div class="rc-kiki rc-kiki-play" data-kiki-play>
-        <img data-kiki-img class="rc-kiki-actor" src="./assets/kiki/poses/neutral.webp" alt="Кики" draggable="false" style="max-height: 28vh; width: auto;" />
+        <img data-kiki-img class="rc-kiki-actor" src="./assets/kiki/poses/neutral.webp" alt="Kiki" draggable="false" style="max-height: 28vh; width: auto;" />
       </div>
     </section>
   </main>

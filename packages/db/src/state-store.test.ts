@@ -113,7 +113,7 @@ it("other connections see each committed version with the matching wallet, Brain
 
 it("does not mix a sibling's stats, wallet or game history into a snapshot", async () => {
   const f = await fixture();
-  await f.db.insert(children).values({ ...demo.child, id: "sibling", name: "Миша" });
+  await f.db.insert(children).values({ ...demo.child, id: "sibling", name: "Misha" });
   await f.db.insert(wallets).values({ childId: "sibling", stars: 1, suns: 2 });
   await f.db.insert(brainyStates).values({ ...demo.brainy, childId: "sibling", eyes: 99 });
   await f.db.insert(showcases).values({ childId: "sibling", data: demoShowcase });
@@ -124,7 +124,7 @@ it("does not mix a sibling's stats, wallet or game history into a snapshot", asy
     expiresAt: new Date("2026-11-15"),
   });
   expect(await getStateSnapshot(f.db, "sibling-access", now)).toMatchObject({
-    child: { id: "sibling", name: "Миша" },
+    child: { id: "sibling", name: "Misha" },
     progress: { stats: { eyes: 99 }, wallet: { stars: 1, suns: 2 } },
     latestGame: null,
   });
@@ -181,6 +181,7 @@ it("rolls days and weeks forward once, archives expired tasks and resets the dai
     "expired",
   ]);
   expect(first.showcase.weekGoal).toEqual({ ...before.showcase.weekGoal, earned: 0 });
+  expect(first.showcase.science).toEqual(before.showcase.science);
   expect(first.showcase.owned).toEqual(before.showcase.owned);
   expect(first.showcase.requests).toEqual(before.showcase.requests);
   await setParentUnlock(f.db, f.hash, "1234", monday);

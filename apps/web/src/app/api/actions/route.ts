@@ -4,7 +4,7 @@ import { demoApi, readDemoJson, requireDemoToken } from "@/lib/server/demo-api";
 
 export const runtime = "nodejs";
 
-/** Demo interactions (shop, gifts, tasks); rules live in @brainee/core (D-21). */
+/** Demo interactions (shop, gifts, tasks, video quiz); rules live in @brainee/core (D-21). */
 export async function POST(request: NextRequest) {
   return demoApi(request, async (db, now) => {
     const tokenHash = requireDemoToken(request);

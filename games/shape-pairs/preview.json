@@ -1,0 +1,17 @@
+{
+  "id": "shape-pairs",
+  "title": "Shape Pairs",
+  "entry": "/games/shape-pairs/index.html",
+  "minAge": 4,
+  "license": "MIT",
+  "sizeBudgetBytes": 1800000,
+  "mode": "explore",
+  "thumbnail": "/games/shape-pairs/thumbnail.svg",
+  "explore": {
+    "family": "phaser",
+    "viewport": "responsive",
+    "orientation": "any",
+    "audio": true,
+    "readiness": "bridge"
+  }
+}

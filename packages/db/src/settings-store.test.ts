@@ -38,7 +38,7 @@ it("requires parent access, checks the old PIN and revokes a device without expo
   await updateSettings(
     f.db,
     f.hash,
-    { type: "child", child: { name: "Мира", birthYear: 2020, promise: 2 } },
+    { type: "child", child: { name: "Mira", birthYear: 2020, promise: 2 } },
     now,
   );
   await expect(
@@ -49,7 +49,7 @@ it("requires parent access, checks the old PIN and revokes a device without expo
   expect(await setParentUnlock(f.db, f.hash, "1234", now)).toBe(false);
   expect(await setParentUnlock(f.db, f.hash, "2468", now)).toBe(true);
   const data = await getSettings(f.db, f.hash, now);
-  expect(data.child).toEqual({ name: "Мира", birthYear: 2020, promise: 2 });
+  expect(data.child).toEqual({ name: "Mira", birthYear: 2020, promise: 2 });
   expect(JSON.stringify(data)).not.toContain(f.hash);
   const id = data.devices[0]?.id;
   await updateSettings(f.db, f.hash, { type: "revoke", deviceId: id }, now);
@@ -131,4 +131,42 @@ it("isolates families, serializes code redemption and keeps PIN elevation at fif
   await expect(getSettings(f.db, f.hash, new Date(now.getTime() + 900000))).rejects.toMatchObject({
     code: "unauthorized",
   });
+});
+
+it("validates funnel answers and the exact age before converting the quiz start", async () => {
+  const f = await fixture();
+  const { signupFromQuiz } = await import("./account-store");
+  const { funnelQuizAnswers, quizStart } = await import("@brainee/core");
+  const funnel = {
+    goal: "ending",
+    age: "6-7",
+    duration: "one",
+    content: "kids",
+    finish: "switch",
+    handoff: "bargain",
+    reading: "together",
+    attempt: "timer",
+    moment: "afternoon",
+  };
+  const input = {
+    email: "funnel@example.com",
+    password: "secret123",
+    pin: "2468",
+    childName: "Alex",
+    birthYear: 2020,
+    funnel,
+  };
+  for (const invalid of [
+    { ...input, funnel: { ...funnel, age: "outside" } },
+    { ...input, birthYear: 2022 },
+    { ...input, funnel: { ...funnel, moment: "invalid" } },
+  ])
+    await expect(signupFromQuiz(f.db, invalid, now)).rejects.toMatchObject({
+      reason: "invalid-input",
+    });
+  const access = await signupFromQuiz(f.db, input, now);
+  const state = await getStateSnapshot(f.db, demoTokenHash(access.token) as string, now);
+  expect(state.progress.stats).toEqual(quizStart(funnelQuizAnswers(funnel)).stats);
+  expect(state.showcase.familyPlan).toEqual(funnel);
+  expect(state.progress.wallet).toEqual({ stars: 50, suns: 0 });
 });

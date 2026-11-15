@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Ученик — время вышло</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.tu-glow{animation:tuGlow 3.2s ease-in-out infinite}
+@keyframes tuGlow{0%,100%{box-shadow:0 0 0 4px #FF9EC2,0 0 20px -2px #FF9EC2}50%{box-shadow:0 0 0 4px #FF9EC2,0 0 38px 2px #FF9EC2}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 64px 20px 28px; display: flex; flex-direction: column; gap: 16px; background: #F2F1FA; font-family: 'Manrope', system-ui, sans-serif; color: #1C1B33">
+
+<span style="align-self: center; display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 0 0 1px #E6E4F2; font-size: 13px; font-weight: 700; color: #5F6180">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+TikTok закрыт Извилиной · 20:52
+</span>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 24px 18px; border-radius: 30px; background: #1C1B33; color: #FFFFFF; box-shadow: 0 24px 40px -24px rgba(28,27,51,0.55)">
+<div class="tu-glow" style="width: 180px; height: 180px; border-radius: 50%; background: #F2F1FA; display: flex; align-items: center; justify-content: center; overflow: hidden">
+<dc-import name="Brain" health="76" size="192" hint-size="192px,184px"></dc-import>
+</div>
+<span style="font-family: 'Unbounded', sans-serif; font-size: 24px; font-weight: 700; text-align: center; line-height: 1.2">Вечер на сегодня всё</span>
+<span style="font-size: 15px; font-weight: 600; line-height: 1.45; color: #CFCDE6; text-align: center">Ты потратил 70 из 70 минут. Мозг-гений никуда не делся — завтра база снова 45</span>
+<span style="display: block; width: 100%; height: 8px; border-radius: 999px; background: #5A3FE0"></span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 22px; background: #FFFFFF; box-shadow: 0 0 0 1px #E6E4F2; font-size: 14px; font-weight: 700">
+<div style="display: flex; align-items: center; justify-content: space-between"><span>Копилка на выходные</span><span style="font-weight: 800">20 мин</span></div>
+<div style="display: flex; align-items: center; justify-content: space-between"><span>Если 7 «Б» победит в пятницу</span><span style="padding: 2px 9px; border-radius: 999px; background: #FFF3D6; color: #7A4E00; font-weight: 800">+15</span></div>
+<div style="display: flex; align-items: center; justify-content: space-between"><span style="color: #5F6180">Завтра откроется</span><span style="font-weight: 800">в 17:00</span></div>
+</div>
+
+<button type="button" style="margin-top: auto; min-height: 56px; border: none; border-radius: 18px; background: #1C1B33; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">До завтра</button>
+<span style="text-align: center; font-size: 12px; font-weight: 600; color: #5F6180">Звонки, сообщения и учебные приложения работают</span>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

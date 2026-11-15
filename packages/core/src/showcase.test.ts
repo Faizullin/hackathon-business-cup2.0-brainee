@@ -12,13 +12,13 @@ const base: Showcase = {
   equipped: {},
   owned: [],
   earned: [],
-  weekGoal: { earned: 6, target: 10, giftId: "cinema", due: "Вс" },
+  weekGoal: { earned: 6, target: 10, giftId: "cinema", due: "Sun" },
   tasks: [
     {
       id: "a",
-      title: "Убраться",
+      title: "Tidy up",
       place: "real",
-      skill: "Ответственность",
+      skill: "Responsibility",
       reward: 2,
       status: "todo",
     },
@@ -27,29 +27,43 @@ const base: Showcase = {
   recommendations: [
     {
       id: "r",
-      skill: "Внимание",
+      skill: "Attention",
       value: 41,
       average: 52,
-      part: "Глаза",
+      part: "Eyes",
       why: "",
-      items: [{ id: "i", title: "Пазл", reward: 3, duration: "20 мин" }],
+      items: [{ id: "i", title: "Puzzle", reward: 3, duration: "20 min" }],
     },
   ],
   gifts: [
-    { id: "cinema", title: "Кино", price: 10 },
-    { id: "ice", title: "Мороженое", price: 3 },
+    { id: "cinema", title: "Movie", price: 10 },
+    { id: "ice", title: "Ice cream", price: 3 },
   ],
   requests: [],
   fun: [
     {
       id: "rocket",
-      title: "Ракета",
+      title: "Rocket",
       skill: "",
       icon: "rocket",
       priceTimed: 30,
       priceForever: 500,
       forever: false,
       until: null,
+    },
+  ],
+  science: [
+    {
+      id: "v",
+      title: "Ocean",
+      minutes: 24,
+      icon: "wave",
+      colors: ["#000", "#111"],
+      question: "?",
+      options: ["a", "b", "c"],
+      answer: 0,
+      position: 0,
+      solved: false,
     },
   ],
   ageAverages: { speech: 50, reading: 50, logic: 50, attention: 50, memory: 50, motor: 50 },
@@ -81,7 +95,7 @@ describe("showcase actions", () => {
   it("enforces five tasks a day", () => {
     const firstTask = base.tasks[0] ?? {
       id: "t0",
-      title: "Дело",
+      title: "Chore",
       place: "real" as const,
       skill: "X",
       reward: 1,
@@ -91,7 +105,7 @@ describe("showcase actions", () => {
       ...base,
       tasks: Array.from({ length: TASKS_PER_DAY }, (_, i) => ({ ...firstTask, id: `t${i}` })),
     };
-    const add = { type: "task-add", title: "Ещё", place: "real", skill: "X", reward: 1 } as const;
+    const add = { type: "task-add", title: "More", place: "real", skill: "X", reward: 1 } as const;
     expect(applyShowcaseAction(input(full), add)).toEqual({ ok: false, reason: "daily-limit" });
     expect(applyShowcaseAction(input(), add).ok).toBe(true);
   });
@@ -100,7 +114,7 @@ describe("showcase actions", () => {
     const bought = applyShowcaseAction(input(), { type: "buy-gift", giftId: "ice" });
     expect(bought).toMatchObject({ ok: true, wallet: { stars: 100, suns: 2 } });
     if (bought.ok)
-      expect(bought.showcase.requests[0]).toMatchObject({ title: "Мороженое", delivered: false });
+      expect(bought.showcase.requests[0]).toMatchObject({ title: "Ice cream", delivered: false });
     expect(applyShowcaseAction(input(), { type: "buy-gift", giftId: "cinema" }).ok).toBe(false);
   });
 
@@ -112,6 +126,27 @@ describe("showcase actions", () => {
       showcase: { equipped: { head: "cap" } },
     });
     expect(applyShowcaseAction(input(), { type: "equip", id: "cap" }).ok).toBe(false);
+  });
+
+  it("video stars only after the end and a correct answer, once", () => {
+    expect(applyShowcaseAction(input(), { type: "video-answer", id: "v", answer: 0 }).ok).toBe(
+      false,
+    );
+    const watched = applyShowcaseAction(input(), { type: "video-position", id: "v", position: 99 });
+    if (!watched.ok) throw new Error();
+    expect(watched.showcase.science[0]?.position).toBe(24);
+    expect(
+      applyShowcaseAction(input(watched.showcase), { type: "video-answer", id: "v", answer: 1 }),
+    ).toEqual({
+      ok: false,
+      reason: "wrong-answer",
+    });
+    const right = applyShowcaseAction(input(watched.showcase), {
+      type: "video-answer",
+      id: "v",
+      answer: 0,
+    });
+    expect(right).toMatchObject({ ok: true, wallet: { stars: 115 }, gains: { eyes: 2 } });
   });
 
   it("timed fun unlock lasts ten minutes", () => {
@@ -178,4 +213,30 @@ it("counts only assigned real tasks, pending confirmations and undelivered gifts
     parentTasks: 0,
     parentRewards: 0,
   });
+});
+
+it("validates a parent-only family plan without changing rewards or stats", () => {
+  const answers = {
+    goal: "ending",
+    age: "6-7",
+    duration: "one",
+    content: "kids",
+    finish: "switch",
+    handoff: "bargain",
+    reading: "together",
+    attempt: "timer",
+    moment: "afternoon",
+  };
+  expect(PARENT_ACTIONS.has("family-plan")).toBe(true);
+  const result = applyShowcaseAction(input(), { type: "family-plan", answers });
+  expect(result).toMatchObject({
+    ok: true,
+    showcase: { familyPlan: answers },
+    wallet: input().wallet,
+    gains: {},
+  });
+  expect(input().showcase.familyPlan).toBeUndefined();
+  expect(
+    applyShowcaseAction(input(), { type: "family-plan", answers: { ...answers, age: "outside" } }),
+  ).toEqual({ ok: false, reason: "invalid-input" });
 });

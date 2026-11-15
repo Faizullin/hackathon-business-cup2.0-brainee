@@ -8,10 +8,12 @@ radars and ranking remain labelled demo data. Demo parent PIN: `1234`.
 
 ## Recordings
 
-Each walkthrough opens the app on “What shall we play?”, goes to Learn,
+Each walkthrough previews the parent funnel's cover and five real growth stages,
+then opens the app on “What shall we play?”, goes to Learn,
 browses Leisure, watches a science video to the end (1 s = 1 min) and answers
 its quiz (a wrong answer fades, the right one pays +15 ★ once), marks a task
-done and exchanges ☀ → ★ in Gifts, and buys an accessory on the Brainy tab.
+done and exchanges ☀ → ★ in Gifts, buys an accessory on the Brainy tab,
+and visits Path for weekly learning, stages and discoveries.
 Then it enters parent mode with the PIN, scrolls Analytics, confirms the
 child's task in Tasks and opens Gifts & goal.
 
@@ -22,6 +24,19 @@ child's task in Tasks and opens Gifts & goal.
 ### iPad viewport · 1180 × 820 landscape
 
 {{flow:ipad-mvp}}
+
+## Parent funnel preview
+
+The review session is separate from normal saved answers. These preview stages
+create no game session or reward; signup and plan persistence are separate flows.
+
+### Cover
+
+{{compare:iPad (1180 × 820 landscape)=start-cover@ipad|Phone (390 × 844)=start-cover@phone}}
+
+### Growth slider · Genius preview
+
+{{compare:iPad (1180 × 820 landscape)=start-growth@ipad|Phone (390 × 844)=start-growth@phone}}
 
 ## Child screens
 
@@ -48,6 +63,10 @@ child's task in Tasks and opens Gifts & goal.
 ### Brainy
 
 {{compare:iPad (1180 × 820 landscape)=brainy@ipad|Phone (390 × 844)=brainy@phone}}
+
+### Path
+
+{{compare:iPad (1180 × 820 landscape)=path@ipad|Phone (390 × 844)=path@phone}}
 
 ## Parent screens
 

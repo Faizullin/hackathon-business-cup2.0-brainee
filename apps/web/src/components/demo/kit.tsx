@@ -24,7 +24,7 @@ export function Panel({
   return (
     <section
       className={cn(
-        "flex min-w-0 flex-col gap-3 rounded-panel border border-border bg-card p-4 sm:p-5",
+        "flex min-w-0 flex-col gap-3 rounded-panel ring-1 ring-border bg-card p-4 sm:p-5",
         className,
       )}
     >
@@ -32,9 +32,7 @@ export function Panel({
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div className="min-w-0">
             {title && (
-              <Heading className={Heading === "h2" ? "font-heading text-lg font-semibold" : ""}>
-                {title}
-              </Heading>
+              <Heading className={Heading === "h2" ? "font-heading text-lg" : ""}>{title}</Heading>
             )}
             {note && <p className="text-muted-foreground text-sm">{note}</p>}
           </div>
@@ -51,13 +49,14 @@ export function Chip({
   tone,
 }: {
   children: ReactNode;
-  tone?: "mint" | "sun" | "sky" | "coral";
+  tone?: "mint" | "sun" | "sky" | "coral" | "highlight";
 }) {
   const tones = {
-    mint: "bg-mint/15 text-foreground",
+    mint: "bg-violet-wash text-mint",
     sun: "bg-sun/20 text-foreground",
-    sky: "bg-sky/15 text-foreground",
-    coral: "bg-coral/15 text-foreground",
+    sky: "bg-gain-wash text-sky",
+    coral: "bg-loss-wash text-coral",
+    highlight: "bg-highlight-wash text-ink",
   };
   return (
     <span
@@ -126,7 +125,10 @@ export function Notice({ notice }: { notice: { text: string; ok: boolean } | nul
   return (
     <p
       role={notice.ok ? "status" : "alert"}
-      className={cn("rounded-xl p-3 text-sm font-medium", notice.ok ? "bg-mint/15" : "bg-coral/15")}
+      className={cn(
+        "rounded-xl p-3 text-sm font-medium",
+        notice.ok ? "lv-gainA bg-gain-wash text-sky" : "lv-lossA bg-loss-wash text-coral",
+      )}
     >
       {notice.text}
     </p>
@@ -136,5 +138,4 @@ export function Notice({ notice }: { notice: { text: string; ok: boolean } | nul
 export const smallButton =
   "inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl px-3.5 text-sm font-semibold transition-transform duration-(--dur-press) active:scale-95 disabled:opacity-50 disabled:pointer-events-none";
 export const primaryButton = `${smallButton} bg-primary text-primary-foreground`;
-export const coralButton = `${smallButton} bg-coral text-white`;
-export const outlineButton = `${smallButton} border border-border bg-card`;
+export const outlineButton = `${smallButton} ring-1 ring-border bg-card`;

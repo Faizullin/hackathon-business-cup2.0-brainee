@@ -1,3 +1,0 @@
-module.exports=[87543,s=>{"use strict";s.s([])}];
-
-//# sourceMappingURL=apps_web__next-internal_server_app_api_settings_route_actions_1w1ycd3di3ya0.js.map

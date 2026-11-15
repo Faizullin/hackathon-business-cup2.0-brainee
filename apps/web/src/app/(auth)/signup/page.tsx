@@ -1,17 +1,32 @@
 "use client";
-import { TIME_ZONES } from "@brainee/core";
-import { useState } from "react";
+import { type FunnelAnswers, funnelBirthYears, isFunnelAnswers, TIME_ZONES } from "@brainee/core";
+import { useEffect, useState } from "react";
 import { Panel, primaryButton } from "@/components/demo/kit";
+import { funnelCopy as c } from "@/components/funnel/copy";
+
+import { loadFunnel } from "@/components/funnel/storage";
 import { useI18n } from "@/i18n";
+
+// Hackathon demo: every family uses PIN 1234 unless the parent changes it in Settings.
+const DEMO_PIN_HINT = { pin: "1234" } as const;
 
 export default function Signup() {
   const { t } = useI18n();
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [funnel, setFunnel] = useState<FunnelAnswers | null>(null);
+  useEffect(() => {
+    const saved = loadFunnel();
+    if (isFunnelAnswers(saved.answers)) setFunnel(saved.answers);
+    else window.location.replace(`/start${window.location.search}`);
+  }, []);
+  const years = funnel ? funnelBirthYears(funnel.age, new Date().getUTCFullYear()) : null;
   const to = t.onboarding;
   const ts = t.settings;
+  if (!funnel || !years) return <p>{c.loading}</p>;
   return (
-    <Panel as="h1" title={t.signup.title} note={t.signup.note}>
+    <Panel as="h1" title={c.signupTitle} note={c.signupNote}>
+      <p className="mb-4 text-muted-foreground">{c.range(years.min, years.max)}</p>
       <form
         className="grid gap-4 sm:grid-cols-2"
         onSubmit={async (e) => {
@@ -19,10 +34,11 @@ export default function Signup() {
           setBusy(true);
           const f = new FormData(e.currentTarget);
           try {
-            const r = await fetch("/api/auth/signup", {
+            const r = await fetch("/api/onboarding", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
+                funnel,
                 email: f.get("email"),
                 password: f.get("password"),
                 pin: f.get("pin"),
@@ -55,11 +71,12 @@ export default function Signup() {
               name={name}
               type={type}
               required
-              min={name === "birthYear" ? new Date().getFullYear() - 10 : undefined}
-              max={name === "birthYear" ? new Date().getFullYear() - 4 : undefined}
+              min={name === "birthYear" ? years.min : undefined}
+              max={name === "birthYear" ? years.max : undefined}
               minLength={name === "password" ? 6 : undefined}
               maxLength={name === "pin" ? 4 : 100}
               pattern={name === "pin" ? "[0-9]{4}" : undefined}
+              defaultValue={name === "pin" ? DEMO_PIN_HINT.pin : undefined}
             />
           </label>
         ))}

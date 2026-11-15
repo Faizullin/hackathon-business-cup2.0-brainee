@@ -15,11 +15,9 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
-import { localizeContent, translateContent, useI18n } from "@/i18n";
 import {
   type FinishReply,
   type IssuedGame,
@@ -76,7 +74,7 @@ function SharedLearning({ children }: { children: ReactNode }) {
   const client = useQueryClient();
   const pathname = usePathname();
   const active =
-    /^\/(learn|leisure|gifts|brainy|game|entry|analytics|tasks|rewards|settings|fun|explore)(\/|$)/.test(
+    /^\/(learn|leisure|gifts|brainy|path|game|entry|video|analytics|tasks|rewards|settings|fun|explore)(\/|$)/.test(
       pathname,
     );
   const accessReady = useRef(false);
@@ -127,20 +125,7 @@ function SharedLearning({ children }: { children: ReactNode }) {
     retry: false,
     refetchInterval: (query) => (query.state.data ? 3000 : false),
   });
-  const { locale } = useI18n();
-  // Seeded showcase text and game titles follow the device locale; logic keeps the raw data.
-  const snapshot = useMemo(
-    () =>
-      state.data && {
-        ...state.data,
-        showcase: localizeContent(state.data.showcase, locale),
-        latestGame: state.data.latestGame && {
-          ...state.data.latestGame,
-          title: translateContent(state.data.latestGame.title, locale),
-        },
-      },
-    [state.data, locale],
-  );
+  const snapshot = state.data;
   useEffect(() => {
     if (state.error && "status" in state.error && state.error.status === 419)
       window.location.replace("/login");
@@ -251,7 +236,7 @@ function SharedLearning({ children }: { children: ReactNode }) {
       {children}
       <StageCelebration
         snapshot={snapshot}
-        enabled={/^\/(learn|leisure|gifts|brainy|game|entry|fun)(\/|$)/.test(pathname)}
+        enabled={/^\/(learn|leisure|gifts|brainy|path|game|entry|video|fun)(\/|$)/.test(pathname)}
       />
     </LearningContext>
   );

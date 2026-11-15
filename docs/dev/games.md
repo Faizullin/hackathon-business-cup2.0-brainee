@@ -48,7 +48,7 @@ type GameProps = {
   onFinish(result: GameResult): void;
 };
 ```
-`<GameHost game level seed text onRound onFinish />` renders `ReactGame` (via `load()` from the code registry) or `IframeGame` (via `runtimeUrl` from the `Game` DB row). Both run inside an error boundary. `GameText` is defined in `kit.ts`; the web host supplies the active dictionary from `i18n/en.ts` or `i18n/ru.ts` and passes the locale to the iframe handshake. Shared shape types and the SVG renderer live in `src/kit/`; game folders may import that kit, core, npm and their own files, never another game. `pnpm check:games` checks this boundary. **The server validates every `GameResult` before `core` rewards it** (T-81).
+`<GameHost game level seed text onRound onFinish />` renders `ReactGame` (via `load()` from the code registry) or `IframeGame` (via `runtimeUrl` from the `Game` DB row). Both run inside an error boundary. `GameText` is defined in `kit.ts`; the web host supplies the English dictionary from `i18n/en.ts` and passes `locale: "en"` in the iframe handshake. Shared shape types and the SVG renderer live in `src/kit/`; game folders may import that kit, core, npm and their own files, never another game. `pnpm check:games` checks this boundary. **The server validates every `GameResult` before `core` rewards it** (T-81).
 
 Rules for every game:
 1. **Games report; `core` rewards.** A game never decides ★ or stat changes.
@@ -84,7 +84,7 @@ games/gdevelop-<name>/      # project/ (editable .json + assets, committed) → 
 
 Manifest (trimmed from GSP):
 ```jsonc
-{ "id": "phaser-shape-match", "kind": "dev", "title": "Найди пару", "engine": "phaser",
+{ "id": "phaser-shape-match", "kind": "dev", "title": "Find a Pair", "engine": "phaser",
   "skills": { "main": "attention" }, "levels": 2,
   "runtimeUrl": "/games/phaser-shape-match/index.html", "version": "0.1.0", "license": "own" }
 ```
@@ -112,25 +112,25 @@ Our own games: `sandbox="allow-scripts allow-same-origin"`. This isolates lifecy
 
 | GSP package | Engine | Fit for Brainee | Notes |
 |---|---|---|---|
-| `phaser-shape-match-game` | Phaser | attention/logic learning game | kid-friendly already; translate UI to Russian |
-| `gdevelop-pairs-game` | GDevelop | memory ("Повтори за Брейни" stand-in) | official MIT sample |
+| `phaser-shape-match-game` | Phaser | attention/logic learning game | kid-friendly already; English UI |
+| `gdevelop-pairs-game` | GDevelop | memory ("Repeat after Brainy" stand-in) | official MIT sample |
 | `gdevelop-sokoban-game` | GDevelop | logic / *do the hard thing* | MIT (GDevelop examples) |
 | `phaser-picture-puzzle-game` | Phaser | fun or logic | CC0 art (Kenney); check that pictures load locally |
-| `three-subway-runner-game` | Three.js | fun ("Ракета-раннер" analog) | ⚠ heavy `.glb` on iPad; **drop `talia.glb`** (third-party IP, breaks the product rule) |
+| `three-subway-runner-game` | Three.js | fun ("Rocket Runner" analog) | ⚠ heavy `.glb` on iPad; **drop `talia.glb`** (third-party IP, breaks the product rule) |
 
 PECS board games and the sample game don't fit. Porting a candidate is T-85.
 
 ## Porting prototype games
-Odd one out and Continue the pattern → `react` runtime. Prototype lines 901–982 ([ideas/README.md](../ideas/README.md)). Catalog: [screens.md](../product/screens.md#learn-учимся).
+Odd one out and Continue the pattern → `react` runtime. Catalog: [screens.md](../product/screens.md#learn).
 
 ## Implemented platform slice (T-29 / T-85 / T-89 / T-90)
 
 - `packages/game-bridge` ports GSP's `bridge-core` transport, endpoints, repeat-hello handshake, DOM/GDevelop adapters and tests. The drop-in script exposes `window.Brainee`; PECS, speech, card/progress host methods and analytics outbox are removed. Protocol 2 supports protocol 1 (legacy `id` normalizes to `eventId`). Every incoming message is capped at 64 KiB and 50 messages/s; the last 1,000 event IDs are deduplicated. Contract event payloads use zod. Nonce + the private transferred MessageChannel bind the connection to the iframe; these audited same-origin builds are not a security boundary.
 - `packages/engine-phaser` ports the GSP Phaser adapter, `BridgedScene`, responsive factory and esbuild helper. Scenes send `ready` only after assets and launch config are loaded. `IframeGame` waits at most 10 seconds for ready, renders an error and removes the frame on failure; unmount closes the bridge and removes the iframe's timers/audio/renderer. A finish must agree with the observed rounds and issued game/level before the existing LearningProvider submits it. Lab launches use an ephemeral ID and never save rewards.
 - Every React folder and engine game has `manifest.json`. `packages/game-catalog` validates and exports the registered manifests; DB seed and embedded registry consume them. `pnpm check` validates manifests, entry paths, weights and React source budgets; `pnpm test:assets` additionally checks embedded output budgets, HTML/CSS references, pictures and bridge build. React budgets are source bytes in this light slice; embedded budgets are uncompressed artifact bytes. Version-history/rollback (`GameVersion`) and automatic path-C imports remain future work.
-- `games/picture-puzzle` is path B. Phaser 4 and the Rex jigsaw cutter are bundled locally, with Kenney CC0 pictures and preserved licences. **One session = four successful piece placements**, not four pictures. Each rejected placement increments mistakes; a successfully placed piece with one or more prior rejections increments corrections once. Picture changes reset per-piece attempts, retain the issued level and continue the four-placement counter. At four, input stops and exactly one `GameResult` is emitted. Partial play never finishes. Seed selects the starting picture; no family calendar/timezone dependency. Five levels retain GSP's short-side `<700px` cap at 3×4 pieces. The host's Russian chrome surrounds language-light canvas controls; no remote speech/font is used.
+- `games/picture-puzzle` is path B. Phaser 4 and the Rex jigsaw cutter are bundled locally, with Kenney CC0 pictures and preserved licences. **One session = four successful piece placements**, not four pictures. Each rejected placement increments mistakes; a successfully placed piece with one or more prior rejections increments corrections once. Picture changes reset per-piece attempts, retain the issued level and continue the four-placement counter. At four, input stops and exactly one `GameResult` is emitted. Partial play never finishes. Seed selects the starting picture; no family calendar/timezone dependency. Five levels retain GSP's short-side `<700px` cap at 3×4 pieces. The host's English chrome surrounds language-light canvas controls; no remote speech/font is used.
 - `pnpm games:build` replaces the public embedded-game directories and emits `public/games/bridge.js`; `pnpm build` runs it first. Generated artifacts stay ignored. Use `pnpm games:build` before `pnpm dev` on a fresh checkout. `pnpm db:push && pnpm db:seed` adds runtime columns/catalog to existing local data; `pnpm demo` starts from a full reset.
-- `game-conformance.spec.ts` loops all manifests in Chromium/WebKit, phone/landscape iPad: ready within 10 seconds, real pointer input, exactly one finish, no console errors/foreign requests. Puzzle coverage includes rejection→correction, server receipt replay without another reward, stopping, timeout cleanup and screenshots. `pnpm test` retains the ported bridge/geometry/layout tests.
+- The per-game specs plus the shared `imported-game-acceptance` / `explore-acceptance` helpers, `games-integration.spec.ts` and `own-origin.spec.ts` cover ready, real input, exactly one finish, rewards, receipt replay and foreign requests. Heavy game specs run only in `pnpm e2e:full` on WebKit iPad (see [setup.md](setup.md#e2e-matrix-tiered)); the former loop-all `game-conformance.spec.ts` was removed as a duplicate.
 
 The sections above describing full GDevelop build tooling, per-version trust tiers and external artifact imports are the longer-term design; this slice supplies its generic GDevelop bridge adapter, but not a GDevelop export kit.
 
@@ -138,11 +138,11 @@ The sections above describing full GDevelop build tooling, per-version trust tie
 
 `games/tangram-tales/artifact/` contains 47 selected, unmodified QLOBE files from commit `60967634e6cc313c41a5aa8067bed9f0f616176c`, including MIT LICENSE. `sources.lock.json` records upstream paths, Git blob hashes and SHA-256; `pnpm check` checks every retained byte. The handoff launcher was reviewed but not executed: only the selected pinned files were fetched and verified outside the repo. Normal builds are offline.
 
-`scripts/build-tangram.mjs` copies that artifact and applies a bounded guided-mode port plus `session.js`/`session.css`/Russian HTML to `public/games/tangram-tales/`. The served engine omits debug, free play, shelf, storage, narration and idle prompting. The original 16 silhouettes, shape-family equivalence, target geometry and snapping remain. Native buttons use select-then-place input, including keyboard activation; orientation snaps automatically. Drag/hold rotation is omitted from this simplified guided version. Controls fit the phone iframe and landscape iPad; no race between pointer-up replacement and compatibility click.
+`games/tangram-tales/build.mjs` copies that artifact and applies a bounded guided-mode port plus `session.js`/`session.css`/English HTML to `public/games/tangram-tales/`; the upstream English copy is kept. The served engine omits debug, free play, shelf, storage, narration and idle prompting. The original 16 silhouettes, shape-family equivalence, target geometry and snapping remain. Native buttons use select-then-place input, including keyboard activation; orientation snaps automatically. Drag/hold rotation is omitted from this simplified guided version. Controls fit the phone iframe and landscape iPad; no race between pointer-up replacement and compatibility click.
 
-The manifest specifies logic .7 / motor .3, age 6+, three levels. Levels leave 4/5/6 pieces to place, selected deterministically by the issued seed. A session selects four distinct silhouettes from the 16. **Round = one fully assembled silhouette confirmed with «Проверить».** Check while incomplete reports one mistake; completing after one or more failed checks reports exactly one correction. Selection, failed placement and rotation never count as rounds/mistakes. Four rounds produce exactly one finish; pagehide/unmount stops without finishing. All timing is elapsed monotonic time, with no family timezone dependency.
+The manifest specifies logic .7 / motor .3, age 6+, three levels. Levels leave 4/5/6 pieces to place, selected deterministically by the issued seed. A session selects four distinct silhouettes from the 16. **Round = one fully assembled silhouette confirmed with "Check".** Check while incomplete reports one mistake; completing after one or more failed checks reports exactly one correction. Selection, failed placement and rotation never count as rounds/mistakes. Four rounds produce exactly one finish; pagehide/unmount stops without finishing. All timing is elapsed monotonic time, with no family timezone dependency.
 
-`game-conformance.spec.ts` covers the same ready/finish/network/console contract as every other listed game. `tangram.spec.ts` covers a failed check → correction → four silhouettes → one persisted reward and idempotent receipt replay, stopping, levels 1/2 and repeated mistakes with one correction; level 3 is covered by conformance/reward tests. All run on Chromium/WebKit at phone and landscape iPad sizes. No debug/win helper or programmatic game-state mutation is used.
+`tangram.spec.ts` covers a failed check → correction → four silhouettes → one persisted reward and idempotent receipt replay, stopping, levels 1/2 and repeated mistakes with one correction; level 3 is covered by conformance/reward tests. All run on Chromium/WebKit at phone and landscape iPad sizes. No debug/win helper or programmatic game-state mutation is used.
 
 ## Learning batch and Explore previews
 
@@ -165,15 +165,14 @@ Rhythm 5+ and Secret Message 6+ (memory .7 / attention .3). The session API chec
 minimum age as well as enabled status; catalog cards and Explore direct launches respect age locks.
 Explore participates in shared state loading but never issues a learning session or grants rewards.
 
-English catalog titles and localized host loading/error text use the active app dictionary;
-the locale also travels in the bridge handshake. Russian catalog titles and saved game-feed
-entries remain translated. Imported scored-game instructions are currently Russian; Explore
-retains the original English gameplay. Full bilingual in-game instructions remain a follow-up.
+The platform is English-only (D-34): catalog titles, host loading/error text and every game's
+in-game copy are English, and the bridge handshake carries `locale: "en"`. Explore previews keep
+their original English gameplay with an English host bar.
 The original pinned bytes and licenses are unchanged; only host/session code and served build
 transforms are adapted. Stable button hit areas keep visual feedback from moving input targets.
 
 `games-integration.spec.ts` covers the new games' English host flow, calculated skill gains,
-saved history recommendations, parent progress, next-level launch, age locks, Russian feed titles
+saved history recommendations, parent progress, next-level launch, age locks
 and iframe timeout/reload recovery, alongside the imported real-input conformance and replay tests.
 
 Publishing this merge requires an application rebuild/redeploy and adding the missing catalog
@@ -181,3 +180,20 @@ rows with the non-reset seed command (`pnpm db:seed`) against the intended deplo
 This integration does not run that command against production. Do not use `db:reset` or the
 shared-family refresh to install game catalog entries. Unimported titles in
 [the remaining queue](../product/external-games.md) stay unregistered and unavailable to children.
+
+## Auto-discovery, thumbnails and Explore metadata (#8, D-38)
+
+A game registers by existing: `scripts/discover-games.mjs` reads every `packages/games/src/<id>/manifest.json`, `games/<id>/manifest.json` (scored) and `games/<id>/preview.json` (Explore) and writes the gitignored registry modules the catalog imports. Shared scripts name no game.
+
+New game checklist (only its folder):
+- React: `manifest.json`, `index.ts` that **default-exports** its `GameDefinition`, `thumbnail.svg`.
+- Embedded: `manifest.json` or `preview.json`, `build.mjs` exporting `buildGame(destination)` (optional `checkAssets(base)`), `thumbnail.svg`, `CREDITS.md`/licences.
+- `thumbnail` is always `/games/<id>/thumbnail.svg`: 4:3 (`viewBox="0 0 160 120"`), ≤ 8 KB, `#F2F1FA` canvas with a 1 px `#E6E4F2` frame (`rx` 18), `GAME_PALETTE` shapes showing the actual mechanic, no text, no Brainy, nothing external.
+- Previews add `explore`: `family` (`phaser` | `qlobe` | `sugarizer` | `h5p` | `blockly`), `viewport` (`responsive`, or `contain` with `aspectRatio` like `"4 / 3"`), `orientation`, `audio`, `readiness` (`bridge`, or `load` for games without the bridge).
+- E2E: add the spec name to `HEAVY_GAME_SPECS`/`GAME_SPECS` in `apps/web/playwright.config.ts`.
+
+GSP Phaser games (Shape Pairs, Color Boxes, Sticker Scene) share `packages/engine-phaser`, which carries GSP `phaser-core`'s helpers as `@brainee/engine-phaser/<module>`. Batch details: [docs/games/batches/2026-11-15-autodiscovery-thumbnails-wave1.md](../games/batches/2026-11-15-autodiscovery-thumbnails-wave1.md).
+
+## Lavender palette (T-141)
+
+Host chrome uses `--game-*` aliases from `@brainee/ui/styles.css`. Canvas consumers can import `GAME_PALETTE` from `@brainee/ui/lib/game-palette`; `pnpm check:palette` prevents drift from the light UI reference. CSS aliases follow the derived dark theme. Pair colors with shapes or words for correct/retry feedback. Pinned game artwork stays unchanged; this redesign does not modify game internals.

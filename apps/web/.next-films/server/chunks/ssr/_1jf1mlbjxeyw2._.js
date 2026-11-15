@@ -1,3 +1,0 @@
-module.exports=[80673,a=>{"use strict";var b=a.i(47386);a.i(39011);var c=a.i(32696),d=a.i(62364);a.i(63008);var e=a.i(91832);a.s(["BrainyLoader",0,function(){let{t:a}=(0,e.useI18n)();return(0,b.jsxs)("div",{role:"status",className:"flex flex-col items-center gap-3 p-6 text-center",children:[(0,b.jsx)(d.f,{stats:c.f.afterQuiz,label:"",className:"brainy-idle h-28 w-28"}),(0,b.jsx)("p",{children:a.child.sync.loading})]})}])},32696,a=>{"use strict";a.s(["f",0,{afterQuiz:{brain:18,eyes:16,mouth:14,arms:14,legs:18,resp:10},now:{brain:66,eyes:41,mouth:55,arms:70,legs:64,resp:80},onlyFun:{brain:12,eyes:32,mouth:34,arms:96,legs:88,resp:20}}])}];
-
-//# sourceMappingURL=_1jf1mlbjxeyw2._.js.map

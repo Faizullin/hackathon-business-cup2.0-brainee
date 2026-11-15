@@ -2,7 +2,7 @@
 
 > A snapshot: **overwrite it, don't append.** History goes in [log.md](log.md); tasks go in [todo.md](todo.md).
 
-**Updated:** 2026-11-15 · **Phase:** P7 Demo prep (all pages built)
+**Updated:** 2026-11-15 · **Phase:** P7 demo prep + redesign implementation
 
 ## Phases
 
@@ -20,10 +20,11 @@
 Legend: ✅ done · 🔄 in progress · ⏳ next · ⬜ todo · ⛔ blocked
 
 ## Current focus
-**Jury-ready presentation MVP:** one-tap isolated family access, quiz-first or simple signup, paired devices, saved learning/tasks/rewards and playable Snake. Activity analytics use real saved actions; historical/character radars and rankings remain labelled demo. See [demo.md](../demo.md) and the [remaining road map](todo.md#road-to-mvp-acceptance-criteria--remaining-tasks).
+The lavender redesign now includes published D-33 films, D-34 English-only platform behavior and input hardening from `origin/master`, integrated in `../brainee-merge-trial` on `merge/origin-master`. Ready for owner review with the verification limits below.
 
 ## Handoff
-- **This session (T-116, branch `minor_features/placeholders_sound`, uncommitted):** Rhythm Copycat and Secret Message Lab now start with sound on («Звук: вкл») and unlock WebAudio on the first gesture. Secret Message's toggle used to change only its label; it now drives synthesized stamp/correct/mistake/finish cues. Removed placeholder content per D-33: cartoon and science-video cards, `/cartoon/[id]`, `/video/[id]`, their core actions/showcase fields/seed, and non-Snake fun titles. Leisure is the Snake shop; analytics weekly bars lose the science series.
-- **Verified:** 171 unit tests, `pnpm build`, `games:build`, `test:assets`, `check:games`; Playwright `mvp-pages`/`own-origin`/`jury` on chromium-phone + webkit-phone (20/20), and Rhythm/Secret Message conformance + acceptance on chromium-phone (8/8). The full `pnpm e2e` matrix was not run.
-- **Tooling caveats:** `apps/web/.next-combined/` and `.next-films/` are committed build outputs; repo-wide `pnpm format`/`biome check .` rewrite or flag them, so `pnpm check` fails (T-117). Stale `apps/web/.next/dev/types` (old `/lab/film`, `/video`, `/cartoon` entries) blocked `next build`; it was moved to the session scratchpad and regenerates on the next `pnpm dev`.
-- **Still open from before:** T-113 serial WebKit input stabilization + full browser rerun; T-115 English in-game instructions (now also the sound toggles); T-114 further imports; physical iPad rehearsal T-62/T-84 and freeze T-74. Production needs a redeploy; existing families keep old cartoon/science JSON, which is ignored.
+- **PR #10 (branch `minor_features/placeholders_sound`, merged with current master):** Rhythm Copycat and Secret Message Lab now start with «Sound: on» and unlock WebAudio on the first gesture; Secret Message's toggle used to change only its label and now drives synthesized stamp/correct/mistake/finish cues. Placeholder content is gone per D-39: cartoons (cards, `/cartoon/[id]`, `buy-cartoon`, showcase field), the timer-based `DemoPlayer` and the four science entries without films, and the four unplayable fun titles. Leisure = Snake shop + the three films; `/video/[id]` renders not-found for non-film ids.
+- **Existing families:** `syncCatalog` now drops saved `science`/`fun` items that the catalog no longer has (progress on removed placeholders is discarded); old `cartoons` JSON is ignored.
+- **Passed:** `pnpm check`, 340 unit tests, production build; Playwright mvp-pages/own-origin/jury/film on webkit-ipad + chromium-phone (20/20 after fixing one new locator), state-sync 5/5, Rhythm/Secret Message integration/input/acceptance on webkit-ipad (11/11). Not run: full `pnpm e2e:full`, report regeneration.
+- **Note:** with the app's `loading.tsx`, Next.js returns HTTP 200 for `notFound()` in `/video/[id]` (the not-found page still renders); the spec checks the page, not the status.
+- **Next:** owner review/merge of #10; then the #8 follow-ups (physical iPad touch check, T-147, T-148, T-139).

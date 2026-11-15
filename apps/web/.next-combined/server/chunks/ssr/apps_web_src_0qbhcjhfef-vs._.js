@@ -1,3 +1,0 @@
-module.exports=[41925,a=>{"use strict";var b=a.i(12061),c=a.i(75641);a.s(["default",0,function(){return(0,b.jsx)(c.BrainyLoader,{})}])},92195,function(a){a.n(a.i(41925))},76336,a=>{"use strict";let b=(0,a.i(48476).registerClientReference)(function(){throw Error("Attempted to call BrainyLoader() from the server but BrainyLoader is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"[project]/apps/web/src/components/BrainyLoader.tsx","BrainyLoader");a.s(["BrainyLoader",0,b])},75641,a=>{"use strict";var b=a.i(76336);a.n(b)}];
-
-//# sourceMappingURL=apps_web_src_0qbhcjhfef-vs._.js.map

@@ -1,10 +1,12 @@
-// Port of GSP's replace-on-build package pipeline.
-import { cpSync, mkdirSync, rmSync } from "node:fs";
-import { resolve } from "node:path";
+// Port of GSP's replace-on-build package pipeline, driven by auto-discovery:
+// every embedded game folder exports `buildGame(destination)` from its own build.mjs.
+import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
+import { join, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import { build } from "esbuild";
-import { buildPhaserPackage } from "../packages/engine-phaser/buildPhaserPackage.mjs";
-import { buildTangram } from "./build-tangram.mjs";
+import { writeGeneratedModules } from "./discover-games.mjs";
 
+const games = writeGeneratedModules();
 const destination = resolve("apps/web/public/games");
 mkdirSync(destination, { recursive: true });
 await build({
@@ -15,31 +17,20 @@ await build({
   format: "iife",
   target: "safari15",
 });
-await buildPhaserPackage({ packageDir: resolve("games/picture-puzzle") });
-rmSync(`${destination}/picture-puzzle`, { recursive: true, force: true });
-cpSync("games/picture-puzzle/dist", `${destination}/picture-puzzle`, { recursive: true });
-for (const name of ["manifest.json", "CREDITS.md"])
-  cpSync(`games/picture-puzzle/${name}`, `${destination}/picture-puzzle/${name}`);
-cpSync(
-  "games/picture-puzzle/assets-src/animals/License.txt",
-  `${destination}/picture-puzzle/LICENSE-art.txt`,
-);
 
-cpSync("games/picture-puzzle/licenses", `${destination}/picture-puzzle/licenses`, {
-  recursive: true,
-});
-
-rmSync(`${destination}/tangram-tales`, { recursive: true, force: true });
-buildTangram(`${destination}/tangram-tales`);
-
-for (const id of [
-  "reflection",
-  "rhythm-copycat",
-  "secret-message-copy",
-  "magnet-explorer",
-  "neighborhood-map-walk",
-]) {
-  const { buildGame } = await import(`../games/${id}/build.mjs`);
-  rmSync(`${destination}/${id}`, { recursive: true, force: true });
-  await buildGame(`${destination}/${id}`);
+for (const game of games) {
+  const out = join(destination, game.id);
+  rmSync(out, { recursive: true, force: true });
+  if (game.runtime === "embedded") {
+    const script = join(game.dir, "build.mjs");
+    if (!existsSync(script)) throw new Error(`${game.id}: embedded games need build.mjs`);
+    const { buildGame } = await import(pathToFileURL(script).href);
+    if (typeof buildGame !== "function")
+      throw new Error(`${game.id}: build.mjs must export buildGame`);
+    await buildGame(out);
+  }
+  // React games are bundled by Next; only their card image is served from public/.
+  mkdirSync(out, { recursive: true });
+  cpSync(join(game.dir, "thumbnail.svg"), join(out, "thumbnail.svg"));
 }
+console.log(`Built ${games.length} game folders into ${destination}`);

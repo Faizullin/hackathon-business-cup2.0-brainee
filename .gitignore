@@ -2,6 +2,7 @@ node_modules/
 .pnpm-store/
 .turbo/
 .next/
+.next-*/
 out/
 dist/
 coverage/
@@ -27,10 +28,13 @@ apps/web/public/games/
 *.log
 .vercel
 
-.next-games/
 
 # Pinned game content is not local SQLite data.
 !games/*/artifact/data/
 !games/*/artifact/data/**
-pecs-game-store-master.zip
-Brainy-Funnel-Export.zip
+
+# Raw film sources (podcast audio/video); only the encoded film mp3 + JSON are committed
+videos/
+
+# Game registry modules written by scripts/discover-games.mjs from each game folder
+*.generated.ts

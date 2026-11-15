@@ -12,10 +12,11 @@ import {
   useAct,
 } from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
+import { RewardBreakdown } from "./ParentPatterns";
 
 const input = "min-h-11 w-full rounded-xl border border-border bg-background px-3 text-base";
 
-// T-46 for the demo: rules, weekly goal, gift shop CRUD, child requests → «Вручено».
+// T-46 for the demo: rules, weekly goal, gift shop CRUD, child requests → "Delivered".
 export function RewardsScreen() {
   const { snapshot } = useLearning();
   const { run, busy, notice } = useAct();
@@ -43,6 +44,7 @@ export function RewardsScreen() {
       <h1>{t.title}</h1>
       <p className="rounded-panel bg-sun/15 p-4 font-semibold">{t.rules}</p>
       <Notice notice={notice} />
+      <RewardBreakdown snapshot={snapshot} />
       <div className="grid gap-5 lg:grid-cols-2">
         <Panel title={t.goal}>
           <div className="flex items-center justify-between text-sm font-semibold">
@@ -92,12 +94,12 @@ export function RewardsScreen() {
               {requests.map((request) => (
                 <li
                   key={request.id}
-                  className="flex items-center gap-3 rounded-xl border border-border p-3"
+                  className="flex items-center gap-3 min-h-[60px] rounded-row bg-card p-4 ring-1 ring-border"
                 >
                   <span className="flex-1">
                     <span className="block font-semibold">{request.title}</span>
                     <span className="text-muted-foreground text-xs">
-                      {new Date(request.at).toLocaleString("ru-RU", {
+                      {new Date(request.at).toLocaleString("en-US", {
                         dateStyle: "short",
                         timeStyle: "short",
                       })}
@@ -126,7 +128,7 @@ export function RewardsScreen() {
           {gifts.map((gift) => (
             <li
               key={gift.id}
-              className="flex items-center gap-3 rounded-xl border border-border p-3"
+              className="flex items-center gap-3 min-h-[60px] rounded-row bg-card p-4 ring-1 ring-border"
             >
               <span className="flex-1 font-semibold">
                 {gift.title}{" "}

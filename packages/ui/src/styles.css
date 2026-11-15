@@ -3,7 +3,7 @@
 
 @source "./";
 
-/* Base UI/shadcn semantics mapped to the prototype palette. */
+/* Base UI/shadcn semantics mapped to the lavender palette. */
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--ink);
@@ -11,19 +11,39 @@
   --color-card-foreground: var(--ink);
   --color-popover: var(--surface);
   --color-popover-foreground: var(--ink);
-  --color-primary: var(--ink);
-  --color-primary-foreground: var(--surface);
+  --color-primary: var(--mint);
+  --color-primary-foreground: var(--bg);
   --color-secondary: var(--surface-2);
   --color-secondary-foreground: var(--ink);
   --color-muted: var(--surface-2);
   --color-muted-foreground: var(--muted);
-  --color-accent: var(--surface-2);
+  --color-accent: var(--accent);
   --color-accent-foreground: var(--ink);
   --color-destructive: var(--coral);
   --color-border: var(--line);
   --color-input: var(--line);
-  --color-ring: var(--sky);
+  --color-ring: var(--ring);
   --font-sans: var(--font-b);
-  --font-heading: var(--font-d);
+  --font-heading: var(--font-b);
+  --color-violet-wash: var(--violet-wash);
+  --color-gain-wash: var(--gain-wash);
+  --color-loss-wash: var(--loss-wash);
+  --color-highlight: var(--highlight);
+  --color-highlight-wash: var(--highlight-wash);
+  --color-pink: var(--pink);
+  --color-night: var(--night);
+  --font-display: var(--font-d);
+  --radius-control: 12px;
+  --radius-row: 16px;
+  --radius-stage: 28px;
   --radius-lg: var(--r);
+}
+
+@utility font-heading {
+  font-family: var(--font-b);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.lucide {
+  stroke-width: 2;
 }

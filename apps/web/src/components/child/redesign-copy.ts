@@ -1,0 +1,27 @@
+export const childDesignCopy = {
+  path: "Path",
+  goal: "Weekly goal",
+  earned: "Earned ✓",
+  toNext: (points: number, stage: string) => `${points} to ${stage}`,
+  greeting: (name = "there") => `Hello, ${name}`,
+  streak: (days: number) => `${days} day streak`,
+  pathTitle: "Your growing world",
+  week: "Learning this week",
+  minutes: "minutes",
+  here: "You are here",
+  energy: "Energy",
+  grown: "Keep growing, one small step at a time.",
+  today: (n: number) => (n > 0 ? `+${n} ★ today` : "Play to earn ★"),
+  hub: (name: string, energy: number, stage: string) =>
+    `${name}, energy ${energy} out of 100, ${stage}`,
+  days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  stages: ["Sleepy", "Awake", "Lively", "Smart", "Genius"],
+  badges: "Your discoveries",
+  rewardNames: {
+    captainBackpack: "Captain backpack",
+    explorerBadge: "Explorer badge",
+    ownGarden: "Your garden",
+    heroCape: "Hero cape",
+  },
+  progress: (value: number, target: number) => `${value} / ${target}`,
+};

@@ -10,8 +10,8 @@ test("odd-one-out plays to the end in the lab and reports a valid result", async
   await expect(stream).toHaveAttribute("data-status", "running");
 
   for (let round = 0; round < 4; round++) {
-    const next = page.getByRole("button", { name: /^(Дальше|Готово)$/ });
-    const cells = page.getByRole("button", { name: /^Фигура \d+$/ });
+    const next = page.getByRole("button", { name: /^(Next|Done)$/ });
+    const cells = page.getByRole("button", { name: /^Shape \d+$/ });
     await expect(cells).toHaveCount(9);
     const count = await cells.count();
     // Tap cells in order until the odd one is found (this also exercises mistakes).
@@ -32,7 +32,7 @@ test("odd-one-out plays to the end in the lab and reports a valid result", async
 
 test("the same seed replays the same board; level 2 uses 12 cells", async ({ page }) => {
   await page.goto("/lab");
-  await expect(page.getByRole("button", { name: /^Фигура \d+$/ })).toHaveCount(9);
+  await expect(page.getByRole("button", { name: /^Shape \d+$/ })).toHaveCount(9);
   const board = () =>
     page
       .locator('[data-game="odd-one-out"] svg')
@@ -44,9 +44,9 @@ test("the same seed replays the same board; level 2 uses 12 cells", async ({ pag
       return first;
     })
     .not.toBe("");
-  await page.getByRole("button", { name: "Перезапустить" }).click();
+  await page.getByRole("button", { name: "Restart" }).click();
   await expect.poll(board).toBe(first);
 
-  await page.getByLabel("Уровень").selectOption("2");
-  await expect(page.getByRole("button", { name: /^Фигура \d+$/ })).toHaveCount(12);
+  await page.getByLabel("Level").selectOption("2");
+  await expect(page.getByRole("button", { name: /^Shape \d+$/ })).toHaveCount(12);
 });

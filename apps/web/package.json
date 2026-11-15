@@ -8,12 +8,14 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "next typegen && tsc --noEmit",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "e2e:full": "E2E_FULL=1 playwright test"
   },
   "dependencies": {
     "@brainee/brainy": "workspace:*",
     "@brainee/core": "workspace:*",
     "@brainee/db": "workspace:*",
+    "@brainee/films": "workspace:*",
     "@brainee/games": "workspace:*",
     "@brainee/ui": "workspace:*",
     "@tanstack/react-query": "5.107.1",

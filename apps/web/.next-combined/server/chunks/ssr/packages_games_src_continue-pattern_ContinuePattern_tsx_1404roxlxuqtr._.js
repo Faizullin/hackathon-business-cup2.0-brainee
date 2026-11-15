@@ -1,3 +1,0 @@
-module.exports=[9807,a=>{"use strict";let b=(0,a.i(48476).registerClientReference)(function(){throw Error("Attempted to call the default export of [project]/packages/games/src/continue-pattern/ContinuePattern.tsx from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"[project]/packages/games/src/continue-pattern/ContinuePattern.tsx","default");a.s(["default",0,b])},27366,a=>{"use strict";var b=a.i(9807);a.n(b)}];
-
-//# sourceMappingURL=packages_games_src_continue-pattern_ContinuePattern_tsx_1404roxlxuqtr._.js.map

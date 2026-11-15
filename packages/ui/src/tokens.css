@@ -1,50 +1,83 @@
-/* Prototype palette with font families provided by next/font/local. */
+/* Lavender palette (D-36) with font families provided by next/font/local. */
 :root {
   color-scheme: light;
-  --bg: #f1f4fa;
+  --bg: #f2f1fa;
   --surface: #ffffff;
-  --surface-2: #e8edf7;
-  --ink: #1b1f3b;
-  --muted: #5d6485;
-  --line: #d8deec;
-  --coral: #ee5a4a;
-  --sun: #f2ae12;
-  --orange: #e5731a;
-  --mint: #139e80;
-  --sky: #3c68ee;
+  --surface-2: #eceaf6;
+  --ink: #1c1b33;
+  --muted: #5f6180;
+  --line: #e6e4f2;
+  --coral: #9a3b12;
+  --sun: #ffae1a;
+  --orange: #f0a27e;
+  --mint: #5a3fe0;
+  --sky: #2847c7;
   --font-d: var(--font-unbounded, "Unbounded"), "Arial Black", system-ui, sans-serif;
-  --font-b: var(--font-onest, "Onest"), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --r: 18px;
+  --font-b:
+    var(--font-manrope, "Manrope"), var(--font-onest, "Onest"), system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --r: 20px;
+  --radius-control: 12px;
+  --radius-row: 16px;
+  --radius-stage: 28px;
+  --violet-wash: #ece8ff;
+  --gain-wash: #e3e9ff;
+  --loss-wash: #fde6d8;
+  --pink: #ff9ec2;
+  --highlight: #ff9ec2;
+  --highlight-wash: #fff4f8;
+  --accent: var(--mint);
+  --night: #2e2b55;
+  --ring: #8c76ff;
+  --game-surface: var(--bg);
+  --game-tile: var(--surface);
+  --game-tile-ring: var(--line);
+  --game-selected: var(--mint);
+  --game-selected-wash: var(--violet-wash);
+  --game-correct: var(--sky);
+  --game-correct-wash: var(--gain-wash);
+  --game-retry: var(--coral);
+  --game-retry-wash: var(--loss-wash);
+  --game-star: var(--sun);
+  --game-highlight: var(--pink);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg: #10121c;
-    --surface: #191c2a;
-    --surface-2: #222638;
-    --ink: #eceff8;
-    --muted: #9aa1bf;
-    --line: #2c3147;
-    --coral: #ff7868;
+    --bg: #141226;
+    --surface: #211e38;
+    --surface-2: #2e2b49;
+    --ink: #f2f1fa;
+    --muted: #b9b5d1;
+    --line: #413b60;
+    --coral: #f8b894;
     --sun: #ffc845;
-    --orange: #ff9a45;
-    --mint: #3bcda9;
-    --sky: #7a97ff;
+    --orange: #f0a27e;
+    --mint: #b9a8ff;
+    --sky: #a8baff;
+    --violet-wash: #33295b;
+    --gain-wash: #263256;
+    --loss-wash: #482d28;
+    --highlight-wash: #402b43;
   }
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #10121c;
-  --surface: #191c2a;
-  --surface-2: #222638;
-  --ink: #eceff8;
-  --muted: #9aa1bf;
-  --line: #2c3147;
-  --coral: #ff7868;
+  --bg: #141226;
+  --surface: #211e38;
+  --surface-2: #2e2b49;
+  --ink: #f2f1fa;
+  --muted: #b9b5d1;
+  --line: #413b60;
+  --coral: #f8b894;
   --sun: #ffc845;
-  --orange: #ff9a45;
-  --mint: #3bcda9;
-  --sky: #7a97ff;
+  --orange: #f0a27e;
+  --mint: #b9a8ff;
+  --sky: #a8baff;
+  --violet-wash: #33295b;
+  --gain-wash: #263256;
+  --loss-wash: #482d28;
+  --highlight-wash: #402b43;
 }

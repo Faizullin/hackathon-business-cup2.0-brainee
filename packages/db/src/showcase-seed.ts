@@ -1,6 +1,6 @@
 import type { Showcase } from "@brainee/core";
 
-// D-21: hand-picked demo content (US English, the main audience; the RU locale maps it in apps/web/src/i18n/content.ts). Analytics are illustrative, not computed.
+// D-21: hand-picked demo content in US English (the product is English-only). Analytics are illustrative, not computed.
 export const demoShowcase: Showcase = {
   equipped: { face: "glasses" },
   owned: ["glasses"],
@@ -126,12 +126,52 @@ export const demoShowcase: Showcase = {
       until: null,
     },
   ],
+  science: [
+    {
+      // Interactive films: apps/web/public/media/films/<id>.{mp3,json} (docs/dev/films.md).
+      id: "sky-blue",
+      title: "Why the sky is blue?",
+      minutes: 13,
+      icon: "sun",
+      colors: ["#1F3FA8", "#3C68EE"],
+      question: "Why is the sky blue?",
+      options: ["It mirrors the sea", "Air bounces blue light", "Someone painted it"],
+      answer: 1,
+      position: 0,
+      solved: false,
+    },
+    {
+      id: "rain",
+      title: "Rain",
+      minutes: 13,
+      icon: "rain",
+      colors: ["#4A5694", "#7C86A8"],
+      question: "On a sunny day, where did the puddle go?",
+      options: ["It turned to sand", "Up into the air", "A bird drank it"],
+      answer: 1,
+      position: 0,
+      solved: false,
+    },
+    {
+      id: "sun-goes",
+      title: "Where the sun goes",
+      minutes: 13,
+      icon: "moon",
+      colors: ["#2A2546", "#E5731A"],
+      question: "When it's night here, what is the sun doing?",
+      options: ["Shining on other kids", "Sleeping in a bed", "Hiding under the sea"],
+      answer: 0,
+      position: 0,
+      solved: false,
+    },
+  ],
   // Illustrative values for the demo; real age norms remain T-83.
   ageAverages: { speech: 55, reading: 55, logic: 58, attention: 52, memory: 56, motor: 60 },
   entryLog: { took: 14, other: 6 },
   feed: [
     { at: "2026-11-14T00:00:00.000Z", kind: "game", title: "Odd One Out · 1", amount: 12 },
     { at: "2026-11-13T17:40:00.000Z", kind: "task-done", title: "Tidy up your room" },
+    { at: "2026-11-13T15:10:00.000Z", kind: "video", title: "Rain", amount: 15 },
     { at: "2026-11-12T16:20:00.000Z", kind: "gift-bought", title: "Sticker pack", amount: 2 },
   ],
   analytics: {
@@ -166,6 +206,7 @@ export const demoShowcase: Showcase = {
     week: {
       days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       learning: [25, 30, 18, 35, 28, 40, 32],
+      science: [10, 0, 12, 0, 15, 24, 20],
       fun: [12, 18, 8, 16, 12, 20, 16],
     },
     hardThing: {

@@ -1,3 +1,0 @@
-module.exports=[95591,a=>{"use strict";var b=a.i(47386),c=a.i(18197);a.i(63008);var d=a.i(91832);a.s(["default",0,function({reset:a}){let{t:e}=(0,d.useI18n)();return(0,b.jsxs)("main",{className:"mx-auto flex max-w-lg flex-col items-center gap-4 p-6 text-center",children:[(0,b.jsx)("h1",{children:e.child.sync.title}),(0,b.jsx)("p",{role:"alert",children:e.child.sync.loadError}),(0,b.jsx)(c.f,{onClick:a,children:e.child.sync.retry})]})}])}];
-
-//# sourceMappingURL=apps_web_src_app_error_tsx_1dn8_l6eb8tzs._.js.map

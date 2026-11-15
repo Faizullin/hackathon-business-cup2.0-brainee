@@ -2,9 +2,9 @@
 
 import { StarIcon, SunIcon } from "@brainee/ui/components/child-icons";
 import { cn } from "@brainee/ui/lib/utils";
+import { QuestMark } from "@/components/child/QuestMark";
 import {
   Chip,
-  coralButton,
   Meter,
   Notice,
   outlineButton,
@@ -54,7 +54,7 @@ export function GiftsScreen() {
               <button
                 type="button"
                 disabled={busy || wallet.suns < gift.price}
-                className={wallet.suns >= gift.price ? coralButton : outlineButton}
+                className={wallet.suns >= gift.price ? primaryButton : outlineButton}
                 onClick={() => run({ type: "buy-gift", giftId: gift.id }, t.bought(gift.title))}
               >
                 {gift.price} <SunIcon className="size-4" />
@@ -73,11 +73,14 @@ export function GiftsScreen() {
               key={task.id}
               data-testid={`child-task-${task.id}`}
               className={cn(
-                "flex flex-col gap-2 rounded-xl border border-border p-3",
+                "flex min-h-[60px] flex-col gap-3 rounded-row bg-card p-4 ring-1 ring-border",
                 task.status === "done" && "opacity-70",
               )}
             >
-              <span className="font-semibold">{task.title}</span>
+              <span className="flex items-center gap-3 font-semibold">
+                <QuestMark done={task.status === "done"} />
+                {task.title}
+              </span>
               <span className="flex flex-wrap items-center gap-2">
                 <Chip>{task.skill}</Chip>
                 <Chip tone={task.place === "real" ? "sun" : "sky"}>
@@ -95,7 +98,7 @@ export function GiftsScreen() {
                     <button
                       type="button"
                       disabled={busy}
-                      className={cn(coralButton, "ml-auto")}
+                      className={cn(primaryButton, "ml-auto")}
                       onClick={() => run({ type: "task-done", taskId: task.id })}
                     >
                       {t.done}

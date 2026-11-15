@@ -30,14 +30,19 @@ test("every route and its resources stay on our origin", async ({ page, context,
     "/login",
     "/game/odd-one-out",
     "/game/continue-pattern",
+    "/video/sky-blue",
+    "/video/rain",
+    "/video/sun-goes",
     "/lab",
     "/lab/brainy",
+    "/lab/film",
     "/not-found",
   ]) {
     await page.goto(path);
     await expect(page.locator("h1").first()).toBeVisible();
     await page.evaluate(() => document.fonts.ready);
     if (path.startsWith("/game/")) await expect(page.locator("[data-game]")).toBeVisible();
+    if (path.startsWith("/video/")) await expect(page.getByRole("progressbar")).toBeVisible();
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
       path,

@@ -1,3 +1,0 @@
-module.exports=[92554,a=>{"use strict";var b=a.i(47386);a.s(["f",0,function({count:a}){return 0===a?null:(0,b.jsx)("span",{"aria-hidden":"true","data-testid":"navigation-badge",className:"inline-flex min-w-5 items-center justify-center rounded-full bg-coral px-1.5 py-0.5 text-xs font-semibold text-white",children:a})}])}];
-
-//# sourceMappingURL=apps_web_src_components_demo_NavigationBadge_tsx_1hehx4cvbi93v._.js.map

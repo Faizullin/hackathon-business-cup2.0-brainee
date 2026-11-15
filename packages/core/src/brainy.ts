@@ -63,3 +63,12 @@ export function reachedStage(before: BrainyStats, after: BrainyStats) {
   const next = stageOf(after);
   return next.index > stageOf(before).index ? next.id : null;
 }
+
+/** Representative stats for visual stage previews; never applied to a child's saved state. */
+export function stagePreviewStats(id: StageId): BrainyStats {
+  const index = STAGES.findIndex((stage) => stage.id === id);
+  const stage = STAGES[index];
+  if (!stage) throw new RangeError("Unknown stage.");
+  const point = Math.floor((stage.min + (STAGES[index + 1]?.min ?? 101) - 1) / 2);
+  return { brain: point, eyes: point, mouth: point, arms: point, legs: point, resp: point };
+}

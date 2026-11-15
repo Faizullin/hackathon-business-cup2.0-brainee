@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Извилина — состояния мозга</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1280px; height: 505px; box-sizing: border-box; padding: 40px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; background: #F2F1FA; font-family: 'Manrope', system-ui, sans-serif; color: #1C1B33">
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px 18px 24px; border-radius: 28px; background: #FFFFFF">
+<dc-import name="Brain" health="92" size="250" hint-size="250px,239px"></dc-import>
+<span style="font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 700">92 · Гений</span>
+<span style="font-size: 14px; line-height: 1.45; text-align: center; color: #5F6180">Бежит вприпрыжку, светится, вокруг искры и бьют молнии</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px 18px 24px; border-radius: 28px; background: #FFFFFF">
+<dc-import name="Brain" health="62" size="250" hint-size="250px,239px"></dc-import>
+<span style="font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 700">62 · В форме</span>
+<span style="font-size: 14px; line-height: 1.45; text-align: center; color: #5F6180">Трусит медленнее, руки ниже, улыбка спокойнее</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px 18px 24px; border-radius: 28px; background: #FFFFFF">
+<dc-import name="Brain" health="38" size="250" hint-size="250px,239px"></dc-import>
+<span style="font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 700">38 · Вянет</span>
+<span style="font-size: 14px; line-height: 1.45; text-align: center; color: #5F6180">Остановился, руки повисли, веки слипаются, капля пота, лёгкий душок и первая муха</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px 18px 24px; border-radius: 28px; background: #FFFFFF">
+<dc-import name="Brain" health="10" size="250" hint-size="250px,239px"></dc-import>
+<span style="font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 700">10 · Гниёт</span>
+<span style="font-size: 14px; line-height: 1.45; text-align: center; color: #5F6180">Руки плетьми, колени внутрь, плотно воняет: зелёное облако, клубы и рой мух</span>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":505}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

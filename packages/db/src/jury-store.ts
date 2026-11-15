@@ -1,8 +1,8 @@
-import { randomBytes, randomInt, randomUUID } from "node:crypto";
+import { randomBytes, randomUUID } from "node:crypto";
 import { advanceCalendar, EARNED_THRESHOLDS, NEUTRAL_QUIZ } from "@brainee/core";
 import { and, eq, lt } from "drizzle-orm";
 import { brainyStates, demoSessions, families, showcases, wallets } from "../schema";
-import { signupFromQuiz } from "./account-store";
+import { DEMO_PIN, signupFromQuiz } from "./account-store";
 import type { Database } from "./client";
 import {
   demoTokenHash,
@@ -26,7 +26,7 @@ export async function createJuryFamily(db: Database, now: Date) {
   const credentials = {
     email: `jury-${randomUUID()}@brainee.example`,
     password: randomBytes(9).toString("base64url"),
-    pin: String(randomInt(10000)).padStart(4, "0"),
+    pin: DEMO_PIN,
   };
   const access = await signupFromQuiz(
     db,

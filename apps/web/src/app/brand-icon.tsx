@@ -1,4 +1,4 @@
-// Shared artwork for generated app icons: a simple Brainy face on coral. No external fonts or images.
+// Shared artwork for generated app icons: a simple Brainy face on lavender. No external fonts or images.
 export function BrandIcon({ size }: { size: number }) {
   const u = size / 100;
   return (
@@ -9,7 +9,7 @@ export function BrandIcon({ size }: { size: number }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#ee5a4a",
+        background: "#f2f1fa",
         borderRadius: 22 * u,
       }}
     >
@@ -21,9 +21,9 @@ export function BrandIcon({ size }: { size: number }) {
           alignItems: "center",
           justifyContent: "center",
           gap: 12 * u,
-          background: "#f4a3a0",
+          background: "#ff9ec2",
           borderRadius: 30 * u,
-          border: `${3 * u}px solid #1b1f3b`,
+          border: `${3 * u}px solid #1c1b33`,
         }}
       >
         {[0, 1].map((eye) => (
@@ -34,14 +34,14 @@ export function BrandIcon({ size }: { size: number }) {
               height: 16 * u,
               borderRadius: 999,
               background: "#ffffff",
-              border: `${3 * u}px solid #1b1f3b`,
+              border: `${3 * u}px solid #1c1b33`,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
             <div
-              style={{ width: 6 * u, height: 6 * u, borderRadius: 999, background: "#1b1f3b" }}
+              style={{ width: 6 * u, height: 6 * u, borderRadius: 999, background: "#1c1b33" }}
             />
           </div>
         ))}

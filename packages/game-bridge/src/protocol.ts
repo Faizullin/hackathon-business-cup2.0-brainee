@@ -7,7 +7,8 @@
 export const BRIDGE_TAG = "brainee";
 export const BRIDGE_PROTOCOL = 2;
 
-export const LOCALES = ["en", "ru", "kk"] as const;
+/** The product is English-only; the handshake still carries the locale for future use. */
+export const LOCALES = ["en"] as const;
 export type Locale = (typeof LOCALES)[number];
 
 export type JsonValue =

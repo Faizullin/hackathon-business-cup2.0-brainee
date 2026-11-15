@@ -1,11 +1,10 @@
 import { z } from "zod";
-import puzzle from "../../../games/picture-puzzle/manifest.json" with { type: "json" };
-import imported0 from "../../../games/reflection/manifest.json" with { type: "json" };
-import imported1 from "../../../games/rhythm-copycat/manifest.json" with { type: "json" };
-import imported2 from "../../../games/secret-message-copy/manifest.json" with { type: "json" };
-import tangram from "../../../games/tangram-tales/manifest.json" with { type: "json" };
-import pattern from "../../games/src/continue-pattern/manifest.json" with { type: "json" };
-import odd from "../../games/src/odd-one-out/manifest.json" with { type: "json" };
+import { discoveredManifests } from "./discovered.generated";
+
+/** Every game card image is served from our own origin at this path (copied by games:build). */
+export const thumbnailUrl = (id: string) => `/games/${id}/thumbnail.svg`;
+/** Thumbnails stay small enough to list many cards on a phone. */
+export const THUMBNAIL_MAX_BYTES = 8 * 1024;
 
 const skill = z.enum(["attention", "logic", "memory", "speech", "reading", "motor"]);
 export const manifestSchema = z
@@ -27,8 +26,12 @@ export const manifestSchema = z
     bridge: z.object({ protocol: z.union([z.literal(1), z.literal(2)]), contract: z.string() }),
     sizeBudgetBytes: z.number().int().positive(),
     license: z.string().min(1),
+    /** Same-origin card image; the game folder ships `thumbnail.svg` (see thumbnailUrl). */
+    thumbnail: z.string(),
   })
   .superRefine((game, ctx) => {
+    if (game.thumbnail !== thumbnailUrl(game.id))
+      ctx.addIssue({ code: "custom", message: "Thumbnail must be the game's own thumbnail.svg" });
     if (game.bridge.contract !== `${game.id}@1`)
       ctx.addIssue({ code: "custom", message: "Contract must match game id" });
     if (
@@ -41,8 +44,7 @@ export const manifestSchema = z
     if (game.runtime === "embedded" && game.entry !== `/games/${game.id}/index.html`)
       ctx.addIssue({ code: "custom", message: "Embedded entry must be same-origin" });
   });
-export const manifests = [odd, pattern, puzzle, tangram, imported0, imported1, imported2].map(
-  (value) => manifestSchema.parse(value),
-);
+/** Discovered from each game folder by scripts/discover-games.mjs, then validated here. */
+export const manifests = discoveredManifests.map((value) => manifestSchema.parse(value));
 
-export { previewSchema, previews } from "./previews";
+export { type Preview, previewSchema, previews } from "./previews";

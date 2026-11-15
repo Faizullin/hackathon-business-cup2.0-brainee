@@ -8,6 +8,7 @@ export type ActivitySession = {
   finishedAt: number | null;
   durationMs: number | null;
   recommended: boolean;
+  starsEarned?: number | null;
 };
 const DAY = 86400000;
 export const EARNED_THRESHOLDS = {
@@ -35,20 +36,32 @@ export function activitySummary(
     streak++;
     cursor -= DAY;
   }
-  const learning = Array<number>(7).fill(0);
+  const learning = Array<number>(7).fill(0),
+    science = Array<number>(7).fill(0);
   const index = (at: number) =>
     Math.round((Date.parse(calendarKeys(new Date(at), zone).day) - Date.parse(week)) / DAY);
   for (const s of completed) {
     const i = index(s.finishedAt as number);
     if (i >= 0 && i < 7) learning[i] = (learning[i] ?? 0) + (s.durationMs ?? 0) / 60000;
   }
+  for (const v of showcase.science) {
+    if (!v.completedAt) continue;
+    const i = index(Date.parse(v.completedAt));
+    if (i >= 0 && i < 7) science[i] = (science[i] ?? 0) + v.minutes;
+  }
   const recommended = sessions.filter((s) => s.recommended);
   const lastRecommended = [...recommended]
     .sort((a, b) => b.startedAt - a.startedAt)
     .slice(0, EARNED_THRESHOLDS.heroWindow);
   const entries = showcase.entryLog.took + showcase.entryLog.other;
+  const todaySessions = completed
+    .filter((s) => calendarKeys(new Date(s.finishedAt as number), zone).day === day)
+    .sort((a, b) => (b.finishedAt as number) - (a.finishedAt as number));
   return {
+    todaySessions,
+    learningStarsToday: todaySessions.reduce((sum, s) => sum + (s.starsEarned ?? 0), 0),
     learning,
+    science,
     streakDays: streak,
     completed: completed.length,
     focusMinutes: completed.length

@@ -2,6 +2,7 @@
 
 import { cn } from "@brainee/ui/lib/utils";
 import type { ReactNode } from "react";
+import { BrandMark } from "@/components/BrandMark";
 import { useI18n } from "@/i18n";
 
 // Route layouts opt into chrome; fullscreen games can use their own shell in T-30.
@@ -21,7 +22,7 @@ export function AppFrame({ children, className }: { children: ReactNode; classNa
         {t.app.skipToContent}
       </a>
       <header className="mb-6 border-line border-b pb-4">
-        <p className="font-display font-bold text-coral text-xl">{t.app.name}</p>
+        <BrandMark name={t.app.name} />
       </header>
       {children}
     </div>

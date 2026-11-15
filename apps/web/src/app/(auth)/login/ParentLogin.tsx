@@ -52,7 +52,7 @@ export function ParentLogin() {
         />
       </label>
       {error && (
-        <p role="alert" className="rounded-xl bg-coral/15 p-3 text-sm">
+        <p role="alert" className="rounded-xl bg-loss-wash p-3 text-sm">
           {tl.wrong}
         </p>
       )}
@@ -62,13 +62,13 @@ export function ParentLogin() {
       <p className="text-muted-foreground text-xs">{tl.demoHint}</p>
       <Link
         href="/onboarding"
-        className="font-semibold text-coral text-sm underline-offset-4 hover:underline"
+        className="font-semibold text-accent text-sm underline-offset-4 hover:underline"
       >
         {tl.newFamily}
       </Link>
       <JuryButton />
-      <Link href="/signup">{t.signup.link}</Link>
-      <Link href="/child-login" className="font-semibold text-coral">
+
+      <Link href="/child-login" className="font-semibold text-accent">
         {t.pairing.child}
       </Link>
     </form>

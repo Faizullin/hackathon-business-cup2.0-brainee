@@ -1,18 +1,28 @@
 "use client";
 
 import { funMinutesLeft } from "@brainee/core";
-import { Play, Worm } from "@brainee/ui/components/icons";
+import { CloudRain, Moon, Play, Sun, Worm } from "@brainee/ui/components/icons";
 import { cn } from "@brainee/ui/lib/utils";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Chip, Notice, outlineButton, Panel, primaryButton, useAct } from "@/components/demo/kit";
+import {
+  Chip,
+  Notice,
+  outlineButton,
+  Panel,
+  primaryButton,
+  smallButton,
+  useAct,
+} from "@/components/demo/kit";
 import { useI18n } from "@/i18n";
 import { useLearning } from "./LearningProvider";
+import { stoppingCopy } from "./stopping-copy";
 
 const FUN_ICONS = { snake: Worm };
-/** Only fun games with a real player are listed; catalog entries without content stay hidden. */
-const PLAYABLE_FUN = new Set(["snake"]);
+export const SCIENCE_ICONS = { sun: Sun, rain: CloudRain, moon: Moon };
 
-// Leisure tab (T-36): shop of playable fun games for ★.
+// Leisure tab (T-36): playable fun games for ★ and free interactive films. Only content that
+// exists is listed (D-39); the catalog sync drops removed items from saved families.
 export function LeisureScreen() {
   const { snapshot } = useLearning();
   const { run, busy, notice } = useAct();
@@ -24,13 +34,36 @@ export function LeisureScreen() {
     return () => clearInterval(timer);
   }, []);
   if (!snapshot) return null;
-  const fun = snapshot.showcase.fun.filter((game) => PLAYABLE_FUN.has(game.id));
+  const { fun, science } = snapshot.showcase;
   const stars = snapshot.progress.wallet.stars;
   return (
     <>
       <Panel as="h1" title={t.title} note={t.description}>
         <span />
       </Panel>
+      <details data-testid="leisure-time" className="rounded-panel bg-card p-4 ring-1 ring-border">
+        <summary className="min-h-11 cursor-pointer font-heading text-lg">
+          {stoppingCopy.timeTitle}
+        </summary>
+        <p className="mb-4 text-sm text-muted-foreground">{stoppingCopy.timeNote}</p>
+        <dl className="space-y-2">
+          {fun.map((game) => (
+            <div
+              key={game.id}
+              className="flex justify-between gap-3 rounded-row bg-violet-wash p-3 text-sm"
+            >
+              <dt>{game.title}</dt>
+              <dd className="font-semibold text-accent">
+                {game.forever
+                  ? stoppingCopy.owned
+                  : funMinutesLeft(game, now) > 0
+                    ? stoppingCopy.minutes(funMinutesLeft(game, now))
+                    : stoppingCopy.noTime}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </details>
       <Notice notice={notice} />
       <Panel title={t.shop} note={`★ ${stars}`}>
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -38,9 +71,12 @@ export function LeisureScreen() {
             const Icon = FUN_ICONS[game.icon as keyof typeof FUN_ICONS] ?? Play;
             const left = funMinutesLeft(game, now);
             return (
-              <li key={game.id} className="flex flex-col gap-3 rounded-xl border border-border p-3">
+              <li
+                key={game.id}
+                className="flex flex-col gap-3 rounded-panel bg-card p-3 ring-1 ring-border"
+              >
                 <div className="flex items-center gap-3">
-                  <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-sky/15">
+                  <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-gain-wash">
                     <Icon aria-hidden="true" className="size-6 text-sky" />
                   </span>
                   <span className="min-w-0">
@@ -103,6 +139,39 @@ export function LeisureScreen() {
                     </button>
                   </div>
                 )}
+              </li>
+            );
+          })}
+        </ul>
+      </Panel>
+      <Panel title={t.science} note={t.scienceNote}>
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {science.map((video) => {
+            const Icon = SCIENCE_ICONS[video.icon as keyof typeof SCIENCE_ICONS] ?? Play;
+            return (
+              <li key={video.id}>
+                <Link
+                  href={`/video/${video.id}`}
+                  className="flex items-center gap-3 rounded-xl p-3 text-white transition-transform duration-(--dur-press) active:scale-[0.98]"
+                  style={{
+                    background: "linear-gradient(135deg, var(--night), var(--accent))",
+                  }}
+                >
+                  <Icon aria-hidden="true" className="size-10 shrink-0" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-semibold">{video.title}</span>
+                    <span className="text-sm opacity-90">
+                      {video.solved
+                        ? t.solved
+                        : video.position > 0
+                          ? t.resume(video.position)
+                          : t.minutes(video.minutes)}
+                    </span>
+                  </span>
+                  <span className={cn(smallButton, "bg-white/20")}>
+                    <Play aria-hidden="true" className="size-4" />
+                  </span>
+                </Link>
               </li>
             );
           })}

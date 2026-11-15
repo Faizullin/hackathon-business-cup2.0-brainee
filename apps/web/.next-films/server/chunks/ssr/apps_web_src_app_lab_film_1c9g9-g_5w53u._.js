@@ -1,3 +1,0 @@
-module.exports=[24113,a=>{"use strict";let b=(0,a.i(48476).registerClientReference)(function(){throw Error("Attempted to call FilmLab() from the server but FilmLab is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"[project]/apps/web/src/app/lab/film/FilmLab.tsx","FilmLab");a.s(["FilmLab",0,b])},35599,a=>{"use strict";var b=a.i(24113);a.n(b)},12230,a=>{"use strict";var b=a.i(12061),c=(a.i(73813),a.i(35599));a.s(["default",0,function(){return(0,b.jsx)(c.FilmLab,{})},"metadata",0,{title:"Мультики: проверка сценария"}],12230)},56372,function(a){a.n(a.i(12230))}];
-
-//# sourceMappingURL=apps_web_src_app_lab_film_1c9g9-g_5w53u._.js.map

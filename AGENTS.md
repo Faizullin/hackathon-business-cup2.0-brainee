@@ -2,7 +2,7 @@
 
 The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.md` only import this file, so edit it here.
 
-**Project:** Брейни, a kids' learning PWA with a growing mascot and a two-currency reward economy. Summary: [README.md](README.md).
+**Project:** Brainy (Brainee), a kids' learning PWA with a growing mascot and a two-currency reward economy. Summary: [README.md](README.md).
 
 ## Session protocol
 
@@ -20,10 +20,9 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 
 ## Token rules
 
-- **Never read `docs/ideas/PRD Брейни.pdf`.** It's 24 pages of Russian, mostly images. Its content is condensed in [docs/product/](docs/product/).
-- **Never read the whole prototype HTML** (~1,170 lines). Use the line map in [docs/ideas/README.md](docs/ideas/README.md) and read only the range you need.
+- The original PRD and prototype are no longer in the tree; their content lives in [docs/product/](docs/product/) ([docs/ideas/README.md](docs/ideas/README.md) explains where).
 - Each fact lives in one doc. Link to it; don't copy it. Update the original when it changes.
-- Keep docs in English (cheaper in tokens than Russian). Quote UI strings in Russian.
+- Keep docs in English. The product UI, including games and films, is English-only (D-34).
 
 ## Hard rules (break these and the product breaks)
 
@@ -31,7 +30,11 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - **Game rules live in `packages/core`** as pure, tested functions. Don't scatter economy or stat logic through UI code. → [architecture.md](docs/dev/architecture.md)
 - **Games follow the contract**: React games through props, any other engine (Phaser, GDevelop, external repo) through the iframe bridge. They report a `GameResult`, never grant ★, and load nothing from outside our origin. Test them at `/lab`. Port the bridge, engine kits and tests from `../game-store-planning` rather than rewriting them. → [games.md](docs/dev/games.md)
 - **Local-first, no new infrastructure.** SQLite file, media in `public/media`. Don't assume a long-running process or writable disk (the final deploy is serverless; live sync = polling). Deployment is only the last task (T-14). Don't add backend services, cloud SDKs, auth or payment providers without a new entry in [decisions.md](docs/dev/decisions.md).
+- **English-only platform (D-34):** host, games and films use English with no locale controls or locale cookie. Keep new feature text in feature-local English copy modules. No Russian in new code, docs, prompts or tests. → [decisions.md](docs/dev/decisions.md)
+- **Redesign:** follow [docs/plans/redesign.md](docs/plans/redesign.md). The visual source of truth is [docs/product/design.md](docs/product/design.md) (D-36), with the funnel in [docs/product/funnel.md](docs/product/funnel.md) (D-35). Brainy is a port of the design's Brain component driven by our stats and mood, kid-safe (no rot, stink or flies). Don't add checkout or third-party analytics.
 - **Product rules:** no feeds, autoplay or "watch next". Kids never see rankings. Brainy never dies. No medical claims. → [rules.md](docs/product/rules.md#product-rules)
+
+- **Keep tests short.** Use `pnpm e2e` (the fast core run) for everyday work. Run `pnpm e2e:full` only for game work or a release. Don't add specs that duplicate existing coverage or re-run stable checks on every project; put new heavy game specs in `HEAVY_GAME_SPECS`. Never edit the Playwright config while a run is in progress.
 
 ## Commands
 
@@ -39,18 +42,19 @@ The single source of instructions for AI coding agents. `CLAUDE.md` and `GEMINI.
 - `pnpm demo` — **manual run**: reset the demo DB, then `pnpm dev` with `DEMO_MODE=1 BRAINEE_LAB=1` at `http://localhost:3000` (parent PIN `1234`).
 - `pnpm dev` — start the Next.js web app at `http://localhost:3000` (child/parent data need `DEMO_MODE=1`, via env or `apps/web/.env.local`).
 - `pnpm build` / `pnpm start` — build and serve the production web app.
-- `pnpm e2e` — build, then run shell, `/lab`, saved learning, polling and recovery tests in Chromium and WebKit (phone + iPad widths).
+- `pnpm e2e` — build, then the fast core browser run (WebKit iPad flows + one game per runtime, Chromium phone layout). `pnpm e2e:full` adds every game check and size; use it for game work and releases. Tiers: [setup.md](docs/dev/setup.md#e2e-matrix-tiered).
 - `pnpm report --video` — generate Markdown with phone/iPad recordings, screenshots and logs against a local server; see [docs/reports/README.md](docs/reports/README.md).
 - `pnpm test:reports` — validate the report generator, browser capture, video conversion and artifact links.
 - `pnpm test` — run workspace Vitest tests (`core` rules, game rounds, database).
 - `pnpm db:reset` — recreate the local SQLite database, push the schema and seed the demo.
 - `pnpm db:push` / `pnpm db:seed` / `pnpm db:studio` — apply the schema, add demo fixtures or inspect local data.
+- `pnpm check:films` — validate every film in `apps/web/public/media/films` (script rules, art, mp3, catalog); podcast → film workflow in [films.md](docs/dev/films.md).
 - `pnpm check` — Biome lint/format checks, `check:games` (self-contained game folders), then TypeScript checks.
 - `/lab` (in `pnpm dev`) — play any registered game with level/seed and watch its events; `/lab/brainy` — Brainy presets, stat sliders, accessories.
 - `pnpm typecheck` — workspace TypeScript checks through Turborepo.
 - `pnpm format` — format source and config files with Biome.
 
-`pnpm games:build` bundles same-origin embedded games; `pnpm test:assets` validates their builds. Database paths, browser installation and all commands are in [docs/dev/setup.md](docs/dev/setup.md).
+`pnpm games:build` bundles same-origin embedded games (games register from their own folders via `pnpm games:discover`); `pnpm test:assets` validates their builds. Database paths, browser installation and all commands are in [docs/dev/setup.md](docs/dev/setup.md).
 
 ## Conventions and tools
 

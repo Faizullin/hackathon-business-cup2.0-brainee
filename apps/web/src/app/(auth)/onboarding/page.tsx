@@ -1,8 +1,4 @@
-import type { Metadata } from "next";
-import { OnboardingQuiz } from "./OnboardingQuiz";
-
-export const metadata: Metadata = { title: "Onboarding" };
-
+import { redirect } from "next/navigation";
 export default function OnboardingPage() {
-  return <OnboardingQuiz />;
+  redirect("/start");
 }

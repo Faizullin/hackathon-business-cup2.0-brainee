@@ -22,6 +22,7 @@ import {
   LearningApiError,
   pendingGameHref,
 } from "@/lib/learning-api";
+import { hostCopy } from "./host-copy";
 import { PostGameScreen } from "./PostGameScreen";
 
 type Props = { gameId: string; level: number; seed?: number };
@@ -50,7 +51,7 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
   const boot = useRef<Promise<IssuedGame> | null>(null);
   const router = useRouter();
   const safeLevel = clampLevel(level, game?.levels ?? 1);
-  const { t: i18n, tc, locale } = useI18n();
+  const { t: i18n, locale } = useI18n();
   const t = i18n.child.game;
   const sync = i18n.child.sync;
   const matches =
@@ -103,12 +104,7 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
   if (!game) return null;
   if (completion && issued)
     return (
-      <PostGameScreen
-        game={{ ...game, title: tc(game.title) }}
-        level={issued.level}
-        seed={issued.seed}
-        completion={completion}
-      />
+      <PostGameScreen game={game} level={issued.level} seed={issued.seed} completion={completion} />
     );
   if (phase !== "playing" || !issued) {
     const failed = phase === "save-error" || phase === "start-error";
@@ -116,7 +112,7 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
     const accessExpired = error instanceof LearningApiError && error.status === 401;
     return (
       <section className="mx-auto flex w-full max-w-xl flex-col items-center gap-4 p-6 text-center">
-        <h1>{tc(game.title)}</h1>
+        <h1>{game.title}</h1>
         <p role={failed ? "alert" : "status"}>
           {phase === "start-error"
             ? accessExpired
@@ -166,14 +162,14 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
     );
   }
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col">
-      <header className="flex items-center gap-3 px-3 py-2">
+    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-3 bg-(--game-surface) p-3 lg:max-w-5xl lg:p-5">
+      <header className="flex items-center gap-3 rounded-stage bg-(--game-tile) px-3 py-2 ring-1 ring-(--game-tile-ring)">
         <StopLearningButton href="/learn" variant="ghost">
           <ArrowLeft className="size-5" aria-hidden="true" />
           {t.exit}
         </StopLearningButton>
         <div className="min-w-0 flex-1">
-          <h1 className="!text-lg leading-tight">{tc(game.title)}</h1>
+          <h1 className="!text-lg leading-tight">{game.title}</h1>
           <p className="text-muted-foreground text-sm">{t.level(issued.level)}</p>
         </div>
         <p
@@ -185,21 +181,35 @@ function ActiveGamePlayer({ gameId, level, seed, onStartRetry }: Props & { onSta
           {events.reduce((sum, event) => sum + roundStars(event), 0)}
         </p>
       </header>
-      <GameHost
-        locale={locale}
-        sessionId={issued.sessionId}
-        text={i18n.games}
-        game={{ ...game, title: tc(game.title) }}
-        level={issued.level}
-        seed={issued.seed}
-        onRound={(event) => setEvents((list) => [...list, event])}
-        onFinish={(value) => {
-          if (settled.current) return;
-          settled.current = true;
-          result.current = value;
-          void save(issued, value);
-        }}
-      />
+      {events.length > 0 && (
+        <p
+          role="status"
+          key={events.length}
+          className={`rounded-row px-4 py-2 text-sm font-bold ${events.at(-1)?.correct ? "gainA bg-(--game-correct-wash) text-(--game-correct)" : "lossA bg-(--game-retry-wash) text-(--game-retry)"}`}
+        >
+          {events.at(-1)?.correct ? `✓ ${hostCopy.complete}` : hostCopy.retry}
+        </p>
+      )}
+      <div
+        data-testid="game-host-frame"
+        className="min-h-0 overflow-hidden rounded-stage bg-(--game-tile) ring-1 ring-(--game-tile-ring) lg:mx-auto lg:w-full lg:max-w-[680px]"
+      >
+        <GameHost
+          locale={locale}
+          sessionId={issued.sessionId}
+          text={i18n.games}
+          game={game}
+          level={issued.level}
+          seed={issued.seed}
+          onRound={(event) => setEvents((list) => [...list, event])}
+          onFinish={(value) => {
+            if (settled.current) return;
+            settled.current = true;
+            result.current = value;
+            void save(issued, value);
+          }}
+        />
+      </div>
     </div>
   );
 }

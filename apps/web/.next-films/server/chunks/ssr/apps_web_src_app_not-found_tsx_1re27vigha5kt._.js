@@ -1,3 +1,0 @@
-module.exports=[47791,a=>{"use strict";let b=(0,a.i(48476).registerClientReference)(function(){throw Error("Attempted to call the default export of [project]/apps/web/src/app/not-found.tsx from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"[project]/apps/web/src/app/not-found.tsx","default");a.s(["default",0,b])},84103,a=>{"use strict";var b=a.i(47791);a.n(b)},47941,function(a){a.n(a.i(84103))}];
-
-//# sourceMappingURL=apps_web_src_app_not-found_tsx_1re27vigha5kt._.js.map

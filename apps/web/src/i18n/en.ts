@@ -1,7 +1,6 @@
 import { EARNED_THRESHOLDS } from "@brainee/core";
-import type { Dictionary } from "./types";
 
-export const en: Dictionary = {
+export const en = {
   rewardProgress: (id: string, value: number, target: number, starts: number) =>
     id === "heroCape"
       ? `Unlocks: ${value} / ${target} completed · ${starts} / ${EARNED_THRESHOLDS.heroWindow} started via advice`
@@ -79,7 +78,7 @@ export const en: Dictionary = {
     note: "Time, streak, and advice choices are computed from saved actions. Monthly radar, character, age averages, and rankings are demo data.",
     saved: "From completed sessions",
     entries: (took: number, all: number) => `${took} of ${all} visits`,
-    week: "Minutes in family local time",
+    week: "Minutes in family local time; science video after completion",
     recommended: "Games started and finished via Brainy advice",
     earned: "New reward!",
   },
@@ -98,11 +97,6 @@ export const en: Dictionary = {
     timezone: "Timezone",
     devices: "Devices",
     account: "Account",
-    language: "Language",
-    languageOptions: {
-      en: "🇬🇧 English (Default)",
-      ru: "🇷🇺 Русский",
-    },
     name: "Child's name",
     year: "Birth year",
     promise: "Child's promise: tasks per day",
@@ -203,14 +197,39 @@ export const en: Dictionary = {
     },
     leisure: {
       title: "Leisure",
-      description: "Stars from 'Learn' can be spent here.",
+      description: "Stars from 'Learn' can be spent here. Educational science is free.",
       shop: "Games for stars",
       timed: (minutes: number, price: number) => `${minutes} min · ${price}★`,
       forever: (price: number) => `Forever · ${price}★`,
       owned: "Yours forever",
       minutesLeft: (minutes: number) => `${minutes} min left`,
       play: "Play",
+      science: "Science videos — Free",
+      scienceNote: "Engaging educational films. Watch to the end and answer the question: +15★.",
+      minutes: (n: number) => `${n} min`,
+      resume: (n: number) => `Resume at ${n} min`,
+      solved: "Question solved",
       notEnough: "Not enough stars — earn them in 'Learn'",
+    },
+    video: {
+      close: "Close and finish later",
+      pause: "Pause",
+      play: "Watch",
+      progress: "Watched",
+      question: "Question about the video",
+      correct: "Correct! +15★ and Eyes +2",
+      wrong: "Not quite. Try another answer",
+      back: "Back to Leisure",
+      film: {
+        loading: "Loading the cartoon…",
+        failed: "Couldn't load the cartoon. Please try again later.",
+        stage: "Cartoon",
+        brainyAsks: "Brainy asks",
+        listenAgain: "Listen again",
+        next: "Next",
+        resume: "Continue",
+        time: (now: string, total: string) => `${now} of ${total}`,
+      },
     },
     gifts: {
       title: "Gifts",
@@ -338,6 +357,7 @@ export const en: Dictionary = {
     week: "Time this week",
     weekNote: "Minutes per day",
     learning: "Learning games",
+    science: "Science videos",
     fun: "Entertainment",
     hard: "Do the hard thing",
     hardNote: "How often the child chooses a game for a weaker skill at entry",
@@ -518,7 +538,7 @@ export const en: Dictionary = {
     ],
     resultTitle: "Meet your Brainy!",
     story:
-      "The Scroll Monster took away some of Brainy's energy. Games and real-life tasks will help him grow — from 'Sleepy' to 'Genius'.",
+      "The Scroll Monster took away some of Brainy's energy. Games, science videos, and real-life tasks will help him grow — from 'Sleepy' to 'Genius'.",
     baseline: "These answers serve as the baseline in analytics.",
     signup: "Create account",
     childName: "Child's name",
@@ -543,7 +563,28 @@ export const en: Dictionary = {
     status: { running: "Game in progress", finished: "Game finished", error: "Error" },
     noEvents: "No events yet",
     rewardPreview: "Reward preview (core)",
-    nav: { games: "Games", brainy: "Brainy" },
+    nav: { games: "Games", brainy: "Brainy", film: "Cartoons" },
+    film: {
+      title: "Cartoons: script check",
+      pick: "Cartoon",
+      files: "Your own files (mp3 + JSON)",
+      audio: "Audio",
+      script: "Script",
+      seek: "Seek",
+      skip: "Don't stop at questions",
+      jump: (n: number, at: string) => `Question ${n} · ${at}`,
+      issues: "Script check",
+      clean: "No errors or warnings",
+      badJson: "This is not a JSON script",
+      narrator: "Mascot (host)",
+      narrators: {
+        afterQuiz: "Brainy after the quiz",
+        now: "Brainy now",
+        onlyFun: "Brainy: only fun",
+        dressed: "Brainy with accessories",
+        none: "No mascot",
+      },
+    },
     brainy: {
       title: "Brainy: scenarios and stats",
       preview: "Brainy preview",

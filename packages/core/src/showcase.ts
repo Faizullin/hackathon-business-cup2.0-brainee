@@ -13,10 +13,13 @@ import {
 } from "./accessories";
 import type { ArchivedTask, FamilyCalendar } from "./calendar";
 import { buyGift, exchangeSuns } from "./economy";
+import { type FunnelAnswers, isFunnelAnswers } from "./funnel";
 import type { Ability, Wallet } from "./types";
 
 export const TASKS_PER_DAY = 5;
 export const FUN_PRICES = { timedMinutes: 10 } as const;
+export const VIDEO_QUIZ_STARS = 15;
+export const VIDEO_QUIZ_EYES = 2;
 export const TASK_RESP_GAIN = 2;
 
 export type TaskPlace = "real" | "app";
@@ -60,6 +63,19 @@ export type FunGame = {
   remainingSeconds?: number;
   play?: { id: string; device: string; at: string; sequence: number };
 };
+export type ScienceVideo = {
+  id: string;
+  title: string;
+  minutes: number;
+  icon: string;
+  colors: [string, string];
+  question: string;
+  options: string[];
+  answer: number;
+  position: number;
+  solved: boolean;
+  completedAt?: string;
+};
 export type FeedKind =
   | "app-task"
   | "earned"
@@ -70,7 +86,7 @@ export type FeedKind =
   | "gift-bought"
   | "gift-delivered"
   | "accessory"
-  | "video" // legacy history entries from removed science videos
+  | "video"
   | "exchange"
   | "fun";
 /** Parent event feed (ROUTES.md §6): structured, rendered with i18n strings. */
@@ -104,13 +120,14 @@ export type Analytics = {
   };
   skills: { labels: string[]; now: number[]; monthAgo: number[]; average: number[] };
   character: { labels: string[]; now: number[]; monthAgo: number[] };
-  week: { days: string[]; learning: number[]; fun: number[] };
+  week: { days: string[]; learning: number[]; science: number[]; fun: number[] };
   hardThing: { weeks: string[]; share: number[]; finished: number; recommended: number };
   ranking: Record<"district" | "city" | "country", Record<"growth" | "absolute", RankTable>>;
   recap: { month: string; achievements: string[]; referral: string };
 };
 
 export type Showcase = {
+  familyPlan?: FunnelAnswers;
   childPromise?: number;
   calendar?: FamilyCalendar;
   taskHistory?: ArchivedTask[];
@@ -124,6 +141,7 @@ export type Showcase = {
   gifts: Gift[];
   requests: GiftRequest[];
   fun: FunGame[];
+  science: ScienceVideo[];
   ageAverages: Record<Ability, number>;
   entryLog: { took: number; other: number };
   feed: FeedItem[];
@@ -138,8 +156,11 @@ export type ShowcaseAction =
   | { type: "buy-gift"; giftId: string }
   | { type: "task-done"; taskId: string }
   | { type: "unlock-fun"; gameId: string; mode: "timed" | "forever" }
+  | { type: "video-position"; id: string; position: number }
+  | { type: "video-answer"; id: string; answer: number }
   | { type: "entry-choice"; took: boolean }
   // Parent-only actions:
+  | { type: "family-plan"; answers: FunnelAnswers }
   | { type: "task-confirm"; taskId: string }
   | { type: "task-cancel"; taskId: string }
   | {
@@ -156,6 +177,7 @@ export type ShowcaseAction =
   | { type: "goal-set"; target: number; giftId: string };
 
 export const PARENT_ACTIONS = new Set<ShowcaseAction["type"]>([
+  "family-plan",
   "task-confirm",
   "task-cancel",
   "task-add",
@@ -192,6 +214,10 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
   const ok = (next: Wallet = wallet, gains: { eyes?: number; resp?: number } = {}) =>
     ({ ok: true, showcase: s, wallet: next, gains }) as const;
   switch (action.type) {
+    case "family-plan":
+      if (!isFunnelAnswers(action.answers)) return fail("invalid-input");
+      s.familyPlan = structuredClone(action.answers);
+      return ok();
     case "buy-accessory": {
       const result = buyAccessory(wallet, s.owned, action.id);
       if (!result.ok) return fail(result.reason);
@@ -320,6 +346,24 @@ export function applyShowcaseAction(input: ShowcaseInput, action: ShowcaseAction
       addFeed(s, { at, kind: "fun", title: game.title, amount: price });
       return ok({ ...wallet, stars: wallet.stars - price });
     }
+    case "video-position": {
+      const video = s.science.find((v) => v.id === action.id);
+      if (!video || !Number.isInteger(action.position) || action.position < 0)
+        return fail("invalid-input");
+      video.position = Math.min(action.position, video.minutes);
+      return ok();
+    }
+    case "video-answer": {
+      const video = s.science.find((v) => v.id === action.id);
+      if (!video || video.position < video.minutes) return fail("not-finished");
+      if (action.answer !== video.answer) return fail("wrong-answer");
+      if (video.solved) return ok();
+      video.solved = true;
+      video.completedAt = at;
+      video.position = 0;
+      addFeed(s, { at, kind: "video", title: video.title, amount: VIDEO_QUIZ_STARS });
+      return ok({ ...wallet, stars: wallet.stars + VIDEO_QUIZ_STARS }, { eyes: VIDEO_QUIZ_EYES });
+    }
     case "entry-choice":
       if (action.took) s.entryLog.took += 1;
       else s.entryLog.other += 1;
@@ -344,6 +388,8 @@ const ACTION_TYPES = new Set([
   "buy-gift",
   "task-done",
   "unlock-fun",
+  "video-position",
+  "video-answer",
   "entry-choice",
   ...PARENT_ACTIONS,
 ]);

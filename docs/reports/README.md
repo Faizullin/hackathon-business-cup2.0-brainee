@@ -2,7 +2,7 @@
 
 | Report | Shows |
 | --- | --- |
-| [Every MVP page](mvp.md) (default) | Entry, Learn, Leisure, video quiz, Gifts, Brainy shop, parent PIN, Analytics, Tasks, Gifts & goal. Two walkthroughs, 20 screenshots |
+| [Every MVP page](mvp.md) (default) | Parent funnel cover and growth preview, Entry, Learn, Leisure, video quiz, Gifts, Brainy shop, Path, parent PIN, Analytics, Tasks, Gifts & goal. Two walkthroughs, 26 screenshots |
 | [Saved child learning loop](learning.md) | Three saved games without returning to the menu, post-game screens, the three-game break bonus, the Brainy tab, child tabs and `/lab`. Two walkthroughs, 12 screenshots |
 
 The earlier `scaffold` report (placeholder screens) was retired once every page existed.
@@ -38,7 +38,7 @@ pnpm report --module learning --video # saved child learning loop
 
 The command defaults to the `mvp` module and `http://127.0.0.1:3123`.
 It records WebKit at phone (390 × 844) and iPad (1180 × 820) viewport sizes,
-in English (`brainee_locale=en`), light theme, with timestamps shown in America/New_York. Both recordings
+in English, light theme, with timestamps shown in America/New_York. Both recordings
 show the same continuous flow. `--video` requires successful MP4 conversion;
 conversion errors fail the run instead of silently publishing a video-less report.
 
@@ -144,7 +144,7 @@ The shared `recoverMissing` check expects a 404 and keeps it in the log.
 Do not interpret PASSED as a general accessibility or security audit.
 
 This is a local tooling port under [D-14](../dev/decisions.md#d-14--port-local-ui-recordings-and-markdown-reports--2026-11-14--accepted).
-WebKit captures do not generate a PDF (Playwright only supports PDF in Chromium); the HTML contact sheet and published images/videos remain available. The Russian smoke is retained in `english.spec.ts` and `locale-switch.spec.ts`.
+WebKit captures do not generate a PDF (Playwright only supports PDF in Chromium); the HTML contact sheet and published images/videos remain available. `english.spec.ts` checks that host pages and every embedded game contain no Cyrillic.
 
 Browser-engine regression tests remain `pnpm e2e`; real-device verification
 remains [T-62](../progress/todo.md).

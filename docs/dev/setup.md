@@ -8,7 +8,7 @@
 - Nothing else: no Docker, no database server, no cloud accounts.
 
 ## First run
-Fastest manual run: `pnpm demo` (resets `data/dev.db`, then starts the dev server with `DEMO_MODE=1 BRAINEE_LAB=1`). Otherwise enable demo access using the [database setup](#local-database-and-tests) (`DEMO_MODE=1` in `apps/web/.env.local`, or `DEMO_MODE=1 pnpm dev`; `turbo.json` passes `DEMO_MODE`, `BRAINEE_LAB` and `DATABASE_URL` through). Without it every child/parent screen shows «Не удалось загрузить Брейни». Then:
+Fastest manual run: `pnpm demo` (resets `data/dev.db`, then starts the dev server with `DEMO_MODE=1 BRAINEE_LAB=1`). Otherwise enable demo access using the [database setup](#local-database-and-tests) (`DEMO_MODE=1` in `apps/web/.env.local`, or `DEMO_MODE=1 pnpm dev`; `turbo.json` passes `DEMO_MODE`, `BRAINEE_LAB` and `DATABASE_URL` through). Without it every child/parent screen shows "Could not load Brainy". Then:
 ```bash
 pnpm install
 pnpm db:reset
@@ -47,7 +47,7 @@ Install browser binaries once, then run the spec:
 pnpm --filter @brainee/web exec playwright install chromium webkit
 pnpm e2e
 ```
-The suite checks shells, both games, saved post-game progression, polling, retry/reload recovery, session APIs, cookies, routing, fonts, Russian text, themes, reduced motion, touch targets, overflow and own-domain requests at 390px and 820px in both engines. Screenshots/traces are in `apps/web/test-results/` (gitignored). Playwright seeds a unique temporary SQLite file before starting its server, enables demo mode there, and cleans up afterward; it does not touch `data/dev.db`. One worker avoids competing tests mutating the shared seeded child; assertions use saved balances/capped gains rather than a fixed 340★. On macOS, WebKit keyboard traversal uses Option-Tab to include links. Emulation does not replace the real-device Screen Time check (T-62).
+The suite checks shells, both games, saved post-game progression, polling, retry/reload recovery, session APIs, cookies, routing, fonts, English-only text, themes, reduced motion, touch targets, overflow and own-domain requests at 390px and 820px in both engines. Screenshots/traces are in `apps/web/test-results/` (gitignored). Playwright seeds a unique temporary SQLite file before starting its server, enables demo mode there, and cleans up afterward; it does not touch `data/dev.db`. One worker avoids competing tests mutating the shared seeded child; assertions use saved balances/capped gains rather than a fixed 340★. On macOS, WebKit keyboard traversal uses Option-Tab to include links. Emulation does not replace the real-device Screen Time check (T-62).
 
 ### WebKit pointer diagnostics (T-93)
 Observed on this Mac on 2026-11-14 with pinned WebKit 2388: DOM hit testing identifies the correct link, but a mouse click requested at `(100, 430)` produces a pointer event near `(-1095, 1570)`. Playwright reports `<html> intercepts pointer events`. The same failure occurs on a plain HTML button; one worker, headed mode and a forced reinstall did not resolve it. API/browser-fetch tests pass in WebKit. This is an input-coordinate problem outside the application, not evidence that its UI click flows passed. Keep the normal click assertions; do not bypass them with forced clicks or synthetic DOM events.
@@ -109,6 +109,7 @@ The example defaults demo access off; explicitly set `DEMO_MODE=1` in `apps/web/
 | `pnpm gen:game` | Scaffold a new game (react or embedded) + register it |
 | `pnpm games:build` | Build `bridge.js` + every embedded game, replace `public/games/<id>/` ([games.md](games.md)) |
 | `pnpm test:assets` | Check every built game's referenced files exist |
+| `pnpm games:discover` | Regenerate the gitignored game registry from each game folder (also runs on install, dev, test, typecheck, build and checks) |
 
 Next.js ships version-matched docs at `apps/web/node_modules/next/dist/docs/`; read the relevant pages before using Next APIs. `next typegen` runs before TypeScript checks, so a clean checkout needs no previous build. `next-env.d.ts` and `.next/` are generated and ignored. If Next adds agent instructions, retain them alongside the project instructions.
 
@@ -133,7 +134,7 @@ Not now. Deploying is the final roadmap step (T-14): Vercel Hobby + Turso free p
 - `pnpm games:build` builds the local bridge and all registered learning games and Explore previews, replacing their directories under `apps/web/public/games/`. Run before `pnpm dev` on a new checkout or after changing an embedded game; `pnpm build` does this automatically.
 - `pnpm test:assets` verifies built entries, referenced assets, pictures, bridge script and manifest size budgets. `pnpm check:manifests` validates every listed game's manifest; included in `pnpm check`.
 - For an existing DB, run `pnpm db:push && pnpm db:seed` to add game runtime columns and catalog entries. `pnpm demo` resets the local demo as usual.
-- `/lab` now includes «Собери картинку». Its events use the same `round`/`finish` contract as React games; embedded ready changes the event stream to `data-status="connected"`. Standalone: `/games/picture-puzzle/index.html?level=3&seed=42`.
+- `/lab` now includes "Picture Puzzle". Its events use the same `round`/`finish` contract as React games; embedded ready changes the event stream to `data-status="connected"`. Standalone: `/games/picture-puzzle/index.html?level=3&seed=42`.
 
 ### Isolated game worktree verification
 
@@ -153,7 +154,19 @@ DATABASE_URL=file:./data/games.db BRAINEE_NEXT_DIR=.next-games BRAINEE_E2E_PORT=
 In an isolated games worktree, build once with `BRAINEE_NEXT_DIR=.next-games pnpm build`, then run the focused iPad Safari suite:
 
 ```sh
-BRAINEE_NEXT_DIR=.next-games BRAINEE_E2E_PORT=3114 pnpm --filter @brainee/web e2e game-conformance.spec.ts picture-puzzle.spec.ts tangram.spec.ts reflection.spec.ts rhythm-copycat.spec.ts secret-message-copy.spec.ts magnet-explorer.spec.ts neighborhood-map-walk.spec.ts --project=webkit-ipad
+BRAINEE_NEXT_DIR=.next-games BRAINEE_E2E_PORT=3114 pnpm --filter @brainee/web e2e picture-puzzle.spec.ts tangram.spec.ts reflection.spec.ts rhythm-copycat.spec.ts secret-message-copy.spec.ts magnet-explorer.spec.ts neighborhood-map-walk.spec.ts --project=webkit-ipad
 ```
 
 The test server owns a temporary SQLite database. Review generated `apps/web/test-results` screenshots. `/lab` tests explicitly select the iPad frame on tablet projects. For an unchanged app build, `pnpm games:build && pnpm test:assets` refreshes static game-only edits without rebuilding Next. Run the full four-project matrix before broader integration; keep unrelated onboarding/settings failures separate from game acceptance. Do not merge this games branch into master without a new explicit instruction.
+
+### E2E matrix (tiered)
+
+Tiers are defined in `apps/web/playwright.config.ts`.
+
+| Command | Projects | Runs |
+|---|---|---|
+| `pnpm e2e` (default, ~3 min of tests) | `webkit-ipad` | product flows, API, language, films, one game per runtime (Continue the Pattern, Tangram Tales) |
+| | `chromium-phone` | layout and main flows (`LAYOUT_SPECS`) |
+| `pnpm e2e:full` (`E2E_FULL=1`) | all four | adds the heavy game checks (`HEAVY_GAME_SPECS`: imported-game acceptance, input stress, integration, puzzle, Explore previews) on WebKit iPad, the remaining flows on Chromium phone, and layout on Chromium iPad / WebKit phone |
+
+Run `pnpm e2e:full` for game work and before a release; run `pnpm e2e` for everyday changes. Put a new game spec in `HEAVY_GAME_SPECS` and a new layout spec in `LAYOUT_SPECS`.

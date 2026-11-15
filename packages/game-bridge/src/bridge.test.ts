@@ -19,7 +19,7 @@ import {
 } from "./index";
 
 type PuzzleContract = DefineContract<{
-  config: { level: number; cardIds: number[]; locale: "en" | "ru" | "kk" };
+  config: { level: number; cardIds: number[]; locale: "en" };
   events: {
     target_selected: { target: number };
     piece_placed: { piece: number; attempts: number };
@@ -78,9 +78,9 @@ const context = {
   sessionId: "session-1",
   gameId: "phaser-picture-puzzle-game",
   version: "1.0.0",
-  locale: "ru" as const,
+  locale: "en" as const,
 };
-const config = { level: 1, cardIds: [1, 2, 3], locale: "ru" as const };
+const config = { level: 1, cardIds: [1, 2, 3], locale: "en" as const };
 
 function setup(
   hostOptions: Partial<HostBridgeOptions> = {},
@@ -153,14 +153,14 @@ describe("handshake", () => {
       parent: frames.host,
       handshakeTimeoutMs: 50,
       fallback: () => ({
-        context: { locale: "kk" },
+        context: { gameId: "standalone-puzzle", locale: "en" },
         config: { ...config, level: 4 },
       }),
     });
     open.push(game);
     assert.equal(await game.ready, false);
     assert.equal(game.status, "unbridged");
-    assert.equal(game.context?.locale, "kk");
+    assert.equal(game.context?.gameId, "standalone-puzzle");
     assert.equal(game.config?.level, 4);
     game.track("piece_placed", { piece: 1, attempts: 1 }); // buffered, no throw
     await assert.rejects(game.host.call("session.exit"), {

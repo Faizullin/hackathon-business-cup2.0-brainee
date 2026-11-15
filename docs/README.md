@@ -9,7 +9,8 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [progress/](progress/) | Current status, backlog, session log | **Every session start** (status.md) | Whoever finishes work |
 | [product/](product/) | What we build: condensed PRD | Building a feature or checking a rule | Product owner; anyone fixing a spec gap |
 | [dev/](dev/) | How we build: stack, setup, conventions, decisions | Scaffolding, adding packages, onboarding | Whoever changes the architecture |
-| [ideas/](ideas/) | Original sources: PRD PDF, HTML prototype | Porting prototype code (line map inside) | Rarely; sources are frozen |
+| [plans/](plans/) | Ordered implementation plans for larger efforts | Starting a planned effort (e.g. the redesign) | Whoever plans or finishes the effort |
+| [ideas/](ideas/) | Frozen funnel/design sources, reference screenshots and pointers to removed originals | Tracing a design or product specification to its source | Rarely; sources are frozen |
 | [reports/](reports/) | Generated UI walkthroughs, videos, screenshots and logs | Reviewing current UI or recording a demo | Whoever changes a report scenario |
 
 ## Files
@@ -32,22 +33,28 @@ Read only what your task needs. Each fact lives in exactly one file; other files
 | [dev/sessions.md](dev/sessions.md) | Demo cookie, issued sessions, atomic rewards, state polling and retry/reload recovery |
 | [dev/conventions.md](dev/conventions.md) | Code style, naming, testing, git |
 | [dev/games.md](dev/games.md) | Game runtimes, bridge + engine kits to port from game-store-planning, testing, reusable games |
+| [dev/films.md](dev/films.md) | Interactive films: mp3 + JSON script format, podcast → film workflow, art rules, checks, player |
 | [dev/ui.md](dev/ui.md) | UI and motion system: Base UI components, page transitions, Motion, app shell, mobile app-feel checklist |
 | [dev/agent-tooling.md](dev/agent-tooling.md) | Which agent skills and MCP servers to use or skip, and why |
-| [ideas/README.md](ideas/README.md) | What the source files are + prototype line map |
+| [ideas/README.md](ideas/README.md) | Where the original sources live now (git history) |
 | [reports/README.md](reports/README.md) | Recording commands, artifact map and analysis of the game-store-planning reporting pipeline |
 | [product/routes-spec.md](product/routes-spec.md) | Building or changing routes, access, parent dashboard or ROUTES.md rules |
+| [product/design.md](product/design.md) | **Visual source of truth** (Claude Design lavender): tokens, motion, Brain component spec and Brainy mapping, screen patterns, game palette |
+| [product/funnel.md](product/funnel.md) | Building the parent funnel or lavender redesign: export analysis, screenshots, logic, tokens, what to take or skip |
+| [plans/redesign.md](plans/redesign.md) | Implementing the redesign: ordered tasks T-130–T-142, ground rules, open owner questions |
 | [product/external-games.md](product/external-games.md) | Planning the 30-game pack (licences, path C, first wave) |
 | [reports/mvp.md](reports/mvp.md) | Every MVP page (child + parent): phone/iPad walkthrough videos, screenshots, JSON logs. Also [reports/learning.md](reports/learning.md) (three-game loop) |
 
 ## Reading paths by task
 
-- **Build or port a game** → `dev/games.md` → that game's row in `screens.md` → prototype lines 901–982
-- **Build a child screen** → `screens.md` (that section) → `dev/ui.md` → `mechanics.md` if it touches stars or stats → prototype range from `ideas/README.md`
+- **Turn a podcast into a film** → `dev/films.md` (whole workflow) → `packages/films/src/art.tsx` for art keys
+- **Build or port a game** → `dev/games.md` → the game catalog and contract → its pinned source or manifest
+- **Build a child screen** → `screens.md` (that section) → `dev/ui.md` → `mechanics.md` if it touches stars or stats
 - **Build parent analytics** → `screens.md` §Parent → `data-model.md`
 - **Write economy or stat logic** → `mechanics.md` → `data-model.md` §How stats change
 - **Save games or wire shared state** → `dev/sessions.md` → `product/data-model.md` → `dev/setup.md`
 - **Infra, auth or deploy** → `architecture.md` → `rules.md` §Technical requirements → `decisions.md`
+- **Redesign or parent funnel** → `plans/redesign.md` → `product/design.md` → `product/funnel.md` → `dev/ui.md`
 - **Demo prep** → `rules.md` §Acceptance criteria → `status.md`
 
 ## Upkeep

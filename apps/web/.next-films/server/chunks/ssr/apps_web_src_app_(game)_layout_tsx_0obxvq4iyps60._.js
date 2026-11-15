@@ -1,3 +1,0 @@
-module.exports=[26355,a=>{"use strict";var b=a.i(12061),c=a.i(91552);a.s(["default",0,function({children:a}){return(0,b.jsx)("main",{id:"main-content","data-mode":"game",className:"flex min-h-dvh flex-col overscroll-none pt-[max(8px,env(safe-area-inset-top))] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)]",children:(0,b.jsx)(c.ViewTransition,{default:"page-slide",children:a})})}])},29630,function(a){a.n(a.i(26355))}];
-
-//# sourceMappingURL=apps_web_src_app_%28game%29_layout_tsx_0obxvq4iyps60._.js.map

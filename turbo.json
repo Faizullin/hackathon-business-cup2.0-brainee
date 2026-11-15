@@ -1,5 +1,10 @@
 {
   "$schema": "https://turborepo.com/schema.json",
+  "globalDependencies": [
+    "games/*/manifest.json",
+    "games/*/preview.json",
+    "packages/games/src/*/manifest.json"
+  ],
   "tasks": {
     "typecheck": {
       "dependsOn": ["^typecheck"],
@@ -26,12 +31,6 @@
       "outputs": []
     }
   },
-  "globalPassThroughEnv": [
-    "DEMO_MODE",
-    "BRAINEE_LAB",
-    "DATABASE_URL",
-    "DATABASE_AUTH_TOKEN",
-    "BRAINEE_DEFAULT_LOCALE"
-  ],
+  "globalPassThroughEnv": ["DEMO_MODE", "BRAINEE_LAB", "DATABASE_URL", "DATABASE_AUTH_TOKEN"],
   "globalEnv": ["BRAINEE_NEXT_DIR"]
 }

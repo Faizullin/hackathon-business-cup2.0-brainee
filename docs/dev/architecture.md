@@ -16,6 +16,7 @@ brainee/
 ├─ packages/
 │  ├─ core/         # Pure logic + shared types (GameResult, Skill, Stats…)
 │  ├─ brainy/       # Brainy SVG renderer (port of prototype brainy())
+│  ├─ films/        # Interactive films: art (bg/props), FilmStage, film checks → films.md
 │  ├─ games/        # Game contract, GameHost, registry, React games  → games.md
 │  ├─ game-bridge/  # Any-engine iframe bridge (ported from game-store-planning bridge-core)
 │  ├─ engine-phaser/   # Phaser adapter, BridgedScene, esbuild build helper
@@ -38,12 +39,12 @@ apps/web/
 ├─ src/app/
 │  ├─ layout.tsx, page.tsx    # Fonts/providers only; / redirects to /learn
 │  ├─ (child)/layout.tsx      # Child shell: content + persistent 4-tab bottom bar (T-30)
-│  ├─ (child)/(docked)/       # Brainy dock layout: learn (advice + grid), leisure (playable fun-game shop), gifts (goal/shop/tasks/exchange)
+│  ├─ (child)/(docked)/       # Brainy dock layout: learn (advice + grid), leisure (Snake shop + films), gifts (goal/shop/tasks/exchange)
 │  ├─ (child)/brainy/         # Brainy tab (no dock): big Brainy, stage path, stats, accessory shop, rewards
 │  ├─ (parent)/               # PIN barrier + tabs: analytics (seeded charts), tasks, rewards (D-21)
 │  ├─ (auth)/login/           # Welcome page; sessions, quiz and onboarding planned
 │  ├─ (game)/game/[id]/       # Fullscreen play (no dock/tab bar); `?level=&seed=`
-│  ├─ (game)/entry            # Entry screen «Во что играем сейчас?» (`/` redirects here)
+│  ├─ (game)/entry, video/[id] # Entry screen "What are we playing now?" (`/` redirects here); interactive film player (registered films only)
 │  ├─ lab/, lab/brainy/       # Dev-only game lab + event stream; Brainy presets (T-16, T-20)
 │  └─ api/                   # Demo access, game start/finish/stop, /api/state, /api/actions, /api/parent, /api/demo-reset
 ├─ public/media/             # Planned: own-domain media
@@ -58,6 +59,7 @@ Child routes use their own shell (tab bar; dock via the nested `(docked)` group)
 |---|---|---|
 | `core` | Star rules, ☀→★ exchange, stage/mood math, stat gain formula, entry recommendation algorithm, task limit; shared types | import React, touch the DB, or do I/O |
 | `brainy` | `<Brainy stats accessories />` SVG, color mix, stage visuals | hold any game rules |
+| `films` | Film art (`FILM_BG`, `FILM_PROPS`), `<FilmStage>`, layout check, `FILM_IDS`; `pnpm check:films` ([films.md](films.md)) | grant stars, play audio, or load foreign assets |
 | `games` | Contract, `GameHost` (React or iframe runtime), registry, React games; emit a `GameResult` | grant stars, fetch, or load foreign assets |
 | `game-bridge` | Handshake + MessageChannel protocol, zod validation (host side), ESM + IIFE `bridge.js`, standalone mode | depend on React or the app |
 | `engine-*` | Engine adapters + build helpers shared by embedded games | contain game content |

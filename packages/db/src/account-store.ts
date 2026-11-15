@@ -2,6 +2,9 @@ import { randomBytes, randomUUID, scryptSync, timingSafeEqual } from "node:crypt
 import {
   advanceCalendar,
   calendarKeys,
+  funnelBirthYears,
+  funnelQuizAnswers,
+  isFunnelAnswers,
   isQuizAnswers,
   quizStart,
   type Showcase,
@@ -36,6 +39,8 @@ export class AccountError extends Error {
   }
 }
 
+/** Demo/hackathon parent PIN used by the shared demo, jury families and prefilled signup. */
+export const DEMO_PIN = "1234";
 export const MIN_CHILD_AGE = 4;
 export const MAX_CHILD_AGE = 10;
 const STARTER_STARS = 50;
@@ -75,6 +80,7 @@ export type SignupInput = {
   childName: string;
   birthYear: number;
   answers: unknown;
+  funnel?: unknown;
   timeZone?: unknown;
 };
 
@@ -125,6 +131,12 @@ function personalShowcase(childName: string, start: ReturnType<typeof quizStart>
     until: null,
     remainingSeconds: 0,
   }));
+  showcase.science = showcase.science.map((v) => ({
+    ...v,
+    solved: false,
+    position: 0,
+    completedAt: undefined,
+  }));
   return showcase;
 }
 
@@ -134,7 +146,19 @@ export async function signupFromQuiz(
   now: Date,
   plan: "demo" | "jury" = "demo",
 ) {
-  const input = (raw ?? {}) as Partial<SignupInput>;
+  const input = { ...(raw ?? {}) } as Partial<SignupInput>;
+  if (input.funnel !== undefined) {
+    if (!isFunnelAnswers(input.funnel)) throw new AccountError("invalid-input");
+    const years = funnelBirthYears(input.funnel.age, now.getUTCFullYear());
+    if (
+      !years ||
+      !Number.isInteger(input.birthYear) ||
+      Number(input.birthYear) < years.min ||
+      Number(input.birthYear) > years.max
+    )
+      throw new AccountError("invalid-input");
+    input.answers = funnelQuizAnswers(input.funnel);
+  }
   if (!validSignup(input, now)) throw new AccountError("invalid-input");
   const email = input.email.trim().toLowerCase();
   const start = quizStart(input.answers as never);
@@ -174,6 +198,7 @@ export async function signupFromQuiz(
       childId,
       data: {
         ...advanceCalendar(personalShowcase(input.childName, start), now).showcase,
+        ...(isFunnelAnswers(input.funnel) ? { familyPlan: input.funnel } : {}),
         calendar: {
           timeZone: signupTimeZone(input.timeZone),
           ...calendarKeys(now, signupTimeZone(input.timeZone)),

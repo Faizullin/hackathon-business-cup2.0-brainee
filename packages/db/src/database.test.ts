@@ -56,6 +56,16 @@ it("creates the schema and seed that another connection can read", async () => {
   }
 });
 
+it("re-seeding refreshes existing game catalog rows from the manifests", async () => {
+  const fixture = await temporaryDatabase();
+  const { db } = await fixture.seeded();
+  const [first] = demo.games;
+  if (!first) throw new Error("The seed has no games.");
+  await db.update(games).set({ title: "Old title", minAge: 9 }).where(eq(games.id, first.id));
+  await seedDatabase(fixture.config);
+  expect(await db.select().from(games).where(eq(games.id, first.id))).toEqual([first]);
+});
+
 it("refreshes only the shared demo family", async () => {
   const fixture = await temporaryDatabase();
   const { db } = await fixture.seeded();
@@ -86,7 +96,7 @@ it("enforces parent references and cascading child/wallet deletion", async () =>
     ["orphan-a", "orphan-b"].map((id) =>
       client.execute({
         sql: "INSERT INTO children (id, family_id, name, birth_year) VALUES (?, ?, ?, ?)",
-        args: [id, "missing-family", "Саша", 2020],
+        args: [id, "missing-family", "Sasha", 2020],
       }),
     ),
   );

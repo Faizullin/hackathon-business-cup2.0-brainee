@@ -22,7 +22,7 @@ export type GameText = {
 };
 
 export type GameProps = {
-  locale?: "en" | "ru";
+  locale?: "en";
   level: number;
   /** Deterministic rounds: same seed → same game. */
   seed: number;
@@ -45,6 +45,8 @@ export type GameMeta = {
   minAge: number;
   levels: number;
   roundsPerSession: number;
+  /** Same-origin card image, `/games/<id>/thumbnail.svg` (copied by games:build). */
+  thumbnail: string;
 };
 
 export type ReactGameModule = { default: ComponentType<GameProps> };

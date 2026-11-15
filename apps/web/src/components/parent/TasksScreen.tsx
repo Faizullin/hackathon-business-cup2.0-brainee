@@ -1,9 +1,10 @@
 "use client";
 
-import { TASKS_PER_DAY, type TaskPlace } from "@brainee/core";
+import { familyTaskTemplate, planFor, TASKS_PER_DAY, type TaskPlace } from "@brainee/core";
 import { cn } from "@brainee/ui/lib/utils";
 import { type FormEvent, useState } from "react";
 import { useLearning } from "@/components/child/LearningProvider";
+import { QuestMark } from "@/components/child/QuestMark";
 import {
   Chip,
   Meter,
@@ -13,6 +14,7 @@ import {
   primaryButton,
   useAct,
 } from "@/components/demo/kit";
+import { familyPlanCopy } from "@/components/family-plan/copy";
 import { useI18n } from "@/i18n";
 
 const input = "min-h-11 w-full rounded-xl border border-border bg-background px-3 text-base";
@@ -30,6 +32,9 @@ export function TasksScreen() {
   if (!snapshot) return null;
   const { tasks, templates, recommendations, taskHistory = [] } = snapshot.showcase;
   const full = tasks.length >= TASKS_PER_DAY;
+  const familyTask = snapshot.showcase.familyPlan
+    ? familyTaskTemplate(snapshot.showcase.familyPlan)
+    : null;
   const submit = async (event: FormEvent) => {
     event.preventDefault();
     if (await run({ type: "task-add", title, place, skill, reward })) setTitle("");
@@ -70,11 +75,14 @@ export function TasksScreen() {
                 key={task.id}
                 data-testid={`parent-task-${task.id}`}
                 className={cn(
-                  "flex flex-col gap-2 rounded-xl border border-border p-3",
+                  "flex min-h-[60px] flex-col gap-3 rounded-row bg-card p-4 ring-1 ring-border",
                   task.status === "done" && "opacity-70",
                 )}
               >
-                <span className="font-semibold">{task.title}</span>
+                <span className="flex items-center gap-3 font-semibold">
+                  <QuestMark done={task.status === "done"} />
+                  {task.title}
+                </span>
                 <span className="flex flex-wrap items-center gap-2">
                   <Chip>{task.skill}</Chip>
                   <Chip tone={task.place === "real" ? "sun" : "sky"}>
@@ -113,6 +121,31 @@ export function TasksScreen() {
           </ul>
         </Panel>
         <Panel title={t.form}>
+          {familyTask && (
+            <aside
+              data-testid="family-task-template"
+              className="space-y-2 rounded-panel bg-highlight-wash p-4"
+            >
+              <h3 className="font-semibold">{familyPlanCopy.template}</h3>
+              <p className="text-sm">
+                {snapshot.showcase.familyPlan &&
+                  planFor(snapshot.showcase.familyPlan)?.steps[3]?.body}
+              </p>
+              <p className="text-sm text-muted-foreground">{familyPlanCopy.templateNote}</p>
+              <button
+                type="button"
+                className={outlineButton}
+                onClick={() => {
+                  setTitle(familyTask.title);
+                  setPlace(familyTask.place);
+                  setSkill(familyTask.skill);
+                  setReward(familyTask.reward);
+                }}
+              >
+                {familyPlanCopy.useTemplate}
+              </button>
+            </aside>
+          )}
           <form onSubmit={submit} className="flex flex-col gap-3">
             <label className="flex flex-col gap-1 text-sm font-medium">
               {t.what}
@@ -135,7 +168,7 @@ export function TasksScreen() {
                     onClick={() => setPlace(value)}
                     className={cn(
                       outlineButton,
-                      place === value && "border-foreground bg-secondary",
+                      place === value && "border-primary bg-violet-wash text-accent",
                     )}
                   >
                     {t[value]}
@@ -219,7 +252,10 @@ export function TasksScreen() {
       <Panel title={t.recs}>
         <ul className="grid gap-3 lg:grid-cols-3">
           {recommendations.map((rec) => (
-            <li key={rec.id} className="flex flex-col gap-2 rounded-xl border border-border p-3">
+            <li
+              key={rec.id}
+              className="flex min-h-[60px] flex-col gap-3 rounded-row bg-card p-4 ring-1 ring-border"
+            >
               <div className="flex items-baseline justify-between gap-2">
                 <span className="font-semibold">{rec.skill}</span>
                 <span className="text-sm">

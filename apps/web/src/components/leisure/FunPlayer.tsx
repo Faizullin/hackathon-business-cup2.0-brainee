@@ -3,7 +3,9 @@ import { FUN_HEARTBEAT_SECONDS, type GameResult } from "@brainee/core";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLearning } from "@/components/child/LearningProvider";
+import { stoppingCopy } from "@/components/child/stopping-copy";
 import { outlineButton, Panel, primaryButton } from "@/components/demo/kit";
+import { StoppingPhrase } from "@/components/family-plan/StoppingPhrase";
 import { useI18n } from "@/i18n";
 import { SnakeGame } from "./SnakeGame";
 export function FunPlayer({ id }: { id: string }) {
@@ -104,7 +106,7 @@ export function FunPlayer({ id }: { id: string }) {
   const remaining = left ?? game?.remainingSeconds ?? 0;
   const locked = !game || id !== "snake" || (!game.forever && remaining <= 0);
   return (
-    <div className="mx-auto grid w-full max-w-4xl gap-4 p-4 lg:grid-cols-2">
+    <div className="mx-auto grid w-full max-w-4xl gap-4 p-4 [--color-coral:var(--accent)] lg:grid-cols-2">
       <Panel as="h1" title={t.title}>
         <p data-testid="fun-time">
           {game?.forever
@@ -135,7 +137,13 @@ export function FunPlayer({ id }: { id: string }) {
         <Link href="/learn" className={outlineButton}>
           {t.learn}
         </Link>
-        {!game?.forever && remaining === 0 && <p>{t.ended}</p>}
+        {!game?.forever && remaining === 0 && (
+          <aside className="space-y-4 rounded-stage bg-[#1c1b33] p-5 text-white">
+            <h2 className="font-heading text-xl">{t.ended}</h2>
+            <p className="text-sm text-[#cfcde6]">{stoppingCopy.funReason}</p>
+            <StoppingPhrase />
+          </aside>
+        )}
       </Panel>
     </div>
   );

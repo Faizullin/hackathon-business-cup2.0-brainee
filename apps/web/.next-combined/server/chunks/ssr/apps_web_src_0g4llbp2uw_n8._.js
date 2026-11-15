@@ -1,3 +1,0 @@
-module.exports=[80300,a=>{"use strict";var b=a.i(12061),c=a.i(12451);a.s(["default",0,function({children:a}){return(0,b.jsx)(c.ParentShell,{children:a})}])},87695,function(a){a.n(a.i(80300))},65146,a=>{"use strict";let b=(0,a.i(48476).registerClientReference)(function(){throw Error("Attempted to call ParentShell() from the server but ParentShell is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"[project]/apps/web/src/components/parent/ParentShell.tsx","ParentShell");a.s(["ParentShell",0,b])},12451,a=>{"use strict";var b=a.i(65146);a.n(b)}];
-
-//# sourceMappingURL=apps_web_src_0g4llbp2uw_n8._.js.map

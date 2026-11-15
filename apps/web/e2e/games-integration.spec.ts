@@ -1,4 +1,5 @@
 import { recommendGames, weightedSkillGains } from "@brainee/core";
+import { previews } from "@brainee/game-catalog";
 import { allGames } from "@brainee/games";
 import { expect, test } from "@playwright/test";
 import { importedRound } from "./imported-games";
@@ -10,11 +11,9 @@ const imported = ["tangram-tales", "reflection", "rhythm-copycat", "secret-messa
 for (const id of imported) {
   test(`${id}: English launch, gains, parent progress, history recommendations and next level`, async ({
     page,
-    context,
     baseURL,
   }, info) => {
     test.setTimeout(90000);
-    await context.addCookies([{ name: "brainee_locale", value: "en", url: baseURL as string }]);
     await newFamily(page.request, baseURL as string, 8);
     const before = await savedState(page.request);
     const game = allGames.find((g) => g.id === id);
@@ -65,73 +64,54 @@ for (const id of imported) {
     await page.goto("/analytics");
     await expect(page.getByTestId("parent-latest-game")).toContainText(game.title);
     await expect(page.getByTestId("parent-latest-game")).toContainText("+12");
-    await context.addCookies([{ name: "brainee_locale", value: "ru", url: baseURL as string }]);
-    await page.reload();
-    await expect(page.getByTestId("parent-latest-game")).not.toContainText(game.title);
-    await expect(page.getByTestId("event-feed")).not.toContainText(game.title);
   });
 }
 
-test("new catalog titles switch language; locked learning and Explore routes cannot launch", async ({
+test("new catalog titles show; locked learning and Explore routes cannot launch", async ({
   page,
-  context,
   baseURL,
 }) => {
   await newFamily(page.request, baseURL as string, 4);
-  for (const locale of ["en", "ru"]) {
-    await context.addCookies([{ name: "brainee_locale", value: locale, url: baseURL as string }]);
-    await page.goto("/learn");
-    await expect(
-      page.getByText(locale === "en" ? "Mirror Grid" : "Зеркальная сетка", { exact: true }),
-    ).toBeVisible();
-    for (const id of imported) {
-      await expect(page.locator(`a[href="/game/${id}"]`)).toHaveCount(0);
-      const response = await page.request.post("/api/sessions/start", {
-        headers: { origin: baseURL as string },
-        data: { gameId: id, level: 1, seed: 42 },
-      });
-      expect(response.status()).toBe(400);
-    }
-    await page.goto("/explore");
-    await expect(page.locator('a[href^="/explore/"]')).toHaveCount(0);
-    await page.goto("/explore/magnet-explorer");
-    await expect(page.getByTestId("explore-frame")).toHaveCount(0);
-    await expect(
-      page.getByText(locale === "en" ? /Unlocks at age 6/ : /Откроется с 6/),
-    ).toBeVisible();
+  await page.goto("/learn");
+  await expect(page.getByText("Mirror Grid", { exact: true })).toBeVisible();
+  for (const id of imported) {
+    await expect(page.locator(`a[href="/game/${id}"]`)).toHaveCount(0);
+    const response = await page.request.post("/api/sessions/start", {
+      headers: { origin: baseURL as string },
+      data: { gameId: id, level: 1, seed: 42 },
+    });
+    expect(response.status()).toBe(400);
   }
+  await page.goto("/explore");
+  // A four-year-old: age-locked previews have no launch link; 4+ previews stay open.
+  for (const preview of previews)
+    await expect(page.locator(`a[href="/explore/${preview.id}"]`)).toHaveCount(
+      preview.minAge > 4 ? 0 : 1,
+    );
+  await page.goto("/explore/magnet-explorer");
+  await expect(page.getByTestId("explore-frame")).toHaveCount(0);
+  await expect(page.getByText(/Unlocks at age 6/)).toBeVisible();
 });
 
-for (const locale of ["en", "ru"]) {
-  test(`iframe timeout and recovery preserve rewards (${locale})`, async ({
-    page,
-    context,
-    baseURL,
-  }) => {
-    await context.addCookies([{ name: "brainee_locale", value: locale, url: baseURL as string }]);
-    await newFamily(page.request, baseURL as string, 8);
-    const before = await savedState(page.request);
-    await page.route("**/games/reflection/index.html*", (route) =>
-      route.fulfill({
-        contentType: "text/html",
-        body: "<!doctype html><title>Silent game</title>",
-      }),
-    );
-    await page.goto("/game/reflection?seed=42");
-    await expect(page.locator("main").getByRole("alert")).toHaveText(
-      locale === "en"
-        ? "The game could not load. Please try again later."
-        : "Игра не загрузилась. Попробуй ещё раз позже.",
-      { timeout: 12000 },
-    );
-    await expect(page.getByTestId("embedded-game")).toHaveCount(0);
-    await page.unroute("**/games/reflection/index.html*");
-    await page.reload();
-    await expect(page.getByTestId("embedded-game")).toHaveAttribute("data-ready", "true", {
-      timeout: 10000,
-    });
-    expect((await savedState(page.request)).progress.wallet.stars).toBe(
-      before.progress.wallet.stars,
-    );
+test("iframe timeout and recovery preserve rewards", async ({ page, baseURL }) => {
+  await newFamily(page.request, baseURL as string, 8);
+  const before = await savedState(page.request);
+  await page.route("**/games/reflection/index.html*", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: "<!doctype html><title>Silent game</title>",
+    }),
+  );
+  await page.goto("/game/reflection?seed=42");
+  await expect(page.locator("main").getByRole("alert")).toHaveText(
+    "The game could not load. Please try again later.",
+    { timeout: 12000 },
+  );
+  await expect(page.getByTestId("embedded-game")).toHaveCount(0);
+  await page.unroute("**/games/reflection/index.html*");
+  await page.reload();
+  await expect(page.getByTestId("embedded-game")).toHaveAttribute("data-ready", "true", {
+    timeout: 10000,
   });
-}
+  expect((await savedState(page.request)).progress.wallet.stars).toBe(before.progress.wallet.stars);
+});

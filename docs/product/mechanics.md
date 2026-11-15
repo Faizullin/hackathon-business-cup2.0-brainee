@@ -18,7 +18,7 @@ Source: PRD §3–4. Implement in `packages/core` (logic) and `packages/brainy` 
 | Event | Reward |
 |---|---|
 | Learning-game round solved on the first try | +3★ |
-| Mistake, then corrected ("звезда за исправление"; trains *learning from mistakes*) | +4★ |
+| Mistake, then corrected ("star for correction"; trains *learning from mistakes*) | +4★ |
 | Science video watched to the end + correct answer | +15★ |
 | 3 learning games in a row | +5★ once per child per local day, plus a break suggestion |
 
@@ -52,11 +52,11 @@ A brain with eyes, mouth, arms and legs. Its look is computed from stats, so pro
 ### Stages
 Stage = average of brain, eyes, mouth, arms, legs. Moving up a stage triggers an animation and a **push notification to the parent**.
 
-| Сонный (Sleepy) | Проснувшийся (Awake) | Бодрый (Lively) | Умник (Smart) | Гений (Genius) |
+| Sleepy | Awake | Lively | Smart | Genius |
 |---|---|---|---|---|
 | 0 | 25 | 40 | 55 | 70 |
 
-### Mood (самочувствие)
+### Mood
 A separate 0–100% scale for **recent activity, not skill**. +8 points per completed game, slowly decays on days without play (rate TBD). Brainy gets sad and bored but **never gets sick or dies**: fear of losing a pet makes both child and parent anxious.
 
 ### Accessories
@@ -81,7 +81,7 @@ Worse habits make a sleepier starting Brainy. Prototype start: brain 18, eyes 16
 How games move these numbers: [data-model.md](data-model.md#how-stats-change).
 
 ## Leisure play credit
-Ten-minute purchases add 600 seconds of saved credit. Only active foreground Snake play consumes credit; pause, background and closed screens do not. Forever ownership removes the time limit. Server checks and persistence are described in D-29. Cartoons and science videos are not built yet (D-33).
+Ten-minute purchases add 600 seconds of saved credit. Only active foreground Snake play consumes credit; pause, background and closed screens do not. Forever ownership removes the time limit. Server checks and persistence are described in D-29. Paid cartoons are not built yet (D-39).
 
 ## Live activity
-Completed sessions provide learning minutes by family-local day, current learning streak and recommendation completion counts. Entry choices provide the advice rate; current weekly goals provide suns versus target. Radar history, character radar and ranking remain labelled demo data. A learning finish completes all assigned in-app tasks and grants their stars once; real-life tasks still need parent confirmation.
+Completed sessions provide learning minutes by family-local day, current learning streak and recommendation completion counts. Film completions contribute their catalog duration once. Entry choices provide the advice rate; current weekly goals provide suns versus target. Radar history, character radar and ranking remain labelled demo data. A learning finish completes all assigned in-app tasks and grants their stars once; real-life tasks still need parent confirmation.

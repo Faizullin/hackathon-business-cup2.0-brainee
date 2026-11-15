@@ -1,3 +1,0 @@
-module.exports=[73155,908,a=>{"use strict";a.i(12006);let b={speech:"mouth",reading:"mouth",logic:"brain",attention:"eyes",memory:"brain",motor:"arms"};function c(a,c){return c.filter(a=>"dev"===a.kind&&a.skills.main in b).slice().sort((c,d)=>a[b[c.skills.main]]-a[b[d.skills.main]]||c.id.localeCompare(d.id))[0]}a.s(["f",0,b],908),a.s(["U",0,function(a,d){return c(a,d.filter(a=>["brain","eyes","mouth"].includes(b[a.skills.main])))},"R",0,c],73155)}];
-
-//# sourceMappingURL=packages_core_src_learning_ts_0u6t8_dxzzcgx._.js.map
